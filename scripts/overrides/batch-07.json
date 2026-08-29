@@ -1,0 +1,490 @@
+{
+	"L2-0715": {
+		"meanings": ["to grow"],
+		"note": "V row for zhǎng. CEDICT leads with the noun \"chief\"; the L2 sense is the verb, kept apart from 长大 \"to grow up\" and 成长 \"to grow and develop\"."
+	},
+	"L2-0716": {
+		"meanings": ["to grow up"],
+		"note": "Transparent compound and the one sense a learner meets; 长 alone keeps \"to grow\"."
+	},
+	"L2-0717": {
+		"meanings": ["to pick out", "to track down"],
+		"note": "找到 already owns \"to find\". 找出 is locating one thing among others, so the gloss says that instead."
+	},
+	"L2-0720": {
+		"meanings": ["to take a photograph"],
+		"note": "Single sense; 拍照 at L4 keeps \"to take a picture\" so the two stay distinguishable."
+	},
+	"L2-0721": {
+		"meanings": ["so or such", "in this way"],
+		"note": "Pron row. The L2 use is degree — 这么贵 \"so expensive\" — with the manner sense second; 这样 leads with \"like this\"."
+	},
+	"L2-0722": {
+		"meanings": ["at this moment", "just then"],
+		"note": "No usable CEDICT row. Time phrase pointing at the moment just described."
+	},
+	"L2-0723": {
+		"meanings": ["like this", "this kind of"],
+		"note": "Pron row, both senses CEDICT lists; degree (\"so much\") belongs to 这么, not here."
+	},
+	"L2-0724": {
+		"meanings": ["genuine", "real"],
+		"note": "Adj row. \"Really\" is the adverbial use and would answer for 真的 as well."
+	},
+	"L2-0725": {
+		"meanings": ["normal"],
+		"note": "Adj row, one sense; \"regular\" adds nothing a learner can act on."
+	},
+	"L2-0726": {
+		"meanings": ["just right", "as it happens"],
+		"note": "Adj/Adv row: the Adj sense first, then the adverbial coincidence sense. Bare \"just\" answered for 刚 too."
+	},
+	"L2-0727": {
+		"meanings": ["correct or right", "proper"],
+		"note": "Adj row. 对 at L1 and 改 both take plain \"correct\", so this card spells out both everyday words for it; 准确 keeps \"accurate\"."
+	},
+	"L2-0728": {
+		"meanings": ["to be exactly", "precisely"],
+		"note": "V row, so the gloss is a verb phrase rather than the bare adverb CEDICT gives."
+	},
+	"L2-0729": {
+		"meanings": ["direct", "straightforward"],
+		"note": "Adj row; CEDICT ships a cross-reference to 间接 inside the first sense that a card must not print."
+	},
+	"L2-0730": {
+		"meanings": ["only", "merely"],
+		"note": "Adv row for zhǐ, the everyday restrictive adverb. The animal measure word is the other 只 row."
+	},
+	"L2-0731": {
+		"meanings": ["can only", "unable to do otherwise"],
+		"note": "Keeps 不得不 \"have no choice but to\" distinct while saying the same modal idea in the learner's words."
+	},
+	"L2-0732": {
+		"meanings": ["so long as", "provided that"],
+		"note": "Conj row, the 只要…就 pattern; 只有 carries \"it is only if\"."
+	},
+	"L2-0733": {
+		"meanings": ["paper"],
+		"note": "N row, one sense. CEDICT's classifier note is source notation, not a meaning."
+	},
+	"L2-0737": {
+		"meanings": ["primary and secondary schools"],
+		"note": "Names the two school stages in current English; \"middle and elementary\" is a literal calque."
+	},
+	"L2-0738": {
+		"meanings": ["center", "core"],
+		"note": "N row; 中间 keeps \"the middle\" so this card takes the institutional or focal centre."
+	},
+	"L2-0739": {
+		"meanings": ["Chinese medicine", "a doctor of Chinese medicine"],
+		"note": "Pairs with 西医 \"Western medicine\" and leaves \"traditional Chinese medicine\" to 中药 at L5."
+	},
+	"L2-0740": {
+		"meanings": ["key point", "mainly"],
+		"note": "N/Adv row: the noun sense first, then the adverbial 重点介绍 use, matching the official POS pair."
+	},
+	"L2-0742": {
+		"meanings": ["measure word for weeks", "week"],
+		"note": "Official POS is M. Leading with the counting use keeps it apart from 星期 \"week\" at L1."
+	},
+	"L2-0745": {
+		"meanings": ["host", "owner"],
+		"note": "N row. Pairs with 客人 \"guest\"; \"master\" is the dated reading."
+	},
+	"L2-0746": {
+		"meanings": ["main", "principal"],
+		"note": "Adj row; one idea, two everyday words for it."
+	},
+	"L2-0748": {
+		"meanings": ["to stay in hospital"],
+		"note": "Separable verb; one sense is all a learner needs."
+	},
+	"L2-0749": {
+		"meanings": ["to load or pack", "to pretend"],
+		"note": "V row. CEDICT led with the noun \"adornment\"; 安装 owns \"to install\", so this card takes putting things in and playing a part."
+	},
+	"L2-0750": {
+		"meanings": ["accurate", "precise"],
+		"note": "Adj row; 正确 keeps \"correct\" so the two do not answer for each other."
+	},
+	"L2-0751": {
+		"meanings": ["oneself", "one's own"],
+		"note": "Pron row. CEDICT tags the second sense \"(attributive)\", a label no beginner needs."
+	},
+	"L2-0752": {
+		"meanings": ["bicycle"],
+		"note": "N row, one sense; the classifier note is not a meaning."
+	},
+	"L2-0753": {
+		"meanings": ["freedom", "free and unrestricted"],
+		"note": "N/Adj row: noun then adjective. Bare \"free\" would answer for 免费."
+	},
+	"L2-0755": {
+		"meanings": ["to walk past"],
+		"note": "Literal compound; 经过 keeps \"to pass\" so this card stays on foot."
+	},
+	"L2-0758": {
+		"meanings": ["to rent from someone", "to rent out"],
+		"note": "V row. 出租 owns the landlord side, and 租 genuinely runs both ways, which is the difficulty worth teaching."
+	},
+	"L2-0759": {
+		"meanings": ["to form a group", "a set"],
+		"note": "V/N row. 小组 already ships \"group\", so the verb leads and the noun is the counted set."
+	},
+	"L2-0762": {
+		"meanings": ["mouth"],
+		"note": "N row, the body part. CEDICT's \"beak\", \"nozzle\" and \"spout\" are extensions no L2 text uses."
+	},
+	"L2-0763": {
+		"meanings": ["recently", "soon"],
+		"note": "Time noun that reaches both ways in Chinese — 最近很忙 and 最近要去 — so both senses ship."
+	},
+	"L2-0765": {
+		"meanings": ["a school composition"],
+		"note": "N row. \"To write an essay\" is a verb gloss on a noun card; 文章 keeps \"an article\"."
+	},
+	"L2-0766": {
+		"meanings": ["school assignment", "homework"],
+		"note": "N row; leading with the assignment keeps 功课 \"homework\" at L3 distinguishable."
+	},
+	"L2-0768": {
+		"meanings": ["measure word for big structures"],
+		"note": "M row: buildings, bridges, mountains. Rewritten without the colon-and-comma list."
+	},
+	"L2-0770": {
+		"meanings": ["to accomplish", "to manage to do"],
+		"note": "Resultative 做+到: the point is that the doing succeeded, which 完成 \"to complete\" does not say."
+	},
+	"L2-0772": {
+		"meanings": ["to cook a meal"],
+		"note": "Separable verb; one everyday sense."
+	},
+	"L3-0001": {
+		"meanings": ["compassion", "a caring heart"],
+		"note": "N row. CEDICT's \"love\", \"charity bazaar\" and the heart symbol are not this card."
+	},
+	"L3-0003": {
+		"meanings": ["to install", "to set up"],
+		"note": "V row; \"to erect\" is register-wrong for software and appliances, which is where a learner meets it."
+	},
+	"L3-0004": {
+		"meanings": ["to press", "according to"],
+		"note": "V/Prep row: one gloss per official POS, press-button first."
+	},
+	"L3-0006": {
+		"meanings": ["puts the object before the verb", "measure word for handled things"],
+		"note": "Prep/M row. Says what 把 does to a sentence rather than naming a construction a beginner has no word for."
+	},
+	"L3-0008": {
+		"meanings": ["to seize", "certainty of success"],
+		"note": "V/N row: seize a chance, then 有把握 confidence. CEDICT marks its lead sense figurative."
+	},
+	"L3-0009": {
+		"meanings": ["in vain", "without paying"],
+		"note": "Adv row. The colour is the L1 Adj card; this level teaches 白跑一趟 and 白吃."
+	},
+	"L3-0012": {
+		"meanings": ["to move an object", "to shift"],
+		"note": "V row for shifting something bulky; 搬家 keeps moving house."
+	},
+	"L3-0013": {
+		"meanings": ["to move house"],
+		"note": "Separable verb, one sense; CEDICT's \"to remove sth\" is British legalese."
+	},
+	"L3-0014": {
+		"meanings": ["board", "plank"],
+		"note": "N row. CEDICT's music and adjective senses are unrelated readings."
+	},
+	"L3-0016": {
+		"meanings": ["to keep safe", "to ensure"],
+		"note": "V row. 保护 owns \"to protect\", so the bound single character takes keeping safe and guaranteeing."
+	},
+	"L3-0017": {
+		"meanings": ["security guard", "public security"],
+		"note": "N row: the person first, since that is who a learner meets at a gate."
+	},
+	"L3-0019": {
+		"meanings": ["to preserve", "to save a file"],
+		"note": "V row; the computing sense is the one an L3 learner clicks every day."
+	},
+	"L3-0022": {
+		"meanings": ["insurance", "safe and reliable"],
+		"note": "Adj/N row: the noun is the word a learner meets, with the adjective second and clear of 安全 \"safe\"."
+	},
+	"L3-0023": {
+		"meanings": ["to guarantee", "a pledge"],
+		"note": "V/N row matching the official POS pair."
+	},
+	"L3-0024": {
+		"meanings": ["a newspaper or journal"],
+		"note": "N row. 报纸 at L2 keeps \"newspaper\", so the single character names the wider class of published papers."
+	},
+	"L3-0025": {
+		"meanings": ["to check in on arrival", "to report for duty"],
+		"note": "Separable verb: registering on arrival at a school or job."
+	},
+	"L3-0027": {
+		"meanings": ["to report to someone", "a formal report"],
+		"note": "V/N row. 报道 keeps \"to report\" for news, so this card is reporting to a person and the document."
+	},
+	"L3-0028": {
+		"meanings": ["to carry on one's back"],
+		"note": "V row for bēi. CEDICT's second sense is explicitly figurative."
+	},
+	"L3-0030": {
+		"meanings": ["the back of the body", "the reverse side"],
+		"note": "N row for bèi. CEDICT's \"unlucky\" is marked slang and \"hard of hearing\" is a separate colloquial reading."
+	},
+	"L3-0031": {
+		"meanings": ["behind something", "behind one's back"],
+		"note": "N row; 后面 keeps \"the back\", and the second gloss is the very common 背后说 use."
+	},
+	"L3-0032": {
+		"meanings": ["marks the passive", "shows who did it"],
+		"note": "Prep row. Describes the job 被 does in the sentence; CEDICT's lead sense is the unrelated noun \"quilt\"."
+	},
+	"L3-0033": {
+		"meanings": ["quilt"],
+		"note": "N row, one sense; the classifier note is not a meaning."
+	},
+	"L3-0034": {
+		"meanings": ["in the first place", "originally"],
+		"note": "Adj/Adv row. 原来 at L2 already ships \"original / originally\", so this card leads with the other everyday reading."
+	},
+	"L3-0039": {
+		"meanings": ["a match or competition", "to compete in a match"],
+		"note": "V/N row; 竞争 keeps the bare \"to compete\" for rivalry."
+	},
+	"L3-0040": {
+		"meanings": ["inevitable", "bound to happen"],
+		"note": "Adj row; 必要 keeps \"necessary\"."
+	},
+	"L3-0041": {
+		"meanings": ["necessary", "a necessity"],
+		"note": "Adj/N row; 需要 keeps \"to need\"."
+	},
+	"L3-0043": {
+		"meanings": ["to turn into"],
+		"note": "Written-register twin of 变成, which keeps \"to change into\"."
+	},
+	"L3-0044": {
+		"meanings": ["a title or headline"],
+		"note": "N row. 题目 ships \"a question set\", so this card is the printed heading of a piece."
+	},
+	"L3-0045": {
+		"meanings": ["a standard or criterion", "up to standard"],
+		"note": "N/Adj row: the yardstick, then 标准的发音 \"up to standard\"."
+	},
+	"L3-0046": {
+		"meanings": ["to put into words", "to express"],
+		"note": "V row. 表示 already leads with \"to express\", so 表达 leads with what it actually does — putting a thought or feeling into words."
+	},
+	"L3-0048": {
+		"meanings": ["the outer surface", "outward appearance"],
+		"note": "N row; 外面 keeps \"outside\" and the second gloss carries 表面上."
+	},
+	"L3-0049": {
+		"meanings": ["to make clear", "to state clearly"],
+		"note": "V row: evidence that shows something, distinct from 说明 \"to explain\"."
+	},
+	"L3-0052": {
+		"meanings": ["and also", "emphasizes a following negative"],
+		"note": "Adv/Conj row. The conjunction is testable; the second gloss is what 并不 and 并没有 do, in plain words."
+	},
+	"L3-0056": {
+		"meanings": ["no need to"],
+		"note": "Adv row; one sense, phrased as a learner would say it."
+	},
+	"L3-0057": {
+		"meanings": ["without stopping", "unceasing"],
+		"note": "V/Adv row; 一直 keeps \"all along\"."
+	},
+	"L3-0058": {
+		"meanings": ["regardless of", "no matter which"],
+		"note": "Conj row. 无论 at L4 keeps \"no matter what or how\", so the two stay distinguishable."
+	},
+	"L3-0059": {
+		"meanings": ["to mend", "to make up for"],
+		"note": "V row: patching a hole, then filling a shortfall."
+	},
+	"L3-0060": {
+		"meanings": ["to supplement", "to add what is missing"],
+		"note": "V/N row; both glosses say the same act in learner English."
+	},
+	"L3-0061": {
+		"meanings": ["uneasy", "restless"],
+		"note": "Adj row; the feeling, not the political \"unstable\" CEDICT leads with."
+	},
+	"L3-0062": {
+		"meanings": ["have no choice but to", "must reluctantly"],
+		"note": "Fixed phrase; 只能 keeps \"can only\"."
+	},
+	"L3-0063": {
+		"meanings": ["not merely", "more than just"],
+		"note": "Adv/Conj row. 不仅 keeps \"not only\" so the near-synonyms do not answer for each other."
+	},
+	"L3-0064": {
+		"meanings": ["not only", "not limited to"],
+		"note": "Conj row, the 不仅…而且 pattern."
+	},
+	"L3-0065": {
+		"meanings": ["cloth"],
+		"note": "N row. CEDICT's \"to declare / to spread\" senses belong to 宣布 and 布置, not to this N card."
+	},
+	"L3-0066": {
+		"meanings": ["a step", "a stage in a process"],
+		"note": "N/M row: a pace, then 第一步 as a stage."
+	},
+	"L3-0067": {
+		"meanings": ["a government ministry", "measure word for films and books"],
+		"note": "N/M row: 教育部 first, then the classifier, without the colon-comma list."
+	},
+	"L3-0069": {
+		"meanings": ["government minister", "head of a department"],
+		"note": "N row; the ministerial sense is the one the news uses."
+	},
+	"L3-0072": {
+		"meanings": ["to adopt", "to put into use"],
+		"note": "V row: adopting a method or a suggestion; 使用 keeps plain \"to use\"."
+	},
+	"L3-0074": {
+		"meanings": ["once in the past", "used to do"],
+		"note": "Adv row. Bare \"once\" reads as \"one time\"; this says the past-experience job 曾经 does."
+	},
+	"L3-0075": {
+		"meanings": ["to give rise to", "to come about"],
+		"note": "V row; 生产 keeps \"to produce\" for manufacturing."
+	},
+	"L3-0078": {
+		"meanings": ["long term", "over a long period"],
+		"note": "N row; a stretch of time, not the adjective alone."
+	},
+	"L3-0079": {
+		"meanings": ["manufacturing plant"],
+		"note": "N row. 工厂 at the same level ships \"factory\", and \"plant, works\" was unreadable as two senses."
+	},
+	"L3-0080": {
+		"meanings": ["occasion", "setting"],
+		"note": "N row; the social occasion, kept clear of 情况 \"circumstances\"."
+	},
+	"L3-0082": {
+		"meanings": ["super", "top-grade"],
+		"note": "Adj row; CEDICT gives only hyphenated prefixes, which cannot stand as a card."
+	},
+	"L3-0083": {
+		"meanings": ["facing towards", "towards"],
+		"note": "Prep/V row. The official POS excludes the noun \"dynasty\" CEDICT leads with."
+	},
+	"L3-0084": {
+		"meanings": ["noisy", "to quarrel"],
+		"note": "Adj/V row: one gloss per official POS."
+	},
+	"L3-0088": {
+		"meanings": ["to be called", "to be known as"],
+		"note": "Fixed verb phrase; CEDICT's third clause is a quoting frame, not a sense."
+	},
+	"L3-0089": {
+		"meanings": ["to succeed", "successful"],
+		"note": "V/Adj row, so the noun \"success\" is dropped in favour of the adjective the POS asks for."
+	},
+	"L3-0091": {
+		"meanings": ["an accomplishment", "to bring about"],
+		"note": "N/V row: the noun leads as the official POS orders. 成果 keeps \"achievement\" and 做到 keeps \"to accomplish\"."
+	},
+	"L3-0093": {
+		"meanings": ["ripe", "mature"],
+		"note": "Adj row; leading with \"ripe\" keeps it clear of 成长 \"to grow and develop\"."
+	},
+	"L3-0095": {
+		"meanings": ["to grow and develop", "to mature"],
+		"note": "V row; 长大 keeps \"to grow up\" and 成熟 keeps \"ripe\"."
+	},
+	"L3-0096": {
+		"meanings": ["town", "city wall"],
+		"note": "N row. 城市 keeps \"city\"; the wall sense is what 长城 and 城里 are built on."
+	},
+	"L3-0097": {
+		"meanings": ["city"],
+		"note": "N row, one sense."
+	},
+	"L3-0098": {
+		"meanings": ["level or degree", "extent"],
+		"note": "N row; 度 at L2 keeps bare \"degree\"."
+	},
+	"L3-0100": {
+		"meanings": ["to be full of"],
+		"note": "V row, so the gloss is a verb phrase rather than the adjective \"full of\" CEDICT gives."
+	},
+	"L3-0101": {
+		"meanings": ["again from the start", "anew"],
+		"note": "Adv row for chóng. 再 and 又 keep \"again\", and the repeat-from-scratch sense is what 重做 means."
+	},
+	"L3-0102": {
+		"meanings": ["at the beginning", "early"],
+		"note": "Adv/Prefix row: 初 in 初春 and 月初. CEDICT's bound-form markers are not learner copy."
+	},
+	"L3-0104": {
+		"meanings": ["preliminary", "initial"],
+		"note": "Adj row; a first pass at something."
+	},
+	"L3-0107": {
+		"meanings": ["apart from", "besides"],
+		"note": "Prep row. CEDICT packs two example sentences into sense 1; the card takes the sense alone."
+	},
+	"L3-0109": {
+		"meanings": ["to pass along", "to hand down"],
+		"note": "V row. 传播 keeps \"to spread\", so this card is handing something on — a ball, a message, a tradition."
+	},
+	"L3-0111": {
+		"meanings": ["to come from afar", "to be heard"],
+		"note": "What arrives is a sound or a piece of news, which is the whole point of the word."
+	},
+	"L3-0112": {
+		"meanings": ["legend has it that", "a folk tale"],
+		"note": "V/N row. 据说 keeps \"it is said that\"; 传说 is specifically what has been handed down. 神话 at L4 keeps \"legend\"."
+	},
+	"L3-0113": {
+		"meanings": ["to innovate", "innovation"],
+		"note": "V/N row, one gloss per POS."
+	},
+	"L3-0114": {
+		"meanings": ["to start a business"],
+		"note": "V row; the modern sense, not CEDICT's \"to begin an undertaking\"."
+	},
+	"L3-0118": {
+		"meanings": ["in former times", "once upon a time"],
+		"note": "N row; 以前 keeps \"before\" and 过去 keeps \"past\"."
+	},
+	"L3-0119": {
+		"meanings": ["to engage in", "to work in a field"],
+		"note": "V row: 从事教育工作. Bare \"to do\" would answer for 做."
+	},
+	"L3-0120": {
+		"meanings": ["village"],
+		"note": "N row. CEDICT's \"to scold\" is a regional reading and \"boorish\" is a separate adjective."
+	},
+	"L3-0121": {
+		"meanings": ["to store", "to deposit"],
+		"note": "V row: keeping something and putting money in the bank; 存在 keeps \"to exist\"."
+	},
+	"L3-0123": {
+		"meanings": ["mistaken", "an error"],
+		"note": "Adj/N row; 错 at L1 keeps \"a mistake / wrong\"."
+	},
+	"L3-0126": {
+		"meanings": ["to inquire about", "to ask around"],
+		"note": "V row: asking around for information, not 问 \"to ask\" a person a question."
+	},
+	"L3-0127": {
+		"meanings": ["probably", "roughly"],
+		"note": "Adj/Adv row; the guess sense leads because that is the everyday use."
+	},
+	"L3-0129": {
+		"meanings": ["approximately"],
+		"note": "Adv row for quantity estimates: 大约十个人. One sense; bare \"about\" reads as \"concerning\" and 大概 keeps the guessing sense."
+	},
+	"L3-0130": {
+		"meanings": ["physician", "doctor"],
+		"note": "N row. 医生 at L1 keeps \"doctor\", so the everyday spoken word leads with \"physician\"."
+	}
+}
