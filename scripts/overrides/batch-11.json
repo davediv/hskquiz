@@ -1,0 +1,490 @@
+{
+	"L3-0688": {
+		"meanings": ["to die", "dead"],
+		"note": "V/Adj row. 'impassable' and 'damned' are the rigid/intensifier readings, not L3; the Adj sense a learner meets is simply 'dead'."
+	},
+	"L3-0689": {
+		"meanings": ["speed"],
+		"note": "N row, one sense; 'tempo' and 'velocity' are register-wrong for L3."
+	},
+	"L3-0690": {
+		"meanings": ["to go along with", "to comply with"],
+		"note": "V row. Bare 'to follow' would answer to 跟 (L1) just as well; 随 is going along with what someone else does."
+	},
+	"L3-0691": {
+		"meanings": ["measure word: schools or houses", "an institute or office"],
+		"note": "N/M row. Bare \"place\" collides with 地方 L1; 一所学校 is what a learner meets."
+	},
+	"L3-0693": {
+		"meanings": ["platform", "measure word: machines"],
+		"note": "N/M row. No CEDICT gloss on this key; 'platform' is the noun and 一台电脑 the classifier."
+	},
+	"L3-0694": {
+		"meanings": ["to talk over a topic", "to chat"],
+		"note": "V row. 讲 (L2-0267) owns 'to talk about', 说 (L1) 'to speak' and 讨论 (L2) 'to discuss'; 谈 is talking a topic over."
+	},
+	"L3-0695": {
+		"meanings": ["to have a conversation", "to talk things over"],
+		"note": "Separable verb-object. Keeps 说话 (L1) free for plain 'to speak'."
+	},
+	"L3-0696": {
+		"meanings": ["to negotiate", "negotiations"],
+		"note": "V/N row, verb first per the official POS order."
+	},
+	"L3-0697": {
+		"meanings": ["soup"],
+		"note": "N row. 'hot or boiling water' and 'decoction of medicinal herbs' are the classical readings."
+	},
+	"L3-0698": {
+		"meanings": ["sugar", "candy"],
+		"note": "N row; both senses are met at L3 (放糖 / 吃糖)."
+	},
+	"L3-0699": {
+		"meanings": ["distinctive feature", "special quality"],
+		"note": "N row. 特点 (L2) owns 'characteristic'; 特色 is what makes something distinctive."
+	},
+	"L3-0700": {
+		"meanings": ["to do ahead of time", "to move to an earlier date"],
+		"note": "V row, so the adverbial \"in advance\" cannot lead."
+	},
+	"L3-0701": {
+		"meanings": ["to ask a question"],
+		"note": "V row. CEDICT's 'to grill' and 'to quiz' are interrogation senses; 提问 is a hand going up in class."
+	},
+	"L3-0703": {
+		"meanings": ["to learn from experience", "personal insight"],
+		"note": "V/N row. Two near-identical CEDICT verb clauses collapsed to one, with the noun sense as the second."
+	},
+	"L3-0704": {
+		"meanings": ["to embody", "to give expression to"],
+		"note": "V row. 'to reflect' is left for 反映 (L4)."
+	},
+	"L3-0707": {
+		"meanings": ["sweet"],
+		"note": "Adj row. CEDICT's second clause is marked (fig.) — endearing/lovely never ships."
+	},
+	"L3-0708": {
+		"meanings": ["to mix or blend", "to adjust"],
+		"note": "V row, tiáo reading. 调整 (L3-0709) owns 'to adjust' as a primary, and 调 diào (L3-0153) is the separate transfer/investigate card, so the blending sense leads here."
+	},
+	"L3-0709": {
+		"meanings": ["to adjust", "to rearrange"],
+		"note": "V row. 'to revise' is left for 修改 (L3-0814)."
+	},
+	"L3-0710": {
+		"meanings": ["to jump"],
+		"note": "V row, one sense; 'to palpitate' is the heartbeat reading."
+	},
+	"L3-0711": {
+		"meanings": ["to do the high jump"],
+		"note": "Official POS is V, so the bare noun 'high jump' would break the POS match."
+	},
+	"L3-0712": {
+		"meanings": ["to dance"],
+		"note": "Separable verb-object; one sense only."
+	},
+	"L3-0713": {
+		"meanings": ["to do the long jump"],
+		"note": "V row, parallel to 跳高."
+	},
+	"L3-0714": {
+		"meanings": ["iron"],
+		"note": "N row, the metal. CEDICT's 'arms', 'hard', 'close (slang)' are all non-noun or register-wrong."
+	},
+	"L3-0718": {
+		"meanings": ["to stop doing something", "to cease"],
+		"note": "V row. 停 (L2) owns bare 'to stop'; 停止 is stopping an activity."
+	},
+	"L3-0719": {
+		"meanings": ["customary", "normally the case"],
+		"note": "Adj row, so the adverb 'usually' cannot lead. 平常 (L2-0419) owns 'usual', 正常 (L2) 'normal' and 普通 (L2) 'ordinary'."
+	},
+	"L3-0722": {
+		"meanings": ["painful", "sore"],
+		"note": "Adj row; the shipped 'ache, pain' were nouns. 疼 (L2) is the verb 'to hurt'."
+	},
+	"L3-0723": {
+		"meanings": ["in great pain", "miserable"],
+		"note": "Adj row. Kept off plain 'painful' so 痛 (L3-0722) stays distinct; 痛苦 is the deeper distress."
+	},
+	"L3-0724": {
+		"meanings": ["first in a sequence", "leading"],
+		"note": "L3 头 is the Adj row (头一次, 头三天). 头 at L2 is the N/M row that owns 'head' — the two shipped byte-identical glosses before."
+	},
+	"L3-0725": {
+		"meanings": ["brains", "the mind"],
+		"note": "N row. CEDICT's 'gist' is marked (fig.) and 'boss' is colloquial."
+	},
+	"L3-0726": {
+		"meanings": ["prominent", "to stand out"],
+		"note": "Adj/V row, adjective first per official order."
+	},
+	"L3-0727": {
+		"meanings": ["sudden"],
+		"note": "Adj row, one sense."
+	},
+	"L3-0728": {
+		"meanings": ["diagram", "drawing"],
+		"note": "N row. 'map' is 地图 (L1) and 'picture' is 画 (L2)."
+	},
+	"L3-0730": {
+		"meanings": ["soil", "dirt"],
+		"note": "N row. 'earth' would read as the planet; 'crude opium' and the eight-tones-of-music sense are reference clutter."
+	},
+	"L3-0731": {
+		"meanings": ["a ball or lump", "measure word: lumps or masses", "an organized group"],
+		"note": "N/M row. 集体 (L3) and 队 (L2) own the collective senses, so the physical lump leads and the group sense trails."
+	},
+	"L3-0732": {
+		"meanings": ["to unite", "to rally together"],
+		"note": "V row, so the noun 'unity' cannot ship as the primary."
+	},
+	"L3-0734": {
+		"meanings": ["to set in motion", "to promote"],
+		"note": "推 (L2) owns 'to push'. 推动 is making something move forward — kept distinct from 推进 (L3-0736)."
+	},
+	"L3-0735": {
+		"meanings": ["to popularize", "to spread widely"],
+		"note": "V row; 'to extend' was too vague to identify the word."
+	},
+	"L3-0736": {
+		"meanings": ["to push ahead with", "to drive forward"],
+		"note": "V row. 前进 (L3) owns 'to advance' and 推动 owns 'to set in motion'."
+	},
+	"L3-0737": {
+		"meanings": ["to push open", "to push aside"],
+		"note": "Resultative compound; 'to reject' and 'to decline' are the figurative extensions."
+	},
+	"L3-0738": {
+		"meanings": ["to move back", "to give back or refund"],
+		"note": "V row. Both senses are met at L3 (后退 / 退钱); 'or' avoids an internal comma."
+	},
+	"L3-0739": {
+		"meanings": ["to withdraw from", "to quit"],
+		"note": "V row. 'to abort' and 'to log out' are computing senses."
+	},
+	"L3-0740": {
+		"meanings": ["to retire"],
+		"note": "Separable verb-object; one sense."
+	},
+	"L3-0741": {
+		"meanings": ["diplomacy", "foreign affairs"],
+		"note": "N row; the adjective 'diplomatic' is dropped as a POS mismatch."
+	},
+	"L3-0742": {
+		"meanings": ["the outside of something", "the exterior"],
+		"note": "N row. 外 (L1-0367) owns 'outside' and 外边 (L1-0368) 'out there'; 外面 keeps the exterior-surface reading CEDICT also lists."
+	},
+	"L3-0745": {
+		"meanings": ["well-designed and complete", "to perfect"],
+		"note": "Adj/V row, adjective first. 完整 (L3-0746) owns 'complete', 完美 (L3-0744) 'perfect' and 发达 (L3-0173) 'well-developed'."
+	},
+	"L3-0748": {
+		"meanings": ["more often than not", "as a rule"],
+		"note": "Adv row. 常常 (L1) and 经常 (L2) own 'often'; 往往 states a pattern observed over time."
+	},
+	"L3-0749": {
+		"meanings": ["to endanger", "harm done"],
+		"note": "V/N row, verb first. 伤害 (L4) is the physical injury verb."
+	},
+	"L3-0751": {
+		"meanings": ["to act as", "to serve as", "by in a formal passive"],
+		"note": "Merged V + Prep row (L3-0751/L3-0752). The Prep sense was dropped entirely before; 为…所… is the formal passive."
+	},
+	"L3-0753": {
+		"meanings": ["to surround", "to encircle"],
+		"note": "V row. 'to wear by wrapping around' is the scarf sense and too narrow to lead."
+	},
+	"L3-0754": {
+		"meanings": ["great", "magnificent"],
+		"note": "Adj row. The shipped 'huge' was plainly wrong — 伟大 is admiration, not size."
+	},
+	"L3-0755": {
+		"meanings": ["hygienic", "hygiene"],
+		"note": "Adj/N row, adjective first per official order."
+	},
+	"L3-0757": {
+		"meanings": ["in order to", "so as to"],
+		"note": "Prep row introducing a purpose. 为 wèi (L2-0570) owns 'for the sake of'; bare 'for' would equally answer to 给."
+	},
+	"L3-0759": {
+		"meanings": ["culture", "level of education"],
+		"note": "N row. 'civilization' is handed to 文明 (L3-0761) so the two cards stay distinct; 有文化 is the second sense."
+	},
+	"L3-0761": {
+		"meanings": ["civilization", "civilized"],
+		"note": "N/Adj row, noun first per official order."
+	},
+	"L3-0764": {
+		"meanings": ["written language", "script"],
+		"note": "N row. 字 (L1) owns 'character' and 词 (L2) owns 'word'."
+	},
+	"L3-0765": {
+		"meanings": ["to shake hands"],
+		"note": "Separable verb-object; one sense."
+	},
+	"L3-0766": {
+		"meanings": ["room in a house", "house"],
+		"note": "N row. 房间 (L1) owns 'room' and 室 (L3-0666) is the bound form in 教室/办公室; 屋子 is the colloquial room you live in."
+	},
+	"L3-0768": {
+		"meanings": ["martial arts"],
+		"note": "N row, one sense. CEDICT's spiritual-development and opera-choreography notes are encyclopedia material."
+	},
+	"L3-0769": {
+		"meanings": ["stage"],
+		"note": "N row. CEDICT marks the sense (lit. and fig.); only the literal performing stage ships."
+	},
+	"L3-0771": {
+		"meanings": ["to hope", "hope"],
+		"note": "V/N row, verb first per official order."
+	},
+	"L3-0772": {
+		"meanings": ["university department", "faculty"],
+		"note": "N row. 部门 (L3-0068) owns plain 'department'. The 系 jì card (L4) is a different word entirely."
+	},
+	"L3-0773": {
+		"meanings": ["to come down", "after a verb: motion downward"],
+		"note": "Directional complement, described in plain words."
+	},
+	"L3-0774": {
+		"meanings": ["underneath", "the following"],
+		"note": "N row. 下 (L1) owns 'under' and 'below'; 下面 is the region beneath and the next item in a list."
+	},
+	"L3-0775": {
+		"meanings": ["to go down from here", "to keep on doing something"],
+		"note": "Directional complement. 下 (L1-0389) owns 'to go down'; the second gloss states the 说下去 continuation use in plain words."
+	},
+	"L3-0776": {
+		"meanings": ["advanced", "exemplary"],
+		"note": "Adj/N row. 'sophisticated' reads as a person's manner in English, which 先进 never means."
+	},
+	"L3-0777": {
+		"meanings": ["to seem", "to come across as"],
+		"note": "V row. 显得 always takes an appearance, so both glosses keep that frame."
+	},
+	"L3-0778": {
+		"meanings": ["evident", "plain to see"],
+		"note": "Adj row, so the adverb 'clearly' cannot lead. 明显 (L3-0493) owns 'obvious'."
+	},
+	"L3-0780": {
+		"meanings": ["the scene of an event", "the site"],
+		"note": "N row. Bare 'the scene' would not separate from 场面 or 地点."
+	},
+	"L3-0781": {
+		"meanings": ["modern times"],
+		"note": "N row; the three CEDICT clauses are one sense said three ways."
+	},
+	"L3-0783": {
+		"meanings": ["reality", "the actual situation"],
+		"note": "N row. CEDICT's 'materialistic; self-interested' is the pejorative adjective reading and is dropped."
+	},
+	"L3-0785": {
+		"meanings": ["thread", "line"],
+		"note": "N row; the city-tier sense is modern slang."
+	},
+	"L3-0786": {
+		"meanings": ["to compare against", "compared with"],
+		"note": "V row, so the bare phrase 'compared with' cannot lead. 比 (L1) and 比较 (L3) own the plain comparison verbs."
+	},
+	"L3-0787": {
+		"meanings": ["considerably", "to be equivalent to"],
+		"note": "Adv/V row, adverb first per official order; 'quite' would collide with 很 and 挺."
+	},
+	"L3-0788": {
+		"meanings": ["to be related to", "relevant"],
+		"note": "V row, so the adjective 'related' cannot lead."
+	},
+	"L3-0791": {
+		"meanings": ["fragrant", "appetizing"],
+		"note": "Adj row. Both senses are everyday at L3 (花很香 / 菜真香); the incense-stick noun is dropped."
+	},
+	"L3-0794": {
+		"meanings": ["to disappear"],
+		"note": "V row, one sense."
+	},
+	"L3-0795": {
+		"meanings": ["a piece of news", "message"],
+		"note": "N row. 新闻 (L2) owns 'news'; 消息 is word that reaches you about something."
+	},
+	"L3-0797": {
+		"meanings": ["to compose a piece of writing", "to write essays or books"],
+		"note": "V row. 写 (L1) owns 'to write', so 写作 has to name the authoring activity."
+	},
+	"L3-0798": {
+		"meanings": ["blood"],
+		"note": "N row, one sense."
+	},
+	"L3-0799": {
+		"meanings": ["heart", "one's feelings"],
+		"note": "N row. 'mind' is handed to 头脑 (L3-0725) so the two cards stay distinct; 心 in Chinese is the seat of feeling."
+	},
+	"L3-0800": {
+		"meanings": ["to trust", "to have faith in"],
+		"note": "L3 信 is the V row. 相信 (L2) owns 'to believe' and 信 at L2 is the N row meaning 'letter' — the two 信 cards shipped identically before."
+	},
+	"L3-0804": {
+		"meanings": ["to form", "to take shape"],
+		"note": "V row; both clauses of the single CEDICT sense are useful at L3."
+	},
+	"L3-0805": {
+		"meanings": ["outward form", "format"],
+		"note": "N row. Kept off bare 'form' so 形成 (L3-0804) stays distinct, and away from 形象 (L3-0806), which is the image something projects."
+	},
+	"L3-0806": {
+		"meanings": ["image", "vivid"],
+		"note": "N/Adj row, noun first per official order."
+	},
+	"L3-0808": {
+		"meanings": ["happy and fulfilled", "happiness"],
+		"note": "Adj/N row. 高兴 (L1) and 快乐 (L2) own plain 'happy'; 幸福 is the settled well-being kind."
+	},
+	"L3-0809": {
+		"meanings": ["lucky", "fortunate"],
+		"note": "Adj row; the noun 'good fortune' is a POS mismatch as a primary."
+	},
+	"L3-0810": {
+		"meanings": ["word ending like -ness or -ity"],
+		"note": "Suffix row. Says what 性 does to a word instead of naming a grammar category; CEDICT's sexuality senses never ship on a learner card."
+	},
+	"L3-0813": {
+		"meanings": ["to fix"],
+		"note": "V row. 建 (L3-0343) owns 'to build'. Flagged: 修理 (L4-0828) must not also be glossed 'to fix' or 'to repair'."
+	},
+	"L3-0814": {
+		"meanings": ["to revise a draft", "to amend"],
+		"note": "V row. 改 (L2-0173) owns 'to change' and 复习 (L2-0171) currently ships 'to revise', so 修改 names what it revises."
+	},
+	"L3-0815": {
+		"meanings": ["demand for something", "what is required"],
+		"note": "N row. Kept distinct from 需要 (L3-0816) and from 要求 (L2)."
+	},
+	"L3-0816": {
+		"meanings": ["to need", "a need"],
+		"note": "V/N row, verb first per official order."
+	},
+	"L3-0817": {
+		"meanings": ["to announce", "to declare"],
+		"note": "V row. 通知 (L2) is notifying someone; 宣布 is announcing publicly."
+	},
+	"L3-0821": {
+		"meanings": ["to train", "training"],
+		"note": "V/N row, verb first. 'to drill' reads as boring a hole in English."
+	},
+	"L3-0822": {
+		"meanings": ["to press down on", "to weigh down"],
+		"note": "V row. 按 (L3-0004) owns pressing a button; 压 is weight from above."
+	},
+	"L3-0824": {
+		"meanings": ["smoke", "cigarette"],
+		"note": "N row; both senses are everyday at L3 (烟很大 / 抽烟)."
+	},
+	"L3-0825": {
+		"meanings": ["in front of one's eyes", "the present moment"],
+		"note": "N row; both the spatial and the temporal sense are met at L3."
+	},
+	"L3-0826": {
+		"meanings": ["to play a role", "to put on a show"],
+		"note": "V row. 表演 (L3-0051) owns 'to perform', so 演 takes the acting-a-part sense."
+	},
+	"L3-0829": {
+		"meanings": ["to give a performance", "a show"],
+		"note": "V/N row, verb first; kept off bare 'to perform' so 表演 stays distinct."
+	},
+	"L3-0830": {
+		"meanings": ["actor", "performer"],
+		"note": "N row; 'actress' folds into 'actor' on a flashcard."
+	},
+	"L3-0831": {
+		"meanings": ["sheep"],
+		"note": "N row. 羊 covers sheep and goats, but a single English word is what fits a button; 山羊 carries the goat reading."
+	},
+	"L3-0832": {
+		"meanings": ["sunshine"],
+		"note": "N row. CEDICT's 'upbeat; energetic' is the personality metaphor and does not ship; 光 (L3-0268) owns plain 'light'."
+	},
+	"L3-0833": {
+		"meanings": ["supposing that", "if"],
+		"note": "Conj row. 如果 (L2) owns bare 'if'; 要是 is the spoken-style conditional."
+	},
+	"L3-0835": {
+		"meanings": ["everything", "every single one"],
+		"note": "Pron row. 所有 (L2) and 全部 (L2) own 'all'."
+	},
+	"L3-0836": {
+		"meanings": ["by now", "already"],
+		"note": "Adv row. 已经 (L2) owns 'already'; 已 is its terser written form, so the time-reference gloss leads."
+	},
+	"L3-0840": {
+		"meanings": ["unexpected", "an accident"],
+		"note": "Adj/N row, adjective first per official order."
+	},
+	"L3-0841": {
+		"meanings": ["significance", "the point of something"],
+		"note": "N row. 意思 (L2) owns 'meaning'; 意义 is why something matters."
+	},
+	"L3-0842": {
+		"meanings": ["for this reason", "therefore"],
+		"note": "Conj row. 所以 (L2) owns 'so' and 'therefore' as a primary."
+	},
+	"L3-0843": {
+		"meanings": ["silver"],
+		"note": "N row, the metal; 金 (L3-0368) is gold and 铁 (L3-0714) iron."
+	},
+	"L3-0846": {
+		"meanings": ["should"],
+		"note": "V row. 应该 (L2-0675) is authored as 'ought to'; 应当 is its formal twin and takes the remaining plain modal."
+	},
+	"L3-0847": {
+		"meanings": ["to meet someone on arrival", "to welcome"],
+		"note": "V row. 欢迎 (L2) owns 'to welcome'; 迎接 is going out to meet an arrival."
+	},
+	"L3-0849": {
+		"meanings": ["to win"],
+		"note": "V row, one sense; 'to profit' is the gambling reading."
+	},
+	"L3-0851": {
+		"meanings": ["to put to practical use", "to apply"],
+		"note": "V row, so the adjective 'practical' and the computing noun 'app' are both out."
+	},
+	"L3-0852": {
+		"meanings": ["strong point", "good quality"],
+		"note": "N row. Kept off 'advantage' so 优势 (L3-0853) stays distinct."
+	},
+	"L3-0853": {
+		"meanings": ["the upper hand", "superiority"],
+		"note": "N row. 好处 (L2-0215) owns 'advantage' and 'benefit'; 优势 is holding the stronger position."
+	},
+	"L3-0854": {
+		"meanings": ["by whom it is done", "from"],
+		"note": "Prep row. 由我来 is the L3 use; 从 L1 owns bare \"from\", and 叫 L3-0355 takes the spoken passive."
+	},
+	"L3-0855": {
+		"meanings": ["because of", "owing to"],
+		"note": "Prep/Conj row; 因为 (L2) is the conjunction a learner already has."
+	},
+	"L3-0856": {
+		"meanings": ["mail", "email"],
+		"note": "N row; both the postal and electronic senses are current at L3."
+	},
+	"L3-0858": {
+		"meanings": ["mailbox", "email inbox"],
+		"note": "N row; kept distinct from 邮件 (L3-0856), which is what goes in it."
+	},
+	"L3-0859": {
+		"meanings": ["to swim", "to roam about"],
+		"note": "V row. Flagged: 游泳 (L3-0861) is POS N/V with N first and should be glossed 'swimming', otherwise these two cards collide on 'to swim'."
+	},
+	"L3-0862": {
+		"meanings": ["to have plenty of", "there is no shortage of"],
+		"note": "Fixed phrase; both CEDICT clauses are usable once the second is made a full statement."
+	},
+	"L3-0863": {
+		"meanings": ["advantageous", "favorable"],
+		"note": "Adj row; 有利 describes conditions that help, not a person's merit."
+	},
+	"L3-0864": {
+		"meanings": ["to be effective", "to be valid"],
+		"note": "Official POS is V, so both glosses take a verb frame; 票还有效 is the validity sense."
+	}
+}
