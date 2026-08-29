@@ -1,0 +1,16 @@
+{
+  "piece": "app-shell",
+  "loop": 2,
+  "rule": "\"app-shell\" is 9 characters — ODD — so reference is A, ours is B",
+  "A": {
+    "which": "reference",
+    "source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+    "what": "Du Chinese, Articles list — back chevron + centred title bar, scrolling list of collection cards, persistent bottom tab bar"
+  },
+  "B": {
+    "which": "ours",
+    "source": "progress/shots/loop-2/app-shell-mobile.png",
+    "what": "hskquiz level select at 375x812 — app bar with 汉 wordmark, hero, list of level cards"
+  },
+  "note": "Same pairing as loop 1 (which the judge picked B, gap moderate) so movement is measurable."
+}
