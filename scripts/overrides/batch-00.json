@@ -1,0 +1,490 @@
+{
+	"L1-0001": {
+		"meanings": ["to love"],
+		"note": "V row. One gloss keeps 'to like' free for 喜欢 and 'to be fond of' free for 爱好."
+	},
+	"L1-0003": {
+		"meanings": ["eight"],
+		"note": "Num row, one sense only; the digit is the whole card."
+	},
+	"L1-0004": {
+		"meanings": ["father", "dad"],
+		"note": "CEDICT leads '(coll.) father; dad'; a card should not open with a register marker."
+	},
+	"L1-0005": {
+		"meanings": ["softens a suggestion or guess", "...right?"],
+		"note": "Particle. Says what 吧 does to a sentence instead of naming a grammar category."
+	},
+	"L1-0006": {
+		"meanings": ["white"],
+		"note": "Adj row at L1 is the colour; 'in vain' belongs to the Adv row of 白 at L3, not here."
+	},
+	"L1-0007": {
+		"meanings": ["daytime"],
+		"note": "N row. 'during the day' is adverbial and reads as a second answer in the quiz."
+	},
+	"L1-0008": {
+		"meanings": ["hundred"],
+		"note": "Num row; 'numerous' is the literary reading and never appears at HSK 1."
+	},
+	"L1-0009": {
+		"meanings": ["class of students", "work shift"],
+		"note": "Bare 'class' would answer to 课 as well; the group of students is what 班 names."
+	},
+	"L1-0010": {
+		"meanings": ["half"],
+		"note": "Num row, one sense; 半年 and 半天 carry their own cards."
+	},
+	"L1-0011": {
+		"meanings": ["half a year"],
+		"note": "Transparent compound; the literal reading is the taught one."
+	},
+	"L1-0012": {
+		"meanings": ["half a day", "quite a while"],
+		"note": "Both senses are met at L1; 'half of the day' was needlessly wordy."
+	},
+	"L1-0013": {
+		"meanings": ["to help"],
+		"note": "V row. CEDICT's 'side of a pail / upper of a shoe' senses are unrelated readings."
+	},
+	"L1-0015": {
+		"meanings": ["bag", "to wrap"],
+		"note": "N/M/V row: the noun leads, the verb follows, matching the official POS order."
+	},
+	"L1-0016": {
+		"meanings": ["steamed bun with filling"],
+		"note": "'baozi' is the word's own romanization, so the quiz asked 'baozi' and answered 包子."
+	},
+	"L1-0017": {
+		"meanings": ["measure word: cups or glasses"],
+		"note": "Was 'measure word: cups, glasses' — the internal comma splits the row on screen."
+	},
+	"L1-0019": {
+		"meanings": ["north"],
+		"note": "N row; CEDICT's second sense is classical 'to be defeated'."
+	},
+	"L1-0021": {
+		"meanings": ["capital city of China"],
+		"note": "'Beijing' is the entry's own toneless pinyin, so it cannot be a gloss on its own card."
+	},
+	"L1-0022": {
+		"meanings": ["measure word: books"],
+		"note": "M row; every CEDICT sense above the classifier is a bound form."
+	},
+	"L1-0024": {
+		"meanings": ["than", "to compare"],
+		"note": "Prep/V row: the comparative preposition leads (我比你高). Parenthetical dropped — the gate bars ( ) in a shipped gloss."
+	},
+	"L1-0025": {
+		"meanings": ["don't ...!"],
+		"note": "Adv row. CEDICT leads 'to leave; to part', which is the unrelated verb reading."
+	},
+	"L1-0026": {
+		"meanings": ["other", "another"],
+		"note": "Pron row. 'else' alone is too thin to pick out of four buttons."
+	},
+	"L1-0027": {
+		"meanings": ["other people", "somebody else"],
+		"note": "Kept distinct from 别的 by naming people rather than things."
+	},
+	"L1-0028": {
+		"meanings": ["illness", "to fall ill"],
+		"note": "N/V row; both senses are met at L1 and the noun leads as the POS orders it."
+	},
+	"L1-0029": {
+		"meanings": ["patient", "sick person"],
+		"note": "N row. The clinical word is what 病人 is used for."
+	},
+	"L1-0030": {
+		"meanings": ["not very", "not often"],
+		"note": "CEDICT buries both senses in one comma-piled clause; split so each reads alone."
+	},
+	"L1-0031": {
+		"meanings": ["not right", "incorrect"],
+		"note": "Held apart from 错 'wrong' — same level, and the quiz needs one right answer."
+	},
+	"L1-0032": {
+		"meanings": ["you're welcome", "don't mention it"],
+		"note": "The reply to 谢谢; CEDICT's 'impolite, rude, blunt' is the literal 不客气 of a person."
+	},
+	"L1-0033": {
+		"meanings": ["need not", "there is no need"],
+		"note": "Adv row; both phrasings are how a learner meets 不用."
+	},
+	"L1-0034": {
+		"meanings": ["not", "no"],
+		"note": "Adv row, the negator; CEDICT's second entry is the bound prefix un-."
+	},
+	"L1-0035": {
+		"meanings": ["vegetable", "a dish of food"],
+		"note": "Both senses are everyday at L1 (买菜 / 点菜) and CEDICT hid them behind CL: notes."
+	},
+	"L1-0036": {
+		"meanings": ["tea"],
+		"note": "N row, one sense; the tea plant is not an L1 reading."
+	},
+	"L1-0037": {
+		"meanings": ["to be short of", "poor or inferior"],
+		"note": "Shipped 'different, wrong', which are the chā reading; this row is chà (V/Adj)."
+	},
+	"L1-0038": {
+		"meanings": ["often"],
+		"note": "Adv row. 'always, ever' overstates 常; kept apart from 常常 'frequently'."
+	},
+	"L1-0039": {
+		"meanings": ["frequently"],
+		"note": "Near-synonym of 常 at the same level, so the two take different English."
+	},
+	"L1-0040": {
+		"meanings": ["to sing"],
+		"note": "V row; 'to call loudly' is the operatic reading."
+	},
+	"L1-0041": {
+		"meanings": ["to sing a song"],
+		"note": "Named object keeps it apart from 唱 'to sing' at the same level."
+	},
+	"L1-0042": {
+		"meanings": ["vehicle", "car"],
+		"note": "N row; the general sense leads because 车 covers bus, train and bike too."
+	},
+	"L1-0044": {
+		"meanings": ["in the car or on the bus"],
+		"note": "No CEDICT entry; one gloss with 'or' avoids the comma that splits the row."
+	},
+	"L1-0046": {
+		"meanings": ["to eat"],
+		"note": "V row; CEDICT's 'to eradicate, to absorb, to suffer' are all figurative extensions."
+	},
+	"L1-0047": {
+		"meanings": ["to have a meal"],
+		"note": "One gloss only, so it cannot answer to 吃 'to eat' as well."
+	},
+	"L1-0048": {
+		"meanings": ["to exit", "to come or go out"],
+		"note": "'to go out' is 出去's answer at this level, so 出 leads with 'to exit'."
+	},
+	"L1-0049": {
+		"meanings": ["to come out"],
+		"note": "The directional complement sense; 'to appear, to arise' are later extensions."
+	},
+	"L1-0051": {
+		"meanings": ["to wear", "to put on clothes"],
+		"note": "CEDICT leads 'to bore through'; 穿 at HSK 1 is only ever about clothes and shoes."
+	},
+	"L1-0052": {
+		"meanings": ["bed"],
+		"note": "N row; 'frame, chassis' and the classifier reading are not L1."
+	},
+	"L1-0053": {
+		"meanings": ["measure word: times"],
+		"note": "M row; every CEDICT sense above the classifier is the cì of 次要 'secondary'."
+	},
+	"L1-0054": {
+		"meanings": ["from", "starting from"],
+		"note": "Prep row; the rest of CEDICT's list is bound-form 从 cóng/zòng."
+	},
+	"L1-0055": {
+		"meanings": ["wrong", "a mistake"],
+		"note": "Adj/N row; the adjective leads and 不对 takes 'not right' so the two stay apart."
+	},
+	"L1-0056": {
+		"meanings": ["to hit", "to strike"],
+		"note": "V row; 打球 and 打电话 hold their own compounds, so 打 keeps the physical sense."
+	},
+	"L1-0057": {
+		"meanings": ["to take a taxi"],
+		"note": "One gloss; 'to hitch a lift' is a different act and not what 打车 means today."
+	},
+	"L1-0058": {
+		"meanings": ["to make a phone call"],
+		"note": "Shortened from CEDICT's 'telephone call' so it fits a phone button."
+	},
+	"L1-0060": {
+		"meanings": ["to play a ball game"],
+		"note": "Named object keeps it apart from 打 'to hit' at the same level."
+	},
+	"L1-0061": {
+		"meanings": ["big", "large"],
+		"note": "Adj row; CEDICT's 'father, uncle' senses are dialect and cannot ship."
+	},
+	"L1-0062": {
+		"meanings": ["university"],
+		"note": "One gloss; 'college' is the US synonym and adds nothing to the card."
+	},
+	"L1-0063": {
+		"meanings": ["university student"],
+		"note": "Matches 大学 so the pair reads as one family on the browse screen."
+	},
+	"L1-0064": {
+		"meanings": ["to reach", "to arrive"],
+		"note": "V row; leads with 'to reach' so it cannot answer to 来到 at the same level."
+	},
+	"L1-0065": {
+		"meanings": ["to get", "to obtain"],
+		"note": "CEDICT piles three synonyms into one clause; two are enough."
+	},
+	"L1-0066": {
+		"meanings": ["turns a word into an adverb"],
+		"note": "Particle. Says what 地 does rather than calling it a structural particle."
+	},
+	"L1-0067": {
+		"meanings": ["marks possession like 's", "of"],
+		"note": "Particle. Plain description beats 'possessive particle' for a first-week learner."
+	},
+	"L1-0068": {
+		"meanings": ["to wait"],
+		"note": "V row; 'by the time' and 'and so on' are separate readings a beginner never meets."
+	},
+	"L1-0069": {
+		"meanings": ["the ground", "land"],
+		"note": "N row for dì; kept apart from 地上 'on the ground' and from the de particle row."
+	},
+	"L1-0072": {
+		"meanings": ["on the ground"],
+		"note": "One gloss; 'on the floor' is the same idea indoors."
+	},
+	"L1-0075": {
+		"meanings": ["makes 'one' into 'first'"],
+		"note": "Prefix row. Shows the job it does instead of using the word 'ordinal'."
+	},
+	"L1-0076": {
+		"meanings": ["o'clock", "a little", "to order food"],
+		"note": "M/V/N row; all three are L1 daily use (三点 / 一点儿 / 点菜)."
+	},
+	"L1-0077": {
+		"meanings": ["electricity"],
+		"note": "N row; 'lightning' is the etymological sense and misleads on 电话 and 电视."
+	},
+	"L1-0078": {
+		"meanings": ["telephone", "phone call"],
+		"note": "Both senses are met at L1 (打电话 is the call, 一部电话 is the device)."
+	},
+	"L1-0080": {
+		"meanings": ["television"],
+		"note": "One gloss; the CL: note was the only other CEDICT content."
+	},
+	"L1-0082": {
+		"meanings": ["movie", "film"],
+		"note": "Two everyday synonyms; CEDICT joined them in one clause."
+	},
+	"L1-0083": {
+		"meanings": ["cinema"],
+		"note": "One gloss; 'movie theater' repeats it and crowds the button."
+	},
+	"L1-0084": {
+		"meanings": ["east"],
+		"note": "N row; 'host, landlord' is the classical reading of 东."
+	},
+	"L1-0086": {
+		"meanings": ["thing", "stuff"],
+		"note": "N row; CEDICT's 'person' sense is only ever abusive (不是东西)."
+	},
+	"L1-0087": {
+		"meanings": ["to move"],
+		"note": "V row; one gloss, since 'to set in movement' says the same thing at length."
+	},
+	"L1-0088": {
+		"meanings": ["movement", "action"],
+		"note": "N row, so both glosses are nouns; CEDICT's second clause was the verb reading."
+	},
+	"L1-0089": {
+		"meanings": ["all", "both"],
+		"note": "Adv row; the emphatic 'even' reading of dōu is not an L1 sense."
+	},
+	"L1-0090": {
+		"meanings": ["to read", "to read aloud"],
+		"note": "Plain reading leads; CEDICT led with 'to read out' and buried the ordinary sense."
+	},
+	"L1-0091": {
+		"meanings": ["to read a book", "to attend school"],
+		"note": "Named object keeps it apart from 读 'to read' at the same level."
+	},
+	"L1-0092": {
+		"meanings": ["correct", "right"],
+		"note": "Adj row; the preposition 'towards' is the L2 row of 对, not this one."
+	},
+	"L1-0093": {
+		"meanings": ["I'm sorry", "excuse me"],
+		"note": "Shipped 'to let down' first; the apology is the only thing 对不起 is used for at L1."
+	},
+	"L1-0094": {
+		"meanings": ["many", "a lot of"],
+		"note": "Adj/Pron row at L1; the Adv row of 多 at L2 must take different English."
+	},
+	"L1-0095": {
+		"meanings": ["how much?", "how many?"],
+		"note": "'how much?' leads so the card does not answer to 几 'how many' at the same level."
+	},
+	"L1-0096": {
+		"meanings": ["hungry"],
+		"note": "Adj/V row; the adjective is the L1 use and 'to starve sb' is causative."
+	},
+	"L1-0098": {
+		"meanings": ["two"],
+		"note": "Num row; CEDICT's third sense is Beijing dialect for 'stupid'."
+	},
+	"L1-0099": {
+		"meanings": ["cooked rice", "a meal"],
+		"note": "N row; both senses are L1 (米饭 / 吃饭) and CEDICT's 'fan, devotee' is a loanword."
+	},
+	"L1-0102": {
+		"meanings": ["house"],
+		"note": "N row; one gloss, since 'building, apartment, room' pull in three directions."
+	},
+	"L1-0103": {
+		"meanings": ["to put", "to place"],
+		"note": "V row; 'to set off fireworks' and 'to release' are later senses."
+	},
+	"L1-0104": {
+		"meanings": ["to have a holiday"],
+		"note": "Trimmed from 'to have a holiday or vacation' so it fits a phone button."
+	},
+	"L1-0105": {
+		"meanings": ["to finish school for the day"],
+		"note": "Written from the learner's side; CEDICT states it from the school's side."
+	},
+	"L1-0106": {
+		"meanings": ["to fly"],
+		"note": "V row, one sense."
+	},
+	"L1-0109": {
+		"meanings": ["minute", "point in a score"],
+		"note": "N/M row; both are L1 (五点十分 / 得三分). The verb 分 'to divide' is the L2 row."
+	},
+	"L1-0110": {
+		"meanings": ["wind"],
+		"note": "N row; 'news, style, custom' are all compound-only readings."
+	},
+	"L1-0111": {
+		"meanings": ["dry"],
+		"note": "Adj row for gān; CEDICT's 'rude, blunt, to cold-shoulder' senses are dialect."
+	},
+	"L1-0113": {
+		"meanings": ["to do a job", "to work at"],
+		"note": "V row for gàn. Kept off bare 'to do' (做) and bare 'to work' (工作), both L1."
+	},
+	"L1-0114": {
+		"meanings": ["what are you doing?"],
+		"note": "One gloss; CEDICT's second is the same question in the third person."
+	},
+	"L1-0115": {
+		"meanings": ["tall", "high"],
+		"note": "Adj row; 'your (honorific)' is a bound courtesy form."
+	},
+	"L1-0116": {
+		"meanings": ["happy", "glad"],
+		"note": "Adj row; 快乐 sits at L2 so 'happy' is free at this level."
+	},
+	"L1-0117": {
+		"meanings": ["to tell"],
+		"note": "One gloss; CEDICT piles 'to inform, to let know' into the same clause."
+	},
+	"L1-0119": {
+		"meanings": ["song"],
+		"note": "N row, so the noun stands alone; 'to sing' is 唱's card."
+	},
+	"L1-0120": {
+		"meanings": ["measure word: general purpose"],
+		"note": "M row; the everyday classifier, used when a noun has no special one."
+	},
+	"L1-0121": {
+		"meanings": ["to give", "for someone"],
+		"note": "V/Prep row; the verb leads and the benefactive preposition follows."
+	},
+	"L1-0122": {
+		"meanings": ["with", "to follow"],
+		"note": "Prep/Conj/V row; 'with' leads and is held apart from 和 'and' at the same level."
+	},
+	"L1-0124": {
+		"meanings": ["to work", "a job"],
+		"note": "V/N row; CEDICT's '(of a machine) to operate' is not the L1 use."
+	},
+	"L1-0125": {
+		"meanings": ["to close", "to turn off"],
+		"note": "V row; 'mountain pass' is the noun reading of 关 and not L1."
+	},
+	"L1-0127": {
+		"meanings": ["expensive"],
+		"note": "Adj row; the honorific 'your' (贵姓) is a bound prefix, not a standalone answer."
+	},
+	"L1-0128": {
+		"meanings": ["nation"],
+		"note": "'country' is 国家's answer at this same level, so 国 takes 'nation'."
+	},
+	"L1-0130": {
+		"meanings": ["abroad", "overseas"],
+		"note": "Both are the everyday reading; 'external (affairs)' is a formal collocation."
+	},
+	"L1-0131": {
+		"meanings": ["to cross", "to go past"],
+		"note": "V row; 'to celebrate' (过生日) and the aspect marker are separate jobs."
+	},
+	"L1-0132": {
+		"meanings": ["still", "in addition"],
+		"note": "Adv row for hái; CEDICT lists twelve overlapping fragments for one adverb."
+	},
+	"L1-0134": {
+		"meanings": ["and also", "there is still more"],
+		"note": "Rewritten from CEDICT's 'there still remain(s)', which leaks bracket notation."
+	},
+	"L1-0138": {
+		"meanings": ["good", "fine"],
+		"note": "Adj row at L1; the Adv row of 好 at L2 must lead with different English."
+	},
+	"L1-0139": {
+		"meanings": ["tasty", "delicious"],
+		"note": "Adj row; CEDICT joined both in one clause and the build kept only the first."
+	},
+	"L1-0140": {
+		"meanings": ["good-looking", "nice to look at"],
+		"note": "Adj row; steers clear of 'pretty', which answers to 漂亮."
+	},
+	"L1-0142": {
+		"meanings": ["fun", "amusing"],
+		"note": "CEDICT only says 'erhua variant of 好玩', which is notation, not a gloss."
+	},
+	"L1-0143": {
+		"meanings": ["day of the month in speech", "number"],
+		"note": "N/M row. 五月一号 is the L1 use, and saying \"in speech\" is the real distinction from 日 L1-0308, the written date word."
+	},
+	"L1-0144": {
+		"meanings": ["to drink"],
+		"note": "V row; CEDICT's second entry is a variant-character note."
+	},
+	"L1-0145": {
+		"meanings": ["and", "with"],
+		"note": "Prep/Conj row; the noun-joining conjunction leads, as in 我和你."
+	},
+	"L1-0146": {
+		"meanings": ["very"],
+		"note": "Adv row, one sense; CEDICT's second entry only describes when it means nothing."
+	},
+	"L1-0147": {
+		"meanings": ["back or rear", "after"],
+		"note": "N row; held apart from 后边 'behind' at the same level by naming the part."
+	},
+	"L1-0148": {
+		"meanings": ["behind", "the back side"],
+		"note": "The location word, kept distinct from bare 后 which names the part itself."
+	},
+	"L1-0149": {
+		"meanings": ["the day after tomorrow"],
+		"note": "One gloss; CEDICT's 'life after birth, a posteriori' is philosophical vocabulary."
+	},
+	"L1-0150": {
+		"meanings": ["flower", "blossom"],
+		"note": "N row at L1; the verb 'to spend' is the L2 row of 花 and belongs there."
+	},
+	"L1-0151": {
+		"meanings": ["words", "speech"],
+		"note": "N row; 'dialect, language' overlaps 语言 and is not what 说话 or 电话 carry."
+	},
+	"L1-0152": {
+		"meanings": ["bad", "broken"],
+		"note": "Adj row; both senses are L1 (坏人 / 手机坏了)."
+	},
+	"L1-0153": {
+		"meanings": ["to give back", "to return something"],
+		"note": "V row for huán; 'to return' alone answers to 回 at the same level."
+	}
+}
