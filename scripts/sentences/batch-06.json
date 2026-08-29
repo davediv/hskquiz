@@ -1,0 +1,247 @@
+{
+	"L1-0007": {
+		"hanzi": "白天我在学校学习。",
+		"pinyin": "bái tiān wǒ zài xué xiào xué xí",
+		"english": "During the day I study at school."
+	},
+	"L1-0033": {
+		"hanzi": "你不用等我了。",
+		"pinyin": "nǐ bú yòng děng wǒ le",
+		"english": "You don't have to wait for me."
+	},
+	"L1-0059": {
+		"hanzi": "请打开门。",
+		"pinyin": "qǐng dǎ kāi mén",
+		"english": "Please open the door."
+	},
+	"L1-0085": {
+		"hanzi": "医院在学校东边。",
+		"pinyin": "yī yuàn zài xué xiào dōng bian",
+		"english": "The hospital is on the east side of the school."
+	},
+	"L1-0111": {
+		"hanzi": "衣服还没干。",
+		"pinyin": "yī fu hái méi gān",
+		"english": "The clothes aren't dry yet."
+	},
+	"L1-0137": {
+		"hanzi": "这个汉字我不认识。",
+		"pinyin": "zhè ge Hàn zì wǒ bú rèn shi",
+		"english": "I don't know this Chinese character."
+	},
+	"L1-0163": {
+		"hanzi": "我要买机票。",
+		"pinyin": "wǒ yào mǎi jī piào",
+		"english": "I want to buy a plane ticket."
+	},
+	"L1-0189": {
+		"hanzi": "我哥哥会开车。",
+		"pinyin": "wǒ gē ge huì kāi chē",
+		"english": "My older brother can drive."
+	},
+	"L1-0215": {
+		"hanzi": "我有两个妹妹。",
+		"pinyin": "wǒ yǒu liǎng ge mèi mei",
+		"english": "I have two younger sisters."
+	},
+	"L1-0241": {
+		"hanzi": "老师们都很忙。",
+		"pinyin": "lǎo shī men dōu hěn máng",
+		"english": "The teachers are all very busy."
+	},
+	"L1-0267": {
+		"hanzi": "我家在学校南边。",
+		"pinyin": "wǒ jiā zài xué xiào nán bian",
+		"english": "My home is on the south side of the school."
+	},
+	"L1-0293": {
+		"hanzi": "前天我去了医院。",
+		"pinyin": "qián tiān wǒ qù le yī yuàn",
+		"english": "I went to the hospital the day before yesterday."
+	},
+	"L1-0319": {
+		"hanzi": "上次我们去了那家店。",
+		"pinyin": "shàng cì wǒ men qù le nà jiā diàn",
+		"english": "Last time we went to that shop."
+	},
+	"L1-0345": {
+		"hanzi": "我想喝水。",
+		"pinyin": "wǒ xiǎng hē shuǐ",
+		"english": "I want to drink some water."
+	},
+	"L1-0371": {
+		"hanzi": "孩子们在外面玩儿。",
+		"pinyin": "hái zi men zài wài miàn wán r",
+		"english": "The kids are playing outside."
+	},
+	"L1-0397": {
+		"hanzi": "你先吃饭吧。",
+		"pinyin": "nǐ xiān chī fàn ba",
+		"english": "You go ahead and eat first."
+	},
+	"L1-0423": {
+		"hanzi": "我要一杯水。",
+		"pinyin": "wǒ yào yì bēi shuǐ",
+		"english": "I'd like a glass of water."
+	},
+	"L1-0449": {
+		"hanzi": "外面在下雨。",
+		"pinyin": "wài miàn zài xià yǔ",
+		"english": "It's raining outside."
+	},
+	"L1-0475": {
+		"hanzi": "书里有很多知识。",
+		"pinyin": "shū lǐ yǒu hěn duō zhī shi",
+		"english": "There is a lot of knowledge in books."
+	},
+	"L2-0001": {
+		"hanzi": "这个菜真好吃啊！",
+		"pinyin": "zhè ge cài zhēn hǎo chī a",
+		"english": "Wow, this dish is really good!"
+	},
+	"L2-0027": {
+		"hanzi": "这本书我看了两遍。",
+		"pinyin": "zhè běn shū wǒ kàn le liǎng biàn",
+		"english": "I've read this book through twice."
+	},
+	"L2-0053": {
+		"hanzi": "我查了这个词的意思。",
+		"pinyin": "wǒ chá le zhè ge cí de yì si",
+		"english": "I looked up what this word means."
+	},
+	"L2-0079": {
+		"hanzi": "春节的时候我回家。",
+		"pinyin": "Chūn jié de shí hou wǒ huí jiā",
+		"english": "I go home for Spring Festival."
+	},
+	"L2-0105": {
+		"hanzi": "这件衣服很好，但是太贵了。",
+		"pinyin": "zhè jiàn yī fu hěn hǎo dàn shì tài guì le",
+		"english": "This jacket is nice, but it's too expensive."
+	},
+	"L2-0131": {
+		"hanzi": "太阳从东方出来。",
+		"pinyin": "tài yáng cóng dōng fāng chū lái",
+		"english": "The sun comes up in the east."
+	},
+	"L2-0157": {
+		"hanzi": "这里买东西很方便。",
+		"pinyin": "zhè lǐ mǎi dōng xi hěn fāng biàn",
+		"english": "Shopping here is very convenient."
+	},
+	"L2-0183": {
+		"hanzi": "我刚刚吃完饭。",
+		"pinyin": "wǒ gāng gāng chī wán fàn",
+		"english": "I finished eating just a moment ago."
+	},
+	"L2-0209": {
+		"hanzi": "老师在那边，你过去吧。",
+		"pinyin": "lǎo shī zài nà biān nǐ guò qù ba",
+		"english": "The teacher is over there — go on over."
+	},
+	"L2-0235": {
+		"hanzi": "他是一位有名的画家。",
+		"pinyin": "tā shì yí wèi yǒu míng de huà jiā",
+		"english": "He is a well-known painter."
+	},
+	"L2-0261": {
+		"hanzi": "假期我想去旅游。",
+		"pinyin": "jià qī wǒ xiǎng qù lǚ yóu",
+		"english": "I want to travel during the vacation."
+	},
+	"L2-0287": {
+		"hanzi": "这条街上有很多商店。",
+		"pinyin": "zhè tiáo jiē shang yǒu hěn duō shāng diàn",
+		"english": "There are a lot of shops on this street."
+	},
+	"L2-0313": {
+		"hanzi": "说说你的看法吧。",
+		"pinyin": "shuō shuo nǐ de kàn fǎ ba",
+		"english": "Go ahead and tell us what you think."
+	},
+	"L2-0339": {
+		"hanzi": "他老忘记带书。",
+		"pinyin": "tā lǎo wàng jì dài shū",
+		"english": "He's always forgetting to bring his book."
+	},
+	"L2-0366": {
+		"hanzi": "路边有很多树。",
+		"pinyin": "lù biān yǒu hěn duō shù",
+		"english": "There are lots of trees along the roadside."
+	},
+	"L2-0392": {
+		"hanzi": "南方的冬天不太冷。",
+		"pinyin": "nán fāng de dōng tiān bú tài lěng",
+		"english": "Winter in the south isn't very cold."
+	},
+	"L2-0418": {
+		"hanzi": "他们平安到家了。",
+		"pinyin": "tā men píng ān dào jiā le",
+		"english": "They got home safe and sound."
+	},
+	"L2-0444": {
+		"hanzi": "他请求老师再讲一遍。",
+		"pinyin": "tā qǐng qiú lǎo shī zài jiǎng yí biàn",
+		"english": "He asked the teacher to explain it once more."
+	},
+	"L2-0470": {
+		"hanzi": "这件事我们商量一下。",
+		"pinyin": "zhè jiàn shì wǒ men shāng liang yí xià",
+		"english": "Let's talk this over."
+	},
+	"L2-0497": {
+		"hanzi": "我的手表停了。",
+		"pinyin": "wǒ de shǒu biǎo tíng le",
+		"english": "My wristwatch has stopped."
+	},
+	"L2-0523": {
+		"hanzi": "南方的天气有什么特点？",
+		"pinyin": "nán fāng de tiān qì yǒu shén me tè diǎn",
+		"english": "What is the weather in the south like?"
+	},
+	"L2-0549": {
+		"hanzi": "我的头很疼。",
+		"pinyin": "wǒ de tóu hěn téng",
+		"english": "My head really hurts."
+	},
+	"L2-0575": {
+		"hanzi": "今天的温度很高。",
+		"pinyin": "jīn tiān de wēn dù hěn gāo",
+		"english": "The temperature is high today."
+	},
+	"L2-0601": {
+		"hanzi": "妹妹长得像妈妈。",
+		"pinyin": "mèi mei zhǎng de xiàng mā ma",
+		"english": "My little sister looks like our mother."
+	},
+	"L2-0627": {
+		"hanzi": "请写下你的姓名。",
+		"pinyin": "qǐng xiě xià nǐ de xìng míng",
+		"english": "Please write down your full name."
+	},
+	"L2-0653": {
+		"hanzi": "下课以后我们去吃饭。",
+		"pinyin": "xià kè yǐ hòu wǒ men qù chī fàn",
+		"english": "After class we'll go get something to eat."
+	},
+	"L2-0679": {
+		"hanzi": "看电视会影响学习。",
+		"pinyin": "kàn diàn shì huì yǐng xiǎng xué xí",
+		"english": "Watching TV affects your studies."
+	},
+	"L2-0705": {
+		"hanzi": "这件衣服太脏了。",
+		"pinyin": "zhè jiàn yī fu tài zāng le",
+		"english": "These clothes are far too dirty."
+	},
+	"L2-0731": {
+		"hanzi": "外面下雨，我们只能在家看电视。",
+		"pinyin": "wài miàn xià yǔ wǒ men zhǐ néng zài jiā kàn diàn shì",
+		"english": "It's raining outside, so all we can do is watch TV at home."
+	},
+	"L2-0757": {
+		"hanzi": "他生气地走开了。",
+		"pinyin": "tā shēng qì de zǒu kāi le",
+		"english": "He walked away angrily."
+	}
+}
