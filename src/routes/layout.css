@@ -1,3 +1,636 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+/* ==========================================================================================
+   hskquiz design system — "paper, ink, cinnabar"
+   ------------------------------------------------------------------------------------------
+   Chinese type is the product. Everything here exists so that a hanzi headword can be set
+   enormous, in a real Chinese face, with tone-marked pinyin on its own line underneath —
+   the way Pleco and Du Chinese do it — and so that the chrome around it stays out of the way.
+
+   HOW TO CONSUME THIS
+   Every token below is a Tailwind v4 theme variable, so it generates a utility:
+       --color-accent      -> bg-accent  text-accent  border-accent
+       --text-hanzi-2xl    -> text-hanzi-2xl
+       --font-hanzi        -> font-hanzi
+       --radius-card       -> rounded-card
+       --shadow-card       -> shadow-card
+       --container-app     -> max-w-app
+   Inside a component <style> block use the same names as `var(--color-accent)` etc. — the
+   `@theme static` below guarantees every token is emitted to `:root` whether or not a utility
+   happens to reference it, so a raw `var()` in a scoped style block is always safe.
+   Do NOT consume the `--hq-*` variables: that is the private layer where the light and dark
+   values live. Read `--color-*`; it always points at the right one for the active theme.
+
+   THE THREE ROLES OF COLOUR — this is the whole colour system, memorise it:
+       INK acts.      Primary buttons are ink-filled (`--color-primary`), never red.
+       RED alerts.    `--color-accent` is the single accent: identity, level badges,
+                      the focus ring, "look here" — and a missed answer (`--color-wrong`
+                      is the same red). Because red does double duty, a wrong state must
+                      ALWAYS also carry a glyph (✕) or a label. Colour is never the only
+                      channel, which is also what colour-blind learners need.
+       JADE confirms. `--color-correct` marks a right answer and mastery progress. Nothing
+                      else is green.
+   That split is why the primary button is ink: a red CTA sitting next to a red "wrong" card
+   would make the accent meaningless.
+
+   TYPE — three stacks, three scales, and they are not interchangeable:
+       --font-hanzi   + --text-hanzi-*    for 汉字. Never set hanzi on the Latin scale;
+                                          16px hanzi is unreadable. Smallest is 20px.
+       --font-pinyin  + --text-pinyin-*   for tone-marked pinyin. Both pinyin and hanzi
+                                          stacks lead with PingFang SC / Hiragino Sans GB /
+                                          Noto Sans SC / Microsoft YaHei, because a Chinese
+                                          font has to cover the GB 18030 pinyin block
+                                          (ǖ ǘ ǚ ǜ, U+01D5–U+01DC) while plenty of Latin UI
+                                          faces do not — Verdana, for one, has no ǚ, so the
+                                          browser silently swaps in a different face for that
+                                          one letter and `nǚ'ér` comes apart mid-word.
+                                          Verified: PingFang SC alone renders every marked
+                                          vowel, and the pinyin stack rasterises identically
+                                          to PingFang SC alone, i.e. it never falls through.
+       --font-sans    + --text-*          for English UI. CJK faces sit at the tail of this
+                                          stack too, so an inline 汉字 in a sentence still
+                                          gets a real Chinese face.
+   No webfonts, deliberately: a CJK webfont is 5–15 MB, and a Latin webfont next to system
+   CJK produces exactly the face mismatch this system exists to avoid.
+
+   SPACE — `--spacing` is 0.25rem, so p-4 = 16px. `--spacing-gutter` (20px) is the page edge
+   inset, `--spacing-tap` (44px) is the minimum touch target. `.app-shell` applies the gutter
+   plus the iOS safe-area insets and caps the column at `--container-app`.
+
+   ACCESSIBILITY CONTRACT — do not regress these:
+       · every text token is >= 4.5:1 on every surface it is allowed on (verified, both themes)
+       · `--color-line-strong` is the >= 3:1 border for interactive components; `--color-line`
+         is a decorative hairline and must not be the only thing defining a control
+       · `:focus-visible` gets a 3px accent ring at 3px offset, globally, in `@layer base`
+       · every <button> gets min-block-size 44px via a `:where()` rule (zero specificity, so
+         `min-h-0` overrides it when you really do need a tiny target)
+       · `prefers-reduced-motion: reduce` kills every animation and transition
+       · `prefers-contrast: more` promotes hairlines to the strong border
+
+   OPT-IN CLASSES (bottom of this file): .app-shell .card .btn (+ -primary -accent -quiet
+   -block) .chip .meter — plus utilities .hanzi .hanzi-display .pinyin .eyebrow .tabular .tap
+   ========================================================================================== */
+
+/* ------------------------------------------------------------------------------------------
+   Private theme layer. Light values here, dark values in the media query below. These are the
+   only declarations that change between themes; every semantic token points at one of them.
+   ------------------------------------------------------------------------------------------ */
+:root {
+	color-scheme: light dark;
+
+	/* Warm paper, not clinical white — it makes black hanzi look like ink instead of pixels. */
+	--hq-page: #faf8f5;
+	--hq-surface: #ffffff;
+	--hq-surface-sunken: #f1ede6;
+
+	--hq-ink: #1a1815;
+	--hq-ink-muted: #575049;
+	--hq-ink-subtle: #726b5f;
+	--hq-ink-inverse: #faf8f5;
+
+	--hq-line: #e7e1d7;
+	--hq-line-strong: #8e8778;
+
+	--hq-accent: #c8102e;
+	--hq-accent-strong: #9e0f27;
+	--hq-accent-soft: #fceaec;
+	--hq-accent-ink: #ffffff;
+
+	--hq-correct: #0e7a53;
+	--hq-correct-soft: #e4f2eb;
+	--hq-correct-ink: #ffffff;
+
+	--hq-primary: #1a1815;
+	--hq-primary-strong: #332f29;
+	--hq-primary-ink: #faf8f5;
+
+	/* Pleco's tone colouring, kept because learners already read it: 1 red, 2 green, 3 blue,
+	   4 purple, 5 grey. Opt-in — use it on pinyin, never on the hanzi itself. */
+	--hq-tone-1: #c8102e;
+	--hq-tone-2: #1f7a3d;
+	--hq-tone-3: #1f5fbf;
+	--hq-tone-4: #7a3fa8;
+	--hq-tone-5: #726b5f;
+
+	--hq-shadow-near: rgb(26 24 21 / 0.05);
+	--hq-shadow-far: rgb(26 24 21 / 0.11);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--hq-page: #100f0e;
+		--hq-surface: #191714;
+		--hq-surface-sunken: #211e1a;
+
+		--hq-ink: #f6f2eb;
+		--hq-ink-muted: #b5ada1;
+		--hq-ink-subtle: #9a9184;
+		--hq-ink-inverse: #100f0e;
+
+		--hq-line: #2e2a24;
+		--hq-line-strong: #6b6355;
+
+		--hq-accent: #f2685e;
+		--hq-accent-strong: #ff8b7c;
+		--hq-accent-soft: #351a15;
+		--hq-accent-ink: #100f0e;
+
+		--hq-correct: #4ecb93;
+		--hq-correct-soft: #102b22;
+		--hq-correct-ink: #100f0e;
+
+		--hq-primary: #f6f2eb;
+		--hq-primary-strong: #ffffff;
+		--hq-primary-ink: #100f0e;
+
+		--hq-tone-1: #f2685e;
+		--hq-tone-2: #5cc97e;
+		--hq-tone-3: #7faeff;
+		--hq-tone-4: #c08feb;
+		--hq-tone-5: #9a9184;
+
+		--hq-shadow-near: rgb(0 0 0 / 0.5);
+		--hq-shadow-far: rgb(0 0 0 / 0.55);
+	}
+}
+
+/* Hairlines become real borders when the OS asks for more contrast. */
+@media (prefers-contrast: more) {
+	:root {
+		--hq-line: var(--hq-line-strong);
+		--hq-ink-subtle: var(--hq-ink-muted);
+	}
+}
+
+@theme static {
+	/* -------------------------------------------------------------------- type stacks -- */
+	--font-sans:
+		ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI Variable Text', 'Segoe UI', Inter,
+		Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC',
+		'Microsoft YaHei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+
+	--font-hanzi:
+		'PingFang SC', 'Hiragino Sans GB', 'Source Han Sans SC', 'Noto Sans SC', 'Noto Sans CJK SC',
+		'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif;
+
+	/* CJK-first on purpose: these faces carry the full tone-marked vowel set, so ǎ ě ǐ ǒ ǔ ǚ
+	   come from the same face as the unmarked letters instead of a fallback. */
+	--font-pinyin:
+		'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', 'Lucida Grande',
+		'DejaVu Sans', 'Segoe UI', system-ui, sans-serif;
+
+	--font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+	/* ------------------------------------------------------------------ Latin/UI scale -- */
+	--text-2xs: 0.6875rem;
+	--text-2xs--line-height: 1.4;
+	--text-2xs--letter-spacing: 0.06em;
+
+	--text-xs: 0.75rem;
+	--text-xs--line-height: 1.45;
+	--text-xs--letter-spacing: 0.01em;
+
+	--text-sm: 0.875rem;
+	--text-sm--line-height: 1.5;
+
+	--text-base: 1rem;
+	--text-base--line-height: 1.55;
+
+	--text-lg: 1.125rem;
+	--text-lg--line-height: 1.5;
+
+	--text-xl: 1.3125rem;
+	--text-xl--line-height: 1.4;
+	--text-xl--letter-spacing: -0.005em;
+
+	--text-2xl: 1.625rem;
+	--text-2xl--line-height: 1.26;
+	--text-2xl--letter-spacing: -0.012em;
+
+	--text-3xl: 2.125rem;
+	--text-3xl--line-height: 1.14;
+	--text-3xl--letter-spacing: -0.02em;
+
+	--text-4xl: 2.75rem;
+	--text-4xl--line-height: 1.06;
+	--text-4xl--letter-spacing: -0.026em;
+
+	/* --------------------------------------------------------------------- hanzi scale --
+	   Its own scale because hanzi needs roughly double the optical size of Latin. The
+	   smallest step is 20px; below that strokes collapse. `-prompt` and `-hero` are fluid,
+	   for the one headword a screen is built around. */
+	--text-hanzi-xs: 1.25rem;
+	--text-hanzi-xs--line-height: 1.35;
+	--text-hanzi-sm: 1.625rem;
+	--text-hanzi-sm--line-height: 1.25;
+	--text-hanzi-md: 2.25rem;
+	--text-hanzi-md--line-height: 1.18;
+	--text-hanzi-lg: 3rem;
+	--text-hanzi-lg--line-height: 1.1;
+	--text-hanzi-xl: 4.25rem;
+	--text-hanzi-xl--line-height: 1.06;
+	--text-hanzi-2xl: 5.5rem;
+	--text-hanzi-2xl--line-height: 1.04;
+
+	--text-hanzi-prompt: clamp(3.25rem, 17vw, 6rem);
+	--text-hanzi-prompt--line-height: 1.06;
+	--text-hanzi-hero: clamp(4.5rem, 22vw, 9rem);
+	--text-hanzi-hero--line-height: 1.02;
+
+	/* -------------------------------------------------------------------- pinyin scale -- */
+	--text-pinyin-xs: 0.75rem;
+	--text-pinyin-xs--line-height: 1.3;
+	--text-pinyin-sm: 0.875rem;
+	--text-pinyin-sm--line-height: 1.35;
+	--text-pinyin-md: 1.0625rem;
+	--text-pinyin-md--line-height: 1.35;
+	--text-pinyin-lg: 1.375rem;
+	--text-pinyin-lg--line-height: 1.3;
+	--text-pinyin-xl: 1.75rem;
+	--text-pinyin-xl--line-height: 1.25;
+
+	/* --------------------------------------------------------------- semantic colours -- */
+	--color-page: var(--hq-page);
+	--color-surface: var(--hq-surface);
+	--color-surface-sunken: var(--hq-surface-sunken);
+
+	--color-ink: var(--hq-ink);
+	--color-ink-muted: var(--hq-ink-muted);
+	--color-ink-subtle: var(--hq-ink-subtle);
+	--color-ink-inverse: var(--hq-ink-inverse);
+
+	--color-line: var(--hq-line);
+	--color-line-strong: var(--hq-line-strong);
+
+	--color-accent: var(--hq-accent);
+	--color-accent-strong: var(--hq-accent-strong);
+	--color-accent-soft: var(--hq-accent-soft);
+	--color-accent-ink: var(--hq-accent-ink);
+
+	--color-correct: var(--hq-correct);
+	--color-correct-soft: var(--hq-correct-soft);
+	--color-correct-ink: var(--hq-correct-ink);
+
+	/* A miss is the same red as the accent — see "THE THREE ROLES OF COLOUR" above. Always
+	   pair it with a glyph or a label so colour is not the only signal. */
+	--color-wrong: var(--hq-accent);
+	--color-wrong-soft: var(--hq-accent-soft);
+	--color-wrong-ink: var(--hq-accent-ink);
+
+	--color-primary: var(--hq-primary);
+	--color-primary-strong: var(--hq-primary-strong);
+	--color-primary-ink: var(--hq-primary-ink);
+
+	--color-focus: var(--hq-accent);
+
+	--color-tone-1: var(--hq-tone-1);
+	--color-tone-2: var(--hq-tone-2);
+	--color-tone-3: var(--hq-tone-3);
+	--color-tone-4: var(--hq-tone-4);
+	--color-tone-5: var(--hq-tone-5);
+
+	/* --------------------------------------------------------- space, shape, elevation -- */
+	--spacing: 0.25rem;
+	--spacing-gutter: 1.25rem;
+	--spacing-tap: 2.75rem;
+
+	--container-app: 34rem;
+	--container-wide: 64rem;
+
+	--radius-xs: 0.375rem;
+	--radius-sm: 0.625rem;
+	--radius-md: 0.875rem;
+	--radius-lg: 1.25rem;
+	--radius-xl: 1.75rem;
+	--radius-card: 1.25rem;
+	--radius-pill: 999px;
+
+	--shadow-card: 0 1px 2px -1px var(--hq-shadow-near), 0 14px 34px -20px var(--hq-shadow-far);
+	--shadow-lift: 0 2px 4px -2px var(--hq-shadow-near), 0 22px 48px -24px var(--hq-shadow-far);
+	--shadow-inset: inset 0 1px 2px var(--hq-shadow-near);
+
+	/* ------------------------------------------------------------------------- motion -- */
+	--ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+	--animate-rise-in: rise-in 320ms var(--ease-out-soft) both;
+	--animate-shake: shake 380ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+
+	@keyframes rise-in {
+		from {
+			opacity: 0;
+			transform: translate3d(0, 10px, 0);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes shake {
+		10%,
+		90% {
+			transform: translate3d(-1px, 0, 0);
+		}
+		20%,
+		80% {
+			transform: translate3d(2px, 0, 0);
+		}
+		30%,
+		50%,
+		70% {
+			transform: translate3d(-5px, 0, 0);
+		}
+		40%,
+		60% {
+			transform: translate3d(5px, 0, 0);
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------------------
+   Base layer. Plain semantic markup should already look like this app before anyone reaches
+   for a utility class.
+   ------------------------------------------------------------------------------------------ */
+@layer base {
+	html {
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+	}
+
+	body {
+		/* The viewer paints its own ground behind the page, so state it explicitly. */
+		background-color: var(--color-page);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		font-size: var(--text-base);
+		line-height: 1.55;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		/* Never let the browser fake a weight — synthetic bold on hanzi is a smear. */
+		font-synthesis-weight: none;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-weight: 650;
+		letter-spacing: -0.018em;
+		text-wrap: balance;
+		color: var(--color-ink);
+	}
+
+	h1 {
+		font-size: var(--text-3xl);
+		line-height: 1.14;
+	}
+	h2 {
+		font-size: var(--text-2xl);
+		line-height: 1.26;
+	}
+	h3 {
+		font-size: var(--text-xl);
+		line-height: 1.4;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	a {
+		color: var(--color-accent);
+		text-decoration-thickness: from-font;
+		text-underline-offset: 0.18em;
+	}
+
+	hr {
+		border: 0;
+		border-top: 1px solid var(--color-line);
+	}
+
+	/* Zero-specificity so any utility (min-h-0, cursor-default) still wins. */
+	:where(button, [role='button'], summary) {
+		cursor: pointer;
+	}
+
+	:where(button, [role='button']) {
+		min-block-size: var(--spacing-tap);
+	}
+
+	:where(button, [role='button'], a, label, summary) {
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	:where(button):disabled {
+		cursor: not-allowed;
+	}
+
+	:focus-visible {
+		outline: 3px solid var(--color-focus);
+		outline-offset: 3px;
+	}
+
+	::selection {
+		background-color: var(--color-accent-soft);
+		color: var(--color-ink);
+	}
+
+	:lang(zh),
+	:lang(zh-Hans),
+	[lang='zh'],
+	[lang='zh-Hans'] {
+		font-family: var(--font-hanzi);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}
+
+/* ------------------------------------------------------------------------------------------
+   Utilities. Composable, single-purpose, safe to mix with any Tailwind class.
+   ------------------------------------------------------------------------------------------ */
+
+/* 汉字. Tight leading, a touch of tracking so adjacent characters do not knit together, and
+   no synthetic styling — pair with a --text-hanzi-* size. */
+@utility hanzi {
+	font-family: var(--font-hanzi);
+	font-weight: 400;
+	letter-spacing: 0.015em;
+	font-synthesis: none;
+	font-variant-ligatures: none;
+}
+
+/* The one headword a screen is about: PingFang Medium reads as "display" without faux bold. */
+@utility hanzi-display {
+	font-family: var(--font-hanzi);
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	font-synthesis: none;
+	font-variant-ligatures: none;
+}
+
+/* Tone-marked pinyin. Medium weight because diacritics thin out at regular. */
+@utility pinyin {
+	font-family: var(--font-pinyin);
+	font-weight: 500;
+	letter-spacing: 0.015em;
+	font-variant-ligatures: none;
+	font-feature-settings: 'kern' 1;
+}
+
+/* Small all-caps label above a block — the only place tracking goes positive on Latin. */
+@utility eyebrow {
+	font-size: var(--text-2xs);
+	line-height: 1.4;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--color-ink-subtle);
+}
+
+/* Counters and scores must not jitter as they change. */
+@utility tabular {
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: 'tnum' 1;
+}
+
+/* Force a 44px hit area on an icon-sized control. */
+@utility tap {
+	min-block-size: var(--spacing-tap);
+	min-inline-size: var(--spacing-tap);
+}
+
+@utility no-select {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Opt-in component classes. Nothing here is required — they exist so a screen can be built
+   out of the system without re-deriving the same six declarations each time.
+   ------------------------------------------------------------------------------------------ */
+@layer components {
+	/* The single-column phone-first shell: gutters, safe-area insets, capped measure. */
+	.app-shell {
+		width: 100%;
+		max-width: var(--container-app);
+		margin-inline: auto;
+		padding-inline: max(var(--spacing-gutter), env(safe-area-inset-left));
+		padding-block-end: max(var(--spacing-gutter), env(safe-area-inset-bottom));
+	}
+
+	.card {
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: calc(var(--spacing) * 2);
+		min-block-size: var(--spacing-tap);
+		padding-inline: calc(var(--spacing) * 5);
+		padding-block: calc(var(--spacing) * 3);
+		border: 1px solid transparent;
+		border-radius: var(--radius-pill);
+		font-size: var(--text-base);
+		font-weight: 600;
+		line-height: 1.2;
+		text-decoration: none;
+		transition:
+			background-color 160ms var(--ease-out-soft),
+			border-color 160ms var(--ease-out-soft),
+			transform 120ms var(--ease-out-soft);
+	}
+
+	.btn:active:not(:disabled) {
+		transform: scale(0.985);
+	}
+
+	.btn:disabled {
+		opacity: 0.45;
+	}
+
+	/* The primary action is ink, not red. See the colour-roles note at the top. */
+	.btn-primary {
+		background-color: var(--color-primary);
+		color: var(--color-primary-ink);
+	}
+
+	.btn-primary:hover:not(:disabled) {
+		background-color: var(--color-primary-strong);
+	}
+
+	.btn-accent {
+		background-color: var(--color-accent);
+		color: var(--color-accent-ink);
+	}
+
+	.btn-accent:hover:not(:disabled) {
+		background-color: var(--color-accent-strong);
+	}
+
+	/* Secondary: a real >= 3:1 border, so it is a control and not a suggestion. */
+	.btn-quiet {
+		background-color: var(--color-surface);
+		border-color: var(--color-line-strong);
+		color: var(--color-ink);
+	}
+
+	.btn-quiet:hover:not(:disabled) {
+		background-color: var(--color-surface-sunken);
+	}
+
+	.btn-block {
+		display: flex;
+		width: 100%;
+	}
+
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: calc(var(--spacing) * 1.5);
+		padding-inline: calc(var(--spacing) * 2.5);
+		padding-block: calc(var(--spacing) * 1);
+		border-radius: var(--radius-pill);
+		background-color: var(--color-surface-sunken);
+		color: var(--color-ink-muted);
+		font-size: var(--text-xs);
+		font-weight: 600;
+		letter-spacing: 0.02em;
+	}
+
+	.chip-accent {
+		background-color: var(--color-accent-soft);
+		color: var(--color-accent-strong);
+	}
+
+	.meter {
+		block-size: calc(var(--spacing) * 2);
+		border-radius: var(--radius-pill);
+		background-color: var(--color-surface-sunken);
+		overflow: hidden;
+	}
+
+	.meter > * {
+		display: block;
+		block-size: 100%;
+		border-radius: inherit;
+		background-color: var(--color-correct);
+		transition: inline-size 420ms var(--ease-out-soft);
+	}
+}
