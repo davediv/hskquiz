@@ -1,0 +1,17 @@
+{
+	"piece": "level-select",
+	"loop": 1,
+	"rule": "\"level-select\" has 12 characters (even) -> app mobile screenshot = A.png, reference = B.png",
+	"A": {
+		"which": "app",
+		"source": "progress/shots/loop-1/level-select-mobile.png",
+		"description": "hskquiz level select, first-time empty state, 375x812 @2x"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+		"description": "Du Chinese Articles collection list screen (device viewport crop)",
+		"why": "closest comparable: a list/library screen presenting a set of things to start, with per-item difficulty labels, counts and a primary action"
+	},
+	"note": "B retains the device bezel from the App Store frame crop; A is a raw browser viewport. Judge on layout, hierarchy and typography, not on framing."
+}
