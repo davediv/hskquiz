@@ -1117,7 +1117,7 @@
 			{ "py": "cháng", "tone": 2 },
 			{ "py": "shòu", "tone": 4 }
 		],
-		"meanings": ["longevity", "long-lived"],
+		"meanings": ["long-lived", "having a long life"],
 		"pos": ["Adj"],
 		"level": 5
 	},
@@ -4944,7 +4944,7 @@
 			{ "py": "jìn", "tone": 4 },
 			{ "py": "lái", "tone": 2 }
 		],
-		"meanings": ["recently", "lately"],
+		"meanings": ["the recent period", "lately"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -6727,7 +6727,7 @@
 			{ "py": "pín", "tone": 2 },
 			{ "py": "fán", "tone": 2 }
 		],
-		"meanings": ["frequently", "often"],
+		"meanings": ["frequent", "happening often"],
 		"pos": ["Adj"],
 		"level": 5
 	},
@@ -11083,7 +11083,7 @@
 			{ "py": "yōu", "tone": 1 },
 			{ "py": "mò", "tone": 4 }
 		],
-		"meanings": ["humor", "humorous"],
+		"meanings": ["humorous", "funny in a clever way"],
 		"pos": ["Adj"],
 		"level": 5
 	},
@@ -11335,7 +11335,7 @@
 			{ "py": "yuán", "tone": 2 },
 			{ "py": "xiān", "tone": 1 }
 		],
-		"meanings": ["originally", "formerly"],
+		"meanings": ["what it was originally", "formerly"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -11964,7 +11964,7 @@
 			{ "py": "zhèng", "tone": 4 },
 			{ "py": "bǎn", "tone": 3 }
 		],
-		"meanings": ["genuine", "legal"],
+		"meanings": ["a genuine edition", "a licensed copy"],
 		"pos": ["N"],
 		"level": 5
 	},

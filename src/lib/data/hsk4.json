@@ -1304,7 +1304,7 @@
 			{ "py": "chǔ", "tone": 3 },
 			{ "py": "yú", "tone": 2 }
 		],
-		"meanings": ["to be in"],
+		"meanings": ["to be in a certain state", "to be situated in"],
 		"pos": ["V"],
 		"level": 4
 	},
@@ -2645,7 +2645,7 @@
 		"hanzi": "法",
 		"pinyin": "fǎ",
 		"syllables": [{ "py": "fǎ", "tone": 3 }],
-		"meanings": ["a way of doing something", "a method"],
+		"meanings": ["law (in compounds)", "a method"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -2669,7 +2669,7 @@
 			{ "py": "fǎ", "tone": 3 },
 			{ "py": "lǜ", "tone": 4 }
 		],
-		"meanings": ["the law"],
+		"meanings": ["law (a body of rules)", "legislation"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -3803,7 +3803,7 @@
 			{ "py": "hēi", "tone": 1 },
 			{ "py": "àn", "tone": 4 }
 		],
-		"meanings": ["darkness", "pitch dark"],
+		"meanings": ["pitch dark", "darkness"],
 		"pos": ["Adj"],
 		"level": 4
 	},
@@ -6832,7 +6832,7 @@
 			{ "py": "qī", "tone": 1 },
 			{ "py": "zhōng", "tone": 1 }
 		],
-		"meanings": ["interim", "midterm"],
+		"meanings": ["midterm", "the middle of a term"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -7122,7 +7122,7 @@
 			{ "py": "quán", "tone": 2 },
 			{ "py": "lì", "tone": 4 }
 		],
-		"meanings": ["right"],
+		"meanings": ["a legal right", "an entitlement"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -11478,7 +11478,7 @@
 			{ "py": "zhí", "tone": 2 },
 			{ "py": "wù", "tone": 4 }
 		],
-		"meanings": ["plant life", "vegetation"],
+		"meanings": ["a plant (a living thing)", "vegetation"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -11611,7 +11611,7 @@
 		"traditional": "種",
 		"pinyin": "zhòng",
 		"syllables": [{ "py": "zhòng", "tone": 4 }],
-		"meanings": ["to plant or grow", "to cultivate"],
+		"meanings": ["to plant (in the ground)", "to cultivate"],
 		"pos": ["V"],
 		"level": 4
 	},

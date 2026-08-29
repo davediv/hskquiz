@@ -6,6 +6,11 @@
 		"pinyin": "ài",
 		"syllables": [{ "py": "ài", "tone": 4 }],
 		"meanings": ["to love"],
+		"example": {
+			"hanzi": "我爱我的爸爸妈妈。",
+			"pinyin": "wǒ ài wǒ de bà ba mā ma",
+			"english": "I love my mum and dad."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -19,6 +24,11 @@
 			{ "py": "hào", "tone": 4 }
 		],
 		"meanings": ["hobby", "to be fond of"],
+		"example": {
+			"hanzi": "我的爱好是看书。",
+			"pinyin": "wǒ de ài hào shì kàn shū",
+			"english": "My hobby is reading."
+		},
 		"pos": ["V", "N"],
 		"level": 1
 	},
@@ -28,6 +38,11 @@
 		"pinyin": "bā",
 		"syllables": [{ "py": "bā", "tone": 1 }],
 		"meanings": ["eight"],
+		"example": {
+			"hanzi": "我家有八口人。",
+			"pinyin": "wǒ jiā yǒu bā kǒu rén",
+			"english": "There are eight people in my family."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -40,6 +55,11 @@
 			{ "py": "ba", "tone": 0 }
 		],
 		"meanings": ["father", "dad"],
+		"example": {
+			"hanzi": "我爸爸是老师。",
+			"pinyin": "wǒ bà ba shì lǎo shī",
+			"english": "My dad is a teacher."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -49,6 +69,11 @@
 		"pinyin": "ba",
 		"syllables": [{ "py": "ba", "tone": 0 }],
 		"meanings": ["softens a suggestion or guess", "...right?"],
+		"example": {
+			"hanzi": "我们一起去吧。",
+			"pinyin": "wǒ men yì qǐ qù ba",
+			"english": "Let's go together, shall we?"
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -58,6 +83,11 @@
 		"pinyin": "bái",
 		"syllables": [{ "py": "bái", "tone": 2 }],
 		"meanings": ["white"],
+		"example": {
+			"hanzi": "我的衣服是白的。",
+			"pinyin": "wǒ de yī fu shì bái de",
+			"english": "My clothes are white."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -70,6 +100,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["daytime"],
+		"example": {
+			"hanzi": "白天我在学校学习。",
+			"pinyin": "bái tiān wǒ zài xué xiào xué xí",
+			"english": "During the day I study at school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -79,6 +114,11 @@
 		"pinyin": "bǎi",
 		"syllables": [{ "py": "bǎi", "tone": 3 }],
 		"meanings": ["hundred"],
+		"example": {
+			"hanzi": "学校里有一百个学生。",
+			"pinyin": "xué xiào lǐ yǒu yì bǎi ge xué shēng",
+			"english": "There are a hundred students at the school."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -88,6 +128,11 @@
 		"pinyin": "bān",
 		"syllables": [{ "py": "bān", "tone": 1 }],
 		"meanings": ["class of students", "work shift"],
+		"example": {
+			"hanzi": "我们班有二十个学生。",
+			"pinyin": "wǒ men bān yǒu èr shí ge xué shēng",
+			"english": "There are twenty students in our class."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -97,6 +142,11 @@
 		"pinyin": "bàn",
 		"syllables": [{ "py": "bàn", "tone": 4 }],
 		"meanings": ["half"],
+		"example": {
+			"hanzi": "我等了半个小时。",
+			"pinyin": "wǒ děng le bàn ge xiǎo shí",
+			"english": "I waited for half an hour."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -109,6 +159,11 @@
 			{ "py": "nián", "tone": 2 }
 		],
 		"meanings": ["half a year"],
+		"example": {
+			"hanzi": "我学了半年中文。",
+			"pinyin": "wǒ xué le bàn nián zhōng wén",
+			"english": "I've been studying Chinese for half a year."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -121,6 +176,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["half a day", "quite a while"],
+		"example": {
+			"hanzi": "我在家学了半天。",
+			"pinyin": "wǒ zài jiā xué le bàn tiān",
+			"english": "I studied at home for half a day."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -131,6 +191,11 @@
 		"pinyin": "bāng",
 		"syllables": [{ "py": "bāng", "tone": 1 }],
 		"meanings": ["to help"],
+		"example": {
+			"hanzi": "我帮妈妈做饭。",
+			"pinyin": "wǒ bāng mā ma zuò fàn",
+			"english": "I help my mum cook."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -144,6 +209,11 @@
 			{ "py": "máng", "tone": 2 }
 		],
 		"meanings": ["to lend a hand", "to do a favor"],
+		"example": {
+			"hanzi": "你能来帮忙吗？",
+			"pinyin": "nǐ néng lái bāng máng ma",
+			"english": "Can you come and lend a hand?"
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -153,6 +223,11 @@
 		"pinyin": "bāo",
 		"syllables": [{ "py": "bāo", "tone": 1 }],
 		"meanings": ["bag", "to wrap"],
+		"example": {
+			"hanzi": "我的包在桌子上。",
+			"pinyin": "wǒ de bāo zài zhuō zi shang",
+			"english": "My bag is on the table."
+		},
 		"pos": ["N", "M", "V"],
 		"level": 1
 	},
@@ -165,6 +240,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["steamed bun with filling"],
+		"example": {
+			"hanzi": "我早上吃了两个包子。",
+			"pinyin": "wǒ zǎo shang chī le liǎng ge bāo zi",
+			"english": "I ate two steamed buns this morning."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -174,6 +254,11 @@
 		"pinyin": "bēi",
 		"syllables": [{ "py": "bēi", "tone": 1 }],
 		"meanings": ["measure word: cups or glasses"],
+		"example": {
+			"hanzi": "我想喝一杯水。",
+			"pinyin": "wǒ xiǎng hē yì bēi shuǐ",
+			"english": "I'd like a glass of water."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -186,6 +271,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["cup", "glass"],
+		"example": {
+			"hanzi": "我买了一个新杯子。",
+			"pinyin": "wǒ mǎi le yí ge xīn bēi zi",
+			"english": "I bought a new cup."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -195,6 +285,11 @@
 		"pinyin": "běi",
 		"syllables": [{ "py": "běi", "tone": 3 }],
 		"meanings": ["north"],
+		"example": {
+			"hanzi": "我家在北边。",
+			"pinyin": "wǒ jiā zài běi biān",
+			"english": "My house is on the north side."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -208,6 +303,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the north side"],
+		"example": {
+			"hanzi": "学校在我家的北边。",
+			"pinyin": "xué xiào zài wǒ jiā de běi bian",
+			"english": "The school is on the north side of my house."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -220,6 +320,11 @@
 			{ "py": "jīng", "tone": 1 }
 		],
 		"meanings": ["capital city of China"],
+		"example": {
+			"hanzi": "我家在北京。",
+			"pinyin": "wǒ jiā zài Běi jīng",
+			"english": "My family lives in Beijing."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -229,6 +334,11 @@
 		"pinyin": "běn",
 		"syllables": [{ "py": "běn", "tone": 3 }],
 		"meanings": ["measure word: books"],
+		"example": {
+			"hanzi": "我买了两本书。",
+			"pinyin": "wǒ mǎi le liǎng běn shū",
+			"english": "I bought two books."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -241,6 +351,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["notebook"],
+		"example": {
+			"hanzi": "这个本子是我的。",
+			"pinyin": "zhè ge běn zi shì wǒ de",
+			"english": "This notebook is mine."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -250,6 +365,11 @@
 		"pinyin": "bǐ",
 		"syllables": [{ "py": "bǐ", "tone": 3 }],
 		"meanings": ["than", "to compare"],
+		"example": {
+			"hanzi": "我比我弟弟高。",
+			"pinyin": "wǒ bǐ wǒ dì di gāo",
+			"english": "I'm taller than my little brother."
+		},
 		"pos": ["Prep", "V"],
 		"level": 1
 	},
@@ -260,6 +380,11 @@
 		"pinyin": "bié",
 		"syllables": [{ "py": "bié", "tone": 2 }],
 		"meanings": ["don't ...!"],
+		"example": {
+			"hanzi": "别忘了明天的考试。",
+			"pinyin": "bié wàng le míng tiān de kǎo shì",
+			"english": "Don't forget tomorrow's test."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -273,6 +398,11 @@
 			{ "py": "de", "tone": 0 }
 		],
 		"meanings": ["other", "another"],
+		"example": {
+			"hanzi": "我不要这个，我要别的。",
+			"pinyin": "wǒ bú yào zhè ge wǒ yào bié de",
+			"english": "I don't want this one, I want a different one."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -286,6 +416,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["other people", "somebody else"],
+		"example": {
+			"hanzi": "别人的东西不能拿。",
+			"pinyin": "bié rén de dōng xi bù néng ná",
+			"english": "You mustn't take other people's things."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -295,6 +430,11 @@
 		"pinyin": "bìng",
 		"syllables": [{ "py": "bìng", "tone": 4 }],
 		"meanings": ["illness", "to fall ill"],
+		"example": {
+			"hanzi": "妈妈的病好了。",
+			"pinyin": "mā ma de bìng hǎo le",
+			"english": "Mom's illness has cleared up."
+		},
 		"pos": ["N", "V"],
 		"level": 1
 	},
@@ -307,6 +447,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["patient", "sick person"],
+		"example": {
+			"hanzi": "医院里有很多病人。",
+			"pinyin": "yī yuàn lǐ yǒu hěn duō bìng rén",
+			"english": "There are a lot of patients in the hospital."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -319,6 +464,11 @@
 			{ "py": "dà", "tone": 4 }
 		],
 		"meanings": ["not very", "not often"],
+		"example": {
+			"hanzi": "这个房间不大。",
+			"pinyin": "zhè ge fáng jiān bú dà",
+			"english": "This room isn't very big."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -332,6 +482,11 @@
 			{ "py": "duì", "tone": 4 }
 		],
 		"meanings": ["not right", "incorrect"],
+		"example": {
+			"hanzi": "你说的不对。",
+			"pinyin": "nǐ shuō de bú duì",
+			"english": "What you said isn't right."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -346,6 +501,11 @@
 			{ "py": "qì", "tone": 4 }
 		],
 		"meanings": ["you're welcome", "don't mention it"],
+		"example": {
+			"hanzi": "谢谢你！不客气。",
+			"pinyin": "xiè xie nǐ bú kè qì",
+			"english": "Thank you! — You're welcome."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -358,6 +518,11 @@
 			{ "py": "yòng", "tone": 4 }
 		],
 		"meanings": ["need not", "there is no need"],
+		"example": {
+			"hanzi": "你不用等我了。",
+			"pinyin": "nǐ bú yòng děng wǒ le",
+			"english": "You don't have to wait for me."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -367,6 +532,11 @@
 		"pinyin": "bù",
 		"syllables": [{ "py": "bù", "tone": 4 }],
 		"meanings": ["not", "no"],
+		"example": {
+			"hanzi": "我今天不想去。",
+			"pinyin": "wǒ jīn tiān bù xiǎng qù",
+			"english": "I don't feel like going today."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -376,6 +546,11 @@
 		"pinyin": "cài",
 		"syllables": [{ "py": "cài", "tone": 4 }],
 		"meanings": ["vegetable", "a dish of food"],
+		"example": {
+			"hanzi": "我买了一些菜。",
+			"pinyin": "wǒ mǎi le yì xiē cài",
+			"english": "I bought some vegetables."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -385,6 +560,11 @@
 		"pinyin": "chá",
 		"syllables": [{ "py": "chá", "tone": 2 }],
 		"meanings": ["tea"],
+		"example": {
+			"hanzi": "我妈妈喜欢喝茶。",
+			"pinyin": "wǒ mā ma xǐ huan hē chá",
+			"english": "My mum loves drinking tea."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -394,6 +574,11 @@
 		"pinyin": "chà",
 		"syllables": [{ "py": "chà", "tone": 4 }],
 		"meanings": ["to be short of", "poor or inferior"],
+		"example": {
+			"hanzi": "我们还差一个人。",
+			"pinyin": "wǒ men hái chà yí gè rén",
+			"english": "We're still one person short."
+		},
 		"pos": ["V", "Adj"],
 		"level": 1
 	},
@@ -403,6 +588,11 @@
 		"pinyin": "cháng",
 		"syllables": [{ "py": "cháng", "tone": 2 }],
 		"meanings": ["often"],
+		"example": {
+			"hanzi": "他常来我家。",
+			"pinyin": "tā cháng lái wǒ jiā",
+			"english": "He often comes over to my place."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -415,6 +605,11 @@
 			{ "py": "cháng", "tone": 2 }
 		],
 		"meanings": ["frequently"],
+		"example": {
+			"hanzi": "我常常在家看书。",
+			"pinyin": "wǒ cháng cháng zài jiā kàn shū",
+			"english": "I often read at home."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -424,6 +619,11 @@
 		"pinyin": "chàng",
 		"syllables": [{ "py": "chàng", "tone": 4 }],
 		"meanings": ["to sing"],
+		"example": {
+			"hanzi": "她唱得很好听。",
+			"pinyin": "tā chàng de hěn hǎo tīng",
+			"english": "She sings beautifully."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -436,6 +636,11 @@
 			{ "py": "gē", "tone": 1 }
 		],
 		"meanings": ["to sing a song"],
+		"example": {
+			"hanzi": "我妹妹很喜欢唱歌。",
+			"pinyin": "wǒ mèi mei hěn xǐ huan chàng gē",
+			"english": "My little sister loves to sing."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -446,6 +651,11 @@
 		"pinyin": "chē",
 		"syllables": [{ "py": "chē", "tone": 1 }],
 		"meanings": ["vehicle", "car"],
+		"example": {
+			"hanzi": "这是我家的新车。",
+			"pinyin": "zhè shì wǒ jiā de xīn chē",
+			"english": "This is our family's new car."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -459,6 +669,11 @@
 			{ "py": "piào", "tone": 4 }
 		],
 		"meanings": ["travel ticket"],
+		"example": {
+			"hanzi": "我在车站买了车票。",
+			"pinyin": "wǒ zài chē zhàn mǎi le chē piào",
+			"english": "I bought a ticket at the station."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -472,6 +687,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["in the car or on the bus"],
+		"example": {
+			"hanzi": "车上的人很多。",
+			"pinyin": "chē shang de rén hěn duō",
+			"english": "There are a lot of people on the bus."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -485,6 +705,11 @@
 			{ "py": "zhàn", "tone": 4 }
 		],
 		"meanings": ["rail station", "bus stop"],
+		"example": {
+			"hanzi": "车站在学校旁边。",
+			"pinyin": "chē zhàn zài xué xiào páng biān",
+			"english": "The bus stop is next to the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -494,6 +719,11 @@
 		"pinyin": "chī",
 		"syllables": [{ "py": "chī", "tone": 1 }],
 		"meanings": ["to eat"],
+		"example": {
+			"hanzi": "我想吃中国菜。",
+			"pinyin": "wǒ xiǎng chī zhōng guó cài",
+			"english": "I'd like to eat Chinese food."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -507,6 +737,11 @@
 			{ "py": "fàn", "tone": 4 }
 		],
 		"meanings": ["to have a meal"],
+		"example": {
+			"hanzi": "我们六点吃饭。",
+			"pinyin": "wǒ men liù diǎn chī fàn",
+			"english": "We eat at six."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -516,6 +751,11 @@
 		"pinyin": "chū",
 		"syllables": [{ "py": "chū", "tone": 1 }],
 		"meanings": ["to exit", "to come or go out"],
+		"example": {
+			"hanzi": "他从房间里出来了。",
+			"pinyin": "tā cóng fáng jiān lǐ chū lái le",
+			"english": "He came out of the room."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -529,6 +769,11 @@
 			{ "py": "lái", "tone": 2 }
 		],
 		"meanings": ["to come out"],
+		"example": {
+			"hanzi": "他从房间里出来了。",
+			"pinyin": "tā cóng fáng jiān lǐ chū lái le",
+			"english": "He came out of the room."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -541,6 +786,11 @@
 			{ "py": "qù", "tone": 4 }
 		],
 		"meanings": ["to go out"],
+		"example": {
+			"hanzi": "我们出去玩吧。",
+			"pinyin": "wǒ men chū qù wán ba",
+			"english": "Let's go out and play."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -550,6 +800,11 @@
 		"pinyin": "chuān",
 		"syllables": [{ "py": "chuān", "tone": 1 }],
 		"meanings": ["to wear", "to put on clothes"],
+		"example": {
+			"hanzi": "他今天穿了新衣服。",
+			"pinyin": "tā jīn tiān chuān le xīn yī fu",
+			"english": "He's wearing new clothes today."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -559,6 +814,11 @@
 		"pinyin": "chuáng",
 		"syllables": [{ "py": "chuáng", "tone": 2 }],
 		"meanings": ["bed"],
+		"example": {
+			"hanzi": "我想在床上睡觉。",
+			"pinyin": "wǒ xiǎng zài chuáng shàng shuì jiào",
+			"english": "I want to lie down in bed and sleep."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -568,6 +828,11 @@
 		"pinyin": "cì",
 		"syllables": [{ "py": "cì", "tone": 4 }],
 		"meanings": ["measure word: times"],
+		"example": {
+			"hanzi": "我一天喝三次水。",
+			"pinyin": "wǒ yì tiān hē sān cì shuǐ",
+			"english": "I drink water three times a day."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -578,6 +843,11 @@
 		"pinyin": "cóng",
 		"syllables": [{ "py": "cóng", "tone": 2 }],
 		"meanings": ["from", "starting from"],
+		"example": {
+			"hanzi": "我从学校回家。",
+			"pinyin": "wǒ cóng xué xiào huí jiā",
+			"english": "I go home from school."
+		},
 		"pos": ["Prep"],
 		"level": 1
 	},
@@ -588,6 +858,11 @@
 		"pinyin": "cuò",
 		"syllables": [{ "py": "cuò", "tone": 4 }],
 		"meanings": ["wrong", "a mistake"],
+		"example": {
+			"hanzi": "这个字写错了。",
+			"pinyin": "zhè ge zì xiě cuò le",
+			"english": "This character is written wrong."
+		},
 		"pos": ["Adj", "N"],
 		"level": 1
 	},
@@ -597,6 +872,11 @@
 		"pinyin": "dǎ",
 		"syllables": [{ "py": "dǎ", "tone": 3 }],
 		"meanings": ["to hit", "to strike"],
+		"example": {
+			"hanzi": "请不要打人。",
+			"pinyin": "qǐng bú yào dǎ rén",
+			"english": "Please don't hit people."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -610,6 +890,11 @@
 			{ "py": "chē", "tone": 1 }
 		],
 		"meanings": ["to take a taxi"],
+		"example": {
+			"hanzi": "我们打车去学校吧。",
+			"pinyin": "wǒ men dǎ chē qù xué xiào ba",
+			"english": "Let's take a taxi to school."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -624,6 +909,11 @@
 			{ "py": "huà", "tone": 4 }
 		],
 		"meanings": ["to make a phone call"],
+		"example": {
+			"hanzi": "我给妈妈打电话。",
+			"pinyin": "wǒ gěi mā ma dǎ diàn huà",
+			"english": "I'm calling my mom."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -637,6 +927,11 @@
 			{ "py": "kāi", "tone": 1 }
 		],
 		"meanings": ["to open up", "to switch on"],
+		"example": {
+			"hanzi": "请打开门。",
+			"pinyin": "qǐng dǎ kāi mén",
+			"english": "Please open the door."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -649,6 +944,11 @@
 			{ "py": "qiú", "tone": 2 }
 		],
 		"meanings": ["to play a ball game"],
+		"example": {
+			"hanzi": "弟弟很喜欢打球。",
+			"pinyin": "dì di hěn xǐ huan dǎ qiú",
+			"english": "My little brother loves playing ball."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -658,6 +958,11 @@
 		"pinyin": "dà",
 		"syllables": [{ "py": "dà", "tone": 4 }],
 		"meanings": ["big", "large"],
+		"example": {
+			"hanzi": "他们的房子很大。",
+			"pinyin": "tā men de fáng zi hěn dà",
+			"english": "Their house is very big."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -671,6 +976,11 @@
 			{ "py": "xué", "tone": 2 }
 		],
 		"meanings": ["university"],
+		"example": {
+			"hanzi": "我哥哥今年上大学。",
+			"pinyin": "wǒ gē ge jīn nián shàng dà xué",
+			"english": "My older brother starts university this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -685,6 +995,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["university student"],
+		"example": {
+			"hanzi": "我姐姐是大学生。",
+			"pinyin": "wǒ jiě jie shì dà xué shēng",
+			"english": "My older sister is a university student."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -694,6 +1009,11 @@
 		"pinyin": "dào",
 		"syllables": [{ "py": "dào", "tone": 4 }],
 		"meanings": ["to reach", "to arrive"],
+		"example": {
+			"hanzi": "我八点到学校。",
+			"pinyin": "wǒ bā diǎn dào xué xiào",
+			"english": "I get to school at eight."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -706,6 +1026,11 @@
 			{ "py": "dào", "tone": 4 }
 		],
 		"meanings": ["to get", "to obtain"],
+		"example": {
+			"hanzi": "他得到了一个新手机。",
+			"pinyin": "tā dé dào le yí ge xīn shǒu jī",
+			"english": "He got a new phone."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -715,6 +1040,11 @@
 		"pinyin": "de",
 		"syllables": [{ "py": "de", "tone": 0 }],
 		"meanings": ["turns a word into an adverb"],
+		"example": {
+			"hanzi": "他慢慢地走进来。",
+			"pinyin": "tā màn màn de zǒu jìn lái",
+			"english": "He walked in slowly."
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -724,6 +1054,11 @@
 		"pinyin": "de",
 		"syllables": [{ "py": "de", "tone": 0 }],
 		"meanings": ["marks possession like 's", "of"],
+		"example": {
+			"hanzi": "这是我姐姐的书。",
+			"pinyin": "zhè shì wǒ jiě jie de shū",
+			"english": "This is my older sister's book."
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -733,6 +1068,11 @@
 		"pinyin": "děng",
 		"syllables": [{ "py": "děng", "tone": 3 }],
 		"meanings": ["to wait"],
+		"example": {
+			"hanzi": "我在车站等你。",
+			"pinyin": "wǒ zài chē zhàn děng nǐ",
+			"english": "I'll wait for you at the station."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -742,6 +1082,11 @@
 		"pinyin": "dì",
 		"syllables": [{ "py": "dì", "tone": 4 }],
 		"meanings": ["the ground", "land"],
+		"example": {
+			"hanzi": "我的书在地上。",
+			"pinyin": "wǒ de shū zài dì shang",
+			"english": "My book is on the ground."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -755,6 +1100,11 @@
 			{ "py": "diǎn", "tone": 3 }
 		],
 		"meanings": ["location", "site"],
+		"example": {
+			"hanzi": "考试的地点在三楼。",
+			"pinyin": "kǎo shì de dì diǎn zài sān lóu",
+			"english": "The exam is held on the third floor."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -767,6 +1117,11 @@
 			{ "py": "fang", "tone": 0 }
 		],
 		"meanings": ["place", "area"],
+		"example": {
+			"hanzi": "这是一个好地方。",
+			"pinyin": "zhè shì yí gè hǎo dì fang",
+			"english": "This is a good place."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -779,6 +1134,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["on the ground"],
+		"example": {
+			"hanzi": "别坐在地上。",
+			"pinyin": "bié zuò zài dì shang",
+			"english": "Don't sit on the ground."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -792,6 +1152,11 @@
 			{ "py": "tú", "tone": 2 }
 		],
 		"meanings": ["map"],
+		"example": {
+			"hanzi": "我们看地图吧。",
+			"pinyin": "wǒ men kàn dì tú ba",
+			"english": "Let's have a look at the map."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -804,6 +1169,11 @@
 			{ "py": "di", "tone": 0 }
 		],
 		"meanings": ["younger brother"],
+		"example": {
+			"hanzi": "我弟弟今年八岁。",
+			"pinyin": "wǒ dì di jīn nián bā suì",
+			"english": "My younger brother is eight this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -813,6 +1183,11 @@
 		"pinyin": "dì",
 		"syllables": [{ "py": "dì", "tone": 4 }],
 		"meanings": ["makes 'one' into 'first'"],
+		"example": {
+			"hanzi": "他是第一个到的。",
+			"pinyin": "tā shì dì yī ge dào de",
+			"english": "He was the first one to arrive."
+		},
 		"pos": ["Prefix"],
 		"level": 1
 	},
@@ -823,6 +1198,11 @@
 		"pinyin": "diǎn",
 		"syllables": [{ "py": "diǎn", "tone": 3 }],
 		"meanings": ["o'clock", "a little", "to order food"],
+		"example": {
+			"hanzi": "我早上七点起床。",
+			"pinyin": "wǒ zǎo shang qī diǎn qǐ chuáng",
+			"english": "I get up at seven in the morning."
+		},
 		"pos": ["M", "V", "N"],
 		"level": 1
 	},
@@ -833,6 +1213,11 @@
 		"pinyin": "diàn",
 		"syllables": [{ "py": "diàn", "tone": 4 }],
 		"meanings": ["electricity"],
+		"example": {
+			"hanzi": "我们的房间没有电。",
+			"pinyin": "wǒ men de fáng jiān méi yǒu diàn",
+			"english": "There's no electricity in our room."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -846,6 +1231,11 @@
 			{ "py": "huà", "tone": 4 }
 		],
 		"meanings": ["telephone", "phone call"],
+		"example": {
+			"hanzi": "我在等你的电话。",
+			"pinyin": "wǒ zài děng nǐ de diàn huà",
+			"english": "I'm waiting for your call."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -859,6 +1249,11 @@
 			{ "py": "nǎo", "tone": 3 }
 		],
 		"meanings": ["computer"],
+		"example": {
+			"hanzi": "我的电脑很新。",
+			"pinyin": "wǒ de diàn nǎo hěn xīn",
+			"english": "My computer is brand new."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -872,6 +1267,11 @@
 			{ "py": "shì", "tone": 4 }
 		],
 		"meanings": ["television"],
+		"example": {
+			"hanzi": "晚上我看电视。",
+			"pinyin": "wǎn shang wǒ kàn diàn shì",
+			"english": "I watch television in the evening."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -886,6 +1286,11 @@
 			{ "py": "jī", "tone": 1 }
 		],
 		"meanings": ["television set"],
+		"example": {
+			"hanzi": "我家的电视机很大。",
+			"pinyin": "wǒ jiā de diàn shì jī hěn dà",
+			"english": "The TV set at our house is very big."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -899,6 +1304,11 @@
 			{ "py": "yǐng", "tone": 3 }
 		],
 		"meanings": ["movie", "film"],
+		"example": {
+			"hanzi": "我们晚上去看电影吧。",
+			"pinyin": "wǒ men wǎn shang qù kàn diàn yǐng ba",
+			"english": "Let's go see a movie tonight."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -913,6 +1323,11 @@
 			{ "py": "yuàn", "tone": 4 }
 		],
 		"meanings": ["cinema"],
+		"example": {
+			"hanzi": "我们去电影院看电影。",
+			"pinyin": "wǒ men qù diàn yǐng yuàn kàn diàn yǐng",
+			"english": "We're going to the cinema to see a film."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -923,6 +1338,11 @@
 		"pinyin": "dōng",
 		"syllables": [{ "py": "dōng", "tone": 1 }],
 		"meanings": ["east"],
+		"example": {
+			"hanzi": "我家在学校的东边。",
+			"pinyin": "wǒ jiā zài xué xiào de dōng bian",
+			"english": "My home is east of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -936,6 +1356,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the east side"],
+		"example": {
+			"hanzi": "医院在学校东边。",
+			"pinyin": "yī yuàn zài xué xiào dōng bian",
+			"english": "The hospital is on the east side of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -949,6 +1374,11 @@
 			{ "py": "xi", "tone": 0 }
 		],
 		"meanings": ["thing", "stuff"],
+		"example": {
+			"hanzi": "这些东西是我的。",
+			"pinyin": "zhè xiē dōng xi shì wǒ de",
+			"english": "These things are mine."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -959,6 +1389,11 @@
 		"pinyin": "dòng",
 		"syllables": [{ "py": "dòng", "tone": 4 }],
 		"meanings": ["to move"],
+		"example": {
+			"hanzi": "别动我的书。",
+			"pinyin": "bié dòng wǒ de shū",
+			"english": "Don't move my book."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -972,6 +1407,11 @@
 			{ "py": "zuò", "tone": 4 }
 		],
 		"meanings": ["movement", "action"],
+		"example": {
+			"hanzi": "这个动作不太难。",
+			"pinyin": "zhè ge dòng zuò bú tài nán",
+			"english": "This movement isn't too hard."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -981,6 +1421,11 @@
 		"pinyin": "dōu",
 		"syllables": [{ "py": "dōu", "tone": 1 }],
 		"meanings": ["all", "both"],
+		"example": {
+			"hanzi": "我们都是学生。",
+			"pinyin": "wǒ men dōu shì xué shēng",
+			"english": "We are all students."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -991,6 +1436,11 @@
 		"pinyin": "dú",
 		"syllables": [{ "py": "dú", "tone": 2 }],
 		"meanings": ["to read", "to read aloud"],
+		"example": {
+			"hanzi": "我喜欢读中文书。",
+			"pinyin": "wǒ xǐ huan dú zhōng wén shū",
+			"english": "I like reading Chinese books."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1004,6 +1454,11 @@
 			{ "py": "shū", "tone": 1 }
 		],
 		"meanings": ["to read a book", "to attend school"],
+		"example": {
+			"hanzi": "他在房间里读书。",
+			"pinyin": "tā zài fáng jiān lǐ dú shū",
+			"english": "He's reading in his room."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1014,6 +1469,11 @@
 		"pinyin": "duì",
 		"syllables": [{ "py": "duì", "tone": 4 }],
 		"meanings": ["correct", "right"],
+		"example": {
+			"hanzi": "老师说我写得对。",
+			"pinyin": "lǎo shī shuō wǒ xiě de duì",
+			"english": "The teacher said I wrote it correctly."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1028,6 +1488,11 @@
 			{ "py": "qǐ", "tone": 3 }
 		],
 		"meanings": ["I'm sorry", "excuse me"],
+		"example": {
+			"hanzi": "对不起，我来晚了。",
+			"pinyin": "duì bu qǐ wǒ lái wǎn le",
+			"english": "Sorry, I'm late."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1037,6 +1502,11 @@
 		"pinyin": "duō",
 		"syllables": [{ "py": "duō", "tone": 1 }],
 		"meanings": ["many", "a lot of"],
+		"example": {
+			"hanzi": "今天路上的人很多。",
+			"pinyin": "jīn tiān lù shang de rén hěn duō",
+			"english": "There are a lot of people out today."
+		},
 		"pos": ["Adj", "Pron"],
 		"level": 1
 	},
@@ -1049,6 +1519,11 @@
 			{ "py": "shao", "tone": 0 }
 		],
 		"meanings": ["how much?", "how many?"],
+		"example": {
+			"hanzi": "这个多少钱？",
+			"pinyin": "zhè ge duō shao qián",
+			"english": "How much is this?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -1059,6 +1534,11 @@
 		"pinyin": "è",
 		"syllables": [{ "py": "è", "tone": 4 }],
 		"meanings": ["hungry"],
+		"example": {
+			"hanzi": "我现在很饿。",
+			"pinyin": "wǒ xiàn zài hěn è",
+			"english": "I'm really hungry right now."
+		},
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -1072,6 +1552,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["son"],
+		"example": {
+			"hanzi": "我儿子今年八岁。",
+			"pinyin": "wǒ ér zi jīn nián bā suì",
+			"english": "My son is eight years old."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1081,6 +1566,11 @@
 		"pinyin": "èr",
 		"syllables": [{ "py": "èr", "tone": 4 }],
 		"meanings": ["two"],
+		"example": {
+			"hanzi": "我住在二号楼。",
+			"pinyin": "wǒ zhù zài èr hào lóu",
+			"english": "I live in building number two."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -1091,6 +1581,11 @@
 		"pinyin": "fàn",
 		"syllables": [{ "py": "fàn", "tone": 4 }],
 		"meanings": ["cooked rice", "a meal"],
+		"example": {
+			"hanzi": "妈妈做的饭很好吃。",
+			"pinyin": "mā ma zuò de fàn hěn hǎo chī",
+			"english": "The food my mum cooks is delicious."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1104,6 +1599,11 @@
 			{ "py": "diàn", "tone": 4 }
 		],
 		"meanings": ["restaurant", "hotel"],
+		"example": {
+			"hanzi": "这家饭店的菜很好吃。",
+			"pinyin": "zhè jiā fàn diàn de cài hěn hǎo chī",
+			"english": "The food at this restaurant is delicious."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1117,6 +1617,11 @@
 			{ "py": "jiān", "tone": 1 }
 		],
 		"meanings": ["room"],
+		"example": {
+			"hanzi": "我的房间很干净。",
+			"pinyin": "wǒ de fáng jiān hěn gān jìng",
+			"english": "My room is very clean."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1129,6 +1634,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["house"],
+		"example": {
+			"hanzi": "他们的房子很大。",
+			"pinyin": "tā men de fáng zi hěn dà",
+			"english": "Their house is really big."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1138,6 +1648,11 @@
 		"pinyin": "fàng",
 		"syllables": [{ "py": "fàng", "tone": 4 }],
 		"meanings": ["to put", "to place"],
+		"example": {
+			"hanzi": "东西都放在桌子上。",
+			"pinyin": "dōng xi dōu fàng zài zhuō zi shàng",
+			"english": "Put everything on the desk."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1150,6 +1665,11 @@
 			{ "py": "jià", "tone": 4 }
 		],
 		"meanings": ["to have a holiday"],
+		"example": {
+			"hanzi": "我们下星期放假。",
+			"pinyin": "wǒ men xià xīng qī fàng jià",
+			"english": "We're on holiday next week."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1163,6 +1683,11 @@
 			{ "py": "xué", "tone": 2 }
 		],
 		"meanings": ["to finish school for the day"],
+		"example": {
+			"hanzi": "我们下午四点放学。",
+			"pinyin": "wǒ men xià wǔ sì diǎn fàng xué",
+			"english": "We finish school at four in the afternoon."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1173,6 +1698,11 @@
 		"pinyin": "fēi",
 		"syllables": [{ "py": "fēi", "tone": 1 }],
 		"meanings": ["to fly"],
+		"example": {
+			"hanzi": "飞机飞得很高。",
+			"pinyin": "fēi jī fēi de hěn gāo",
+			"english": "The plane is flying very high."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1186,6 +1716,11 @@
 			{ "py": "jī", "tone": 1 }
 		],
 		"meanings": ["airplane"],
+		"example": {
+			"hanzi": "我们明天坐飞机回家。",
+			"pinyin": "wǒ men míng tiān zuò fēi jī huí jiā",
+			"english": "We're flying home tomorrow."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1198,6 +1733,11 @@
 			{ "py": "cháng", "tone": 2 }
 		],
 		"meanings": ["extremely"],
+		"example": {
+			"hanzi": "今天非常热。",
+			"pinyin": "jīn tiān fēi cháng rè",
+			"english": "It's extremely hot today."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -1207,6 +1747,11 @@
 		"pinyin": "fēn",
 		"syllables": [{ "py": "fēn", "tone": 1 }],
 		"meanings": ["minute", "point in a score"],
+		"example": {
+			"hanzi": "现在是八点十分。",
+			"pinyin": "xiàn zài shì bā diǎn shí fēn",
+			"english": "It's ten past eight."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -1217,6 +1762,11 @@
 		"pinyin": "fēng",
 		"syllables": [{ "py": "fēng", "tone": 1 }],
 		"meanings": ["wind"],
+		"example": {
+			"hanzi": "今天风很大。",
+			"pinyin": "jīn tiān fēng hěn dà",
+			"english": "It's very windy today."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1227,6 +1777,11 @@
 		"pinyin": "gān",
 		"syllables": [{ "py": "gān", "tone": 1 }],
 		"meanings": ["dry"],
+		"example": {
+			"hanzi": "衣服还没干。",
+			"pinyin": "yī fu hái méi gān",
+			"english": "The clothes aren't dry yet."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1240,6 +1795,11 @@
 			{ "py": "jìng", "tone": 4 }
 		],
 		"meanings": ["clean", "neat"],
+		"example": {
+			"hanzi": "房间很干净。",
+			"pinyin": "fáng jiān hěn gān jìng",
+			"english": "The room is very clean."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1250,6 +1810,11 @@
 		"pinyin": "gàn",
 		"syllables": [{ "py": "gàn", "tone": 4 }],
 		"meanings": ["to do a job", "to work at"],
+		"example": {
+			"hanzi": "我在这个店里干了三年。",
+			"pinyin": "wǒ zài zhè ge diàn lǐ gàn le sān nián",
+			"english": "I've worked at this shop for three years."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1264,6 +1829,11 @@
 			{ "py": "me", "tone": 0 }
 		],
 		"meanings": ["what are you doing?"],
+		"example": {
+			"hanzi": "你们在干什么呢？",
+			"pinyin": "nǐ men zài gàn shén me ne",
+			"english": "What are you all doing?"
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1273,6 +1843,11 @@
 		"pinyin": "gāo",
 		"syllables": [{ "py": "gāo", "tone": 1 }],
 		"meanings": ["tall", "high"],
+		"example": {
+			"hanzi": "我弟弟比我高。",
+			"pinyin": "wǒ dì di bǐ wǒ gāo",
+			"english": "My little brother is taller than me."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1286,6 +1861,11 @@
 			{ "py": "xìng", "tone": 4 }
 		],
 		"meanings": ["happy", "glad"],
+		"example": {
+			"hanzi": "今天见到你很高兴。",
+			"pinyin": "jīn tiān jiàn dào nǐ hěn gāo xìng",
+			"english": "I'm really glad to see you today."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1299,6 +1879,11 @@
 			{ "py": "su", "tone": 0 }
 		],
 		"meanings": ["to tell"],
+		"example": {
+			"hanzi": "请告诉我你的名字。",
+			"pinyin": "qǐng gào su wǒ nǐ de míng zi",
+			"english": "Please tell me your name."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1311,6 +1896,11 @@
 			{ "py": "ge", "tone": 0 }
 		],
 		"meanings": ["older brother"],
+		"example": {
+			"hanzi": "我哥哥今年二十岁。",
+			"pinyin": "wǒ gē ge jīn nián èr shí suì",
+			"english": "My older brother is twenty this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1320,6 +1910,11 @@
 		"pinyin": "gē",
 		"syllables": [{ "py": "gē", "tone": 1 }],
 		"meanings": ["song"],
+		"example": {
+			"hanzi": "老师教我们唱新歌。",
+			"pinyin": "lǎo shī jiāo wǒ men chàng xīn gē",
+			"english": "The teacher is teaching us a new song."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1330,6 +1925,11 @@
 		"pinyin": "gè",
 		"syllables": [{ "py": "gè", "tone": 4 }],
 		"meanings": ["measure word: general purpose"],
+		"example": {
+			"hanzi": "我有两个哥哥。",
+			"pinyin": "wǒ yǒu liǎng ge gē ge",
+			"english": "I have two older brothers."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -1340,6 +1940,11 @@
 		"pinyin": "gěi",
 		"syllables": [{ "py": "gěi", "tone": 3 }],
 		"meanings": ["to give", "for someone"],
+		"example": {
+			"hanzi": "请给我一杯茶。",
+			"pinyin": "qǐng gěi wǒ yì bēi chá",
+			"english": "Please give me a cup of tea."
+		},
 		"pos": ["V", "Prep"],
 		"level": 1
 	},
@@ -1349,6 +1954,11 @@
 		"pinyin": "gēn",
 		"syllables": [{ "py": "gēn", "tone": 1 }],
 		"meanings": ["with", "to follow"],
+		"example": {
+			"hanzi": "我跟朋友一起去看电影。",
+			"pinyin": "wǒ gēn péng you yì qǐ qù kàn diàn yǐng",
+			"english": "I'm going to a film with friends."
+		},
 		"pos": ["Prep", "Conj", "V"],
 		"level": 1
 	},
@@ -1361,6 +1971,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["worker"],
+		"example": {
+			"hanzi": "我爸爸是工人。",
+			"pinyin": "wǒ bà ba shì gōng rén",
+			"english": "My dad is a factory worker."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1373,6 +1988,11 @@
 			{ "py": "zuò", "tone": 4 }
 		],
 		"meanings": ["to work", "a job"],
+		"example": {
+			"hanzi": "我爸爸在医院工作。",
+			"pinyin": "wǒ bà ba zài yī yuàn gōng zuò",
+			"english": "My dad works at a hospital."
+		},
 		"pos": ["V", "N"],
 		"level": 1
 	},
@@ -1383,6 +2003,11 @@
 		"pinyin": "guān",
 		"syllables": [{ "py": "guān", "tone": 1 }],
 		"meanings": ["to close", "to turn off"],
+		"example": {
+			"hanzi": "走的时候请关门。",
+			"pinyin": "zǒu de shí hou qǐng guān mén",
+			"english": "Please close the door when you leave."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1396,6 +2021,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["to close up"],
+		"example": {
+			"hanzi": "走的时候请关上门。",
+			"pinyin": "zǒu de shí hou qǐng guān shang mén",
+			"english": "Please close the door when you leave."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1406,6 +2036,11 @@
 		"pinyin": "guì",
 		"syllables": [{ "py": "guì", "tone": 4 }],
 		"meanings": ["expensive"],
+		"example": {
+			"hanzi": "这本书太贵了。",
+			"pinyin": "zhè běn shū tài guì le",
+			"english": "This book is too expensive."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1416,6 +2051,11 @@
 		"pinyin": "guó",
 		"syllables": [{ "py": "guó", "tone": 2 }],
 		"meanings": ["nation"],
+		"example": {
+			"hanzi": "他是哪国人？",
+			"pinyin": "tā shì nǎ guó rén",
+			"english": "What country is he from?"
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1429,6 +2069,11 @@
 			{ "py": "jiā", "tone": 1 }
 		],
 		"meanings": ["country"],
+		"example": {
+			"hanzi": "中国是一个大国家。",
+			"pinyin": "zhōng guó shì yí gè dà guó jiā",
+			"english": "China is a big country."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1442,6 +2087,11 @@
 			{ "py": "wài", "tone": 4 }
 		],
 		"meanings": ["abroad", "overseas"],
+		"example": {
+			"hanzi": "我姐姐在国外学习。",
+			"pinyin": "wǒ jiě jie zài guó wài xué xí",
+			"english": "My older sister is studying abroad."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1452,6 +2102,11 @@
 		"pinyin": "guò",
 		"syllables": [{ "py": "guò", "tone": 4 }],
 		"meanings": ["to cross", "to go past"],
+		"example": {
+			"hanzi": "我们过马路吧。",
+			"pinyin": "wǒ men guò mǎ lù ba",
+			"english": "Let's cross the road."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1462,6 +2117,11 @@
 		"pinyin": "hái",
 		"syllables": [{ "py": "hái", "tone": 2 }],
 		"meanings": ["still", "in addition"],
+		"example": {
+			"hanzi": "他还没回来。",
+			"pinyin": "tā hái méi huí lái",
+			"english": "He still isn't back."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -1475,6 +2135,11 @@
 			{ "py": "shi", "tone": 0 }
 		],
 		"meanings": ["or in a question", "still"],
+		"example": {
+			"hanzi": "你喝茶还是喝水？",
+			"pinyin": "nǐ hē chá hái shi hē shuǐ",
+			"english": "Would you like tea or water?"
+		},
 		"pos": ["Adv", "Conj"],
 		"level": 1
 	},
@@ -1488,6 +2153,11 @@
 			{ "py": "yǒu", "tone": 3 }
 		],
 		"meanings": ["and also", "there is still more"],
+		"example": {
+			"hanzi": "我有哥哥还有姐姐。",
+			"pinyin": "wǒ yǒu gē ge hái yǒu jiě jie",
+			"english": "I have an older brother and an older sister as well."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1499,7 +2169,12 @@
 			{ "py": "hái", "tone": 2 },
 			{ "py": "zi", "tone": 0 }
 		],
-		"meanings": ["child"],
+		"meanings": ["child (son or daughter)", "kid"],
+		"example": {
+			"hanzi": "他们有两个孩子。",
+			"pinyin": "tā men yǒu liǎng ge hái zi",
+			"english": "They have two children."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1513,6 +2188,11 @@
 			{ "py": "yǔ", "tone": 3 }
 		],
 		"meanings": ["the Chinese language"],
+		"example": {
+			"hanzi": "我想学好汉语。",
+			"pinyin": "wǒ xiǎng xué hǎo Hàn yǔ",
+			"english": "I want to learn Chinese well."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1526,6 +2206,11 @@
 			{ "py": "zì", "tone": 4 }
 		],
 		"meanings": ["Chinese character"],
+		"example": {
+			"hanzi": "这个汉字我不认识。",
+			"pinyin": "zhè ge Hàn zì wǒ bú rèn shi",
+			"english": "I don't know this Chinese character."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1535,6 +2220,11 @@
 		"pinyin": "hǎo",
 		"syllables": [{ "py": "hǎo", "tone": 3 }],
 		"meanings": ["good", "fine"],
+		"example": {
+			"hanzi": "今天天气很好。",
+			"pinyin": "jīn tiān tiān qì hěn hǎo",
+			"english": "The weather is lovely today."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1547,6 +2237,11 @@
 			{ "py": "chī", "tone": 1 }
 		],
 		"meanings": ["tasty", "delicious"],
+		"example": {
+			"hanzi": "这家饭馆的菜很好吃。",
+			"pinyin": "zhè jiā fàn guǎn de cài hěn hǎo chī",
+			"english": "The food at this restaurant is delicious."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1559,6 +2254,11 @@
 			{ "py": "kàn", "tone": 4 }
 		],
 		"meanings": ["good-looking", "nice to look at"],
+		"example": {
+			"hanzi": "你的新衣服很好看。",
+			"pinyin": "nǐ de xīn yī fu hěn hǎo kàn",
+			"english": "Your new clothes look great."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1572,6 +2272,11 @@
 			{ "py": "tīng", "tone": 1 }
 		],
 		"meanings": ["pleasant to hear"],
+		"example": {
+			"hanzi": "她唱的歌很好听。",
+			"pinyin": "tā chàng de gē hěn hǎo tīng",
+			"english": "The songs she sings are lovely."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1586,6 +2291,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["fun", "amusing"],
+		"example": {
+			"hanzi": "学汉语很好玩儿。",
+			"pinyin": "xué hàn yǔ hěn hǎo wán r",
+			"english": "Learning Chinese is a lot of fun."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1596,6 +2306,11 @@
 		"pinyin": "hào",
 		"syllables": [{ "py": "hào", "tone": 4 }],
 		"meanings": ["day of the month in speech", "number"],
+		"example": {
+			"hanzi": "今天是九月八号。",
+			"pinyin": "jīn tiān shì jiǔ yuè bā hào",
+			"english": "Today is the eighth of September."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -1605,6 +2320,11 @@
 		"pinyin": "hē",
 		"syllables": [{ "py": "hē", "tone": 1 }],
 		"meanings": ["to drink"],
+		"example": {
+			"hanzi": "我想喝一杯茶。",
+			"pinyin": "wǒ xiǎng hē yì bēi chá",
+			"english": "I'd like a cup of tea."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1614,6 +2334,11 @@
 		"pinyin": "hé",
 		"syllables": [{ "py": "hé", "tone": 2 }],
 		"meanings": ["and", "with"],
+		"example": {
+			"hanzi": "我和妹妹一起看电视。",
+			"pinyin": "wǒ hé mèi mei yì qǐ kàn diàn shì",
+			"english": "My sister and I watch TV together."
+		},
 		"pos": ["Prep", "Conj"],
 		"level": 1
 	},
@@ -1623,6 +2348,11 @@
 		"pinyin": "hěn",
 		"syllables": [{ "py": "hěn", "tone": 3 }],
 		"meanings": ["very"],
+		"example": {
+			"hanzi": "今天天气很热。",
+			"pinyin": "jīn tiān tiān qì hěn rè",
+			"english": "It's very hot today."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -1633,6 +2363,11 @@
 		"pinyin": "hòu",
 		"syllables": [{ "py": "hòu", "tone": 4 }],
 		"meanings": ["back or rear", "after"],
+		"example": {
+			"hanzi": "学校后面有一家店。",
+			"pinyin": "xué xiào hòu miàn yǒu yì jiā diàn",
+			"english": "There's a shop behind the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1646,6 +2381,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["behind", "the back side"],
+		"example": {
+			"hanzi": "书店在学校后边。",
+			"pinyin": "shū diàn zài xué xiào hòu bian",
+			"english": "The bookshop is behind the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1659,6 +2399,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["the day after tomorrow"],
+		"example": {
+			"hanzi": "后天我去北京。",
+			"pinyin": "hòu tiān wǒ qù Běi jīng",
+			"english": "I'm going to Beijing the day after tomorrow."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1668,6 +2413,11 @@
 		"pinyin": "huā",
 		"syllables": [{ "py": "huā", "tone": 1 }],
 		"meanings": ["flower", "blossom"],
+		"example": {
+			"hanzi": "这些花很好看。",
+			"pinyin": "zhè xiē huā hěn hǎo kàn",
+			"english": "These flowers are really pretty."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1678,6 +2428,11 @@
 		"pinyin": "huà",
 		"syllables": [{ "py": "huà", "tone": 4 }],
 		"meanings": ["words", "speech"],
+		"example": {
+			"hanzi": "他的话我没听见。",
+			"pinyin": "tā de huà wǒ méi tīng jiàn",
+			"english": "I didn't catch what he said."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1688,6 +2443,11 @@
 		"pinyin": "huài",
 		"syllables": [{ "py": "huài", "tone": 4 }],
 		"meanings": ["bad", "broken"],
+		"example": {
+			"hanzi": "他不是坏人。",
+			"pinyin": "tā bú shì huài rén",
+			"english": "He is not a bad person."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1698,6 +2458,11 @@
 		"pinyin": "huán",
 		"syllables": [{ "py": "huán", "tone": 2 }],
 		"meanings": ["to give back", "to return something"],
+		"example": {
+			"hanzi": "我明天还你钱。",
+			"pinyin": "wǒ míng tiān huán nǐ qián",
+			"english": "I'll pay you back tomorrow."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1707,6 +2472,11 @@
 		"pinyin": "huí",
 		"syllables": [{ "py": "huí", "tone": 2 }],
 		"meanings": ["to return", "to go back"],
+		"example": {
+			"hanzi": "你什么时候回来？",
+			"pinyin": "nǐ shén me shí hou huí lái",
+			"english": "When are you coming back?"
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1719,6 +2489,11 @@
 			{ "py": "dá", "tone": 2 }
 		],
 		"meanings": ["to answer", "an answer"],
+		"example": {
+			"hanzi": "他没有回答我。",
+			"pinyin": "tā méi yǒu huí dá wǒ",
+			"english": "He didn't answer me."
+		},
 		"pos": ["V", "N"],
 		"level": 1
 	},
@@ -1731,6 +2506,11 @@
 			{ "py": "dào", "tone": 4 }
 		],
 		"meanings": ["to return to"],
+		"example": {
+			"hanzi": "他昨天回到北京。",
+			"pinyin": "tā zuó tiān huí dào Běi jīng",
+			"english": "He got back to Beijing yesterday."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1743,6 +2523,11 @@
 			{ "py": "jiā", "tone": 1 }
 		],
 		"meanings": ["to go home"],
+		"example": {
+			"hanzi": "我晚上六点回家。",
+			"pinyin": "wǒ wǎn shang liù diǎn huí jiā",
+			"english": "I get home at six in the evening."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1756,6 +2541,11 @@
 			{ "py": "lái", "tone": 2 }
 		],
 		"meanings": ["to come back"],
+		"example": {
+			"hanzi": "爸爸六点回来。",
+			"pinyin": "bà ba liù diǎn huí lái",
+			"english": "Dad comes back at six."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1768,6 +2558,11 @@
 			{ "py": "qù", "tone": 4 }
 		],
 		"meanings": ["to go back"],
+		"example": {
+			"hanzi": "他昨天就回去了。",
+			"pinyin": "tā zuó tiān jiù huí qù le",
+			"english": "He went back yesterday."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1778,6 +2573,11 @@
 		"pinyin": "huì",
 		"syllables": [{ "py": "huì", "tone": 4 }],
 		"meanings": ["to know how to", "will or is likely to"],
+		"example": {
+			"hanzi": "我会说汉语。",
+			"pinyin": "wǒ huì shuō hàn yǔ",
+			"english": "I can speak Chinese."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1791,6 +2591,11 @@
 			{ "py": "chē", "tone": 1 }
 		],
 		"meanings": ["train"],
+		"example": {
+			"hanzi": "我坐火车回家。",
+			"pinyin": "wǒ zuò huǒ chē huí jiā",
+			"english": "I'm taking the train home."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1804,6 +2609,11 @@
 			{ "py": "chǎng", "tone": 3 }
 		],
 		"meanings": ["airport"],
+		"example": {
+			"hanzi": "我们明天去机场。",
+			"pinyin": "wǒ men míng tiān qù jī chǎng",
+			"english": "We're going to the airport tomorrow."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1817,6 +2627,11 @@
 			{ "py": "piào", "tone": 4 }
 		],
 		"meanings": ["plane ticket"],
+		"example": {
+			"hanzi": "我要买机票。",
+			"pinyin": "wǒ yào mǎi jī piào",
+			"english": "I want to buy a plane ticket."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1830,6 +2645,11 @@
 			{ "py": "dàn", "tone": 4 }
 		],
 		"meanings": ["egg", "hen's egg"],
+		"example": {
+			"hanzi": "妈妈买了十个鸡蛋。",
+			"pinyin": "mā ma mǎi le shí ge jī dàn",
+			"english": "Mum bought ten eggs."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1840,6 +2660,11 @@
 		"pinyin": "jǐ",
 		"syllables": [{ "py": "jǐ", "tone": 3 }],
 		"meanings": ["how many", "a few"],
+		"example": {
+			"hanzi": "你家有几口人？",
+			"pinyin": "nǐ jiā yǒu jǐ kǒu rén",
+			"english": "How many people are there in your family?"
+		},
 		"pos": ["Num", "Pron"],
 		"level": 1
 	},
@@ -1850,6 +2675,11 @@
 		"pinyin": "jì",
 		"syllables": [{ "py": "jì", "tone": 4 }],
 		"meanings": ["to write down", "to remember"],
+		"example": {
+			"hanzi": "请你记一下我的电话。",
+			"pinyin": "qǐng nǐ jì yí xià wǒ de diàn huà",
+			"english": "Please write down my phone number."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1863,6 +2693,11 @@
 			{ "py": "de", "tone": 0 }
 		],
 		"meanings": ["to remember"],
+		"example": {
+			"hanzi": "我记得你的名字。",
+			"pinyin": "wǒ jì de nǐ de míng zi",
+			"english": "I remember your name."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1876,6 +2711,11 @@
 			{ "py": "zhù", "tone": 4 }
 		],
 		"meanings": ["to memorize", "to bear in mind"],
+		"example": {
+			"hanzi": "这个字我记住了。",
+			"pinyin": "zhè ge zì wǒ jì zhù le",
+			"english": "I've got this character memorized."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1885,6 +2725,11 @@
 		"pinyin": "jiā",
 		"syllables": [{ "py": "jiā", "tone": 1 }],
 		"meanings": ["home", "family"],
+		"example": {
+			"hanzi": "他的家在学校旁边。",
+			"pinyin": "tā de jiā zài xué xiào páng biān",
+			"english": "His home is next to the school."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -1898,6 +2743,11 @@
 			{ "py": "li", "tone": 0 }
 		],
 		"meanings": ["at home"],
+		"example": {
+			"hanzi": "家里没有人。",
+			"pinyin": "jiā li méi yǒu rén",
+			"english": "There's nobody home."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1910,6 +2760,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["family member"],
+		"example": {
+			"hanzi": "我的家人都很好。",
+			"pinyin": "wǒ de jiā rén dōu hěn hǎo",
+			"english": "My family are all doing well."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1920,6 +2775,11 @@
 		"pinyin": "jiān",
 		"syllables": [{ "py": "jiān", "tone": 1 }],
 		"meanings": ["measure word for rooms"],
+		"example": {
+			"hanzi": "我家有三间房。",
+			"pinyin": "wǒ jiā yǒu sān jiān fáng",
+			"english": "There are three rooms in my home."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -1930,6 +2790,11 @@
 		"pinyin": "jiàn",
 		"syllables": [{ "py": "jiàn", "tone": 4 }],
 		"meanings": ["to meet with", "to see someone"],
+		"example": {
+			"hanzi": "明天在学校见！",
+			"pinyin": "míng tiān zài xué xiào jiàn",
+			"english": "See you at school tomorrow!"
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1943,6 +2808,11 @@
 			{ "py": "miàn", "tone": 4 }
 		],
 		"meanings": ["to meet face to face"],
+		"example": {
+			"hanzi": "我们明天见面吧。",
+			"pinyin": "wǒ men míng tiān jiàn miàn ba",
+			"english": "Let's meet up tomorrow."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -1952,6 +2822,11 @@
 		"pinyin": "jiāo",
 		"syllables": [{ "py": "jiāo", "tone": 1 }],
 		"meanings": ["to teach"],
+		"example": {
+			"hanzi": "老师教我们汉语。",
+			"pinyin": "lǎo shī jiāo wǒ men Hàn yǔ",
+			"english": "The teacher teaches us Chinese."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1961,6 +2836,11 @@
 		"pinyin": "jiào",
 		"syllables": [{ "py": "jiào", "tone": 4 }],
 		"meanings": ["to be called", "to shout"],
+		"example": {
+			"hanzi": "你叫什么名字？",
+			"pinyin": "nǐ jiào shén me míng zi",
+			"english": "What is your name?"
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1975,6 +2855,11 @@
 			{ "py": "lóu", "tone": 2 }
 		],
 		"meanings": ["classroom building"],
+		"example": {
+			"hanzi": "教学楼在学校东边。",
+			"pinyin": "jiào xué lóu zài xué xiào dōng bian",
+			"english": "The classroom building is on the east side of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1987,6 +2872,11 @@
 			{ "py": "jie", "tone": 0 }
 		],
 		"meanings": ["older sister"],
+		"example": {
+			"hanzi": "我姐姐是老师。",
+			"pinyin": "wǒ jiě jie shì lǎo shī",
+			"english": "My older sister is a teacher."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2000,6 +2890,11 @@
 			{ "py": "shào", "tone": 4 }
 		],
 		"meanings": ["to introduce"],
+		"example": {
+			"hanzi": "我来介绍一下我的朋友。",
+			"pinyin": "wǒ lái jiè shào yí xià wǒ de péng you",
+			"english": "Let me introduce my friend."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2012,6 +2907,11 @@
 			{ "py": "nián", "tone": 2 }
 		],
 		"meanings": ["this year"],
+		"example": {
+			"hanzi": "我今年二十岁。",
+			"pinyin": "wǒ jīn nián èr shí suì",
+			"english": "I'm twenty this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2024,6 +2924,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["today"],
+		"example": {
+			"hanzi": "今天是我的生日。",
+			"pinyin": "jīn tiān shì wǒ de shēng rì",
+			"english": "Today is my birthday."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2034,6 +2939,11 @@
 		"pinyin": "jìn",
 		"syllables": [{ "py": "jìn", "tone": 4 }],
 		"meanings": ["to enter"],
+		"example": {
+			"hanzi": "他进了房间。",
+			"pinyin": "tā jìn le fáng jiān",
+			"english": "He went into the room."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2047,6 +2957,11 @@
 			{ "py": "lái", "tone": 2 }
 		],
 		"meanings": ["to come in"],
+		"example": {
+			"hanzi": "请进来喝杯茶。",
+			"pinyin": "qǐng jìn lái hē bēi chá",
+			"english": "Come in and have a cup of tea."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2060,6 +2975,7 @@
 			{ "py": "qù", "tone": 4 }
 		],
 		"meanings": ["to go in"],
+		"example": { "hanzi": "我们进去吧。", "pinyin": "wǒ men jìn qù ba", "english": "Let's go in." },
 		"pos": [],
 		"level": 1
 	},
@@ -2069,6 +2985,11 @@
 		"pinyin": "jiǔ",
 		"syllables": [{ "py": "jiǔ", "tone": 3 }],
 		"meanings": ["nine"],
+		"example": {
+			"hanzi": "我弟弟今年九岁。",
+			"pinyin": "wǒ dì di jīn nián jiǔ suì",
+			"english": "My younger brother is nine this year."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -2078,6 +2999,11 @@
 		"pinyin": "jiù",
 		"syllables": [{ "py": "jiù", "tone": 4 }],
 		"meanings": ["then", "as early as", "only"],
+		"example": {
+			"hanzi": "他吃了饭就走了。",
+			"pinyin": "tā chī le fàn jiù zǒu le",
+			"english": "He ate and then left right away."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -2091,6 +3017,11 @@
 			{ "py": "de", "tone": 0 }
 		],
 		"meanings": ["to feel that", "to think"],
+		"example": {
+			"hanzi": "我觉得这个菜很好吃。",
+			"pinyin": "wǒ jué de zhè ge cài hěn hǎo chī",
+			"english": "I think this dish is delicious."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2101,6 +3032,11 @@
 		"pinyin": "kāi",
 		"syllables": [{ "py": "kāi", "tone": 1 }],
 		"meanings": ["to open", "to turn on"],
+		"example": {
+			"hanzi": "请你开一下门。",
+			"pinyin": "qǐng nǐ kāi yí xià mén",
+			"english": "Please open the door."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2114,6 +3050,11 @@
 			{ "py": "chē", "tone": 1 }
 		],
 		"meanings": ["to drive a car"],
+		"example": {
+			"hanzi": "我哥哥会开车。",
+			"pinyin": "wǒ gē ge huì kāi chē",
+			"english": "My older brother can drive."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2127,6 +3068,11 @@
 			{ "py": "huì", "tone": 4 }
 		],
 		"meanings": ["to have a meeting", "to attend a meeting"],
+		"example": {
+			"hanzi": "我们下午三点开会。",
+			"pinyin": "wǒ men xià wǔ sān diǎn kāi huì",
+			"english": "We're having a meeting at three this afternoon."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2141,6 +3087,11 @@
 			{ "py": "xiào", "tone": 4 }
 		],
 		"meanings": ["to make a joke", "to joke around"],
+		"example": {
+			"hanzi": "他喜欢跟我开玩笑。",
+			"pinyin": "tā xǐ huan gēn wǒ kāi wán xiào",
+			"english": "He likes joking around with me."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2150,6 +3101,11 @@
 		"pinyin": "kàn",
 		"syllables": [{ "py": "kàn", "tone": 4 }],
 		"meanings": ["to look at", "to watch", "to read"],
+		"example": {
+			"hanzi": "我晚上喜欢看书。",
+			"pinyin": "wǒ wǎn shang xǐ huan kàn shū",
+			"english": "I like to read in the evening."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2162,6 +3118,11 @@
 			{ "py": "bìng", "tone": 4 }
 		],
 		"meanings": ["to see a doctor"],
+		"example": {
+			"hanzi": "我明天去医院看病。",
+			"pinyin": "wǒ míng tiān qù yī yuàn kàn bìng",
+			"english": "I'm going to the hospital tomorrow to see a doctor."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2173,7 +3134,12 @@
 			{ "py": "kàn", "tone": 4 },
 			{ "py": "dào", "tone": 4 }
 		],
-		"meanings": ["to catch sight of"],
+		"meanings": ["to see (as a result)"],
+		"example": {
+			"hanzi": "我看到你的车了。",
+			"pinyin": "wǒ kàn dào nǐ de chē le",
+			"english": "I spotted your car."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2186,7 +3152,12 @@
 			{ "py": "kàn", "tone": 4 },
 			{ "py": "jiàn", "tone": 4 }
 		],
-		"meanings": ["to see", "to notice"],
+		"meanings": ["to see (and catch sight of)", "to notice"],
+		"example": {
+			"hanzi": "我在路上看见了老师。",
+			"pinyin": "wǒ zài lù shang kàn jiàn le lǎo shī",
+			"english": "I saw the teacher on the road."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2196,6 +3167,11 @@
 		"pinyin": "kǎo",
 		"syllables": [{ "py": "kǎo", "tone": 3 }],
 		"meanings": ["to take a test", "to give a test"],
+		"example": {
+			"hanzi": "我明天考汉语。",
+			"pinyin": "wǒ míng tiān kǎo hàn yǔ",
+			"english": "I have my Chinese exam tomorrow."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2209,6 +3185,11 @@
 			{ "py": "shì", "tone": 4 }
 		],
 		"meanings": ["exam", "to take an exam"],
+		"example": {
+			"hanzi": "明天我们有考试。",
+			"pinyin": "míng tiān wǒ men yǒu kǎo shì",
+			"english": "We have an exam tomorrow."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2218,6 +3199,11 @@
 		"pinyin": "kě",
 		"syllables": [{ "py": "kě", "tone": 3 }],
 		"meanings": ["thirsty"],
+		"example": {
+			"hanzi": "我渴了，想喝水。",
+			"pinyin": "wǒ kě le xiǎng hē shuǐ",
+			"english": "I'm thirsty and want a drink of water."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2228,6 +3214,11 @@
 		"pinyin": "kè",
 		"syllables": [{ "py": "kè", "tone": 4 }],
 		"meanings": ["class", "lesson"],
+		"example": {
+			"hanzi": "我们上午有课。",
+			"pinyin": "wǒ men shàng wǔ yǒu kè",
+			"english": "We have class in the morning."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2241,6 +3232,11 @@
 			{ "py": "běn", "tone": 3 }
 		],
 		"meanings": ["textbook"],
+		"example": {
+			"hanzi": "我的课本在桌子上。",
+			"pinyin": "wǒ de kè běn zài zhuō zi shang",
+			"english": "My textbook is on the desk."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2254,6 +3250,11 @@
 			{ "py": "wén", "tone": 2 }
 		],
 		"meanings": ["the text of a lesson"],
+		"example": {
+			"hanzi": "今天的课文很难。",
+			"pinyin": "jīn tiān de kè wén hěn nán",
+			"english": "Today's lesson text is hard."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2263,6 +3264,11 @@
 		"pinyin": "kǒu",
 		"syllables": [{ "py": "kǒu", "tone": 3 }],
 		"meanings": ["mouth", "measure word for family members"],
+		"example": {
+			"hanzi": "我喝了一口水。",
+			"pinyin": "wǒ hē le yì kǒu shuǐ",
+			"english": "I took a mouthful of water."
+		},
 		"pos": ["M", "N"],
 		"level": 1
 	},
@@ -2273,6 +3279,11 @@
 		"pinyin": "kuài",
 		"syllables": [{ "py": "kuài", "tone": 4 }],
 		"meanings": ["piece", "yuan in spoken Chinese"],
+		"example": {
+			"hanzi": "妈妈给我一块面包。",
+			"pinyin": "mā ma gěi wǒ yí kuài miàn bāo",
+			"english": "Mum gave me a piece of bread."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -2282,6 +3293,11 @@
 		"pinyin": "kuài",
 		"syllables": [{ "py": "kuài", "tone": 4 }],
 		"meanings": ["fast", "soon"],
+		"example": {
+			"hanzi": "你走得太快了。",
+			"pinyin": "nǐ zǒu de tài kuài le",
+			"english": "You walk too fast."
+		},
 		"pos": ["Adj", "Adv"],
 		"level": 1
 	},
@@ -2292,6 +3308,11 @@
 		"pinyin": "lái",
 		"syllables": [{ "py": "lái", "tone": 2 }],
 		"meanings": ["to come"],
+		"example": {
+			"hanzi": "你明天来我家吗？",
+			"pinyin": "nǐ míng tiān lái wǒ jiā ma",
+			"english": "Are you coming to my place tomorrow?"
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2305,6 +3326,11 @@
 			{ "py": "dào", "tone": 4 }
 		],
 		"meanings": ["to come to", "to arrive at"],
+		"example": {
+			"hanzi": "我们来到了一个新学校。",
+			"pinyin": "wǒ men lái dào le yí ge xīn xué xiào",
+			"english": "We arrived at a new school."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2314,6 +3340,11 @@
 		"pinyin": "lǎo",
 		"syllables": [{ "py": "lǎo", "tone": 3 }],
 		"meanings": ["old in years", "elderly"],
+		"example": {
+			"hanzi": "我爷爷老了。",
+			"pinyin": "wǒ yé ye lǎo le",
+			"english": "My grandfather has grown old."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2326,6 +3357,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["an old person", "the elderly"],
+		"example": {
+			"hanzi": "我常常帮老人拿东西。",
+			"pinyin": "wǒ cháng cháng bāng lǎo rén ná dōng xi",
+			"english": "I often help elderly people carry things."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2339,6 +3375,11 @@
 			{ "py": "shī", "tone": 1 }
 		],
 		"meanings": ["teacher"],
+		"example": {
+			"hanzi": "我们的老师很好。",
+			"pinyin": "wǒ men de lǎo shī hěn hǎo",
+			"english": "Our teacher is really kind."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2348,6 +3389,11 @@
 		"pinyin": "le",
 		"syllables": [{ "py": "le", "tone": 0 }],
 		"meanings": ["marks a completed action", "marks a change of situation"],
+		"example": {
+			"hanzi": "我买了一本书。",
+			"pinyin": "wǒ mǎi le yì běn shū",
+			"english": "I bought a book."
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -2357,6 +3403,11 @@
 		"pinyin": "lèi",
 		"syllables": [{ "py": "lèi", "tone": 4 }],
 		"meanings": ["tired"],
+		"example": {
+			"hanzi": "走了一天路我很累。",
+			"pinyin": "zǒu le yì tiān lù wǒ hěn lèi",
+			"english": "I walked all day and I'm worn out."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2366,6 +3417,11 @@
 		"pinyin": "lěng",
 		"syllables": [{ "py": "lěng", "tone": 3 }],
 		"meanings": ["cold"],
+		"example": {
+			"hanzi": "今天天气很冷。",
+			"pinyin": "jīn tiān tiān qì hěn lěng",
+			"english": "The weather is cold today."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2376,6 +3432,11 @@
 		"pinyin": "lǐ",
 		"syllables": [{ "py": "lǐ", "tone": 3 }],
 		"meanings": ["inside", "in"],
+		"example": {
+			"hanzi": "我的书在房间里。",
+			"pinyin": "wǒ de shū zài fáng jiān lǐ",
+			"english": "My book is in the room."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2389,6 +3450,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the inside part", "in there"],
+		"example": {
+			"hanzi": "书包里边有课本。",
+			"pinyin": "shū bāo lǐ bian yǒu kè běn",
+			"english": "There's a textbook inside the backpack."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2399,6 +3465,11 @@
 		"pinyin": "liǎng",
 		"syllables": [{ "py": "liǎng", "tone": 3 }],
 		"meanings": ["two of something"],
+		"example": {
+			"hanzi": "我有两个妹妹。",
+			"pinyin": "wǒ yǒu liǎng ge mèi mei",
+			"english": "I have two younger sisters."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -2408,6 +3479,11 @@
 		"pinyin": "líng",
 		"syllables": [{ "py": "líng", "tone": 2 }],
 		"meanings": ["zero"],
+		"example": {
+			"hanzi": "现在是十点零五分。",
+			"pinyin": "xiàn zài shì shí diǎn líng wǔ fēn",
+			"english": "It's five past ten."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -2417,6 +3493,11 @@
 		"pinyin": "liù",
 		"syllables": [{ "py": "liù", "tone": 4 }],
 		"meanings": ["six"],
+		"example": {
+			"hanzi": "我们六点在学校见。",
+			"pinyin": "wǒ men liù diǎn zài xué xiào jiàn",
+			"english": "We'll meet at the school at six."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -2427,6 +3508,11 @@
 		"pinyin": "lóu",
 		"syllables": [{ "py": "lóu", "tone": 2 }],
 		"meanings": ["building", "floor of a building"],
+		"example": {
+			"hanzi": "我家在三楼。",
+			"pinyin": "wǒ jiā zài sān lóu",
+			"english": "My home is on the third floor."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2440,6 +3526,11 @@
 			{ "py": "shàng", "tone": 4 }
 		],
 		"meanings": ["upstairs"],
+		"example": {
+			"hanzi": "我的房间在楼上。",
+			"pinyin": "wǒ de fáng jiān zài lóu shàng",
+			"english": "My room is upstairs."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2453,6 +3544,11 @@
 			{ "py": "xià", "tone": 4 }
 		],
 		"meanings": ["downstairs"],
+		"example": {
+			"hanzi": "妈妈在楼下等我。",
+			"pinyin": "mā ma zài lóu xià děng wǒ",
+			"english": "Mum is waiting for me downstairs."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2462,6 +3558,11 @@
 		"pinyin": "lù",
 		"syllables": [{ "py": "lù", "tone": 4 }],
 		"meanings": ["road", "route"],
+		"example": {
+			"hanzi": "学校在这条路上。",
+			"pinyin": "xué xiào zài zhè tiáo lù shang",
+			"english": "The school is on this road."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -2474,6 +3575,11 @@
 			{ "py": "kǒu", "tone": 3 }
 		],
 		"meanings": ["crossing", "intersection"],
+		"example": {
+			"hanzi": "我们在路口等你。",
+			"pinyin": "wǒ men zài lù kǒu děng nǐ",
+			"english": "We'll wait for you at the intersection."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2486,6 +3592,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["on the way", "on the road"],
+		"example": {
+			"hanzi": "我在路上给他打电话。",
+			"pinyin": "wǒ zài lù shang gěi tā dǎ diàn huà",
+			"english": "I rang him on the way."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2499,6 +3610,11 @@
 			{ "py": "ma", "tone": 0 }
 		],
 		"meanings": ["mother", "mom"],
+		"example": {
+			"hanzi": "我妈妈在医院工作。",
+			"pinyin": "wǒ mā ma zài yī yuàn gōng zuò",
+			"english": "My mum works at a hospital."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2512,6 +3628,11 @@
 			{ "py": "lù", "tone": 4 }
 		],
 		"meanings": ["street", "road"],
+		"example": {
+			"hanzi": "马路上有很多车。",
+			"pinyin": "mǎ lù shang yǒu hěn duō chē",
+			"english": "There are a lot of cars on the road."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2525,6 +3646,11 @@
 			{ "py": "shàng", "tone": 4 }
 		],
 		"meanings": ["right away", "immediately"],
+		"example": {
+			"hanzi": "你等我，我马上回来。",
+			"pinyin": "nǐ děng wǒ wǒ mǎ shàng huí lái",
+			"english": "Wait for me, I'll be right back."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -2535,6 +3661,11 @@
 		"pinyin": "ma",
 		"syllables": [{ "py": "ma", "tone": 0 }],
 		"meanings": ["makes a sentence a yes-no question"],
+		"example": {
+			"hanzi": "你是中国人吗？",
+			"pinyin": "nǐ shì Zhōng guó rén ma",
+			"english": "Are you Chinese?"
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -2545,6 +3676,11 @@
 		"pinyin": "mǎi",
 		"syllables": [{ "py": "mǎi", "tone": 3 }],
 		"meanings": ["to buy"],
+		"example": {
+			"hanzi": "我要去商店买东西。",
+			"pinyin": "wǒ yào qù shāng diàn mǎi dōng xi",
+			"english": "I'm going to the shop to buy a few things."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2554,6 +3690,11 @@
 		"pinyin": "màn",
 		"syllables": [{ "py": "màn", "tone": 4 }],
 		"meanings": ["slow"],
+		"example": {
+			"hanzi": "你走得太慢了。",
+			"pinyin": "nǐ zǒu de tài màn le",
+			"english": "You're walking too slowly."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2563,6 +3704,11 @@
 		"pinyin": "máng",
 		"syllables": [{ "py": "máng", "tone": 2 }],
 		"meanings": ["busy"],
+		"example": {
+			"hanzi": "爸爸今天很忙。",
+			"pinyin": "bà ba jīn tiān hěn máng",
+			"english": "Dad is very busy today."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2572,6 +3718,11 @@
 		"pinyin": "máo",
 		"syllables": [{ "py": "máo", "tone": 2 }],
 		"meanings": ["ten cents", "one tenth of a yuan"],
+		"example": {
+			"hanzi": "这个鸡蛋五毛钱。",
+			"pinyin": "zhè ge jī dàn wǔ máo qián",
+			"english": "This egg costs fifty cents."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -2582,6 +3733,11 @@
 		"pinyin": "méi",
 		"syllables": [{ "py": "méi", "tone": 2 }],
 		"meanings": ["did not", "to not have"],
+		"example": {
+			"hanzi": "我昨天没去学校。",
+			"pinyin": "wǒ zuó tiān méi qù xué xiào",
+			"english": "I didn't go to school yesterday."
+		},
 		"pos": ["Adv", "V"],
 		"level": 1
 	},
@@ -2596,6 +3752,11 @@
 			{ "py": "xi", "tone": 0 }
 		],
 		"meanings": ["it doesn't matter"],
+		"example": {
+			"hanzi": "我来晚一点没关系吗？",
+			"pinyin": "wǒ lái wǎn yì diǎn méi guān xi ma",
+			"english": "Is it all right if I come a little late?"
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2610,6 +3771,11 @@
 			{ "py": "me", "tone": 0 }
 		],
 		"meanings": ["it's nothing", "no big deal"],
+		"example": {
+			"hanzi": "没什么，我很好。",
+			"pinyin": "méi shén me wǒ hěn hǎo",
+			"english": "It's nothing, I'm fine."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2624,6 +3790,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["it's all right", "no problem"],
+		"example": {
+			"hanzi": "他说他没事儿。",
+			"pinyin": "tā shuō tā méi shì r",
+			"english": "He says he's fine."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2637,6 +3808,11 @@
 			{ "py": "yǒu", "tone": 3 }
 		],
 		"meanings": ["to not have", "there is not"],
+		"example": {
+			"hanzi": "我今天没有时间。",
+			"pinyin": "wǒ jīn tiān méi yǒu shí jiān",
+			"english": "I don't have time today."
+		},
 		"pos": ["V", "Adv"],
 		"level": 1
 	},
@@ -2649,6 +3825,11 @@
 			{ "py": "mei", "tone": 0 }
 		],
 		"meanings": ["younger sister", "young woman"],
+		"example": {
+			"hanzi": "我妹妹比我小两岁。",
+			"pinyin": "wǒ mèi mei bǐ wǒ xiǎo liǎng suì",
+			"english": "My younger sister is two years younger than me."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2659,6 +3840,11 @@
 		"pinyin": "mén",
 		"syllables": [{ "py": "mén", "tone": 2 }],
 		"meanings": ["door", "measure word for school courses"],
+		"example": {
+			"hanzi": "请你关上门。",
+			"pinyin": "qǐng nǐ guān shàng mén",
+			"english": "Please close the door."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -2672,6 +3858,11 @@
 			{ "py": "kǒu", "tone": 3 }
 		],
 		"meanings": ["doorway", "gate"],
+		"example": {
+			"hanzi": "他在学校门口等我。",
+			"pinyin": "tā zài xué xiào mén kǒu děng wǒ",
+			"english": "He's waiting for me at the school gate."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2685,6 +3876,11 @@
 			{ "py": "piào", "tone": 4 }
 		],
 		"meanings": ["entry ticket"],
+		"example": {
+			"hanzi": "电影院的门票不贵。",
+			"pinyin": "diàn yǐng yuàn de mén piào bú guì",
+			"english": "Tickets at the cinema aren't expensive."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2695,6 +3891,11 @@
 		"pinyin": "men",
 		"syllables": [{ "py": "men", "tone": 0 }],
 		"meanings": ["plural ending for people"],
+		"example": {
+			"hanzi": "老师们都很忙。",
+			"pinyin": "lǎo shī men dōu hěn máng",
+			"english": "The teachers are all very busy."
+		},
 		"pos": ["Suffix"],
 		"level": 1
 	},
@@ -2708,6 +3909,11 @@
 			{ "py": "fàn", "tone": 4 }
 		],
 		"meanings": ["rice"],
+		"example": {
+			"hanzi": "我喜欢吃米饭。",
+			"pinyin": "wǒ xǐ huan chī mǐ fàn",
+			"english": "I like eating rice."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2721,6 +3927,11 @@
 			{ "py": "bāo", "tone": 1 }
 		],
 		"meanings": ["bread"],
+		"example": {
+			"hanzi": "我早上吃面包喝牛奶。",
+			"pinyin": "wǒ zǎo shang chī miàn bāo hē niú nǎi",
+			"english": "I have bread and milk in the morning."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2735,6 +3946,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["noodles"],
+		"example": {
+			"hanzi": "妈妈做的面条儿很好吃。",
+			"pinyin": "mā ma zuò de miàn tiáo r hěn hǎo chī",
+			"english": "The noodles my mum makes are delicious."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2747,6 +3963,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["name"],
+		"example": {
+			"hanzi": "你叫什么名字？",
+			"pinyin": "nǐ jiào shén me míng zi",
+			"english": "What's your name?"
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2759,6 +3980,11 @@
 			{ "py": "bai", "tone": 0 }
 		],
 		"meanings": ["to understand clearly", "clear and obvious"],
+		"example": {
+			"hanzi": "老师说的我明白了。",
+			"pinyin": "lǎo shī shuō de wǒ míng bai le",
+			"english": "I understand what the teacher said."
+		},
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -2771,6 +3997,11 @@
 			{ "py": "nián", "tone": 2 }
 		],
 		"meanings": ["next year"],
+		"example": {
+			"hanzi": "明年我要去中国。",
+			"pinyin": "míng nián wǒ yào qù zhōng guó",
+			"english": "Next year I'm going to China."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2783,6 +4014,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["tomorrow"],
+		"example": {
+			"hanzi": "明天是我的生日。",
+			"pinyin": "míng tiān shì wǒ de shēng rì",
+			"english": "Tomorrow is my birthday."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2792,6 +4028,11 @@
 		"pinyin": "ná",
 		"syllables": [{ "py": "ná", "tone": 2 }],
 		"meanings": ["to take", "to hold"],
+		"example": {
+			"hanzi": "我去房间拿我的书。",
+			"pinyin": "wǒ qù fáng jiān ná wǒ de shū",
+			"english": "I'm going to my room to get my book."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2801,6 +4042,11 @@
 		"pinyin": "nǎ",
 		"syllables": [{ "py": "nǎ", "tone": 3 }],
 		"meanings": ["which"],
+		"example": {
+			"hanzi": "你是哪国人？",
+			"pinyin": "nǐ shì nǎ guó rén",
+			"english": "Which country are you from?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2814,6 +4060,11 @@
 			{ "py": "lǐ", "tone": 3 }
 		],
 		"meanings": ["where", "what place"],
+		"example": {
+			"hanzi": "你家在哪里？",
+			"pinyin": "nǐ jiā zài nǎ lǐ",
+			"english": "Where do you live?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2827,6 +4078,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["the spoken word for where"],
+		"example": {
+			"hanzi": "你星期天要去哪儿？",
+			"pinyin": "nǐ xīng qī tiān yào qù nǎ r",
+			"english": "Where are you going on Sunday?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2839,6 +4095,11 @@
 			{ "py": "xiē", "tone": 1 }
 		],
 		"meanings": ["which ones"],
+		"example": {
+			"hanzi": "你想买哪些书？",
+			"pinyin": "nǐ xiǎng mǎi nǎ xiē shū",
+			"english": "Which books do you want to buy?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2848,6 +4109,11 @@
 		"pinyin": "nà",
 		"syllables": [{ "py": "nà", "tone": 4 }],
 		"meanings": ["that"],
+		"example": {
+			"hanzi": "那是我的书。",
+			"pinyin": "nà shì wǒ de shū",
+			"english": "That is my book."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2861,6 +4127,11 @@
 			{ "py": "biān", "tone": 1 }
 		],
 		"meanings": ["that side", "over there"],
+		"example": {
+			"hanzi": "书店在那边。",
+			"pinyin": "shū diàn zài nà biān",
+			"english": "The bookshop is over there."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2874,6 +4145,11 @@
 			{ "py": "lǐ", "tone": 3 }
 		],
 		"meanings": ["there", "that place"],
+		"example": {
+			"hanzi": "我的书在那里。",
+			"pinyin": "wǒ de shū zài nà lǐ",
+			"english": "My book is over there."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2887,6 +4163,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["the spoken word for there"],
+		"example": {
+			"hanzi": "我的书在那儿。",
+			"pinyin": "wǒ de shū zài nà r",
+			"english": "My book is over there."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2899,6 +4180,11 @@
 			{ "py": "xiē", "tone": 1 }
 		],
 		"meanings": ["those"],
+		"example": {
+			"hanzi": "那些书是我的。",
+			"pinyin": "nà xiē shū shì wǒ de",
+			"english": "Those books are mine."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2908,6 +4194,11 @@
 		"pinyin": "nǎi",
 		"syllables": [{ "py": "nǎi", "tone": 3 }],
 		"meanings": ["milk"],
+		"example": {
+			"hanzi": "我早上喝一杯牛奶。",
+			"pinyin": "wǒ zǎo shang hē yì bēi niú nǎi",
+			"english": "I drink a glass of milk in the morning."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2920,6 +4211,11 @@
 			{ "py": "nai", "tone": 0 }
 		],
 		"meanings": ["paternal grandmother", "grandma"],
+		"example": {
+			"hanzi": "我奶奶今年八十岁了。",
+			"pinyin": "wǒ nǎi nai jīn nián bā shí suì le",
+			"english": "My grandma turns eighty this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2929,6 +4225,11 @@
 		"pinyin": "nán",
 		"syllables": [{ "py": "nán", "tone": 2 }],
 		"meanings": ["male"],
+		"example": {
+			"hanzi": "我们班男生很多。",
+			"pinyin": "wǒ men bān nán shēng hěn duō",
+			"english": "There are a lot of boys in our class."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2943,6 +4244,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["boy"],
+		"example": {
+			"hanzi": "那个男孩儿是我弟弟。",
+			"pinyin": "nà ge nán hái r shì wǒ dì di",
+			"english": "That boy is my younger brother."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2956,6 +4262,11 @@
 			{ "py": "you", "tone": 0 }
 		],
 		"meanings": ["boyfriend"],
+		"example": {
+			"hanzi": "她的男朋友是老师。",
+			"pinyin": "tā de nán péng you shì lǎo shī",
+			"english": "Her boyfriend is a teacher."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2968,6 +4279,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["man", "men"],
+		"example": {
+			"hanzi": "那个男人是我朋友。",
+			"pinyin": "nà ge nán rén shì wǒ péng you",
+			"english": "That man is my friend."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2980,6 +4296,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["male student", "schoolboy"],
+		"example": {
+			"hanzi": "那个男生是我弟弟。",
+			"pinyin": "nà ge nán shēng shì wǒ dì di",
+			"english": "That boy is my younger brother."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2989,6 +4310,11 @@
 		"pinyin": "nán",
 		"syllables": [{ "py": "nán", "tone": 2 }],
 		"meanings": ["south"],
+		"example": {
+			"hanzi": "商店在山的南边。",
+			"pinyin": "shāng diàn zài shān de nán bian",
+			"english": "The shop is south of the mountain."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3002,6 +4328,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the south side"],
+		"example": {
+			"hanzi": "我家在学校南边。",
+			"pinyin": "wǒ jiā zài xué xiào nán bian",
+			"english": "My home is on the south side of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3012,6 +4343,11 @@
 		"pinyin": "nán",
 		"syllables": [{ "py": "nán", "tone": 2 }],
 		"meanings": ["difficult"],
+		"example": {
+			"hanzi": "这个字很难写。",
+			"pinyin": "zhè ge zì hěn nán xiě",
+			"english": "This character is hard to write."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3021,6 +4357,11 @@
 		"pinyin": "ne",
 		"syllables": [{ "py": "ne", "tone": 0 }],
 		"meanings": ["and what about ...?", "shows an action is still going on"],
+		"example": {
+			"hanzi": "我很好，你呢？",
+			"pinyin": "wǒ hěn hǎo nǐ ne",
+			"english": "I'm fine — and you?"
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -3030,6 +4371,11 @@
 		"pinyin": "néng",
 		"syllables": [{ "py": "néng", "tone": 2 }],
 		"meanings": ["to be able to", "to be allowed to"],
+		"example": {
+			"hanzi": "我今天不能去。",
+			"pinyin": "wǒ jīn tiān bù néng qù",
+			"english": "I can't go today."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3039,6 +4385,11 @@
 		"pinyin": "nǐ",
 		"syllables": [{ "py": "nǐ", "tone": 3 }],
 		"meanings": ["you"],
+		"example": {
+			"hanzi": "你是老师吗？",
+			"pinyin": "nǐ shì lǎo shī ma",
+			"english": "Are you a teacher?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3052,6 +4403,11 @@
 			{ "py": "men", "tone": 0 }
 		],
 		"meanings": ["you all"],
+		"example": {
+			"hanzi": "你们是学生吗？",
+			"pinyin": "nǐ men shì xué shēng ma",
+			"english": "Are you all students?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3061,6 +4417,11 @@
 		"pinyin": "nián",
 		"syllables": [{ "py": "nián", "tone": 2 }],
 		"meanings": ["year"],
+		"example": {
+			"hanzi": "我学了三年汉语。",
+			"pinyin": "wǒ xué le sān nián hàn yǔ",
+			"english": "I've studied Chinese for three years."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -3070,6 +4431,11 @@
 		"pinyin": "nín",
 		"syllables": [{ "py": "nín", "tone": 2 }],
 		"meanings": ["the polite word for you"],
+		"example": {
+			"hanzi": "您想喝茶还是喝水？",
+			"pinyin": "nín xiǎng hē chá hái shi hē shuǐ",
+			"english": "Would you like tea or water?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3082,6 +4448,11 @@
 			{ "py": "nǎi", "tone": 3 }
 		],
 		"meanings": ["cow's milk"],
+		"example": {
+			"hanzi": "我早上喝一杯牛奶。",
+			"pinyin": "wǒ zǎo shang hē yì bēi niú nǎi",
+			"english": "I have a glass of milk in the morning."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3091,6 +4462,11 @@
 		"pinyin": "nǚ",
 		"syllables": [{ "py": "nǚ", "tone": 3 }],
 		"meanings": ["female"],
+		"example": {
+			"hanzi": "她是我的女朋友。",
+			"pinyin": "tā shì wǒ de nǚ péng you",
+			"english": "She's my girlfriend."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3104,6 +4480,11 @@
 			{ "py": "ér", "tone": 2 }
 		],
 		"meanings": ["daughter"],
+		"example": {
+			"hanzi": "我的女儿今年八岁。",
+			"pinyin": "wǒ de nǚ ér jīn nián bā suì",
+			"english": "My daughter is eight this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3118,6 +4499,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["girl"],
+		"example": {
+			"hanzi": "那个女孩儿是我妹妹。",
+			"pinyin": "nà ge nǚ hái r shì wǒ mèi mei",
+			"english": "That girl is my little sister."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3131,6 +4517,11 @@
 			{ "py": "you", "tone": 0 }
 		],
 		"meanings": ["girlfriend"],
+		"example": {
+			"hanzi": "他的女朋友是老师。",
+			"pinyin": "tā de nǚ péng you shì lǎo shī",
+			"english": "His girlfriend is a teacher."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3143,6 +4534,11 @@
 			{ "py": "rén", "tone": 2 }
 		],
 		"meanings": ["woman"],
+		"example": {
+			"hanzi": "那个女人是我姐姐。",
+			"pinyin": "nà ge nǚ rén shì wǒ jiě jie",
+			"english": "That woman is my older sister."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3155,6 +4551,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["female student", "schoolgirl"],
+		"example": {
+			"hanzi": "那个女生是我妹妹。",
+			"pinyin": "nà ge nǚ shēng shì wǒ mèi mei",
+			"english": "That girl is my younger sister."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3168,6 +4569,11 @@
 			{ "py": "biān", "tone": 1 }
 		],
 		"meanings": ["the side of something", "beside"],
+		"example": {
+			"hanzi": "我家旁边有一个商店。",
+			"pinyin": "wǒ jiā páng biān yǒu yí ge shāng diàn",
+			"english": "There is a shop next to my house."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3177,6 +4583,11 @@
 		"pinyin": "pǎo",
 		"syllables": [{ "py": "pǎo", "tone": 3 }],
 		"meanings": ["to run"],
+		"example": {
+			"hanzi": "他跑得很快。",
+			"pinyin": "tā pǎo de hěn kuài",
+			"english": "He runs very fast."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3189,6 +4600,11 @@
 			{ "py": "you", "tone": 0 }
 		],
 		"meanings": ["friend"],
+		"example": {
+			"hanzi": "他是我最好的朋友。",
+			"pinyin": "tā shì wǒ zuì hǎo de péng you",
+			"english": "He's my best friend."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3198,6 +4614,11 @@
 		"pinyin": "piào",
 		"syllables": [{ "py": "piào", "tone": 4 }],
 		"meanings": ["ticket"],
+		"example": {
+			"hanzi": "我们的电影票买好了。",
+			"pinyin": "wǒ men de diàn yǐng piào mǎi hǎo le",
+			"english": "We've got our movie tickets."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3207,6 +4628,11 @@
 		"pinyin": "qī",
 		"syllables": [{ "py": "qī", "tone": 1 }],
 		"meanings": ["seven"],
+		"example": {
+			"hanzi": "我们七点去吃饭。",
+			"pinyin": "wǒ men qī diǎn qù chī fàn",
+			"english": "We're going out to eat at seven."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -3216,6 +4642,11 @@
 		"pinyin": "qǐ",
 		"syllables": [{ "py": "qǐ", "tone": 3 }],
 		"meanings": ["to rise", "to raise"],
+		"example": {
+			"hanzi": "我早上六点起床。",
+			"pinyin": "wǒ zǎo shang liù diǎn qǐ chuáng",
+			"english": "I get up at six in the morning."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3228,6 +4659,11 @@
 			{ "py": "chuáng", "tone": 2 }
 		],
 		"meanings": ["to get out of bed"],
+		"example": {
+			"hanzi": "他早上七点起床。",
+			"pinyin": "tā zǎo shang qī diǎn qǐ chuáng",
+			"english": "He gets up at seven in the morning."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3241,6 +4677,11 @@
 			{ "py": "lái", "tone": 2 }
 		],
 		"meanings": ["to stand up", "to get up"],
+		"example": {
+			"hanzi": "我们都站起来了。",
+			"pinyin": "wǒ men dōu zhàn qǐ lái le",
+			"english": "We all stood up."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3254,6 +4695,11 @@
 			{ "py": "chē", "tone": 1 }
 		],
 		"meanings": ["car", "automobile"],
+		"example": {
+			"hanzi": "路上有很多汽车。",
+			"pinyin": "lù shang yǒu hěn duō qì chē",
+			"english": "There are a lot of cars on the road."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3263,6 +4709,11 @@
 		"pinyin": "qián",
 		"syllables": [{ "py": "qián", "tone": 2 }],
 		"meanings": ["in front", "before in time"],
+		"example": {
+			"hanzi": "学校前边有一家书店。",
+			"pinyin": "xué xiào qián bian yǒu yì jiā shū diàn",
+			"english": "There's a bookshop in front of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3276,6 +4727,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the front side", "ahead"],
+		"example": {
+			"hanzi": "学校前边有一家商店。",
+			"pinyin": "xué xiào qián bian yǒu yì jiā shāng diàn",
+			"english": "There's a shop in front of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3288,6 +4744,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["the day before yesterday"],
+		"example": {
+			"hanzi": "前天我去了医院。",
+			"pinyin": "qián tiān wǒ qù le yī yuàn",
+			"english": "I went to the hospital the day before yesterday."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3298,6 +4759,11 @@
 		"pinyin": "qián",
 		"syllables": [{ "py": "qián", "tone": 2 }],
 		"meanings": ["money"],
+		"example": {
+			"hanzi": "我没有钱买那本书。",
+			"pinyin": "wǒ méi yǒu qián mǎi nà běn shū",
+			"english": "I don't have the money to buy that book."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3311,6 +4777,11 @@
 			{ "py": "bāo", "tone": 1 }
 		],
 		"meanings": ["purse", "wallet"],
+		"example": {
+			"hanzi": "我的钱包里没有钱。",
+			"pinyin": "wǒ de qián bāo lǐ méi yǒu qián",
+			"english": "There's no money in my wallet."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3321,6 +4792,11 @@
 		"pinyin": "qǐng",
 		"syllables": [{ "py": "qǐng", "tone": 3 }],
 		"meanings": ["to invite", "please"],
+		"example": {
+			"hanzi": "明天我请你吃饭。",
+			"pinyin": "míng tiān wǒ qǐng nǐ chī fàn",
+			"english": "I'll treat you to a meal tomorrow."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3334,6 +4810,11 @@
 			{ "py": "jià", "tone": 4 }
 		],
 		"meanings": ["to ask for time off"],
+		"example": {
+			"hanzi": "我今天想请假。",
+			"pinyin": "wǒ jīn tiān xiǎng qǐng jià",
+			"english": "I'd like to take the day off today."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3347,6 +4828,11 @@
 			{ "py": "jìn", "tone": 4 }
 		],
 		"meanings": ["please come in"],
+		"example": {
+			"hanzi": "你来了，请进！",
+			"pinyin": "nǐ lái le qǐng jìn",
+			"english": "You're here — please come in!"
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3360,6 +4846,11 @@
 			{ "py": "wèn", "tone": 4 }
 		],
 		"meanings": ["may I ask", "excuse me"],
+		"example": {
+			"hanzi": "请问，去医院怎么走？",
+			"pinyin": "qǐng wèn qù yī yuàn zěn me zǒu",
+			"english": "Excuse me, how do I get to the hospital?"
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3373,6 +4864,11 @@
 			{ "py": "zuò", "tone": 4 }
 		],
 		"meanings": ["please sit down"],
+		"example": {
+			"hanzi": "进来请坐吧。",
+			"pinyin": "jìn lái qǐng zuò ba",
+			"english": "Come in and have a seat."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3382,6 +4878,11 @@
 		"pinyin": "qiú",
 		"syllables": [{ "py": "qiú", "tone": 2 }],
 		"meanings": ["ball"],
+		"example": {
+			"hanzi": "我下午和同学打球。",
+			"pinyin": "wǒ xià wǔ hé tóng xué dǎ qiú",
+			"english": "I play ball with my classmates in the afternoon."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3391,6 +4892,11 @@
 		"pinyin": "qù",
 		"syllables": [{ "py": "qù", "tone": 4 }],
 		"meanings": ["to go"],
+		"example": {
+			"hanzi": "我明天去北京。",
+			"pinyin": "wǒ míng tiān qù Běi jīng",
+			"english": "I'm going to Beijing tomorrow."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3403,6 +4909,11 @@
 			{ "py": "nián", "tone": 2 }
 		],
 		"meanings": ["last year"],
+		"example": {
+			"hanzi": "去年我去了北京。",
+			"pinyin": "qù nián wǒ qù le Běi jīng",
+			"english": "Last year I went to Beijing."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3413,6 +4924,11 @@
 		"pinyin": "rè",
 		"syllables": [{ "py": "rè", "tone": 4 }],
 		"meanings": ["hot", "to heat up"],
+		"example": {
+			"hanzi": "今天天气很热。",
+			"pinyin": "jīn tiān tiān qì hěn rè",
+			"english": "It's very hot today."
+		},
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -3422,6 +4938,11 @@
 		"pinyin": "rén",
 		"syllables": [{ "py": "rén", "tone": 2 }],
 		"meanings": ["person", "people"],
+		"example": {
+			"hanzi": "这个商店人很多。",
+			"pinyin": "zhè ge shāng diàn rén hěn duō",
+			"english": "There are a lot of people in this shop."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3435,6 +4956,11 @@
 			{ "py": "shi", "tone": 0 }
 		],
 		"meanings": ["to know someone", "to recognize"],
+		"example": {
+			"hanzi": "我认识她的哥哥。",
+			"pinyin": "wǒ rèn shi tā de gē ge",
+			"english": "I know her older brother."
+		},
 		"pos": ["V", "N"],
 		"level": 1
 	},
@@ -3448,6 +4974,11 @@
 			{ "py": "zhēn", "tone": 1 }
 		],
 		"meanings": ["serious and careful", "conscientious"],
+		"example": {
+			"hanzi": "他学习很认真。",
+			"pinyin": "tā xué xí hěn rèn zhēn",
+			"english": "He works hard at his studies."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3457,6 +4988,11 @@
 		"pinyin": "rì",
 		"syllables": [{ "py": "rì", "tone": 4 }],
 		"meanings": ["day of the month in writing", "sun"],
+		"example": {
+			"hanzi": "今天是五月八日。",
+			"pinyin": "jīn tiān shì wǔ yuè bā rì",
+			"english": "Today is the eighth of May."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3469,6 +5005,11 @@
 			{ "py": "qī", "tone": 1 }
 		],
 		"meanings": ["date"],
+		"example": {
+			"hanzi": "你知道考试的日期吗？",
+			"pinyin": "nǐ zhī dào kǎo shì de rì qī ma",
+			"english": "Do you know the date of the exam?"
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3478,6 +5019,11 @@
 		"pinyin": "ròu",
 		"syllables": [{ "py": "ròu", "tone": 4 }],
 		"meanings": ["meat"],
+		"example": {
+			"hanzi": "这个菜里没有肉。",
+			"pinyin": "zhè ge cài lǐ méi yǒu ròu",
+			"english": "There's no meat in this dish."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3487,6 +5033,11 @@
 		"pinyin": "sān",
 		"syllables": [{ "py": "sān", "tone": 1 }],
 		"meanings": ["three"],
+		"example": {
+			"hanzi": "我家有三口人。",
+			"pinyin": "wǒ jiā yǒu sān kǒu rén",
+			"english": "There are three people in my family."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -3496,6 +5047,11 @@
 		"pinyin": "shān",
 		"syllables": [{ "py": "shān", "tone": 1 }],
 		"meanings": ["mountain", "hill"],
+		"example": {
+			"hanzi": "星期天我们去山上玩。",
+			"pinyin": "xīng qī tiān wǒ men qù shān shàng wán",
+			"english": "On Sunday we're going up into the mountains."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3509,6 +5065,11 @@
 			{ "py": "chǎng", "tone": 3 }
 		],
 		"meanings": ["shopping mall", "department store"],
+		"example": {
+			"hanzi": "我们去商场买衣服。",
+			"pinyin": "wǒ men qù shāng chǎng mǎi yī fu",
+			"english": "We're going to the mall to buy clothes."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3521,6 +5082,11 @@
 			{ "py": "diàn", "tone": 4 }
 		],
 		"meanings": ["shop", "store"],
+		"example": {
+			"hanzi": "这家商店的东西很多。",
+			"pinyin": "zhè jiā shāng diàn de dōng xi hěn duō",
+			"english": "This shop has a lot of things."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3530,6 +5096,11 @@
 		"pinyin": "shàng",
 		"syllables": [{ "py": "shàng", "tone": 4 }],
 		"meanings": ["above or on top", "to go up"],
+		"example": {
+			"hanzi": "书在桌子上。",
+			"pinyin": "shū zài zhuō zi shàng",
+			"english": "The book is on the table."
+		},
 		"pos": ["N", "V"],
 		"level": 1
 	},
@@ -3542,6 +5113,11 @@
 			{ "py": "bān", "tone": 1 }
 		],
 		"meanings": ["to go to work"],
+		"example": {
+			"hanzi": "爸爸八点去上班。",
+			"pinyin": "bà ba bā diǎn qù shàng bān",
+			"english": "Dad goes to work at eight."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3555,6 +5131,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the top", "the upper side"],
+		"example": {
+			"hanzi": "桌子上边有一个杯子。",
+			"pinyin": "zhuō zi shàng bian yǒu yí ge bēi zi",
+			"english": "There's a cup on top of the table."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3568,6 +5149,11 @@
 			{ "py": "chē", "tone": 1 }
 		],
 		"meanings": ["to get on a bus or train", "to get into a car"],
+		"example": {
+			"hanzi": "我们快上车吧。",
+			"pinyin": "wǒ men kuài shàng chē ba",
+			"english": "Let's get on the bus, quick."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3580,6 +5166,11 @@
 			{ "py": "cì", "tone": 4 }
 		],
 		"meanings": ["last time"],
+		"example": {
+			"hanzi": "上次我们去了那家店。",
+			"pinyin": "shàng cì wǒ men qù le nà jiā diàn",
+			"english": "Last time we went to that shop."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3593,6 +5184,11 @@
 			{ "py": "kè", "tone": 4 }
 		],
 		"meanings": ["to go to class", "to attend class"],
+		"example": {
+			"hanzi": "明天早上八点上课。",
+			"pinyin": "míng tiān zǎo shang bā diǎn shàng kè",
+			"english": "Class starts at eight tomorrow morning."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3606,6 +5202,11 @@
 			{ "py": "wǎng", "tone": 3 }
 		],
 		"meanings": ["to go online", "to use the Internet"],
+		"example": {
+			"hanzi": "我晚上喜欢上网。",
+			"pinyin": "wǒ wǎn shang xǐ huan shàng wǎng",
+			"english": "I like going online in the evening."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3618,6 +5219,11 @@
 			{ "py": "wǔ", "tone": 3 }
 		],
 		"meanings": ["morning"],
+		"example": {
+			"hanzi": "我上午有汉语课。",
+			"pinyin": "wǒ shàng wǔ yǒu hàn yǔ kè",
+			"english": "I have a Chinese class in the morning."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3631,6 +5237,11 @@
 			{ "py": "xué", "tone": 2 }
 		],
 		"meanings": ["to go to school", "to attend school"],
+		"example": {
+			"hanzi": "我早上八点上学。",
+			"pinyin": "wǒ zǎo shang bā diǎn shàng xué",
+			"english": "I go to school at eight in the morning."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3640,6 +5251,11 @@
 		"pinyin": "shǎo",
 		"syllables": [{ "py": "shǎo", "tone": 3 }],
 		"meanings": ["few", "to lack"],
+		"example": {
+			"hanzi": "今天来的人很少。",
+			"pinyin": "jīn tiān lái de rén hěn shǎo",
+			"english": "Very few people came today."
+		},
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -3650,6 +5266,11 @@
 		"pinyin": "shéi/shuí",
 		"syllables": [{ "py": "shéi", "tone": 2 }],
 		"meanings": ["who"],
+		"example": {
+			"hanzi": "这本书是谁的？",
+			"pinyin": "zhè běn shū shì shéi de",
+			"english": "Whose book is this?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3662,6 +5283,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["on one's body", "carried with you"],
+		"example": {
+			"hanzi": "我身上没有钱。",
+			"pinyin": "wǒ shēn shang méi yǒu qián",
+			"english": "I don't have any money on me."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3675,6 +5301,11 @@
 			{ "py": "tǐ", "tone": 3 }
 		],
 		"meanings": ["the body", "one's health"],
+		"example": {
+			"hanzi": "多喝水对身体好。",
+			"pinyin": "duō hē shuǐ duì shēn tǐ hǎo",
+			"english": "Drinking plenty of water is good for the body."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3688,6 +5319,11 @@
 			{ "py": "me", "tone": 0 }
 		],
 		"meanings": ["what"],
+		"example": {
+			"hanzi": "你在做什么？",
+			"pinyin": "nǐ zài zuò shén me",
+			"english": "What are you doing?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3700,6 +5336,11 @@
 			{ "py": "bìng", "tone": 4 }
 		],
 		"meanings": ["to get sick"],
+		"example": {
+			"hanzi": "我妹妹生病了。",
+			"pinyin": "wǒ mèi mei shēng bìng le",
+			"english": "My little sister has fallen ill."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3713,6 +5354,11 @@
 			{ "py": "qì", "tone": 4 }
 		],
 		"meanings": ["to get angry"],
+		"example": {
+			"hanzi": "我回家太晚，妈妈生气了。",
+			"pinyin": "wǒ huí jiā tài wǎn mā ma shēng qì le",
+			"english": "I got home too late and Mum got angry."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3725,6 +5371,11 @@
 			{ "py": "rì", "tone": 4 }
 		],
 		"meanings": ["birthday"],
+		"example": {
+			"hanzi": "今天是我的生日。",
+			"pinyin": "jīn tiān shì wǒ de shēng rì",
+			"english": "Today is my birthday."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3734,6 +5385,11 @@
 		"pinyin": "shí",
 		"syllables": [{ "py": "shí", "tone": 2 }],
 		"meanings": ["ten"],
+		"example": {
+			"hanzi": "我们十点上课。",
+			"pinyin": "wǒ men shí diǎn shàng kè",
+			"english": "Our class starts at ten."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -3747,6 +5403,11 @@
 			{ "py": "hou", "tone": 0 }
 		],
 		"meanings": ["the time when", "point in time"],
+		"example": {
+			"hanzi": "小的时候我很喜欢唱歌。",
+			"pinyin": "xiǎo de shí hou wǒ hěn xǐ huan chàng gē",
+			"english": "When I was little I loved to sing."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3760,6 +5421,11 @@
 			{ "py": "jiān", "tone": 1 }
 		],
 		"meanings": ["time"],
+		"example": {
+			"hanzi": "我明天没有时间。",
+			"pinyin": "wǒ míng tiān méi yǒu shí jiān",
+			"english": "I don't have time tomorrow."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3769,6 +5435,11 @@
 		"pinyin": "shì",
 		"syllables": [{ "py": "shì", "tone": 4 }],
 		"meanings": ["matter", "affair"],
+		"example": {
+			"hanzi": "我今天有很多事。",
+			"pinyin": "wǒ jīn tiān yǒu hěn duō shì",
+			"english": "I have a lot to do today."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3779,6 +5450,11 @@
 		"pinyin": "shì",
 		"syllables": [{ "py": "shì", "tone": 4 }],
 		"meanings": ["to try", "to test"],
+		"example": {
+			"hanzi": "你试试这个菜吧。",
+			"pinyin": "nǐ shì shi zhè ge cài ba",
+			"english": "Give this dish a try."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3788,6 +5464,11 @@
 		"pinyin": "shì",
 		"syllables": [{ "py": "shì", "tone": 4 }],
 		"meanings": ["to be"],
+		"example": {
+			"hanzi": "他是我的汉语老师。",
+			"pinyin": "tā shì wǒ de hàn yǔ lǎo shī",
+			"english": "He is my Chinese teacher."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3801,6 +5482,11 @@
 			{ "py": "shì", "tone": 4 }
 		],
 		"meanings": ["is it or not?", "used to ask for confirmation"],
+		"example": {
+			"hanzi": "你是不是想回家？",
+			"pinyin": "nǐ shì bu shì xiǎng huí jiā",
+			"english": "You want to go home, don't you?"
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3810,6 +5496,11 @@
 		"pinyin": "shǒu",
 		"syllables": [{ "py": "shǒu", "tone": 3 }],
 		"meanings": ["hand"],
+		"example": {
+			"hanzi": "吃饭前要洗手。",
+			"pinyin": "chī fàn qián yào xǐ shǒu",
+			"english": "Wash your hands before you eat."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3823,6 +5514,11 @@
 			{ "py": "jī", "tone": 1 }
 		],
 		"meanings": ["cell phone", "mobile phone"],
+		"example": {
+			"hanzi": "我的手机没电了。",
+			"pinyin": "wǒ de shǒu jī méi diàn le",
+			"english": "My cell phone is out of battery."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3833,6 +5529,11 @@
 		"pinyin": "shū",
 		"syllables": [{ "py": "shū", "tone": 1 }],
 		"meanings": ["book"],
+		"example": {
+			"hanzi": "我在看一本新书。",
+			"pinyin": "wǒ zài kàn yì běn xīn shū",
+			"english": "I'm reading a new book."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3846,6 +5547,11 @@
 			{ "py": "bāo", "tone": 1 }
 		],
 		"meanings": ["schoolbag", "book bag"],
+		"example": {
+			"hanzi": "我的书包在桌子上。",
+			"pinyin": "wǒ de shū bāo zài zhuō zi shang",
+			"english": "My schoolbag is on the desk."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3859,6 +5565,11 @@
 			{ "py": "diàn", "tone": 4 }
 		],
 		"meanings": ["bookstore"],
+		"example": {
+			"hanzi": "我在书店买了两本书。",
+			"pinyin": "wǒ zài shū diàn mǎi le liǎng běn shū",
+			"english": "I bought two books at the bookshop."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3869,6 +5580,11 @@
 		"pinyin": "shù",
 		"syllables": [{ "py": "shù", "tone": 4 }],
 		"meanings": ["tree"],
+		"example": {
+			"hanzi": "学校里有很多树。",
+			"pinyin": "xué xiào lǐ yǒu hěn duō shù",
+			"english": "There are a lot of trees at the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3878,6 +5594,11 @@
 		"pinyin": "shuǐ",
 		"syllables": [{ "py": "shuǐ", "tone": 3 }],
 		"meanings": ["water"],
+		"example": {
+			"hanzi": "我想喝水。",
+			"pinyin": "wǒ xiǎng hē shuǐ",
+			"english": "I want to drink some water."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3890,6 +5611,11 @@
 			{ "py": "guǒ", "tone": 3 }
 		],
 		"meanings": ["fruit"],
+		"example": {
+			"hanzi": "商店里有很多水果。",
+			"pinyin": "shāng diàn lǐ yǒu hěn duō shuǐ guǒ",
+			"english": "There's a lot of fruit in the shop."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3899,6 +5625,11 @@
 		"pinyin": "shuì",
 		"syllables": [{ "py": "shuì", "tone": 4 }],
 		"meanings": ["to sleep"],
+		"example": {
+			"hanzi": "我昨天睡得很晚。",
+			"pinyin": "wǒ zuó tiān shuì de hěn wǎn",
+			"english": "I went to sleep very late last night."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3912,6 +5643,11 @@
 			{ "py": "jiào", "tone": 4 }
 		],
 		"meanings": ["to go to bed", "to sleep"],
+		"example": {
+			"hanzi": "弟弟九点就睡觉了。",
+			"pinyin": "dì di jiǔ diǎn jiù shuì jiào le",
+			"english": "My little brother went to bed at nine."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3922,6 +5658,11 @@
 		"pinyin": "shuō",
 		"syllables": [{ "py": "shuō", "tone": 1 }],
 		"meanings": ["to say", "to speak"],
+		"example": {
+			"hanzi": "老师说明天有课。",
+			"pinyin": "lǎo shī shuō míng tiān yǒu kè",
+			"english": "The teacher says there's class tomorrow."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3935,6 +5676,11 @@
 			{ "py": "huà", "tone": 4 }
 		],
 		"meanings": ["to talk"],
+		"example": {
+			"hanzi": "老师说话很慢。",
+			"pinyin": "lǎo shī shuō huà hěn màn",
+			"english": "The teacher talks slowly."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -3944,6 +5690,11 @@
 		"pinyin": "sì",
 		"syllables": [{ "py": "sì", "tone": 4 }],
 		"meanings": ["four"],
+		"example": {
+			"hanzi": "我们班有四个女生。",
+			"pinyin": "wǒ men bān yǒu sì ge nǚ shēng",
+			"english": "There are four girls in our class."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -3953,6 +5704,11 @@
 		"pinyin": "sòng",
 		"syllables": [{ "py": "sòng", "tone": 4 }],
 		"meanings": ["to give as a gift", "to see someone off", "to deliver"],
+		"example": {
+			"hanzi": "我送她一本书。",
+			"pinyin": "wǒ sòng tā yì běn shū",
+			"english": "I gave her a book as a present."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3963,6 +5719,11 @@
 		"pinyin": "suì",
 		"syllables": [{ "py": "suì", "tone": 4 }],
 		"meanings": ["years of age"],
+		"example": {
+			"hanzi": "我妹妹今年七岁。",
+			"pinyin": "wǒ mèi mei jīn nián qī suì",
+			"english": "My little sister is seven years old this year."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -3972,6 +5733,11 @@
 		"pinyin": "tā",
 		"syllables": [{ "py": "tā", "tone": 1 }],
 		"meanings": ["he", "him"],
+		"example": {
+			"hanzi": "他今天没来上课。",
+			"pinyin": "tā jīn tiān méi lái shàng kè",
+			"english": "He didn't come to class today."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3985,6 +5751,11 @@
 			{ "py": "men", "tone": 0 }
 		],
 		"meanings": ["they", "them"],
+		"example": {
+			"hanzi": "他们都是我的朋友。",
+			"pinyin": "tā men dōu shì wǒ de péng you",
+			"english": "They're all friends of mine."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3994,6 +5765,11 @@
 		"pinyin": "tā",
 		"syllables": [{ "py": "tā", "tone": 1 }],
 		"meanings": ["she", "her"],
+		"example": {
+			"hanzi": "她是我的汉语老师。",
+			"pinyin": "tā shì wǒ de Hàn yǔ lǎo shī",
+			"english": "She is my Chinese teacher."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -4007,6 +5783,11 @@
 			{ "py": "men", "tone": 0 }
 		],
 		"meanings": ["they for a group of women"],
+		"example": {
+			"hanzi": "她们都是老师。",
+			"pinyin": "tā men dōu shì lǎo shī",
+			"english": "They are all teachers."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -4016,6 +5797,11 @@
 		"pinyin": "tài",
 		"syllables": [{ "py": "tài", "tone": 4 }],
 		"meanings": ["excessively", "too"],
+		"example": {
+			"hanzi": "这本书太贵了。",
+			"pinyin": "zhè běn shū tài guì le",
+			"english": "This book is too expensive."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4025,6 +5811,11 @@
 		"pinyin": "tiān",
 		"syllables": [{ "py": "tiān", "tone": 1 }],
 		"meanings": ["day", "sky"],
+		"example": {
+			"hanzi": "我们在这里住了三天。",
+			"pinyin": "wǒ men zài zhè lǐ zhù le sān tiān",
+			"english": "We stayed here for three days."
+		},
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -4038,6 +5829,11 @@
 			{ "py": "qì", "tone": 4 }
 		],
 		"meanings": ["weather"],
+		"example": {
+			"hanzi": "今天天气很好。",
+			"pinyin": "jīn tiān tiān qì hěn hǎo",
+			"english": "The weather is lovely today."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4048,6 +5844,11 @@
 		"pinyin": "tīng",
 		"syllables": [{ "py": "tīng", "tone": 1 }],
 		"meanings": ["to listen", "to hear"],
+		"example": {
+			"hanzi": "我喜欢听歌。",
+			"pinyin": "wǒ xǐ huan tīng gē",
+			"english": "I like listening to songs."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4060,7 +5861,12 @@
 			{ "py": "tīng", "tone": 1 },
 			{ "py": "dào", "tone": 4 }
 		],
-		"meanings": ["to hear"],
+		"meanings": ["to hear (as a result)"],
+		"example": {
+			"hanzi": "我听到有人叫我。",
+			"pinyin": "wǒ tīng dào yǒu rén jiào wǒ",
+			"english": "I heard someone calling me."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4073,7 +5879,12 @@
 			{ "py": "tīng", "tone": 1 },
 			{ "py": "jiàn", "tone": 4 }
 		],
-		"meanings": ["to catch a sound"],
+		"meanings": ["to hear (and catch it)"],
+		"example": {
+			"hanzi": "你听见我说话了吗？",
+			"pinyin": "nǐ tīng jiàn wǒ shuō huà le ma",
+			"english": "Did you hear what I said?"
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4087,6 +5898,11 @@
 			{ "py": "xiě", "tone": 3 }
 		],
 		"meanings": ["to take dictation", "to write down what you hear"],
+		"example": {
+			"hanzi": "明天我们要听写汉字。",
+			"pinyin": "míng tiān wǒ men yào tīng xiě hàn zì",
+			"english": "Tomorrow we have to write characters from dictation."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4100,6 +5916,11 @@
 			{ "py": "xué", "tone": 2 }
 		],
 		"meanings": ["classmate", "fellow student"],
+		"example": {
+			"hanzi": "他是我的同学。",
+			"pinyin": "tā shì wǒ de tóng xué",
+			"english": "He's my classmate."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4114,6 +5935,11 @@
 			{ "py": "guǎn", "tone": 3 }
 		],
 		"meanings": ["library"],
+		"example": {
+			"hanzi": "我们在图书馆看书。",
+			"pinyin": "wǒ men zài tú shū guǎn kàn shū",
+			"english": "We read in the library."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4123,6 +5949,11 @@
 		"pinyin": "wài",
 		"syllables": [{ "py": "wài", "tone": 4 }],
 		"meanings": ["outside"],
+		"example": {
+			"hanzi": "外面下雨了。",
+			"pinyin": "wài miàn xià yǔ le",
+			"english": "It's raining outside."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4136,6 +5967,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["out there", "outdoors"],
+		"example": {
+			"hanzi": "外边在下雨。",
+			"pinyin": "wài bian zài xià yǔ",
+			"english": "It's raining outside."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4149,6 +5985,11 @@
 			{ "py": "guó", "tone": 2 }
 		],
 		"meanings": ["foreign country"],
+		"example": {
+			"hanzi": "他有很多外国朋友。",
+			"pinyin": "tā yǒu hěn duō wài guó péng you",
+			"english": "He has a lot of friends from other countries."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4162,6 +6003,11 @@
 			{ "py": "yǔ", "tone": 3 }
 		],
 		"meanings": ["foreign language"],
+		"example": {
+			"hanzi": "我很喜欢学外语。",
+			"pinyin": "wǒ hěn xǐ huan xué wài yǔ",
+			"english": "I really like studying foreign languages."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4175,6 +6021,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["to play", "to have fun"],
+		"example": {
+			"hanzi": "孩子们在外面玩儿。",
+			"pinyin": "hái zi men zài wài miàn wán r",
+			"english": "The kids are playing outside."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4184,6 +6035,11 @@
 		"pinyin": "wǎn",
 		"syllables": [{ "py": "wǎn", "tone": 3 }],
 		"meanings": ["late"],
+		"example": {
+			"hanzi": "你今天起得很晚。",
+			"pinyin": "nǐ jīn tiān qǐ de hěn wǎn",
+			"english": "You got up very late today."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -4197,6 +6053,11 @@
 			{ "py": "fàn", "tone": 4 }
 		],
 		"meanings": ["dinner", "the evening meal"],
+		"example": {
+			"hanzi": "今天的晚饭是我做的。",
+			"pinyin": "jīn tiān de wǎn fàn shì wǒ zuò de",
+			"english": "I'm the one who made dinner tonight."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4209,6 +6070,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["evening", "at night"],
+		"example": {
+			"hanzi": "晚上我们一起看电影。",
+			"pinyin": "wǎn shang wǒ men yì qǐ kàn diàn yǐng",
+			"english": "Tonight we're watching a film together."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4222,6 +6088,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["online", "on the internet"],
+		"example": {
+			"hanzi": "我在网上买书。",
+			"pinyin": "wǒ zài wǎng shang mǎi shū",
+			"english": "I buy books online."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4235,6 +6106,11 @@
 			{ "py": "yǒu", "tone": 3 }
 		],
 		"meanings": ["online friend", "internet user"],
+		"example": {
+			"hanzi": "他是我的网友。",
+			"pinyin": "tā shì wǒ de wǎng yǒu",
+			"english": "He's a friend of mine from online."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4244,6 +6120,11 @@
 		"pinyin": "wàng",
 		"syllables": [{ "py": "wàng", "tone": 4 }],
 		"meanings": ["to forget"],
+		"example": {
+			"hanzi": "我忘了他的名字。",
+			"pinyin": "wǒ wàng le tā de míng zi",
+			"english": "I've forgotten his name."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4257,6 +6138,11 @@
 			{ "py": "jì", "tone": 4 }
 		],
 		"meanings": ["to forget about"],
+		"example": {
+			"hanzi": "我忘记问他的名字了。",
+			"pinyin": "wǒ wàng jì wèn tā de míng zi le",
+			"english": "I forgot to ask his name."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4267,6 +6153,11 @@
 		"pinyin": "wèn",
 		"syllables": [{ "py": "wèn", "tone": 4 }],
 		"meanings": ["to ask"],
+		"example": {
+			"hanzi": "我问妈妈今天几点回家。",
+			"pinyin": "wǒ wèn mā ma jīn tiān jǐ diǎn huí jiā",
+			"english": "I asked my mum what time she's coming home today."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4276,6 +6167,11 @@
 		"pinyin": "wǒ",
 		"syllables": [{ "py": "wǒ", "tone": 3 }],
 		"meanings": ["I", "me"],
+		"example": {
+			"hanzi": "我在学校学习汉语。",
+			"pinyin": "wǒ zài xué xiào xué xí hàn yǔ",
+			"english": "I study Chinese at school."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -4289,6 +6185,11 @@
 			{ "py": "men", "tone": 0 }
 		],
 		"meanings": ["we", "us"],
+		"example": {
+			"hanzi": "我们一起去看电影吧。",
+			"pinyin": "wǒ men yì qǐ qù kàn diàn yǐng ba",
+			"english": "Let's go and see a film together."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -4298,6 +6199,11 @@
 		"pinyin": "wǔ",
 		"syllables": [{ "py": "wǔ", "tone": 3 }],
 		"meanings": ["five"],
+		"example": {
+			"hanzi": "我们班有五个学生。",
+			"pinyin": "wǒ men bān yǒu wǔ ge xué shēng",
+			"english": "There are five students in our class."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -4311,6 +6217,11 @@
 			{ "py": "fàn", "tone": 4 }
 		],
 		"meanings": ["lunch"],
+		"example": {
+			"hanzi": "我们在家吃午饭。",
+			"pinyin": "wǒ men zài jiā chī wǔ fàn",
+			"english": "We eat lunch at home."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4320,6 +6231,11 @@
 		"pinyin": "xī",
 		"syllables": [{ "py": "xī", "tone": 1 }],
 		"meanings": ["west"],
+		"example": {
+			"hanzi": "我家在学校的西边。",
+			"pinyin": "wǒ jiā zài xué xiào de xī bian",
+			"english": "My home is west of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4333,6 +6249,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the west side"],
+		"example": {
+			"hanzi": "我的房间在西边。",
+			"pinyin": "wǒ de fáng jiān zài xī bian",
+			"english": "My room is on the west side."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4342,6 +6263,11 @@
 		"pinyin": "xǐ",
 		"syllables": [{ "py": "xǐ", "tone": 3 }],
 		"meanings": ["to wash"],
+		"example": {
+			"hanzi": "吃饭前要洗手。",
+			"pinyin": "chī fàn qián yào xǐ shǒu",
+			"english": "Wash your hands before you eat."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4356,6 +6282,11 @@
 			{ "py": "jiān", "tone": 1 }
 		],
 		"meanings": ["restroom", "washroom"],
+		"example": {
+			"hanzi": "洗手间在哪儿？",
+			"pinyin": "xǐ shǒu jiān zài nǎ r",
+			"english": "Where is the restroom?"
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4369,6 +6300,11 @@
 			{ "py": "huan", "tone": 0 }
 		],
 		"meanings": ["to like"],
+		"example": {
+			"hanzi": "我很喜欢唱歌。",
+			"pinyin": "wǒ hěn xǐ huan chàng gē",
+			"english": "I really like singing."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4378,6 +6314,11 @@
 		"pinyin": "xià",
 		"syllables": [{ "py": "xià", "tone": 4 }],
 		"meanings": ["below", "to go down"],
+		"example": {
+			"hanzi": "书在桌子下面。",
+			"pinyin": "shū zài zhuō zi xià miàn",
+			"english": "The book is under the desk."
+		},
 		"pos": ["N", "V"],
 		"level": 1
 	},
@@ -4390,6 +6331,11 @@
 			{ "py": "bān", "tone": 1 }
 		],
 		"meanings": ["to finish work", "to get off work"],
+		"example": {
+			"hanzi": "我爸爸六点下班。",
+			"pinyin": "wǒ bà ba liù diǎn xià bān",
+			"english": "My dad finishes work at six."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4403,6 +6349,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the underside", "underneath"],
+		"example": {
+			"hanzi": "我的书在桌子下边。",
+			"pinyin": "wǒ de shū zài zhuō zi xià bian",
+			"english": "My book is under the table."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4416,6 +6367,11 @@
 			{ "py": "chē", "tone": 1 }
 		],
 		"meanings": ["to get off a vehicle"],
+		"example": {
+			"hanzi": "我在前面下车。",
+			"pinyin": "wǒ zài qián miàn xià chē",
+			"english": "I'll get off up ahead."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4428,6 +6384,11 @@
 			{ "py": "cì", "tone": 4 }
 		],
 		"meanings": ["next time"],
+		"example": {
+			"hanzi": "下次我请你吃饭。",
+			"pinyin": "xià cì wǒ qǐng nǐ chī fàn",
+			"english": "Next time dinner is on me."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4441,6 +6402,11 @@
 			{ "py": "kè", "tone": 4 }
 		],
 		"meanings": ["to finish class", "to get out of class"],
+		"example": {
+			"hanzi": "我们四点下课。",
+			"pinyin": "wǒ men sì diǎn xià kè",
+			"english": "We get out of class at four."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4453,6 +6419,11 @@
 			{ "py": "wǔ", "tone": 3 }
 		],
 		"meanings": ["afternoon", "p.m"],
+		"example": {
+			"hanzi": "今天下午我们去打球。",
+			"pinyin": "jīn tiān xià wǔ wǒ men qù dǎ qiú",
+			"english": "This afternoon we're going to play ball."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4465,6 +6436,11 @@
 			{ "py": "yǔ", "tone": 3 }
 		],
 		"meanings": ["it is raining", "to rain"],
+		"example": {
+			"hanzi": "外边下雨了。",
+			"pinyin": "wài bian xià yǔ le",
+			"english": "It's raining outside."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4474,6 +6450,11 @@
 		"pinyin": "xiān",
 		"syllables": [{ "py": "xiān", "tone": 1 }],
 		"meanings": ["first", "beforehand"],
+		"example": {
+			"hanzi": "你先吃饭吧。",
+			"pinyin": "nǐ xiān chī fàn ba",
+			"english": "You go ahead and eat first."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4486,6 +6467,11 @@
 			{ "py": "sheng", "tone": 0 }
 		],
 		"meanings": ["Mr", "gentleman"],
+		"example": {
+			"hanzi": "先生，您要喝茶吗？",
+			"pinyin": "xiān sheng nín yào hē chá ma",
+			"english": "Would you like some tea, sir?"
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4499,6 +6485,11 @@
 			{ "py": "zài", "tone": 4 }
 		],
 		"meanings": ["now", "at present"],
+		"example": {
+			"hanzi": "现在外面下雨了。",
+			"pinyin": "xiàn zài wài miàn xià yǔ le",
+			"english": "It's raining outside now."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4508,6 +6499,11 @@
 		"pinyin": "xiǎng",
 		"syllables": [{ "py": "xiǎng", "tone": 3 }],
 		"meanings": ["to think about", "would like to", "to miss someone"],
+		"example": {
+			"hanzi": "你想什么呢？",
+			"pinyin": "nǐ xiǎng shén me ne",
+			"english": "What are you thinking about?"
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4517,6 +6513,11 @@
 		"pinyin": "xiǎo",
 		"syllables": [{ "py": "xiǎo", "tone": 3 }],
 		"meanings": ["small", "little"],
+		"example": {
+			"hanzi": "这个房间很小。",
+			"pinyin": "zhè ge fáng jiān hěn xiǎo",
+			"english": "This room is very small."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -4531,6 +6532,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["kid", "young child"],
+		"example": {
+			"hanzi": "那个小孩儿很爱笑。",
+			"pinyin": "nà ge xiǎo hái r hěn ài xiào",
+			"english": "That little kid smiles a lot."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4543,6 +6549,11 @@
 			{ "py": "jiě", "tone": 3 }
 		],
 		"meanings": ["young lady", "Miss"],
+		"example": {
+			"hanzi": "小姐，这是你的书吗？",
+			"pinyin": "xiǎo jiě zhè shì nǐ de shū ma",
+			"english": "Miss, is this your book?"
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4555,7 +6566,12 @@
 			{ "py": "péng", "tone": 2 },
 			{ "py": "yǒu", "tone": 3 }
 		],
-		"meanings": ["youngster"],
+		"meanings": ["child (as adults address one)"],
+		"example": {
+			"hanzi": "这个小朋友今年六岁。",
+			"pinyin": "zhè ge xiǎo péng yǒu jīn nián liù suì",
+			"english": "This little one is six years old."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4569,6 +6585,11 @@
 			{ "py": "shí", "tone": 2 }
 		],
 		"meanings": ["hour"],
+		"example": {
+			"hanzi": "我看了两个小时的书。",
+			"pinyin": "wǒ kàn le liǎng gè xiǎo shí de shū",
+			"english": "I read for two hours."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4582,6 +6603,11 @@
 			{ "py": "xué", "tone": 2 }
 		],
 		"meanings": ["elementary school", "primary school"],
+		"example": {
+			"hanzi": "我弟弟在小学读书。",
+			"pinyin": "wǒ dì di zài xiǎo xué dú shū",
+			"english": "My younger brother is at primary school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4596,6 +6622,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["primary school pupil", "schoolchild"],
+		"example": {
+			"hanzi": "我弟弟是小学生。",
+			"pinyin": "wǒ dì di shì xiǎo xué shēng",
+			"english": "My younger brother is in primary school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4605,6 +6636,11 @@
 		"pinyin": "xiào",
 		"syllables": [{ "py": "xiào", "tone": 4 }],
 		"meanings": ["to laugh", "to smile"],
+		"example": {
+			"hanzi": "孩子们都笑了。",
+			"pinyin": "hái zi men dōu xiào le",
+			"english": "The children all laughed."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4615,6 +6651,11 @@
 		"pinyin": "xiě",
 		"syllables": [{ "py": "xiě", "tone": 3 }],
 		"meanings": ["to write"],
+		"example": {
+			"hanzi": "他在写汉字。",
+			"pinyin": "tā zài xiě Hàn zì",
+			"english": "He is writing Chinese characters."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4628,6 +6669,11 @@
 			{ "py": "xie", "tone": 0 }
 		],
 		"meanings": ["to thank", "thank you"],
+		"example": {
+			"hanzi": "谢谢你帮我。",
+			"pinyin": "xiè xie nǐ bāng wǒ",
+			"english": "Thank you for helping me."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4637,6 +6683,11 @@
 		"pinyin": "xīn",
 		"syllables": [{ "py": "xīn", "tone": 1 }],
 		"meanings": ["new"],
+		"example": {
+			"hanzi": "这是我的新手机。",
+			"pinyin": "zhè shì wǒ de xīn shǒu jī",
+			"english": "This is my new phone."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -4649,6 +6700,11 @@
 			{ "py": "nián", "tone": 2 }
 		],
 		"meanings": ["New Year"],
+		"example": {
+			"hanzi": "我在家过新年。",
+			"pinyin": "wǒ zài jiā guò xīn nián",
+			"english": "I spend New Year at home."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4661,6 +6717,11 @@
 			{ "py": "qī", "tone": 1 }
 		],
 		"meanings": ["week"],
+		"example": {
+			"hanzi": "这个星期我很忙。",
+			"pinyin": "zhè ge xīng qī wǒ hěn máng",
+			"english": "I'm very busy this week."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4674,6 +6735,11 @@
 			{ "py": "rì", "tone": 4 }
 		],
 		"meanings": ["Sunday"],
+		"example": {
+			"hanzi": "星期日我在家休息。",
+			"pinyin": "xīng qī rì wǒ zài jiā xiū xi",
+			"english": "On Sunday I rest at home."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4687,6 +6753,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["Sunday in everyday speech"],
+		"example": {
+			"hanzi": "星期天我们去看电影。",
+			"pinyin": "xīng qī tiān wǒ men qù kàn diàn yǐng",
+			"english": "On Sunday we're going to see a film."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4696,6 +6767,11 @@
 		"pinyin": "xíng",
 		"syllables": [{ "py": "xíng", "tone": 2 }],
 		"meanings": ["all right", "capable"],
+		"example": {
+			"hanzi": "我们明天去，行吗？",
+			"pinyin": "wǒ men míng tiān qù xíng ma",
+			"english": "Let's go tomorrow — is that all right?"
+		},
 		"pos": ["V", "Adj"],
 		"level": 1
 	},
@@ -4708,6 +6784,11 @@
 			{ "py": "xi", "tone": 0 }
 		],
 		"meanings": ["to rest", "to take a break"],
+		"example": {
+			"hanzi": "你累了就休息一下。",
+			"pinyin": "nǐ lèi le jiù xiū xi yí xià",
+			"english": "If you're tired, take a break."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4718,6 +6799,11 @@
 		"pinyin": "xué",
 		"syllables": [{ "py": "xué", "tone": 2 }],
 		"meanings": ["to learn"],
+		"example": {
+			"hanzi": "我在学中文。",
+			"pinyin": "wǒ zài xué zhōng wén",
+			"english": "I'm learning Chinese."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4731,6 +6817,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["student", "schoolchild"],
+		"example": {
+			"hanzi": "我们班有三十个学生。",
+			"pinyin": "wǒ men bān yǒu sān shí ge xué shēng",
+			"english": "There are thirty students in our class."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4744,6 +6835,11 @@
 			{ "py": "xí", "tone": 2 }
 		],
 		"meanings": ["to study"],
+		"example": {
+			"hanzi": "他在家学习汉语。",
+			"pinyin": "tā zài jiā xué xí hàn yǔ",
+			"english": "He studies Chinese at home."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4757,6 +6853,11 @@
 			{ "py": "xiào", "tone": 4 }
 		],
 		"meanings": ["school"],
+		"example": {
+			"hanzi": "我们的学校很大。",
+			"pinyin": "wǒ men de xué xiào hěn dà",
+			"english": "Our school is very big."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4770,6 +6871,11 @@
 			{ "py": "yuàn", "tone": 4 }
 		],
 		"meanings": ["college", "academy"],
+		"example": {
+			"hanzi": "她在这个学院学习。",
+			"pinyin": "tā zài zhè ge xué yuàn xué xí",
+			"english": "She studies at this college."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4779,6 +6885,11 @@
 		"pinyin": "yào",
 		"syllables": [{ "py": "yào", "tone": 4 }],
 		"meanings": ["to want", "to need", "will"],
+		"example": {
+			"hanzi": "我要一杯水。",
+			"pinyin": "wǒ yào yì bēi shuǐ",
+			"english": "I'd like a glass of water."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4792,6 +6903,11 @@
 			{ "py": "ye", "tone": 0 }
 		],
 		"meanings": ["paternal grandfather", "grandpa"],
+		"example": {
+			"hanzi": "我爷爷今年八十岁了。",
+			"pinyin": "wǒ yé ye jīn nián bā shí suì le",
+			"english": "My grandpa turns eighty this year."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4801,6 +6917,11 @@
 		"pinyin": "yě",
 		"syllables": [{ "py": "yě", "tone": 3 }],
 		"meanings": ["also", "too"],
+		"example": {
+			"hanzi": "我也想去看电影。",
+			"pinyin": "wǒ yě xiǎng qù kàn diàn yǐng",
+			"english": "I want to go and see the film too."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4811,6 +6932,11 @@
 		"pinyin": "yè",
 		"syllables": [{ "py": "yè", "tone": 4 }],
 		"meanings": ["page", "measure word: pages"],
+		"example": {
+			"hanzi": "这本书有两百页。",
+			"pinyin": "zhè běn shū yǒu liǎng bǎi yè",
+			"english": "This book is two hundred pages long."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -4820,6 +6946,11 @@
 		"pinyin": "yī",
 		"syllables": [{ "py": "yī", "tone": 1 }],
 		"meanings": ["one"],
+		"example": {
+			"hanzi": "我有一个哥哥。",
+			"pinyin": "wǒ yǒu yí gè gē ge",
+			"english": "I have one older brother."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -4832,6 +6963,11 @@
 			{ "py": "fu", "tone": 0 }
 		],
 		"meanings": ["clothes"],
+		"example": {
+			"hanzi": "妈妈买了新衣服。",
+			"pinyin": "mā ma mǎi le xīn yī fu",
+			"english": "Mum bought some new clothes."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4845,6 +6981,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["doctor", "physician"],
+		"example": {
+			"hanzi": "我姐姐是医生。",
+			"pinyin": "wǒ jiě jie shì yī shēng",
+			"english": "My older sister is a doctor."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4858,6 +6999,11 @@
 			{ "py": "yuàn", "tone": 4 }
 		],
 		"meanings": ["hospital"],
+		"example": {
+			"hanzi": "妈妈在医院工作。",
+			"pinyin": "mā ma zài yī yuàn gōng zuò",
+			"english": "My mum works at a hospital."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4870,6 +7016,11 @@
 			{ "py": "bàn", "tone": 4 }
 		],
 		"meanings": ["one half"],
+		"example": {
+			"hanzi": "这些菜我吃了一半。",
+			"pinyin": "zhè xiē cài wǒ chī le yí bàn",
+			"english": "I ate half of this food."
+		},
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -4884,6 +7035,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["a short while", "a moment"],
+		"example": {
+			"hanzi": "请等我一会儿。",
+			"pinyin": "qǐng děng wǒ yí huì r",
+			"english": "Please wait for me a moment."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4898,6 +7054,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["together with someone", "as a group"],
+		"example": {
+			"hanzi": "我们一块儿吃饭吧。",
+			"pinyin": "wǒ men yí kuài r chī fàn ba",
+			"english": "Let's eat together."
+		},
 		"pos": ["N", "Adv"],
 		"level": 1
 	},
@@ -4912,6 +7073,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["briefly", "just once"],
+		"example": {
+			"hanzi": "请等一下儿，我马上来。",
+			"pinyin": "qǐng děng yí xià r wǒ mǎ shàng lái",
+			"english": "Hang on a second, I'm coming."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4925,6 +7091,11 @@
 			{ "py": "yàng", "tone": 4 }
 		],
 		"meanings": ["the same", "alike"],
+		"example": {
+			"hanzi": "这两个杯子一样。",
+			"pinyin": "zhè liǎng gè bēi zi yí yàng",
+			"english": "These two cups are the same."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -4938,6 +7109,11 @@
 			{ "py": "biān", "tone": 1 }
 		],
 		"meanings": ["one side", "while doing something else"],
+		"example": {
+			"hanzi": "我们坐在桌子的一边。",
+			"pinyin": "wǒ men zuò zài zhuō zi de yì biān",
+			"english": "We sat on one side of the table."
+		},
 		"pos": ["N", "Adv"],
 		"level": 1
 	},
@@ -4952,6 +7128,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["a little", "a bit"],
+		"example": {
+			"hanzi": "我会说一点儿汉语。",
+			"pinyin": "wǒ huì shuō yì diǎn r hàn yǔ",
+			"english": "I can speak a little Chinese."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4964,6 +7145,11 @@
 			{ "py": "qǐ", "tone": 3 }
 		],
 		"meanings": ["together", "in the same place"],
+		"example": {
+			"hanzi": "我们一起去看电影吧。",
+			"pinyin": "wǒ men yì qǐ qù kàn diàn yǐng ba",
+			"english": "Let's go and see a film together."
+		},
 		"pos": ["Adv", "N"],
 		"level": 1
 	},
@@ -4976,6 +7162,11 @@
 			{ "py": "xiē", "tone": 1 }
 		],
 		"meanings": ["some"],
+		"example": {
+			"hanzi": "我买了一些水果。",
+			"pinyin": "wǒ mǎi le yì xiē shuǐ guǒ",
+			"english": "I bought some fruit."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -4985,6 +7176,11 @@
 		"pinyin": "yòng",
 		"syllables": [{ "py": "yòng", "tone": 4 }],
 		"meanings": ["to use"],
+		"example": {
+			"hanzi": "我用手机看书。",
+			"pinyin": "wǒ yòng shǒu jī kàn shū",
+			"english": "I read books on my phone."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4994,6 +7190,11 @@
 		"pinyin": "yǒu",
 		"syllables": [{ "py": "yǒu", "tone": 3 }],
 		"meanings": ["to have", "there is"],
+		"example": {
+			"hanzi": "我有两个妹妹。",
+			"pinyin": "wǒ yǒu liǎng gè mèi mei",
+			"english": "I have two younger sisters."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5006,6 +7207,11 @@
 			{ "py": "de", "tone": 0 }
 		],
 		"meanings": ["some of them"],
+		"example": {
+			"hanzi": "有的同学喜欢唱歌。",
+			"pinyin": "yǒu de tóng xué xǐ huan chàng gē",
+			"english": "Some of the students like to sing."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5018,6 +7224,11 @@
 			{ "py": "míng", "tone": 2 }
 		],
 		"meanings": ["famous", "well-known"],
+		"example": {
+			"hanzi": "这个饭馆很有名。",
+			"pinyin": "zhè ge fàn guǎn hěn yǒu míng",
+			"english": "This restaurant is very famous."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -5032,6 +7243,11 @@
 			{ "py": "hou", "tone": 0 }
 		],
 		"meanings": ["sometimes"],
+		"example": {
+			"hanzi": "我有时候去朋友家玩儿。",
+			"pinyin": "wǒ yǒu shí hou qù péng you jiā wán r",
+			"english": "Sometimes I go over to a friend's place."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -5044,6 +7260,11 @@
 			{ "py": "xiē", "tone": 1 }
 		],
 		"meanings": ["certain ones", "somewhat"],
+		"example": {
+			"hanzi": "有些学生今天没来。",
+			"pinyin": "yǒu xiē xué shēng jīn tiān méi lái",
+			"english": "Some of the students didn't come today."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5056,6 +7277,11 @@
 			{ "py": "yòng", "tone": 4 }
 		],
 		"meanings": ["to be useful"],
+		"example": {
+			"hanzi": "这本书很有用。",
+			"pinyin": "zhè běn shū hěn yǒu yòng",
+			"english": "This book is very useful."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5065,6 +7291,11 @@
 		"pinyin": "yòu",
 		"syllables": [{ "py": "yòu", "tone": 4 }],
 		"meanings": ["the right-hand side"],
+		"example": {
+			"hanzi": "书店在医院的右边。",
+			"pinyin": "shū diàn zài yī yuàn de yòu bian",
+			"english": "The bookshop is to the right of the hospital."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5078,6 +7309,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["right side", "on the right"],
+		"example": {
+			"hanzi": "医院在马路右边。",
+			"pinyin": "yī yuàn zài mǎ lù yòu bian",
+			"english": "The hospital is on the right side of the road."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5087,6 +7323,11 @@
 		"pinyin": "yǔ",
 		"syllables": [{ "py": "yǔ", "tone": 3 }],
 		"meanings": ["rain"],
+		"example": {
+			"hanzi": "外面在下雨。",
+			"pinyin": "wài miàn zài xià yǔ",
+			"english": "It's raining outside."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5096,6 +7337,11 @@
 		"pinyin": "yuán",
 		"syllables": [{ "py": "yuán", "tone": 2 }],
 		"meanings": ["unit of Chinese currency"],
+		"example": {
+			"hanzi": "这本书三十元。",
+			"pinyin": "zhè běn shū sān shí yuán",
+			"english": "This book costs thirty yuan."
+		},
 		"pos": ["M"],
 		"level": 1
 	},
@@ -5106,6 +7352,11 @@
 		"pinyin": "yuǎn",
 		"syllables": [{ "py": "yuǎn", "tone": 3 }],
 		"meanings": ["far", "distant"],
+		"example": {
+			"hanzi": "那个地方很远。",
+			"pinyin": "nà ge dì fang hěn yuǎn",
+			"english": "That place is a long way away."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -5115,6 +7366,11 @@
 		"pinyin": "yuè",
 		"syllables": [{ "py": "yuè", "tone": 4 }],
 		"meanings": ["month", "moon"],
+		"example": {
+			"hanzi": "这个月我很忙。",
+			"pinyin": "zhè ge yuè wǒ hěn máng",
+			"english": "I'm very busy this month."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5124,6 +7380,11 @@
 		"pinyin": "zài",
 		"syllables": [{ "py": "zài", "tone": 4 }],
 		"meanings": ["once more", "again"],
+		"example": {
+			"hanzi": "请你再说一次。",
+			"pinyin": "qǐng nǐ zài shuō yí cì",
+			"english": "Please say that once more."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -5137,6 +7398,11 @@
 			{ "py": "jiàn", "tone": 4 }
 		],
 		"meanings": ["goodbye", "see you again"],
+		"example": {
+			"hanzi": "她跟我说再见。",
+			"pinyin": "tā gēn wǒ shuō zài jiàn",
+			"english": "She said goodbye to me."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5146,6 +7412,11 @@
 		"pinyin": "zài",
 		"syllables": [{ "py": "zài", "tone": 4 }],
 		"meanings": ["to be at", "at or in"],
+		"example": {
+			"hanzi": "我的书在桌子上。",
+			"pinyin": "wǒ de shū zài zhuō zi shang",
+			"english": "My book is on the table."
+		},
 		"pos": ["V", "Prep", "Adv"],
 		"level": 1
 	},
@@ -5158,6 +7429,11 @@
 			{ "py": "jiā", "tone": 1 }
 		],
 		"meanings": ["to be at home"],
+		"example": {
+			"hanzi": "星期天我在家看书。",
+			"pinyin": "xīng qī tiān wǒ zài jiā kàn shū",
+			"english": "On Sunday I stay home and read."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5167,6 +7443,11 @@
 		"pinyin": "zǎo",
 		"syllables": [{ "py": "zǎo", "tone": 3 }],
 		"meanings": ["early"],
+		"example": {
+			"hanzi": "今天你来得很早。",
+			"pinyin": "jīn tiān nǐ lái de hěn zǎo",
+			"english": "You came very early today."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -5180,6 +7461,11 @@
 			{ "py": "fàn", "tone": 4 }
 		],
 		"meanings": ["breakfast"],
+		"example": {
+			"hanzi": "我今天没吃早饭。",
+			"pinyin": "wǒ jīn tiān méi chī zǎo fàn",
+			"english": "I didn't have breakfast today."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5192,6 +7478,11 @@
 			{ "py": "shang", "tone": 0 }
 		],
 		"meanings": ["early morning"],
+		"example": {
+			"hanzi": "早上我喝一杯牛奶。",
+			"pinyin": "zǎo shang wǒ hē yì bēi niú nǎi",
+			"english": "In the morning I drink a glass of milk."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5205,6 +7496,11 @@
 			{ "py": "me", "tone": 0 }
 		],
 		"meanings": ["how?", "in what way?"],
+		"example": {
+			"hanzi": "这个字怎么读？",
+			"pinyin": "zhè ge zì zěn me dú",
+			"english": "How do you read this character?"
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5214,6 +7510,11 @@
 		"pinyin": "zhàn",
 		"syllables": [{ "py": "zhàn", "tone": 4 }],
 		"meanings": ["station", "a stop on a route"],
+		"example": {
+			"hanzi": "下一站是学校。",
+			"pinyin": "xià yí zhàn shì xué xiào",
+			"english": "The next stop is the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5223,6 +7524,11 @@
 		"pinyin": "zhǎo",
 		"syllables": [{ "py": "zhǎo", "tone": 3 }],
 		"meanings": ["to look for", "to try to find"],
+		"example": {
+			"hanzi": "我在找我的手机。",
+			"pinyin": "wǒ zài zhǎo wǒ de shǒu jī",
+			"english": "I'm looking for my phone."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5235,6 +7541,11 @@
 			{ "py": "dào", "tone": 4 }
 		],
 		"meanings": ["to find"],
+		"example": {
+			"hanzi": "我找到我的书了。",
+			"pinyin": "wǒ zhǎo dào wǒ de shū le",
+			"english": "I found my book."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -5245,6 +7556,11 @@
 		"pinyin": "zhè",
 		"syllables": [{ "py": "zhè", "tone": 4 }],
 		"meanings": ["this"],
+		"example": {
+			"hanzi": "这是我的书。",
+			"pinyin": "zhè shì wǒ de shū",
+			"english": "This is my book."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5258,6 +7574,11 @@
 			{ "py": "biān", "tone": 1 }
 		],
 		"meanings": ["this side", "over here"],
+		"example": {
+			"hanzi": "请到这边来坐。",
+			"pinyin": "qǐng dào zhè biān lái zuò",
+			"english": "Please come and sit over here."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5271,6 +7592,11 @@
 			{ "py": "lǐ", "tone": 3 }
 		],
 		"meanings": ["here"],
+		"example": {
+			"hanzi": "我们在这里等你。",
+			"pinyin": "wǒ men zài zhè lǐ děng nǐ",
+			"english": "We'll wait for you here."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5284,6 +7610,11 @@
 			{ "py": "r", "tone": 0 }
 		],
 		"meanings": ["the spoken word for here"],
+		"example": {
+			"hanzi": "你的书在这儿。",
+			"pinyin": "nǐ de shū zài zhè r",
+			"english": "Your book is here."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5297,6 +7628,11 @@
 			{ "py": "xiē", "tone": 1 }
 		],
 		"meanings": ["these"],
+		"example": {
+			"hanzi": "这些菜都很好吃。",
+			"pinyin": "zhè xiē cài dōu hěn hǎo chī",
+			"english": "These dishes are all delicious."
+		},
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -5307,6 +7643,11 @@
 		"pinyin": "zhe",
 		"syllables": [{ "py": "zhe", "tone": 0 }],
 		"meanings": ["shows a continuing state", "marks an ongoing action"],
+		"example": {
+			"hanzi": "他在门口站着。",
+			"pinyin": "tā zài mén kǒu zhàn zhe",
+			"english": "He is standing in the doorway."
+		},
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -5316,6 +7657,11 @@
 		"pinyin": "zhēn",
 		"syllables": [{ "py": "zhēn", "tone": 1 }],
 		"meanings": ["truly", "real"],
+		"example": {
+			"hanzi": "今天真冷！",
+			"pinyin": "jīn tiān zhēn lěng",
+			"english": "It's really cold today!"
+		},
 		"pos": ["Adv", "Adj"],
 		"level": 1
 	},
@@ -5328,6 +7674,11 @@
 			{ "py": "de", "tone": 0 }
 		],
 		"meanings": ["really", "truly"],
+		"example": {
+			"hanzi": "我真的很喜欢你。",
+			"pinyin": "wǒ zhēn de hěn xǐ huan nǐ",
+			"english": "I really do like you."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -5337,6 +7688,11 @@
 		"pinyin": "zhèng",
 		"syllables": [{ "py": "zhèng", "tone": 4 }],
 		"meanings": ["just at that moment", "right in the middle of"],
+		"example": {
+			"hanzi": "我正在吃饭。",
+			"pinyin": "wǒ zhèng zài chī fàn",
+			"english": "I'm right in the middle of eating."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -5349,6 +7705,11 @@
 			{ "py": "zài", "tone": 4 }
 		],
 		"meanings": ["in the process of doing", "currently"],
+		"example": {
+			"hanzi": "妈妈正在做饭。",
+			"pinyin": "mā ma zhèng zài zuò fàn",
+			"english": "Mum is cooking right now."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -5361,6 +7722,11 @@
 			{ "py": "dào", "tone": 4 }
 		],
 		"meanings": ["to know a fact"],
+		"example": {
+			"hanzi": "我不知道他的名字。",
+			"pinyin": "wǒ bù zhī dào tā de míng zi",
+			"english": "I don't know his name."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5374,6 +7740,11 @@
 			{ "py": "shi", "tone": 0 }
 		],
 		"meanings": ["knowledge", "intellectual"],
+		"example": {
+			"hanzi": "书里有很多知识。",
+			"pinyin": "shū lǐ yǒu hěn duō zhī shi",
+			"english": "There is a lot of knowledge in books."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5383,6 +7754,11 @@
 		"pinyin": "zhōng",
 		"syllables": [{ "py": "zhōng", "tone": 1 }],
 		"meanings": ["the middle part", "within"],
+		"example": {
+			"hanzi": "这些书中我最喜欢这本。",
+			"pinyin": "zhè xiē shū zhōng wǒ zuì xǐ huan zhè běn",
+			"english": "Of all these books, this is the one I like best."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5396,6 +7772,11 @@
 			{ "py": "guó", "tone": 2 }
 		],
 		"meanings": ["China"],
+		"example": {
+			"hanzi": "我在中国学汉语。",
+			"pinyin": "wǒ zài Zhōng guó xué hàn yǔ",
+			"english": "I study Chinese in China."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5409,6 +7790,11 @@
 			{ "py": "jiān", "tone": 1 }
 		],
 		"meanings": ["the middle", "in between"],
+		"example": {
+			"hanzi": "我坐在他们中间。",
+			"pinyin": "wǒ zuò zài tā men zhōng jiān",
+			"english": "I'm sitting between the two of them."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5421,6 +7807,11 @@
 			{ "py": "wén", "tone": 2 }
 		],
 		"meanings": ["Chinese especially in writing"],
+		"example": {
+			"hanzi": "这本书是中文的。",
+			"pinyin": "zhè běn shū shì zhōng wén de",
+			"english": "This book is in Chinese."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5433,6 +7824,11 @@
 			{ "py": "wǔ", "tone": 3 }
 		],
 		"meanings": ["noon", "midday"],
+		"example": {
+			"hanzi": "我们中午在学校吃饭。",
+			"pinyin": "wǒ men zhōng wǔ zài xué xiào chī fàn",
+			"english": "We eat at school at midday."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5446,6 +7842,11 @@
 			{ "py": "xué", "tone": 2 }
 		],
 		"meanings": ["middle school"],
+		"example": {
+			"hanzi": "我哥哥在中学学习。",
+			"pinyin": "wǒ gē ge zài zhōng xué xué xí",
+			"english": "My older brother studies at a middle school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5460,6 +7861,11 @@
 			{ "py": "shēng", "tone": 1 }
 		],
 		"meanings": ["middle-school student", "high school student"],
+		"example": {
+			"hanzi": "我姐姐是中学生。",
+			"pinyin": "wǒ jiě jie shì zhōng xué shēng",
+			"english": "My older sister is a middle-school student."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5469,6 +7875,11 @@
 		"pinyin": "zhòng",
 		"syllables": [{ "py": "zhòng", "tone": 4 }],
 		"meanings": ["heavy", "serious"],
+		"example": {
+			"hanzi": "这个东西太重了。",
+			"pinyin": "zhè ge dōng xi tài zhòng le",
+			"english": "This thing is far too heavy."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -5481,6 +7892,11 @@
 			{ "py": "yào", "tone": 4 }
 		],
 		"meanings": ["important"],
+		"example": {
+			"hanzi": "这本书对我很重要。",
+			"pinyin": "zhè běn shū duì wǒ hěn zhòng yào",
+			"english": "This book matters a lot to me."
+		},
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -5490,6 +7906,11 @@
 		"pinyin": "zhù",
 		"syllables": [{ "py": "zhù", "tone": 4 }],
 		"meanings": ["to live somewhere", "to stay"],
+		"example": {
+			"hanzi": "我住在学校旁边。",
+			"pinyin": "wǒ zhù zài xué xiào páng biān",
+			"english": "I live right next to the school."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5503,6 +7924,11 @@
 			{ "py": "bèi", "tone": 4 }
 		],
 		"meanings": ["to prepare", "to plan to"],
+		"example": {
+			"hanzi": "我在准备明天的考试。",
+			"pinyin": "wǒ zài zhǔn bèi míng tiān de kǎo shì",
+			"english": "I'm getting ready for tomorrow's exam."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5515,6 +7941,11 @@
 			{ "py": "zi", "tone": 0 }
 		],
 		"meanings": ["table", "desk"],
+		"example": {
+			"hanzi": "书在桌子上。",
+			"pinyin": "shū zài zhuō zi shàng",
+			"english": "The book is on the table."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5524,6 +7955,11 @@
 		"pinyin": "zì",
 		"syllables": [{ "py": "zì", "tone": 4 }],
 		"meanings": ["written character", "letter"],
+		"example": {
+			"hanzi": "这个字我不认识。",
+			"pinyin": "zhè ge zì wǒ bú rèn shi",
+			"english": "I don't know this character."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5533,6 +7969,11 @@
 		"pinyin": "zi",
 		"syllables": [{ "py": "zi", "tone": 0 }],
 		"meanings": ["noun suffix on objects and people"],
+		"example": {
+			"hanzi": "桌子和杯子都在房间里。",
+			"pinyin": "zhuō zi hé bēi zi dōu zài fáng jiān lǐ",
+			"english": "The table and the cup are both in the room."
+		},
 		"pos": ["Suffix"],
 		"level": 1
 	},
@@ -5542,6 +7983,11 @@
 		"pinyin": "zǒu",
 		"syllables": [{ "py": "zǒu", "tone": 3 }],
 		"meanings": ["to walk", "to leave"],
+		"example": {
+			"hanzi": "我们走路去学校。",
+			"pinyin": "wǒ men zǒu lù qù xué xiào",
+			"english": "We walk to school."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5554,6 +8000,11 @@
 			{ "py": "lù", "tone": 4 }
 		],
 		"meanings": ["to go on foot"],
+		"example": {
+			"hanzi": "我走路去学校。",
+			"pinyin": "wǒ zǒu lù qù xué xiào",
+			"english": "I walk to school."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -5563,6 +8014,11 @@
 		"pinyin": "zuì",
 		"syllables": [{ "py": "zuì", "tone": 4 }],
 		"meanings": ["the most", "to the highest degree"],
+		"example": {
+			"hanzi": "今天是最冷的一天。",
+			"pinyin": "jīn tiān shì zuì lěng de yì tiān",
+			"english": "Today is the coldest day."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -5575,6 +8031,11 @@
 			{ "py": "hǎo", "tone": 3 }
 		],
 		"meanings": ["had better", "it would be best to"],
+		"example": {
+			"hanzi": "你最好早点睡觉。",
+			"pinyin": "nǐ zuì hǎo zǎo diǎn shuì jiào",
+			"english": "You'd better go to bed early."
+		},
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -5588,6 +8049,11 @@
 			{ "py": "hòu", "tone": 4 }
 		],
 		"meanings": ["the last one", "in the end"],
+		"example": {
+			"hanzi": "他是最后一个走的。",
+			"pinyin": "tā shì zuì hòu yí ge zǒu de",
+			"english": "He was the last one to leave."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5600,6 +8066,11 @@
 			{ "py": "tiān", "tone": 1 }
 		],
 		"meanings": ["yesterday"],
+		"example": {
+			"hanzi": "昨天我没去学校。",
+			"pinyin": "zuó tiān wǒ méi qù xué xiào",
+			"english": "I didn't go to school yesterday."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5609,6 +8080,11 @@
 		"pinyin": "zuǒ",
 		"syllables": [{ "py": "zuǒ", "tone": 3 }],
 		"meanings": ["the left-hand side"],
+		"example": {
+			"hanzi": "商店在路的左边。",
+			"pinyin": "shāng diàn zài lù de zuǒ bian",
+			"english": "The shop is on the left side of the road."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5622,6 +8098,11 @@
 			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["the left side"],
+		"example": {
+			"hanzi": "医院在学校的左边。",
+			"pinyin": "yī yuàn zài xué xiào de zuǒ bian",
+			"english": "The hospital is on the left side of the school."
+		},
 		"pos": ["N"],
 		"level": 1
 	},
@@ -5631,6 +8112,11 @@
 		"pinyin": "zuò",
 		"syllables": [{ "py": "zuò", "tone": 4 }],
 		"meanings": ["to sit", "to travel by vehicle"],
+		"example": {
+			"hanzi": "请你坐在这里。",
+			"pinyin": "qǐng nǐ zuò zài zhè lǐ",
+			"english": "Please sit here."
+		},
 		"pos": ["V"],
 		"level": 1
 	},
@@ -5643,6 +8129,11 @@
 			{ "py": "xia", "tone": 0 }
 		],
 		"meanings": ["to sit down"],
+		"example": {
+			"hanzi": "请你坐下吧。",
+			"pinyin": "qǐng nǐ zuò xia ba",
+			"english": "Please have a seat."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -5652,6 +8143,11 @@
 		"pinyin": "zuò",
 		"syllables": [{ "py": "zuò", "tone": 4 }],
 		"meanings": ["to do", "to make"],
+		"example": {
+			"hanzi": "妈妈在家做饭。",
+			"pinyin": "mā ma zài jiā zuò fàn",
+			"english": "Mom is cooking at home."
+		},
 		"pos": ["V"],
 		"level": 1
 	}

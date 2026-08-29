@@ -901,7 +901,7 @@
 			{ "py": "cháng", "tone": 2 },
 			{ "py": "chù", "tone": 4 }
 		],
-		"meanings": ["good aspects", "strong points"],
+		"meanings": ["what one is good at", "one's forte"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -1006,7 +1006,7 @@
 			{ "py": "chèn", "tone": 4 },
 			{ "py": "shān", "tone": 1 }
 		],
-		"meanings": ["shirt"],
+		"meanings": ["shirt (dress shirt)"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -1019,7 +1019,7 @@
 			{ "py": "chèn", "tone": 4 },
 			{ "py": "yī", "tone": 1 }
 		],
-		"meanings": ["underclothes", "a shirt worn next to the skin"],
+		"meanings": ["shirt (general word)"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -2800,7 +2800,7 @@
 			{ "py": "gè", "tone": 4 },
 			{ "py": "dì", "tone": 4 }
 		],
-		"meanings": ["in all parts of", "various regions"],
+		"meanings": ["all parts of a country", "various regions"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -8209,7 +8209,7 @@
 			{ "py": "shū", "tone": 1 },
 			{ "py": "rù", "tone": 4 }
 		],
-		"meanings": ["to import", "to input"],
+		"meanings": ["to input", "to enter data"],
 		"pos": ["V"],
 		"level": 3
 	},
