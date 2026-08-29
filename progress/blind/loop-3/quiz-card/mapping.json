@@ -1,0 +1,18 @@
+{
+  "piece": "quiz-card",
+  "loop": 3,
+  "rule": "\"quiz-card\" is 9 characters — ODD — so the reference is A and our screenshot is B.",
+  "A": {
+    "which": "reference",
+    "path": "reference/screenshots/pleco/pleco-iphone-02.png",
+    "what": "Pleco iOS headword/detail screen for 几乎 — hanzi headword, traditional form, HSK badge, PY/JP rows with audio buttons, DICT/CHARS/WORDS/SENTS tabs, POS + sense + four example sentences (hanzi / pinyin / English).",
+    "device": "iPhone 6 Plus class, 1242x2208"
+  },
+  "B": {
+    "which": "ours",
+    "path": "progress/shots/loop-3/wrong-h2m-after.png",
+    "what": "hskquiz /quiz/1 — recognition question 看 answered WRONG (the reveal state), 375x812 @2x, light theme, captured from the running dev server at 127.0.0.1:5177 on 2026-08-30.",
+    "device": "375x812 @2x, isMobile, hasTouch"
+  },
+  "note": "Deliberately the WRONG-answer reveal, not the correct one. Loop 2's blind judge only ever saw the flattering correct frame at the tallest viewport; this is the fuller and less flattering state."
+}
