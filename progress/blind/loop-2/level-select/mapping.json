@@ -1,0 +1,15 @@
+{
+	"piece": "level-select",
+	"loop": 2,
+	"rule": "\"level-select\" is 12 characters — EVEN — so ours is A and the reference is B.",
+	"A": {
+		"which": "ours",
+		"source": "progress/shots/loop-2/level-select-mobile.png",
+		"note": "hskquiz level select, first-time empty state, 375x812 @2x, viewport (not full page)"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+		"note": "Du Chinese — Articles collection screen: a list of things to start, with a size count, a description and one full-width primary button. Chosen as the closest list-of-things-to-start screen in reference/."
+	}
+}
