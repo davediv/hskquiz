@@ -1,0 +1,15 @@
+{
+  "piece": "session-summary",
+  "loop": 3,
+  "rule": "\"session-summary\" has 15 characters — ODD — so the reference is A and ours is B.",
+  "A": {
+    "which": "reference",
+    "path": "reference/screenshots/duchinese/ui/duchinese-iphone-05-ui.png",
+    "note": "Du Chinese flashcard review: headword, word/sentence sections, Dictionary + Pinyin controls, Forgot / Almost / Got it."
+  },
+  "B": {
+    "which": "ours",
+    "path": "progress/shots/loop-3/session-summary-mobile.png",
+    "note": "hskquiz session summary at /quiz/1?state=summary, 375x812 @2x, light."
+  }
+}
