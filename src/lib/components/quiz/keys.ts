@@ -10,9 +10,7 @@
  */
 
 export type QuizAction =
-	| { type: 'choose'; index: number }
-	| { type: 'move'; delta: number }
-	| { type: 'advance' };
+	{ type: 'choose'; index: number } | { type: 'move'; delta: number } | { type: 'advance' };
 
 export interface KeyContext {
 	/** Whether the current question already has an answer. */

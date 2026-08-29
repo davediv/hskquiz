@@ -80,8 +80,16 @@
 	/*
 	 * During a quiz the footer is gone, so the shell is what keeps flow content off the
 	 * home indicator. A sticky answer bar has to clear it itself — `--app-safe-bottom`.
+	 *
+	 * The column here is what lets the run be exactly one viewport tall. `.content` grows to
+	 * fill the 100dvh shell, but its height stays *indefinite* — it comes from flexing, not
+	 * from a length — so a child asking for `block-size: 100%` gets `auto` and the answer
+	 * buttons end up stranded mid-screen. As a flex column it hands its used height to the
+	 * screen instead, and `.quiz` claims it with `flex: 1`.
 	 */
 	.shell.focus .content {
+		display: flex;
+		flex-direction: column;
 		padding-block-end: var(--app-safe-bottom);
 	}
 

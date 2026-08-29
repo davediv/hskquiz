@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ProgressStore, progress, type StorageLike } from './progress.svelte.ts';
 import { STORAGE_KEY } from './progress-core.ts';
+import { SHIPPED_SIZES } from '$lib/data/sizes';
 
 /** A `localStorage` stand-in that can be made to misbehave the way real ones do. */
 class MemoryStorage implements StorageLike {
@@ -374,9 +375,12 @@ describe('summarize', () => {
 		store.recordAnswer('L1-0002', false);
 		store.recordAnswer('L2-0001', true);
 
-		// Level 1 has 500 words in the official list; the store knows that without loading them.
+		// The denominator is how many words the app *ships* at that level, not how many rows the
+		// official standard lists — a learner cannot practise a word that is not in the box, so
+		// an arc drawn against the official count could never fill. The store knows the figure
+		// without loading the list.
 		expect(store.levelSummary(1)).toEqual({
-			total: 500,
+			total: SHIPPED_SIZES[1],
 			seen: 2,
 			mastered: 1,
 			answers: 4,
@@ -385,7 +389,7 @@ describe('summarize', () => {
 		});
 		expect(store.levelSummary(2).seen).toBe(1);
 		expect(store.levelSummary(3)).toEqual({
-			total: 973,
+			total: SHIPPED_SIZES[3],
 			seen: 0,
 			mastered: 0,
 			answers: 0,

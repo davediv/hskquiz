@@ -1281,7 +1281,7 @@ const OVERRIDES = {
 	'L4-0153': ['the public', 'the masses'],
 	'L2-0586': ['habit', 'to be used to'],
 	'L3-0763': ['an article', 'an essay'],
-	'L4-0973': ['a written work', 'a book'],
+	'L4-0973': ['a written work', 'a book']
 };
 
 /* ------------------------------------------------------------------ build */

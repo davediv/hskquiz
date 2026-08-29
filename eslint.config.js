@@ -10,6 +10,12 @@ const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
 	includeIgnoreFile(gitignorePath),
+	{
+		// Written by `wrangler types` and ~15k lines long. It ships eslint-disable directives for
+		// rules this config does not enable, which lint then reports as unused — and the file must
+		// never be hand-edited, only regenerated, so the only fix is to not lint it.
+		ignores: ['src/worker-configuration.d.ts']
+	},
 	js.configs.recommended,
 	ts.configs.recommended,
 	svelte.configs.recommended,

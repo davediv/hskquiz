@@ -24,7 +24,7 @@
 -->
 <script lang="ts">
 	import { untrack } from 'svelte';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { LEVELS, type Level, type Word } from '$lib/types';
@@ -156,14 +156,14 @@
 		// Leaving the preview flag behind is the whole job here: the effect sees the URL change
 		// and builds a real session instead of re-seeding the demo.
 		if (preview) {
-			await goto(`${base}/quiz/${level}`, { replaceState: true });
+			await goto(resolve('/quiz/[level]', { level: String(level) }), { replaceState: true });
 			return;
 		}
 		await startSession(level, false);
 	}
 
 	function goHome() {
-		void goto(`${base}/`);
+		void goto(resolve('/'));
 	}
 
 	/** Arrow keys walk the four buttons in document order — whatever is on screen is the truth. */
@@ -213,10 +213,14 @@
 			</p>
 			<ul class="levels">
 				{#each LEVELS as choice (choice)}
-					<li><a class="level-link" href="{base}/quiz/{choice}">HSK {choice}</a></li>
+					<li>
+						<a class="level-link" href={resolve('/quiz/[level]', { level: String(choice) })}>
+							HSK {choice}
+						</a>
+					</li>
 				{/each}
 			</ul>
-			<a class="btn btn-quiet btn-block" href="{base}/">Back to levels</a>
+			<a class="btn btn-quiet btn-block" href={resolve('/')}>Back to levels</a>
 		</section>
 	{:else if status === 'failed'}
 		<section class="panel">
@@ -227,13 +231,13 @@
 				device.
 			</p>
 			<button type="button" class="btn btn-primary btn-block" onclick={restart}>Try again</button>
-			<a class="btn btn-quiet btn-block mt-2.5" href="{base}/">Back to levels</a>
+			<a class="btn btn-quiet btn-block mt-2.5" href={resolve('/')}>Back to levels</a>
 		</section>
 	{:else if status === 'empty'}
 		<section class="panel">
 			<p class="eyebrow">Nothing to ask</p>
 			<h1 class="panel-title">HSK {level} has no questions to build from</h1>
-			<a class="btn btn-quiet btn-block" href="{base}/">Back to levels</a>
+			<a class="btn btn-quiet btn-block" href={resolve('/')}>Back to levels</a>
 		</section>
 	{:else if status === 'loading' || !session}
 		<!-- Shaped like the run it becomes, so the first frame does not jump into the second. -->
@@ -299,11 +303,13 @@
 		flex-direction: column;
 		inline-size: 100%;
 		/*
-		 * The shell is a column flex box one viewport tall and the content wrapper is its
-		 * growing item, so `100%` here is exactly "the space left under the app bar" — measured
-		 * rather than recomputed from `100dvh` minus a list of things that might change height.
+		 * The shell is a column flex box one viewport tall and the focus-mode content wrapper is
+		 * its growing item, so growing into it is exactly "the space left under the app bar" —
+		 * measured, rather than recomputed from `100dvh` minus a list of things that might change
+		 * height. It has to be `flex`, not `block-size: 100%`: the wrapper's height comes from
+		 * flexing and is therefore indefinite, so a percentage against it resolves to `auto`.
 		 */
-		min-block-size: 100%;
+		flex: 1 1 auto;
 		max-inline-size: var(--container-app);
 		margin-inline: auto;
 		padding-inline-start: max(var(--spacing-gutter), var(--app-safe-left, 0px));

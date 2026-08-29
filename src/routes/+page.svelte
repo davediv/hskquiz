@@ -11,7 +11,8 @@
 	the five levels get the reading column.
 -->
 <script lang="ts">
-	import { LEVELS, LEVEL_SIZES, type Level } from '$lib/types';
+	import { LEVELS, type Level } from '$lib/types';
+	import { SHIPPED_SIZES, SHIPPED_TOTAL } from '$lib/data/sizes';
 	import { progress } from '$lib/progress';
 	import LevelCard from '$lib/components/levels/LevelCard.svelte';
 	import {
@@ -40,12 +41,14 @@
 	const cards = $derived(
 		LEVELS.map((level: Level) => ({
 			level,
-			total: LEVEL_SIZES[level],
+			total: SHIPPED_SIZES[level],
 			stats: levelStats(snapshot, level)
 		}))
 	);
 
-	const totalWords = LEVELS.reduce((sum, level) => sum + LEVEL_SIZES[level], 0);
+	// The shipped count, not the official one: this number has to survive the tap through to
+	// `/browse/2`, which can only ever show what is in the box.
+	const totalWords = SHIPPED_TOTAL;
 	const lastPlayed = $derived(formatWhen(summary.lastPlayed, now));
 
 	/** The one-line headline over the level list. Only stats that have a value appear. */

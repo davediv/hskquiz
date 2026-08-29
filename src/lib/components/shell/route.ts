@@ -7,8 +7,12 @@ export type ShellMode = 'home' | 'quiz' | 'browse' | 'other';
 export interface ShellRoute {
 	mode: ShellMode;
 	level: Level | null;
-	/** Target of the back control, or null on the root route where there is no "back". */
-	back: string | null;
+	/**
+	 * Whether the bar shows a back control. Its destination is always level select, so the
+	 * href is resolved in the component rather than pasted together here — `resolve()` is what
+	 * applies `base`, and a hand-built string silently drops it.
+	 */
+	back: boolean;
 	/** Header label. Empty on home, where the wordmark takes the slot instead. */
 	heading: string;
 	/** Document title. */
@@ -36,13 +40,12 @@ function toLevel(segment: string | undefined): Level | null {
 export function readRoute(pathname: string, base = ''): ShellRoute {
 	const path = base && pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
 	const segments = path.split('/').filter(Boolean);
-	const home = `${base}/`;
 
 	if (segments.length === 0) {
 		return {
 			mode: 'home',
 			level: null,
-			back: null,
+			back: false,
 			heading: '',
 			title: `${APP_NAME} — ${APP_TAGLINE}`,
 			focus: false
@@ -55,7 +58,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 		return {
 			mode: 'quiz',
 			level,
-			back: home,
+			back: true,
 			heading: `HSK ${level}`,
 			title: `HSK ${level} practice · ${APP_NAME}`,
 			focus: true
@@ -66,7 +69,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 		return {
 			mode: 'browse',
 			level,
-			back: home,
+			back: true,
 			heading: `HSK ${level} vocabulary`,
 			title: `HSK ${level} vocabulary · ${APP_NAME}`,
 			focus: false
@@ -76,7 +79,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 	return {
 		mode: 'other',
 		level: null,
-		back: home,
+		back: true,
 		heading: '',
 		title: APP_NAME,
 		focus: false

@@ -28,7 +28,8 @@
  * which point their new answers are the better data and win.
  */
 
-import { LEVELS, LEVEL_SIZES, type Level, type ProgressState, type WordProgress } from '$lib/types';
+import { LEVELS, type Level, type ProgressState, type WordProgress } from '$lib/types';
+import { SHIPPED_SIZES } from '$lib/data/sizes';
 import {
 	MASTERY_STREAK,
 	STORAGE_KEY,
@@ -191,7 +192,7 @@ export class ProgressStore {
 	 * words have records, so this walks what the learner has done rather than all 1,000 words —
 	 * which is what lets the level screen render progress before any vocabulary is fetched.
 	 */
-	levelSummary(level: Level, total: number = LEVEL_SIZES[level] ?? 0): ProgressSummary {
+	levelSummary(level: Level, total: number = SHIPPED_SIZES[level] ?? 0): ProgressSummary {
 		const summary = blankSummary(total);
 		for (const [wordId, record] of Object.entries(this.#state.byWord)) {
 			if (levelOfId(wordId) !== level) continue;

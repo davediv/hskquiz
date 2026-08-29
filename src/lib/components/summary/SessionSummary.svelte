@@ -28,6 +28,7 @@
 	would fire on monosyllables and go quiet everywhere else.
 -->
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Session, Word } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import { isCorrect } from '$lib/session';
@@ -92,9 +93,12 @@
 	// Progress lives in localStorage, so the server has an empty store and the client a full
 	// one. The arc is held back until after hydration — the block keeps its height either way,
 	// so the numbers arriving never move the review list underneath them.
+	// `onMount` rather than `$effect`: this is a "the client is now running" latch, not a value
+	// derived from anything, and an effect that only ever assigns trips
+	// `svelte/prefer-writable-derived`.
 	let hydrated = $state(false);
 
-	$effect(() => {
+	onMount(() => {
 		hydrated = true;
 	});
 

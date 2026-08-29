@@ -78,7 +78,7 @@
 			{#if pos}<p class="pos">{pos}</p>{/if}
 		</div>
 	{:else}
-		<p class="eyebrow ask-label">{promptLabel(question.direction)}</p>
+		<p class="ask-label eyebrow">{promptLabel(question.direction)}</p>
 
 		{#if question.direction === 'hanzi-to-meaning'}
 			<Hanzi text={word.hanzi} {size} display class="block" />

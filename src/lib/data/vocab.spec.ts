@@ -11,6 +11,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import type { Level, Word } from '$lib/types';
 import { LEVEL_SIZES, LEVELS } from '$lib/types';
+import { SHIPPED_SIZES, SHIPPED_TOTAL } from './sizes';
 
 interface ShippedWord extends Word {
 	/** Present only where two official rows collapsed into one card. */
@@ -152,5 +153,14 @@ describe('level sizes', () => {
 			const merged = rows.reduce((sum, word) => sum + ((word.ids?.length ?? 1) - 1), 0);
 			expect(rows.length + merged).toBe(LEVEL_SIZES[level]);
 		}
+	});
+
+	// `SHIPPED_SIZES` is what the level cards, the browse header and the summary arc all count
+	// with. It is written out rather than derived, so that a screen can name a count without
+	// loading 640KB of JSON — which makes this the test that stops it drifting from the box.
+	it('matches the counts the screens are built on', () => {
+		const actual = Object.fromEntries(LEVELS.map((level) => [level, readShipped(level).length]));
+		expect(actual).toEqual(SHIPPED_SIZES);
+		expect(SHIPPED_TOTAL).toBe(shipped.length);
 	});
 });

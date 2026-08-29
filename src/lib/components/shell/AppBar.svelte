@@ -9,6 +9,7 @@
 	          the screen belongs to the answer buttons.
 -->
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { ShellRoute } from './route';
 	import { APP_NAME } from './route';
 
@@ -33,7 +34,7 @@
 		{:else}
 			<span class="slot start">
 				{#if route.back}
-					<a class="icon" href={route.back} aria-label="Back to levels">
+					<a class="icon" href={resolve('/')} aria-label="Back to levels">
 						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 							<path
 								d="M15 5 8 12l7 7"
@@ -54,7 +55,9 @@
 
 			<span class="slot end">
 				{#if route.mode === 'browse' && route.level !== null}
-					<a class="action" href="/quiz/{route.level}">Practise</a>
+					<a class="action" href={resolve('/quiz/[level]', { level: String(route.level) })}>
+						Practise
+					</a>
 				{/if}
 			</span>
 		{/if}
