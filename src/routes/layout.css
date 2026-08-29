@@ -29,25 +29,39 @@
                       the focus ring, "look here" — and a missed answer (`--color-wrong`
                       is the same red). Because red does double duty, a wrong state must
                       ALWAYS also carry a glyph (✕) or a label. Colour is never the only
-                      channel, which is also what colour-blind learners need.
+                      channel, which is also what colour-blind learners need. This red is
+                      the interface's; the tone-1 red below is the data's, and they are
+                      deliberately different reds — see THE FOURTH FAMILY.
        JADE confirms. `--color-correct` marks a right answer and mastery progress. Nothing
                       else is green.
    That split is why the primary button is ink: a red CTA sitting next to a red "wrong" card
    would make the accent meaningless.
 
-   THE FOURTH FAMILY — TONE. `--color-tone-0` … `--color-tone-4` are not part of the three
-   roles above and never overlap with them, because of one hard rule:
-       Tone colour lands ONLY on Chinese text — a hanzi character or a pinyin syllable.
-       Never a border, never a fill, never an icon, never a word of English.
-   So a red thing is a state, unless it is a 汉字 or a syllable, in which case it is tone 1.
-   Nothing else in the app can be mistaken for a tone, and a tone can never be mistaken for a
-   state. Consume it through `<Hanzi>` / `<Pinyin>`, which paint it per character and per
-   syllable from `Word.syllables`; do not hand-write `var(--color-tone-*)` in a screen.
-   Tone 1 red and tone 2 green are the pair a deuteranope cannot separate, which is survivable
-   here and only here: the tone is already written in the diacritic (ā á ǎ à), so on pinyin the
-   colour is a second copy of information the reader can also see, never the only copy. That is
-   the same reason a wrong answer must carry a ✕ — and it is why tone colour must stay off
-   anything that is not Chinese text, where there would be no diacritic to fall back on.
+   THE FOURTH FAMILY — TONE. `--color-tone-0` … `--color-tone-4` are a data channel, not a
+   fourth role. Two rules keep the two kinds of colour from ever being read as one:
+
+       WHERE IT LANDS — on the pinyin, one colour per syllable, and nowhere else. Not on the
+       hanzi. Not on a border, a fill, an icon, or a word of English. Pleco paints the
+       characters and leaves the pinyin black; Du Chinese paints both. We paint the pinyin
+       only, because the character's shape is the thing the learner is here to memorise and
+       a saturated hue across it at 60–90px fights that shape. So 爱 is the same ink in a
+       list row and in the sheet that row opens — `<Hanzi>` defaults to ink, `<Pinyin>`
+       defaults to coloured, and that pairing IS the rule. Consume the two components; never
+       hand-write `var(--color-tone-*)`, and never hand-write a flat colour over pinyin.
+
+       WHAT IT MAY NOT BE — any colour another token already holds. Measured, not asserted:
+       every tone hue is >= 12 ΔE00 (CIEDE2000) from every non-tone `--hq-*` colour in its
+       own theme, and >= 10 from every other tone. `src/lib/design/palette.spec.ts` reads
+       this file and fails on either. Worst actual: 14.7 light (tone 0 vs ink-muted), 15.0
+       dark (tone 1 vs accent). That is why tone 1 is a vermilion and not the cinnabar
+       accent, tone 2 a leaf green and not the jade `--color-correct`, and tone 0 a cool
+       slate and not the warm `--color-ink-subtle` grey the UI de-emphasises text with.
+
+   Tone 1 and tone 2 are the pair a deuteranope cannot separate, which is survivable because
+   of where tone colour lands: the tone is already written in the diacritic (ā á ǎ à), so on
+   pinyin the colour is a second copy of something the reader can also read. Hanzi carries no
+   diacritic — which is the other reason tone colour stays off it. Same principle as the ✕ on
+   a wrong answer: colour is never the only channel.
 
    TYPE — three stacks, three scales, and they are not interchangeable:
        --font-hanzi   + --text-hanzi-*    for 汉字. Never set hanzi on the Latin scale;
@@ -77,14 +91,22 @@
    for rather than how big it is: `--spacing-gutter` (20px page-edge inset), `--spacing-block`
    (24px, between siblings inside one block) and `--spacing-section` (48px, between the major
    blocks of a screen). `--spacing-tap` (44px) is the minimum touch target. `.stack` applies a
-   step to every child gap at once — `.stack .stack-sm` etc. — so a column has one rhythm and
-   not six hand-tuned margins. `.app-shell` applies the gutter plus the iOS safe-area insets and
-   caps the column at `--container-app`.
+   step to every child gap at once — `class="stack stack-sm"`, both classes on the one column —
+   so a column has one rhythm and not six hand-tuned margins, and it composes with `flex
+   flex-col` rather than fighting it. `.app-shell` applies the gutter plus the iOS safe-area
+   insets and caps the column at `--container-app`.
 
-   ACCESSIBILITY CONTRACT — do not regress these:
-       · every text token is >= 4.5:1 on every surface it is allowed on (verified, both themes)
-       · `--color-line-strong` is the >= 3:1 border for interactive components; `--color-line`
-         is a decorative hairline and must not be the only thing defining a control
+   ACCESSIBILITY CONTRACT — do not regress these. The first three are executable: they are
+   computed off this stylesheet by `src/lib/design/palette.spec.ts`, so they fail loudly
+   rather than drifting back.
+       · every text token is >= 4.5:1 on every surface it is allowed on (worst: 4.52 light,
+         ink-subtle on sunken; 4.91 dark, tone 1 on sunken)
+       · every tone hue is >= 12 ΔE00 from every non-tone colour token in its own theme, and
+         >= 10 from every other tone — see THE FOURTH FAMILY above
+       · `--color-line-strong` is the >= 3:1 border for interactive components, on all three
+         surfaces in BOTH themes (worst: 3.06 light, 3.35 dark); `--color-line` is a
+         decorative hairline and must not be the only thing defining a control — and neither
+         may be diluted with `color-mix` to below 3:1 and still be called a control edge
        · `:focus-visible` gets a 3px accent ring at 3px offset, globally, in `@layer base`
        · every <button> gets min-block-size 44px via a `:where()` rule (zero specificity, so
          `min-h-0` overrides it when you really do need a tiny target)
@@ -129,17 +151,20 @@
 	--hq-primary-strong: #332f29;
 	--hq-primary-ink: #faf8f5;
 
-	/* Pleco's tone colouring, kept because learners already read it: 1 red, 2 green, 3 blue,
-	   4 purple, neutral grey. Numbered the way the data is (`Syllable.tone`), so 0 is neutral.
+	/* Pleco's tone families, kept because learners already read them — 1 red, 2 green, 3 blue,
+	   4 purple, 0 neutral — but each one moved to a value nothing else in the system holds.
+	   Numbered the way the data is (`Syllable.tone`), so 0 is neutral.
 
-	   It goes on BOTH the hanzi and the pinyin. Pleco paints the characters and leaves the
-	   pinyin black (手机 = blue 手 + red 机, "shǒujī" plain); Du Chinese paints both and spaces
-	   the pinyin per syllable (一边 / "yì biān"). We follow Du Chinese: one character is exactly
-	   one syllable, `Word.syllables` says which tone each of them is, so there is no guess to
-	   protect against on either line. */
-	--hq-tone-0: #726b5f;
-	--hq-tone-1: #c8102e;
-	--hq-tone-2: #1f7a3d;
+	   Tone 1 is a VERMILION, not the cinnabar `--hq-accent`: those were the same #c8102e, so
+	   1,644 of 7,905 syllables printed in the exact red of ✕ NOT QUITE, and 20.8% of the
+	   corpus was arguing with the interface. Tone 2 is a LEAF green, well off the blue-green
+	   jade of `--hq-correct`. Tone 0 is a cool SLATE — every UI grey in this file is warm
+	   (h ≈ 85), so a cool one is legibly a colour and not the disabled-text grey it used to be
+	   byte-for-byte. Tones 3 and 4 were already clear of everything and did not move.
+	   Distances are measured in `palette.spec.ts`; see THE FOURTH FAMILY at the top. */
+	--hq-tone-0: #5a6674;
+	--hq-tone-1: #b8440c;
+	--hq-tone-2: #356807;
 	--hq-tone-3: #1f5fbf;
 	--hq-tone-4: #7a3fa8;
 
@@ -159,7 +184,9 @@
 		--hq-ink-inverse: #100f0e;
 
 		--hq-line: #2e2a24;
-		--hq-line-strong: #6b6355;
+		/* #6b6355 was 2.80:1 on the sunken surface — under the >= 3:1 this token exists to
+		   guarantee, on the surface a control most often sits on. Now 3.35 / 3.61 / 3.86. */
+		--hq-line-strong: #786f5f;
 
 		--hq-accent: #f2685e;
 		--hq-accent-strong: #ff8b7c;
@@ -174,9 +201,15 @@
 		--hq-primary-strong: #ffffff;
 		--hq-primary-ink: #100f0e;
 
-		--hq-tone-0: #9a9184;
-		--hq-tone-1: #f2685e;
-		--hq-tone-2: #5cc97e;
+		/* Same four moves as light: vermilion off the accent, leaf off the jade, slate off the
+		   warm grey. Tones 3 and 4 unchanged. */
+		--hq-tone-0: #8fa0b4;
+		/* Lifted from #ea6114, which cleared 4.5:1 on the three plain grounds but measured
+		   4.47:1 on --hq-correct-soft — the ground a correct answer's card paints, where the
+		   missed word's pinyin then sits. 4.58:1 on all five now; 0.6 dE00 from the old value,
+		   which is below the threshold anyone can see. */
+		--hq-tone-1: #ec6316;
+		--hq-tone-2: #63ad24;
 		--hq-tone-3: #7faeff;
 		--hq-tone-4: #c08feb;
 
@@ -320,7 +353,8 @@
 	--color-focus: var(--hq-accent);
 
 	/* Indexed by `Syllable.tone`, so `var(--color-tone-${tone})` is a direct lookup with no
-	   off-by-one mapping between the data and the palette. 0 is the neutral tone. */
+	   off-by-one mapping between the data and the palette. 0 is the neutral tone. These paint
+	   pinyin syllables and nothing else — see THE FOURTH FAMILY at the top of this file. */
 	--color-tone-0: var(--hq-tone-0);
 	--color-tone-1: var(--hq-tone-1);
 	--color-tone-2: var(--hq-tone-2);
@@ -583,12 +617,20 @@
 		padding-block-end: max(var(--spacing-gutter), env(safe-area-inset-bottom));
 	}
 
-	/* One rhythm for a column, set once. `.stack` alone is the standard block gap; the
-	   modifiers step it up or down the scale. Use it instead of hanging a margin off every
-	   child — that is how a screen ends up with a 250px void nobody chose. */
+	/* One rhythm for a column, set once. `.stack` alone is the standard block gap; a modifier
+	   goes on THE SAME element to step it up or down the scale — `class="stack stack-sm"`,
+	   never `.stack > .stack-sm`. Use it instead of hanging a margin off every child; that is
+	   how a screen ends up with a 250px void nobody chose.
+
+	   The `display` is wrapped in `:where()` so it carries no specificity: `class="flex
+	   flex-col stack"` is a flex column that still gets the rhythm, because the utility wins
+	   the display and the margins do not care which layout the parent uses. */
+	:where(.stack) {
+		display: flow-root;
+	}
+
 	.stack {
 		--stack-space: var(--spacing-block);
-		display: flow-root;
 	}
 
 	.stack > * + * {

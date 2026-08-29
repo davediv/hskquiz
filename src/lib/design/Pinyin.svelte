@@ -14,9 +14,13 @@
 	own syllabification on 4,306 of the 4,308 shipped words (see `tone.spec.ts`) — but the data
 	is exact by construction, so prefer it.
 
-	`tones` and `spaced` default on. Turn `tones` off only where the pinyin sits on a surface
-	that owns its colour (an ink-filled button); turn `spaced` off to print the official list's
-	own spacing instead of per-syllable spacing.
+	PINYIN IS WHERE TONE COLOUR LIVES — all of it. `<Hanzi>` sets characters in ink, so this
+	component is the only place in the app a learner reads tone off a colour. `tones` and
+	`spaced` therefore default on, and `tones={false}` is for exactly one situation: pinyin on
+	a surface that already owns its colour, such as an ink-filled button, where the tone hues
+	would fail contrast. It is NOT a way to set pinyin in a brand colour instead — flat accent
+	pinyin was loop 2's landing-page bug, and it reads as "these words are an error".
+	Turn `spaced` off to print the official list's own spacing instead of per-syllable spacing.
 
 	ERHUA IS THE ONE EXCEPTION TO ONE-SPACE-PER-CHARACTER. 儿 in 那儿 / 面条儿 is a retroflex
 	ending on the syllable before it, not a syllable of its own: 汉语拼音正词法 writes nàr and
@@ -39,7 +43,10 @@
 		syllables?: readonly Syllable[];
 		/** Step on the pinyin type scale. */
 		size?: Size;
-		/** Colour each syllable by its tone (1 red, 2 green, 3 blue, 4 purple, neutral grey). */
+		/**
+		 * Colour each syllable by its tone: 1 vermilion, 2 leaf, 3 blue, 4 violet, 0 slate.
+		 * On by default — turn it off only where the surface owns its colour.
+		 */
 		tones?: boolean;
 		/** Put a space between syllables, the way Du Chinese does. */
 		spaced?: boolean;

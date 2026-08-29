@@ -5,19 +5,28 @@
 	`lang="zh-Hans"` is not decoration — it tells the browser which face to reach for when a
 	glyph is shared with Japanese, and it tells a screen reader which voice to use.
 
-	TONE COLOUR ON THE CHARACTER. This is where Pleco puts it — 手机 is a blue 手 and a red 机,
-	with the pinyin left plain — and where Du Chinese puts it as well, on both. One character is
-	exactly one syllable, so the mapping is not a guess: give this component `syllables` (or the
-	whole `word`) and each character is painted from its own tone.
+	THE CHARACTER IS INK. Pleco colours the hanzi by tone (手机 = blue 手 + red 机) and leaves
+	the pinyin black; Du Chinese colours both. This system colours the pinyin only, so `tones`
+	defaults to FALSE here and to true in `<Pinyin>`. Two reasons, and they are the same two
+	the design-system comment in `layout.css` gives:
+
+	  · the glyph's shape is what the learner is trying to learn, and a saturated hue laid
+	    across it at 60–90px competes with the strokes rather than annotating them;
+	  · a character carries no tone diacritic, so on hanzi the colour would be the ONLY copy
+	    of the tone — exactly the single-channel signal the rest of this system refuses.
+
+	The practical consequence is that 爱 is the same ink in a list row and in the sheet that
+	row opens, instead of changing colour when you tap it.
 
 	  <Hanzi {word} size="prompt" display />        the headword a screen is built around
-	  <Hanzi {word} size="sm" />                    inline in a list row
-	  <Hanzi text={w.hanzi} size="sm" />            no tone data: plain ink, one text node
-	  <Hanzi {word} size="lg" tones={false} />      opt out where the surface owns the colour
+	  <Hanzi {word} size="sm" />                    inline in a list row — ink
+	  <Hanzi text={w.hanzi} size="sm" />            no tone data needed; ink either way
+	  <Hanzi {word} size="lg" tones />              opt IN, for a screen that teaches tone
+	                                                itself. Nothing in the app does today.
 
-	Without `syllables` — or if their count does not match the characters, which the build makes
-	impossible for shipped words but a caller could still contrive — it renders exactly as it
-	always did, in plain ink.
+	Painting still needs one syllable per character — without `syllables`, or with a count that
+	does not match (the build makes that impossible for shipped words, but a caller could
+	contrive it), `tones` is ignored and the characters render as one plain text node.
 -->
 <script lang="ts">
 	import type { Syllable, Word } from '$lib/types';
@@ -36,7 +45,10 @@
 		size?: Size;
 		/** Medium weight, for the one headword a screen is about. */
 		display?: boolean;
-		/** Colour each character by its tone. No effect without matching `syllables`. */
+		/**
+		 * Opt in to per-character tone colour. Off by default: the system puts tone on the
+		 * pinyin. No effect without one `syllables` entry per character.
+		 */
 		tones?: boolean;
 		class?: string;
 	}
@@ -47,7 +59,7 @@
 		syllables,
 		size = 'md',
 		display = false,
-		tones = true,
+		tones = false,
 		class: extra = ''
 	}: Props = $props();
 

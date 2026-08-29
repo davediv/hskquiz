@@ -20,8 +20,13 @@
  * correctly, there are simply two of them for one character.
  *
  * TONE NUMBERING. `Tone` is `0 | 1 | 2 | 3 | 4`, exactly `Syllable['tone']` — 0 is the neutral
- * tone. Pleco's palette is 1 red, 2 green, 3 blue, 4 purple, neutral grey; `--color-tone-0`
- * … `--color-tone-4` in `layout.css` carry it.
+ * tone. `--color-tone-0` … `--color-tone-4` in `layout.css` hold the palette: Pleco's families
+ * (1 red, 2 green, 3 blue, 4 purple, 0 neutral) shifted onto values no state, text or border
+ * token holds — a vermilion, a leaf green, a blue, a violet and a cool slate. `toneColor`
+ * returns the `var()`, so this module never carries a hex.
+ *
+ * WHERE THE COLOUR GOES. On the pinyin, not the hanzi: `<Pinyin>` paints by default and
+ * `<Hanzi>` does not. `palette.spec.ts` holds the palette's half of that contract.
  */
 
 import type { Syllable } from '$lib/types';
