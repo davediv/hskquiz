@@ -3,38 +3,76 @@
 	why this app does not get Du Chinese's three-item bottom bar.
 
 	  home    mark + wordmark, left aligned. Identity, nothing else.
-	  browse  back to levels, the level name, and the one lateral move worth offering:
-	          practise the level you are currently reading.
-	  quiz    back to levels and the level name. Nothing else — during a run the bottom of
-	          the screen belongs to the answer buttons.
+	  browse  back, the level name as the page's <h1>, and the one lateral move worth
+	          offering: practise the level you are currently reading.
+	  quiz    back and the level name. Nothing else — during a run the bottom of the screen
+	          belongs to the answer buttons.
+
+	IT RETRACTS. `chrome` (see chrome.svelte.ts) tracks the scroll delta and this bar
+	translates 1:1 with it, so on a long list the 56px it costs is only spent while the user
+	is actually at rest or heading back up. Everything stuck beneath it follows automatically
+	because `--app-header-h` publishes the live height, not the intrinsic one.
+
+	THE HEADING IS AN <h1>. It used to be a <span>, which left `/quiz/[level]` and
+	`/browse/[level]` with literally zero headings in their normal state while `/` had a full
+	outline — the app was inconsistent with itself, and a screen-reader user landing on browse
+	had nothing to navigate by.
 -->
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import type { ShellRoute } from './route';
 	import { APP_NAME } from './route';
+	import type { ChromeController } from './chrome.svelte';
+	import type { BackTarget } from './back.svelte';
 
-	let { route }: { route: ShellRoute } = $props();
+	let {
+		route,
+		chrome,
+		backTarget
+	}: { route: ShellRoute; chrome: ChromeController; backTarget: BackTarget } = $props();
 
-	/** The hairline only appears once there is content underneath it to separate. */
-	let scrolled = $state(false);
+	/** Reported to the controller, which turns it into the live `--app-header-h`. */
+	let innerH = $state(0);
 
-	$effect(() => {
-		const sync = () => (scrolled = window.scrollY > 2);
-		sync();
-		window.addEventListener('scroll', sync, { passive: true });
-		return () => window.removeEventListener('scroll', sync);
-	});
+	$effect(() => chrome.report(innerH));
+
+	function onBack(event: MouseEvent) {
+		// Leave modified clicks, middle clicks and anything already handled to the browser:
+		// the href is a real destination and "open in new tab" should keep working.
+		if (event.defaultPrevented || event.button !== 0) return;
+		if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+		event.preventDefault();
+		if (backTarget.canPop) {
+			history.back();
+		} else {
+			// Cold deep link: there is nothing to pop, and pushing would leave the screen the
+			// user just left sitting one edge-swipe away.
+			void goto(resolve('/'), { replaceState: true });
+		}
+	}
 </script>
 
-<header class="bar" class:scrolled>
-	<div class="inner" class:home={route.mode === 'home'}>
+<header
+	class="bar"
+	class:scrolled={chrome.scrolled}
+	style:translate={chrome.barOffset > 0 ? `0 ${-chrome.barOffset}px` : null}
+	onfocusin={() => chrome.reveal()}
+>
+	<div class="inner" class:home={route.mode === 'home'} bind:clientHeight={innerH}>
 		{#if route.mode === 'home'}
-			<span class="mark" aria-hidden="true">汉</span>
+			<span class="mark" lang="zh-Hans" aria-hidden="true">汉</span>
 			<span class="wordmark">{APP_NAME}</span>
 		{:else}
 			<span class="slot start">
 				{#if route.back}
-					<a class="icon" href={resolve('/')} aria-label="Back to levels">
+					<a
+						class="icon"
+						href={resolve('/')}
+						aria-label="Back to {backTarget.label}"
+						onclick={onBack}
+					>
 						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 							<path
 								d="M15 5 8 12l7 7"
@@ -50,7 +88,7 @@
 			</span>
 
 			<span class="slot mid">
-				{#if route.heading}<span class="heading">{route.heading}</span>{/if}
+				{#if route.heading}<h1 class="heading">{route.heading}</h1>{/if}
 			</span>
 
 			<span class="slot end">
@@ -76,6 +114,12 @@
 		backdrop-filter: saturate(1.6) blur(14px);
 		-webkit-backdrop-filter: saturate(1.6) blur(14px);
 		transition: border-color 160ms var(--ease-out-soft);
+		/*
+		 * The retraction is a `translate` written per frame from JS, deliberately with no
+		 * transition of its own: it is tracking a finger, and a transition would put the bar
+		 * behind the content it is attached to. The settle glide is tweened in JS instead.
+		 */
+		will-change: translate;
 	}
 
 	@supports not (backdrop-filter: blur(1px)) {
@@ -93,14 +137,16 @@
 		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
 		gap: 0.25rem;
-		block-size: var(--app-header-h);
+		block-size: var(--app-bar-h);
 		/*
-		 * Full bleed on purpose. Every route sets its own measure — the level screen alone
-		 * runs 34rem on a phone and 60rem on a desktop — so a shell bar pinned to one of
-		 * them would be misaligned on the others. Window chrome sits at the window edge.
+		 * Full bleed on a phone: every route runs edge to edge there, so window chrome sits
+		 * at the window edge. From 64rem the routes pull into a centred column and a
+		 * full-bleed bar reads as a phone app stretched — the chevron was 430px left of the
+		 * content it belonged to — so the bar takes the same measure. A route with a
+		 * different column overrides `--app-bar-measure`.
 		 *
-		 * Pulled 0.75rem tighter than the gutter so the 44px hit areas overhang it and the
-		 * glyphs inside them land exactly on the text column.
+		 * The inline padding is pulled 0.75rem tighter than the gutter so the 44px hit areas
+		 * overhang it and the glyphs inside them land exactly on the text column.
 		 */
 		padding-inline-start: max(calc(var(--spacing-gutter) - 0.75rem), var(--app-safe-left));
 		padding-inline-end: max(calc(var(--spacing-gutter) - 0.75rem), var(--app-safe-right));
@@ -116,13 +162,26 @@
 
 	@media (min-width: 64rem) {
 		.inner {
-			padding-inline-start: max(1.25rem, var(--app-safe-left));
-			padding-inline-end: max(1.25rem, var(--app-safe-right));
+			inline-size: 100%;
+			/* Both measured off the screen the router just rendered — see chrome.svelte.ts.
+			   The fallbacks are what server-rendered HTML uses for one frame. */
+			max-inline-size: var(--app-bar-measure, var(--container-wide));
+			margin-inline: auto;
+			padding-inline-start: max(
+				calc(var(--app-bar-pad, var(--spacing-gutter)) - 0.75rem),
+				var(--app-safe-left)
+			);
+			padding-inline-end: max(
+				calc(var(--app-bar-pad, var(--spacing-gutter)) - 0.75rem),
+				var(--app-safe-right)
+			);
 		}
 
+		/* The wordmark is not a 44px hit area, so it needs no overhang — it sits on the
+		   column's text edge directly. */
 		.inner.home {
-			padding-inline-start: max(2rem, var(--app-safe-left));
-			padding-inline-end: max(2rem, var(--app-safe-right));
+			padding-inline-start: max(var(--app-bar-pad, 2rem), var(--app-safe-left));
+			padding-inline-end: max(var(--app-bar-pad, 2rem), var(--app-safe-right));
 		}
 	}
 
@@ -136,6 +195,7 @@
 	}
 	.mid {
 		justify-self: center;
+		min-inline-size: 0;
 	}
 	.end {
 		justify-self: end;
@@ -163,6 +223,7 @@
 
 	.heading {
 		display: block;
+		margin: 0;
 		overflow: hidden;
 		font-size: var(--text-lg);
 		font-weight: 600;

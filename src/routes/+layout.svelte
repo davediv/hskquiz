@@ -13,6 +13,24 @@
 	So: a contextual top bar, and the lateral move between practising and browsing offered
 	where it is unambiguous (from a browse screen, for the level already on screen).
 
+	THE SHELL OWNS THE CHROME BUDGET
+	It is not enough for the bar to be small; nothing was watching the *total*. Browse stacks
+	its own 151px of search and filters under the bar, so a phone opened on HSK 1 spent 208px
+	— a quarter of the frame — before the first word, against Pleco's 72px and Du Chinese's
+	95px. So the shell now runs a scroll-direction controller (`chrome.svelte.ts`) and
+	publishes three things every layer beneath it can read:
+
+	  --app-header-h    live on-screen height of the bar, 56px → 0px as you scroll down
+	  --app-chrome-h    that plus the safe-area inset: the shell's live total
+	  --app-bar-measure the width of the column the current screen actually rendered, so the
+	                    bar can sit over it on a desktop instead of stretching past it
+	  --app-bar-pad     that column's own inline padding
+	  data-chrome       "expanded" | "condensed", for screens that want to restructure
+
+	Because the whole app already offset against `--app-header-h`, publishing it live is what
+	makes browse's search field, the quiz progress rail and the level screen's desktop rail
+	all ride up with the bar without a single edit outside this folder.
+
 	WHAT THIS SHELL DOES NOT DO
 	It sets no measure and no horizontal gutter on the content. Every screen owns its own
 	column — the level screen alone runs 34rem on a phone and widens to a 60rem two-column
@@ -25,25 +43,54 @@
 <script lang="ts">
 	import './layout.css';
 	import '$lib/components/shell/shell.css';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import AppBar from '$lib/components/shell/AppBar.svelte';
 	import SiteFooter from '$lib/components/shell/SiteFooter.svelte';
 	import { readRoute } from '$lib/components/shell/route';
+	import { createChrome } from '$lib/components/shell/chrome.svelte';
+	import { createBackTarget } from '$lib/components/shell/back.svelte';
 
 	let { children } = $props();
 
 	const route = $derived(readRoute(page.url.pathname, base));
+	const chrome = createChrome();
+	const backTarget = createBackTarget(base);
+
+	$effect(() => chrome.listen());
+
+	// A new screen always starts with its chrome intact, however the last one left it — and
+	// its column may be a different width from the one we just left.
+	afterNavigate(() => {
+		chrome.reveal(true);
+		chrome.sync();
+	});
+
+	/**
+	 * Canonical without the query string: `?state=summary` is a view of `/quiz/1`, not a
+	 * separate document, and a shared link should resolve to one address either way.
+	 */
+	const canonical = $derived(`${page.url.origin}${page.url.pathname}`);
 </script>
 
 <svelte:head>
 	<title>{route.title}</title>
+	<link rel="canonical" href={canonical} />
+	<meta property="og:url" content={canonical} />
 </svelte:head>
 
-<a class="skip" href="#main">Skip to content</a>
+<div
+	class="shell"
+	class:focus={route.focus}
+	data-chrome={chrome.condensed ? 'condensed' : 'expanded'}
+	style:--app-header-h={chrome.measured ? `${chrome.visible}px` : null}
+	style:--app-bar-measure={chrome.columnWidth > 0 ? `${chrome.columnWidth}px` : null}
+	style:--app-bar-pad={chrome.columnPad > 0 ? `${chrome.columnPad}px` : null}
+>
+	<a class="skip" href="#main">Skip to content</a>
 
-<div class="shell" class:focus={route.focus}>
-	<AppBar {route} />
+	<AppBar {route} {chrome} {backTarget} />
 
 	<div id="main" class="content" tabindex="-1">
 		{@render children()}
@@ -56,6 +103,13 @@
 
 <style>
 	.shell {
+		/*
+		 * Redeclared here, not just in shell.css: a custom property is substituted at the
+		 * element that declares it, so the `:root` copy would have baked in the *intrinsic*
+		 * 3.5rem. This one resolves against the live `--app-header-h` written inline above.
+		 */
+		--app-chrome-h: calc(var(--app-safe-top) + var(--app-header-h));
+
 		display: flex;
 		flex-direction: column;
 		min-block-size: 100dvh;
@@ -95,7 +149,8 @@
 
 	.skip {
 		position: fixed;
-		inset-block-start: calc(var(--app-safe-top) + var(--app-header-h) + 0.5rem);
+		/* Rides the live chrome, so it stays visible even with the bar retracted. */
+		inset-block-start: calc(var(--app-chrome-h) + 0.5rem);
 		inset-inline-start: max(var(--spacing-gutter), var(--app-safe-left));
 		/* Under the bar's z-40, so it slides out from behind it instead of across the wordmark. */
 		z-index: 30;
