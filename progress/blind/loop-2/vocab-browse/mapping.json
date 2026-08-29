@@ -1,0 +1,16 @@
+{
+	"piece": "vocab-browse",
+	"loop": 2,
+	"rule": "\"vocab-browse\" is 12 characters — EVEN — so ours is A and the reference is B.",
+	"A": {
+		"which": "ours",
+		"source": "progress/shots/loop-2/vocab-browse-mobile.png",
+		"description": "hskquiz /browse/1 at 375x812 @2x, no query, no seeded progress"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"description": "Pleco iOS, dictionary search results list for the query \"shouji\""
+	},
+	"why_this_reference": "Both are vocabulary list screens: one row per word, hanzi + pinyin + English gloss, scanned top to bottom. It is the same pairing loop 1 used, so the two judgements are comparable."
+}
