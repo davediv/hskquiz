@@ -1,39 +1,41 @@
 <!--
 	The end of a run — the screen where a learner decides whether to do another one.
 
-	WHAT GETS THE BIG TYPE
-	Not the score. A percentage is a verdict on the learner; the misses are the thing they can
-	actually do something about, so the missed words are set as full study cards — hanzi at the
-	size the design system reserves for a headword, tone-marked pinyin on its own weight beside
-	it, every gloss, the part of speech, and the word they picked instead. The score itself is
-	one quiet line and a ten-segment rail: the same rail they watched fill during the run, now
-	complete. Reading the summary is meant to be worth as much as answering one more question.
+	ONE CARD, ONE SIZE, EVERYWHERE A WORD APPEARS
+	Every word on this screen is a `WordCard`, and every card sets its hanzi from the app's shared
+	`headwordSize()`. A missed 干 comes back at 82px on a phone rather than a polite 48px, and the
+	ten words of a clean run are that same card rather than a grey two-column receipt. The rule
+	this screen is built on: the teaching moment is never smaller than the testing moment, and
+	nothing that congratulates you is ever larger than a word being taught — the 满分/继续 mark
+	is 26px, a third of the card it sits above.
 
-	WHY THE MARK IS A CHINESE WORD
-	Finishing has to feel like it counted without turning into a sticker. So the reward is more
-	vocabulary: 满分 / 不错 / 继续 / 加油, set the way every other word in this app is set —
-	hanzi, pinyin, gloss. It is the one flourish on the screen and it teaches something. The
-	pinyin for the three that are on the official list is theirs verbatim (búcuò, jìxù,
-	jiā yóu); 满分 is not an HSK 1–5 word but every learner who just scored one should meet it.
+	WHY THE MARK IS A CHINESE WORD, AND WHY IT IS SMALL
+	Finishing has to feel like it counted without turning into a sticker, so the reward is more
+	vocabulary: 满分 / 不错 / 继续 / 加油, set the way every word in this app is set — hanzi,
+	pinyin, gloss — on one line, at a third of the size of the cards below it. It is a signature
+	on the receipt, not the point of the page. The pinyin for the three that are on the official
+	list is theirs verbatim (búcuò, jìxù, jiā yóu); 满分 is not an HSK 1–5 word but every learner
+	who just scored one should meet it.
 
 	WHY THE PERCENTAGE IS ABSENT AND THE LEVEL ARC IS NOT
-	One session's accuracy is noise — ten questions, weighted toward what you keep missing, so
-	a bad run often means the scheduler is working. What does mean something is the arc: how
-	much of the level you have now met, and how much of it is mastered. That line moves by a
-	word or two per session, which is exactly the honest amount, and it is the only figure here
-	that includes the run that just finished.
+	One session's accuracy is noise — ten questions, weighted toward what you keep missing, so a
+	bad run often means the scheduler is working. What does mean something is the arc: how much of
+	the level you have met and how much of it is mastered. It moves by a word or two per session,
+	which is the honest amount. It reads on a different scale from the ten-segment session rail
+	above it, so it is labelled, two-toned and captioned rather than left to look like a second
+	score bar that failed to fill.
 
-	Pinyin is set in the accent rather than Pleco's tone colours, for the reason QuestionPrompt
-	documents: `Word.pinyin` is syllable-spaced for only a fraction of the list, so tone colour
-	would fire on monosyllables and go quiet everywhere else.
+	Every 汉字 here is tone-coloured, character and syllable, from `Word.syllables` — the mark
+	included, whose syllables are written out below because the four marks are not in the shipped
+	data. See WordCard for why this screen paints all of it and the open quiz question paints none.
 -->
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { Session, Word } from '$lib/types';
+	import type { Session, Syllable, Word } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import { isCorrect } from '$lib/session';
 	import { progress } from '$lib/progress';
-	import { fullGloss, posLabel, primaryGloss } from '$lib/components/quiz/quiz';
+	import WordCard from './WordCard.svelte';
 
 	interface Props {
 		/** The finished run. Every figure on this screen is derived from it. */
@@ -46,30 +48,66 @@
 
 	let { session, onRestart, onHome }: Props = $props();
 
-	/** The mark at the top of the screen: a real word, sized to the run that earned it. */
+	/**
+	 * The mark at the top of the screen: a real word, chosen by the run that earned it.
+	 *
+	 * Shaped as the design system's word primitives want it — hanzi plus one syllable per
+	 * character — so the mark is tone-coloured by exactly the same code path as every other word
+	 * here rather than being a special case that happens to look similar. 不错 carries bú, the
+	 * sandhi form the official list prints, not bù.
+	 */
 	interface Mark {
 		hanzi: string;
 		pinyin: string;
+		syllables: readonly Syllable[];
 		gloss: string;
 	}
 
-	function markFor(correct: number, total: number): Mark {
-		if (total > 0 && correct === total) {
-			return { hanzi: '满分', pinyin: 'mǎnfēn', gloss: 'full marks' };
+	const MARKS: Record<'full' | 'good' | 'fair' | 'low', Mark> = {
+		full: {
+			hanzi: '满分',
+			pinyin: 'mǎnfēn',
+			syllables: [
+				{ py: 'mǎn', tone: 3 },
+				{ py: 'fēn', tone: 1 }
+			],
+			gloss: 'full marks'
+		},
+		good: {
+			hanzi: '不错',
+			pinyin: 'búcuò',
+			syllables: [
+				{ py: 'bú', tone: 2 },
+				{ py: 'cuò', tone: 4 }
+			],
+			gloss: 'not bad'
+		},
+		fair: {
+			hanzi: '继续',
+			pinyin: 'jìxù',
+			syllables: [
+				{ py: 'jì', tone: 4 },
+				{ py: 'xù', tone: 4 }
+			],
+			gloss: 'keep going'
+		},
+		low: {
+			hanzi: '加油',
+			pinyin: 'jiā yóu',
+			syllables: [
+				{ py: 'jiā', tone: 1 },
+				{ py: 'yóu', tone: 2 }
+			],
+			gloss: 'keep at it'
 		}
-		const share = total > 0 ? correct / total : 0;
-		if (share >= 0.8) return { hanzi: '不错', pinyin: 'búcuò', gloss: 'not bad' };
-		if (share >= 0.5) return { hanzi: '继续', pinyin: 'jìxù', gloss: 'keep going' };
-		return { hanzi: '加油', pinyin: 'jiā yóu', gloss: 'keep at it' };
-	}
+	};
 
-	/**
-	 * Review cards run one step below the quiz prompt: 48px for the one- to three-character
-	 * words, 36px for the four-character ones, so a card is never taller than the phrase it
-	 * holds and 不好意思 never wraps away from its pinyin.
-	 */
-	function reviewSize(hanzi: string): 'md' | 'lg' {
-		return [...hanzi].length <= 3 ? 'lg' : 'md';
+	function markFor(correct: number, total: number): Mark {
+		if (total > 0 && correct === total) return MARKS.full;
+		const share = total > 0 ? correct / total : 0;
+		if (share >= 0.8) return MARKS.good;
+		if (share >= 0.5) return MARKS.fair;
+		return MARKS.low;
 	}
 
 	const results = $derived(
@@ -103,7 +141,10 @@
 	});
 
 	const arc = $derived(hydrated ? progress.levelSummary(session.level) : null);
-	const arcPct = $derived(arc && arc.total > 0 ? Math.min(100, (arc.seen / arc.total) * 100) : 0);
+	const pct = (part: number, whole: number) =>
+		whole > 0 ? Math.min(100, (part / whole) * 100) : 0;
+	const seenPct = $derived(arc ? pct(arc.seen, arc.total) : 0);
+	const masteredPct = $derived(arc ? pct(arc.mastered, arc.total) : 0);
 
 	const headline = $derived(
 		total === 0
@@ -112,17 +153,11 @@
 					`${missed.length} to review`
 	);
 
-	// Both figure lines are built here rather than out of `{#if}` blocks in the markup: an
-	// interpolated separator inside a block loses the space in front of it, and `63 of 500
-	// practised· 5 mastered` is exactly the kind of thing nobody sees until it ships.
+	// Built here rather than out of `{#if}` blocks in the markup: an interpolated separator
+	// inside a block loses the space in front of it, and `7 of 10 correct· 1 unanswered` is
+	// exactly the kind of thing nobody sees until it ships.
 	const scoreRest = $derived(
 		`of ${total} correct` + (skipped > 0 ? ` · ${skipped} unanswered` : '')
-	);
-	const arcRest = $derived(
-		arc
-			? `of ${arc.total.toLocaleString('en')} HSK ${session.level} words practised` +
-					(arc.mastered > 0 ? ` · ${arc.mastered.toLocaleString('en')} mastered` : '')
-			: ''
 	);
 
 	// The run is over and the last answer button has just been removed from the DOM, so focus
@@ -141,21 +176,23 @@
 </script>
 
 <div class="summary" bind:this={panel} tabindex="-1">
-	<h1 class="sr-only">{headline}</h1>
+	<h2 class="sr-only">{headline}</h2>
 
 	{#if total === 0}
 		<p class="empty">This session had no questions in it. Pick a level and start another one.</p>
 	{:else}
 		<header class="crest">
 			<p class="eyebrow">Session complete</p>
-			<p class="mark"><Hanzi text={mark.hanzi} size="md" display /></p>
-			<p class="mark-sound"><Pinyin pinyin={mark.pinyin} size="lg" /></p>
-			<p class="mark-gloss">{mark.gloss}</p>
+			<p class="mark">
+				<Hanzi text={mark.hanzi} syllables={mark.syllables} size="sm" display />
+				<Pinyin pinyin={mark.pinyin} syllables={mark.syllables} size="sm" />
+				<span class="mark-gloss">{mark.gloss}</span>
+			</p>
 		</header>
 
 		<section class="score" aria-label="Score">
-			<p class="score-line tabular">
-				<strong>{solved.length}</strong>
+			<p class="score-line">
+				<strong class="tabular">{solved.length}</strong>
 				{scoreRest}
 			</p>
 			<div class="rail" aria-hidden="true">
@@ -169,71 +206,54 @@
 			</div>
 		</section>
 
-		<!-- The one figure that outlives the session. Absent until there is one: a learner whose
-		     storage rejected every write should not be told they have practised nothing. -->
+		<!-- The one figure that outlives the session, and the only block on this screen measured
+		     against the whole level rather than the ten questions. Absent until there is one: a
+		     learner whose storage rejected every write should not be told they practised nothing. -->
 		{#if arc && arc.seen > 0}
-			<div class="arc">
-				<p class="arc-line tabular">
-					<strong>{arc.seen.toLocaleString('en')}</strong>
-					{arcRest}
+			<section class="arc" aria-label="HSK {session.level} overall">
+				<p class="eyebrow">HSK {session.level} overall</p>
+				<p class="arc-line">
+					<strong class="tabular">{arc.seen.toLocaleString('en')}</strong>
+					of <span class="tabular">{arc.total.toLocaleString('en')}</span> words met
 				</p>
-				<div class="meter arc-meter" aria-hidden="true">
-					{#if arcPct > 0}<span style:width="{arcPct}%"></span>{/if}
+				<div class="track" aria-hidden="true">
+					<span class="fill fill-seen" style:inline-size="max(3px, {seenPct}%)"></span>
+					{#if arc.mastered > 0}
+						<span class="fill fill-mastered" style:inline-size="max(3px, {masteredPct}%)"></span>
+					{/if}
 				</div>
-			</div>
+				<p class="legend">
+					<span class="key"><span class="dot dot-seen"></span>met once</span>
+					<span class="key"
+						><span class="dot dot-mastered"></span>{arc.mastered.toLocaleString('en')} mastered</span
+					>
+				</p>
+			</section>
 		{/if}
 
 		<section aria-labelledby="summary-review">
 			{#if missed.length > 0}
-				<h2 id="summary-review" class="section-title">
+				<h3 id="summary-review" class="section-title">
 					{missed.length}
 					{missed.length === 1 ? 'word' : 'words'} to review
-				</h2>
+				</h3>
 
 				<ul class="cards">
 					{#each missed as result, i (i)}
-						{@const pos = posLabel(result.word)}
-						<li class="card word" style:animation-delay="{Math.min(i, 5) * 45}ms">
-							<div class="face">
-								<Hanzi text={result.word.hanzi} size={reviewSize(result.word.hanzi)} display />
-								<span class="sound"><Pinyin pinyin={result.word.pinyin} size="lg" /></span>
-							</div>
-							<p class="gloss">{fullGloss(result.word)}</p>
-							{#if pos}<p class="pos">{pos}</p>{/if}
-
-							<p class="picked">
-								<svg class="cross" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-									<path
-										d="m4.5 4.5 7 7m0-7-7 7"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="2.2"
-										stroke-linecap="round"
-									/>
-								</svg>
-								{#if result.picked === null}
-									<span class="tag">No answer</span>
-								{:else}
-									<span class="tag">You picked</span>
-									{#if result.direction === 'meaning-to-hanzi'}
-										<Hanzi text={result.picked.hanzi} size="xs" />
-										<Pinyin pinyin={result.picked.pinyin} size="sm" /> · {primaryGloss(
-											result.picked
-										)}
-									{:else}
-										{primaryGloss(result.picked)} ·
-										<Hanzi text={result.picked.hanzi} size="xs" />
-										<Pinyin pinyin={result.picked.pinyin} size="sm" />
-									{/if}
-								{/if}
-							</p>
-						</li>
+						<WordCard
+							word={result.word}
+							outcome="wrong"
+							picked={result.picked}
+							direction={result.direction}
+							index={i}
+						/>
 					{/each}
 				</ul>
 			{:else}
-				<h2 id="summary-review" class="section-title">Nothing to review</h2>
+				<h3 id="summary-review" class="section-title">Nothing to review</h3>
 				<p class="clean">
-					All {total} right. The set is below — a clean run is the best moment to read them once more.
+					All {total} right. The set is below, at full size — a clean run is the best moment to read them
+					once more.
 				</p>
 			{/if}
 		</section>
@@ -253,15 +273,9 @@
 					</svg>
 					{solved.length} answered correctly
 				</summary>
-				<ul class="solved-list">
+				<ul class="cards">
 					{#each solved as result, i (i)}
-						<li class="solved-row">
-							<span class="solved-face">
-								<Hanzi text={result.word.hanzi} size="sm" />
-								<span class="sound-quiet"><Pinyin pinyin={result.word.pinyin} size="sm" /></span>
-							</span>
-							<span class="solved-gloss">{primaryGloss(result.word)}</span>
-						</li>
+						<WordCard word={result.word} outcome="right" index={i} />
 					{/each}
 				</ul>
 			</details>
@@ -288,7 +302,7 @@
 		max-inline-size: var(--container-app);
 		margin-inline: auto;
 		padding-inline: var(--spacing-gutter);
-		padding-block-start: 1.5rem;
+		padding-block-start: 1.25rem;
 		/* Focusing this panel scrolls it into view, and the app bar is sticky over the top of
 		   the scroll port — without this the eyebrow lands underneath it. */
 		scroll-margin-block-start: calc(var(--app-safe-top) + var(--app-header-h) + 0.75rem);
@@ -308,23 +322,24 @@
 		text-align: center;
 	}
 
+	/* One line: hanzi, pinyin, gloss. Deliberately a third of the size of the cards below — a
+	   congratulation that outsizes the vocabulary is a sticker. */
 	.mark {
-		margin: 0.5rem 0 0;
-	}
-
-	.mark-sound {
-		margin: 0.25rem 0 0;
-		color: var(--color-accent);
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0 0.5rem;
+		margin: 0.375rem 0 0;
 	}
 
 	.mark-gloss {
-		margin: 0.3125rem 0 0;
 		font-size: var(--text-sm);
 		color: var(--color-ink-muted);
 	}
 
 	.score {
-		margin-block-start: 1.25rem;
+		margin-block-start: 1rem;
 	}
 
 	.score-line {
@@ -368,40 +383,96 @@
 		}
 	}
 
-	/* Holds its height before hydration, so the review list never shifts under a thumb. */
+	/*
+	 * Holds its height before hydration, so the review list never shifts under a thumb.
+	 *
+	 * Everything here exists to stop it being read as a second session score: its own eyebrow
+	 * naming the scale, a continuous two-tone track rather than ten segments, a legend, and a
+	 * 3px floor on the fill so 10-of-500 reads as "barely started" instead of "failed to draw".
+	 */
 	.arc {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		gap: 0.5rem;
+		gap: 0.375rem;
 		margin-block-start: 1.125rem;
-		padding-block: 0.875rem;
-		border-block: 1px solid var(--color-line);
+		padding: 0.875rem 0.9375rem 0.8125rem;
+		border-radius: var(--radius-md);
+		background-color: var(--color-surface-sunken);
 	}
 
 	.arc-line {
 		margin: 0;
-		font-size: var(--text-xs);
+		font-size: var(--text-sm);
 		color: var(--color-ink-muted);
 	}
 
 	.arc-line strong {
+		font-size: var(--text-lg);
 		font-weight: 700;
 		color: var(--color-ink);
 	}
 
-	.arc-meter {
-		block-size: 0.25rem;
+	.track {
+		position: relative;
+		block-size: 0.5rem;
+		border-radius: var(--radius-pill);
+		background-color: var(--color-page);
+		overflow: hidden;
+	}
+
+	.fill {
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 0;
+		border-radius: inherit;
+	}
+
+	/* Met-once is ink, not green: green is mastery in this system and nothing else. */
+	.fill-seen {
+		background-color: var(--color-line-strong);
+	}
+
+	.fill-mastered {
+		background-color: var(--color-correct);
+	}
+
+	.legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.875rem;
+		margin: 0;
+		font-size: var(--text-xs);
+		color: var(--color-ink-subtle);
+	}
+
+	.key {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3125rem;
+	}
+
+	.dot {
+		inline-size: 0.5rem;
+		block-size: 0.5rem;
+		border-radius: var(--radius-pill);
+	}
+
+	.dot-seen {
+		background-color: var(--color-line-strong);
+	}
+
+	.dot-mastered {
+		background-color: var(--color-correct);
 	}
 
 	.section-title {
-		margin: 1.75rem 0 0.875rem;
+		margin: 1.375rem 0 0.875rem;
 		font-size: var(--text-xl);
 	}
 
 	.clean {
 		margin: 0;
-		max-inline-size: 40ch;
+		max-inline-size: 42ch;
 		font-size: var(--text-sm);
 		color: var(--color-ink-muted);
 	}
@@ -413,71 +484,6 @@
 		margin: 0;
 		padding: 0;
 		list-style: none;
-	}
-
-	/* A missed word is a study card, not a list row: it carries everything the quiz revealed. */
-	.word {
-		padding: 1rem 1.125rem 0.875rem;
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		.word {
-			animation: var(--animate-rise-in);
-		}
-	}
-
-	.face {
-		display: flex;
-		align-items: baseline;
-		flex-wrap: wrap;
-		gap: 0.125rem 0.625rem;
-	}
-
-	.sound {
-		color: var(--color-accent);
-	}
-
-	.gloss {
-		margin: 0.5rem 0 0;
-		font-size: var(--text-base);
-		font-weight: 550;
-		line-height: 1.4;
-		text-wrap: pretty;
-	}
-
-	.pos {
-		margin: 0.1875rem 0 0;
-		font-size: var(--text-xs);
-		color: var(--color-ink-subtle);
-	}
-
-	/* What they chose instead. Hairline-separated, because it is context and not the record. */
-	.picked {
-		display: flex;
-		align-items: baseline;
-		flex-wrap: wrap;
-		gap: 0.25rem;
-		margin: 0.75rem 0 0;
-		padding-block-start: 0.6875rem;
-		border-block-start: 1px solid var(--color-line);
-		font-size: var(--text-xs);
-		color: var(--color-ink-muted);
-	}
-
-	.tag {
-		font-weight: 700;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		font-size: var(--text-2xs);
-		color: var(--color-ink-subtle);
-	}
-
-	/* The miss glyph, so the card never relies on colour — or on position — to say what it is. */
-	.cross {
-		inline-size: 0.75rem;
-		block-size: 0.75rem;
-		align-self: center;
-		color: var(--color-wrong);
 	}
 
 	.solved {
@@ -510,40 +516,8 @@
 		rotate: 180deg;
 	}
 
-	.solved-list {
-		margin: 0 0 0.5rem;
-		padding: 0;
-		list-style: none;
-	}
-
-	.solved-row {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		gap: 0.125rem 0.875rem;
-		padding-block: 0.5625rem;
-		border-block-start: 1px solid var(--color-line);
-	}
-
-	.solved-face {
-		display: flex;
-		align-items: baseline;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.sound-quiet {
-		color: var(--color-ink-subtle);
-	}
-
-	.solved-gloss {
-		/* Keeps the gloss on the right edge even when it wraps onto its own line, which a long
-		   one does at 375px. `justify-content` alone only aligns a row that has two items in it. */
-		margin-inline-start: auto;
-		font-size: var(--text-sm);
-		color: var(--color-ink-muted);
-		text-align: end;
+	.solved[open] summary {
+		margin-block-end: 0.375rem;
 	}
 
 	/*
