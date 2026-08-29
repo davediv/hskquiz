@@ -30,19 +30,34 @@ not a last-writer-wins: one id, one owner.
 ordered by level then id, each with the official part of speech, the current glosses, the raw
 CC-CEDICT senses and the `reasons` it is listed.
 
-A gloss has to clear five build-failing gates, all of them also tests in
+A gloss has to clear the first six of seven build-failing gates, all of them also tests in
 `src/lib/data/vocab.spec.ts`:
 
 1. **Register** — no slang, sexual, vulgar, dialect, figurative or variant-character content.
 2. **Cross-level** — two levels of the same word may not share _any_ sense (白, 才, 牛, 火, 头, 称,
    好, 多, 一会儿, 出口 all led with the same gloss; L2 米 "meter" was L3 米's second gloss).
 3. **Romanization** — a gloss may not be the word's own toneless pinyin (包子 is not "baozi").
-4. **Part of speech** — an N/Adj/Adv-only card may not lead with `to …`, and a V-only card may not
-   lead with a bare noun.
+4. **Part of speech** — the primary gloss agrees with the official POS in all four directions: an
+   N/Adj/Adv-only card may not lead with `to …`, a V-only card may not lead with a bare noun, an
+   Adj-only card may not lead with a noun (黑暗 "darkness", 长寿 "longevity"), and an N- or Adj-only
+   card may not lead with an `-ly` adverb (最近 "recently", 一般 "generally", 原先 "originally").
+   The qualifier is not read here — 该 "should (it is one's turn)" leads with `should`.
 5. **Punctuation** — a gloss closes every quotation it opens (L3 老百姓 shipped
-   `the "person in the street`).
+   `the "person in the street`) and every parenthesis: balanced, never nested, never empty, never
+   the whole gloss.
+6. **Gloss survival** — the word's own English is still on the card. For every reference sense
+   short and plain enough to be a _naming_ rather than a reading (at most two content words, no
+   parenthetical left after a scope marker comes off, no `sth`/`sb`), at least one has to survive
+   in `meanings`. 听见's whole CC-CEDICT entry is `["to hear"]`; whatever else the card says, it has
+   to still say "hear". Reviewed exceptions live in `scripts/gloss-survival-allow.json`, one id to
+   one line saying why the rewrite is a synonym; an exemption the card no longer needs fails the
+   build, so the list cannot quietly turn back into a blanket.
+7. **Example level** — not a gloss gate, but it fails the same build. See
+   [`scripts/sentences/`](../sentences/README.md): an example sentence may only use characters at
+   or below its own card's level, one pinyin syllable per character, and it has to contain the word
+   it is an example of.
 
-Two more, on top of the gates: within a level no two cards' **primary** glosses may share a sense,
+Two more, on top of the gates: within a level no two cards' **primary** glosses may _read_ the same,
 and no two cards may share a whole meaning _set_.
 
 ## What counts as the same answer
@@ -64,10 +79,35 @@ It does **not** split an `or` that coordinates two objects of one sense — 戴 
 hat" stays one sense, because the alternative is to give 戴 the sense "hat" — and it leaves fixed
 phrases (`whether or not`, `more or less`) alone.
 
-Resolve a collision by **disambiguating the Chinese**: give each card the sense it actually owns and
-say in the note which card owns the other one. Never resolve one by inventing a paraphrase of the
-same meaning — that only moves the collision somewhere the guard cannot see it, which is what
-produced 听见 "to catch a sound" in loop 1.
+## How to resolve a collision
+
+Two same-level cards whose primary glosses answer to the same English are a card where the learner
+presses a button reading exactly what the prompt asked and is graded wrong. There are two honest
+resolutions and one that is not a resolution at all.
+
+**If the two words really mean different things**, give each card the sense it actually owns and say
+in the note which card owns the other one. 采取 "to take measures" against 采用 "to adopt".
+
+**If they really mean the same thing** — and near-synonyms in one level often do — keep the shared
+word on **both** cards and put the distinguishing tag in the **same gloss**, in parentheses:
+
+| the pair                                                     | why this shape                    |
+| ------------------------------------------------------------ | --------------------------------- |
+| 听见 "to hear (and catch it)" / 听到 "to hear (as a result)" | both still answer to `hear`       |
+| 衬衫 "shirt (dress shirt)" / 衬衣 "shirt (general word)"     | 现代汉语词典 defines 衬衣 as 衬衫 |
+| 可是 "but (spoken)" / 但是 "but (written)"                   | one conjunction, two registers    |
+| 该 "should (it is one's turn)" / 应该 "should (ought to)"    | 该 at HSK 2 is the modal          |
+
+`senseKeys` ignores the parenthetical, so the collision stays **visible**: the runtime guard in
+`src/lib/session/distractors.ts` still refuses to put the pair on one card, and `/browse/1?q=hear`
+still finds 听见. The uniqueness gate reads the parenthetical, so the two buttons still differ. Both
+questions get their true answer.
+
+**Never resolve one by moving both cards off the shared word.** That is not a resolution, it is
+concealment: it hides the collision from the gate, tells the distractor guard the two words are
+unrelated — so it starts offering one as a wrong answer for the other — and deletes the word from
+the app's own search. It is what produced 听见 "to catch a sound" in loop 1 and 衬衣 "underclothes"
+in loop 3, and gate 6 exists because nothing caught either.
 
 `baseline-L{1..5}.json` are the glosses loop 1 authored, carried over unchanged apart from the 面1 /
 面2 split and 为's prepositional sense. They are not privileged — replace one by moving it into your
@@ -94,10 +134,24 @@ pairs separated only by a plural s: 体育/运动, 泪水/眼泪, 大脑/脑子,
 
 Teaching the splitter the word `or` exposed 38 same-level pairs whose _primary_ glosses answered to
 the same English — the text on the answer button — so a learner could press a button reading
-exactly what the prompt asked for and be marked wrong. `batch-25-or-collisions.json` holds all 32
-re-glossed cards; each note names the level-mate that owns the sense it gave up (衬衣 →
-"underclothes" because 衬衫 owns "shirt", 餐厅 → "a dining hall" because 餐馆 owns "restaurant",
-鼠标 → "a computer mouse" because 鼠 is the animal). `batch-26-primary-senses.json` fixes the wrong
-primary senses left in the machine-picked residue, plus 老百姓's truncated quotation and the 初
-merge, which had been dropping the lunar-date prefix sense (初一…初十) its second official row exists
-to carry.
+exactly what the prompt asked for and be marked wrong. `batch-25-or-collisions.json` holds the cards
+whose two words really do mean different things; each note names the level-mate that owns the sense
+it gave up (餐厅 → "a dining hall" because 餐馆 owns "restaurant", 鼠标 → "a computer mouse" because
+鼠 is the animal). `batch-26-primary-senses.json` fixes the wrong primary senses left in the
+machine-picked residue, plus 老百姓's truncated quotation and the 初 merge, which had been dropping
+the lunar-date prefix sense (初一…初十) its second official row exists to carry.
+
+## How loop 4 re-resolved the ones that were only hidden
+
+Four of the loop-3 resolutions moved a card off a sense it genuinely owns — 衬衣 → "underclothes"
+against a reference of `["shirt"]`, 该 → "to be one's turn" when 该 at HSK 2 is the modal, 法 off
+"law", 植物 off "plant" — and 听见 "to catch a sound" had survived from loop 1. Gate 6 was written to
+make that class visible: it fires on 205 cards today, and `scripts/gloss-survival-allow.json` clears
+the ones that are ordinary synonym rewrites so the rest cannot hide among them.
+
+`batch-27-qualified-senses.json` holds the 33 cards that came out of it. Eight collisions were
+re-resolved by qualifying the shared sense on both sides (听见/听到, 看见/看到, 衬衫/衬衣,
+可是/但是/但, 该/应该, 孩子/小朋友, 植物/种, 法/法律) — every one of those pairs still shares a sense,
+which is the point. The rest are the wrong-for-level primaries the loop-3 verdict named, most of them
+part-of-speech leads gate 4 could not see until it was widened: 最近, 近来, 原先, 一般, 频繁, 长寿,
+黑暗, 幽默, 正版, 输入, 各地, 处于, 长处, 期中, 权利, 全体.

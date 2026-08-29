@@ -7,10 +7,6 @@
 		"meanings": ["an achievement", "results at school or work"],
 		"note": "N. 分数 L2-0166 owns \"a score\" and 结果 L2-0291 owns \"result\"; 成绩 is what was achieved."
 	},
-	"L2-0172": {
-		"meanings": ["to be one's turn", "should"],
-		"note": "V. 应该 L2-0675 owns the bare obligation; 该我了 is the sense only 该 carries."
-	},
 	"L2-0214": {
 		"meanings": ["very", "easy to do"],
 		"note": "Adv. 好大/好久 is degree. 这么 L2-0721 keeps \"so or such\"; 好 L1-0138 keeps \"good\"."
@@ -26,10 +22,6 @@
 	"L3-0071": {
 		"meanings": ["to take measures", "to adopt an attitude"],
 		"note": "V. 采用 L3-0072 owns bare \"to adopt\"; 采取 collocates with 措施, 行动 and 态度."
-	},
-	"L3-0087": {
-		"meanings": ["underclothes", "a shirt worn next to the skin"],
-		"note": "N. 衬衫 L3-0086 owns \"shirt\"; 衬 is the lining layer, which is what 衬衣 names."
 	},
 	"L3-0148": {
 		"meanings": ["a region", "an area of a country"],
@@ -63,10 +55,6 @@
 		"meanings": ["to decide on", "to settle on"],
 		"note": "V. 修理 L4-0828 owns \"to fix\"; 定时间 and 定计划 are the settle-on sense."
 	},
-	"L4-0222": {
-		"meanings": ["a way of doing something", "a method"],
-		"note": "N. 法律 L4-0224 owns \"law\" and 规则 L4-0299 \"rule\"; 法 here is the 办法/方法 sense."
-	},
 	"L4-0253": {
 		"meanings": ["a written symbol", "a notation mark"],
 		"note": "N. 标志 L4-0043 keeps the emblem sense; 符号 is what is written on a page."
@@ -90,10 +78,6 @@
 	"L4-0821": {
 		"meanings": ["a model", "a mold"],
 		"note": "N. 类型 L4-0466 owns \"type\"; 血型, 新型, 型号 are all the model-of-a-thing sense."
-	},
-	"L4-0953": {
-		"meanings": ["plant life", "vegetation"],
-		"note": "N. 种 L4-0964 owns the verb \"to plant\"; naming it plant life keeps the two apart."
 	},
 	"L5-0061": {
 		"meanings": ["bad or undesirable", "faulty"],

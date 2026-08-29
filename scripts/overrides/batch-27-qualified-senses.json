@@ -1,0 +1,134 @@
+{
+	"L1-0135": {
+		"meanings": ["child (son or daughter)", "kid"],
+		"note": "N. 小朋友 L1-0404 answers to \"child\" too. Both keep the word and say on the button which child is meant, so the distractor guard still sees the pair."
+	},
+	"L1-0404": {
+		"meanings": ["child (as adults address one)"],
+		"note": "N. Loop 3 shipped \"youngster\" to dodge 孩子 L1-0135; that deleted \"child\" from the card and from /browse/1?q=child, and told the guard the two were unrelated."
+	},
+	"L1-0362": {
+		"meanings": ["to hear (as a result)"],
+		"note": "V. CC-CEDICT glosses 听见 and 听到 identically as \"to hear\"; 到 is the reaching-of-the-result complement, which is what the tag names."
+	},
+	"L1-0363": {
+		"meanings": ["to hear (and catch it)"],
+		"note": "V. Loop 3's \"to catch a sound\" hid the 听到 L1-0362 collision from senseKeys, so the guard offered 听到 as a distractor for 听见, and search lost the word."
+	},
+	"L1-0194": {
+		"meanings": ["to see (as a result)"],
+		"note": "V. Reference gives 看到 \"to see\" and 看见 \"to see; to catch sight of\"; loop 3 swapped the two. 到 is the result complement, as in 听到 L1-0362."
+	},
+	"L1-0195": {
+		"meanings": ["to see (and catch sight of)", "to notice"],
+		"note": "V. 看到 L1-0194 answers to \"see\" too; 见 is the perception-achieved complement, which is CC-CEDICT's own \"to catch sight of\"."
+	},
+	"L2-0104": {
+		"meanings": ["but (the short form)"],
+		"note": "Conj. 但是 L2-0105 and 可是 L2-0321 are the same conjunction; 但 is the one-syllable form. All three keep \"but\" and name themselves on the button."
+	},
+	"L2-0105": {
+		"meanings": ["but (written)", "however"],
+		"note": "Conj. The neutral written \"but\"; 可是 L2-0321 is the spoken one and 但 L2-0104 the short form."
+	},
+	"L2-0321": {
+		"meanings": ["but (spoken)", "and yet"],
+		"note": "Conj. Loop 3 shipped \"yet\" alone to dodge 但是 L2-0105, which is not what 可是 means and left no L2 card leading with the spoken \"but\"."
+	},
+	"L2-0172": {
+		"meanings": ["should (it is one's turn)", "to be one's turn"],
+		"note": "V. At HSK 2 该 is the modal; loop 3 led it with CC-CEDICT sense 7. 应该 L2-0675 keeps \"should\" too — the tag, not the word, tells them apart."
+	},
+	"L2-0675": {
+		"meanings": ["should (ought to)", "to be supposed to"],
+		"note": "V. The plain obligation. 该 L2-0172 shares \"should\"; qualifying both keeps the collision visible to the guard and readable on the button."
+	},
+	"L2-0458": {
+		"meanings": ["all the members", "the whole body of people"],
+		"note": "N. Loop 3's \"everyone as a body\" dropped the reference's own \"all\"; 全 L2-0452 owns \"entirely\", so \"all\" is free here."
+	},
+	"L2-0660": {
+		"meanings": ["average", "so-so"],
+		"note": "Adj. \"generally\" is the adverb and led an adjective card. 普通 L2-0424 owns \"ordinary\" and \"common\", so 一般 takes the middling sense."
+	},
+	"L2-0763": {
+		"meanings": ["recent times", "recently"],
+		"note": "N. Official POS is N and the card led with the adverb. The noun leads; the adverb stays as the second gloss, which is what search and the reveal need."
+	},
+	"L3-0077": {
+		"meanings": ["what one is good at", "one's forte"],
+		"note": "N. \"good aspects\" is CC-CEDICT's wording, not a learner's; 优点 L3-0852 owns \"strong point\"."
+	},
+	"L3-0086": {
+		"meanings": ["shirt (dress shirt)"],
+		"note": "N. 衬衣 L3-0087 is the same garment. Both keep \"shirt\" — moving one off it, as loop 3 did, only hides the collision from the guard."
+	},
+	"L3-0087": {
+		"meanings": ["shirt (general word)"],
+		"note": "N. Loop 3 shipped \"underclothes\" against a reference of [\"shirt\"]; 现代汉语词典 defines 衬衣 as 衬衫. The tag, not a different word, separates it from L3-0086."
+	},
+	"L3-0233": {
+		"meanings": ["all parts of a country", "various regions"],
+		"note": "N. \"in all parts of\" is a fragment CC-CEDICT only completes with its own parenthetical."
+	},
+	"L3-0679": {
+		"meanings": ["to input", "to enter data"],
+		"note": "V. 输入 at HSK 3 is keyboard input; 进口 L4-0410 owns \"to import\", which led this card."
+	},
+	"L4-0111": {
+		"meanings": ["to be in a certain state", "to be situated in"],
+		"note": "V. \"to be in\" alone is a fragment; the reference completes it with \"(some state, position, or condition)\"."
+	},
+	"L4-0222": {
+		"meanings": ["law (in compounds)", "a method"],
+		"note": "N. Loop 3 moved 法 off \"law\" entirely to leave it to 法律 L4-0224. 法 is the bound form of the same word, so it keeps it and says so."
+	},
+	"L4-0224": {
+		"meanings": ["law (a body of rules)", "legislation"],
+		"note": "N. The free-standing noun. 法 L4-0222 shares \"law\"; the tag says which of the two a learner is being asked for."
+	},
+	"L4-0319": {
+		"meanings": ["pitch dark", "darkness"],
+		"note": "Adj. \"darkness\" is the noun and led an adjective card; 暗 L4-0010 owns the plain \"dark\"."
+	},
+	"L4-0570": {
+		"meanings": ["midterm", "the middle of a term"],
+		"note": "N. \"interim\" led the card out of CC-CEDICT; a 期中考试 is a midterm."
+	},
+	"L4-0594": {
+		"meanings": ["a legal right", "an entitlement"],
+		"note": "N. The reference's own qualifier — \"right (i.e. an entitlement to sth)\" — was stripped, leaving a bare \"right\" that reads as the direction."
+	},
+	"L4-0953": {
+		"meanings": ["a plant (a living thing)", "vegetation"],
+		"note": "N. Loop 3 shipped \"plant life\" to dodge 种 L4-0964. Both now keep \"plant\", which is what the reference says and what search needs."
+	},
+	"L4-0964": {
+		"meanings": ["to plant (in the ground)", "to cultivate"],
+		"note": "V. Shares \"plant\" with 植物 L4-0953; the tag is what a learner reads to tell the verb from the noun on the button."
+	},
+	"L5-0092": {
+		"meanings": ["long-lived", "having a long life"],
+		"note": "Adj. \"longevity\" is the noun and led an adjective card."
+	},
+	"L5-0408": {
+		"meanings": ["the recent period", "lately"],
+		"note": "N. Official POS is N and the card led with the adverb; 最近 L2-0763 takes the same shape at its own level."
+	},
+	"L5-0557": {
+		"meanings": ["frequent", "happening often"],
+		"note": "Adj. \"frequently\" is the adverb and led an adjective card."
+	},
+	"L5-0919": {
+		"meanings": ["humorous", "funny in a clever way"],
+		"note": "Adj. \"humor\" is the noun and led an adjective card."
+	},
+	"L5-0939": {
+		"meanings": ["what it was originally", "formerly"],
+		"note": "N. Official POS is N and the card led with the adverb; 原先的计划 is \"the plan as it originally was\"."
+	},
+	"L5-0991": {
+		"meanings": ["a genuine edition", "a licensed copy"],
+		"note": "N. \"genuine\" is the adjective and led a noun card; a 正版 is the licensed edition of a book or a program."
+	}
+}

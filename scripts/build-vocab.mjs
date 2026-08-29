@@ -35,18 +35,31 @@ import { join } from 'node:path';
 import prettier from 'prettier';
 // The app's own sense normaliser, not a copy of it — see the gates section. Node strips the
 // types, so the build and the browser run byte-identical logic.
-import { senseKeys, senseKey, intersects } from '../src/lib/data/senses.ts';
+import {
+	senseKeys,
+	senseKey,
+	intersects,
+	buttonKeys,
+	qualifierOf,
+	splitSenses,
+	singularise
+} from '../src/lib/data/senses.ts';
 
 const OUT = 'src/lib/data';
 const REF = 'reference/hsk';
 const OVERRIDE_DIR = 'scripts/overrides';
 const AUDIT_FILE = 'scripts/vocab-audit.json';
+const SURVIVAL_ALLOW_FILE = 'scripts/gloss-survival-allow.json';
+const SENTENCE_DIR = 'scripts/sentences';
 const LEVELS = [1, 2, 3, 4, 5];
 const OFFICIAL_SIZES = { 1: 500, 2: 772, 3: 973, 4: 1000, 5: 1071 };
 
 const argv = new Set(process.argv.slice(2));
 const VERIFY_ONLY = argv.has('--verify');
 const REPORT = argv.has('--report');
+
+/** How many problems to print. The whole list, when a triage pass needs to read it. */
+const PROBLEM_LIMIT = argv.has('--all') ? Infinity : 200;
 
 /* ------------------------------------------------------------------ hanzi */
 
@@ -119,8 +132,14 @@ function displayPinyin(official, fallback) {
 
 /** Source notation that must never reach a headword or its pinyin. */
 const LEAKED = /[|｜（）()0-9¹²³…∥·[\]{}]/;
-/** Source notation that must never reach a gloss. Digits are fine there ("100 million"). */
-const LEAKED_GLOSS = /[|｜（）()¹²³…∥·[\]{}]/;
+/**
+ * Source notation that must never reach a gloss. Digits are fine there ("100 million"), and
+ * so, since loop 4, are ASCII parentheses: they are how a card qualifies a sense it shares
+ * with a level-mate — 衬衫 "shirt (dress shirt)" against 衬衣 "shirt (general word)" — instead
+ * of abandoning the sense to it. Gate (e) checks they balance; the full-width pair stays
+ * banned because it only ever arrives from the reference's own notation.
+ */
+const LEAKED_GLOSS = /[|｜（）¹²³…∥·[\]{}]/;
 
 /* -------------------------------------------------------------- syllables */
 
@@ -607,6 +626,138 @@ function readOverrides() {
 	return { byId, files };
 }
 
+/**
+ * Reviewed exemptions to gate (f), read from scripts/gloss-survival-allow.json.
+ *
+ * The gate asks whether a card still says what the reference says the word means. Most of
+ * what it catches is a synonym a learner would accept — 美丽 "lovely" for "beautiful", 逐渐
+ * "little by little" for "gradually" — and the point of the gate is not to ban those but to
+ * isolate the handful that are not synonyms at all. Each exemption is one line saying which
+ * it is, and an exemption whose card no longer needs it fails the build, so the list cannot
+ * quietly turn back into a blanket.
+ *
+ *   { "L1-0123": "\"lovely\" is CC-CEDICT's \"beautiful\"; both answer the same prompt." }
+ */
+function readSurvivalAllow() {
+	let parsed;
+	try {
+		parsed = JSON.parse(readFileSync(SURVIVAL_ALLOW_FILE, 'utf8'));
+	} catch (err) {
+		if (err.code === 'ENOENT') return new Map();
+		throw new Error(`${SURVIVAL_ALLOW_FILE}: not valid JSON — ${err.message}`, { cause: err });
+	}
+	if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+		throw new Error(`${SURVIVAL_ALLOW_FILE}: expected an object keyed by official row id`);
+	}
+	const out = new Map();
+	for (const [id, note] of Object.entries(parsed)) {
+		if (!/^L[1-5]-\d{4}$/.test(id)) {
+			throw new Error(`${SURVIVAL_ALLOW_FILE}: "${id}" is not an official row id`);
+		}
+		if (typeof note !== 'string' || !note.trim()) {
+			throw new Error(
+				`${SURVIVAL_ALLOW_FILE}: ${id} needs a one-line reason the rewrite is a synonym`
+			);
+		}
+		out.set(id, note.trim());
+	}
+	return out;
+}
+
+/* ------------------------------------------------------------- sentences */
+
+/** Every character class an example sentence may print: Han, plus four full-width marks. */
+const SENTENCE_PUNCT = /[，。！？]/;
+const SENTENCE_HAN = /[㐀-鿿豈-﫿]/;
+
+/** The characters of a sentence that a learner reads aloud — punctuation is not one. */
+function sentenceChars(hanzi) {
+	return [...String(hanzi)].filter((c) => !SENTENCE_PUNCT.test(c));
+}
+
+/**
+ * A sentence's pinyin, one whitespace-separated token per character.
+ *
+ * Authors split roughly two to one on whether to carry the hanzi's punctuation across into
+ * the pinyin, and the word-level `pinyin` field never carries any, so the build settles it
+ * the same way `displayPinyin` settles the notation on a headword: strip it. What is left is
+ * countable against `sentenceChars` with no special cases.
+ *
+ * Erhua is one token per character, `wán r` and not `wánr`, because that is what the card's
+ * own `syllables` array already says 玩儿 is — 28 of the 29 authored erhua sentences were
+ * written that way and the twenty-ninth is now too.
+ */
+function sentencePinyin(pinyin) {
+	return String(pinyin)
+		.replace(/[.,!?;:]/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
+const pinyinSyllables = (pinyin) => (pinyin ? sentencePinyin(pinyin).split(' ') : []);
+
+/**
+ * Hand-authored example sentences, read from every .json file in scripts/sentences/.
+ *
+ * One file per author, keyed by card id, shape:
+ *
+ *   { "L1-0001": { "hanzi": "我爱我的爸爸妈妈。", "pinyin": "wǒ ài …", "english": "I love …" } }
+ *
+ * Read order carries no meaning — 26 authors wrote these in parallel — so, exactly as with
+ * scripts/overrides/, the merge is order-independent and one id appearing in two files is a
+ * build failure rather than a last-writer-wins. `example` is optional on `Word`: levels 3–5
+ * have no sentences yet, and those cards ship without the field rather than with an empty one.
+ */
+function readSentences() {
+	let files;
+	try {
+		files = readdirSync(SENTENCE_DIR)
+			.filter((name) => name.endsWith('.json'))
+			.sort();
+	} catch {
+		return { byId: new Map(), files: [] };
+	}
+	const byId = new Map();
+	const owner = new Map();
+	for (const name of files) {
+		const path = join(SENTENCE_DIR, name);
+		let parsed;
+		try {
+			parsed = JSON.parse(readFileSync(path, 'utf8'));
+		} catch (err) {
+			throw new Error(`${path}: not valid JSON — ${err.message}`, { cause: err });
+		}
+		if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+			throw new Error(`${path}: expected an object keyed by card id`);
+		}
+		for (const [id, value] of Object.entries(parsed)) {
+			if (!/^L[1-5]-\d{4}$/.test(id)) {
+				throw new Error(`${path}: "${id}" is not a card id`);
+			}
+			if (owner.has(id)) {
+				throw new Error(
+					`${id} has an example in two files: ${owner.get(id)} and ${name} — one id, one sentence`
+				);
+			}
+			if (!value || typeof value !== 'object' || Array.isArray(value)) {
+				throw new Error(`${path}: ${id} must be an object with hanzi, pinyin and english`);
+			}
+			const extra = Object.keys(value).filter((k) => !['hanzi', 'pinyin', 'english'].includes(k));
+			if (extra.length) {
+				throw new Error(`${path}: ${id} has unexpected field(s) ${extra.join(', ')}`);
+			}
+			owner.set(id, name);
+			byId.set(id, {
+				hanzi: String(value.hanzi ?? '').trim(),
+				pinyin: sentencePinyin(value.pinyin ?? ''),
+				english: String(value.english ?? '').trim(),
+				file: name
+			});
+		}
+	}
+	return { byId, files };
+}
+
 /* ------------------------------------------------------------------ build */
 
 function readOfficial() {
@@ -622,7 +773,7 @@ function readOfficial() {
 	return rows;
 }
 
-function build(official, overrides) {
+function build(official, overrides, sentences) {
 	const entries = official.map((r) => {
 		const hanzi = displayHanzi(r.simplified);
 		const pinyin = displayPinyin(r.officialPinyin, r.pinyin);
@@ -689,7 +840,18 @@ function build(official, overrides) {
 		for (const p of e.pos) if (!prev.pos.includes(p)) prev.pos.push(p);
 	}
 
-	return [...byKey.values()];
+	const entriesOut = [...byKey.values()];
+
+	// Example sentences are attached after the merge, because they are keyed on the card a
+	// learner sees, not on an official row: 老1 and 老2 are one card and get one sentence.
+	// An id with no card is not silently ignored — gate (g) reports it.
+	for (const e of entriesOut) {
+		const example = sentences?.get(e.id);
+		if (example)
+			e.example = { hanzi: example.hanzi, pinyin: example.pinyin, english: example.english };
+	}
+
+	return entriesOut;
 }
 
 /* ------------------------------------------------------------------ gates */
@@ -704,7 +866,7 @@ function build(official, overrides) {
  * shipped "shirt" while 衬衣 shipped "a shirt or blouse", and nothing on either side of the
  * pipeline could see it. There is now one implementation; `node` reads the `.ts` directly.
  */
-const senseSetKey = (word) => senseKey(senseKeys(word.meanings));
+const senseSetKey = (word) => senseKey(buttonKeys(word.meanings));
 
 /** The word's own pinyin with the tones and the spacing taken off: 包子 becomes "baozi". */
 function romanization(pinyin) {
@@ -742,14 +904,328 @@ function isBareNounGloss(text) {
 }
 
 /**
- * The four gates. Each one is a defect loop 1 shipped green, and each one is also a test in
- * src/lib/data/vocab.spec.ts so that the shipped JSON is checked even when nobody rebuilds.
+ * Words ending in -ly that are not adverbs. Every one of these is a legitimate lead on an
+ * adjective or a noun card, so the adverb test below has to know them by name.
+ */
+const NOT_ADVERB = new Set([
+	'early',
+	'only',
+	'ugly',
+	'silly',
+	'lovely',
+	'lonely',
+	'friendly',
+	'likely',
+	'lively',
+	'timely',
+	'costly',
+	'deadly',
+	'orderly',
+	'elderly',
+	'curly',
+	'burly',
+	'jolly',
+	'holy',
+	'daily',
+	'weekly',
+	'monthly',
+	'yearly',
+	'hourly',
+	'nightly',
+	'quarterly',
+	'leisurely',
+	'smelly',
+	'chilly',
+	'hilly',
+	'oily',
+	'homely',
+	'manly',
+	'worldly',
+	'kindly',
+	'stately',
+	'saintly',
+	'sickly',
+	'portly',
+	'scholarly',
+	'brotherly',
+	'motherly',
+	'fatherly',
+	'sisterly',
+	'cowardly',
+	'miserly',
+	'unruly',
+	'surly',
+	'wobbly',
+	'prickly',
+	'ghastly',
+	'godly',
+	'comely',
+	'seemly',
+	'family',
+	'ally',
+	'belly',
+	'jelly',
+	'rally',
+	'tally',
+	'bully',
+	'folly',
+	'fly',
+	'butterfly',
+	'dragonfly',
+	'supply',
+	'reply',
+	'apply',
+	'assembly',
+	'monopoly',
+	'anomaly',
+	'melancholy',
+	'italy',
+	'july'
+]);
+
+/** A gloss that is one -ly adverb and nothing else: "recently", "generally", "frequently". */
+function isAdverbGloss(text) {
+	const words = String(text)
+		.toLowerCase()
+		.split(/[\s-]+/)
+		.filter(Boolean);
+	if (words.length !== 1) return false;
+	return /ly$/.test(words[0]) && !NOT_ADVERB.has(words[0]);
+}
+
+/**
+ * A gloss that is one unmistakable noun: "darkness", "longevity", "humor".
+ *
+ * Stricter than `isBareNounGloss`, which an adjective card trips constantly — "the same"
+ * opens with an article, "outstanding" and "charming" end in -ing, "of fine quality" is a
+ * phrase. Only a single word whose own suffix makes it a noun counts here.
+ */
+function isNounWordGloss(text) {
+	const words = String(text)
+		.toLowerCase()
+		.split(/[\s-]+/)
+		.filter(Boolean);
+	if (words.length !== 1) return false;
+	return NOUN_SUFFIX.test(words[0]) && !/ing$/.test(words[0]);
+}
+
+/**
+ * The gloss as the part-of-speech gate reads it: qualifier dropped.
+ *
+ * A qualifier describes the sense, it does not lead it — 该 "should (it is one's turn)" is a
+ * modal gloss whose tag happens to open with a verb — so every test below runs on the part a
+ * learner reads first.
+ */
+function leadOf(word) {
+	return String(word.meanings[0] || '')
+		.replace(/\([^)]*\)/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+}
+
+/**
+ * True when a gloss's parentheses are usable as a qualifier: balanced, never nested, never
+ * empty, and never the whole gloss. `shirt (general word)` yes; `(general word)` no.
+ */
+function qualifierIsWellFormed(text) {
+	let depth = 0;
+	for (const c of String(text)) {
+		if (c === '(') {
+			depth++;
+			if (depth > 1) return false;
+		} else if (c === ')') {
+			depth--;
+			if (depth < 0) return false;
+		}
+	}
+	if (depth !== 0) return false;
+	if (!/\(/.test(text)) return true;
+	if (/\(\s*\)/.test(text)) return false;
+	return Boolean(
+		String(text)
+			.replace(/\([^)]*\)/g, ' ')
+			.trim()
+	);
+}
+
+/* -------------------------------------------------------- gloss survival */
+
+/**
+ * Words that carry no sense of their own, so they neither count toward a sense's length nor
+ * have to survive on the card. Glue only: 那 means "that" and 一 means "one", so the
+ * demonstratives and the numeral stay in, or the gate would have nothing to hold them to.
+ */
+const CORE_STOP = new Set([
+	'to',
+	'a',
+	'an',
+	'the',
+	'of',
+	'for',
+	'in',
+	'on',
+	'at',
+	'with',
+	'by',
+	'and',
+	'or',
+	'as',
+	'from',
+	'into',
+	'be',
+	'is',
+	'sb',
+	'sth'
+]);
+
+/**
+ * A reference clause too entangled to hold the card to: a bracketed pinyin, a hanzi
+ * cross-reference, a list comma, or a `sth`/`sb` placeholder is a dictionary construction
+ * rather than a word a learner would answer with.
+ *
+ * Parentheses are handled separately, by `unscoped` below.
+ */
+const CORE_SKIP = /[[\]㐀-鿿,]|\b(?:sth|sb|s\.o\.|someone|something|oneself|one's|etc)\b/i;
+
+/**
+ * A clause with its scope marker taken off, or `null` if what is left is still hedged.
+ *
+ * The rule is "no parenthetical", and the reason is that a hedged sense is not a naming the
+ * card can be held to. But CC-CEDICT writes its plainest namings hedged — `(of sth) to move`,
+ * `to introduce (sb to sb)`, `to take a taxi (in China)` — and dropping those wholesale
+ * leaves 动 obliged to say "to displace" and 打车 obliged to say "to hitch a lift", which
+ * inverts the gate. One marker at either end comes off; anything else, or a marker in the
+ * middle of the sense, still disqualifies the clause.
+ */
+function unscoped(clause) {
+	const bare = String(clause)
+		.replace(/^\s*\([^()]*\)\s*/, ' ')
+		.replace(/\s*\([^()]*\)\s*$/, ' ')
+		.trim();
+	return /[()]/.test(bare) ? null : bare;
+}
+
+/** Grammar labels. True of the word, but never the English a learner answers with. */
+const CORE_PLUMBING =
+	/\b(?:particle|classifier|measure word|prefix|suffix|marker|abbr|surname|onom|interjection|used\b)/i;
+
+/**
+ * The reference senses a card is not allowed to lose: each one's wording, mapped to the words
+ * that carry it.
+ *
+ * Short and unambiguous only — at most two content words, no parenthetical, no placeholder —
+ * because those are the senses where CC-CEDICT is simply naming the word in English and no
+ * amount of level-appropriate judgement makes the naming wrong. 听见's whole entry is
+ * `["to hear"]`; whatever else the card says, it has to still say "hear".
+ */
+function coreSenses(defs, pinyin, pos) {
+	const rom = romanization(pinyin || '');
+	const out = new Map();
+	for (const raw of defs ?? []) {
+		const original = String(raw || '').trim();
+		if (!original || DROP_SENSE.some((re) => re.test(original))) continue;
+		const graded = original.replace(LIT_AND_FIG, ' ');
+		if (EXCLUDE_LEADING.test(graded)) continue;
+		for (const hedged of topLevelClauses(graded)) {
+			if (EXCLUDE_CLAUSE.test(hedged) || EXCLUDE_REGIONAL.test(hedged)) continue;
+			const clause = unscoped(hedged);
+			if (clause === null) continue;
+			if (CORE_SKIP.test(clause) || CORE_PLUMBING.test(clause)) continue;
+			if (DROP_SENSE.some((re) => re.test(clause.trim()))) continue;
+			const text = tidy(stripSense(clause));
+			if (!text || FORBIDDEN_GLOSS.test(text)) continue;
+			// Gate (c) forbids a card glossing itself with its own pinyin, so gate (f) must
+			// not demand it: CC-CEDICT names 包子 "baozi" and the card may not repeat it.
+			if (rom && asLetters(text) === rom) continue;
+			if (!coreFitsPos(text, pos)) continue;
+			const content = contentWords(text);
+			if (!content.size || content.size > 2) continue;
+			if (!out.has(text)) out.set(text, content);
+		}
+	}
+	return out;
+}
+
+/** English glosses a verb card leads with that carry no `to`: the modals. */
+const MODAL = /^(?:should|ought|must|may|might|can|will|shall|would|could|need)\b/i;
+
+/**
+ * Whether a reference sense is one *this* card could carry, given its official part of speech.
+ *
+ * 花 is listed at L2 as a verb and CC-CEDICT names the noun ("flower", "blossom"); 杯 is
+ * listed as a measure word and CC-CEDICT names the cup. Holding those cards to a sense their
+ * own part of speech rules out is gate (d) run backwards, so the sense is not an obligation.
+ */
+function coreFitsPos(text, pos) {
+	if (!pos.length) return true;
+	// A classifier reading is written "classifier for X" — filtered out as plumbing — so
+	// everything CC-CEDICT has left to say about a measure word belongs to another reading.
+	if (pos.includes('M')) return false;
+	const isTo = /^to\b/i.test(text);
+	if (pos.every((p) => NOMINAL_ONLY.includes(p)) && isTo) return false;
+	// The mirror of gate (d): a verb-only card answers with a verb, so CC-CEDICT's nominal
+	// and adjectival readings of the same character are somebody else's card. 是 is listed V
+	// and CC-CEDICT also says "correct; right; true"; 花 is listed V and it says "flower".
+	// Modals are the exception a `to` test cannot see — 该 answers "should", not "to should".
+	if (pos.length === 1 && pos[0] === 'V' && !isTo && !MODAL.test(text)) return false;
+	return true;
+}
+
+/** The words of a gloss that carry its sense, each folded to its singular. */
+function contentWords(text) {
+	const out = new Set();
+	for (const sense of splitSenses(text)) {
+		for (const word of sense.split(' ')) {
+			const stem = singularise(word);
+			if (stem && !CORE_STOP.has(stem)) out.add(stem);
+		}
+	}
+	return out;
+}
+
+/**
+ * The characters a sentence at each level is allowed to use.
+ *
+ * Built from the shipped corpus itself rather than from a separate character list, so it can
+ * never disagree with what the app actually teaches: a character is allowed at level L when
+ * some word at level L or below is written with it. The five sets nest, and come out at
+ * 300 / 599 / 899 / 1200 / 1500 characters — the standard's own per-level character budget.
+ */
+function allowedCharacters(shipped) {
+	const perLevel = new Map(LEVELS.map((level) => [level, new Set()]));
+	for (const w of shipped) {
+		const set = perLevel.get(w.level);
+		if (set) for (const c of w.hanzi) if (SENTENCE_HAN.test(c)) set.add(c);
+	}
+	const cumulative = new Map();
+	let seen = new Set();
+	for (const level of LEVELS) {
+		seen = new Set([...seen, ...perLevel.get(level)]);
+		cumulative.set(level, new Set(seen));
+	}
+	return cumulative;
+}
+
+/** The longest sentence a card will show. Past this it stops being an example and becomes a text. */
+const MAX_SENTENCE = 20;
+
+/**
+ * The seven gates. Each one is a defect a previous loop shipped green, and each one is also a
+ * test in src/lib/data/vocab.spec.ts so that the shipped JSON is checked even when nobody
+ * rebuilds.
  *
  * These fail the build. They are not tuneable: `meanings[0]` is the quiz question, so every
  * one of them is a wrong answer put in front of a learner.
+ *
+ * `refs` carries what the shipped card cannot: `defs`, the reference row's own CC-CEDICT
+ * senses, keyed by official id, `allow`, the reviewed exemptions to gate (f), and
+ * `sentences`, the authored example sentences gate (g) checks the card's `example` against.
  */
-function gateProblems(shipped) {
+function gateProblems(shipped, refs) {
 	const problems = [];
+	const defsById = refs?.defs ?? new Map();
+	const allow = refs?.allow ?? new Map();
+	const sentences = refs?.sentences ?? new Map();
 
 	// (a) Register. No gloss carries slang, sexual, vulgar, dialect, figurative or
 	//     variant-character content — whatever produced it.
@@ -801,28 +1277,142 @@ function gateProblems(shipped) {
 		}
 	}
 
-	// (d) Part of speech and primary gloss agree.
+	// (d) Part of speech and primary gloss agree, in both directions.
+	//
+	//     Loop 3 tested two of the four shapes — a `to …` lead on an N/Adj/Adv card and a
+	//     bare-noun lead on a V-only card — so an adjective or a noun card leading with an
+	//     adverb was invisible: 最近 L2 [N] "recently", 近来 L5 [N] "recently", 原先 L5 [N]
+	//     "originally", 一般 L2 [Adj] "generally", 频繁 L5 [Adj] "frequently" all shipped
+	//     green. So was an adjective card leading with a noun (长寿 [Adj] "longevity").
 	for (const w of shipped) {
-		const lead = w.meanings[0] || '';
 		if (!w.pos.length) continue;
+		const lead = leadOf(w);
+		const pos = `[${w.pos.join('/')}]`;
 		if (w.pos.every((p) => NOMINAL_ONLY.includes(p)) && /^to\b/i.test(lead)) {
-			problems.push(
-				`gate:pos ${w.id} ${w.hanzi} [${w.pos.join('/')}]: leads with the verb gloss "${lead}"`
-			);
+			problems.push(`gate:pos ${w.id} ${w.hanzi} ${pos}: leads with the verb gloss "${lead}"`);
 		}
 		if (w.pos.length === 1 && w.pos[0] === 'V' && isBareNounGloss(lead)) {
 			problems.push(`gate:pos ${w.id} ${w.hanzi} [V]: leads with the noun gloss "${lead}"`);
+		}
+		if (w.pos.every((p) => p === 'Adj') && isNounWordGloss(lead)) {
+			problems.push(`gate:pos ${w.id} ${w.hanzi} [Adj]: leads with the noun gloss "${lead}"`);
+		}
+		if (w.pos.every((p) => p === 'N' || p === 'Adj') && isAdverbGloss(lead)) {
+			problems.push(`gate:pos ${w.id} ${w.hanzi} ${pos}: leads with the adverb gloss "${lead}"`);
 		}
 	}
 
 	// (e) Punctuation closes. L3 老百姓 shipped `the "person in the street` straight onto an
 	//     answer button — a sense truncated mid-quote — and every battery in loop 2 called
-	//     the corpus clean, because nothing was counting quotation marks.
+	//     the corpus clean, because nothing was counting quotation marks. Parentheses are
+	//     checked the same way, and harder: a qualifier is only readable if it is balanced,
+	//     unnested, non-empty and has a gloss in front of it.
 	for (const w of shipped) {
 		for (const m of w.meanings) {
 			if ((m.match(/"/g) ?? []).length % 2 || /[“”]/.test(m)) {
 				problems.push(`gate:punctuation ${w.id} ${w.hanzi}: unclosed quotation in "${m}"`);
 			}
+			if (!qualifierIsWellFormed(m)) {
+				problems.push(`gate:punctuation ${w.id} ${w.hanzi}: unusable parentheses in "${m}"`);
+			}
+		}
+	}
+
+	// (f) The word's own English survived whatever was done to the card.
+	//
+	//     Loop 2 found 38 same-level pairs whose primary glosses answered to the same English
+	//     and loop 3 "resolved" all 38 by moving BOTH cards off the shared word. 听见 shipped
+	//     "to catch a sound" for CC-CEDICT's `["to hear"]`; 衬衣 shipped "underclothes" for
+	//     `["shirt"]`. Nothing failed, because no gate had ever asked whether the word still
+	//     means what it means — and the paraphrase is worse than the collision it hid, since
+	//     `senseKeys(听见)` no longer meets `senseKeys(听到)` and the distractor guard will now
+	//     happily offer 听到 as a wrong answer for 听见.
+	//
+	//     So: for every reference sense short and plain enough to be a naming rather than a
+	//     reading (see `coreSenses`), at least one has to still be findable in `meanings`.
+	//     A card may be re-glossed as far as this line and no further; past it, qualify the
+	//     sense rather than replace it — 听见 "to hear (and catch it)" — or, where the rewrite
+	//     really is a synonym a learner would accept, say so in the allow file, one line each.
+	for (const w of shipped) {
+		const defs = w.ids.flatMap((id) => defsById.get(id) ?? []);
+		const core = coreSenses(defs.length ? defs : (w.defs ?? []), w.pinyin, w.pos);
+		const exempt = allow.get(w.id);
+		if (!core.size) {
+			if (exempt) {
+				problems.push(
+					`gate:gloss-survival ${w.id} ${w.hanzi}: exempt but has no short reference sense — drop it from ${SURVIVAL_ALLOW_FILE}`
+				);
+			}
+			continue;
+		}
+		const carried = contentWords(w.meanings.join('; '));
+		const survived = [...core.values()].some((words) => intersects(words, carried));
+		if (survived) {
+			if (exempt) {
+				problems.push(
+					`gate:gloss-survival ${w.id} ${w.hanzi}: exempt but the reference sense is on the card — drop it from ${SURVIVAL_ALLOW_FILE}`
+				);
+			}
+			continue;
+		}
+		if (exempt) continue;
+		const wanted = [...core.keys()].map((t) => `"${t}"`).join(', ');
+		const got = w.meanings.map((m) => `"${m}"`).join(', ');
+		problems.push(
+			`gate:gloss-survival ${w.id} ${w.hanzi}: reference says ${wanted}; card says ${got}`
+		);
+	}
+
+	// (g) An example sentence is written at or below its own card's level.
+	//
+	//     A sentence exists to show the word working, so it has to be readable by the learner
+	//     who is on that card. One HSK 5 character in an HSK 1 example does not teach 爱 in
+	//     context; it replaces one unknown word with two. The allowed set is derived from the
+	//     shipped corpus (see `allowedCharacters`), so it tracks whatever the app teaches
+	//     rather than a list that can fall behind it.
+	//
+	//     The rest of the gate is the sentence being a sentence at all: pinyin that aligns
+	//     one token to one character (which is also what makes it colourable syllable by
+	//     syllable, the same way the headword is), the card's own word actually present, no
+	//     empty field, and short enough to read on a phone.
+	const allowed = allowedCharacters(shipped);
+	const cardIds = new Set(shipped.map((w) => w.id));
+	for (const [id, authored] of sentences) {
+		if (!cardIds.has(id)) {
+			problems.push(
+				`gate:example-level ${id}: ${authored.file} writes a sentence for no such card`
+			);
+		}
+	}
+	for (const w of shipped) {
+		const ex = w.example;
+		if (!ex) continue;
+		const where = `gate:example-level ${w.id} ${w.hanzi}`;
+		if (!ex.hanzi || !ex.pinyin || !ex.english) {
+			problems.push(`${where}: example is missing hanzi, pinyin or english`);
+			continue;
+		}
+		const chars = sentenceChars(ex.hanzi);
+		const stray = chars.filter((c) => !SENTENCE_HAN.test(c));
+		if (stray.length) {
+			problems.push(`${where}: "${ex.hanzi}" is not hanzi and punctuation — "${stray.join('')}"`);
+		}
+		const set = allowed.get(w.level) ?? new Set();
+		const above = [...new Set(chars.filter((c) => SENTENCE_HAN.test(c) && !set.has(c)))];
+		if (above.length) {
+			problems.push(`${where}: "${ex.hanzi}" uses "${above.join(' ')}" — above HSK ${w.level}`);
+		}
+		const syllables = pinyinSyllables(ex.pinyin);
+		if (syllables.length !== chars.length) {
+			problems.push(
+				`${where}: "${ex.hanzi}" is ${chars.length} character(s) but "${ex.pinyin}" is ${syllables.length} syllable(s)`
+			);
+		}
+		if (!ex.hanzi.includes(w.hanzi)) {
+			problems.push(`${where}: "${ex.hanzi}" never uses the word it is an example of`);
+		}
+		if (chars.length > MAX_SENTENCE) {
+			problems.push(`${where}: "${ex.hanzi}" is ${chars.length} characters, over ${MAX_SENTENCE}`);
 		}
 	}
 
@@ -858,7 +1448,7 @@ function primaryCollisions(shipped) {
 					const pair = `${other.id} ${w.id}`;
 					if (seenPairs.has(pair)) continue;
 					seenPairs.add(pair);
-					found.push({ level, sense, a: other, b: w });
+					found.push({ level, sense, a: other, b: w, qualified: qualifiedApart(other, w) });
 				}
 				others.push(w);
 			}
@@ -868,14 +1458,37 @@ function primaryCollisions(shipped) {
 }
 
 /**
- * Within a level, two cards must never answer to the same English — not a shared sense in
+ * True when two cards keep a shared sense but say on the button which one they are.
+ *
+ * This is the only resolution of a primary collision the build accepts besides genuinely
+ * different senses, and it is deliberately the *easier* one to reach, because the alternative
+ * authors kept choosing was to paraphrase both cards off the shared word — which hides the
+ * collision from `senseKeys`, tells the distractor guard the two are unrelated, and deletes
+ * the word from the app's own search. 衬衫 "shirt (dress shirt)" and 衬衣 "shirt (general
+ * word)" still both answer to `shirt`, so the guard still refuses to put them on one card;
+ * what changed is that a learner reading the two buttons can tell them apart.
+ */
+function qualifiedApart(a, b) {
+	const qa = qualifierOf(a.meanings[0] || '');
+	const qb = qualifierOf(b.meanings[0] || '');
+	return Boolean(qa) && Boolean(qb) && qa !== qb;
+}
+
+/**
+ * Within a level, two cards must never read the same on the button — not a shared sense in
  * the primary gloss, and not the same set of glosses in a different order.
+ *
+ * "Read the same" and "mean the same" are two questions, and this is the first one: a pair
+ * that shares a sense but qualifies it on both sides is resolved, and passes. The second
+ * question is still asked, at runtime, by the distractor guard, which keeps the pair off one
+ * card precisely *because* the shared sense is still visible to `senseKeys`.
  */
 function uniquenessProblems(shipped) {
 	const problems = [];
-	for (const { level, sense, a, b } of primaryCollisions(shipped)) {
+	for (const { level, sense, a, b, qualified } of primaryCollisions(shipped)) {
+		if (qualified) continue;
 		problems.push(
-			`unique:primary L${level} "${sense}": ${a.hanzi} (${a.id}) "${a.meanings[0]}" / ${b.hanzi} (${b.id}) "${b.meanings[0]}"`
+			`unique:primary L${level} "${sense}": ${a.hanzi} (${a.id}) "${a.meanings[0]}" / ${b.hanzi} (${b.id}) "${b.meanings[0]}" — qualify both, do not move either off "${sense}"`
 		);
 	}
 	for (const level of LEVELS) {
@@ -926,7 +1539,7 @@ function secondarySharing(shipped) {
  * Every one of the 4,316 official rows must be traceable to exactly one shipped entry,
  * with hanzi, pinyin, syllables and level unchanged from the standard.
  */
-function verify(official, shipped) {
+function verify(official, shipped, refs) {
 	const problems = [];
 	const byId = new Map();
 	for (const w of shipped) for (const id of w.ids) byId.set(id, w);
@@ -992,7 +1605,7 @@ function verify(official, shipped) {
 	}
 
 	problems.push(...uniquenessProblems(shipped));
-	problems.push(...gateProblems(shipped));
+	problems.push(...gateProblems(shipped, refs));
 	return problems;
 }
 
@@ -1008,7 +1621,7 @@ const FUNCTION_POS = ['Adv', 'Prep', 'Conj', 'Aux', 'M', 'Prefix', 'Suffix', 'Nu
  * wrongly off it ships a wrong answer to a learner, which is exactly what loop 1 did about
  * 430 times over.
  */
-function auditEntries(shipped) {
+function auditEntries(shipped, refs) {
 	const gateHits = new Map();
 	const note = (id, reason) => {
 		if (!gateHits.has(id)) gateHits.set(id, new Set());
@@ -1016,16 +1629,17 @@ function auditEntries(shipped) {
 	};
 	const byId = new Map(shipped.map((w) => [w.id, w]));
 
-	for (const problem of gateProblems(shipped)) {
-		const reason = problem.startsWith('gate:register')
-			? 'register-denied-gloss'
-			: problem.startsWith('gate:cross-level')
-				? 'cross-level-duplicate-gloss'
-				: problem.startsWith('gate:romanization')
-					? 'gloss-is-its-own-romanization'
-					: problem.startsWith('gate:punctuation')
-						? 'unclosed-punctuation'
-						: 'pos-and-gloss-disagree';
+	const GATE_REASON = {
+		'gate:register': 'register-denied-gloss',
+		'gate:cross-level': 'cross-level-duplicate-gloss',
+		'gate:romanization': 'gloss-is-its-own-romanization',
+		'gate:punctuation': 'unclosed-punctuation',
+		'gate:gloss-survival': 'reference-sense-not-on-card',
+		'gate:example-level': 'example-sentence-above-level',
+		'gate:pos': 'pos-and-gloss-disagree'
+	};
+	for (const problem of gateProblems(shipped, refs)) {
+		const reason = GATE_REASON[problem.split(' ')[0]] ?? 'pos-and-gloss-disagree';
 		for (const m of problem.matchAll(/\b(L[1-5]-\d{4})\b/g)) if (byId.has(m[1])) note(m[1], reason);
 	}
 	for (const problem of uniquenessProblems(shipped)) {
@@ -1033,6 +1647,14 @@ function auditEntries(shipped) {
 			? 'primary-gloss-collision'
 			: 'identical-meaning-set';
 		for (const m of problem.matchAll(/\b(L[1-5]-\d{4})\b/g)) if (byId.has(m[1])) note(m[1], reason);
+	}
+	// A qualified pair passes the uniqueness gate on purpose — the two buttons read
+	// differently — but it is still two cards in one level answering to one English word, so
+	// it stays on the work list where a human can decide whether the tag is doing enough.
+	for (const { a, b, qualified } of primaryCollisions(shipped)) {
+		if (!qualified) continue;
+		note(a.id, 'primary-gloss-qualified');
+		note(b.id, 'primary-gloss-qualified');
 	}
 	// Not a build failure — see secondarySharing(). Listed so it is work someone can see.
 	for (const { a, b } of secondarySharing(shipped)) {
@@ -1116,6 +1738,9 @@ function toShipped(entries, level) {
 			pinyin: w.pinyin,
 			syllables: w.syllables,
 			meanings: w.meanings,
+			// Optional, and absent rather than empty where no sentence has been authored:
+			// HSK 3–5 have none yet, and nothing in the app may assume the field is there.
+			...(w.example ? { example: w.example } : {}),
 			pos: w.pos,
 			level: w.level,
 			// Only present where two official rows collapsed into one card; keeps the
@@ -1153,17 +1778,29 @@ function fatal(err) {
 const official = readOfficial();
 let overrides;
 let overrideFiles;
+let sentences;
+let sentenceFiles;
 let built;
+let refs;
 try {
 	({ byId: overrides, files: overrideFiles } = readOverrides());
-	built = build(official, overrides);
+	({ byId: sentences, files: sentenceFiles } = readSentences());
+	built = build(official, overrides, sentences);
+	// What the shipped card cannot carry: the reference row's own senses, the reviewed list
+	// of cards allowed to have re-glossed past them, and the authored sentences. Gate (f)
+	// reads the first two, gate (g) the third.
+	refs = {
+		defs: new Map(official.map((r) => [r.id, r.cedictDefs || []])),
+		allow: readSurvivalAllow(),
+		sentences
+	};
 } catch (err) {
 	fatal(err);
 }
 
 // The audit is the work list that clears the gates, so it is written whether or not the
 // gates pass. A failing build that also refuses to say what to fix is not much use.
-const audit = auditEntries(built);
+const audit = auditEntries(built, refs);
 if (!VERIFY_ONLY) {
 	mkdirSync('scripts', { recursive: true });
 	// Through Prettier like every other generated file, so `npm run lint` stays green.
@@ -1181,7 +1818,7 @@ if (VERIFY_ONLY) {
 		console.error(`cannot read ${OUT}: ${err.message}`);
 		process.exit(1);
 	}
-	problems.push(...verify(official, checkedIn));
+	problems.push(...verify(official, checkedIn, refs));
 	for (const level of LEVELS) {
 		const file = `${OUT}/hsk${level}.json`;
 		if ((await serialize(toShipped(built, level), file)) !== readFileSync(file, 'utf8')) {
@@ -1189,7 +1826,7 @@ if (VERIFY_ONLY) {
 		}
 	}
 } else {
-	problems.push(...verify(official, built));
+	problems.push(...verify(official, built, refs));
 }
 
 const shipped = VERIFY_ONLY ? readCheckedIn() : built;
@@ -1218,9 +1855,11 @@ for (const p of problems) {
 
 if (problems.length) {
 	console.error(`\n${problems.length} problem(s):`);
-	for (const p of problems.slice(0, 200)) console.error('  ' + p);
-	if (problems.length > 200) console.error(`  … ${problems.length - 200} more`);
-	console.error(`\nnothing written — fix the glosses in ${OVERRIDE_DIR}/ and rebuild.`);
+	for (const p of problems.slice(0, PROBLEM_LIMIT)) console.error('  ' + p);
+	if (problems.length > PROBLEM_LIMIT) console.error(`  … ${problems.length - PROBLEM_LIMIT} more`);
+	console.error(
+		`\nnothing written — fix the glosses in ${OVERRIDE_DIR}/ or the sentences in ${SENTENCE_DIR}/, then rebuild.`
+	);
 	console.error(`${AUDIT_FILE} lists ${audit.length} card(s) that need a human-authored gloss.`);
 }
 
@@ -1231,6 +1870,11 @@ const summary = {
 	perLevel,
 	overrideFiles,
 	overrides: overrides.size,
+	sentenceFiles: sentenceFiles.length,
+	examples: shipped.filter((w) => w.example).length,
+	examplesPerLevel: Object.fromEntries(
+		LEVELS.map((level) => [level, shipped.filter((w) => w.level === level && w.example).length])
+	),
 	auditEntries: audit.length,
 	problems: problems.length,
 	problemsByGate: buckets

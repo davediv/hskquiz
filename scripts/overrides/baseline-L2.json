@@ -55,10 +55,6 @@
 		"meanings": ["adult", "grownup"],
 		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
 	},
-	"L2-0105": {
-		"meanings": ["however"],
-		"note": "Near-synonym — split from its level-mate so a question has one right answer."
-	},
 	"L2-0108": {
 		"meanings": ["at that time"],
 		"note": "Near-synonym — split from its level-mate so a question has one right answer."
@@ -162,10 +158,6 @@
 	"L2-0302": {
 		"meanings": ["hotel"],
 		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
-	},
-	"L2-0321": {
-		"meanings": ["yet"],
-		"note": "Near-synonym — split from its level-mate so a question has one right answer."
 	},
 	"L2-0326": {
 		"meanings": ["a class in progress"],
@@ -299,10 +291,6 @@
 		"meanings": ["the whole body"],
 		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
 	},
-	"L2-0458": {
-		"meanings": ["everyone as a body"],
-		"note": "Near-synonym — split from its level-mate so a question has one right answer."
-	},
 	"L2-0459": {
 		"meanings": ["and then", "afterwards"],
 		"note": "Near-synonym — split from its level-mate so a question has one right answer."
@@ -425,10 +413,6 @@
 	},
 	"L2-0651": {
 		"meanings": ["bon voyage"],
-		"note": "Near-synonym — split from its level-mate so a question has one right answer."
-	},
-	"L2-0660": {
-		"meanings": ["generally", "so-so"],
 		"note": "Near-synonym — split from its level-mate so a question has one right answer."
 	},
 	"L2-0663": {

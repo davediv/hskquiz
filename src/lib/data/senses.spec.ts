@@ -6,14 +6,17 @@
  */
 import { describe, expect, it } from 'vitest';
 import {
+	buttonKeys,
 	intersects,
 	primarySenses,
+	qualifierOf,
 	senseKey,
 	senseKeys,
 	senseSet,
 	sharesSense,
 	singularise,
-	splitSenses
+	splitSenses,
+	withQualifiers
 } from './senses';
 
 describe('splitSenses', () => {
@@ -137,5 +140,33 @@ describe('sense sets', () => {
 	it('walks the smaller set when intersecting', () => {
 		expect(intersects(new Set(['a']), new Set(['a', 'b', 'c']))).toBe(true);
 		expect(intersects(new Set(['a', 'b', 'c']), new Set(['z']))).toBe(false);
+	});
+});
+
+describe('qualifiers', () => {
+	// The two questions the app asks about one gloss. "Would both be right?" must ignore the
+	// parenthetical, or the distractor guard stops seeing a collision that is still real and
+	// starts offering 听到 as a wrong answer for 听见. "Do the two buttons read the same?" must
+	// not, or a resolved pair looks like an unresolved one to the uniqueness gate.
+	it('ignores the qualifier when asking what a gloss answers to', () => {
+		expect(splitSenses('shirt (dress shirt)')).toEqual(['shirt']);
+		expect(splitSenses('to hear (and catch it)')).toEqual(['hear']);
+		expect(
+			sharesSense({ meanings: ['shirt (dress shirt)'] }, { meanings: ['shirt (general word)'] })
+		).toBe(true);
+	});
+
+	it('reads the qualifier when asking what the button says', () => {
+		expect(withQualifiers('shirt (dress shirt)')).toBe('shirt  dress shirt ');
+		expect([...buttonKeys(['shirt (dress shirt)'])]).toEqual(['shirt dress shirt']);
+		expect(senseKey(buttonKeys(['shirt (dress shirt)']))).not.toBe(
+			senseKey(buttonKeys(['shirt (general word)']))
+		);
+	});
+
+	it('normalises the tag itself, and reports none when there is none', () => {
+		expect(qualifierOf("should (it is one's turn)")).toBe('it is ones turn');
+		expect(qualifierOf('should (ought to)')).toBe('ought to');
+		expect(qualifierOf('shirt')).toBe('');
 	});
 });

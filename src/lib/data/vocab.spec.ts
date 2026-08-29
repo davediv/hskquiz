@@ -23,7 +23,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Level, Word } from '$lib/types';
 import { LEVEL_SIZES, LEVELS } from '$lib/types';
-import { intersects, senseKey, senseKeys } from '$lib/data/senses';
+import { buttonKeys, intersects, qualifierOf, senseKey, senseKeys } from '$lib/data/senses';
 import { SHIPPED_SIZES, SHIPPED_TOTAL } from './sizes';
 
 interface ShippedWord extends Word {
@@ -265,9 +265,46 @@ function isBareNounGloss(text: string): boolean {
 	return NOUN_SUFFIX.test(head);
 }
 
+/** Kept in step with `NOT_ADVERB` in scripts/build-vocab.mjs — -ly words that are not adverbs. */
+const NOT_ADVERB = new Set(
+	`early only ugly silly lovely lonely friendly likely lively timely costly deadly orderly
+	 elderly curly burly jolly holy daily weekly monthly yearly hourly nightly quarterly
+	 leisurely smelly chilly hilly oily homely manly worldly kindly stately saintly sickly
+	 portly scholarly brotherly motherly fatherly sisterly cowardly miserly unruly surly
+	 wobbly prickly ghastly godly comely seemly family ally belly jelly rally tally bully
+	 folly fly butterfly dragonfly supply reply apply assembly monopoly anomaly melancholy
+	 italy july`.split(/\s+/)
+);
+
+/** One -ly adverb and nothing else: "recently", "generally", "frequently". */
+function isAdverbGloss(text: string): boolean {
+	const words = text
+		.toLowerCase()
+		.split(/[\s-]+/)
+		.filter(Boolean);
+	return words.length === 1 && /ly$/.test(words[0]) && !NOT_ADVERB.has(words[0]);
+}
+
+/** One unmistakable noun: "darkness", "longevity". Never an -ing participle. */
+function isNounWordGloss(text: string): boolean {
+	const words = text
+		.toLowerCase()
+		.split(/[\s-]+/)
+		.filter(Boolean);
+	return words.length === 1 && NOUN_SUFFIX.test(words[0]) && !/ing$/.test(words[0]);
+}
+
+/** The gloss the part-of-speech gate reads: the qualifier describes, it does not lead. */
+const leadOf = (word: ShippedWord) =>
+	(word.meanings[0] ?? '')
+		.replace(/\([^)]*\)/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+
 /** The senses the app's own distractor guard compares on — see src/lib/data/senses.ts. */
 const primarySenses = (word: ShippedWord) => senseKeys(word.meanings.slice(0, 1));
-const senseSetKey = (word: ShippedWord) => senseKey(senseKeys(word.meanings));
+/** What the button reads, qualifier and all — the other question senses.ts answers. */
+const senseSetKey = (word: ShippedWord) => senseKey(buttonKeys(word.meanings));
 
 describe('gloss gates', () => {
 	it('(a) ships no slang, vulgar, dialect, figurative or variant-character gloss', () => {
@@ -323,30 +360,49 @@ describe('gloss gates', () => {
 		expect(bad).toEqual([]);
 	});
 
-	it('(e) closes every quotation it opens', () => {
+	it('(e) closes every quotation and every qualifier it opens', () => {
 		// L3 老百姓 shipped `the "person in the street` — a CC-CEDICT sense truncated inside
-		// its own quotation marks — straight onto an answer button.
+		// its own quotation marks — straight onto an answer button. Parentheses now carry the
+		// qualifier that resolves a shared sense, so they are held to the same standard:
+		// balanced, never nested, never empty, never the whole gloss.
 		const bad: string[] = [];
 		for (const word of shipped) {
 			for (const meaning of word.meanings) {
 				if ((meaning.match(/"/g) ?? []).length % 2 || /[\u201c\u201d]/.test(meaning)) {
 					bad.push(`${label(word)}: ${JSON.stringify(meaning)}`);
 				}
+				const opens = (meaning.match(/\(/g) ?? []).length;
+				const closes = (meaning.match(/\)/g) ?? []).length;
+				const wellFormed =
+					opens === closes &&
+					!/\([^)]*\(/.test(meaning) &&
+					!/\(\s*\)/.test(meaning) &&
+					(opens === 0 || meaning.replace(/\([^)]*\)/g, ' ').trim() !== '');
+				if (!wellFormed) bad.push(`${label(word)}: ${JSON.stringify(meaning)}`);
 			}
 		}
 		expect(bad).toEqual([]);
 	});
 
 	it('(d) leads with a gloss that agrees with the official part of speech', () => {
+		// Loop 3 tested two of the four shapes, so an adjective or noun card leading with an
+		// adverb shipped green: 最近 [N] "recently", 近来 [N] "recently", 原先 [N] "originally",
+		// 一般 [Adj] "generally", 频繁 [Adj] "frequently", 长寿 [Adj] "longevity".
 		const bad: string[] = [];
 		for (const word of shipped) {
 			if (!word.pos.length) continue;
-			const lead = word.meanings[0] ?? '';
+			const lead = leadOf(word);
 			if (word.pos.every((code) => NOMINAL_ONLY.includes(code)) && /^to\b/i.test(lead)) {
 				bad.push(`${label(word)} [${word.pos.join('/')}]: verb gloss "${lead}"`);
 			}
 			if (word.pos.length === 1 && word.pos[0] === 'V' && isBareNounGloss(lead)) {
 				bad.push(`${label(word)} [V]: noun gloss "${lead}"`);
+			}
+			if (word.pos.every((code) => code === 'Adj') && isNounWordGloss(lead)) {
+				bad.push(`${label(word)} [Adj]: noun gloss "${lead}"`);
+			}
+			if (word.pos.every((code) => code === 'N' || code === 'Adj') && isAdverbGloss(lead)) {
+				bad.push(`${label(word)} [${word.pos.join('/')}]: adverb gloss "${lead}"`);
 			}
 		}
 		expect(bad).toEqual([]);
@@ -355,11 +411,15 @@ describe('gloss gates', () => {
 
 describe('every entry is quizzable', () => {
 	it('shows a learner no source notation', () => {
-		const notation = /[|｜（）()¹²³…∥·[\]{}]/;
+		// ASCII parentheses are the qualifier syntax — "shirt (dress shirt)" — and gate (e)
+		// checks they are well formed. The full-width pair only ever arrives from the
+		// reference's own notation, so it stays banned, in a gloss as in a headword.
+		const notation = /[|｜（）¹²³…∥·[\]{}]/;
+		const headwordNotation = /[|｜（）()¹²³…∥·[\]{}]/;
 		const leaked = shipped.filter(
 			(word) =>
-				notation.test(word.hanzi) ||
-				notation.test(word.pinyin) ||
+				headwordNotation.test(word.hanzi) ||
+				headwordNotation.test(word.pinyin) ||
 				/[0-9]/.test(word.hanzi) ||
 				/[0-9]/.test(word.pinyin) ||
 				word.meanings.some((meaning) => notation.test(meaning))
@@ -377,11 +437,17 @@ describe('every entry is quizzable', () => {
 		expect(bad.map((word) => `${word.id} ${word.hanzi}: ${word.meanings.join(' | ')}`)).toEqual([]);
 	});
 
-	it('never gives two words in a level a primary meaning that means the same thing', () => {
+	it('never gives two words in a level a primary meaning that reads the same', () => {
 		// `meanings[0]` is the text on the answer button, so a shared sense here is a card
 		// where the learner presses a button that says exactly what the prompt asked for and
 		// is marked wrong. Compared on src/lib/data/senses.ts, which knows that "a shirt or
 		// blouse" contains "shirt" — loop 2 compared whole strings and could not see it.
+		//
+		// A pair that shares the sense but qualifies it on BOTH sides is resolved, not hidden:
+		// 衬衫 "shirt (dress shirt)" and 衬衣 "shirt (general word)" still both answer to
+		// `shirt`, so the runtime guard still refuses to put them on one card, and the buttons
+		// still read differently. Loop 3 resolved 38 of these by moving both cards off the
+		// shared word instead, which blinded the guard and deleted the word from search.
 		const clashes: string[] = [];
 		for (const level of LEVELS) {
 			const rows = readShipped(level);
@@ -390,11 +456,47 @@ describe('every entry is quizzable', () => {
 				for (let j = i + 1; j < rows.length; j++) {
 					const [a, b] = [rows[i], rows[j]];
 					if (!intersects(senses.get(a.id)!, senses.get(b.id)!)) continue;
+					const qa = qualifierOf(a.meanings[0] ?? '');
+					const qb = qualifierOf(b.meanings[0] ?? '');
+					if (qa && qb && qa !== qb) continue;
 					clashes.push(`L${level}: ${a.hanzi} "${a.meanings[0]}" / ${b.hanzi} "${b.meanings[0]}"`);
 				}
 			}
 		}
 		expect(clashes).toEqual([]);
+	});
+
+	it('keeps every qualified pair visible to the runtime distractor guard', () => {
+		// The point of qualifying rather than replacing: the shared sense is still there, so
+		// `isAmbiguousWith` in src/lib/session/distractors.ts still refuses the pair, and
+		// /browse/1?q=hear still finds 听见. Each row is a collision loop 3 concealed.
+		const pairs: [string, string, string][] = [
+			['听见', '听到', 'hear'],
+			['看见', '看到', 'see'],
+			['衬衫', '衬衣', 'shirt'],
+			['可是', '但是', 'but'],
+			['该', '应该', 'should'],
+			['孩子', '小朋友', 'child'],
+			['植物', '种', 'plant'],
+			['法', '法律', 'law']
+		];
+		const broken: string[] = [];
+		for (const [left, right, sense] of pairs) {
+			const a = shipped.find((word) => word.hanzi === left && senseKeys(word.meanings).has(sense));
+			const b = shipped.find((word) => word.hanzi === right && senseKeys(word.meanings).has(sense));
+			if (!a || !b) {
+				broken.push(`${left}/${right}: "${sense}" is gone from one of the pair`);
+				continue;
+			}
+			if (a.level !== b.level) broken.push(`${left}/${right}: not the same level`);
+			if (!intersects(senseKeys(a.meanings), senseKeys(b.meanings))) {
+				broken.push(`${left}/${right}: the guard can no longer see the shared sense`);
+			}
+			if (qualifierOf(a.meanings[0]) === qualifierOf(b.meanings[0])) {
+				broken.push(`${left}/${right}: nothing on the button tells them apart`);
+			}
+		}
+		expect(broken).toEqual([]);
 	});
 
 	it('never gives two words in a level the same set of meanings', () => {
@@ -415,6 +517,207 @@ describe('every entry is quizzable', () => {
 
 	it('has a unique id per entry', () => {
 		expect(new Set(shipped.map((word) => word.id)).size).toBe(shipped.length);
+	});
+});
+
+describe('gloss survival', () => {
+	// Gate (f) in scripts/build-vocab.mjs: a card has to still say what the reference says the
+	// word means. Deriving the reference's short senses again here would be a second copy of
+	// the CC-CEDICT reader, so `is exactly what scripts/build-vocab.mjs produces` above is what
+	// re-runs the gate. What this block owns is the part a rebuild cannot check — the reviewed
+	// exemption list, and the words the loop-3 verdict named as the ones it must never cover.
+	const allow = JSON.parse(readFileSync('scripts/gloss-survival-allow.json', 'utf8')) as Record<
+		string,
+		unknown
+	>;
+
+	it('gives every exemption an official id and a one-line reason', () => {
+		const bad: string[] = [];
+		for (const [id, note] of Object.entries(allow)) {
+			if (!/^L[1-5]-\d{4}$/.test(id)) bad.push(`${id}: not an official row id`);
+			else if (!byOfficialId.has(id)) bad.push(`${id}: no shipped card`);
+			if (typeof note !== 'string' || !note.trim()) bad.push(`${id}: no reason`);
+		}
+		expect(bad).toEqual([]);
+	});
+
+	it('never exempts a word whose own English is the thing at stake', () => {
+		// Loop 3 shipped 听见 as "to catch a sound" and 衬衣 as "underclothes" to dodge a
+		// same-level collision. The gate exists to catch that class; exempting one of these
+		// would be the concealment again, one file further down.
+		const named: [string, string][] = [
+			['L1-0363', 'hear'],
+			['L3-0087', 'shirt'],
+			['L2-0172', 'should'],
+			['L2-0321', 'but'],
+			['L1-0404', 'child'],
+			['L2-0458', 'all'],
+			['L4-0953', 'plant'],
+			['L4-0222', 'law']
+		];
+		const bad: string[] = [];
+		for (const [id, word] of named) {
+			if (id in allow) bad.push(`${id}: exempted from gate (f), which it may never be`);
+			const card = byOfficialId.get(id)!;
+			const words = new Set([...senseKeys(card.meanings)].flatMap((sense) => sense.split(' ')));
+			if (!words.has(word)) bad.push(`${id} ${card.hanzi}: no longer says "${word}"`);
+		}
+		expect(bad).toEqual([]);
+	});
+});
+
+describe('example sentences', () => {
+	// Gate (g) in scripts/build-vocab.mjs. Duplicated here for the same reason as the gloss
+	// gates: the build gate stops a bad sentence being written, this one stops a bad sentence
+	// being checked in by hand or surviving a build nobody re-ran. `example` is optional —
+	// HSK 3–5 have none authored yet — so every assertion here is about the ones that exist.
+	const SENTENCE_PUNCT = /[，。！？]/;
+	const SENTENCE_HAN = /[㐀-鿿豈-﫿]/;
+	const sentenceChars = (hanzi: string) =>
+		[...hanzi].filter((character) => !SENTENCE_PUNCT.test(character));
+
+	/** The same nesting sets the build derives: allowed at L if written at L or below. */
+	const allowedAt = new Map<Level, Set<string>>();
+	{
+		let seen = new Set<string>();
+		for (const level of LEVELS) {
+			for (const word of shipped) {
+				if (word.level !== level) continue;
+				for (const character of word.hanzi) if (SENTENCE_HAN.test(character)) seen.add(character);
+			}
+			allowedAt.set(level, new Set(seen));
+			seen = new Set(seen);
+		}
+	}
+
+	const withExample = shipped.filter((word) => word.example);
+
+	it('ships a sentence for every HSK 1 and HSK 2 card, and none above', () => {
+		const perLevel = Object.fromEntries(
+			LEVELS.map((level) => [level, withExample.filter((word) => word.level === level).length])
+		);
+		expect(perLevel).toEqual({ 1: 500, 2: 770, 3: 0, 4: 0, 5: 0 });
+	});
+
+	it('leaves the field off entirely where no sentence was authored', () => {
+		// `example` is optional on `Word`, and nothing in the app may assume it is there. An
+		// empty object or empty strings would satisfy a naive truthiness check and then render
+		// as a blank row, so a card without a sentence carries no key at all.
+		const empty = shipped.filter((word) => 'example' in word && !word.example?.hanzi?.trim());
+		expect(empty.map(label)).toEqual([]);
+	});
+
+	it('gives every sentence all three fields', () => {
+		const bad = withExample.filter(
+			(word) =>
+				!word.example!.hanzi.trim() || !word.example!.pinyin.trim() || !word.example!.english.trim()
+		);
+		expect(bad.map(label)).toEqual([]);
+	});
+
+	it('writes every sentence in characters at or below its own card level', () => {
+		// The whole point of a per-level example: an HSK 1 card explained with an HSK 5
+		// character swaps one unknown word for two.
+		const bad: string[] = [];
+		for (const word of withExample) {
+			const allowed = allowedAt.get(word.level)!;
+			const above = [
+				...new Set(
+					sentenceChars(word.example!.hanzi).filter(
+						(character) => SENTENCE_HAN.test(character) && !allowed.has(character)
+					)
+				)
+			];
+			if (above.length)
+				bad.push(`${label(word)}: "${word.example!.hanzi}" uses ${above.join(' ')}`);
+		}
+		expect(bad).toEqual([]);
+	});
+
+	it('prints one pinyin syllable per character', () => {
+		// Erhua is one token per character — `wán r`, matching the card's own `syllables`.
+		const bad: string[] = [];
+		for (const word of withExample) {
+			const characters = sentenceChars(word.example!.hanzi).length;
+			const syllables = word.example!.pinyin.trim().split(/\s+/).filter(Boolean).length;
+			if (characters !== syllables) {
+				bad.push(`${label(word)}: ${characters} character(s), ${syllables} syllable(s)`);
+			}
+		}
+		expect(bad).toEqual([]);
+	});
+
+	it('carries no punctuation in the pinyin', () => {
+		// The headword's own `pinyin` never carries any, and the authors split two to one on
+		// whether a sentence's should, so the build strips it rather than shipping both styles.
+		const bad = withExample.filter((word) => /[.,!?;:]/.test(word.example!.pinyin));
+		expect(bad.map(label)).toEqual([]);
+	});
+
+	it('writes the sentence in hanzi and full-width punctuation only', () => {
+		const bad: string[] = [];
+		for (const word of withExample) {
+			const stray = sentenceChars(word.example!.hanzi).filter(
+				(character) => !SENTENCE_HAN.test(character)
+			);
+			if (stray.length) bad.push(`${label(word)}: "${stray.join('')}"`);
+		}
+		expect(bad).toEqual([]);
+	});
+
+	it('actually uses the word it is an example of', () => {
+		const bad = withExample.filter((word) => !word.example!.hanzi.includes(word.hanzi));
+		expect(bad.map((word) => `${label(word)}: ${word.example!.hanzi}`)).toEqual([]);
+	});
+
+	it('keeps every sentence short enough to read on a card', () => {
+		const bad = withExample
+			.map((word) => ({ word, length: sentenceChars(word.example!.hanzi).length }))
+			.filter(({ length }) => length > 20);
+		expect(bad.map(({ word, length }) => `${label(word)}: ${length}`)).toEqual([]);
+	});
+
+	it('never lets two files author the same card, or author a card that does not exist', () => {
+		// The merge in scripts/build-vocab.mjs is order-independent across 26 authors, so a
+		// second sentence for one id is a build failure rather than a last-writer-wins.
+		const dir = 'scripts/sentences';
+		const owner = new Map<string, string>();
+		const bad: string[] = [];
+		for (const file of readdirSync(dir).filter((name) => name.endsWith('.json'))) {
+			const parsed = JSON.parse(readFileSync(join(dir, file), 'utf8')) as Record<string, unknown>;
+			for (const id of Object.keys(parsed)) {
+				if (owner.has(id)) bad.push(`${id}: ${owner.get(id)} and ${file}`);
+				else owner.set(id, file);
+				if (!byOfficialId.has(id)) bad.push(`${id}: no such card (${file})`);
+			}
+		}
+		expect(bad).toEqual([]);
+		expect(owner.size).toBe(withExample.length);
+	});
+
+	it('ships exactly what the authors wrote, sentence for sentence', () => {
+		// The pinyin is normalised on the way through; the hanzi and the English are not, and
+		// a build that quietly rewrote either would be a build that edits an author's work.
+		const dir = 'scripts/sentences';
+		const authored = new Map<string, { hanzi: string; english: string }>();
+		for (const file of readdirSync(dir).filter((name) => name.endsWith('.json'))) {
+			const parsed = JSON.parse(readFileSync(join(dir, file), 'utf8')) as Record<
+				string,
+				{ hanzi: string; english: string }
+			>;
+			for (const [id, value] of Object.entries(parsed)) authored.set(id, value);
+		}
+		const bad: string[] = [];
+		for (const word of withExample) {
+			const source = authored.get(word.id);
+			if (!source) bad.push(`${label(word)}: shipped an example nobody authored`);
+			else if (source.hanzi.trim() !== word.example!.hanzi)
+				bad.push(`${label(word)}: hanzi differs`);
+			else if (source.english.trim() !== word.example!.english) {
+				bad.push(`${label(word)}: english differs`);
+			}
+		}
+		expect(bad).toEqual([]);
 	});
 });
 

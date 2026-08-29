@@ -199,8 +199,10 @@ function normalise(part: string): string {
  * One gloss in, its comparable senses out. `'a shirt or blouse'` → `['shirt', 'blouse']`.
  *
  * Parentheticals go first, before any splitting, so a `;` or an `or` inside one cannot cut
- * the gloss in the wrong place. (The build forbids parentheses in a shipped gloss outright;
- * this is here because the app runs the same function over data it did not build.)
+ * the gloss in the wrong place — and, more importantly, so that a *qualifier* never hides a
+ * collision. 衬衫 "shirt (dress shirt)" and 衬衣 "shirt (general word)" both answer to `shirt`
+ * here, which is the truth: a learner asked for "shirt" could rightly press either. The
+ * qualifier is for the human eye on the button; see `withQualifiers` for the other question.
  */
 export function splitSenses(meaning: string): string[] {
 	let text = String(meaning)
@@ -218,6 +220,50 @@ export function splitSenses(meaning: string): string[] {
 		}
 	}
 	return out;
+}
+
+/**
+ * The same gloss with its qualifier read as words rather than dropped.
+ *
+ * `splitSenses` answers *would both of these be right?* and so must ignore the parenthetical:
+ * "shirt (dress shirt)" is still an answer to "shirt". This answers the other question the
+ * app asks — *do these two buttons read the same?* — and so must not, because "shirt (dress
+ * shirt)" and "shirt (general word)" are two things a learner can tell apart on sight.
+ *
+ * Loop 3 resolved 38 same-answer collisions by moving both cards off the shared word, which
+ * hid the collision from the distractor guard and deleted the word from the app's own search.
+ * Qualifying instead of replacing needs both readings, so both live here.
+ */
+export function withQualifiers(meaning: string): string {
+	return String(meaning).replace(/[()]/g, ' ');
+}
+
+/** What the answer button reads, as comparable senses — qualifier included. */
+export function buttonKeys(meanings: readonly string[] | null | undefined): Set<string> {
+	const out = new Set<string>();
+	for (const meaning of meanings ?? [])
+		for (const sense of splitSenses(withQualifiers(meaning))) out.add(sense);
+	return out;
+}
+
+/**
+ * The distinguishing tag a gloss carries, normalised; `''` when it carries none.
+ *
+ * Two cards in a level may share a sense in their primary glosses only if each says, on the
+ * button, which one it is — so this is what the uniqueness gate reads to tell a resolved
+ * collision from an unresolved one.
+ */
+export function qualifierOf(meaning: string): string {
+	const tags: string[] = [];
+	for (const match of String(meaning).matchAll(/\(([^)]*)\)/g)) {
+		const tag = match[1]
+			.toLowerCase()
+			.replace(APOSTROPHE, '')
+			.replace(/[^a-z0-9]+/g, ' ')
+			.trim();
+		if (tag) tags.push(tag);
+	}
+	return tags.join(' ');
 }
 
 /** Every distinct sense a list of glosses answers to. */

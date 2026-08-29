@@ -135,10 +135,6 @@
 		"meanings": ["mouth"],
 		"note": "N row, the body part. CEDICT's \"beak\", \"nozzle\" and \"spout\" are extensions no L2 text uses."
 	},
-	"L2-0763": {
-		"meanings": ["recently", "soon"],
-		"note": "Time noun that reaches both ways in Chinese — 最近很忙 and 最近要去 — so both senses ship."
-	},
 	"L2-0765": {
 		"meanings": ["a school composition"],
 		"note": "N row. \"To write an essay\" is a verb gloss on a noun card; 文章 keeps \"an article\"."
