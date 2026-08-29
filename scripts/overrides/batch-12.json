@@ -1,0 +1,490 @@
+{
+	"L3-0865": {
+		"meanings": ["forecast", "to forecast"],
+		"note": "V/N row; learners meet it in 天气预报, so the noun leads. Keeps 'to forecast' off the primary so 预计 and L4 预测 stay distinguishable."
+	},
+	"L3-0867": {
+		"meanings": ["to estimate in advance", "to expect"],
+		"note": "V row. CEDICT's 'to forecast' is already 预报's and L4 预测's; 预计 is the beforehand estimate."
+	},
+	"L3-0869": {
+		"meanings": ["marks a person in a job or role"],
+		"note": "Suffix row. Says what 员 does to a stem instead of printing CEDICT's '(bound form)' label; kept clear of L3 员工 'staff'."
+	},
+	"L3-0872": {
+		"meanings": ["to arrange to meet", "to invite"],
+		"note": "V row, so the 'approximately' sense CEDICT lists is out; 约 at L3 is 约朋友/约时间."
+	},
+	"L3-0874": {
+		"meanings": ["to transport", "to carry goods"],
+		"note": "V row; CEDICT's third sense is the noun 'transportation', which the POS rules out."
+	},
+	"L3-0876": {
+		"meanings": ["long since", "already a long time ago"],
+		"note": "Adv row. CEDICT's second sense is marked dialect and is excluded; the clause 'long since' is the one 早已 carries."
+	},
+	"L3-0877": {
+		"meanings": ["to build or make"],
+		"note": "V row. 造 is the general build-or-make character; its specific readings are all owned by L3 compounds — 建 'to build', 制作 'to make', 生产 'to produce', 创造 'to create' — so one joined gloss keeps it honest and unique."
+	},
+	"L3-0878": {
+		"meanings": ["to bring about", "to result in"],
+		"note": "V row. Another L3 card (使) leads with 'to cause', so 造成 takes the bring-about reading it carries in 造成损失."
+	},
+	"L3-0879": {
+		"meanings": ["responsibility", "duty"],
+		"note": "N row; CEDICT's single sense is 'responsibility; duty; liability' and only the first two are level-appropriate."
+	},
+	"L3-0880": {
+		"meanings": ["to increase in amount", "to add to"],
+		"note": "V row. Plain 'to increase' is already shipped by L3 增长, so 增加 says the adding-to-a-quantity sense it actually carries."
+	},
+	"L3-0882": {
+		"meanings": ["to spread out", "to launch an activity"],
+		"note": "No official POS; both CEDICT senses are verbal and both are met at L3 — 展开地图 and 展开活动."
+	},
+	"L3-0883": {
+		"meanings": ["measure word: flat sheets", "to open out"],
+		"note": "M/V row, so the classifier use has to lead and has to say 'measure word'; CEDICT leads with the verb."
+	},
+	"L3-0884": {
+		"meanings": ["to shine on", "according to"],
+		"note": "V/Prep row. Verb sense leads as the POS orders it; the prepositional 按照 sense is kept as the second meaning."
+	},
+	"L3-0885": {
+		"meanings": ["marks the one who does something"],
+		"note": "Suffix row. Describes the job 者 does rather than printing CEDICT's '-er/-ist' fragments, and stays clear of 员."
+	},
+	"L3-0886": {
+		"meanings": ["true to the facts", "not made up"],
+		"note": "Adj row. L2 真正 already owns 'genuine', so 真实 is glossed as the accords-with-fact sense."
+	},
+	"L3-0887": {
+		"meanings": ["to compete for", "to argue"],
+		"note": "V row. 'to strive for' belongs to 争取; 争 alone is competing over something or quarrelling. CEDICT's literary and dialect senses excluded."
+	},
+	"L3-0888": {
+		"meanings": ["to strive for", "to win over"],
+		"note": "V row; separated from bare 争 so the two cards are not the same answer."
+	},
+	"L3-0889": {
+		"meanings": ["whole", "neat and in order"],
+		"note": "Adj/V row. CEDICT wraps every sense in '(bound form)'; 整 at L3 is 整天/整年 whole and 整齐 tidy."
+	},
+	"L3-0890": {
+		"meanings": ["entire", "the whole of it"],
+		"note": "Adj row, so the lead may not be 'the entire' — an article-led gloss reads as a noun. Kept distinct from 整."
+	},
+	"L3-0892": {
+		"meanings": ["neat and orderly", "evenly lined up"],
+		"note": "Adj row; CEDICT's four one-word senses collapse into the tidy/even sense 整齐 carries."
+	},
+	"L3-0896": {
+		"meanings": ["straight and upright", "main or principal"],
+		"note": "Adj row at L3. The 'just now, in the middle of' reading belongs to the L1 Adv row; this card takes the adjective senses 正门/挂正."
+	},
+	"L3-0897": {
+		"meanings": ["formal", "official"],
+		"note": "Adj row; CEDICT's one sense is 'formal; official' and both clauses are worth keeping."
+	},
+	"L3-0898": {
+		"meanings": ["certificate", "proof"],
+		"note": "N row, so the verb 'to prove' cannot lead — that is 证明's card. CEDICT's variant-character note is excluded."
+	},
+	"L3-0900": {
+		"meanings": ["evidence", "proof"],
+		"note": "N row; 'evidence' leads so 证据 and 证 are not the same answer."
+	},
+	"L3-0901": {
+		"meanings": ["to prove", "written proof"],
+		"note": "V/N row; CEDICT sense 1 is the noun list, but 证明 is met first as the verb."
+	},
+	"L3-0902": {
+		"meanings": ["measure word: pens and sticks"],
+		"note": "M row. CEDICT leads with unrelated verb senses; the classifier is the whole card at L3."
+	},
+	"L3-0903": {
+		"meanings": ["to support", "to back up"],
+		"note": "V row; CEDICT's noun senses and the CL: plumbing are not learner copy."
+	},
+	"L3-0905": {
+		"meanings": ["measure word: animals or birds"],
+		"note": "M row. CEDICT's single sense is a 20-word list; the animal use is the one a learner needs."
+	},
+	"L3-0906": {
+		"meanings": ["straight", "frank and direct"],
+		"note": "Adj/V/Adv row; 'straight' is the core sense, and 直 for people is frankness. Kept apart from 正's 'straight and upright'."
+	},
+	"L3-0907": {
+		"meanings": ["to broadcast live", "to livestream"],
+		"note": "V row; CEDICT's agriculture sense of direct seeding is not what 直播 means to a learner."
+	},
+	"L3-0908": {
+		"meanings": ["until", "all the way up to"],
+		"note": "The standard files 直到 as V, but its learner-facing meaning really is 'until' — a 'to ...' gloss here would be false English."
+	},
+	"L3-0909": {
+		"meanings": ["to be worth", "to be on duty"],
+		"note": "V row, so the noun 'value' cannot lead; both verb senses are met at L3 in 值多少钱 and 值班."
+	},
+	"L3-0910": {
+		"meanings": ["to be worth doing", "to deserve"],
+		"note": "CEDICT's 'worth the money' is too narrow; 值得 is worth-the-effort, and this keeps it distinct from 值."
+	},
+	"L3-0911": {
+		"meanings": ["workers and staff", "employees of a workplace"],
+		"note": "N row. L3 员工 already ships 'staff', so 职工 takes the workers-and-staff-of-a-unit reading."
+	},
+	"L3-0912": {
+		"meanings": ["occupation", "profession"],
+		"note": "N row; the adjective 'professional' cannot lead a noun card."
+	},
+	"L3-0913": {
+		"meanings": ["can only", "with no better choice"],
+		"note": "Adv row, so a 'to ...' lead is barred. L3 不得不 already leads with 'have no choice but to', so 只好 says the resigned can-only reading."
+	},
+	"L3-0914": {
+		"meanings": ["just and nothing more", "it is just that"],
+		"note": "Adv/Conj row, so both POS get a gloss. L3 仅 leads with 'merely', 仅仅 with 'no more than' and 简直 with 'simply', and L2 只 with 'only' — 只是 has to be distinguishable from all four."
+	},
+	"L3-0915": {
+		"meanings": ["only if", "there is only"],
+		"note": "Conj row. CEDICT's sense is a 60-word example dump; 只有 pairs with 才 and 'only if' is what it does."
+	},
+	"L3-0916": {
+		"meanings": ["to point at", "to refer to"],
+		"note": "V row, so the noun 'finger' that CEDICT leads with is out."
+	},
+	"L3-0917": {
+		"meanings": ["to point out", "to indicate"],
+		"note": "No official POS, but both senses are verbal; 'to point out' separates it from bare 指."
+	},
+	"L3-0919": {
+		"meanings": ["up to now", "so far"],
+		"note": "Adv row; 'up to now' is the reading 至今 carries in 至今没有消息."
+	},
+	"L3-0920": {
+		"meanings": ["at least"],
+		"note": "Adv row; CEDICT's second clause is a parenthetical variant of the same sense, so one gloss is the whole card."
+	},
+	"L3-0921": {
+		"meanings": ["aspiration", "ambition"],
+		"note": "N row, so CEDICT's 'to volunteer' cannot lead; kept clear of L3 愿望 'desire'."
+	},
+	"L3-0923": {
+		"meanings": ["to draw up a plan", "to formulate"],
+		"note": "V row; 制定 is drafting rules or plans, not making objects — that is 制造."
+	},
+	"L3-0925": {
+		"meanings": ["to manufacture", "to make in a factory"],
+		"note": "V row; separated from 造 and from L3 制作 'to make' so no two cards share an answer."
+	},
+	"L3-0927": {
+		"meanings": ["the central part", "central region"],
+		"note": "N row; 'middle part' reads as a fragment, and 中部 is the central area of a country or region."
+	},
+	"L3-0928": {
+		"meanings": ["the Chinese nation", "the Chinese people"],
+		"note": "No official POS; CEDICT's second sense carries a long parenthetical that cannot ship."
+	},
+	"L3-0929": {
+		"meanings": ["at last", "finally"],
+		"note": "Adv row; 终于 marks the arrival of a long-awaited result."
+	},
+	"L3-0930": {
+		"meanings": ["clock", "a large bell"],
+		"note": "N row. CEDICT leads with the bell and buries the clock; a learner meets 钟 as the clock on the wall."
+	},
+	"L3-0931": {
+		"meanings": ["measure word: kinds or types", "a kind or sort"],
+		"note": "M row, so the classifier use leads and must name itself; 这种/那种 is where 种 is met."
+	},
+	"L3-0933": {
+		"meanings": ["major", "significant"],
+		"note": "Adj row; 重大 attaches to events and decisions, unlike L2 重要 'important'."
+	},
+	"L3-0934": {
+		"meanings": ["the surrounding area", "surroundings"],
+		"note": "N row; CEDICT's 'environs' is register-wrong for a beginner."
+	},
+	"L3-0935": {
+		"meanings": ["pig"],
+		"note": "N row; CEDICT leads with 'hog' and trails a CL: list. One plain word is the whole card."
+	},
+	"L3-0936": {
+		"meanings": ["to host a program", "to take charge of"],
+		"note": "V row; 主持人 is how a learner meets it, and hosting separates it from plain 负责."
+	},
+	"L3-0937": {
+		"meanings": ["taking the initiative", "acting on one's own"],
+		"note": "Adj row, so CEDICT's verb sense cannot lead and 'spontaneous' is the wrong flavour."
+	},
+	"L3-0939": {
+		"meanings": ["an idea about what to do", "a plan of action"],
+		"note": "N row. L2 想法 already ships 'way of thinking' and L2 计划 'a plan', so 主意 is the idea you settle on."
+	},
+	"L3-0940": {
+		"meanings": ["to advocate", "a view one stands for"],
+		"note": "V/N row; both POS get a gloss, and the noun sense stays clear of L2 意见 'opinion'."
+	},
+	"L3-0941": {
+		"meanings": ["to pay attention to", "to take note of"],
+		"note": "No official POS; 注意 is met as a verb and as the warning 注意安全."
+	},
+	"L3-0942": {
+		"meanings": ["to wish someone well", "to offer good wishes"],
+		"note": "V row; CEDICT's 'to pray for' and its shaman sense are both wrong for 祝你生日快乐."
+	},
+	"L3-0943": {
+		"meanings": ["to grab", "to catch"],
+		"note": "V row; kept shorter and more general than 抓住 so the two cards differ."
+	},
+	"L3-0944": {
+		"meanings": ["to grab hold of", "to seize firmly"],
+		"note": "No official POS; the 住 marks a completed grip, which is what separates it from 抓."
+	},
+	"L3-0945": {
+		"meanings": ["expert", "specialist"],
+		"note": "N row; both clauses of CEDICT's single sense are usable and short."
+	},
+	"L3-0946": {
+		"meanings": ["specially", "dedicated to one purpose"],
+		"note": "Adv row, so the adjective 'specialized' cannot lead; 专门 is 专门来看你."
+	},
+	"L3-0947": {
+		"meanings": ["a special topic", "a feature on one topic"],
+		"note": "N row; CEDICT's sense is a long parenthetical list, which cannot ship as written."
+	},
+	"L3-0948": {
+		"meanings": ["major field of study", "specialized field"],
+		"note": "N row; a learner meets 专业 as their university major."
+	},
+	"L3-0949": {
+		"meanings": ["to turn", "to change direction"],
+		"note": "V row for zhuǎn; CEDICT's internet 'to share' sense is not a level-3 meaning."
+	},
+	"L3-0952": {
+		"meanings": ["state or condition"],
+		"note": "N row. One gloss joined by 'or' rather than two, so it cannot collide with another card's 'state' and reads as one sense."
+	},
+	"L3-0953": {
+		"meanings": ["to chase after", "to pursue"],
+		"note": "V row; CEDICT's courting and binge-watching senses are register-wrong for a card."
+	},
+	"L3-0954": {
+		"meanings": ["right on target", "definitely"],
+		"note": "Adj/Adv row. L2 准确 already ships 'accurate', so 准 takes the on-target reading plus its adverbial 'definitely'."
+	},
+	"L3-0956": {
+		"meanings": ["funds", "money for a project"],
+		"note": "N row; 'capital' is the finance-desk word, and 资金 is the money put behind something."
+	},
+	"L3-0957": {
+		"meanings": ["sons and daughters", "one's children"],
+		"note": "N row; 'children' alone would answer for 孩子 too, so the card says whose children."
+	},
+	"L3-0959": {
+		"meanings": ["automatic", "of one's own accord"],
+		"note": "Adj/Adv row; the adjective leads and the adverbial reading follows, matching the POS order."
+	},
+	"L3-0960": {
+		"meanings": ["conscientious", "self-disciplined"],
+		"note": "Adj row, so CEDICT sense 1 ('to realize') cannot lead; 自觉 is doing the right thing unprompted."
+	},
+	"L3-0962": {
+		"meanings": ["one's own self", "oneself"],
+		"note": "N row; 自身 is emphatic and would otherwise be indistinguishable from 自己."
+	},
+	"L3-0963": {
+		"meanings": ["to make one's own decisions", "to be independent"],
+		"note": "V row; CEDICT's single sense runs to three clauses and only the first is short enough to read."
+	},
+	"L3-0964": {
+		"meanings": ["always without exception", "in any case"],
+		"note": "Adv row. L3 总是 ships plain 'always', so 总 must say the same thing differently or the two cards are one answer."
+	},
+	"L3-0965": {
+		"meanings": ["to sum up", "a summary"],
+		"note": "V/N row; both POS get a gloss and the CL: plumbing is dropped."
+	},
+	"L3-0967": {
+		"meanings": ["to be enough", "sufficient"],
+		"note": "V row, so the bare adjective 'enough' cannot lead; 足够 behaves as a verb in 时间足够."
+	},
+	"L3-0968": {
+		"meanings": ["soccer", "a soccer ball"],
+		"note": "N row; the game leads and the object follows, which is the order a learner meets them."
+	},
+	"L3-0969": {
+		"meanings": ["to combine into a group", "to put together"],
+		"note": "V row. L3 结合 already ships 'to combine', so 组合 says the assembling-into-a-set sense."
+	},
+	"L3-0970": {
+		"meanings": ["about that amount", "left and right", "to control"],
+		"note": "N/V row. The approximation use after a number is what learners meet first, but L3 大约 owns 'approximately' — hence 'about that amount'. Literal and verb senses follow."
+	},
+	"L3-0972": {
+		"meanings": ["author", "the writer of a text"],
+		"note": "N row; 作者 is the writer of a particular text, not the profession 作家."
+	},
+	"L3-0973": {
+		"meanings": ["to be a guest", "to visit someone's home"],
+		"note": "No official POS; 做客 is a verb phrase and the second gloss says where it happens."
+	},
+	"L4-0001": {
+		"meanings": ["auntie", "mother's sister"],
+		"note": "N row; 阿姨 is mainly how a child addresses a woman of their parents' age, so the term of address leads."
+	},
+	"L4-0002": {
+		"meanings": ["ah! shows surprise", "oh!"],
+		"note": "Interjection. States the effect rather than printing CEDICT's 'interjection of surprise' label."
+	},
+	"L4-0003": {
+		"meanings": ["short in height"],
+		"note": "Adj row; says which kind of short, so it cannot answer for 短 'short in length'."
+	},
+	"L4-0004": {
+		"meanings": ["short and small in build", "low and small"],
+		"note": "Adj row; CEDICT's 'undersized' is a judgement, and the build reading separates it from 矮."
+	},
+	"L4-0005": {
+		"meanings": ["to love one's country", "patriotic"],
+		"note": "No official POS; the verb phrase leads because 爱国 is 爱 plus its object."
+	},
+	"L4-0006": {
+		"meanings": ["to take good care of", "to cherish"],
+		"note": "V row; 爱护 is protective care of a thing or person, distinct from L3 保护 'to protect'."
+	},
+	"L4-0007": {
+		"meanings": ["to set at ease", "calm and peaceful"],
+		"note": "V/Adj row. 'to install' is already L3 安装's and 'safe' is L2 安全's, so 安 takes the put-at-ease and calm senses."
+	},
+	"L4-0008": {
+		"meanings": ["to find a place for", "to help settle in"],
+		"note": "V row; CEDICT's 'to get into bed' and the noun 'placement' are both wrong leads."
+	},
+	"L4-0010": {
+		"meanings": ["dark", "dim"],
+		"note": "Adj row; CEDICT's literary 'confused, ignorant' sense and the hidden sense are excluded."
+	},
+	"L4-0011": {
+		"meanings": ["to hint at", "to drop a hint"],
+		"note": "V row; the noun clause of CEDICT's sense cannot lead a verb card."
+	},
+	"L4-0014": {
+		"meanings": ["to lay out", "to sway back and forth"],
+		"note": "V row; CEDICT ends on the noun 'a pendulum', which is not what 摆 does at L4."
+	},
+	"L4-0016": {
+		"meanings": ["to break free from", "to get rid of"],
+		"note": "V row; 摆脱 is escaping something that holds you, so the freeing sense leads."
+	},
+	"L4-0017": {
+		"meanings": ["to suffer defeat", "to defeat an opponent"],
+		"note": "V row; 败 runs both directions and CEDICT leads with the transitive one only."
+	},
+	"L4-0019": {
+		"meanings": ["a parcel", "to wrap up"],
+		"note": "N/V row; the noun leads because 包裹 is met as the parcel you post."
+	},
+	"L4-0021": {
+		"meanings": ["to include", "to consist of"],
+		"note": "V row; 'to comprise' is register-heavy for a beginner card."
+	},
+	"L4-0022": {
+		"meanings": ["thin as opposed to thick", "flimsy"],
+		"note": "Adj row. L4 细 ships 'thin or slender', so 薄 has to say which thin it is or the two cards are one answer."
+	},
+	"L4-0023": {
+		"meanings": ["a treasure", "something precious"],
+		"note": "N row; 'jewel' and 'gem' belong to 宝石, so 宝 takes the general treasure sense."
+	},
+	"L4-0024": {
+		"meanings": ["baby", "little darling"],
+		"note": "N row; CEDICT's clause order buries 'baby', which is the everyday meaning."
+	},
+	"L4-0025": {
+		"meanings": ["a treasured possession", "darling"],
+		"note": "N row; kept distinct from 宝 and 宝石. CEDICT's 'good-for-nothing' sense is a slur and is excluded."
+	},
+	"L4-0026": {
+		"meanings": ["valuable", "precious"],
+		"note": "Adj row, so CEDICT's verb senses ('to value', 'to treasure') cannot lead."
+	},
+	"L4-0027": {
+		"meanings": ["gemstone", "precious stone"],
+		"note": "N row; the CL: plumbing is dropped and the card stays clear of 宝 and 宝贝."
+	},
+	"L4-0028": {
+		"meanings": ["to keep a secret", "to maintain secrecy"],
+		"note": "No official POS; 保密 is a verb-object phrase, and the shipped 'something' spelling of sth was the ranker's, not an author's."
+	},
+	"L4-0029": {
+		"meanings": ["conservative", "to guard and keep"],
+		"note": "V/Adj row; 保守 is met first as the adjective, and the guarding sense stays clear of 保密."
+	},
+	"L4-0030": {
+		"meanings": ["to hug", "to hold in one's arms"],
+		"note": "V row; CEDICT's colloquial clothes-fitting sense is excluded."
+	},
+	"L4-0031": {
+		"meanings": ["background", "backdrop"],
+		"note": "N row; CEDICT's second sense is marked figurative and cannot ship."
+	},
+	"L4-0032": {
+		"meanings": ["times as much", "measure word: multiples"],
+		"note": "M row; the shipped gloss 'times, as a multiple' had an internal comma, which the browse row renders as two senses."
+	},
+	"L4-0033": {
+		"meanings": ["to be forced to", "to be compelled"],
+		"note": "V row; 被迫 always describes what happened to the subject."
+	},
+	"L4-0035": {
+		"meanings": ["stupid", "clumsy"],
+		"note": "Adj row; 笨 covers both slow-witted and physically awkward, and both are met at L4."
+	},
+	"L4-0037": {
+		"meanings": ["to graduate from school", "graduation"],
+		"note": "No official POS; 毕业 is a separable verb, so the verb reading leads. Says 'from school' because L4 毕业生 is the noun 'graduate'."
+	},
+	"L4-0039": {
+		"meanings": ["to dodge or evade", "to keep away from"],
+		"note": "V row. 避免 owns plain 'to avoid', so 避 takes the physical getting-out-of-the-way sense."
+	},
+	"L4-0040": {
+		"meanings": ["to avoid", "to prevent"],
+		"note": "V row; 避免 is avoiding something happening, which is the plain 'to avoid' a learner needs."
+	},
+	"L4-0041": {
+		"meanings": ["to compile or edit", "to weave together"],
+		"note": "V row; CEDICT leads with weaving, but 编 at L4 is 编书/编程 and the made-up sense is idiomatic."
+	},
+	"L4-0042": {
+		"meanings": ["to debate", "a debate"],
+		"note": "V/N row; the verb leads as the POS orders it and the CL: plumbing is dropped."
+	},
+	"L4-0043": {
+		"meanings": ["a sign or symbol", "to symbolize"],
+		"note": "V/N row; 标志 is met first as the noun on a road sign, and both POS keep a gloss."
+	},
+	"L4-0046": {
+		"meanings": ["to part from someone", "to pin something on"],
+		"note": "V row at L4 — the 'don't ...!' reading is the L1 Adv card and may not be repeated here. CEDICT's literary and dialect senses are excluded."
+	},
+	"L4-0047": {
+		"meanings": ["ice", "to chill something"],
+		"note": "N row; CEDICT's last sense is drug slang and must never reach a card."
+	},
+	"L4-0050": {
+		"meanings": ["troops", "a soldier"],
+		"note": "N row. L4 士兵 ships 'soldier', so 兵 leads with the collective sense it usually carries."
+	},
+	"L4-0051": {
+		"meanings": ["to merge into one", "to combine"],
+		"note": "V row at L4 — the 'and, moreover' reading is the L3 Adv/Conj card, so this one takes the verb senses only."
+	},
+	"L4-0052": {
+		"meanings": ["not serious", "it does not matter"],
+		"note": "Adj row; CEDICT's last clause is a fragment, and 不要紧 is the reassurance you give about a problem."
+	}
+}
