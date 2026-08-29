@@ -1,0 +1,490 @@
+{
+	"L3-0315": {
+		"meanings": ["basically", "on the whole"],
+		"note": "Adv; CEDICT senses are already correct for the level"
+	},
+	"L3-0316": {
+		"meanings": ["foundation", "basis"],
+		"note": "N row: \"base\"/\"basic\" led with an adjective; 基本 L3 owns \"basic\""
+	},
+	"L3-0317": {
+		"meanings": ["timely", "in good time"],
+		"note": "Adj row; \"promptly\" was an adverb gloss"
+	},
+	"L3-0318": {
+		"meanings": ["to an extreme degree"],
+		"note": "Bound form …极了. Bare \"extremely\" collides with 非常 L1, and the gate bars a parenthetical."
+	},
+	"L3-0319": {
+		"meanings": ["a collective or group"],
+		"note": "N; \"collective\"/\"joint\" were adjective glosses"
+	},
+	"L3-0320": {
+		"meanings": ["to concentrate", "to centralize"],
+		"note": "V/Adj; existing pick is correct"
+	},
+	"L3-0321": {
+		"meanings": ["to calculate", "to compute"],
+		"note": "\"to consider\" is a secondary CEDICT sense not met at L3"
+	},
+	"L3-0322": {
+		"meanings": ["to write down", "a written record"],
+		"note": "Split from 纪录: 记录 is the noting-down word; \"note-taker\" was wrong"
+	},
+	"L3-0323": {
+		"meanings": ["reporter", "journalist"],
+		"note": "N; clause 2 restored"
+	},
+	"L3-0324": {
+		"meanings": ["a best-ever record"],
+		"note": "CEDICT only cross-references 记录; this is the achievement sense, not the written record."
+	},
+	"L3-0325": {
+		"meanings": ["to commemorate", "a keepsake"],
+		"note": "V/N; \"memento\" reads oddly on a beginner card"
+	},
+	"L3-0326": {
+		"meanings": ["technology", "technique"],
+		"note": "N; 科技 L3 keeps \"science and technology\""
+	},
+	"L3-0328": {
+		"meanings": ["to process", "to refine or finish"],
+		"note": "Verb phrase; \"processing\" was a noun gloss"
+	},
+	"L3-0329": {
+		"meanings": ["to speed up", "to accelerate"],
+		"note": "V"
+	},
+	"L3-0330": {
+		"meanings": ["to strengthen", "to reinforce"],
+		"note": "V"
+	},
+	"L3-0336": {
+		"meanings": ["value", "worth"],
+		"note": "N; second clause restored"
+	},
+	"L3-0337": {
+		"meanings": ["measure word: planes or machines", "a shelf or rack"],
+		"note": "POS lists M first; kept clear of 台 L3."
+	},
+	"L3-0338": {
+		"meanings": ["to persevere", "to insist on"],
+		"note": "V; \"to persist in\" dangles without an object"
+	},
+	"L3-0339": {
+		"meanings": ["determined", "firm and resolute"],
+		"note": "Adj; bare \"firm\" collides with 紧"
+	},
+	"L3-0341": {
+		"meanings": ["simple", "uncomplicated"],
+		"note": "Adj; kept off 容易 L3 \"easy\""
+	},
+	"L3-0342": {
+		"meanings": ["simply or downright"],
+		"note": "Adv; bare \"simply\" is unidentifiable in a quiz."
+	},
+	"L3-0343": {
+		"meanings": ["to build", "to found"],
+		"note": "V; 建设 L3 keeps \"to build up\" and 建立 L3 \"to establish\""
+	},
+	"L3-0347": {
+		"meanings": ["to suggest", "a suggestion"],
+		"note": "V/N"
+	},
+	"L3-0348": {
+		"meanings": ["nearly", "close to"],
+		"note": "Adv of quantity before a number (将近三年)."
+	},
+	"L3-0349": {
+		"meanings": ["the time ahead", "in future"],
+		"note": "N; \"the future\" would collide with 未来 L4 once the article is stripped"
+	},
+	"L3-0352": {
+		"meanings": ["to exchange ideas", "to communicate"],
+		"note": "V/N; 交换 L4 owns \"to exchange\" for objects"
+	},
+	"L3-0353": {
+		"meanings": ["to associate with", "to socialize with"],
+		"note": "V; dropped the dating and hang-out senses"
+	},
+	"L3-0354": {
+		"meanings": ["a transaction", "a deal"],
+		"note": "Official POS is N, so the verb clause must not lead"
+	},
+	"L3-0355": {
+		"meanings": ["by in a spoken passive"],
+		"note": "Prep row. 被 L3 keeps \"marks the passive\" and 由 L3-0854 keeps the agent sense."
+	},
+	"L3-0356": {
+		"meanings": ["rather or comparatively"],
+		"note": "Adv before an adjective; 比较 L3 ships \"fairly\"."
+	},
+	"L3-0358": {
+		"meanings": ["a coach", "a trainer"],
+		"note": "N row; CEDICT led with the verb"
+	},
+	"L3-0359": {
+		"meanings": ["sturdy", "durable"],
+		"note": "Adj; dropped the physique sense, kept off 强 L3 \"strong\""
+	},
+	"L3-0361": {
+		"meanings": ["to approach", "to get close to"],
+		"note": "V"
+	},
+	"L3-0362": {
+		"meanings": ["to conserve", "to economize"],
+		"note": "V; 节省 L4 ships \"to save\" and 省 L2 \"to economize\" as a later sense"
+	},
+	"L3-0364": {
+		"meanings": ["to get married"],
+		"note": "Separable verb"
+	},
+	"L3-0365": {
+		"meanings": ["to end", "to finish"],
+		"note": "V"
+	},
+	"L3-0366": {
+		"meanings": ["to solve", "to settle a problem"],
+		"note": "V; dropped the \"wipe out an enemy\" sense"
+	},
+	"L3-0367": {
+		"meanings": ["to untie", "to undo"],
+		"note": "Verb phrase"
+	},
+	"L3-0368": {
+		"meanings": ["gold"],
+		"note": "N; the metal. \"money\" would collide with 钱 L1"
+	},
+	"L3-0370": {
+		"meanings": ["merely", "no more than"],
+		"note": "Adv; bare \"only\" collides with 只 L2"
+	},
+	"L3-0372": {
+		"meanings": ["as much as possible", "to the greatest extent"],
+		"note": "Adv; existing gloss states the function plainly"
+	},
+	"L3-0373": {
+		"meanings": ["tight", "close together"],
+		"note": "Adj; dropped the money and verb senses"
+	},
+	"L3-0375": {
+		"meanings": ["nervous", "tense"],
+		"note": "Adj"
+	},
+	"L3-0376": {
+		"meanings": ["to make progress", "progressive"],
+		"note": "V/Adj; the noun \"progress\" must not lead"
+	},
+	"L3-0378": {
+		"meanings": ["to make headway", "to move forward"],
+		"note": "V; kept distinct from 进步"
+	},
+	"L3-0379": {
+		"meanings": ["the near future", "the coming days"],
+		"note": "N"
+	},
+	"L3-0382": {
+		"meanings": ["to live through", "something one has been through"],
+		"note": "V/N; separated from 经验 and from 经过 L2"
+	},
+	"L3-0383": {
+		"meanings": ["experience or know-how", "lessons learned from doing"],
+		"note": "N row: the knowledge, not the event"
+	},
+	"L3-0384": {
+		"meanings": ["to run a business", "to operate"],
+		"note": "V; \"to engage in\" dangles"
+	},
+	"L3-0385": {
+		"meanings": ["spectacular", "brilliant"],
+		"note": "Adj, of a performance"
+	},
+	"L3-0386": {
+		"meanings": ["spirit", "the mind"],
+		"note": "jīngshén N reading"
+	},
+	"L3-0387": {
+		"meanings": ["full of energy", "lively"],
+		"note": "jīngshen Adj reading; must not repeat the jīngshén card"
+	},
+	"L3-0388": {
+		"meanings": ["a view or landscape", "scenery"],
+		"note": "N; 风景 L4 already ships \"scenery\" as its primary"
+	},
+	"L3-0389": {
+		"meanings": ["police officer", "the police"],
+		"note": "N"
+	},
+	"L3-0390": {
+		"meanings": ["still and silent", "calm"],
+		"note": "Adj/V; 安静 L2 ships \"quiet\""
+	},
+	"L3-0391": {
+		"meanings": ["long in time", "lasting a long while"],
+		"note": "Adj; 长 L2 owns plain \"long\""
+	},
+	"L3-0392": {
+		"meanings": ["old and worn", "second-hand"],
+		"note": "Adj; 老 L1 ships \"old in years\" for people, so 旧 takes things."
+	},
+	"L3-0393": {
+		"meanings": ["to rescue", "to save someone"],
+		"note": "V; \"to assist\" belongs to 帮助"
+	},
+	"L3-0394": {
+		"meanings": ["it's just that", "even if"],
+		"note": "Conj row; the two conjunction uses a learner meets"
+	},
+	"L3-0395": {
+		"meanings": ["to get a job", "to find employment"],
+		"note": "Separable verb"
+	},
+	"L3-0396": {
+		"meanings": ["to hold an event", "to host"],
+		"note": "V; 举行 L2 ships bare \"to hold\""
+	},
+	"L3-0397": {
+		"meanings": ["specific", "concrete"],
+		"note": "Adj"
+	},
+	"L3-0398": {
+		"meanings": ["to possess a quality", "to be endowed with"],
+		"note": "V; bare \"to have\" collides with 有"
+	},
+	"L3-0400": {
+		"meanings": ["it is said that", "reportedly"],
+		"note": "Fixed expression; no plain verb gloss exists"
+	},
+	"L3-0401": {
+		"meanings": ["to decide", "a decision"],
+		"note": "V/N"
+	},
+	"L3-0403": {
+		"meanings": ["determination", "to make up one's mind"],
+		"note": "POS lists N first"
+	},
+	"L3-0404": {
+		"meanings": ["absolutely", "definitely"],
+		"note": "Adv row shipped the adjective \"absolute\""
+	},
+	"L3-0407": {
+		"meanings": ["to open to the public", "to bloom"],
+		"note": "V; 开 L1 owns bare \"to open\""
+	},
+	"L3-0408": {
+		"meanings": ["to begin", "the beginning"],
+		"note": "V/N"
+	},
+	"L3-0409": {
+		"meanings": ["to open for business", "to start a practice"],
+		"note": "Separable verb"
+	},
+	"L3-0410": {
+		"meanings": ["to launch an activity", "to carry out"],
+		"note": "V"
+	},
+	"L3-0411": {
+		"meanings": ["it looks as if", "judging by appearances"],
+		"note": "Kept distinct from 看上去"
+	},
+	"L3-0412": {
+		"meanings": ["it appears to be", "from the look of it"],
+		"note": "Kept distinct from 看起来"
+	},
+	"L3-0413": {
+		"meanings": ["to put to the test", "to test someone's resolve"],
+		"note": "V; not 考试"
+	},
+	"L3-0416": {
+		"meanings": ["cola"],
+		"note": "N row shipped the unrelated kělè \"amusing\" sense; the L3 word is the drink"
+	},
+	"L3-0417": {
+		"meanings": ["to overcome", "to get over a difficulty"],
+		"note": "V"
+	},
+	"L3-0419": {
+		"meanings": ["a course of study", "curriculum"],
+		"note": "N; 课 L1 ships \"subject\""
+	},
+	"L3-0420": {
+		"meanings": ["empty", "hollow"],
+		"note": "kōng Adj; \"in vain\" belongs to 白"
+	},
+	"L3-0422": {
+		"meanings": ["I'm afraid that"],
+		"note": "Adv of worried estimate; the noun \"fear\" was wrong for the row"
+	},
+	"L3-0424": {
+		"meanings": ["trousers", "pants"],
+		"note": "N"
+	},
+	"L3-0425": {
+		"meanings": ["high-speed", "rapid"],
+		"note": "Adj; 快 L1 owns \"fast\""
+	},
+	"L3-0426": {
+		"meanings": ["sleepy", "to trap or besiege"],
+		"note": "Adj is listed first and is the L3 sense (我很困); the old card led with the rare verb"
+	},
+	"L3-0427": {
+		"meanings": ["a difficulty", "difficult"],
+		"note": "POS lists N first"
+	},
+	"L3-0430": {
+		"meanings": ["boss", "shop owner"],
+		"note": "N"
+	},
+	"L3-0432": {
+		"meanings": ["an old man"],
+		"note": "N; CEDICT only cross-references 老头子"
+	},
+	"L3-0433": {
+		"meanings": ["to laugh", "to be happy"],
+		"note": "V row (lè); the adjective sense must not lead"
+	},
+	"L3-0434": {
+		"meanings": ["optimistic", "hopeful"],
+		"note": "Adj"
+	},
+	"L3-0435": {
+		"meanings": ["a kind or category", "measure word for kinds"],
+		"note": "POS lists N first, then M"
+	},
+	"L3-0437": {
+		"meanings": ["to get divorced"],
+		"note": "Separable verb"
+	},
+	"L3-0439": {
+		"meanings": ["to get a haircut", "to cut hair"],
+		"note": "Separable verb"
+	},
+	"L3-0440": {
+		"meanings": ["to comprehend", "to grasp the reason for"],
+		"note": "V; 懂 L2 owns \"to understand\""
+	},
+	"L3-0441": {
+		"meanings": ["a theory"],
+		"note": "N; the \"to argue\" sense is not met at L3"
+	},
+	"L3-0442": {
+		"meanings": ["grounds or justification", "a reason given"],
+		"note": "N; 原因 L2 owns the cause sense"
+	},
+	"L3-0443": {
+		"meanings": ["strength", "physical force"],
+		"note": "N; 力量 L3 ships \"power\""
+	},
+	"L3-0445": {
+		"meanings": ["instantly", "straight away"],
+		"note": "Adv; 马上 L1 ships \"at once\" and 立即 L4 \"immediately\""
+	},
+	"L3-0447": {
+		"meanings": ["to link up", "in a row"],
+		"note": "V then Adv, matching the POS order"
+	},
+	"L3-0448": {
+		"meanings": ["promptly"],
+		"note": "Adv; 赶紧 L3 already ships \"hurriedly\""
+	},
+	"L3-0449": {
+		"meanings": ["to go on without a break", "in succession"],
+		"note": "V row shipped the adjective \"continuous\"; 继续 L3 owns \"to continue\""
+	},
+	"L3-0453": {
+		"meanings": ["to get in touch with", "contact"],
+		"note": "V/N"
+	},
+	"L3-0455": {
+		"meanings": ["to finish or settle", "marks if something can be done"],
+		"note": "liǎo V reading, plus its potential-complement use in plain words."
+	},
+	"L3-0456": {
+		"meanings": ["to lead a group", "to collect or receive"],
+		"note": "V row; \"neck/collar\" is the noun reading"
+	},
+	"L3-0459": {
+		"meanings": ["another one", "besides"],
+		"note": "Pron is listed first"
+	},
+	"L3-0460": {
+		"meanings": ["on the other hand"],
+		"note": "Fixed phrase"
+	},
+	"L3-0461": {
+		"meanings": ["to study abroad"],
+		"note": "Separable verb"
+	},
+	"L3-0462": {
+		"meanings": ["a Chinese dragon"],
+		"note": "N; dropped the fig. emperor and bound dinosaur senses"
+	},
+	"L3-0463": {
+		"meanings": ["to make a recording", "to copy down"],
+		"note": "V row led with \"to hit\"; 录音 L3 keeps \"to record sound\""
+	},
+	"L3-0465": {
+		"meanings": ["a route", "an itinerary"],
+		"note": "N; dropped the political-line sense"
+	},
+	"L3-0468": {
+		"meanings": ["green tea"],
+		"note": "N; CEDICT sense 2 is derogatory slang and must never ship"
+	},
+	"L3-0469": {
+		"meanings": ["messy", "in disorder"],
+		"note": "Adj; dropped the illicit-sex sense"
+	},
+	"L3-0470": {
+		"meanings": ["to fall behind", "behind the times"],
+		"note": "Verb phrase"
+	},
+	"L3-0471": {
+		"meanings": ["to trouble someone", "troublesome"],
+		"note": "V then Adj, matching the POS order"
+	},
+	"L3-0472": {
+		"meanings": ["a horse"],
+		"note": "N; the chess senses are not L3 material"
+	},
+	"L3-0473": {
+		"meanings": ["to satisfy", "to be content"],
+		"note": "V"
+	},
+	"L3-0474": {
+		"meanings": ["slowly", "little by little"],
+		"note": "Adverbial reduplication of 慢"
+	},
+	"L3-0475": {
+		"meanings": ["hair or fur", "ten cents in speech"],
+		"note": "N; 头发 L2 owns hair on the head"
+	},
+	"L3-0476": {
+		"meanings": ["a fault or defect", "a bad habit"],
+		"note": "N; 缺点 L3 ships \"weak point\""
+	},
+	"L3-0477": {
+		"meanings": ["to be useless", "of no use"],
+		"note": "V row, so the gloss is predicative"
+	},
+	"L3-0479": {
+		"meanings": ["every", "each"],
+		"note": "Pron/Adv"
+	},
+	"L3-0480": {
+		"meanings": ["beautiful"],
+		"note": "Adj; 美丽 L3 ships \"lovely\" and 漂亮 L2 \"pretty\""
+	},
+	"L3-0483": {
+		"meanings": ["fine food", "a delicacy"],
+		"note": "N"
+	},
+	"L3-0485": {
+		"meanings": ["US dollar"],
+		"note": "N; no CEDICT entry"
+	},
+	"L3-0486": {
+		"meanings": ["to be crazy about", "to fascinate"],
+		"note": "V row; \"an enthusiast\" is the noun reading"
+	}
+}
