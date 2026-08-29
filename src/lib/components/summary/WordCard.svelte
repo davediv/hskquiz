@@ -14,13 +14,11 @@
 	scroll, one question does not — so the card takes the largest fixed step on the scale instead
 	of copying a number that only makes sense full-bleed.
 
-	TONE COLOUR, BECAUSE THIS IS THE REVEAL
-	`QuestionPrompt` paints the character and its syllable from `Word.syllables` the moment a
-	question closes, and holds plain ink while it is still open — tone colour is the answer, not
-	the question. Every word on this screen is past that line, so every word here is painted:
-	character, pinyin, the word that was picked instead, and the mark. Getting this wrong in
-	either direction is visible — an unpainted card two seconds after a painted reveal of the
-	same word reads as a different app.
+	TONE COLOUR IS ON THE PINYIN, NOT THE CHARACTER
+	`<Hanzi>` sets characters in ink and `<Pinyin>` paints one colour per syllable off
+	`Word.syllables` — the design system's single answer to "where does tone colour go", and the
+	same one `QuestionPrompt` gives. Every pinyin line on this screen is painted, the picked
+	word's included, so a card two seconds after a reveal of the same word reads as the same app.
 
 	SAME CARD FOR A MISS AND A HIT
 	`outcome` changes the label at the top and whether the "you picked" footer exists. Nothing
@@ -31,8 +29,27 @@
 	`Word.traditional` is in the data for roughly a third of the list and Pleco prints it beside
 	every headword. It earns its place here more than anywhere: 干 is two separate cards (乾 gān
 	dry, 幹 gàn to work), and the bracketed form is what tells them apart at a glance.
+
+	TWO CONTROLS, NOT ONE
+	Listen says the word; Entry leaves for it. A card with one audio button on it is still a
+	printout — Du Chinese's equivalent card offers Dictionary, Pinyin and a hint, and every Pleco
+	row pushes into the entry. `Entry` is the browse screen for this word's own level, which is
+	where the character breakdown, the sense list and your record with the word live: the card is
+	the back of the flashcard, and this is the way out of it that is not "answer ten more".
+
+	THE LABEL IS THE DRILL'S, ONCE THERE HAS BEEN ONE
+	`drilled` is `null` until the re-test runs and then says how it went, so a word that was
+	missed and then answered reads **✓ Fixed** rather than carrying a red ✕ that is no longer
+	true. Nothing else about the card changes: same size, same order, same place in the list, so
+	the screen heals instead of rearranging itself under a thumb.
+
+	A CORRECT ANSWER INSIDE THE "10 ANSWERED CORRECTLY" DISCLOSURE SAYS SO ONCE. The green
+	✓ CORRECT stamp on every one of ten solved cards restated the label directly above them and
+	took the line Pleco gives to the headword, so `verdict` is simply absent there and the
+	controls take the row.
 -->
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { Direction, Word } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import { fullGloss, headwordSize, posLabel, primaryGloss } from '$lib/components/quiz/quiz';
@@ -48,12 +65,45 @@
 		direction?: Direction;
 		/** Position in its list, for the staggered entrance. */
 		index?: number;
+		/**
+		 * How the re-test went on this word: `true` fixed, `false` missed again, `null` never
+		 * drilled. Only ever set on a miss.
+		 */
+		drilled?: boolean | null;
+		/** Draw the outcome label. Off inside a list whose own heading already says it. */
+		verdict?: boolean;
 	}
 
-	let { word, outcome, picked = null, direction = 'hanzi-to-meaning', index = 0 }: Props = $props();
+	let {
+		word,
+		outcome,
+		picked = null,
+		direction = 'hanzi-to-meaning',
+		index = 0,
+		drilled = null,
+		verdict = true
+	}: Props = $props();
 
 	const right = $derived(outcome === 'right');
+	const fixed = $derived(!right && drilled === true);
+	/**
+	 * `Fixed` is the only label the drill adds. A word missed a *second* time keeps `Not quite` —
+	 * the card is still red and still in the count, which says it, and `Missed again` is 30px
+	 * wider than the head row has to spare beside two controls on a 375px phone.
+	 */
+	const label = $derived(right ? 'Correct' : fixed ? 'Fixed' : 'Not quite');
 	const size = $derived(headwordSize(word.hanzi));
+	/**
+	 * The word, searched for on its own level's browse screen.
+	 *
+	 * `?q=` is the query the browse route seeds its search field from, and an exact hanzi is the
+	 * top band of its ranking — so tapping Entry lands on a list with this word at the head of
+	 * it, one tap from the full Pleco-style sheet. `Word.level` rather than a prop: a session is
+	 * one level, but the word already knows which, and one source of truth is one fewer thing a
+	 * caller can get wrong. The path itself is built by `resolve()` inside the attribute, which
+	 * is where the lint rule guarding internal links wants to see it.
+	 */
+	const entryQuery = $derived(encodeURIComponent(word.hanzi));
 	/**
 	 * The bracketed traditional form is a footnote to the headword, never a second one, so it is
 	 * sized off the character count rather than off `size`: one or two characters leave room for
@@ -65,33 +115,55 @@
 	const delay = $derived(`${Math.min(index, 5) * 45}ms`);
 </script>
 
-<li class="card word" style:animation-delay={delay}>
+<li class="card word" class:card-fixed={fixed} style:animation-delay={delay}>
 	<div class="head">
-		<p class="verdict" class:right class:miss={!right}>
-			{#if right}
-				<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+		{#if verdict}
+			<p class="verdict" class:right={right || fixed} class:miss={!right && !fixed}>
+				{#if right || fixed}
+					<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+						<path
+							d="m3.5 8.5 3 3 6-7"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.4"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				{:else}
+					<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+						<path
+							d="m4.5 4.5 7 7m0-7-7 7"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2.4"
+							stroke-linecap="round"
+						/>
+					</svg>
+				{/if}{label}
+			</p>
+		{/if}
+		<div class="tools">
+			<a
+				class="tool"
+				href="{resolve('/browse/[level]', { level: String(word.level) })}?q={entryQuery}"
+			>
+				<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
 					<path
-						d="m3.5 8.5 3 3 6-7"
+						d="M3.4 4.6h4.1c1.4 0 2.5.9 2.5 2v8.2c0-.9-1.1-1.6-2.5-1.6H3.4Zm13.2 0h-4.1c-1.4 0-2.5.9-2.5 2v8.2c0-.9 1.1-1.6 2.5-1.6h4.1Z"
 						fill="none"
 						stroke="currentColor"
-						stroke-width="2.4"
-						stroke-linecap="round"
+						stroke-width="1.4"
 						stroke-linejoin="round"
 					/>
-				</svg>Correct
-			{:else}
-				<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-					<path
-						d="m4.5 4.5 7 7m0-7-7 7"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2.4"
-						stroke-linecap="round"
-					/>
-				</svg>Not quite
-			{/if}
-		</p>
-		<SpeakButton text={word.hanzi} pinyin={word.pinyin} />
+				</svg>
+				<span aria-hidden="true">Entry</span>
+				<span class="sr-only"
+					>Open {word.hanzi}, {word.pinyin}, in the HSK {word.level} word list</span
+				>
+			</a>
+			<SpeakButton text={word.hanzi} pinyin={word.pinyin} />
+		</div>
 	</div>
 
 	<p class="face">
@@ -113,7 +185,9 @@
 
 	{#if !right}
 		<p class="picked">
-			<span class="tag">{picked === null ? 'No answer' : 'You picked'}</span>
+			<!-- Once the drill has fixed the word, the wrong answer is history rather than news, and
+			     a bare "YOU PICKED" under a green ✓ FIXED reads as if it had just happened. -->
+			<span class="tag">{picked === null ? 'No answer' : fixed ? 'First time' : 'You picked'}</span>
 			{#if picked !== null}
 				<span class="pick">
 					{#if direction === 'meaning-to-hanzi'}
@@ -143,25 +217,86 @@
 		}
 	}
 
+	/*
+	 * A word answered right in the drill keeps every measurement it had and changes one hairline,
+	 * so a healed card is legible as healed from across the list without the list moving.
+	 */
+	.card-fixed {
+		border-color: var(--color-correct);
+	}
+
 	/* Reserves its own height so the Listen button arriving on hydration moves nothing. */
 	.head {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 0.75rem;
+		gap: 0.5rem;
 		min-block-size: var(--spacing-tap);
 	}
 
+	/* Pushed right whether or not there is a verdict label on the left to push against. */
+	.tools {
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		margin-inline-start: auto;
+	}
+
+	/*
+	 * Same pill as Listen, so the two read as one pair of controls rather than a button and a
+	 * link. Both are `--spacing-tap` tall, which is the 44pt the whole app is built on.
+	 */
+	.tool {
+		display: inline-flex;
+		flex: none;
+		align-items: center;
+		gap: 0.3125rem;
+		min-block-size: var(--spacing-tap);
+		padding-inline: 0.625rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-pill);
+		background-color: var(--color-surface);
+		color: var(--color-ink-muted);
+		font-size: var(--text-xs);
+		font-weight: 650;
+		letter-spacing: 0.02em;
+		text-decoration: none;
+		transition:
+			background-color 140ms var(--ease-out-soft),
+			border-color 140ms var(--ease-out-soft),
+			color 140ms var(--ease-out-soft);
+	}
+
+	.tool svg {
+		inline-size: 1rem;
+		block-size: 1rem;
+	}
+
+	.tool:active {
+		background-color: var(--color-surface-sunken);
+		color: var(--color-ink);
+	}
+
+	@media (hover: hover) {
+		.tool:hover {
+			border-color: var(--color-line-strong);
+			background-color: var(--color-surface-sunken);
+			color: var(--color-ink);
+		}
+	}
+
 	/* Word for word the verdict the quiz card shows, so the two screens agree on what happened. */
+	/* `flex: none` + `nowrap`: the two controls beside it may shrink, this may not wrap. */
 	.verdict {
 		display: inline-flex;
+		flex: none;
 		align-items: center;
 		gap: 0.3125rem;
 		margin: 0;
 		font-size: var(--text-2xs);
 		font-weight: 700;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.08em;
 		text-transform: uppercase;
+		white-space: nowrap;
 	}
 
 	.verdict svg {
