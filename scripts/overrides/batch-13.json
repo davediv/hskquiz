@@ -1,0 +1,490 @@
+{
+	"L4-0053": {
+		"meanings": ["to not care about", "to not mind"],
+		"note": "V row; keeps a verb form. CEDICT gives only the bare \"not to care\"."
+	},
+	"L4-0054": {
+		"meanings": ["whatever happens", "regardless"],
+		"note": "Conj. 无论 ships \"no matter what or how\" and 不论 \"regardless of\", so this takes a third plain wording."
+	},
+	"L4-0055": {
+		"meanings": ["or else", "if not"],
+		"note": "Conj. CEDICT led with \"not so\"; 否则 already ships \"otherwise\", so this leads with \"or else\"."
+	},
+	"L4-0058": {
+		"meanings": ["to wipe", "to rub"],
+		"note": "The L4 sense is 擦桌子/擦干 — wiping. Rubbing is real but secondary."
+	},
+	"L4-0059": {
+		"meanings": ["natural talent", "a gifted person"],
+		"note": "The L4 row is N (the L2 row is the adverb 才 \"only just\"). 才能 already ships \"talent\", so this is \"natural talent\"."
+	},
+	"L4-0061": {
+		"meanings": ["property", "assets"],
+		"note": "N row; machine pick was already right and unique in the corpus."
+	},
+	"L4-0063": {
+		"meanings": ["to interview for the news", "to cover a story"],
+		"note": "Differentiates from 访问 \"to visit or interview\" and 面试 \"to be interviewed\" for a job."
+	},
+	"L4-0064": {
+		"meanings": ["to refer to", "to consult for reference"],
+		"note": "商量 already ships \"to consult\", so the primary is \"to refer to\"."
+	},
+	"L4-0066": {
+		"meanings": ["a school sports ground", "a playground"],
+		"note": "N row; 操场 is specifically the sports ground of a school."
+	},
+	"L4-0067": {
+		"meanings": ["to operate a machine", "to handle equipment"],
+		"note": "V row; 使用 ships the general \"to use\"."
+	},
+	"L4-0068": {
+		"meanings": ["to measure by instrument", "to survey"],
+		"note": "量 ships \"to measure\" and 测试 \"to test\", so 测 is pinned to instrument measurement."
+	},
+	"L4-0071": {
+		"meanings": ["at one time in the past", "formerly"],
+		"note": "Adv. 曾经 owns \"once in the past\" and 以前/从前 own \"before\"/\"previously\", so this takes its own wording."
+	},
+	"L4-0074": {
+		"meanings": ["long-distance", "a long-distance bus or call"],
+		"note": "Adj/N row; the abbreviation senses folded into one noun gloss without a comma."
+	},
+	"L4-0075": {
+		"meanings": ["common sense", "general knowledge"],
+		"note": "CEDICT clause 2 restored as the second sense."
+	},
+	"L4-0077": {
+		"meanings": ["to copy out by hand", "to copy someone's work"],
+		"note": "复印 ships \"to photocopy\"; 抄 is copying by hand, including cheating."
+	},
+	"L4-0079": {
+		"meanings": ["tide", "damp"],
+		"note": "N/Adj row: the noun sense first, the adjective second. 湿 keeps \"moist/wet\"."
+	},
+	"L4-0082": {
+		"meanings": ["thorough and complete", "leaving nothing undone"],
+		"note": "Adj row, so no adverb gloss. 深入 already ships \"thorough\"."
+	},
+	"L4-0083": {
+		"meanings": ["to sink", "heavy and deep"],
+		"note": "V/Adj row. CEDICT led with \"to submerge/immerse\"; the learner sense is sinking. 重 keeps plain \"heavy\"."
+	},
+	"L4-0084": {
+		"meanings": ["silent", "to say nothing"],
+		"note": "Adj/V row; \"taciturn\" is too rare a word for a flashcard."
+	},
+	"L4-0085": {
+		"meanings": ["heavy and burdensome", "weighed down"],
+		"note": "Adj row; 重 ships \"heavy\", so 沉重 carries the burden/mood sense it actually has."
+	},
+	"L4-0087": {
+		"meanings": ["a grown adult", "to reach adulthood"],
+		"note": "N row leads. 大人 already ships \"adult\"."
+	},
+	"L4-0089": {
+		"meanings": ["honest and trustworthy", "acting in good faith"],
+		"note": "Official POS is Adj, so the noun \"honesty\" would not match the row."
+	},
+	"L4-0093": {
+		"meanings": ["a computer program", "a set order of steps"],
+		"note": "手续 ships \"procedure\"; both senses of 程序 are live at L4 and the software one is the concrete card."
+	},
+	"L4-0094": {
+		"meanings": ["to be startled", "to be shocked"],
+		"note": "Separable verb; machine pick was already right."
+	},
+	"L4-0096": {
+		"meanings": ["a Chinese foot of length", "a ruler"],
+		"note": "N/M row. Says the unit is Chinese rather than leaving \"foot\" ambiguous."
+	},
+	"L4-0097": {
+		"meanings": ["measurements", "size of clothing"],
+		"note": "大小 ships \"size\". Drops the \"(coll.) propriety\" sense."
+	},
+	"L4-0099": {
+		"meanings": ["to rush forward", "to rinse with water", "to brew a drink"],
+		"note": "闯 ships \"to rush\". Three senses a learner really meets: 冲过去, 冲一冲, 冲咖啡."
+	},
+	"L4-0100": {
+		"meanings": ["to charge a battery"],
+		"note": "The other CEDICT senses are figurative (\"recharge one's batteries\") and excluded."
+	},
+	"L4-0102": {
+		"meanings": ["full and sufficient", "as much as needed"],
+		"note": "十足 ships \"ample\", so 充分 is reworded rather than duplicated."
+	},
+	"L4-0103": {
+		"meanings": ["an insect", "a bug or worm"],
+		"note": "N row; classifier note dropped."
+	},
+	"L4-0104": {
+		"meanings": ["to draw out", "to take one from a set"],
+		"note": "拔 ships \"to pull out\" and 抽烟 owns the smoking sense, so 抽 keeps the core \"draw out\"."
+	},
+	"L4-0105": {
+		"meanings": ["to draw a prize", "a prize raffle"],
+		"note": "Separable verb; second gloss made concrete."
+	},
+	"L4-0106": {
+		"meanings": ["to smoke a cigarette"],
+		"note": "CEDICT row is only a variant-of pointer. 吸烟 ships the bare \"to smoke\"."
+	},
+	"L4-0107": {
+		"meanings": ["to export goods", "to say out loud"],
+		"note": "The L2 出口 row is the noun \"an exit\"; this L4 row is the separable verb 出∥口, so it must carry the verb senses. Pairs with 进口 at the same level."
+	},
+	"L4-0108": {
+		"meanings": ["remarkable", "exceptionally good"],
+		"note": "Adj row; 优秀 already ships \"outstanding\"."
+	},
+	"L4-0110": {
+		"meanings": ["to attend a formal event", "to be present"],
+		"note": "开会 ships \"to attend a meeting\"; 出席 is attendance at a formal occasion."
+	},
+	"L4-0112": {
+		"meanings": ["a place or spot", "a department or office"],
+		"note": "N row. 地方 and 位置 already ship \"place\"; bound-form markers dropped."
+	},
+	"L4-0113": {
+		"meanings": ["to put on clothes"],
+		"note": "Says what is put on, so it does not collide with 戴 (glasses, hats) or 穿 \"to wear\"."
+	},
+	"L4-0114": {
+		"meanings": ["tradition", "traditional"],
+		"note": "N/Adj row; CEDICT clause 2 restored."
+	},
+	"L4-0116": {
+		"meanings": ["a windowsill"],
+		"note": "One object, one gloss."
+	},
+	"L4-0119": {
+		"meanings": ["pure and unmixed", "nothing else added"],
+		"note": "Breaks the identical meaning set with 单纯: 纯 is unmixed, 单纯 is simple/innocent."
+	},
+	"L4-0121": {
+		"meanings": ["vocabulary", "the words of a language"],
+		"note": "N row; the CEDICT teaching-list parenthetical dropped."
+	},
+	"L4-0122": {
+		"meanings": ["this in formal writing"],
+		"note": "Pron row. 这 ships \"this\"; 此 is the written-register form, so the card says so."
+	},
+	"L4-0123": {
+		"meanings": ["apart from this", "in addition to this"],
+		"note": "Conj. 另外 ships \"in addition\", so this keeps the \"this\" anchor 此外 actually carries."
+	},
+	"L4-0124": {
+		"meanings": ["of poorer quality", "coming next in order"],
+		"note": "Adj row — the classifier \"times\" is the L1 次, and 其次 owns \"next in order\". 次品/次日 are both live at L4."
+	},
+	"L4-0125": {
+		"meanings": ["to prick or stab", "a thorn"],
+		"note": "V/N row, so the verb leads even though CEDICT starts with \"thorn\"."
+	},
+	"L4-0126": {
+		"meanings": ["to stimulate", "to irritate or upset"],
+		"note": "V/N row; CEDICT sense 1 was a five-clause pile."
+	},
+	"L4-0127": {
+		"meanings": ["from then on", "ever since"],
+		"note": "Adv; \"from then on\" keeps 今后 \"hereafter\" free."
+	},
+	"L4-0128": {
+		"meanings": ["thick in diameter", "coarse or rough"],
+		"note": "Replaces the shipped \"thick, of a rod\", whose internal comma reads as a second sense in the joined row."
+	},
+	"L4-0130": {
+		"meanings": ["to promote or boost", "to help along"],
+		"note": "V row; 推动 ships \"to push\"."
+	},
+	"L4-0131": {
+		"meanings": ["to prompt someone to act", "to spur on"],
+		"note": "Keeps the causative-of-a-person sense that separates 促使 from 促进."
+	},
+	"L4-0133": {
+		"meanings": ["a measure taken", "a step or action"],
+		"note": "Bare \"measure\" could equally be a ruler or a classifier; 措施 is an action taken."
+	},
+	"L4-0134": {
+		"meanings": ["a dozen"],
+		"note": "M row, pinyin dá — the loanword classifier, distinct from dǎ \"to hit\"."
+	},
+	"L4-0137": {
+		"meanings": ["to thunder", "a clap of thunder"],
+		"note": "Separable verb."
+	},
+	"L4-0139": {
+		"meanings": ["to give a discount", "to sell at a discount"],
+		"note": "Separable verb; machine pick was right."
+	},
+	"L4-0140": {
+		"meanings": ["to give an injection", "to get a shot"],
+		"note": "Both directions of the separable verb, as CEDICT has it."
+	},
+	"L4-0141": {
+		"meanings": ["a large coach bus", "a tour bus"],
+		"note": "公共汽车 ships \"bus\"; the \"(coll.)\" marker is dropped but the size is kept."
+	},
+	"L4-0142": {
+		"meanings": ["mostly", "for the most part"],
+		"note": "Adv row, so an adverb leads."
+	},
+	"L4-0143": {
+		"meanings": ["generous with money", "natural and at ease"],
+		"note": "Both live L4 senses, disambiguated so neither reads as the other."
+	},
+	"L4-0144": {
+		"meanings": ["eldest brother", "friendly name for an older man"],
+		"note": "哥哥 ships \"older brother\"; the polite-address sense is worded apart from 大爷."
+	},
+	"L4-0145": {
+		"meanings": ["on a large scale", "involving great numbers"],
+		"note": "大型 ships \"large-scale\"."
+	},
+	"L4-0146": {
+		"meanings": ["a general assembly", "a mass meeting"],
+		"note": "会议 ships \"meeting\" and \"conference\"."
+	},
+	"L4-0147": {
+		"meanings": ["eldest sister", "polite name for an older woman"],
+		"note": "姐姐 ships \"older sister\"."
+	},
+	"L4-0148": {
+		"meanings": ["a large multi-story building", "an office block"],
+		"note": "楼 ships the generic storied building; 大楼 is the big one."
+	},
+	"L4-0149": {
+		"meanings": ["a continent", "the mainland"],
+		"note": "N row; both senses are met at L4."
+	},
+	"L4-0152": {
+		"meanings": ["a polite term for an elderly man", "father's elder brother"],
+		"note": "Bare \"uncle\" would collide with 叔叔/舅舅/阿姨; the modern everyday sense leads."
+	},
+	"L4-0154": {
+		"meanings": ["to stand in for", "to substitute for"],
+		"note": "代 ships \"to take the place of\" and 更换 \"to replace\", so 代替 is worded apart from both."
+	},
+	"L4-0155": {
+		"meanings": ["pay and benefits", "how one is treated"],
+		"note": "N row; both senses of 待遇 in one card without a bare \"treatment\"."
+	},
+	"L4-0156": {
+		"meanings": ["a sack or bag", "measure word for bags"],
+		"note": "N/M row. 包 ships \"bag\", so this leads with \"a sack or bag\"."
+	},
+	"L4-0157": {
+		"meanings": ["to wear glasses or a hat", "to put on accessories"],
+		"note": "Names what 戴 takes, so it cannot be confused with 穿 \"to wear\" (clothes)."
+	},
+	"L4-0159": {
+		"meanings": ["to hold the post of", "to serve in a role"],
+		"note": "当 ships \"to serve as\"; 担任 is specifically holding a post."
+	},
+	"L4-0160": {
+		"meanings": ["to be worried", "to feel anxious about"],
+		"note": "着急 ships \"to worry\", so 担心 is worded apart from it."
+	},
+	"L4-0161": {
+		"meanings": ["one on its own", "merely"],
+		"note": "Adj/Adv row, so the noun senses \"bill, list\" are wrong here. 单一 ships \"single\" and 唯一 \"the only one\"."
+	},
+	"L4-0162": {
+		"meanings": ["simple and innocent", "merely or purely"],
+		"note": "Breaks the identical meaning set with 纯 and keeps 简单 \"simple\" free."
+	},
+	"L4-0165": {
+		"meanings": ["bland in taste", "light in color"],
+		"note": "Adj row; the two senses a learner meets (淡的汤, 淡蓝色). Nitrogen variant excluded."
+	},
+	"L4-0166": {
+		"meanings": ["to guide a tour", "a tour guide"],
+		"note": "V/N row, verb first per the official order; both senses are common."
+	},
+	"L4-0167": {
+		"meanings": ["to lead to a bad result", "to result in"],
+		"note": "引起 ships \"to give rise to\" and 造成 \"to bring about\"; 导致 carries the negative outcome."
+	},
+	"L4-0169": {
+		"meanings": ["to change buses or trains", "to transfer between vehicles"],
+		"note": "dǎo chē reading. Comma removed from the shipped \"to change buses, trains\"."
+	},
+	"L4-0170": {
+		"meanings": ["to reverse a vehicle", "to back up a car"],
+		"note": "dào chē reading — kept clearly distinct from the dǎo chē card above."
+	},
+	"L4-0171": {
+		"meanings": ["pleased with oneself", "proud of one's success"],
+		"note": "Adj row; both glosses keep the self-satisfied flavour 得意 has."
+	},
+	"L4-0172": {
+		"meanings": ["to have to do something", "to need to"],
+		"note": "V row so the gloss keeps a verb form. 必须 ships \"must\" and 不能不 \"have to\", so this is worded apart from both."
+	},
+	"L4-0174": {
+		"meanings": ["to climb up", "to publish in a newspaper"],
+		"note": "爬 ships \"to crawl/climb\", 升 \"to ascend\", 登山 \"to climb a mountain\". Dialect and archaic senses dropped."
+	},
+	"L4-0177": {
+		"meanings": ["mountaineering", "to go mountain climbing"],
+		"note": "爬山 already ships \"to climb a mountain\"; 登山 is the sport/activity word."
+	},
+	"L4-0178": {
+		"meanings": ["without a doubt", "truly"],
+		"note": "Adv. 确实 ships \"indeed\" and 真的 ships \"really\", so 的确 takes a third wording."
+	},
+	"L4-0180": {
+		"meanings": ["the bottom of something", "the end of a month or year"],
+		"note": "N row; 月底/年底 is the sense a learner actually meets alongside the literal bottom."
+	},
+	"L4-0181": {
+		"meanings": ["local rather than central", "a local area"],
+		"note": "This is the dìfāng row (L1 地方 dìfang is \"place\"); 地区 ships \"region\". The card is the local-vs-central-government sense."
+	},
+	"L4-0182": {
+		"meanings": ["the ground surface", "the floor indoors"],
+		"note": "地 ships \"ground\"; this names the surface itself."
+	},
+	"L4-0184": {
+		"meanings": ["underground", "below ground level"],
+		"note": "N row; \"covert\" sense dropped as wrong for the level."
+	},
+	"L4-0187": {
+		"meanings": ["to call the roll", "to name someone specifically"],
+		"note": "Separable verb; both senses are met at L4."
+	},
+	"L4-0192": {
+		"meanings": ["the top of something", "measure word for hats"],
+		"note": "N/M senses kept; the slang \"bump a thread\" sense excluded."
+	},
+	"L4-0193": {
+		"meanings": ["to fix or decide", "to settle on"],
+		"note": "决定 ships \"to decide\" and 订 \"to book\", so 定 is worded apart from both."
+	},
+	"L4-0198": {
+		"meanings": ["to be independent", "to stand on one's own"],
+		"note": "V row per the official POS, so the noun \"independence\" does not lead."
+	},
+	"L4-0199": {
+		"meanings": ["distinctive", "unique in its own way"],
+		"note": "唯一 ships \"the only one\" and 特别 \"unusual\"; 独特 is distinctiveness."
+	},
+	"L4-0201": {
+		"meanings": ["to block up", "to stop up a hole"],
+		"note": "V row; the \"(fig.) choked up\" and literary \"wall\" senses excluded."
+	},
+	"L4-0202": {
+		"meanings": ["to be stuck in traffic", "a traffic jam"],
+		"note": "Leads with what a learner says (堵车了) rather than the bare noun."
+	},
+	"L4-0203": {
+		"meanings": ["the belly", "the stomach area"],
+		"note": "胃 ships \"stomach\", so 肚子 leads with the belly."
+	},
+	"L4-0204": {
+		"meanings": ["to spend a period of time", "to get through a time"],
+		"note": "花 covers spending money; 度过 only takes time."
+	},
+	"L4-0205": {
+		"meanings": ["to exercise the body", "to work out"],
+		"note": "运动 ships \"to exercise\"; \"to toughen/to temper\" was the wrong register for the level."
+	},
+	"L4-0206": {
+		"meanings": ["to contrast two things", "a contrast or ratio"],
+		"note": "比较 ships \"to compare\"; 对比 is setting two things side by side."
+	},
+	"L4-0208": {
+		"meanings": ["with regard to", "as far as something is concerned"],
+		"note": "Prep row. 关于 ships \"concerning\"/\"pertaining to\"."
+	},
+	"L4-0209": {
+		"meanings": ["many times", "repeatedly"],
+		"note": "Machine pick was right and unique."
+	},
+	"L4-0210": {
+		"meanings": ["many years", "for years on end"],
+		"note": "Second gloss reworded so it is not a restatement of the first."
+	},
+	"L4-0211": {
+		"meanings": ["diverse", "coming in many forms"],
+		"note": "Adj row, so the noun \"diversity\" does not ship; kept distinct from 多种."
+	},
+	"L4-0212": {
+		"meanings": ["many kinds of", "several different types"],
+		"note": "Kept distinct from 多样 \"diverse\" and 各种 \"every kind of\"."
+	},
+	"L4-0213": {
+		"meanings": ["disgusting", "to feel sick"],
+		"note": "Adj/V row; CEDICT only has a variant-of pointer, so both senses are authored."
+	},
+	"L4-0215": {
+		"meanings": ["and yet", "and also"],
+		"note": "Conj. Plain wording for what 而 does between two clauses, instead of a grammar label; 和 keeps \"and\" and 但是 keeps \"but\"."
+	},
+	"L4-0216": {
+		"meanings": ["but rather", "instead it is"],
+		"note": "The 不是…而是… frame said in plain words."
+	},
+	"L4-0217": {
+		"meanings": ["headphones", "earphones"],
+		"note": "Telephone-receiver sense dropped as dated."
+	},
+	"L4-0218": {
+		"meanings": ["previously owned", "second-hand"],
+		"note": "旧 already ships \"second-hand\" as a sense, so the primary is reworded."
+	},
+	"L4-0219": {
+		"meanings": ["to bring into full play", "to put skills to use"],
+		"note": "V row; \"to display/exhibit\" was the wrong sense for 发挥作用/发挥水平."
+	},
+	"L4-0220": {
+		"meanings": ["an official receipt", "an invoice"],
+		"note": "The 发票 a learner asks for in a shop is the official receipt."
+	},
+	"L4-0221": {
+		"meanings": ["to have a fever", "to run a temperature"],
+		"note": "Separable verb; the \"(fig.) to obsess over\" sense excluded."
+	},
+	"L4-0222": {
+		"meanings": ["law or rule", "a way of doing something"],
+		"note": "N row. 法律 ships \"the law\" and 方法/办法 the method senses, so both of 法's real senses are worded apart from them."
+	},
+	"L4-0226": {
+		"meanings": ["to turn over", "to turn the pages"],
+		"note": "V row; 翻书/翻页 is the everyday L4 use."
+	},
+	"L4-0227": {
+		"meanings": ["to translate", "a translator"],
+		"note": "V/N row. 解释 ships \"to interpret\", so the noun sense takes the second slot."
+	},
+	"L4-0228": {
+		"meanings": ["annoyed or vexed", "to bother someone"],
+		"note": "Adj/V row, adjective first per the official order."
+	},
+	"L4-0229": {
+		"meanings": ["reverse or inside out", "to oppose"],
+		"note": "Adj/V/Adv row; 相反 ships \"opposite\"/\"contrary\", so 反 is worded apart from it."
+	},
+	"L4-0230": {
+		"meanings": ["on the contrary", "instead of what you expect"],
+		"note": "Adv row; the second gloss spells out the surprise 反而 carries."
+	},
+	"L4-0231": {
+		"meanings": ["to reflect a situation", "to report a problem"],
+		"note": "体现 ships \"to reflect\"; both 反映 senses are the report/mirror-a-situation pair, not a physical mirror."
+	},
+	"L4-0232": {
+		"meanings": ["square in shape", "a side or party"],
+		"note": "Adj/N row; the maths, prescription and classifier senses are wrong for the level."
+	},
+	"L4-0233": {
+		"meanings": ["a detailed plan", "a proposal or scheme"],
+		"note": "计划 ships \"a plan\"; 方案 is the worked-out version."
+	},
+	"L4-0235": {
+		"meanings": ["to relax", "to loosen up"],
+		"note": "V row; 轻松 keeps the adjective."
+	}
+}
