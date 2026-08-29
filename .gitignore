@@ -28,3 +28,6 @@ vite.config.ts.timestamp-*
 # Claude Code
 .claude/
 CLAUDE.md
+
+# progress page is regenerated from status.json + shots
+progress/index.html
