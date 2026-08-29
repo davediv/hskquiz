@@ -33,13 +33,15 @@
 		hydrated = true;
 	});
 
-	const state = $derived(hydrated ? progress.state : null);
-	const summary = $derived(overallSummary(state));
+	// NB: must not be named `state` — Svelte reads `$state` as store-access on a
+	// binding called `state`, which breaks the rune itself.
+	const snapshot = $derived(hydrated ? progress.state : null);
+	const summary = $derived(overallSummary(snapshot));
 	const cards = $derived(
 		LEVELS.map((level: Level) => ({
 			level,
 			total: LEVEL_SIZES[level],
-			stats: levelStats(state, level)
+			stats: levelStats(snapshot, level)
 		}))
 	);
 
