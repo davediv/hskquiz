@@ -1,8 +1,68 @@
 {
  "loops": [
   {
+   "loop": 2,
+   "note": "Vocabulary rebuilt from the ground up: 4,316 of 4,316 official entries now traceable, all four slang senses gone, 3,475 glosses hand-authored against the official part of speech, and tone colour moved from a render-time guess to build-time data — every one of 7,907 syllables is painted, where loop 1 coloured only the 29% of words that were monosyllabic. Every piece still fails, but on second-order problems now. The sharpest finding: the sense splitter does not know the word \"or\", so 47 same-level pairs share a primary gloss and the app can mark a right answer wrong.",
+   "verdicts": [
+    {
+     "piece": "vocab-data",
+     "kind": "data",
+     "pass": false,
+     "biggestGap": "Teach the sense splitter the word \"or\", in both places it lives, then fix everything it flags."
+    },
+    {
+     "piece": "progress-store",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Stop deciding what to erase by comparing two wall-clock timestamps. Make a reset a fact recorded in the payload, not an inequality against Date.now()."
+    },
+    {
+     "piece": "session-engine",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Give the record an exposure counter that is not an answer, then ship the introduce card on top of it. The critic's instruction (\"gate recordAnswer, add noteSeen\") is right in shape and wrong in target: seen currently *means*…"
+    },
+    {
+     "piece": "design-system",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Give tone its own five hues, then let the landing page use them."
+    },
+    {
+     "piece": "app-shell",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Give the bar a floor: it must never retract past a compact, permanently-docked row carrying the back control and the level title. Change chrome.svelte.ts so hidden is clamped to barH - MIN_BAR (target MIN_BAR ≈ 40px, enough…"
+    },
+    {
+     "piece": "level-select",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": ""
+    },
+    {
+     "piece": "quiz-card",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make the headword one size. Reserve the reveal's .under block in the unanswered state too, so the character never shrinks at the moment the learner got it wrong."
+    },
+    {
+     "piece": "session-summary",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": ""
+    },
+    {
+     "piece": "vocab-browse",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make the CHARACTERS strip in src/lib/components/browse/WordSheet.svelte the way out of the sheet: turn each character card into a list of the other HSK 1–5 words that contain it, tappable, opening the sheet for that word."
+    }
+   ]
+  },
+  {
    "loop": 1,
-   "note": "First honest pass. Every piece built, integrated and judged against Pleco and Du Chinese by a critic with fresh context that ran the app itself. All nine fail — but the blind judges, shown our screen and a reference screen without being told which was which, picked ours for the quiz, the summary and the vocabulary list. What fails is behaviour and data, not craft.",
+   "note": "First honest pass. Every piece built, integrated and judged against Pleco and Du Chinese by a critic with fresh context that ran the app itself. All nine fail — but the blind judges, shown our screen and a reference screen without being told which was which, picked ours for the quiz, the summary and the vocabulary list.",
    "verdicts": [
     {
      "piece": "vocab-data",

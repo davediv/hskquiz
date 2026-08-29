@@ -66,7 +66,11 @@ for lp in loops:
         while base and base not in by_piece and "-" in base:
             base = base.rsplit("-", 1)[0]
         v = by_piece.get(base, {})
-        uri = data_uri(f)
+        # The extra states critics capture outnumber the main screens ~6:1, so they carry one
+        # modest image used for both the thumbnail and the lightbox. Two encodes each would put
+        # the page over the 16 MB artifact ceiling.
+        primary = piece == base
+        uri = data_uri(f) if primary else data_uri(f, 400, 64)
         if not uri:
             continue
         total_bytes += len(uri)
@@ -76,11 +80,11 @@ for lp in loops:
                 "piece": piece,
                 "base": base,
                 "shot": uri,
-                "desktop": data_uri(desk, 720, 68) if desk.exists() else None,
+                "desktop": (data_uri(desk, 700, 66) if desk.exists() else None) if primary else None,
                 "pass": v.get("pass"),
                 "gap": v.get("biggestGap", ""),
                 "kind": v.get("kind", ""),
-                "primary": piece == base,
+                "primary": primary,
             }
         )
         seen.add(base)
