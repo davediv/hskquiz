@@ -146,9 +146,20 @@
 	/** Everything pinned above the list: the app bar plus this screen's controls. */
 	let stickyH = $state(0);
 
+	/** Signed px of the last scroll step, which is what buys the window reach on a fling. */
+	let travel = $state(0);
+
 	const measured = $derived(rowHeight > 0);
 	const win = $derived(
-		windowFor({ count: filtered.length, cols, rowHeight, listTop, scrollTop, viewportHeight })
+		windowFor({
+			count: filtered.length,
+			cols,
+			rowHeight,
+			listTop,
+			scrollTop,
+			viewportHeight,
+			travel
+		})
 	);
 	const startIndex = $derived(measured ? win.startIndex : 0);
 	const visible = $derived(
@@ -191,13 +202,20 @@
 		untrack(measure);
 		scrollTop = window.scrollY;
 
-		let frame = 0;
+		// Read on the event rather than inside a requestAnimationFrame. The rAF hop was one
+		// frame of latency between the compositor moving the page and the rows for the new
+		// position existing, and on a fast fling that frame is a screen of blank cream. A
+		// passive scroll listener already fires at most once per frame, and Svelte flushes the
+		// re-render before paint, so the rows land in the same frame the scroll did.
+		let settle: ReturnType<typeof setTimeout> | undefined;
 		const onScroll = () => {
-			if (frame !== 0) return;
-			frame = requestAnimationFrame(() => {
-				frame = 0;
-				scrollTop = window.scrollY;
-			});
+			const next = window.scrollY;
+			travel = next - scrollTop;
+			scrollTop = next;
+			// Travel is momentary. Left standing it would keep a fling-sized window in the DOM
+			// for as long as the learner sits still reading it.
+			clearTimeout(settle);
+			settle = setTimeout(() => (travel = 0), 120);
 		};
 		const onResize = () => untrack(measure);
 
@@ -210,7 +228,7 @@
 		if (controlsEl) observer.observe(controlsEl);
 
 		return () => {
-			if (frame !== 0) cancelAnimationFrame(frame);
+			clearTimeout(settle);
 			window.removeEventListener('scroll', onScroll);
 			window.removeEventListener('resize', onResize);
 			observer.disconnect();
@@ -361,7 +379,7 @@
 				title: `Nothing in HSK ${level} matches “${query.trim()}”`,
 				body:
 					filter === 'all'
-						? 'Pinyin works without tone marks — try “hao” for 好. You can also search a character, or an English word from the meaning.'
+						? 'Pinyin needs no tone marks and is matched whole syllables at a time — try “hao”, or “aihao” for 爱好. You can also search a character, or an English word from the meaning.'
 						: `Nothing here is filed under ${STATUS_META[filter].label.toLowerCase()}. Search across every word in the level instead.`,
 				action: filter === 'all' ? 'clear-query' : 'clear-filter'
 			} as const;
@@ -412,7 +430,7 @@
 	{:else if phase === 'failed'}
 		<section class="panel">
 			<p class="eyebrow">Could not load</p>
-			<h1 class="panel-title">The HSK {level} word list did not arrive</h1>
+			<h2 class="panel-title">The HSK {level} word list did not arrive</h2>
 			<p class="panel-body">
 				That is usually the network. Nothing you have practised is lost — progress is kept on this
 				device.
@@ -522,12 +540,30 @@
 		   back off a rendered row rather than being told it a second time in TypeScript. */
 		--browse-row-h: 4.75rem;
 
+		/* The screen's own gutters, named once so the sticky block can cancel them and the chip
+		   strip can run past them. `--browse-bleed-*` is how far a child may bleed: the gutter
+		   on a phone, nothing once the controls become a single desktop row and the strip is
+		   one cell of a grid. */
+		--browse-gutter-start: max(var(--spacing-gutter), var(--app-safe-left, 0px));
+		--browse-gutter-end: max(var(--spacing-gutter), var(--app-safe-right, 0px));
+		--browse-bleed-start: var(--browse-gutter-start);
+		--browse-bleed-end: var(--browse-gutter-end);
+
+		/*
+		 * Volunteered to the shell (see chrome.svelte.ts): once the app bar has retracted, it
+		 * may take this much more off our top edge. 3.375rem is exactly the level-pills-and-
+		 * count row — 0.625rem of `.controls` padding-block-start + the 2.25rem `.top` row +
+		 * the 0.5rem gap beneath it — so the search field and the status chips are what stay,
+		 * and the pills come back the instant the user scrolls up. `.controls` already sticks
+		 * to `--app-header-h`, which the shell drives negative by this amount.
+		 */
+		--app-chrome-fold: 3.375rem;
+
 		inline-size: 100%;
 		max-inline-size: var(--container-app);
 		margin-inline: auto;
 		padding-block-end: 2.5rem;
-		padding-inline-start: max(var(--spacing-gutter), var(--app-safe-left, 0px));
-		padding-inline-end: max(var(--spacing-gutter), var(--app-safe-right, 0px));
+		padding-inline: var(--browse-gutter-start) var(--browse-gutter-end);
 	}
 
 	/* ------------------------------------------------------------------ controls ------ */
@@ -538,21 +574,17 @@
 		z-index: 20;
 		/* Full-bleed background so rows scrolling under it are covered edge to edge, while the
 		   controls themselves stay on the text column. */
-		margin-inline: calc(-1 * max(var(--spacing-gutter), var(--app-safe-left, 0px)))
-			calc(-1 * max(var(--spacing-gutter), var(--app-safe-right, 0px)));
-		padding-inline: max(var(--spacing-gutter), var(--app-safe-left, 0px))
-			max(var(--spacing-gutter), var(--app-safe-right, 0px));
+		margin-inline: calc(-1 * var(--browse-gutter-start)) calc(-1 * var(--browse-gutter-end));
+		padding-inline: var(--browse-gutter-start) var(--browse-gutter-end);
 		padding-block: 0.625rem 0.5rem;
 		border-block-end: 1px solid var(--color-line);
-		background-color: color-mix(in srgb, var(--color-page) 92%, transparent);
-		backdrop-filter: saturate(1.6) blur(14px);
-		-webkit-backdrop-filter: saturate(1.6) blur(14px);
-	}
-
-	@supports not (backdrop-filter: blur(1px)) {
-		.controls {
-			background-color: var(--color-page);
-		}
+		/*
+		 * Opaque, not glass. A translucent bar over a list of 14px Latin glosses does not read
+		 * as depth, it reads as a printing fault: at 92% the descenders of "…of consciousness"
+		 * came through the chip row on every scroll. Both references we are measured against
+		 * (Pleco, Du Chinese) use flat opaque chrome over their lists for exactly this reason.
+		 */
+		background-color: var(--color-page);
 	}
 
 	.controls-inner {
@@ -597,13 +629,17 @@
 
 	@media (min-width: 60rem) {
 		.browse {
+			--browse-gutter-start: 2rem;
+			--browse-gutter-end: 2rem;
+			/* The controls are one row here and the chip strip is one cell of it, so nothing
+			   bleeds: a strip pulled out to the page edge would leave the grid. */
+			--browse-bleed-start: 0px;
+			--browse-bleed-end: 0px;
+
 			max-inline-size: var(--container-wide);
-			padding-inline: 2rem;
 		}
 
 		.controls {
-			margin-inline: -2rem;
-			padding-inline: 2rem;
 			padding-block: 0.75rem 0.625rem;
 		}
 

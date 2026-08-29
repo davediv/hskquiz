@@ -6,18 +6,31 @@
  * Nobody browsing on a phone types `hǎo`. So both sides are folded to a plain-ASCII shape
  * before they meet:
  *
- *   index   `shǒu jī`   → `shou ji`   (spaced) and `shouji` (tight)
- *   query   `shou ji`   → `shou ji`               `shouji`
+ *   index   `chēng hào`  → `cheng` `hao`   (syllables)  and `chenghao` (tight)
+ *   query   `chenghao`   →                              `chenghao`
  *
  * `stripTone` handles the diacritics. On top of that, `ü` (and the `v` learners type for it,
  * and the plain `u` they type when they forget) all fold to `u`, so `nu`, `nv` and `nü` all
  * find 女. That over-matches slightly — `lu` also finds 绿 `lǜ` — which is the right trade for
  * a search box: a near miss you can see beats a hit you cannot reach.
  *
- * The list is not reliably syllable-spaced (`àihào` as often as `ài hào`), so both a spaced
- * and a tight form are indexed and a query is tried against both. A syllable-aligned prefix
- * (`hao` against `hǎo`, or against the second syllable of `nǐ hǎo`) outranks a hit that lands
- * mid-syllable.
+ * ## Syllables, not letters
+ *
+ * A pinyin query is only ever compared at syllable boundaries. This is the whole difference
+ * between a dictionary search and a substring search, and the printed string cannot supply it:
+ * the official list writes 称号 as the unspaced `chēnghào`, so a matcher keyed off whitespace
+ * has no boundary to align to and falls back to `indexOf`. `indexOf` is how "hao" returns
+ * 超越 `chāoyuè` (the `hao` spans the end of `chao` and the start of `yue`) and ranks it above
+ * the words that actually contain 号, and how "an" returns 41% of HSK 5.
+ *
+ * `Word.syllables` removes the ambiguity — it ships one `{ py, tone }` per character, built and
+ * gate-checked against the reference — so the index stores the syllables themselves plus the
+ * offset each one starts at, and a hit only counts when it *starts* on a boundary. It scores
+ * better when it also *ends* on one:
+ *
+ *   query `hao`   称号 `cheng|hao`   starts and ends on a boundary   → whole-syllable hit
+ *   query `sh`    老师 `lao|shi`     starts on one, ends inside      → still typing
+ *   query `hao`   超越 `chao|yue`    starts inside `chao`            → not a hit at all
  *
  * ## Ranking
  *
@@ -27,13 +40,14 @@
  *
  * ## Cost
  *
- * One index per level, built once and cached. A query is a linear pass of a dozen `indexOf`
- * calls over at most 1,071 entries — well under a frame, so there is no debounce and the list
- * updates on the keystroke.
+ * One index per level, built once and cached. A query walks at most one syllable-start per
+ * character of each entry — a couple of `startsWith` calls over at most 1,071 entries, well
+ * under a frame, so there is no debounce and the list updates on the keystroke.
  */
 
 import { stripTone } from '$lib/design/tone';
 import type { Level, Word } from '$lib/types';
+import { printedSyllables } from './pinyin';
 
 interface Entry {
 	word: Word;
@@ -41,10 +55,12 @@ interface Entry {
 	position: number;
 	/** Simplified and traditional forms, concatenated — hanzi queries hit either. */
 	hanzi: string;
-	/** Tone-stripped, lowercase, single-spaced: `shou ji`. */
-	pinyin: string;
-	/** The same with every separator removed: `shouji`. */
+	/** Every syllable, folded and run together: `chenghao`. */
 	tight: string;
+	/** Offset in `tight` where each syllable begins. Ascending, and always starts at 0. */
+	starts: number[];
+	/** Offsets in `tight` where a syllable ends, including the end of the string. */
+	ends: Set<number>;
 	/** Lowercase meanings joined and padded with spaces, so ` word ` tests a whole word. */
 	meaning: string;
 }
@@ -58,13 +74,25 @@ function foldPinyin(text: string): string {
 }
 
 function buildEntry(word: Word, position: number): Entry {
-	const pinyin = foldPinyin(word.pinyin);
+	const starts: number[] = [];
+	const ends = new Set<number>();
+	let tight = '';
+
+	for (const syllable of printedSyllables(word)) {
+		const folded = foldPinyin(syllable).replace(/ /gu, '');
+		if (folded === '') continue;
+		starts.push(tight.length);
+		tight += folded;
+		ends.add(tight.length);
+	}
+
 	return {
 		word,
 		position,
 		hanzi: word.traditional ? `${word.hanzi} ${word.traditional}` : word.hanzi,
-		pinyin,
-		tight: pinyin.replace(/ /gu, ''),
+		tight,
+		starts,
+		ends,
 		meaning: ` ${word.meanings.join(' | ').toLowerCase()} `
 	};
 }
@@ -84,9 +112,9 @@ function indexFor(level: Level, words: readonly Word[]): Entry[] {
 export interface Query {
 	/** What the learner typed, trimmed and lowercased. Empty means "no query". */
 	text: string;
-	/** The same, folded for pinyin comparison. */
+	/** The same, folded for pinyin comparison and single-spaced. */
 	pinyin: string;
-	/** The pinyin form with its spaces removed. */
+	/** The pinyin form with its separators removed — what syllables are compared against. */
 	tight: string;
 }
 
@@ -97,32 +125,86 @@ export function parseQuery(raw: string): Query {
 	return { text, pinyin, tight: pinyin.replace(/ /gu, '') };
 }
 
+/* Score bands. Lower is better; `Infinity` is "no match". */
+const HANZI_EXACT = 0;
+const HANZI_PREFIX = 1;
+const HANZI_INSIDE = 2;
+/** The query is the word's whole pinyin: `haoyun` → 好运. */
+const PY_WHOLE = 3;
+/** Whole syllables from the start, but not all of them: `hao` → 好运. */
+const PY_HEAD = 4;
+/** Whole syllables, starting later in the word: `hao` → 称号. */
+const PY_SYLLABLE = 5;
+/** Starts at the first syllable and stops inside one — mid-keystroke: `haoy` → 好运. */
+const PY_HEAD_PARTIAL = 6;
+/** Starts at a later syllable and stops inside it: `sh` → 老师. */
+const PY_PARTIAL = 7;
+const MEANING_WORD = 8;
+const MEANING_PREFIX = 9;
+
+/**
+ * English words a gloss is *built* from rather than *about*.
+ *
+ * The meanings are hand-authored learner copy — "an editor", "to dodge an issue", "a fund of
+ * money" — so the articles and particles that open them appear in hundreds of entries each.
+ * Typing "an" is a learner reaching for 安; it returned 98 words glossed with the article
+ * before this list existed. A stopword is skipped for the English bands only: it is still a
+ * perfectly good pinyin query, and "to" still finds 偷 `tōu`.
+ */
+const STOPWORDS: ReadonlySet<string> = new Set(
+	'a an and as at be by for in is it of on or the to with'.split(' ')
+);
+
+/**
+ * The best pinyin band this entry can offer the query, or `Infinity`.
+ *
+ * Only syllable starts are tried, so a query can never match across a syllable seam. That one
+ * constraint is what keeps 超越 out of the results for "hao" — there is no boundary inside
+ * `chao` for the `hao` to begin on.
+ */
+function pinyinScore(entry: Entry, tight: string): number {
+	let best = Infinity;
+
+	for (const start of entry.starts) {
+		if (!entry.tight.startsWith(tight, start)) continue;
+
+		const end = start + tight.length;
+		const aligned = entry.ends.has(end);
+		const head = start === 0;
+
+		if (head && aligned) return end === entry.tight.length ? PY_WHOLE : PY_HEAD;
+
+		const score = aligned ? PY_SYLLABLE : head ? PY_HEAD_PARTIAL : PY_PARTIAL;
+		if (score < best) best = score;
+	}
+
+	return best;
+}
+
 /**
  * How well an entry answers a query — lower is better, `Infinity` is "no match".
  *
  * The bands are deliberately coarse: exact forms first, then the field ranking Pleco uses
- * (the character you drew, then the sound you typed, then the English you remembered), then
- * anything that merely contains the string.
+ * (the character you drew, then the sound you typed, then the English you remembered).
+ *
+ * English matches must start a word. A meaning is two or three words long, so a match buried
+ * inside one ("an" in "many") is never what was meant, and on a short query there are hundreds
+ * of them.
  */
 function matchScore(entry: Entry, query: Query): number {
-	const { text, pinyin, tight } = query;
+	const { text, tight } = query;
 	let best = Infinity;
 
-	if (entry.hanzi === text) return 0;
-	if (entry.hanzi.startsWith(text)) best = 1;
-	else if (entry.hanzi.includes(text)) best = 2;
+	if (entry.hanzi === text) return HANZI_EXACT;
+	if (entry.hanzi.startsWith(text)) best = HANZI_PREFIX;
+	else if (entry.hanzi.includes(text)) best = HANZI_INSIDE;
 
-	if (pinyin !== '') {
-		if (entry.pinyin === pinyin || entry.tight === tight) best = Math.min(best, 3);
-		else if (entry.pinyin.startsWith(pinyin) || entry.pinyin.includes(` ${pinyin}`)) {
-			best = Math.min(best, 4);
-		} else if (entry.tight.startsWith(tight)) best = Math.min(best, 5);
-		else if (entry.tight.includes(tight)) best = Math.min(best, 6);
+	if (tight !== '') best = Math.min(best, pinyinScore(entry, tight));
+
+	if (!STOPWORDS.has(text)) {
+		if (entry.meaning.includes(` ${text} `)) best = Math.min(best, MEANING_WORD);
+		else if (entry.meaning.includes(` ${text}`)) best = Math.min(best, MEANING_PREFIX);
 	}
-
-	if (entry.meaning.includes(` ${text} `)) best = Math.min(best, 7);
-	else if (entry.meaning.includes(` ${text}`)) best = Math.min(best, 8);
-	else if (entry.meaning.includes(text)) best = Math.min(best, 9);
 
 	return best;
 }

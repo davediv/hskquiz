@@ -11,7 +11,7 @@
  * position plus where the list starts in the document, and everything is derived from that.
  *
  * Kept pure and separate from the component so the arithmetic can be reasoned about on its
- * own: every value below is a function of the six numbers in `VirtualInput`.
+ * own: every value below is a function of the numbers in `VirtualInput` and nothing else.
  */
 
 export interface VirtualInput {
@@ -29,6 +29,16 @@ export interface VirtualInput {
 	viewportHeight: number;
 	/** Extra rows rendered above and below, so a fast flick does not show blank space. */
 	overscanRows?: number;
+	/**
+	 * Signed px the page has travelled since the last time this ran. Positive is downward.
+	 *
+	 * A fixed overscan is a bet that the next frame lands within a few rows of this one, and a
+	 * fling loses that bet: three rows is 228px, and a momentum frame on a phone can cover ten
+	 * times that, so the rows arrive a frame late and the screen is briefly empty cream. The
+	 * window therefore reaches further in whichever direction the page is already moving, and
+	 * collapses back the moment it stops.
+	 */
+	travel?: number;
 }
 
 export interface VirtualWindow {
@@ -44,7 +54,14 @@ export interface VirtualWindow {
 	rowCount: number;
 }
 
-const DEFAULT_OVERSCAN = 3;
+const DEFAULT_OVERSCAN = 4;
+
+/**
+ * Ceiling on the extra rows a fast frame may pull in. Windowing is only worth its complexity
+ * while the DOM stays small, so travel buys reach up to this and no further; past it a very
+ * fast fling can still outrun the render for a frame, which is what a fling looks like anyway.
+ */
+const MAX_LEAD = 16;
 
 function clamp(value: number, min: number, max: number): number {
 	return value < min ? min : value > max ? max : value;
@@ -69,8 +86,16 @@ export function windowFor(input: VirtualInput): VirtualWindow {
 	const firstRow = Math.floor(scrolledInto / rowHeight);
 	const visibleRows = Math.ceil(Math.max(0, input.viewportHeight) / rowHeight) + 1;
 
-	const startRow = clamp(firstRow - overscan, 0, Math.max(0, rowCount - 1));
-	const endRow = clamp(startRow + visibleRows + overscan * 2, startRow + 1, rowCount);
+	// Reach in the direction of travel only: a list flying upward gains nothing from rows
+	// below the viewport, and paying for both doubles the DOM on every frame of a fling.
+	const travel = input.travel ?? 0;
+	const lead = clamp(Math.ceil(Math.abs(travel) / rowHeight), 0, MAX_LEAD);
+	const leadUp = travel < 0 ? lead : 0;
+	const leadDown = travel > 0 ? lead : 0;
+
+	const startRow = clamp(firstRow - overscan - leadUp, 0, Math.max(0, rowCount - 1));
+	const span = visibleRows + overscan * 2 + leadUp + leadDown;
+	const endRow = clamp(startRow + span, startRow + 1, rowCount);
 
 	return {
 		startIndex: startRow * cols,

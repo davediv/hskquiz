@@ -17,6 +17,7 @@
 	the filtered list without closing, so reading ten words in a row is nine taps, not eighteen.
 -->
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import type { Level, Word, WordProgress } from '$lib/types';
@@ -39,7 +40,84 @@
 
 	let { word, status, record, level, position, total, onclose, onprev, onnext }: Props = $props();
 
+	/** How the tone is named out loud, so the colour is never the only thing carrying it. */
+	const TONE_NAME: Record<0 | 1 | 2 | 3 | 4, string> = {
+		0: 'neutral',
+		1: '1st tone',
+		2: '2nd tone',
+		3: '3rd tone',
+		4: '4th tone'
+	};
+
 	let panel = $state<HTMLElement | null>(null);
+
+	/**
+	 * The word taken apart character by character — Pleco's CHARS tab, which is the thing a
+	 * learner opens an entry for that a list row cannot give them: *which* of those syllables
+	 * belongs to *which* character, and what tone it carries. `Word.syllables` is built one per
+	 * character and the build refuses to emit a word where that does not hold, so this is a
+	 * zip, not a guess. Single-character words are their own breakdown, so they skip it.
+	 */
+	const characters = $derived(
+		[...word.hanzi].map((hanzi, i) => {
+			const syllable = word.syllables[i] ?? { py: '', tone: 0 as const };
+			return { hanzi, syllable, tone: TONE_NAME[syllable.tone] };
+		})
+	);
+
+	/**
+	 * Hearing the word.
+	 *
+	 * Pleco puts a speaker on every line and it is half the reason people open it. We ship no
+	 * audio files — 4,308 recordings is a data problem, not a screen problem — but the device
+	 * already has a Chinese voice in it, so the entry can at least say the headword. The button
+	 * only exists where the API does, and it says so rather than failing silently when the
+	 * device turns out to have no Chinese voice installed.
+	 *
+	 * The sheet is never server-rendered (it opens on a tap), so reading `window` at init is
+	 * safe and there is no hydration shape to keep in agreement.
+	 */
+	const canSpeak = typeof window !== 'undefined' && 'speechSynthesis' in window;
+	let speaking = $state(false);
+	let noVoice = $state(false);
+
+	function chineseVoice(): SpeechSynthesisVoice | undefined {
+		return window.speechSynthesis.getVoices().find((voice) => /^zh\b|^zh[-_]/i.test(voice.lang));
+	}
+
+	function speak() {
+		if (!canSpeak) return;
+		const synth = window.speechSynthesis;
+		synth.cancel();
+
+		const voice = chineseVoice();
+		if (voice === undefined) {
+			noVoice = true;
+			speaking = false;
+			return;
+		}
+
+		const utterance = new SpeechSynthesisUtterance(word.hanzi);
+		utterance.voice = voice;
+		utterance.lang = voice.lang;
+		// Dictionary pace, not conversation pace: the point is to hear the tones separately.
+		utterance.rate = 0.8;
+		utterance.onend = () => (speaking = false);
+		utterance.onerror = () => (speaking = false);
+		noVoice = false;
+		speaking = true;
+		synth.speak(utterance);
+	}
+
+	// Stepping to the next word must not leave the previous one talking over it.
+	$effect(() => {
+		void word.id;
+		untrack(() => {
+			noVoice = false;
+			speaking = false;
+		});
+		if (canSpeak) window.speechSynthesis.cancel();
+	});
 
 	const pos = $derived(posLong(word.pos));
 	const meta = $derived(STATUS_META[status]);
@@ -163,9 +241,14 @@
 		</div>
 
 		<div class="body">
-			<h2 id="word-sheet-title" class="headword">
-				<Hanzi text={word.hanzi} size="lg" display />
-			</h2>
+			<!-- Pleco puts the level badge on the right of the headword line and it is the first
+			     thing you look for; ours sat empty. -->
+			<div class="head">
+				<h2 id="word-sheet-title" class="headword">
+					<Hanzi {word} size="lg" display />
+				</h2>
+				<span class="level" aria-label={`HSK level ${level}`}>HSK {level}</span>
+			</div>
 
 			{#if word.traditional}
 				<p class="trad">
@@ -173,7 +256,36 @@
 				</p>
 			{/if}
 
-			<Pinyin pinyin={word.pinyin} size="xl" tones class="py" />
+			<p class="say">
+				<Pinyin {word} size="xl" class="py" />
+				{#if canSpeak}
+					<button type="button" class="speak" class:on={speaking} onclick={speak}>
+						<span class="sr-only">Say {word.hanzi} out loud</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+							<path
+								d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4z"
+								fill="currentColor"
+								stroke="currentColor"
+								stroke-width="1.6"
+								stroke-linejoin="round"
+							/>
+							<path
+								d="M15.6 9.2a4 4 0 0 1 0 5.6M18.3 6.4a7.8 7.8 0 0 1 0 11.2"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.8"
+								stroke-linecap="round"
+							/>
+						</svg>
+					</button>
+				{/if}
+			</p>
+
+			{#if noVoice}
+				<p class="no-voice">
+					This device has no Chinese voice installed, so there is nothing to play.
+				</p>
+			{/if}
 
 			<!-- One block, so the gap above the meanings is the same whether or not the word
 			     carries a part-of-speech annotation — plenty of them do not. -->
@@ -190,6 +302,28 @@
 					<p class="sense">{word.meanings[0] ?? '—'}</p>
 				{/if}
 			</div>
+
+			{#if characters.length > 1}
+				<!-- Pleco's CHARS tab, inline: a compound is only learnable once you know which
+				     syllable belongs to which character. -->
+				<section class="chars" aria-label="Characters">
+					<h3 class="eyebrow">Characters</h3>
+					<ol class="char-list">
+						{#each characters as char, i (i)}
+							<li class="char">
+								<Hanzi text={char.hanzi} syllables={[char.syllable]} size="sm" class="char-hz" />
+								<Pinyin
+									pinyin={char.syllable.py}
+									syllables={[char.syllable]}
+									size="sm"
+									class="char-py"
+								/>
+								<span class="char-tone">{char.tone}</span>
+							</li>
+						{/each}
+					</ol>
+				</section>
+			{/if}
 
 			<div class="record">
 				<p class="state">
@@ -316,11 +450,76 @@
 
 	/* Pleco's ranking, and Pleco's air: each step down gets less weight and more space above
 	   it than the thing it belongs to. */
+	.head {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
 	.headword {
 		margin: 0.25rem 0 0;
 		font-size: inherit;
 		font-weight: inherit;
 		letter-spacing: normal;
+	}
+
+	/* Quiet where Pleco's is a red block: red already means "wrong" and "practise" in this app,
+	   and a badge that never changes should not shout louder than the meaning under it. */
+	.level {
+		flex: none;
+		margin-block-start: 0.5rem;
+		padding: 0.1875rem 0.5rem;
+		border: 1px solid var(--color-line-strong);
+		border-radius: var(--radius-xs);
+		color: var(--color-ink-muted);
+		font-size: var(--text-2xs);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		white-space: nowrap;
+	}
+
+	.say {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0.375rem 0 0;
+	}
+
+	.speak {
+		display: grid;
+		flex: none;
+		place-items: center;
+		inline-size: 2.25rem;
+		block-size: 2.25rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-pill);
+		background: none;
+		color: var(--color-ink-muted);
+	}
+
+	.speak svg {
+		inline-size: 1.125rem;
+		block-size: 1.125rem;
+	}
+
+	.speak.on {
+		border-color: transparent;
+		background-color: var(--color-surface-sunken);
+		color: var(--color-ink);
+	}
+
+	@media (hover: hover) {
+		.speak:hover {
+			border-color: var(--color-line-strong);
+			color: var(--color-ink);
+		}
+	}
+
+	.no-voice {
+		margin: 0.5rem 0 0;
+		color: var(--color-ink-subtle);
+		font-size: var(--text-xs);
 	}
 
 	.trad {
@@ -336,8 +535,7 @@
 	}
 
 	.panel :global(.py) {
-		display: block;
-		margin-block-start: 0.375rem;
+		min-inline-size: 0;
 		color: var(--color-ink-muted);
 	}
 
@@ -372,6 +570,45 @@
 		color: var(--color-ink-subtle);
 		font-size: var(--text-sm);
 		font-weight: 600;
+	}
+
+	.chars {
+		margin-block-start: 1.5rem;
+		padding-block-start: 1rem;
+		border-block-start: 1px solid var(--color-line);
+	}
+
+	.chars h3 {
+		margin: 0;
+	}
+
+	.char-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin: 0.625rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	/* One tile per character, so the compound reads left to right as the word does and each
+	   syllable sits directly under the character it belongs to. */
+	.char {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.125rem;
+		min-inline-size: 3.5rem;
+		padding: 0.5rem 0.625rem 0.4375rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-sm);
+		background-color: var(--color-surface-sunken);
+	}
+
+	.char-tone {
+		color: var(--color-ink-subtle);
+		font-size: var(--text-2xs);
+		letter-spacing: 0.02em;
 	}
 
 	.record {

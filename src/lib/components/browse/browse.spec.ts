@@ -13,6 +13,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import type { Word } from '$lib/types';
+import { stripTone } from '$lib/design/tone';
 import { searchWords } from './search';
 import { windowFor } from './virtual';
 
@@ -87,6 +88,24 @@ describe('windowFor over the real HSK 5 list', () => {
 		expect(win.rowCount).toBe(Math.ceil(words.length / 2));
 	});
 
+	it('reaches further in the direction a fling is travelling, then lets go', () => {
+		const still = windowFor({ count: words.length, scrollTop: 20000, ...PHONE });
+		const flung = windowFor({ count: words.length, scrollTop: 20000, ...PHONE, travel: 2400 });
+
+		// A frame that moved 2,400px must already hold the rows it is about to land on.
+		expect(flung.endIndex - still.endIndex).toBeGreaterThanOrEqual(12);
+		expect(flung.startIndex).toBe(still.startIndex);
+
+		// ...and only in the direction of travel.
+		const up = windowFor({ count: words.length, scrollTop: 20000, ...PHONE, travel: -2400 });
+		expect(up.startIndex).toBeLessThan(still.startIndex);
+		expect(up.endIndex).toBe(still.endIndex);
+
+		// The reach is capped, so a fling cannot put the whole level in the DOM.
+		const absurd = windowFor({ count: words.length, scrollTop: 20000, ...PHONE, travel: 9e5 });
+		expect(absurd.endIndex - absurd.startIndex).toBeLessThan(60);
+	});
+
 	it('survives an empty list and an unmeasured row height', () => {
 		expect(windowFor({ count: 0, scrollTop: 0, ...PHONE })).toEqual({
 			startIndex: 0,
@@ -118,6 +137,51 @@ describe('searchWords over the real HSK 5 list', () => {
 	it('ranks a syllable-aligned pinyin hit above a mid-syllable one', () => {
 		const hits = ids('hao');
 		expect(hits.indexOf('好运')).toBeLessThan(hits.indexOf('称号'));
+	});
+
+	it('never matches across a syllable seam', () => {
+		// 超越 is `chao|yue`: the letters h-a-o do occur in it, spanning the end of one syllable
+		// and the start of the next. A substring search puts it above 称号, which is the bug
+		// this index exists to make impossible.
+		const hits = ids('hao');
+		expect(hits).not.toContain('超越');
+		expect(hits).not.toContain('稍微');
+		expect(hits).toContain('称号');
+		expect(hits).toContain('口号');
+		// Every survivor really does carry the syllable.
+		for (const word of searchWords(5, words, 'hao')) {
+			expect(word.syllables.some((syllable) => /^h[aāáǎà]o$/u.test(syllable.py))).toBe(true);
+		}
+	});
+
+	it('does not answer a two-letter pinyin query with half the level', () => {
+		// `bàifǎng`, `bǎn`, `bànyǎn` and `bàng` all contain the letters a-n; none of them is
+		// what a learner reaching for 安 typed. Only syllables that *begin* with `an` count.
+		const hits = searchWords(5, words, 'an');
+		expect(hits.length).toBeLessThan(words.length * 0.02);
+		for (const word of hits) {
+			const folded = word.syllables.map((syllable) => stripTone(syllable.py).toLowerCase());
+			expect(folded.some((syllable) => syllable.startsWith('an'))).toBe(true);
+		}
+	});
+
+	it('does not let the articles in a gloss answer an English query', () => {
+		// Meanings are learner copy — "an editor", "a fund of money" — so the words they are
+		// built from appear in hundreds of entries and are never what was searched for.
+		expect(ids('an')).not.toContain('编辑');
+		expect(ids('to')).not.toContain('丢');
+	});
+
+	it('finds every word in the level by its own tone-less pinyin', () => {
+		// The one property that must hold for all 1,070: whatever the official list prints,
+		// typing it back without tone marks returns the word.
+		for (const word of words) {
+			const typed = word.syllables
+				.map((syllable) => stripTone(syllable.py).toLowerCase())
+				.join('')
+				.replace(/[üv]/gu, 'u');
+			expect(searchWords(5, words, typed)).toContain(word);
+		}
 	});
 
 	it('finds a word by hanzi and by English', () => {

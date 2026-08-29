@@ -46,8 +46,14 @@
 	<button type="button" class="row" data-index={index} onclick={() => onopen(index)}>
 		<span class="body">
 			<span class="head">
-				<Hanzi text={word.hanzi} size="sm" class="hz" />
-				<Pinyin pinyin={word.pinyin} size="md" tones class="py" />
+				<!--
+					Tone colour stays on the pinyin and off the hanzi, which is the one place this
+					list deliberately parts company with Pleco: a thousand rows of multicoloured
+					characters turns the shape you are trying to learn into a colour swatch, and
+					the pinyin directly beside it already carries the same information.
+				-->
+				<Hanzi {word} tones={false} size="sm" class="hz" />
+				<Pinyin {word} size="md" class="py" />
 			</span>
 			<span class="gloss">
 				{#if pos}<span class="pos">{pos}</span>{/if}{gloss}
@@ -120,12 +126,16 @@
 		text-overflow: ellipsis;
 	}
 
+	/* Set in real capitals rather than `font-variant: small-caps`: the synthesised small caps
+	   the Latin stack falls back to only fire on some of these — `n.` came out as a cap and
+	   `v.` as a lowercase italic, in the same column, which reads as two different labels. */
 	.pos {
 		margin-inline-end: 0.375rem;
 		color: var(--color-ink-subtle);
 		font-size: var(--text-xs);
-		font-style: italic;
-		font-variant: small-caps;
+		font-weight: 600;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
 	}
 
 	.row:active {
