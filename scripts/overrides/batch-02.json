@@ -1,0 +1,490 @@
+{
+	"L1-0330": {
+		"meanings": ["to get angry"],
+		"note": "Separable verb shēng∥qì. The CEDICT second sense 'vitality' is the unrelated noun reading shēngqì and does not belong on an HSK 1 card."
+	},
+	"L1-0332": {
+		"meanings": ["ten"],
+		"note": "Num. Dropped the redundant numeral form '10'."
+	},
+	"L1-0333": {
+		"meanings": ["the time when", "point in time"],
+		"note": "N. Primary must not be bare 'time' (that is 时间 L1) nor 'moment' (collides with 一会儿). 时候 is the occasion/point at which something happens: 什么时候, ...的时候."
+	},
+	"L1-0335": {
+		"meanings": ["matter", "affair"],
+		"note": "N. Kept 'matter' as primary so it stays distinct from 东西 'thing' and 事情 'affair'. Dropped the CL: clause."
+	},
+	"L1-0336": {
+		"meanings": ["to try", "to test"],
+		"note": "V. At HSK 1 试 is 'try it' (试试 / 试一下). CEDICT leads with 'to test', which belongs to 考试/测试."
+	},
+	"L1-0337": {
+		"meanings": ["to be"],
+		"note": "V. Dropped 'correct' — that sense is 对 L1, and a second gloss here only invites confusion with 对/不对."
+	},
+	"L1-0338": {
+		"meanings": ["is it or not?", "used to ask for confirmation"],
+		"note": "No official POS. Described the function plainly rather than naming the A-not-A pattern."
+	},
+	"L1-0339": {
+		"meanings": ["hand"],
+		"note": "N. Dropped 'personal' — that is the bound adverbial 手 of 手写/亲手, not an HSK 1 sense."
+	},
+	"L1-0340": {
+		"meanings": ["cell phone", "mobile phone"],
+		"note": "N. Both are the same sense in different Englishes; kept the second so a British learner recognises the card."
+	},
+	"L1-0341": {
+		"meanings": ["book"],
+		"note": "N. Correct as shipped."
+	},
+	"L1-0342": {
+		"meanings": ["schoolbag", "book bag"],
+		"note": "N. 'satchel' is dated register for a beginner card."
+	},
+	"L1-0344": {
+		"meanings": ["tree"],
+		"note": "N. Dropped 'to cultivate' — a verb gloss on a noun-only card, and a literary sense at that."
+	},
+	"L1-0345": {
+		"meanings": ["water"],
+		"note": "N. Dropped 'River' (the CEDICT '(after a name) ... River' fragment), which was meaningless on a card."
+	},
+	"L1-0347": {
+		"meanings": ["to sleep"],
+		"note": "V. Kept the bare verb here; 睡觉 (L1-0348) takes 'to go to bed' so the two cards stay distinguishable."
+	},
+	"L1-0348": {
+		"meanings": ["to go to bed", "to sleep"],
+		"note": "Separable verb shuì∥jiào. Primary deliberately differs from 睡 'to sleep' — the two are near-synonyms and would otherwise be one answer."
+	},
+	"L1-0349": {
+		"meanings": ["to say", "to speak"],
+		"note": "V. Dropped the scolding and 'doctrine' senses — wrong register and bound form."
+	},
+	"L1-0351": {
+		"meanings": ["four"],
+		"note": "Num."
+	},
+	"L1-0352": {
+		"meanings": ["to give as a gift", "to see someone off", "to deliver"],
+		"note": "V. Primary cannot be 'to give' — that is 给 L1. These are the three senses an HSK 1 learner actually meets."
+	},
+	"L1-0353": {
+		"meanings": ["years of age"],
+		"note": "M. Measure word for age; the noun 'year' is 年."
+	},
+	"L1-0354": {
+		"meanings": ["he", "him"],
+		"note": "Pron."
+	},
+	"L1-0356": {
+		"meanings": ["she", "her"],
+		"note": "Pron."
+	},
+	"L1-0358": {
+		"meanings": ["excessively", "too"],
+		"note": "Adv. Primary must not be bare 'too', which a learner reads as 'also' and would answer 也. 'excessively' is unambiguous and matches the Adv POS."
+	},
+	"L1-0359": {
+		"meanings": ["day", "sky"],
+		"note": "N/M. Both senses are live at HSK 1 (三天 / 天气); 日 keeps 'sun' and 'day of the month'."
+	},
+	"L1-0361": {
+		"meanings": ["to listen", "to hear"],
+		"note": "V. 'to heed' is the 听话 sense and too idiomatic to lead with; dropped the loanword 'a can' and the Taiwan readings."
+	},
+	"L1-0364": {
+		"meanings": ["to take dictation", "to write down what you hear"],
+		"note": "V. 'to write down' alone is 写下 and collides conceptually with 写; 听写 is specifically the dictation exercise."
+	},
+	"L1-0365": {
+		"meanings": ["classmate", "fellow student"],
+		"note": "N. Reordered: 'classmate' is the everyday word. CEDICT sense 1 'to study at the same school' is a verb and wrong for the N row."
+	},
+	"L1-0367": {
+		"meanings": ["outside"],
+		"note": "N. Dropped 'foreign' (bound form of 外国/外语). Gave the plain gloss to the single character and pushed 外边 onto a different primary."
+	},
+	"L1-0368": {
+		"meanings": ["out there", "outdoors"],
+		"note": "N. Deliberately not 'the outside' — that strips to the same answer as 外 (L1-0367) and as 外面 (L3). 外边下雨了 = it is raining out there."
+	},
+	"L1-0371": {
+		"meanings": ["to play", "to have fun"],
+		"note": "V. Correct as shipped."
+	},
+	"L1-0372": {
+		"meanings": ["late"],
+		"note": "Adj. Dropped the noun senses 'evening/night' — 晚上 carries those."
+	},
+	"L1-0373": {
+		"meanings": ["dinner", "the evening meal"],
+		"note": "N. 'dinner' is the natural primary; stays distinct from 午饭 'lunch' and 早饭 'breakfast'."
+	},
+	"L1-0375": {
+		"meanings": ["online", "on the internet"],
+		"note": "No official POS. Correct as shipped, second gloss added for clarity."
+	},
+	"L1-0376": {
+		"meanings": ["online friend", "internet user"],
+		"note": "N. 'netizen' is dated and would puzzle a beginner."
+	},
+	"L1-0377": {
+		"meanings": ["to forget"],
+		"note": "V."
+	},
+	"L1-0379": {
+		"meanings": ["to ask"],
+		"note": "V."
+	},
+	"L1-0380": {
+		"meanings": ["I", "me"],
+		"note": "Pron."
+	},
+	"L1-0382": {
+		"meanings": ["five"],
+		"note": "Num."
+	},
+	"L1-0384": {
+		"meanings": ["west"],
+		"note": "N. Matches 东/南/北 at the same level."
+	},
+	"L1-0386": {
+		"meanings": ["to wash"],
+		"note": "V. Dropped 'to develop (photographs)', 'to shuffle' and 'to erase' — none is an HSK 1 sense."
+	},
+	"L1-0387": {
+		"meanings": ["restroom", "washroom"],
+		"note": "N. Not 'bathroom' or 'toilet': 卫生间 L3 already ships both of those, and the two cards must stay separable."
+	},
+	"L1-0389": {
+		"meanings": ["below", "to go down"],
+		"note": "N/V. Positional noun sense first to pair with 上; 下边 takes 'the underside' so the two do not collapse."
+	},
+	"L1-0390": {
+		"meanings": ["to finish work", "to get off work"],
+		"note": "Separable verb xià∥bān. Dropped 'next service (train, bus)', which is 下班车 and not this entry."
+	},
+	"L1-0391": {
+		"meanings": ["the underside", "underneath"],
+		"note": "N. Primary changed off 'under' so it does not strip to the same answer as 下 (L1-0389)."
+	},
+	"L1-0393": {
+		"meanings": ["next time"],
+		"note": "No official POS. Correct as shipped."
+	},
+	"L1-0394": {
+		"meanings": ["to finish class", "to get out of class"],
+		"note": "Separable verb xià∥kè. The CEDICT 'to be fired' sense is figurative sports slang and stays out."
+	},
+	"L1-0396": {
+		"meanings": ["it is raining", "to rain"],
+		"note": "No official POS. Primary reworded so it does not strip to the same answer as 雨 'rain' (L1-0449) — the two were an identical-meaning pair."
+	},
+	"L1-0397": {
+		"meanings": ["first", "beforehand"],
+		"note": "Adv. 你先走 = you go first. Not 'first of all' — 首先 L3 owns that. Dropped the '(prefix) my late ...' sense."
+	},
+	"L1-0399": {
+		"meanings": ["now", "at present"],
+		"note": "N."
+	},
+	"L1-0400": {
+		"meanings": ["to think about", "would like to", "to miss someone"],
+		"note": "V. Primary cannot be 'to want' (要 L1) nor bare 'to think' (觉得 L1 is 'to think that'). All three senses are met at HSK 1: 我想想 / 我想去 / 我想你."
+	},
+	"L1-0401": {
+		"meanings": ["small", "little"],
+		"note": "Adj. 'tiny' overstates 小."
+	},
+	"L1-0402": {
+		"meanings": ["kid", "young child"],
+		"note": "N. Primary must not be 'child' — 孩子 L1 already ships that. CEDICT only had an erhua cross-reference."
+	},
+	"L1-0403": {
+		"meanings": ["young lady", "Miss"],
+		"note": "N. The CEDICT '(slang) prostitute' sense is excluded outright. Stays distinct from 女士 'lady' L4."
+	},
+	"L1-0406": {
+		"meanings": ["elementary school", "primary school"],
+		"note": "N."
+	},
+	"L1-0407": {
+		"meanings": ["primary school pupil", "schoolchild"],
+		"note": "N. Dropped the '(fig.) beginner' sense."
+	},
+	"L1-0408": {
+		"meanings": ["to laugh", "to smile"],
+		"note": "V. Both senses are genuinely met at HSK 1 and Chinese does not split them."
+	},
+	"L1-0409": {
+		"meanings": ["to write"],
+		"note": "V."
+	},
+	"L1-0410": {
+		"meanings": ["to thank", "thank you"],
+		"note": "V. Official POS is V, so the verb form leads; 'thank you' follows as the everyday use."
+	},
+	"L1-0411": {
+		"meanings": ["new"],
+		"note": "Adj. Dropped the adverb 'newly' and the chemistry sense 'meso-'."
+	},
+	"L1-0413": {
+		"meanings": ["week"],
+		"note": "N. Dropped 'day of the week' and 'Sunday' — 星期 alone means the week; the weekdays are 星期一 etc."
+	},
+	"L1-0416": {
+		"meanings": ["all right", "capable"],
+		"note": "V/Adj. The HSK 1 use is 行! = that works. CEDICT sense 1 'to walk; to go' is the bound literary form and belongs to xíng in compounds. Stays distinct from 好 'good'."
+	},
+	"L1-0417": {
+		"meanings": ["to rest", "to take a break"],
+		"note": "V. CEDICT sense 1 is the noun 'rest', wrong for a V row."
+	},
+	"L1-0418": {
+		"meanings": ["to learn"],
+		"note": "V. Left 'to study' off so 学习 L1 keeps it as its own primary."
+	},
+	"L1-0422": {
+		"meanings": ["college", "academy"],
+		"note": "N. Distinct from 大学 'university' and 小学/中学."
+	},
+	"L1-0423": {
+		"meanings": ["to want", "to need", "will"],
+		"note": "V. All three are HSK 1 uses (我要一杯水 / 要下雨了)."
+	},
+	"L1-0424": {
+		"meanings": ["paternal grandfather", "grandpa"],
+		"note": "N. Kept the paternal marker because Chinese distinguishes 爷爷 from 外公."
+	},
+	"L1-0425": {
+		"meanings": ["also", "too"],
+		"note": "Adv. Dropped 'even' — that is the marked 连...也 pattern, well beyond HSK 1."
+	},
+	"L1-0426": {
+		"meanings": ["page", "measure word: pages"],
+		"note": "M. Learner meets it as 第五页; the measure-word function is spelled out as the second gloss."
+	},
+	"L1-0427": {
+		"meanings": ["one"],
+		"note": "Num."
+	},
+	"L1-0429": {
+		"meanings": ["doctor", "physician"],
+		"note": "N. 医生 is the standard word; 大夫 L3 is the colloquial synonym."
+	},
+	"L1-0432": {
+		"meanings": ["a short while", "a moment"],
+		"note": "No official POS. Reworded off 'a moment' as primary: 一会儿 also appears at L2 (Adv) and shipped byte-identical glosses. This L1 card is the duration noun (等一会儿); the L2 Adv row should take 'in a moment / now ... now ...'."
+	},
+	"L1-0433": {
+		"meanings": ["together with someone", "as a group"],
+		"note": "N/Adv. Near-synonym of 一起, which keeps the plain 'together'. Differentiated so the two are not one answer."
+	},
+	"L1-0434": {
+		"meanings": ["briefly", "just once"],
+		"note": "No official POS. Post-verbal softener (看一下儿). Kept clear of 一点儿 'a little' and 一会儿 'a short while'. The L5 一下儿 row is the different 'all at once' sense."
+	},
+	"L1-0435": {
+		"meanings": ["the same", "alike"],
+		"note": "Adj. Distinct from 相同 'identical' L2."
+	},
+	"L1-0436": {
+		"meanings": ["one side", "while doing something else"],
+		"note": "N/Adv. Second gloss covers the 一边...一边... pattern (一边走一边说) in plain words."
+	},
+	"L1-0437": {
+		"meanings": ["a little", "a bit"],
+		"note": "No official POS. Correct as shipped; CEDICT had only an erhua cross-reference."
+	},
+	"L1-0438": {
+		"meanings": ["together", "in the same place"],
+		"note": "Adv/N. Adverbial sense leads; 一块儿 is pushed onto a differentiated primary."
+	},
+	"L1-0440": {
+		"meanings": ["to use"],
+		"note": "V. Dropped 'to need', which only surfaces in the negative 不用, and the coverb and courteous-eating senses."
+	},
+	"L1-0441": {
+		"meanings": ["to have", "there is"],
+		"note": "V. Both are core HSK 1; dropped the bound '-ful/-ed' gloss."
+	},
+	"L1-0443": {
+		"meanings": ["famous", "well-known"],
+		"note": "Separable yǒu∥míng. Correct as shipped."
+	},
+	"L1-0444": {
+		"meanings": ["sometimes"],
+		"note": "Adv. Covers both listed variants 有时候 and 有时."
+	},
+	"L1-0446": {
+		"meanings": ["to be useful"],
+		"note": "V. Official POS is V, so the bare adjective 'useful' cannot lead the card."
+	},
+	"L1-0447": {
+		"meanings": ["the right-hand side"],
+		"note": "N. The shipped gloss 'right, the direction' carried an internal comma, which the UI renders as two senses. 'right-hand side' also avoids the correct/right ambiguity with 对 and stays distinct from 右边."
+	},
+	"L1-0449": {
+		"meanings": ["rain"],
+		"note": "N. Kept the plain noun; 下雨 was reworded instead so the pair is no longer one answer."
+	},
+	"L1-0450": {
+		"meanings": ["unit of Chinese currency"],
+		"note": "M. \"yuan\" is the entry's own toneless pinyin and cannot ship on any gloss of this card. 块 keeps the spoken equivalent, 钱 keeps \"money\"."
+	},
+	"L1-0451": {
+		"meanings": ["far", "distant"],
+		"note": "Adj. Dropped the intensifier-in-comparison sense."
+	},
+	"L1-0452": {
+		"meanings": ["month", "moon"],
+		"note": "N. 'month' leads because 月亮 L2 owns 'the moon' and because HSK 1 meets 月 mostly in 三月 / 一个月."
+	},
+	"L1-0453": {
+		"meanings": ["once more", "again"],
+		"note": "Adv. Primary moved off bare 'again' so it does not collide with 又 L2. 再 is the not-yet-happened 'again' (再说一遍); 又 is the already-happened one."
+	},
+	"L1-0454": {
+		"meanings": ["goodbye", "see you again"],
+		"note": "Official POS is V, but 'goodbye' is the only honest learner-facing primary — a verb-shaped gloss like 'to say goodbye' would point at 告别 instead. Flagged as a hard case."
+	},
+	"L1-0455": {
+		"meanings": ["to be at", "at or in"],
+		"note": "V/Prep/Adv. Verb sense leads to match POS order; the preposition follows. The progressive 在 is carried by 正在, so it is not repeated here."
+	},
+	"L1-0457": {
+		"meanings": ["early"],
+		"note": "Adj. Dropped the noun 'morning' — 早上 owns that — and the greeting."
+	},
+	"L1-0460": {
+		"meanings": ["how?", "in what way?"],
+		"note": "Pron. Dropped 'what?' — that is 什么, and leaving it here makes two cards share an answer."
+	},
+	"L1-0461": {
+		"meanings": ["station", "a stop on a route"],
+		"note": "N. Dropped 'website' (that is 网站 L2) and the verb 'to stand' (the separate 站 L2 V row)."
+	},
+	"L1-0462": {
+		"meanings": ["to look for", "to try to find"],
+		"note": "V. 'to look for' is the natural primary; 找到 keeps 'to find' as the result."
+	},
+	"L1-0463": {
+		"meanings": ["to find"],
+		"note": "No official POS. Correct as shipped — the resultative of 找."
+	},
+	"L1-0464": {
+		"meanings": ["this"],
+		"note": "Pron. Dropped 'these' so 这些 keeps it."
+	},
+	"L1-0468": {
+		"meanings": ["these"],
+		"note": "Pron."
+	},
+	"L1-0469": {
+		"meanings": ["shows a continuing state", "marks an ongoing action"],
+		"note": "Aux. Described the function in plain words rather than naming the aspect particle; kept distinct from 呢 and from 了."
+	},
+	"L1-0470": {
+		"meanings": ["truly", "real"],
+		"note": "Adv/Adj. Primary moved off 'really' because 真的 L1 already ships that; 'truly' keeps the adverb POS."
+	},
+	"L1-0472": {
+		"meanings": ["just at that moment", "right in the middle of"],
+		"note": "Adv. The shipped 'straight / upright' is the adjective sense and belongs to the 正 L3 Adj row — the two levels were swapped. 我正吃饭呢."
+	},
+	"L1-0473": {
+		"meanings": ["in the process of doing", "currently"],
+		"note": "Adv. Reworded off 'to be in the process of', a verb-shaped gloss on an Adv row, and kept distinct from 正 above."
+	},
+	"L1-0476": {
+		"meanings": ["the middle part", "within"],
+		"note": "N. Dropped the '(dialect) OK' sense. Primary is 'the middle part' so it stays separable from 中间 'the middle', 中心 'center' and 内 'within'."
+	},
+	"L1-0478": {
+		"meanings": ["the middle", "in between"],
+		"note": "N."
+	},
+	"L1-0483": {
+		"meanings": ["heavy", "serious"],
+		"note": "Adj. The chóng reading 'again / to repeat' is the separate 重 L3 row."
+	},
+	"L1-0484": {
+		"meanings": ["important"],
+		"note": "Adj."
+	},
+	"L1-0485": {
+		"meanings": ["to live somewhere", "to stay"],
+		"note": "V. Primary qualified so it does not read as 生活 'to live / life'. Dropped the resultative-complement sense."
+	},
+	"L1-0486": {
+		"meanings": ["to prepare", "to plan to"],
+		"note": "V. CEDICT sense 1 is the noun 'preparation', wrong for a V row."
+	},
+	"L1-0488": {
+		"meanings": ["written character", "letter"],
+		"note": "N. 'letter' alone is misleading for 字 and 'word' belongs to 词 L2; 汉字 L1 keeps 'Chinese character'. Dropped the courtesy-name sense."
+	},
+	"L1-0489": {
+		"meanings": ["noun suffix on objects and people"],
+		"note": "Suffix. Reference row is 子（桌子）. Qualified so it does not read identically to 头 L2 'noun suffix on place words'."
+	},
+	"L1-0490": {
+		"meanings": ["to walk", "to leave"],
+		"note": "V. Dropped the euphemistic 'to die' and the compound-verb 'away'."
+	},
+	"L1-0492": {
+		"meanings": ["the most", "to the highest degree"],
+		"note": "Adv. The shipped primary 'best or most extreme example' is CEDICT's 之最 parenthetical — a noun phrase on an Adv row and not what 最 does before an adjective."
+	},
+	"L1-0493": {
+		"meanings": ["had better", "it would be best to"],
+		"note": "Adv. Official POS is Adv, so the adjectival 'best' cannot lead; 你最好早点儿去."
+	},
+	"L1-0494": {
+		"meanings": ["the last one", "in the end"],
+		"note": "N. Noun sense leads to match POS; 'final' was an adjective gloss on a noun row."
+	},
+	"L1-0496": {
+		"meanings": ["the left-hand side"],
+		"note": "N. Mirrors 右 and stays distinct from 左边 'the left side'. Dropped the political, geographic and variant-character senses."
+	},
+	"L1-0498": {
+		"meanings": ["to sit", "to travel by vehicle"],
+		"note": "V. The second sense (坐飞机, 坐车) is core HSK 1 and was missing. Dropped 'to bear fruit' and the 座 variant note."
+	},
+	"L1-0499": {
+		"meanings": ["to sit down"],
+		"note": "No official POS. Correct as shipped."
+	},
+	"L1-0500": {
+		"meanings": ["to do", "to make"],
+		"note": "V. The shipped 'to make / to write' takes CEDICT senses 1 and 2 and misses the everyday sense; 做作业, 做什么."
+	},
+	"L2-0001": {
+		"meanings": ["adds warmth or emphasis", "sentence-ending particle"],
+		"note": "Aux, neutral tone. This is the sentence-final modal particle, not the exclamation 啊 ā (the separate L4 Intj row) — so the shipped 'exclamatory particle / ah!' was the wrong entry's meaning."
+	},
+	"L2-0002": {
+		"meanings": ["romantic love", "romance"],
+		"note": "N. Qualified so it is not answered by 爱 L1 'to love'."
+	},
+	"L2-0004": {
+		"meanings": ["quiet", "peaceful"],
+		"note": "Adj/V. Correct as shipped."
+	},
+	"L2-0005": {
+		"meanings": ["safe", "safety"],
+		"note": "Adj/N. Adjective leads to match POS order."
+	},
+	"L2-0006": {
+		"meanings": ["the color white"],
+		"note": "N. The 'fig. reactionary / anti-communist' sense is political CEDICT baggage and is excluded. Qualified so it is not answered by 白 'white'."
+	},
+	"L2-0007": {
+		"meanings": ["class monitor", "team leader"],
+		"note": "N. 'squad leader' is the military sense; a learner meets this in a classroom."
+	}
+}
