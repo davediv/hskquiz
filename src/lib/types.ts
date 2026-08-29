@@ -40,9 +40,28 @@ export interface Word {
 	syllables: Syllable[];
 	/** Short learner-facing English meanings, best first. 1–3 entries, each a few words. */
 	meanings: string[];
+	/** One sentence showing the word in use. Absent where none has been authored yet. */
+	example?: Example;
 	/** Part-of-speech codes: N V Adj Adv Pron Num M Prep Conj Aux Int Prefix Suffix Phonetic. */
 	pos: string[];
 	level: Level;
+}
+
+/**
+ * One example sentence for a word.
+ *
+ * Both reference apps spend their entry screen on the word in context, because a gloss alone
+ * does not tell a learner how a word is used. Sentences are authored against the word's own HSK
+ * level and gated at build time: every character in `hanzi` must itself sit at or below that
+ * level, so an HSK 1 card can never be explained with an HSK 5 character.
+ */
+export interface Example {
+	/** The sentence in simplified hanzi, including its full-width punctuation. */
+	hanzi: string;
+	/** Tone-marked pinyin, syllable-spaced, matching `hanzi`. */
+	pinyin: string;
+	/** Natural English translation — not a gloss-by-gloss crib. */
+	english: string;
 }
 
 /** Which way a question runs. */
