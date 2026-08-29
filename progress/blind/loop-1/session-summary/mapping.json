@@ -1,0 +1,16 @@
+{
+	"piece": "session-summary",
+	"loop": 1,
+	"rule": "\"session-summary\" is 15 characters — ODD — so the reference is A and the app is B.",
+	"A": {
+		"role": "reference",
+		"source": "reference/screenshots/duchinese/ui/duchinese-iphone-05-ui.png",
+		"what": "Du Chinese flashcard review session: coloured segment rail across the top, a study card carrying hanzi + tone-coloured pinyin + gloss + a full example sentence with per-syllable pinyin and translation, and a Forgot / Almost / Got it! action row."
+	},
+	"B": {
+		"role": "app",
+		"source": "progress/shots/loop-1/session-summary-mobile.png",
+		"what": "hskquiz session summary at 7/10 (http://127.0.0.1:5177/quiz/1?state=summary), 375x812 @2x, above the fold."
+	},
+	"whyThisPair": "The Du Chinese review screen is the only reference screen that is the end/middle of a study run rather than a dictionary lookup: it pairs a coloured progress rail with word-level study cards and a bottom action row, which is exactly the anatomy of the summary under review."
+}
