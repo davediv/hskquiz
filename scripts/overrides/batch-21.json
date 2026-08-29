@@ -1,0 +1,490 @@
+{
+	"L5-0518": {
+		"meanings": ["patience", "patient"],
+		"note": "Adj/N row; \"to be patient\" is a verb form the POS does not license, so the adjective is given as a bare adjective."
+	},
+	"L5-0522": {
+		"meanings": ["hard to come by", "rare"],
+		"note": "Adj. Leads with the sense 难得 actually carries — something precious because it seldom happens; \"seldom\" alone is adverbial."
+	},
+	"L5-0523": {
+		"meanings": ["hard to do", "not easy to do"],
+		"note": "Bound adverbial element (难以想象). \"hard to do something\" tripped the V-card noun gate on the -ing head."
+	},
+	"L5-0525": {
+		"meanings": ["inner", "intrinsic"],
+		"note": "Adj. \"internal\" would answer to 内部 as well; \"inner/intrinsic\" is what 内在 contrasts with 外在."
+	},
+	"L5-0529": {
+		"meanings": ["just before Chinese New Year"],
+		"note": "N. 年前 names the stretch before the Spring Festival (年前年后), not \"years ago\"; CEDICT's \"by the end of the year\" is misleading."
+	},
+	"L5-0530": {
+		"meanings": ["awesome", "impressive"],
+		"note": "Adj row at L5 — the noun 牛 \"ox\" is the L3 card and shipping it here duplicates that card and contradicts the POS. This is the praise adjective (很牛), colloquial but standard and the only sense an Adj row can carry."
+	},
+	"L5-0534": {
+		"meanings": ["warm", "to warm up"],
+		"note": "Adj/V row, one gloss per POS."
+	},
+	"L5-0535": {
+		"meanings": ["occasionally", "once in a while"],
+		"note": "Adv. Kept distinct from 偶然, which the standard files as Adj."
+	},
+	"L5-0536": {
+		"meanings": ["accidental", "by chance"],
+		"note": "Adj row, so the adjective leads; \"occasionally\" belongs to 偶尔 and would collide with it."
+	},
+	"L5-0540": {
+		"meanings": ["one side", "other"],
+		"note": "N/Pron. 旁边 already owns \"side\" at L1, so this reads \"one side\"; the Pron sense is 旁人 \"other people\"."
+	},
+	"L5-0541": {
+		"meanings": ["to accompany", "to keep someone company"],
+		"note": "V. Straightforward; the \"old variant of 赔\" note in CEDICT is dropped."
+	},
+	"L5-0542": {
+		"meanings": ["to pay for damage", "to lose money"],
+		"note": "V. The everyday senses (赔钱, 赔个杯子); 赔偿 L5-0543 takes the formal one."
+	},
+	"L5-0544": {
+		"meanings": ["to equip with", "to allocate"],
+		"note": "V. \"to equip with\" is the sense a learner meets (配备设备); 设备 keeps \"equipment\" as a noun."
+	},
+	"L5-0545": {
+		"meanings": ["to form a matching set"],
+		"note": "No official POS. Says what 配套 does instead of the abstract \"compatible\"."
+	},
+	"L5-0546": {
+		"meanings": ["to spray", "to spurt"],
+		"note": "V. The CEDICT \"(slang) to criticize scathingly online\" sense is dropped."
+	},
+	"L5-0547": {
+		"meanings": ["a basin", "flower pot"],
+		"note": "N. The archaic volume unit is dropped."
+	},
+	"L5-0548": {
+		"meanings": ["to drape over the shoulders"],
+		"note": "V. The one concrete sense of 披 at this level (披上外套); \"to open/unroll\" is literary."
+	},
+	"L5-0551": {
+		"meanings": ["temper", "temperament"],
+		"note": "N. \"character\" would collide with 品质 at L4; 脾气 is specifically the temper one loses (发脾气)."
+	},
+	"L5-0552": {
+		"meanings": ["measure word: horses", "measure word: bolts of cloth"],
+		"note": "M row. Both classifier uses; colons not commas so the UI join stays readable."
+	},
+	"L5-0553": {
+		"meanings": ["to cheat", "to deceive"],
+		"note": "V."
+	},
+	"L5-0555": {
+		"meanings": ["to piece together", "to spell out"],
+		"note": "V. 拼 covers both assembling parts and spelling (拼音), and a learner meets both."
+	},
+	"L5-0558": {
+		"meanings": ["to savor", "suffix: a type of product"],
+		"note": "Merged V row (L5-0558) + Suffix row (L5-0559, 工艺品). \"to taste\" is 尝 at this same level, so the V sense is \"to savor\"."
+	},
+	"L5-0561": {
+		"meanings": ["flat and level"],
+		"note": "Adj. 平 already ships \"flat\" at L2; 平坦 is the ground being even underfoot."
+	},
+	"L5-0563": {
+		"meanings": ["to assess", "assessment"],
+		"note": "V/N row, one gloss per POS. \"to estimate\" is 估计 at this level."
+	},
+	"L5-0564": {
+		"meanings": ["to comment on", "a commentary"],
+		"note": "V/N row. Kept off \"to criticize\" (批评, L3) and \"to comment\" bare (议论, L4)."
+	},
+	"L5-0565": {
+		"meanings": ["to go by", "on the basis of"],
+		"note": "V/Prep row. \"to lean against\" is 靠 at L2 and \"to rely on\" is 依靠 at L4, so the V gloss is \"to go by\" (凭经验) and the Prep gloss is 凭票入场."
+	},
+	"L5-0566": {
+		"meanings": ["to splash", "to spill liquid"],
+		"note": "V. Distinct from 洒 \"to sprinkle\" and 喷 \"to spray\", both also at this level."
+	},
+	"L5-0569": {
+		"meanings": ["to place hopes on", "to expect of someone"],
+		"note": "V. \"to hope\" is 希望 at L3; 期望 is the expectation placed on a person."
+	},
+	"L5-0571": {
+		"meanings": ["his or her or its", "that"],
+		"note": "Pron. Spells out the formal third-person possessive rather than listing \"his, her, its\" as three answers."
+	},
+	"L5-0572": {
+		"meanings": ["to start up", "to launch"],
+		"note": "V. The machine start sense; the \"(fig.) to set in motion\" marker is dropped."
+	},
+	"L5-0573": {
+		"meanings": ["to inspire", "inspiration"],
+		"note": "V/N row. \"to enlighten\" reads religious; 启发 is what a good teacher does."
+	},
+	"L5-0574": {
+		"meanings": ["a posted notice"],
+		"note": "N. The pinned-up announcement (寻人启事), not an official bulletin."
+	},
+	"L5-0576": {
+		"meanings": ["minimum", "at the very least"],
+		"note": "Adj row, so the adjective leads (最起码的要求); the adverbial use is the second gloss because it is how a learner meets the word."
+	},
+	"L5-0578": {
+		"meanings": ["weather conditions", "meteorology"],
+		"note": "N. Distinguished from 天气 \"weather\" and 气候 \"climate\" at L3."
+	},
+	"L5-0579": {
+		"meanings": ["to sign one's name"],
+		"note": "V row. The \"visa\" noun belongs to 签证 and the \"inscribed bamboo stick\" gloss is a variant-character note."
+	},
+	"L5-0582": {
+		"meanings": ["to sign a contract"],
+		"note": "No official POS."
+	},
+	"L5-0583": {
+		"meanings": ["visa", "to issue a visa"],
+		"note": "V/N row. A learner meets 签证 as the document first; both POS are represented."
+	},
+	"L5-0585": {
+		"meanings": ["the outlook ahead", "the foreground of a picture"],
+		"note": "N. 前途 owns \"prospects\" at L4, so this is the outlook for a situation plus the literal foreground."
+	},
+	"L5-0586": {
+		"meanings": ["precondition"],
+		"note": "N. Sharper than \"premise\", which reads as logic jargon."
+	},
+	"L5-0587": {
+		"meanings": ["to owe", "to lack"],
+		"note": "V. The literary \"to be deficient in\" and the bound \"yawn\" sense are dropped."
+	},
+	"L5-0588": {
+		"meanings": ["a gun"],
+		"note": "N. The spear and knock-off senses are archaic or figurative."
+	},
+	"L5-0591": {
+		"meanings": ["to snatch", "to scramble for"],
+		"note": "V. \"to grab\" is 抓 at L3; 抢 is taking by force or competing to get there first."
+	},
+	"L5-0594": {
+		"meanings": ["quietly", "stealthily"],
+		"note": "Adv row, so adverbs only — 安静 and 静 hold the adjective \"quiet\" at L2 and L3."
+	},
+	"L5-0595": {
+		"meanings": ["to knock", "to tap"],
+		"note": "V. The \"to rip sb off / overcharge\" sense is dropped."
+	},
+	"L5-0596": {
+		"meanings": ["to knock on a door"],
+		"note": "No official POS; kept distinct from bare 敲."
+	},
+	"L5-0597": {
+		"meanings": ["to take a look", "to glance at"],
+		"note": "V. 看 owns \"to look at\" at L1; 瞧 is the colloquial quick look."
+	},
+	"L5-0598": {
+		"meanings": ["a stringed instrument"],
+		"note": "N. Glossing it \"guqin\" would be romanization, not English; 琴 is the element in 钢琴 and 小提琴."
+	},
+	"L5-0600": {
+		"meanings": ["blue-green", "young"],
+		"note": "Adj. 青 is the colour band Chinese treats as one (青草, 青天) plus the \"young\" sense in 青年."
+	},
+	"L5-0602": {
+		"meanings": ["to clear out", "to dispose of"],
+		"note": "V. \"to tidy up\" is 收拾, also at this level."
+	},
+	"L5-0606": {
+		"meanings": ["a zone or area"],
+		"note": "N. 地区 owns \"region\" at L3; \"or\" avoids an internal comma."
+	},
+	"L5-0607": {
+		"meanings": ["all without exception"],
+		"note": "Adv. One gloss, no internal comma."
+	},
+	"L5-0608": {
+		"meanings": ["the whole world"],
+		"note": "No official POS. Distinguished from 世界 \"world\"."
+	},
+	"L5-0609": {
+		"meanings": ["a spring of water"],
+		"note": "N. Bare \"spring\" would answer to 春天 as well."
+	},
+	"L5-0610": {
+		"meanings": ["to urge", "to advise"],
+		"note": "V. \"to persuade\" is 说服 at L4 and \"to propose\" is 建议 at L3."
+	},
+	"L5-0611": {
+		"meanings": ["to be lacking in"],
+		"note": "V. 缺少 ships \"to be short\" and 缺 ships \"to run short of\", so 缺乏 takes the abstract shortfall (缺乏经验)."
+	},
+	"L5-0614": {
+		"meanings": ["the masses", "ordinary people"],
+		"note": "N. \"mass\" as a bare noun reads as physics; 群众 is the general public."
+	},
+	"L5-0615": {
+		"meanings": ["to dye", "to catch a disease"],
+		"note": "V. Both senses are common at this level (染头发, 感染)."
+	},
+	"L5-0616": {
+		"meanings": ["to go around", "to wind around"],
+		"note": "V. 转 owns \"to turn\" at L3."
+	},
+	"L5-0617": {
+		"meanings": ["heat energy", "calories"],
+		"note": "N. 热 owns \"hot\" at L1; \"calories\" is how 热量 appears on food packaging."
+	},
+	"L5-0618": {
+		"meanings": ["something very popular", "a hot topic"],
+		"note": "N row, so noun phrases only — the bare adjective \"popular\" contradicts the POS."
+	},
+	"L5-0622": {
+		"meanings": ["a notable figure", "character in a story"],
+		"note": "N. Bare \"a character\" would collide with 角色 \"role\" at L4."
+	},
+	"L5-0623": {
+		"meanings": ["to hold back", "to restrain oneself"],
+		"note": "V. 忍住 is self-restraint; 忍受 L5-0625 takes enduring, and 受 L3 owns \"to endure\"."
+	},
+	"L5-0624": {
+		"meanings": ["cannot help doing something", "unable to hold back"],
+		"note": "No official POS. Describes the pattern a learner meets (忍不住笑了)."
+	},
+	"L5-0626": {
+		"meanings": ["to identify", "to admit"],
+		"note": "V. 认出 owns \"to recognize\" at L3, so 认 takes \"to identify\" (认字) plus the 认错 sense."
+	},
+	"L5-0627": {
+		"meanings": ["to firmly believe", "to determine"],
+		"note": "V. Covers both 认定他是对的 and the formal 认定事实."
+	},
+	"L5-0628": {
+		"meanings": ["to throw", "to toss"],
+		"note": "V. 丢 already ships \"to throw away\" at this level."
+	},
+	"L5-0629": {
+		"meanings": ["still as before"],
+		"note": "Adv. One gloss so it cannot be mistaken for the adjective \"still\"."
+	},
+	"L5-0630": {
+		"meanings": ["thus", "in such a way"],
+		"note": "Pron. 这样 owns \"this way\" at L2; 如此 is the formal register (原来如此, 既然如此)."
+	},
+	"L5-0631": {
+		"meanings": ["to be just like"],
+		"note": "V row, so the gloss takes a verb form rather than the bare preposition \"like\"."
+	},
+	"L5-0632": {
+		"meanings": ["to be as follows"],
+		"note": "V row; same reason."
+	},
+	"L5-0633": {
+		"meanings": ["to learn the basics", "introductory"],
+		"note": "No official POS. The literal \"to enter a door\" is not how 入门 is used."
+	},
+	"L5-0634": {
+		"meanings": ["soft"],
+		"note": "Adj."
+	},
+	"L5-0636": {
+		"meanings": ["to sprinkle", "to spill"],
+		"note": "V. Kept apart from 泼 \"to splash\" and 喷 \"to spray\" at the same level."
+	},
+	"L5-0637": {
+		"meanings": ["to come loose", "to fall apart"],
+		"note": "V row at sǎn. 散 sàn \"to scatter\" is the separate L4 card, so this one keeps the coming-apart sense."
+	},
+	"L5-0638": {
+		"meanings": ["prose", "literary essays"],
+		"note": "N. Second gloss covers the 散文 genre a Chinese reader means."
+	},
+	"L5-0639": {
+		"meanings": ["to kill"],
+		"note": "V. The dialect \"to smart\" and the intensifier suffix are dropped."
+	},
+	"L5-0642": {
+		"meanings": ["silly", "foolish"],
+		"note": "Adj."
+	},
+	"L5-0644": {
+		"meanings": ["to fan", "to flap"],
+		"note": "V row at shān. The face-slapping sense is dropped as register."
+	},
+	"L5-0645": {
+		"meanings": ["measure word: doors or windows", "a door or window panel"],
+		"note": "M/N row, M first. The noun \"fan\" belongs to 扇子, so the N sense here is the hinged panel."
+	},
+	"L5-0646": {
+		"meanings": ["a handheld fan"],
+		"note": "N. Differentiated from 扇 shàn, which ships as the classifier."
+	},
+	"L5-0649": {
+		"meanings": ["top and bottom", "roughly that amount"],
+		"note": "N. The second gloss is the very common 三十岁上下 use."
+	},
+	"L5-0651": {
+		"meanings": ["slightly"],
+		"note": "Adv. Kept distinct from 稍微 \"a little bit\"."
+	},
+	"L5-0652": {
+		"meanings": ["a little bit"],
+		"note": "Adv."
+	},
+	"L5-0653": {
+		"meanings": ["a snake"],
+		"note": "N. \"serpent\" is a register a beginner card does not need."
+	},
+	"L5-0654": {
+		"meanings": ["to be reluctant to part with", "to hate to do something"],
+		"note": "V. Covers both the object and the action use."
+	},
+	"L5-0655": {
+		"meanings": ["to be willing to part with"],
+		"note": "V. The exact mirror of 舍不得."
+	},
+	"L5-0656": {
+		"meanings": ["to envisage", "a tentative plan"],
+		"note": "V/N row. 想象 owns \"to imagine\" at L4."
+	},
+	"L5-0657": {
+		"meanings": ["an agency or organization"],
+		"note": "N. The bound form in 出版社, 报社, 旅行社; \"society\" would collide with 社会."
+	},
+	"L5-0659": {
+		"meanings": ["to shoot", "to launch"],
+		"note": "V."
+	},
+	"L5-0663": {
+		"meanings": ["to photograph", "photography"],
+		"note": "V row leads with the verb; 照相 and 拍照 already hold \"to take a photograph\"."
+	},
+	"L5-0664": {
+		"meanings": ["a photographer"],
+		"note": "N."
+	},
+	"L5-0665": {
+		"meanings": ["to stretch out", "to extend"],
+		"note": "V."
+	},
+	"L5-0666": {
+		"meanings": ["the innermost depths", "the deepest part"],
+		"note": "N. A place. 深度 L5-0667 is the measurement, so neither can read as the other's plural."
+	},
+	"L5-0667": {
+		"meanings": ["depth as a measurement", "profundity"],
+		"note": "N. How deep something is, against 深处 L5-0666 the deep place itself."
+	},
+	"L5-0668": {
+		"meanings": ["a god or deity"],
+		"note": "N. The \"(coll.) awesome\" sense is dropped and \"spirit\" is left to 精神 at L3."
+	},
+	"L5-0670": {
+		"meanings": ["magical", "amazing"],
+		"note": "Adj."
+	},
+	"L5-0672": {
+		"meanings": ["to rise higher", "to raise"],
+		"note": "No official POS. 升 ships \"to ascend\" at L3 and 上升 ships \"to rise\", so this one is explicitly comparative."
+	},
+	"L5-0673": {
+		"meanings": ["to generate", "to form"],
+		"note": "V."
+	},
+	"L5-0674": {
+		"meanings": ["a sound or voice", "measure word: shouts or calls"],
+		"note": "N/M row. 声音 owns \"sound\" at L2, so this pairs sound with voice and adds the classifier the M POS requires."
+	},
+	"L5-0676": {
+		"meanings": ["to be left over"],
+		"note": "V."
+	},
+	"L5-0678": {
+		"meanings": ["a slip-up", "to make an error"],
+		"note": "V/N row. 错误 owns \"error\" at L3; 失误 is the lapse in performance."
+	},
+	"L5-0679": {
+		"meanings": ["a master craftsman", "polite term for a worker"],
+		"note": "N. Both are live: the skilled tradesman and the address used to a driver."
+	},
+	"L5-0681": {
+		"meanings": ["ample", "one hundred percent"],
+		"note": "Adj. 完全 owns \"complete\" at L2; 十足 is the full measure of a quality (信心十足)."
+	},
+	"L5-0682": {
+		"meanings": ["often", "time and again"],
+		"note": "Adv. 常常 and 经常 both currently ship \"frequently\", so 时常 takes \"often\"."
+	},
+	"L5-0684": {
+		"meanings": ["the right moment", "timing"],
+		"note": "N. 机会 owns \"opportunity\" at L2; 时机 is specifically the timing being right."
+	},
+	"L5-0685": {
+		"meanings": ["current affairs"],
+		"note": "N."
+	},
+	"L5-0686": {
+		"meanings": ["good value for money", "a real benefit"],
+		"note": "Adj/N row. Both senses are what 实惠 means in a shop and in 得到实惠."
+	},
+	"L5-0687": {
+		"meanings": ["to pick up off the ground", "to gather up"],
+		"note": "V. The banker's numeral \"ten\" on cheques is a formal variant a learner card should not carry."
+	},
+	"L5-0688": {
+		"meanings": ["to make something happen", "to cause"],
+		"note": "V. 造成 owns \"to bring about\" at L3; the CEDICT \"usable\" sense is a different, rarer word."
+	},
+	"L5-0689": {
+		"meanings": ["to demonstrate", "to set an example"],
+		"note": "V."
+	},
+	"L5-0690": {
+		"meanings": ["style or type"],
+		"note": "N. The bound form in 中式, 新式; \"form\" would collide with 形式 at L3."
+	},
+	"L5-0691": {
+		"meanings": ["power and influence", "a faction"],
+		"note": "N. \"influence\" alone is 影响 at L2."
+	},
+	"L5-0694": {
+		"meanings": ["to regard as"],
+		"note": "No official POS."
+	},
+	"L5-0695": {
+		"meanings": ["to buy up", "to acquire a company"],
+		"note": "V. Both the bulk-purchase and takeover senses; keeps 收购 off 买 and 收."
+	},
+	"L5-0697": {
+		"meanings": ["to tidy up", "to pack"],
+		"note": "V. The colloquial \"to sort sb out / to fix sb\" sense is dropped."
+	},
+	"L5-0698": {
+		"meanings": ["means to an end", "a tactic"],
+		"note": "N. 方法 owns \"method\" at L2; 手段 is the means chosen to get a result."
+	},
+	"L5-0699": {
+		"meanings": ["technique", "a trick"],
+		"note": "N. The craft sense (写作手法) plus the negative 骗人的手法."
+	},
+	"L5-0701": {
+		"meanings": ["to be hit by a disaster"],
+		"note": "No official POS."
+	},
+	"L5-0702": {
+		"meanings": ["thin or slim", "lean"],
+		"note": "Adj. 薄 ships \"thin\" at L4 for flat objects; 瘦 is thin of a person, and \"lean\" covers 瘦肉."
+	},
+	"L5-0703": {
+		"meanings": ["Chinese calligraphy"],
+		"note": "N. Bare \"handwriting\" would answer to 字 as well."
+	},
+	"L5-0706": {
+		"meanings": ["to output", "to export"],
+		"note": "V."
+	},
+	"L5-0708": {
+		"meanings": ["to be familiar with", "to know well"],
+		"note": "V. 了解 ships \"to understand well\" at L4."
+	}
+}
