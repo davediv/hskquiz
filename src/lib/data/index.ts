@@ -11,7 +11,7 @@ import { LEVELS } from '$lib/types';
 
 /**
  * `import.meta.glob` gives Vite one dynamic import per file, so each level becomes its
- * own chunk and opening the app pulls down none of them. It also keeps 4,307 entries of
+ * own chunk and opening the app pulls down none of them. It also keeps 4,308 entries of
  * JSON out of the TypeScript program, which a direct `import './hsk1.json'` would not.
  */
 const chunks = import.meta.glob<{ default: Word[] }>('./hsk*.json');

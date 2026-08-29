@@ -1,0 +1,482 @@
+{
+	"L5-0012": {
+		"meanings": ["packaging", "to wrap up"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0014": {
+		"meanings": ["to look after", "to maintain"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0016": {
+		"meanings": ["to call the police"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0037": {
+		"meanings": ["to fluctuate", "a change"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0056": {
+		"meanings": ["to make up for"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0057": {
+		"meanings": ["a subsidy"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0058": {
+		"meanings": ["never before", "has not yet"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0071": {
+		"meanings": ["to speculate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0082": {
+		"meanings": ["fork"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0097": {
+		"meanings": ["a scene", "occasion"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0110": {
+		"meanings": ["to take a vehicle"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0112": {
+		"meanings": ["to travel by"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0122": {
+		"meanings": ["to publish a book"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0138": {
+		"meanings": ["to found"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0152": {
+		"meanings": ["a reply", "to reply formally"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0154": {
+		"meanings": ["to dress up"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0155": {
+		"meanings": ["to pack up", "to take away"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0156": {
+		"meanings": ["to strike a blow"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0158": {
+		"meanings": ["to bother"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0166": {
+		"meanings": ["lobby", "a large hall"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0173": {
+		"meanings": ["the price paid"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0187": {
+		"meanings": ["to arrive"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0188": {
+		"meanings": ["actually", "as it happens"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0205": {
+		"meanings": ["to transfer someone"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0217": {
+		"meanings": ["to correspond"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0222": {
+		"meanings": ["ear"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0226": {
+		"meanings": ["to launch"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0227": {
+		"meanings": ["to issue", "to distribute"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0235": {
+		"meanings": ["to enlarge"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0242": {
+		"meanings": ["to share with others"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0245": {
+		"meanings": ["scenery"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0252": {
+		"meanings": ["range", "extent"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0259": {
+		"meanings": ["to interfere with"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0281": {
+		"meanings": ["an official announcement", "a public bulletin"],
+		"note": "N. Issued by an organization; 启事 L5-0574 is the notice an individual posts."
+	},
+	"L5-0286": {
+		"meanings": ["to share in common"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0302": {
+		"meanings": ["widespread"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0333": {
+		"meanings": ["the picture on screen"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0348": {
+		"meanings": ["vitality"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0376": {
+		"meanings": ["tough", "arduous"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0377": {
+		"meanings": ["difficult"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0384": {
+		"meanings": ["to construct"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0385": {
+		"meanings": ["architecture", "a building"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0392": {
+		"meanings": ["to explain", "to brief"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0410": {
+		"meanings": ["a sight"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0413": {
+		"meanings": ["to compete", "competition"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0419": {
+		"meanings": ["an act", "behavior"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0452": {
+		"meanings": ["width"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0468": {
+		"meanings": ["standpoint"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0473": {
+		"meanings": ["to associate ideas"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0488": {
+		"meanings": ["to put into practice"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0516": {
+		"meanings": ["appearance"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0517": {
+		"meanings": ["gaze", "sight"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0526": {
+		"meanings": ["energy"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0538": {
+		"meanings": ["to film"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0539": {
+		"meanings": ["to rule out"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0543": {
+		"meanings": ["to pay compensation", "to make good a loss"],
+		"note": "V. The formal/legal word, worded apart from 赔 L5-0542."
+	},
+	"L5-0575": {
+		"meanings": ["to play a role"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0581": {
+		"meanings": ["a signature", "to autograph"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0584": {
+		"meanings": ["to sign a document"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0603": {
+		"meanings": ["plot", "details"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0604": {
+		"meanings": ["circumstances"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0612": {
+		"meanings": ["to establish firmly"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0613": {
+		"meanings": ["a group of people"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0621": {
+		"meanings": ["a public figure"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0625": {
+		"meanings": ["to put up with", "to bear something"],
+		"note": "V. Enduring something imposed on you, against 忍 L5-0623 \"to hold back\"."
+	},
+	"L5-0640": {
+		"meanings": ["to remove a virus"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0650": {
+		"meanings": ["to go up"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0658": {
+		"meanings": ["community", "neighborhood"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0660": {
+		"meanings": ["to fire a gun"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0669": {
+		"meanings": ["nerve", "mental state"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0671": {
+		"meanings": ["facial expression"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0677": {
+		"meanings": ["to remain"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0714": {
+		"meanings": ["to command"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0727": {
+		"meanings": ["to search for online"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0736": {
+		"meanings": ["a loss", "to suffer damage"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0746": {
+		"meanings": ["to run away"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0752": {
+		"meanings": ["characteristic"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0756": {
+		"meanings": ["to prompt", "a hint"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0776": {
+		"meanings": ["to carry forward"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0779": {
+		"meanings": ["and then", "afterwards"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L5-0805": {
+		"meanings": ["real estate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0835": {
+		"meanings": ["to eliminate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0836": {
+		"meanings": ["to disinfect"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0848": {
+		"meanings": ["to appreciate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0853": {
+		"meanings": ["performance of a device"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0876": {
+		"meanings": ["insight", "vision"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0880": {
+		"meanings": ["that works too", "may as well"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L5-0886": {
+		"meanings": ["on the basis of", "grounds"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0903": {
+		"meanings": ["willpower"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0912": {
+		"meanings": ["to own"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0913": {
+		"meanings": ["to have no need for"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0929": {
+		"meanings": ["to have"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0944": {
+		"meanings": ["to restrain"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0951": {
+		"meanings": ["a natural disaster"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L5-0952": {
+		"meanings": ["disaster"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0965": {
+		"meanings": ["to grow bigger"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0966": {
+		"meanings": ["to grow in number"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0967": {
+		"meanings": ["to strengthen"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0975": {
+		"meanings": ["to occupy", "to hold"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0977": {
+		"meanings": ["to raise the price"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-0999": {
+		"meanings": ["within"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1002": {
+		"meanings": ["among", "in the midst of"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1004": {
+		"meanings": ["to have control of", "to allocate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1005": {
+		"meanings": ["to carry out"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1008": {
+		"meanings": ["function", "role"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1009": {
+		"meanings": ["a job position"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1010": {
+		"meanings": ["a post", "duties"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1011": {
+		"meanings": ["it is just that"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1015": {
+		"meanings": ["to instruct", "an instruction"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1019": {
+		"meanings": ["to condition", "to restrict"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1033": {
+		"meanings": ["to host"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1034": {
+		"meanings": ["to dominate", "leading"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1038": {
+		"meanings": ["an assistant"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1039": {
+		"meanings": ["a helper"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1047": {
+		"meanings": ["to transform"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1048": {
+		"meanings": ["to switch over"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1049": {
+		"meanings": ["to make over to another"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1051": {
+		"meanings": ["to decorate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1054": {
+		"meanings": ["assets"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L5-1067": {
+		"meanings": ["to organize", "an organization"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	}
+}

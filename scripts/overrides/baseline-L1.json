@@ -1,0 +1,286 @@
+{
+	"L1-0002": {
+		"meanings": ["hobby", "to be fond of"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0014": {
+		"meanings": ["to lend a hand", "to do a favor"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0020": {
+		"meanings": ["the north side"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0023": {
+		"meanings": ["notebook"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0043": {
+		"meanings": ["travel ticket"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0050": {
+		"meanings": ["to go out"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0059": {
+		"meanings": ["to open up", "to switch on"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0070": {
+		"meanings": ["location", "site"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0071": {
+		"meanings": ["place", "area"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0085": {
+		"meanings": ["the east side"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0108": {
+		"meanings": ["extremely"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0126": {
+		"meanings": ["to close up"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0129": {
+		"meanings": ["country"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0133": {
+		"meanings": ["or in a question", "still"],
+		"note": "Conj. 还是 offers a choice inside a question; the \"still\" sense follows."
+	},
+	"L1-0135": {
+		"meanings": ["child"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0136": {
+		"meanings": ["the Chinese language"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0158": {
+		"meanings": ["to come back"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0159": {
+		"meanings": ["to go back"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0167": {
+		"meanings": ["to remember"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0168": {
+		"meanings": ["to memorize", "to bear in mind"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0170": {
+		"meanings": ["at home"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0194": {
+		"meanings": ["to catch sight of"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0195": {
+		"meanings": ["to see", "to notice"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0208": {
+		"meanings": ["an old person", "the elderly"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L1-0209": {
+		"meanings": ["teacher"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0219": {
+		"meanings": ["upstairs"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L1-0233": {
+		"meanings": ["it doesn't matter"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0234": {
+		"meanings": ["it's nothing", "no big deal"],
+		"note": "Dismisses thanks or an apology. 没事儿 L1-0235 takes the reassurance sense so the two are not one answer."
+	},
+	"L1-0240": {
+		"meanings": ["entry ticket"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0252": {
+		"meanings": ["the spoken word for where"],
+		"note": "Pron. 哪里 L1-0251 ships \"where\"; 哪儿 is the northern spoken form, so the register is the gloss."
+	},
+	"L1-0255": {
+		"meanings": ["that side", "over there"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0257": {
+		"meanings": ["the spoken word for there"],
+		"note": "Pron. 那里 L1-0256 ships \"there\"; 那儿 is its spoken form."
+	},
+	"L1-0264": {
+		"meanings": ["man", "men"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L1-0265": {
+		"meanings": ["male student", "schoolboy"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L1-0267": {
+		"meanings": ["the south side"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0272": {
+		"meanings": ["you all"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0290": {
+		"meanings": ["car", "automobile"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0292": {
+		"meanings": ["the front side", "ahead"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0306": {
+		"meanings": ["to know someone", "to recognize"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0328": {
+		"meanings": ["what"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0329": {
+		"meanings": ["to get sick"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0334": {
+		"meanings": ["time"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0350": {
+		"meanings": ["to talk"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0355": {
+		"meanings": ["they", "them"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0357": {
+		"meanings": ["they for a group of women"],
+		"note": "Pron. 他们 L1-0355 ships \"they\"; 她们 is the all-female form."
+	},
+	"L1-0362": {
+		"meanings": ["to hear"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0363": {
+		"meanings": ["to catch a sound"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0374": {
+		"meanings": ["evening", "at night"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0378": {
+		"meanings": ["to forget about"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0381": {
+		"meanings": ["we", "us"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0385": {
+		"meanings": ["the west side"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0388": {
+		"meanings": ["to like"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0392": {
+		"meanings": ["to get off a vehicle"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L1-0398": {
+		"meanings": ["Mr", "gentleman"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0404": {
+		"meanings": ["youngster"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0414": {
+		"meanings": ["Sunday"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0415": {
+		"meanings": ["Sunday in everyday speech"],
+		"note": "N. 星期日 L1-0414 ships \"Sunday\"; 星期天 is the spoken variant."
+	},
+	"L1-0420": {
+		"meanings": ["to study"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0431": {
+		"meanings": ["one half"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0439": {
+		"meanings": ["some"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0442": {
+		"meanings": ["some of them"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0445": {
+		"meanings": ["certain ones", "somewhat"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0456": {
+		"meanings": ["to be at home"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L1-0465": {
+		"meanings": ["this side", "over here"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0466": {
+		"meanings": ["here"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L1-0467": {
+		"meanings": ["the spoken word for here"],
+		"note": "Pron. 这里 L1-0466 ships \"here\"; 这儿 is its spoken form."
+	},
+	"L1-0471": {
+		"meanings": ["really", "truly"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0474": {
+		"meanings": ["to know a fact"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0479": {
+		"meanings": ["Chinese especially in writing"],
+		"note": "N. 汉语 L1-0136 ships \"the Chinese language\"; 中文 leans written."
+	},
+	"L1-0491": {
+		"meanings": ["to go on foot"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L1-0497": {
+		"meanings": ["the left side"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	}
+}

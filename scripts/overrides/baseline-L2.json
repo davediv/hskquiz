@@ -1,0 +1,506 @@
+{
+	"L2-0009": {
+		"meanings": ["a way to do something"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0019": {
+		"meanings": ["for instance"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0030": {
+		"meanings": ["not bad", "pretty good"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0033": {
+		"meanings": ["but then", "merely"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0040": {
+		"meanings": ["quite a few"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0051": {
+		"meanings": ["lawn", "meadow"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0067": {
+		"meanings": ["all over again"],
+		"note": "Adv. No internal comma, and kept off 重 L3 \"again from the start\"."
+	},
+	"L2-0083": {
+		"meanings": ["words and phrases"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0086": {
+		"meanings": ["to work a casual job"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0087": {
+		"meanings": ["to plan to"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0091": {
+		"meanings": ["the great majority"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0092": {
+		"meanings": ["the open sea"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0095": {
+		"meanings": ["main gate"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0096": {
+		"meanings": ["adult", "grownup"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0105": {
+		"meanings": ["however"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0108": {
+		"meanings": ["at that time"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0116": {
+		"meanings": ["to arrive at a result"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0117": {
+		"meanings": ["if at the end of a clause"],
+		"note": "Aux. Says where 的话 sits rather than naming a construction."
+	},
+	"L2-0121": {
+		"meanings": ["by the time", "to wait until"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L2-0135": {
+		"meanings": ["to know how to"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0150": {
+		"meanings": ["how in an exclamation"],
+		"note": "Adv. 多么好啊 — the exclamatory 多么, not the interrogative 多."
+	},
+	"L2-0151": {
+		"meanings": ["the majority"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0166": {
+		"meanings": ["a score", "a mark"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0174": {
+		"meanings": ["to transform"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0176": {
+		"meanings": ["to feel"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0177": {
+		"meanings": ["to be moved", "touching"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0178": {
+		"meanings": ["a feeling", "to sense"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0208": {
+		"meanings": ["to celebrate New Year"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0216": {
+		"meanings": ["a great many"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0219": {
+		"meanings": ["a good deed", "a happy event"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0225": {
+		"meanings": ["the color black"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0227": {
+		"meanings": ["the color red"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0236": {
+		"meanings": ["a painting", "a drawing"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0242": {
+		"meanings": ["the color yellow"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0253": {
+		"meanings": ["a plan", "to map out"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0279": {
+		"meanings": ["classroom"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0283": {
+		"meanings": ["to receive"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0284": {
+		"meanings": ["to accept"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0285": {
+		"meanings": ["next", "coming up"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0295": {
+		"meanings": ["to enter"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0302": {
+		"meanings": ["hotel"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0321": {
+		"meanings": ["yet"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0326": {
+		"meanings": ["a class in progress"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0337": {
+		"meanings": ["the color blue"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0343": {
+		"meanings": ["constantly"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0353": {
+		"meanings": ["to practice", "an exercise"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0356": {
+		"meanings": ["50 grams", "a Chinese ounce"],
+		"note": "Measure word — the classifier reading is the one the learner is tested on."
+	},
+	"L2-0358": {
+		"meanings": ["measure word: vehicles"],
+		"note": "Measure word — the classifier reading is the one the learner is tested on."
+	},
+	"L2-0360": {
+		"meanings": ["to stay", "to keep"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0367": {
+		"meanings": ["passenger"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0368": {
+		"meanings": ["to travel"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0369": {
+		"meanings": ["to tour", "tourism"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0370": {
+		"meanings": ["green"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0371": {
+		"meanings": ["the color green"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0375": {
+		"meanings": ["cat"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0376": {
+		"meanings": ["meter"],
+		"note": "Measure word — the classifier reading is the one the learner is tested on."
+	},
+	"L2-0377": {
+		"meanings": ["side", "surface", "measure word: flat things"],
+		"note": "面1 — the face/surface/classifier word. 面2 (noodles) is L2-0378, a separate card."
+	},
+	"L2-0378": {
+		"meanings": ["noodles", "flour"],
+		"note": "面2 — traditional 麵, a different word from 面1 (L2-0377) despite the shared simplified form."
+	},
+	"L2-0380": {
+		"meanings": ["name", "measure word: people"],
+		"note": "Measure word — the classifier reading is the one the learner is tested on."
+	},
+	"L2-0381": {
+		"meanings": ["the name of a thing"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0387": {
+		"meanings": ["then", "in that case"],
+		"note": "Grammar word — CC-CEDICT can only describe it, not gloss it."
+	},
+	"L2-0388": {
+		"meanings": ["at that moment"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0390": {
+		"meanings": ["back then"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0397": {
+		"meanings": ["unpleasant to hear", "coarse"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0398": {
+		"meanings": ["to be capable of"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0399": {
+		"meanings": ["school year", "grade"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0407": {
+		"meanings": ["row", "measure word: rows"],
+		"note": "Measure word — the classifier reading is the one the learner is tested on."
+	},
+	"L2-0422": {
+		"meanings": ["measure word: bottles"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0423": {
+		"meanings": ["bottle"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0440": {
+		"meanings": ["clear", "to understand fully"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0441": {
+		"meanings": ["sunny", "fine weather"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0444": {
+		"meanings": ["to request"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0447": {
+		"meanings": ["sports field", "court"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0452": {
+		"meanings": ["entirely"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0457": {
+		"meanings": ["the whole body"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0458": {
+		"meanings": ["everyone as a body"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0459": {
+		"meanings": ["and then", "afterwards"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0465": {
+		"meanings": ["to think that"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0467": {
+		"meanings": ["a day", "daily life"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0469": {
+		"meanings": ["entrance"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0477": {
+		"meanings": ["to give birth to"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0481": {
+		"meanings": ["province", "to save", "to economize"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0485": {
+		"meanings": ["to intern", "field work"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0487": {
+		"meanings": ["really", "honestly"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0488": {
+		"meanings": ["solid", "down to earth"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0494": {
+		"meanings": ["to collect", "to put away"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0495": {
+		"meanings": ["to receive something sent"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0498": {
+		"meanings": ["to be subjected to"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0507": {
+		"meanings": ["to deliver to"],
+		"note": "CC-CEDICT supplies no usable gloss for this entry."
+	},
+	"L2-0514": {
+		"meanings": ["all of"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0518": {
+		"meanings": ["sun", "sunlight"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0521": {
+		"meanings": ["measure word: sets"],
+		"note": "Measure word — the classifier reading is the one the learner is tested on."
+	},
+	"L2-0526": {
+		"meanings": ["to put forward"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0528": {
+		"meanings": ["to improve", "to raise"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0531": {
+		"meanings": ["stadium"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0537": {
+		"meanings": ["to hear that"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0548": {
+		"meanings": ["the same"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0552": {
+		"meanings": ["picture", "image"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0579": {
+		"meanings": ["lunch"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0586": {
+		"meanings": ["habit", "to be used to"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0594": {
+		"meanings": ["to believe"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0625": {
+		"meanings": ["behavior"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0629": {
+		"meanings": ["a lot of"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0635": {
+		"meanings": ["eyes"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0638": {
+		"meanings": ["to demand", "a requirement"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0650": {
+		"meanings": ["have a safe trip"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0651": {
+		"meanings": ["bon voyage"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0660": {
+		"meanings": ["generally", "so-so"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0663": {
+		"meanings": ["all along", "straight on"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0665": {
+		"meanings": ["opinion", "a complaint"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0666": {
+		"meanings": ["meaning", "idea"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0676": {
+		"meanings": ["English especially in writing"],
+		"note": "N. 英语 L2-0677 ships \"English\"; 英文 leans written."
+	},
+	"L2-0677": {
+		"meanings": ["English"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0682": {
+		"meanings": ["tourist"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0695": {
+		"meanings": ["a yard"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0702": {
+		"meanings": ["to exercise", "a sport"],
+		"note": "V/N row, verb first as the POS orders it. 体育 L2-0530 takes \"physical education\"."
+	},
+	"L2-0704": {
+		"meanings": ["we including you"],
+		"note": "Pron. The inclusive we, against 我们."
+	},
+	"L2-0711": {
+		"meanings": ["in what way"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0718": {
+		"meanings": ["to look after", "to take care of"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0734": {
+		"meanings": ["Chinese food"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0741": {
+		"meanings": ["to value", "to take seriously"],
+		"note": "CC-CEDICT's leading sense is wrong for this card at this level."
+	},
+	"L2-0756": {
+		"meanings": ["to walk into"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0757": {
+		"meanings": ["to go away"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0760": {
+		"meanings": ["to make up", "to compose"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0767": {
+		"meanings": ["effect", "function"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	},
+	"L2-0771": {
+		"meanings": ["a method of making"],
+		"note": "Near-synonym — split from its level-mate so a question has one right answer."
+	}
+}
