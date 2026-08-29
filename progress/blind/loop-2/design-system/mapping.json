@@ -1,0 +1,16 @@
+{
+	"piece": "design-system",
+	"loop": 2,
+	"rule": "\"design-system\" is 13 characters — ODD — so the reference is A and ours is B.",
+	"A": {
+		"is": "reference",
+		"file": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"what": "Pleco iPhone search-results list: hanzi headword rows, tone-coloured characters, plain-black pinyin, one-line gloss beneath."
+	},
+	"B": {
+		"is": "ours",
+		"file": "progress/shots/loop-2/design-system-browse-mobile.png",
+		"what": "hskquiz /browse/1 vocabulary list at 375x812 @2x: hanzi headword rows in plain ink, tone-coloured syllable-spaced pinyin, POS + gloss beneath."
+	},
+	"whyThisPair": "Both are the same screen type — a scrolling list of Chinese headwords with pronunciation and a short English gloss — which is where this design system's type scale, row rhythm and tone-colour policy are most directly comparable."
+}
