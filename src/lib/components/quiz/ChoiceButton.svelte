@@ -1,18 +1,31 @@
 <!--
-	One answer. Four of these are the whole interaction, so they get the bottom of the screen
-	and a target no smaller than 56px — 68px when the face of the button is a character, which
-	needs the optical size to be legible at all.
+	One answer. Four of these are the whole interaction, so they get the bottom of the screen.
+
+	NOTHING IS EVER ADDED TO THIS BUTTON. It holds one line, it is the same height answered and
+	unanswered, and the ✓/✕ is absolutely positioned so even that costs no layout. It used to
+	grow a second line — 看 `kàn`, what you actually picked — on the tap, which moved every
+	button below it down by up to 45px (so a fast second tap landed on a different word than the
+	one under the thumb) and pushed the continue button off the bottom of a 667px phone. That
+	line still exists; it moved to the reveal above, where the stage absorbs its height instead
+	of the page. Reserving it here would have cost 24px of empty row on all four buttons, on
+	every question, for something that shows on at most one of them and only after the tap.
 
 	Feedback is never colour alone: the picked button carries a ✕ or a ✓ glyph, the right answer
 	carries a ✓ whether or not it was picked, and the verdict is spelled out in words above.
 
-	A missed pick also shows what the learner actually chose — 看 `kàn`, "to look" — because the
-	wrong answer is a word they are about to meet anyway, and that half-second is the only time
-	they will ever be curious about it.
+	THE OTHER TWO ANSWERS ARE STILL WORDS. They used to be `opacity: 0.42`, which put `dry` at
+	2.72:1 on its own button — under the 4.5:1 floor, and faintest for the learner who most
+	needs to read it. De-emphasis is now a colour and a surface (`--color-ink-muted` on
+	`--color-page`, ~8:1), which reads as quieter without erasing three glosses the learner is
+	about to meet.
+
+	NO TONE COLOUR ON THE FACES. A control's colour is its state — right, wrong, quiet — and
+	four tone-painted characters would be a fifth signal competing with that. Tone lives on the
+	headword above, where it is the answer rather than an option.
 -->
 <script lang="ts">
 	import type { Direction, Word } from '$lib/types';
-	import { Hanzi, Pinyin } from '$lib/design';
+	import { Hanzi } from '$lib/design';
 	import { primaryGloss, type ChoiceStatus } from './quiz';
 
 	interface Props {
@@ -31,16 +44,22 @@
 		status === 'chosen-wrong' ? 'cross' : status === 'idle' || status === 'other' ? null : 'check'
 	);
 	const label = $derived(isHanzi ? word.hanzi : primaryGloss(word));
+	/**
+	 * The 111 glosses long enough to wrap in a 257px label. A step down keeps them on one line
+	 * — `makes a sentence a yes-no question` measures 275px at 16px and 241px at 14px — which
+	 * matters because a wrapped button is a taller button, and all four grow with it.
+	 */
+	const long = $derived(!isHanzi && label.length > 28);
 </script>
 
 <button
 	type="button"
 	class="choice"
-	class:hanzi-face={isHanzi}
 	class:right={status === 'chosen-right'}
 	class:miss={status === 'chosen-wrong'}
 	class:answer={status === 'answer'}
 	class:muted={status === 'other'}
+	class:long
 	disabled={status !== 'idle'}
 	aria-label={isHanzi ? `Character ${label}` : label}
 	onclick={onpick}
@@ -74,36 +93,37 @@
 		<span class="badge key tabular" aria-hidden="true">{index + 1}</span>
 	{/if}
 
-	<span class="body">
-		{#if isHanzi}
-			<Hanzi text={word.hanzi} size="lg" display />
-		{:else}
-			<span class="gloss">{label}</span>
-		{/if}
-
-		{#if status === 'chosen-wrong'}
-			<span class="complement">
-				{#if isHanzi}
-					<Pinyin pinyin={word.pinyin} size="sm" /> · {primaryGloss(word)}
-				{:else}
-					<Hanzi text={word.hanzi} size="xs" /> <Pinyin pinyin={word.pinyin} size="sm" />
-				{/if}
-			</span>
-		{/if}
-	</span>
+	{#if isHanzi}
+		<Hanzi text={word.hanzi} tones={false} class="glyph-face" />
+	{:else}
+		<span class="gloss">{label}</span>
+	{/if}
 </button>
 
 <style>
+	/*
+	 * The height steps come from the viewport, not the width: 667px is the phone this has to
+	 * fit and 812px the one it should fill, and the run's own stylesheet splits on the same
+	 * 44rem line. `block-size: 100%` lets the `.answers` grid equalise all four when one gloss
+	 * wraps, so the stack stays a stack.
+	 */
 	.choice {
+		--choice-h: 3.25rem;
+		--choice-face: 1.875rem;
+
 		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 0.125rem;
+		display: grid;
+		place-items: center;
 		inline-size: 100%;
-		min-block-size: 3.5rem;
-		padding: 0.75rem 3rem;
+		block-size: 100%;
+		min-block-size: var(--choice-h);
+		/*
+		 * 2.375rem clears the 22px ✓/✕ badge and its 10px inset with room to spare, and it is
+		 * 10px narrower per side than the 3rem that used to be reserved partly for a keyboard
+		 * number that is `display: none` on every touch device. The longest shipped gloss —
+		 * `makes a sentence a yes-no question` — gains 20px of line before it has to wrap.
+		 */
+		padding: 0.5rem 2.375rem;
 		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-md);
 		background-color: var(--color-surface);
@@ -113,12 +133,15 @@
 			background-color 140ms var(--ease-out-soft),
 			border-color 140ms var(--ease-out-soft),
 			box-shadow 140ms var(--ease-out-soft),
-			opacity 180ms var(--ease-out-soft),
+			color 180ms var(--ease-out-soft),
 			transform 110ms var(--ease-out-soft);
 	}
 
-	.choice.hanzi-face {
-		min-block-size: 4.25rem;
+	@media (min-height: 44rem) {
+		.choice {
+			--choice-h: 4rem;
+			--choice-face: 2.25rem;
+		}
 	}
 
 	.choice:not(:disabled):active {
@@ -153,20 +176,27 @@
 		animation: var(--animate-shake);
 	}
 
+	/*
+	 * Quieter, not fainter — see the note at the top of the file. The border is a mix rather
+	 * than `--color-line`, which sat at ~1.05:1 on the page and made these read as holes in
+	 * the stack rather than as the two answers they still are. 70% of the strong line lands at
+	 * 2.3:1 — a clear step down from the 3.36:1 of a live button, still plainly a pill.
+	 */
 	.choice.muted {
-		border-color: var(--color-line);
-		opacity: 0.42;
+		border-color: color-mix(in srgb, var(--color-line-strong) 70%, var(--color-page));
+		background-color: var(--color-page);
+		color: var(--color-ink-muted);
 	}
 
 	.badge {
 		position: absolute;
-		inset-inline-start: 0.75rem;
+		inset-inline-start: 0.625rem;
 		inset-block-start: 50%;
 		translate: 0 -50%;
 		display: grid;
 		place-items: center;
-		inline-size: 1.5rem;
-		block-size: 1.5rem;
+		inline-size: 1.375rem;
+		block-size: 1.375rem;
 		border-radius: var(--radius-pill);
 	}
 
@@ -186,8 +216,8 @@
 	}
 
 	.glyph svg {
-		inline-size: 1rem;
-		block-size: 1rem;
+		inline-size: 0.9375rem;
+		block-size: 0.9375rem;
 	}
 
 	.choice.answer .glyph {
@@ -204,28 +234,20 @@
 		background-color: var(--color-wrong);
 	}
 
-	.body {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.25rem;
-		min-inline-size: 0;
+	.long .gloss {
+		font-size: var(--text-sm);
 	}
 
 	.gloss {
 		font-size: var(--text-base);
 		font-weight: 600;
 		line-height: 1.3;
-		text-wrap: pretty;
+		text-wrap: balance;
 	}
 
-	.complement {
-		display: inline-flex;
-		align-items: baseline;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 0.25rem;
-		color: var(--color-ink-muted);
-		font-size: var(--text-xs);
+	/* :global — the span belongs to `<Hanzi>`, and this has to beat its size utility. */
+	.choice :global(.glyph-face) {
+		font-size: var(--choice-face);
+		line-height: 1.1;
 	}
 </style>

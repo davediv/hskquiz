@@ -76,13 +76,25 @@
 </div>
 
 <style>
+	/*
+	 * Fixed height, and `flex: none` inside the run: this is one of the three rows the quiz
+	 * column subtracts from the viewport before it hands the rest to the question, so it must
+	 * not be a variable. On a 667px phone it costs 48px; from 704px up, 58px.
+	 */
 	.wrap {
 		position: sticky;
-		/* Directly under the app bar, which is itself sticky under the notch. */
-		inset-block-start: calc(var(--app-safe-top) + var(--app-header-h));
+		/* Rides the shell's live chrome — safe-area inset plus however much bar is on screen. */
+		inset-block-start: var(--app-chrome-h, 0px);
 		z-index: 20;
-		padding-block: 0.5rem 0.75rem;
+		flex: none;
+		padding-block: 0.5rem;
 		background-color: var(--color-page);
+	}
+
+	@media (min-height: 44rem) {
+		.wrap {
+			padding-block: 0.75rem;
+		}
 	}
 
 	.row {

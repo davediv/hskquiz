@@ -4,10 +4,22 @@
 	LAYOUT — the shape is Pleco's headword over Du Chinese's action row. The run is a flex
 	column exactly one viewport tall: the progress rail pins to the top, the answer buttons and
 	the continue button pin to the bottom where a thumb already is, and the question takes every
-	pixel in between so the 汉字 can be set as large as the design system will set it. Nothing in
-	that column moves when an answer lands — the reveal grows into the slack above the buttons
-	rather than pushing them down — which is what stops a fast second tap from hitting a
-	different control than the one that was under the finger.
+	pixel in between so the 汉字 can be set as large as the space allows.
+
+	THE ONLY ELASTIC THING IN THE COLUMN IS THE STAGE. Every other row — rail, answers, action —
+	is `flex: none` and is the same height before and after an answer, and the stage is
+	`flex: 1 1 0`, so it is sized purely by subtraction and never by its contents. That is the
+	fix for the bug that failed this screen at 375×667: the stage used to be `flex: 1 1 auto`,
+	which sizes intrinsically, so on a short phone the taller answered state simply grew the
+	page — `scrollHeight` went 667 → 806 the instant an answer landed and the black "Next word"
+	pill left the frame by up to 127px. Nothing in the column moves on the tap now, which is
+	also what stops a fast second tap from hitting a different control than the one that was
+	under the finger. Two rules keep it true, and both are load-bearing:
+
+	  · the answer buttons reserve the missed-pick line whether or not they show it
+	    (ChoiceButton), so the stack is one height;
+	  · the prompt is a three-row grid whose middle row absorbs the difference between a
+	    question and a reveal (QuestionPrompt), so the stage never has to grow.
 
 	PACE — the learner always taps to continue, on a right answer as much as a wrong one. Auto-
 	advancing on a correct answer would buy half a second and cost the only moment the whole
@@ -225,7 +237,7 @@
 	{:else if status === 'failed'}
 		<section class="panel">
 			<p class="eyebrow">Could not load</p>
-			<h1 class="panel-title">The HSK {level} word list did not arrive</h1>
+			<h2 class="panel-title">The HSK {level} word list did not arrive</h2>
 			<p class="panel-body">
 				That is usually the network. Nothing you have practised is lost — progress is kept on this
 				device.
@@ -236,14 +248,14 @@
 	{:else if status === 'empty'}
 		<section class="panel">
 			<p class="eyebrow">Nothing to ask</p>
-			<h1 class="panel-title">HSK {level} has no questions to build from</h1>
+			<h2 class="panel-title">HSK {level} has no questions to build from</h2>
 			<a class="btn btn-quiet btn-block" href={resolve('/')}>Back to levels</a>
 		</section>
 	{:else if status === 'loading' || !session}
 		<!-- Shaped like the run it becomes, so the first frame does not jump into the second. -->
 		<div class="run" aria-hidden="true">
 			<div class="skeleton-rail"></div>
-			<div class="stage"><div class="skeleton-word"></div></div>
+			<div class="stage"><div class="skeleton-stage"><div class="skeleton-word"></div></div></div>
 			<div class="answers">
 				{#each [0, 1, 2, 3] as slot (slot)}
 					<div class="skeleton-choice"></div>
@@ -317,46 +329,99 @@
 	}
 
 	/*
-	 * One viewport, minus the chrome above and the home indicator below. The stage flexes and
-	 * everything else is fixed, so the answer buttons land in the same place on every question
-	 * of every run — the single most important thing about this screen on a phone.
+	 * One viewport, minus the chrome above and the home indicator below.
+	 *
+	 * The vertical rhythm is five custom properties rather than five literals, because the
+	 * phone this has to FIT (667px) and the phone it should FILL (812px) want different
+	 * numbers: 145px of difference is more than two answer buttons. 44rem = 704px is the line
+	 * between them, and ChoiceButton splits its own height on the same line.
 	 */
 	.run {
+		--choice-gap: 0.5rem;
+		--action-gap: 0.5rem;
+		--stage-pad-t: 0.5rem;
+		--stage-pad-b: 0.75rem;
+		--run-pad-b: 0.75rem;
+
 		display: flex;
 		flex-direction: column;
 		flex: 1 1 auto;
-		padding-block-end: 0.75rem;
+		min-block-size: 0;
+		/* The shell adds the home-indicator inset under this, so a notched phone gets both. */
+		padding-block-end: var(--run-pad-b);
 	}
 
-	/* On anything bigger than a phone a full-height column strands the buttons at the far edge
-	   of the window; capped, the run reads as one object again. */
-	@media (min-width: 48rem) {
+	@media (min-height: 44rem) {
 		.run {
-			max-block-size: 42rem;
+			--choice-gap: 0.75rem;
+			--action-gap: 0.875rem;
+			--stage-pad-t: 1rem;
+			--stage-pad-b: 1.25rem;
+			--run-pad-b: 1rem;
 		}
 	}
 
+	/* On anything bigger than a phone a full-height column strands the buttons at the far edge
+	   of the window; capped and centred, the run reads as one object again. */
+	@media (min-width: 48rem) {
+		.quiz {
+			justify-content: center;
+		}
+
+		.run {
+			max-block-size: 46rem;
+		}
+	}
+
+	/*
+	 * `flex: 1 1 0`, not `auto`: the basis is zero, so this row is whatever is left over and
+	 * never one pixel of what its contents would like. The prompt inside is stretched to it
+	 * and sizes its own character against it. `min-block-size` is the floor for a landscape
+	 * phone, where there is genuinely not enough height for all of this — there the page
+	 * scrolls rather than collapsing the question to nothing.
+	 */
 	.stage {
 		display: grid;
-		place-items: center;
-		flex: 1 1 auto;
-		min-block-size: 0;
-		padding-block: 1.25rem 1.5rem;
+		align-items: stretch;
+		flex: 1 1 0;
+		min-block-size: 7.5rem;
+		padding-block: var(--stage-pad-t) var(--stage-pad-b);
 	}
 
+	/* Landscape. See the matching block in QuestionPrompt: below ~544px of viewport there is
+	   no fit to find, so the run stops being one screen tall and becomes a page. */
+	@media (max-height: 34rem) {
+		.stage {
+			flex: 0 0 auto;
+			min-block-size: 0;
+		}
+
+		.run {
+			max-block-size: none;
+		}
+	}
+
+	/* `1fr` rows: if one gloss wraps, all four buttons take the taller height together, so the
+	   stack never turns into four different sizes. */
 	.answers {
-		display: flex;
-		flex-direction: column;
-		gap: 0.625rem;
+		display: grid;
+		grid-auto-rows: 1fr;
+		flex: none;
+		gap: var(--choice-gap);
 	}
 
-	/* Reserved whether or not there is a button in it: the answer row must not move when one
-	   appears. */
+	/*
+	 * Reserved whether or not there is a button in it, and reserved at 2.875rem rather than at
+	 * the 2.75rem tap minimum: the pill's own content box comes out at 45.2px, so a 44px
+	 * reservation still grew by 1.2px when the button appeared, and every answer button above
+	 * it slid 1.2px up the screen. 46px is the number that makes the two states identical.
+	 */
 	.action {
 		display: flex;
 		align-items: center;
-		min-block-size: var(--spacing-tap);
-		margin-block-start: 0.875rem;
+		flex: none;
+		min-block-size: 2.875rem;
+		margin-block-start: var(--action-gap);
 	}
 
 	.next {
@@ -440,8 +505,13 @@
 
 	.skeleton-rail {
 		block-size: 0.375rem;
-		margin-block: 1.5rem 0.75rem;
+		margin-block: 1.75rem 0.75rem;
 		border-radius: var(--radius-pill);
+	}
+
+	.skeleton-stage {
+		display: grid;
+		place-items: center;
 	}
 
 	.skeleton-word {
@@ -449,8 +519,9 @@
 		block-size: 5rem;
 	}
 
+	/* Matched to a real answer button so the first frame does not jump into the second. */
 	.skeleton-choice {
-		block-size: 3.5rem;
+		min-block-size: 3.625rem;
 	}
 
 	@keyframes quiz-fade {

@@ -44,9 +44,9 @@
 		<ul class="list">
 			{#each missed as word (word.id)}
 				<li class="row">
-					<Hanzi text={word.hanzi} size="sm" display />
+					<Hanzi {word} size="sm" display />
 					<span class="right">
-						<Pinyin pinyin={word.pinyin} size="sm" />
+						<Pinyin {word} size="sm" />
 						<span class="gloss">{fullGloss(word)}</span>
 					</span>
 				</li>

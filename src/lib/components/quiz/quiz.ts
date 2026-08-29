@@ -62,20 +62,53 @@ export function marks(session: Session): Mark[] {
 }
 
 /**
- * Step on the hanzi scale for the headword.
+ * Step on the hanzi scale for the headword, for the surfaces that set a headword from a fixed
+ * step. (The quiz prompt itself no longer calls this: it sizes its hero character against the
+ * space the layout actually left it — see `QuestionPrompt.svelte`.)
  *
  * The official list tops out at four characters (不好意思, 公共汽车), and a fixed size would
  * either wrap those or waste two thirds of the line on 八. So the size is a function of how
- * many characters have to fit: one or two get the full hero setting, and it steps down from
- * there so every headword fills the same optical line width without ever wrapping.
+ * many characters have to fit, and it must never step *up* as characters are added: `prompt`
+ * is fluid (`clamp(3.25rem, 17vw, 6rem)` — 63.75px on a 375px phone) and `xl` is a flat 68px,
+ * so three characters take `xl` and four take `prompt`, not the other way round. Ordered the
+ * other way, 洗手间 came out smaller than 不好意思.
  */
 export type HeadwordSize = 'lg' | 'xl' | 'prompt' | 'hero';
 
 export function headwordSize(hanzi: string): HeadwordSize {
 	const chars = [...hanzi].length;
 	if (chars <= 2) return 'hero';
-	if (chars === 3) return 'prompt';
-	if (chars === 4) return 'xl';
+	if (chars === 3) return 'xl';
+	if (chars === 4) return 'prompt';
+	return 'lg';
+}
+
+/**
+ * How many lines the English side of a production question will take, capped at three.
+ *
+ * The prompt sizes itself against the height the layout left it, and "how big can this be"
+ * depends entirely on how many lines it wraps to: 34px is right for `many` and three lines
+ * too tall for `makes a sentence a yes-no question` (the longest gloss shipped, 34
+ * characters). The measure is 15ch, so ~13 characters land on a line once wrapping is
+ * accounted for. 2,769 of the 4,308 shipped glosses are one line, 1,428 two, 111 three.
+ */
+export function askLines(gloss: string): 1 | 2 | 3 {
+	const lines = Math.ceil(gloss.trim().length / 13);
+	return lines <= 1 ? 1 : lines === 2 ? 2 : 3;
+}
+
+/**
+ * Step on the Latin scale for the revealed meaning line. Every gloss of the word is joined
+ * into it, so it runs from `eight` to 67 characters of `conforming to a standard · a norm or
+ * specification · to standardize`; left at one size the long ones take three lines and eat
+ * the character above them.
+ */
+export type MeaningSize = 'sm' | 'base' | 'lg';
+
+export function meaningSize(gloss: string): MeaningSize {
+	const length = gloss.trim().length;
+	if (length > 62) return 'sm';
+	if (length > 42) return 'base';
 	return 'lg';
 }
 
