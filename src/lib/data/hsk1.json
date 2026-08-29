@@ -1,1 +1,4253 @@
-[{"id":"L1-0001","hanzi":"爱","pinyin":"ài","meanings":["to love; to be fond of; to like","affection","to be inclined; to tend to"],"pos":["V"],"level":1,"traditional":"愛"},{"id":"L1-0002","hanzi":"爱好","pinyin":"àihào","meanings":["interest; hobby"],"pos":["V","N"],"level":1,"traditional":"愛好"},{"id":"L1-0003","hanzi":"八","pinyin":"bā","meanings":["eight"],"pos":["Num"],"level":1},{"id":"L1-0004","hanzi":"爸爸","pinyin":"bàba|bà","meanings":["father; dad"],"pos":["N"],"level":1},{"id":"L1-0005","hanzi":"吧","pinyin":"ba","meanings":["...right?","...OK?","...I presume."],"pos":["Aux"],"level":1},{"id":"L1-0006","hanzi":"白","pinyin":"bái","meanings":["white","in vain","free of charge"],"pos":["Adj","Adv"],"level":1},{"id":"L1-0007","hanzi":"白天","pinyin":"báitiān","meanings":["daytime","during the day","day"],"pos":["N"],"level":1},{"id":"L1-0008","hanzi":"百","pinyin":"bǎi","meanings":["hundred","numerous","all kinds of"],"pos":["Num"],"level":1},{"id":"L1-0009","hanzi":"班","pinyin":"bān","meanings":["team; class; grade","squad","work shift"],"pos":["N","M"],"level":1},{"id":"L1-0010","hanzi":"半","pinyin":"bàn","meanings":["half","semi","incomplete"],"pos":["Num"],"level":1},{"id":"L1-0011","hanzi":"半年","pinyin":"bàn nián","meanings":["half a year"],"pos":[],"level":1},{"id":"L1-0012","hanzi":"半天","pinyin":"bàntiān","meanings":["half of the day","a long time","quite a while"],"pos":[],"level":1},{"id":"L1-0013","hanzi":"帮","pinyin":"bāng","meanings":["to help","to assist","to support"],"pos":["V"],"level":1,"traditional":"幫"},{"id":"L1-0014","hanzi":"帮忙","pinyin":"bāng máng","meanings":["to help","to lend a hand","to do a favor"],"pos":[],"level":1,"traditional":"幫忙"},{"id":"L1-0015","hanzi":"包","pinyin":"bāo","meanings":["to cover","to wrap","to hold"],"pos":["N","M","V"],"level":1},{"id":"L1-0016","hanzi":"包子","pinyin":"bāozi","meanings":["baozi; bao"],"pos":["N"],"level":1},{"id":"L1-0017","hanzi":"杯","pinyin":"bēi","meanings":["cup","trophy cup"],"pos":["M"],"level":1},{"id":"L1-0018","hanzi":"杯子","pinyin":"bēizi","meanings":["cup","glass"],"pos":["N"],"level":1},{"id":"L1-0019","hanzi":"北","pinyin":"běi","meanings":["north","to be defeated"],"pos":["N"],"level":1},{"id":"L1-0020","hanzi":"北边","pinyin":"běibian","meanings":["north","north side","northern part"],"pos":["N"],"level":1,"traditional":"北邊"},{"id":"L1-0021","hanzi":"北京","pinyin":"Běijīng","meanings":[],"pos":["N"],"level":1},{"id":"L1-0022","hanzi":"本","pinyin":"běn","meanings":["root; stem","origin; source","one's own; this"],"pos":["M"],"level":1},{"id":"L1-0023","hanzi":"本子","pinyin":"běnzi","meanings":["book","notebook","edition"],"pos":["N"],"level":1},{"id":"L1-0024","hanzi":"比","pinyin":"bǐ","meanings":["to compare","more {adj.} than {noun}","ratio"],"pos":["Prep","V"],"level":1},{"id":"L1-0025","hanzi":"别","pinyin":"bié","meanings":["to leave; to part","to differentiate; to distinguish","to turn away; to turn aside; to avert"],"pos":["Adv","V"],"level":1,"traditional":"別"},{"id":"L1-0026","hanzi":"别的","pinyin":"biéde","meanings":["else","other"],"pos":["Pron"],"level":1,"traditional":"別的"},{"id":"L1-0027","hanzi":"别人","pinyin":"biérén","meanings":["other people; others; other person"],"pos":["Pron"],"level":1,"traditional":"別人"},{"id":"L1-0028","hanzi":"病","pinyin":"bìng","meanings":["illness","disease","to fall ill"],"pos":["N","V"],"level":1},{"id":"L1-0029","hanzi":"病人","pinyin":"bìngrén","meanings":["sick person","patient","invalid"],"pos":["N"],"level":1},{"id":"L1-0030","hanzi":"不大","pinyin":"bú dà","meanings":["not very; not too","not often; infrequently"],"pos":[],"level":1},{"id":"L1-0031","hanzi":"不对","pinyin":"búduì","meanings":["incorrect","wrong","amiss"],"pos":["Adj"],"level":1,"traditional":"不對"},{"id":"L1-0032","hanzi":"不客气","pinyin":"bú kèqì","meanings":["you're welcome","don't mention it","impolite"],"pos":[],"level":1,"traditional":"不客氣"},{"id":"L1-0033","hanzi":"不用","pinyin":"búyòng","meanings":["need not"],"pos":["Adv"],"level":1},{"id":"L1-0034","hanzi":"不","pinyin":"bù","meanings":["no; not so","not; un"],"pos":["Adv"],"level":1},{"id":"L1-0035","hanzi":"菜","pinyin":"cài","meanings":["vegetable; greens (","dish (","weak; poor"],"pos":["N"],"level":1},{"id":"L1-0036","hanzi":"茶","pinyin":"chá","meanings":["tea","tea plant"],"pos":["N"],"level":1},{"id":"L1-0037","hanzi":"差","pinyin":"chà","meanings":["different","wrong; mistaken","to fall short; to lack"],"pos":["V","Adj"],"level":1},{"id":"L1-0038","hanzi":"常","pinyin":"cháng","meanings":["always","ever","often"],"pos":["Adv"],"level":1},{"id":"L1-0039","hanzi":"常常","pinyin":"chángcháng","meanings":["frequently; often"],"pos":["Adv"],"level":1},{"id":"L1-0040","hanzi":"唱","pinyin":"chàng","meanings":["to sing","to call loudly","to chant"],"pos":["V"],"level":1},{"id":"L1-0041","hanzi":"唱歌","pinyin":"chàng gē","meanings":["to sing a song"],"pos":[],"level":1},{"id":"L1-0042","hanzi":"车","pinyin":"chē","meanings":["car","vehicle","machine"],"pos":["N"],"level":1,"traditional":"車"},{"id":"L1-0043","hanzi":"车票","pinyin":"chēpiào","meanings":["ticket"],"pos":["N"],"level":1,"traditional":"車票"},{"id":"L1-0044","hanzi":"车上","pinyin":"chē shang","meanings":[],"pos":[],"level":1,"traditional":"車上"},{"id":"L1-0045","hanzi":"车站","pinyin":"chēzhàn","meanings":["rail station","bus stop"],"pos":["N"],"level":1,"traditional":"車站"},{"id":"L1-0046","hanzi":"吃","pinyin":"chī","meanings":["to eat; to consume","to eat at","to eradicate; to destroy"],"pos":["V"],"level":1},{"id":"L1-0047","hanzi":"吃饭","pinyin":"chī fàn","meanings":["to have a meal","to eat","to make a living"],"pos":[],"level":1,"traditional":"吃飯"},{"id":"L1-0048","hanzi":"出","pinyin":"chū","meanings":["to go out; to come out","to arise; to occur","to produce; to yield"],"pos":["V"],"level":1},{"id":"L1-0049","hanzi":"出来","pinyin":"chū lái","meanings":["to come out","to appear","to arise"],"pos":[],"level":1,"traditional":"出來"},{"id":"L1-0050","hanzi":"出去","pinyin":"chū qù","meanings":["to go out"],"pos":[],"level":1},{"id":"L1-0051","hanzi":"穿","pinyin":"chuān","meanings":["to bore through; to pierce; to perforate","to go through; to cross","to thread; to string together"],"pos":["V"],"level":1},{"id":"L1-0052","hanzi":"床","pinyin":"chuáng","meanings":["bed; couch (","bed; bottom","frame; chassis"],"pos":["N"],"level":1},{"id":"L1-0053","hanzi":"次","pinyin":"cì","meanings":["next in sequence","second","the second"],"pos":["M","Adj"],"level":1},{"id":"L1-0054","hanzi":"从","pinyin":"cóng","meanings":["from; through; via","to follow","to obey"],"pos":["Prep"],"level":1,"traditional":"從"},{"id":"L1-0055","hanzi":"错","pinyin":"cuò","meanings":["mistake","wrong","bad"],"pos":["Adj","N"],"level":1,"traditional":"錯"},{"id":"L1-0056","hanzi":"打","pinyin":"dǎ","meanings":["to hit; to strike","to fight","from; since"],"pos":["V","Prep"],"level":1},{"id":"L1-0057","hanzi":"打车","pinyin":"dǎ chē","meanings":["to take a taxi","to hitch a lift"],"pos":[],"level":1,"traditional":"打車"},{"id":"L1-0058","hanzi":"打电话","pinyin":"dǎ diànhuà","meanings":["to make a telephone call"],"pos":[],"level":1,"traditional":"打電話"},{"id":"L1-0059","hanzi":"打开","pinyin":"dǎ kāi","meanings":["to open","to show","to turn on"],"pos":[],"level":1,"traditional":"打開"},{"id":"L1-0060","hanzi":"打球","pinyin":"dǎ qiú","meanings":["to play ball","to play with a ball"],"pos":[],"level":1},{"id":"L1-0061","hanzi":"大","pinyin":"dà","meanings":["big; large; great","older","eldest"],"pos":["Adj"],"level":1},{"id":"L1-0062","hanzi":"大学","pinyin":"dàxué","meanings":["university; college"],"pos":["N"],"level":1,"traditional":"大學"},{"id":"L1-0063","hanzi":"大学生","pinyin":"dàxuéshēng","meanings":["university student; college student"],"pos":["N"],"level":1,"traditional":"大學生"},{"id":"L1-0064","hanzi":"到","pinyin":"dào","meanings":["to reach; to arrive","to leave for; to go to","to; until; up to"],"pos":["V"],"level":1},{"id":"L1-0065","hanzi":"得到","pinyin":"dé dào","meanings":["to get; to obtain; to receive"],"pos":[],"level":1},{"id":"L1-0066","hanzi":"地","pinyin":"de","meanings":["ly"],"pos":["Aux"],"level":1},{"id":"L1-0067","hanzi":"的","pinyin":"de","meanings":["of; ~'s","\" or \"new one\")","also pr. or in poetry and songs"],"pos":["Aux"],"level":1},{"id":"L1-0068","hanzi":"等","pinyin":"děng","meanings":["to wait for; to await","by the time; when; till","and so on; etc.; et al."],"pos":["V","Aux","N"],"level":1},{"id":"L1-0069","hanzi":"地","pinyin":"dì","meanings":["earth","ground","field"],"pos":["N"],"level":1},{"id":"L1-0070","hanzi":"地点","pinyin":"dìdiǎn","meanings":["place","site","location"],"pos":["N"],"level":1,"traditional":"地點"},{"id":"L1-0071","hanzi":"地方","pinyin":"dìfang","meanings":["place; location; area; space; territory","aspect; part"],"pos":["N"],"level":1},{"id":"L1-0072","hanzi":"地上","pinyin":"dìshang","meanings":["on the ground","on the floor"],"pos":[],"level":1},{"id":"L1-0073","hanzi":"地图","pinyin":"dìtú","meanings":["map"],"pos":["N"],"level":1,"traditional":"地圖"},{"id":"L1-0074","hanzi":"弟弟","pinyin":"dìdi|dì","meanings":["younger brother"],"pos":["N"],"level":1},{"id":"L1-0075","hanzi":"第","pinyin":"dì (dì-èr)","meanings":["residence of a high official","but; however","only; just"],"pos":["Prefix"],"level":1,"traditional":"第（第二）"},{"id":"L1-0076","hanzi":"点","pinyin":"diǎn","meanings":["to touch briefly; to tap","to mark with a dot; to check off","to order; to select"],"pos":["M","V","N"],"level":1,"traditional":"點"},{"id":"L1-0077","hanzi":"电","pinyin":"diàn","meanings":["lightning","electricity","electric"],"pos":["N"],"level":1,"traditional":"電"},{"id":"L1-0078","hanzi":"电话","pinyin":"diànhuà","meanings":["telephone","phone call","phone number"],"pos":["N"],"level":1,"traditional":"電話"},{"id":"L1-0079","hanzi":"电脑","pinyin":"diànnǎo","meanings":["computer"],"pos":["N"],"level":1,"traditional":"電腦"},{"id":"L1-0080","hanzi":"电视","pinyin":"diànshì","meanings":["television; TV"],"pos":["N"],"level":1,"traditional":"電視"},{"id":"L1-0081","hanzi":"电视机","pinyin":"diànshìjī","meanings":["television set"],"pos":["N"],"level":1,"traditional":"電視機"},{"id":"L1-0082","hanzi":"电影","pinyin":"diànyǐng","meanings":["movie; film"],"pos":["N"],"level":1,"traditional":"電影"},{"id":"L1-0083","hanzi":"电影院","pinyin":"diànyǐngyuàn","meanings":["cinema; movie theater"],"pos":["N"],"level":1,"traditional":"電影院"},{"id":"L1-0084","hanzi":"东","pinyin":"dōng","meanings":["east","host","landlord"],"pos":["N"],"level":1,"traditional":"東"},{"id":"L1-0085","hanzi":"东边","pinyin":"dōngbian","meanings":["east","east side","eastern part"],"pos":["N"],"level":1,"traditional":"東邊"},{"id":"L1-0086","hanzi":"东西","pinyin":"dōngxi","meanings":["thing","stuff","person"],"pos":["N"],"level":1,"traditional":"東西"},{"id":"L1-0087","hanzi":"动","pinyin":"dòng","meanings":["to move","to set in movement","to displace"],"pos":["V"],"level":1,"traditional":"動"},{"id":"L1-0088","hanzi":"动作","pinyin":"dòngzuò","meanings":["movement; motion; action","to act; to move"],"pos":["N"],"level":1,"traditional":"動作"},{"id":"L1-0089","hanzi":"都","pinyin":"dōu","meanings":["all; both; entirely","even","already"],"pos":["Adv"],"level":1},{"id":"L1-0090","hanzi":"读","pinyin":"dú","meanings":["to read out; to read aloud","to read","to attend; to study"],"pos":["V"],"level":1,"traditional":"讀"},{"id":"L1-0091","hanzi":"读书","pinyin":"dú shū","meanings":["to read a book","to study","to attend school"],"pos":[],"level":1,"traditional":"讀書"},{"id":"L1-0092","hanzi":"对","pinyin":"duì","meanings":["right; correct","towards; at; for","concerning; regarding"],"pos":["Adj","Prep","V"],"level":1,"traditional":"對"},{"id":"L1-0093","hanzi":"对不起","pinyin":"duìbuqǐ","meanings":["I'm sorry; excuse me; I beg your pardon","to let down; to disappoint"],"pos":["V"],"level":1,"traditional":"對不起"},{"id":"L1-0094","hanzi":"多","pinyin":"duō","meanings":["many; much; more; a lot of","too many; in excess","... odd"],"pos":["Adj","Pron","Adv"],"level":1},{"id":"L1-0095","hanzi":"多少","pinyin":"duōshao","meanings":["how much?; how many?","what number?"],"pos":["Pron"],"level":1},{"id":"L1-0096","hanzi":"饿","pinyin":"è","meanings":["hungry","to starve"],"pos":["Adj","V"],"level":1,"traditional":"餓"},{"id":"L1-0097","hanzi":"儿子","pinyin":"érzi","meanings":["son"],"pos":["N"],"level":1,"traditional":"兒子"},{"id":"L1-0098","hanzi":"二","pinyin":"èr","meanings":["two","2","stupid"],"pos":["Num"],"level":1},{"id":"L1-0099","hanzi":"饭","pinyin":"fàn","meanings":["cooked rice","meal","fan"],"pos":["N"],"level":1,"traditional":"飯"},{"id":"L1-0100","hanzi":"饭店","pinyin":"fàndiàn","meanings":["restaurant","hotel"],"pos":["N"],"level":1,"traditional":"飯店"},{"id":"L1-0101","hanzi":"房间","pinyin":"fángjiān","meanings":["room"],"pos":["N"],"level":1,"traditional":"房間"},{"id":"L1-0102","hanzi":"房子","pinyin":"fángzi","meanings":["house","building","apartment"],"pos":["N"],"level":1},{"id":"L1-0103","hanzi":"放","pinyin":"fàng","meanings":["to put","to place","to release"],"pos":["V"],"level":1},{"id":"L1-0104","hanzi":"放假","pinyin":"fàng jià","meanings":["to have a holiday or vacation"],"pos":[],"level":1},{"id":"L1-0105","hanzi":"放学","pinyin":"fàng xué","meanings":[],"pos":[],"level":1,"traditional":"放學"},{"id":"L1-0106","hanzi":"飞","pinyin":"fēi","meanings":["to fly"],"pos":["V"],"level":1,"traditional":"飛"},{"id":"L1-0107","hanzi":"飞机","pinyin":"fēijī","meanings":["airplane"],"pos":["N"],"level":1,"traditional":"飛機"},{"id":"L1-0108","hanzi":"非常","pinyin":"fēicháng","meanings":["very; really","unusual; extraordinary"],"pos":["Adv"],"level":1},{"id":"L1-0109","hanzi":"分","pinyin":"fēn","meanings":["to divide; to separate","to distribute; to allocate","to distinguish"],"pos":["N","M","V"],"level":1},{"id":"L1-0110","hanzi":"风","pinyin":"fēng","meanings":["wind","news","style"],"pos":["N"],"level":1,"traditional":"風"},{"id":"L1-0111","hanzi":"干","pinyin":"gān","meanings":["dry","dried food","empty; hollow"],"pos":["Adj"],"level":1,"traditional":"乾"},{"id":"L1-0112","hanzi":"干净","pinyin":"gānjìng","meanings":["clean","neat"],"pos":["Adj"],"level":1,"traditional":"乾淨"},{"id":"L1-0113","hanzi":"干","pinyin":"gàn","meanings":["tree trunk","main part of sth","to manage"],"pos":["V"],"level":1,"traditional":"幹"},{"id":"L1-0114","hanzi":"干什么","pinyin":"gàn shénme","meanings":["what are you doing?","what's he up to?"],"pos":[],"level":1,"traditional":"幹什麼"},{"id":"L1-0115","hanzi":"高","pinyin":"gāo","meanings":["high","tall","above average"],"pos":["Adj"],"level":1},{"id":"L1-0116","hanzi":"高兴","pinyin":"gāoxìng","meanings":["happy","glad","willing"],"pos":["Adj"],"level":1,"traditional":"高興"},{"id":"L1-0117","hanzi":"告诉","pinyin":"gàosu","meanings":["to tell; to inform; to let know"],"pos":["V"],"level":1,"traditional":"告訴"},{"id":"L1-0118","hanzi":"哥哥","pinyin":"gēge|gē","meanings":["older brother"],"pos":["N"],"level":1},{"id":"L1-0119","hanzi":"歌","pinyin":"gē","meanings":["song (","to sing"],"pos":["N"],"level":1},{"id":"L1-0120","hanzi":"个","pinyin":"gè","meanings":["individual"],"pos":["M"],"level":1,"traditional":"個"},{"id":"L1-0121","hanzi":"给","pinyin":"gěi","meanings":["to","for","for the benefit of"],"pos":["V","Prep"],"level":1,"traditional":"給"},{"id":"L1-0122","hanzi":"跟","pinyin":"gēn","meanings":["heel","to follow closely","to go with"],"pos":["Prep","Conj","V"],"level":1},{"id":"L1-0123","hanzi":"工人","pinyin":"gōngrén","meanings":["worker"],"pos":["N"],"level":1},{"id":"L1-0124","hanzi":"工作","pinyin":"gōngzuò","meanings":["to work","to operate","job"],"pos":["V","N"],"level":1},{"id":"L1-0125","hanzi":"关","pinyin":"guān","meanings":["mountain pass","to close; to shut; to turn off","to confine; to lock up; to shut"],"pos":["V","N"],"level":1,"traditional":"關"},{"id":"L1-0126","hanzi":"关上","pinyin":"guānshang","meanings":["to close","to turn off"],"pos":[],"level":1,"traditional":"關上"},{"id":"L1-0127","hanzi":"贵","pinyin":"guì","meanings":["expensive","highly valued; precious","noble; of high rank"],"pos":["Adj"],"level":1,"traditional":"貴"},{"id":"L1-0128","hanzi":"国","pinyin":"guó","meanings":["country; nation; state","national"],"pos":["N"],"level":1,"traditional":"國"},{"id":"L1-0129","hanzi":"国家","pinyin":"guójiā","meanings":["country; nation; state"],"pos":["N"],"level":1,"traditional":"國家"},{"id":"L1-0130","hanzi":"国外","pinyin":"guó wài","meanings":["abroad","external","overseas"],"pos":[],"level":1,"traditional":"國外"},{"id":"L1-0131","hanzi":"过","pinyin":"guò","meanings":["to cross","to go over","to pass"],"pos":["V"],"level":1,"traditional":"過"},{"id":"L1-0132","hanzi":"还","pinyin":"hái","meanings":["still","still in progress","still more"],"pos":["Adv"],"level":1,"traditional":"還"},{"id":"L1-0133","hanzi":"还是","pinyin":"háishi","meanings":["still","had better","unexpectedly"],"pos":["Adv","Conj"],"level":1,"traditional":"還是"},{"id":"L1-0134","hanzi":"还有","pinyin":"hái yǒu","meanings":["there still remain; there is still","in addition"],"pos":[],"level":1,"traditional":"還有"},{"id":"L1-0135","hanzi":"孩子","pinyin":"háizi","meanings":["child"],"pos":["N"],"level":1},{"id":"L1-0136","hanzi":"汉语","pinyin":"Hànyǔ","meanings":["Chinese language"],"pos":["N"],"level":1,"traditional":"漢語"},{"id":"L1-0137","hanzi":"汉字","pinyin":"Hànzì","meanings":["Chinese character"],"pos":["N"],"level":1,"traditional":"漢字"},{"id":"L1-0138","hanzi":"好","pinyin":"hǎo","meanings":["good","appropriate; proper","all right!"],"pos":["Adj","Adv"],"level":1},{"id":"L1-0139","hanzi":"好吃","pinyin":"hǎochī","meanings":["tasty; delicious"],"pos":["Adj"],"level":1},{"id":"L1-0140","hanzi":"好看","pinyin":"hǎokàn","meanings":["good-looking; nice-looking","good","in an embarrassing situation"],"pos":["Adj"],"level":1},{"id":"L1-0141","hanzi":"好听","pinyin":"hǎotīng","meanings":["pleasant to hear"],"pos":["Adj"],"level":1,"traditional":"好聽"},{"id":"L1-0142","hanzi":"好玩儿","pinyin":"hǎowánr","meanings":[],"pos":["Adj"],"level":1,"traditional":"好玩兒"},{"id":"L1-0143","hanzi":"号","pinyin":"hào","meanings":["to call out; to command","bugle; trumpet","signal; bugle call"],"pos":["N","M"],"level":1,"traditional":"號"},{"id":"L1-0144","hanzi":"喝","pinyin":"hē","meanings":["to drink"],"pos":["V"],"level":1},{"id":"L1-0145","hanzi":"和","pinyin":"hé","meanings":["and; together with; with","sum","to make peace"],"pos":["Prep","Conj"],"level":1},{"id":"L1-0146","hanzi":"很","pinyin":"hěn","meanings":["very; quite"],"pos":["Adv"],"level":1},{"id":"L1-0147","hanzi":"后","pinyin":"hòu","meanings":["back","behind","rear"],"pos":["N"],"level":1,"traditional":"後"},{"id":"L1-0148","hanzi":"后边","pinyin":"hòubian","meanings":["the back; the rear; the last bit","behind; near the end; at the back","later; afterwards"],"pos":["N"],"level":1,"traditional":"後邊"},{"id":"L1-0149","hanzi":"后天","pinyin":"hòutiān","meanings":["the day after tomorrow","life after birth","acquired"],"pos":["N"],"level":1,"traditional":"後天"},{"id":"L1-0150","hanzi":"花","pinyin":"huā","meanings":["flower","blossom","fancy pattern"],"pos":["N","V","Adj"],"level":1},{"id":"L1-0151","hanzi":"话","pinyin":"huà","meanings":["dialect","language","spoken words"],"pos":["N"],"level":1,"traditional":"話"},{"id":"L1-0152","hanzi":"坏","pinyin":"huài","meanings":["bad","spoiled","broken"],"pos":["Adj"],"level":1,"traditional":"壞"},{"id":"L1-0153","hanzi":"还","pinyin":"huán","meanings":["to pay back","to return"],"pos":["V"],"level":1,"traditional":"還"},{"id":"L1-0154","hanzi":"回","pinyin":"huí","meanings":["to reply; to answer","classifier for literary divisions","classifier for occurrences or times"],"pos":["V","M"],"level":1},{"id":"L1-0155","hanzi":"回答","pinyin":"huídá","meanings":["to reply; to answer","reply; answer"],"pos":["V","N"],"level":1},{"id":"L1-0156","hanzi":"回到","pinyin":"huídào","meanings":["to return to"],"pos":["V"],"level":1},{"id":"L1-0157","hanzi":"回家","pinyin":"huí jiā","meanings":["to return home"],"pos":[],"level":1},{"id":"L1-0158","hanzi":"回来","pinyin":"huí lái","meanings":["to return; to come back"],"pos":[],"level":1,"traditional":"回來"},{"id":"L1-0159","hanzi":"回去","pinyin":"huí qù","meanings":["to return","to go back"],"pos":[],"level":1},{"id":"L1-0160","hanzi":"会","pinyin":"huì","meanings":["can; to have the skill; to know how to","to be likely to; to be sure to","to meet; to get together"],"pos":["V","N"],"level":1,"traditional":"會"},{"id":"L1-0161","hanzi":"火车","pinyin":"huǒchē","meanings":["train"],"pos":["N"],"level":1,"traditional":"火車"},{"id":"L1-0162","hanzi":"机场","pinyin":"jīchǎng","meanings":["airport; airfield"],"pos":["N"],"level":1,"traditional":"機場"},{"id":"L1-0163","hanzi":"机票","pinyin":"jīpiào","meanings":["plane ticket; airline ticket"],"pos":["N"],"level":1,"traditional":"機票"},{"id":"L1-0164","hanzi":"鸡蛋","pinyin":"jīdàn","meanings":["egg","hen's egg"],"pos":["N"],"level":1,"traditional":"雞蛋"},{"id":"L1-0165","hanzi":"几","pinyin":"jǐ","meanings":["how many; how much","several; a few"],"pos":["Num","Pron"],"level":1,"traditional":"幾"},{"id":"L1-0166","hanzi":"记","pinyin":"jì","meanings":["to record","to note","to memorize"],"pos":["V"],"level":1,"traditional":"記"},{"id":"L1-0167","hanzi":"记得","pinyin":"jìde","meanings":["to remember"],"pos":["V"],"level":1,"traditional":"記得"},{"id":"L1-0168","hanzi":"记住","pinyin":"jìzhù","meanings":["to remember","to bear in mind","to learn by heart"],"pos":[],"level":1,"traditional":"記住"},{"id":"L1-0169","hanzi":"家","pinyin":"jiā","meanings":["home","family","my"],"pos":["N","M"],"level":1},{"id":"L1-0170","hanzi":"家里","pinyin":"jiā li","meanings":["home"],"pos":[],"level":1,"traditional":"家裡"},{"id":"L1-0171","hanzi":"家人","pinyin":"jiārén","meanings":["family member","servant"],"pos":["N"],"level":1},{"id":"L1-0172","hanzi":"间","pinyin":"jiān","meanings":["between","among","within a definite time or space"],"pos":["M"],"level":1,"traditional":"間"},{"id":"L1-0173","hanzi":"见","pinyin":"jiàn","meanings":["to see","to meet","to appear"],"pos":["V"],"level":1,"traditional":"見"},{"id":"L1-0174","hanzi":"见面","pinyin":"jiàn miàn","meanings":["to meet; to see each other"],"pos":[],"level":1,"traditional":"見面"},{"id":"L1-0175","hanzi":"教","pinyin":"jiāo","meanings":["to teach; to instruct"],"pos":["V"],"level":1},{"id":"L1-0176","hanzi":"叫","pinyin":"jiào","meanings":["to shout","to call","to order"],"pos":["V","Prep"],"level":1},{"id":"L1-0177","hanzi":"教学楼","pinyin":"jiàoxuélóu","meanings":["school building; academic building"],"pos":["N"],"level":1,"traditional":"教學樓"},{"id":"L1-0178","hanzi":"姐姐","pinyin":"jiějie|jiě","meanings":["older sister"],"pos":["N"],"level":1},{"id":"L1-0179","hanzi":"介绍","pinyin":"jièshào","meanings":["to introduce","to give a presentation","to present"],"pos":["V"],"level":1,"traditional":"介紹"},{"id":"L1-0180","hanzi":"今年","pinyin":"jīnnián","meanings":["this year"],"pos":["N"],"level":1},{"id":"L1-0181","hanzi":"今天","pinyin":"jīntiān","meanings":["today","the present time; now"],"pos":["N"],"level":1},{"id":"L1-0182","hanzi":"进","pinyin":"jìn","meanings":["to go forward","to advance","to go in"],"pos":["V"],"level":1,"traditional":"進"},{"id":"L1-0183","hanzi":"进来","pinyin":"jìn lái","meanings":["to come in"],"pos":[],"level":1,"traditional":"進來"},{"id":"L1-0184","hanzi":"进去","pinyin":"jìn qù","meanings":["to go in"],"pos":[],"level":1,"traditional":"進去"},{"id":"L1-0185","hanzi":"九","pinyin":"jiǔ","meanings":["nine","9"],"pos":["Num"],"level":1},{"id":"L1-0186","hanzi":"就","pinyin":"jiù","meanings":["in that case; then","as soon as; immediately after","only; as little as"],"pos":["Adv"],"level":1},{"id":"L1-0187","hanzi":"觉得","pinyin":"juéde","meanings":["to think that ...; to feel that ...","to feel"],"pos":["V"],"level":1,"traditional":"覺得"},{"id":"L1-0188","hanzi":"开","pinyin":"kāi","meanings":["to open","to start","to boil"],"pos":["V"],"level":1,"traditional":"開"},{"id":"L1-0189","hanzi":"开车","pinyin":"kāi chē","meanings":["to drive a car"],"pos":[],"level":1,"traditional":"開車"},{"id":"L1-0190","hanzi":"开会","pinyin":"kāi huì","meanings":["to hold a meeting","to attend a meeting"],"pos":[],"level":1,"traditional":"開會"},{"id":"L1-0191","hanzi":"开玩笑","pinyin":"kāi wánxiào","meanings":["to play a joke; to make fun of; to joke"],"pos":[],"level":1,"traditional":"開玩笑"},{"id":"L1-0192","hanzi":"看","pinyin":"kàn","meanings":["to see; to look at","to read","to watch"],"pos":["V"],"level":1},{"id":"L1-0193","hanzi":"看病","pinyin":"kàn bìng","meanings":["to visit a doctor","to see a patient"],"pos":[],"level":1},{"id":"L1-0194","hanzi":"看到","pinyin":"kàndào","meanings":["to see"],"pos":[],"level":1},{"id":"L1-0195","hanzi":"看见","pinyin":"kàn jiàn","meanings":["to see; to catch sight of"],"pos":[],"level":1,"traditional":"看見"},{"id":"L1-0196","hanzi":"考","pinyin":"kǎo","meanings":["to check","to verify","to test"],"pos":["V"],"level":1},{"id":"L1-0197","hanzi":"考试","pinyin":"kǎo shì","meanings":["to take an exam","exam"],"pos":[],"level":1,"traditional":"考試"},{"id":"L1-0198","hanzi":"渴","pinyin":"kě","meanings":["thirsty"],"pos":["Adj"],"level":1},{"id":"L1-0199","hanzi":"课","pinyin":"kè","meanings":["subject","course","class"],"pos":["N"],"level":1,"traditional":"課"},{"id":"L1-0200","hanzi":"课本","pinyin":"kèběn","meanings":["textbook"],"pos":["N"],"level":1,"traditional":"課本"},{"id":"L1-0201","hanzi":"课文","pinyin":"kèwén","meanings":["text"],"pos":["N"],"level":1,"traditional":"課文"},{"id":"L1-0202","hanzi":"口","pinyin":"kǒu","meanings":["mouth","classifier for things with mouths","classifier for bites or mouthfuls"],"pos":["M","N"],"level":1},{"id":"L1-0203","hanzi":"块","pinyin":"kuài","meanings":["lump; chunk; piece","classifier for money and currency units"],"pos":["N","M"],"level":1,"traditional":"塊"},{"id":"L1-0204","hanzi":"快","pinyin":"kuài","meanings":["rapid","quick","speed"],"pos":["Adj","Adv"],"level":1},{"id":"L1-0205","hanzi":"来","pinyin":"lái","meanings":["to come","hither","ever since"],"pos":["V"],"level":1,"traditional":"來"},{"id":"L1-0206","hanzi":"来到","pinyin":"láidào","meanings":["to arrive; to come"],"pos":["V"],"level":1,"traditional":"來到"},{"id":"L1-0207","hanzi":"老","pinyin":"lǎo","meanings":["old","venerable","experienced"],"pos":["Adj","Adv"],"level":1},{"id":"L1-0208","hanzi":"老人","pinyin":"lǎorén","meanings":["old man or woman","the elderly","one's aged parents or grandparents"],"pos":["N"],"level":1},{"id":"L1-0209","hanzi":"老师","pinyin":"lǎoshī","meanings":["teacher"],"pos":["N"],"level":1,"traditional":"老師"},{"id":"L1-0210","hanzi":"了","pinyin":"le","meanings":[],"pos":["Aux"],"level":1},{"id":"L1-0211","hanzi":"累","pinyin":"lèi","meanings":["tired","weary","to strain"],"pos":["Adj"],"level":1},{"id":"L1-0212","hanzi":"冷","pinyin":"lěng","meanings":["cold"],"pos":["Adj"],"level":1},{"id":"L1-0213","hanzi":"里","pinyin":"lǐ","meanings":[],"pos":["N"],"level":1,"traditional":"裡"},{"id":"L1-0214","hanzi":"里边","pinyin":"lǐbian","meanings":["inside"],"pos":["N"],"level":1,"traditional":"裡邊"},{"id":"L1-0215","hanzi":"两","pinyin":"liǎng","meanings":["two","both","some"],"pos":["Num","M"],"level":1,"traditional":"兩"},{"id":"L1-0216","hanzi":"零","pinyin":"líng|líng","meanings":["zero","nought","zero sign"],"pos":["Num"],"level":1},{"id":"L1-0217","hanzi":"六","pinyin":"liù","meanings":["six","6"],"pos":["Num"],"level":1},{"id":"L1-0218","hanzi":"楼","pinyin":"lóu","meanings":["house with more than 1 story","storied building","floor"],"pos":["N"],"level":1,"traditional":"樓"},{"id":"L1-0219","hanzi":"楼上","pinyin":"lóu shàng","meanings":["upstairs","previous poster in a forum thread"],"pos":[],"level":1,"traditional":"樓上"},{"id":"L1-0220","hanzi":"楼下","pinyin":"lóu xià","meanings":["downstairs"],"pos":[],"level":1,"traditional":"樓下"},{"id":"L1-0221","hanzi":"路","pinyin":"lù","meanings":["road (","journey","route"],"pos":["N","M"],"level":1},{"id":"L1-0222","hanzi":"路口","pinyin":"lùkǒu","meanings":["crossing","intersection"],"pos":["N"],"level":1},{"id":"L1-0223","hanzi":"路上","pinyin":"lùshang","meanings":["on the road","on the way; en route"],"pos":["N"],"level":1},{"id":"L1-0224","hanzi":"妈妈","pinyin":"māma|mā","meanings":["mama","mommy","mother"],"pos":["N"],"level":1,"traditional":"媽媽"},{"id":"L1-0225","hanzi":"马路","pinyin":"mǎlù","meanings":["street","road"],"pos":["N"],"level":1,"traditional":"馬路"},{"id":"L1-0226","hanzi":"马上","pinyin":"mǎshàng","meanings":["at once","right away","immediately"],"pos":["Adv"],"level":1,"traditional":"馬上"},{"id":"L1-0227","hanzi":"吗","pinyin":"ma","meanings":[],"pos":["Aux"],"level":1,"traditional":"嗎"},{"id":"L1-0228","hanzi":"买","pinyin":"mǎi","meanings":["to buy","to purchase"],"pos":["V"],"level":1,"traditional":"買"},{"id":"L1-0229","hanzi":"慢","pinyin":"màn","meanings":["slow"],"pos":["Adj"],"level":1},{"id":"L1-0230","hanzi":"忙","pinyin":"máng","meanings":["busy","hurriedly","to hurry"],"pos":["Adj"],"level":1},{"id":"L1-0231","hanzi":"毛","pinyin":"máo","meanings":["hair","feather","down"],"pos":["M","N"],"level":1},{"id":"L1-0232","hanzi":"没","pinyin":"méi","meanings":["have not; not"],"pos":["Adv","V"],"level":1,"traditional":"沒"},{"id":"L1-0233","hanzi":"没关系","pinyin":"méi guānxi","meanings":["it doesn't matter"],"pos":[],"level":1,"traditional":"沒關係"},{"id":"L1-0234","hanzi":"没什么","pinyin":"méi shénme","meanings":[],"pos":[],"level":1,"traditional":"沒什麼"},{"id":"L1-0235","hanzi":"没事儿","pinyin":"méi shìr","meanings":["to have spare time","free from work","it's not important"],"pos":[],"level":1,"traditional":"沒事兒"},{"id":"L1-0236","hanzi":"没有","pinyin":"méiyǒu","meanings":["haven't","hasn't","doesn't exist"],"pos":["V","Adv"],"level":1,"traditional":"沒有"},{"id":"L1-0237","hanzi":"妹妹","pinyin":"mèimei|mèi","meanings":["younger sister","young woman"],"pos":["N"],"level":1},{"id":"L1-0238","hanzi":"门","pinyin":"mén","meanings":["gate; door; doorway; gateway; opening (","way to do sth; knack; method; approach","family; household; lineage"],"pos":["N","M"],"level":1,"traditional":"門"},{"id":"L1-0239","hanzi":"门口","pinyin":"ménkǒu","meanings":["doorway","gate"],"pos":["N"],"level":1,"traditional":"門口"},{"id":"L1-0240","hanzi":"门票","pinyin":"ménpiào","meanings":["ticket"],"pos":["N"],"level":1,"traditional":"門票"},{"id":"L1-0241","hanzi":"们","pinyin":"men (péngyoumen)","meanings":[],"pos":["Suffix"],"level":1,"traditional":"們（朋友們）"},{"id":"L1-0242","hanzi":"米饭","pinyin":"mǐfàn","meanings":["rice"],"pos":["N"],"level":1,"traditional":"米飯"},{"id":"L1-0243","hanzi":"面包","pinyin":"miànbāo","meanings":["bread"],"pos":["N"],"level":1,"traditional":"麵包"},{"id":"L1-0244","hanzi":"面条儿","pinyin":"miàntiáor","meanings":[],"pos":["N"],"level":1,"traditional":"麵條兒"},{"id":"L1-0245","hanzi":"名字","pinyin":"míngzi","meanings":["name"],"pos":["N"],"level":1},{"id":"L1-0246","hanzi":"明白","pinyin":"míngbai","meanings":["clear; obvious; unequivocal","sensible; reasonable","to understand; to realize"],"pos":["Adj","V"],"level":1},{"id":"L1-0247","hanzi":"明年","pinyin":"míngnián","meanings":["next year"],"pos":["N"],"level":1},{"id":"L1-0248","hanzi":"明天","pinyin":"míngtiān","meanings":["tomorrow"],"pos":["N"],"level":1},{"id":"L1-0249","hanzi":"拿","pinyin":"ná","meanings":["to hold","to seize","to catch"],"pos":["V"],"level":1},{"id":"L1-0250","hanzi":"哪","pinyin":"nǎ","meanings":["how","which"],"pos":["Pron"],"level":1},{"id":"L1-0251","hanzi":"哪里","pinyin":"nǎlǐ","meanings":[],"pos":["Pron"],"level":1,"traditional":"哪裡"},{"id":"L1-0252","hanzi":"哪儿","pinyin":"nǎr","meanings":["where?","wherever; anywhere; somewhere","how can ...?; how could ...?"],"pos":["Pron"],"level":1,"traditional":"哪兒"},{"id":"L1-0253","hanzi":"哪些","pinyin":"nǎxiē","meanings":["which ones?","who?","what?"],"pos":["Pron"],"level":1},{"id":"L1-0254","hanzi":"那","pinyin":"nà","meanings":["that; the; those","that","then"],"pos":["Pron","Conj"],"level":1},{"id":"L1-0255","hanzi":"那边","pinyin":"nàbiān","meanings":["over there","yonder"],"pos":["Pron"],"level":1,"traditional":"那邊"},{"id":"L1-0256","hanzi":"那里","pinyin":"nàlǐ","meanings":[],"pos":["Pron"],"level":1,"traditional":"那裡"},{"id":"L1-0257","hanzi":"那儿","pinyin":"nàr","meanings":["there"],"pos":["Pron"],"level":1,"traditional":"那兒"},{"id":"L1-0258","hanzi":"那些","pinyin":"nàxiē","meanings":["those"],"pos":["Pron"],"level":1},{"id":"L1-0259","hanzi":"奶","pinyin":"nǎi","meanings":["breast","milk","to breastfeed"],"pos":["N"],"level":1},{"id":"L1-0260","hanzi":"奶奶","pinyin":"nǎinai","meanings":["grandma","mistress of the house","boobies"],"pos":["N"],"level":1},{"id":"L1-0261","hanzi":"男","pinyin":"nán","meanings":["male"],"pos":["Adj"],"level":1},{"id":"L1-0262","hanzi":"男孩儿","pinyin":"nánháir","meanings":["erhua form of"],"pos":["N"],"level":1,"traditional":"男孩兒"},{"id":"L1-0263","hanzi":"男朋友","pinyin":"nánpéngyou","meanings":["boyfriend"],"pos":["N"],"level":1},{"id":"L1-0264","hanzi":"男人","pinyin":"nánrén","meanings":["a man","a male","men"],"pos":["N"],"level":1},{"id":"L1-0265","hanzi":"男生","pinyin":"nánshēng","meanings":["schoolboy","male student","boy"],"pos":["N"],"level":1},{"id":"L1-0266","hanzi":"南","pinyin":"nán","meanings":["south"],"pos":["N"],"level":1},{"id":"L1-0267","hanzi":"南边","pinyin":"nánbian","meanings":["south","south side","southern part"],"pos":["N"],"level":1,"traditional":"南邊"},{"id":"L1-0268","hanzi":"难","pinyin":"nán","meanings":["difficult","problem","difficulty"],"pos":["Adj"],"level":1,"traditional":"難"},{"id":"L1-0269","hanzi":"呢","pinyin":"ne","meanings":[],"pos":["Aux"],"level":1},{"id":"L1-0270","hanzi":"能","pinyin":"néng","meanings":["can","to be able to","might possibly"],"pos":["V"],"level":1},{"id":"L1-0271","hanzi":"你","pinyin":"nǐ","meanings":["you"],"pos":["Pron"],"level":1},{"id":"L1-0272","hanzi":"你们","pinyin":"nǐmen","meanings":["you"],"pos":["Pron"],"level":1,"traditional":"你們"},{"id":"L1-0273","hanzi":"年","pinyin":"nián","meanings":["year"],"pos":["M"],"level":1},{"id":"L1-0274","hanzi":"您","pinyin":"nín","meanings":["you"],"pos":["Pron"],"level":1},{"id":"L1-0275","hanzi":"牛奶","pinyin":"niúnǎi","meanings":["cow's milk"],"pos":["N"],"level":1},{"id":"L1-0276","hanzi":"女","pinyin":"nǚ","meanings":["female","woman","daughter"],"pos":["Adj"],"level":1},{"id":"L1-0277","hanzi":"女儿","pinyin":"nǚ'ér","meanings":["daughter"],"pos":["N"],"level":1,"traditional":"女兒"},{"id":"L1-0278","hanzi":"女孩儿","pinyin":"nǚháir","meanings":["erhua form of"],"pos":["N"],"level":1,"traditional":"女孩兒"},{"id":"L1-0279","hanzi":"女朋友","pinyin":"nǚpéngyou","meanings":["girlfriend"],"pos":["N"],"level":1},{"id":"L1-0280","hanzi":"女人","pinyin":"nǚrén","meanings":["woman"],"pos":["N"],"level":1},{"id":"L1-0281","hanzi":"女生","pinyin":"nǚshēng","meanings":["schoolgirl","female student","girl"],"pos":["N"],"level":1},{"id":"L1-0282","hanzi":"旁边","pinyin":"pángbiān","meanings":["side; adjacent place"],"pos":["N"],"level":1,"traditional":"旁邊"},{"id":"L1-0283","hanzi":"跑","pinyin":"pǎo","meanings":["to run","to run away","to escape"],"pos":["V"],"level":1},{"id":"L1-0284","hanzi":"朋友","pinyin":"péngyou","meanings":["friend"],"pos":["N"],"level":1},{"id":"L1-0285","hanzi":"票","pinyin":"piào","meanings":["ticket","ballot","banknote"],"pos":["N"],"level":1},{"id":"L1-0286","hanzi":"七","pinyin":"qī","meanings":["seven","7"],"pos":["Num"],"level":1},{"id":"L1-0287","hanzi":"起","pinyin":"qǐ","meanings":["to rise","to raise","to get up"],"pos":["V"],"level":1},{"id":"L1-0288","hanzi":"起床","pinyin":"qǐ chuáng","meanings":["to get out of bed; to get up"],"pos":[],"level":1},{"id":"L1-0289","hanzi":"起来","pinyin":"qǐ lái","meanings":[],"pos":[],"level":1,"traditional":"起來"},{"id":"L1-0290","hanzi":"汽车","pinyin":"qìchē","meanings":["car","automobile","bus"],"pos":["N"],"level":1,"traditional":"汽車"},{"id":"L1-0291","hanzi":"前","pinyin":"qián","meanings":["front","forward","ahead"],"pos":["N"],"level":1},{"id":"L1-0292","hanzi":"前边","pinyin":"qiánbian","meanings":["front","the front side","in front of"],"pos":["N"],"level":1,"traditional":"前邊"},{"id":"L1-0293","hanzi":"前天","pinyin":"qiántiān","meanings":["the day before yesterday"],"pos":["N"],"level":1},{"id":"L1-0294","hanzi":"钱","pinyin":"qián","meanings":["coin","money","unit of weight, one tenth of a tael"],"pos":["N"],"level":1,"traditional":"錢"},{"id":"L1-0295","hanzi":"钱包","pinyin":"qiánbāo","meanings":["purse","wallet"],"pos":["N"],"level":1,"traditional":"錢包"},{"id":"L1-0296","hanzi":"请","pinyin":"qǐng","meanings":["to ask","to invite","please"],"pos":["V"],"level":1,"traditional":"請"},{"id":"L1-0297","hanzi":"请假","pinyin":"qǐng jià","meanings":["to request leave of absence"],"pos":[],"level":1,"traditional":"請假"},{"id":"L1-0298","hanzi":"请进","pinyin":"qǐng jìn","meanings":["\"please come in\""],"pos":[],"level":1,"traditional":"請進"},{"id":"L1-0299","hanzi":"请问","pinyin":"qǐngwèn","meanings":["Excuse me, may I ask...?"],"pos":["V"],"level":1,"traditional":"請問"},{"id":"L1-0300","hanzi":"请坐","pinyin":"qǐng zuò","meanings":["please, have a seat"],"pos":[],"level":1,"traditional":"請坐"},{"id":"L1-0301","hanzi":"球","pinyin":"qiú","meanings":["ball","sphere","globe"],"pos":["N"],"level":1},{"id":"L1-0302","hanzi":"去","pinyin":"qù","meanings":["to go","to go to","last"],"pos":["V"],"level":1},{"id":"L1-0303","hanzi":"去年","pinyin":"qùnián","meanings":["last year"],"pos":["N"],"level":1},{"id":"L1-0304","hanzi":"热","pinyin":"rè","meanings":["to warm up","to heat up","hot"],"pos":["Adj","V"],"level":1,"traditional":"熱"},{"id":"L1-0305","hanzi":"人","pinyin":"rén","meanings":["person; people"],"pos":["N"],"level":1},{"id":"L1-0306","hanzi":"认识","pinyin":"rènshi","meanings":["to know","to recognize","to be familiar with"],"pos":["V","N"],"level":1,"traditional":"認識"},{"id":"L1-0307","hanzi":"认真","pinyin":"rènzhēn","meanings":["conscientious","earnest","serious"],"pos":["Adj"],"level":1,"traditional":"認真"},{"id":"L1-0308","hanzi":"日","pinyin":"rì","meanings":["sun","day","day of the month"],"pos":["N"],"level":1},{"id":"L1-0309","hanzi":"日期","pinyin":"rìqī","meanings":["date"],"pos":["N"],"level":1},{"id":"L1-0310","hanzi":"肉","pinyin":"ròu","meanings":["meat","flesh","pulp"],"pos":["N"],"level":1},{"id":"L1-0311","hanzi":"三","pinyin":"sān","meanings":["three","3"],"pos":["Num"],"level":1},{"id":"L1-0312","hanzi":"山","pinyin":"shān","meanings":["mountain; hill ("],"pos":["N"],"level":1},{"id":"L1-0313","hanzi":"商场","pinyin":"shāngchǎng","meanings":["shopping mall","shopping center","department store"],"pos":["N"],"level":1,"traditional":"商場"},{"id":"L1-0314","hanzi":"商店","pinyin":"shāngdiàn","meanings":["store; shop"],"pos":["N"],"level":1},{"id":"L1-0315","hanzi":"上","pinyin":"shàng","meanings":["up; upper; above; previous","first","to climb; to get onto; to go up"],"pos":["N","V"],"level":1},{"id":"L1-0316","hanzi":"上班","pinyin":"shàng bān","meanings":["to go to work","to be on duty","to start work"],"pos":[],"level":1},{"id":"L1-0317","hanzi":"上边","pinyin":"shàngbian","meanings":["the top","above","overhead"],"pos":["N"],"level":1,"traditional":"上邊"},{"id":"L1-0318","hanzi":"上车","pinyin":"shàng chē","meanings":["to get on or into"],"pos":[],"level":1,"traditional":"上車"},{"id":"L1-0319","hanzi":"上次","pinyin":"shàng cì","meanings":["last time"],"pos":[],"level":1},{"id":"L1-0320","hanzi":"上课","pinyin":"shàng kè","meanings":["to go to class","to attend class","to go to teach a class"],"pos":[],"level":1,"traditional":"上課"},{"id":"L1-0321","hanzi":"上网","pinyin":"shàng wǎng","meanings":["to go online","to connect to the Internet","to be uploaded to the Internet"],"pos":[],"level":1,"traditional":"上網"},{"id":"L1-0322","hanzi":"上午","pinyin":"shàngwǔ","meanings":["morning"],"pos":["N"],"level":1},{"id":"L1-0323","hanzi":"上学","pinyin":"shàng xué","meanings":["to go to school","to attend school"],"pos":[],"level":1,"traditional":"上學"},{"id":"L1-0324","hanzi":"少","pinyin":"shǎo","meanings":["few","less","to lack"],"pos":["Adj","V"],"level":1},{"id":"L1-0325","hanzi":"谁","pinyin":"shéi/shuí","meanings":["who","also pr."],"pos":["Pron"],"level":1,"traditional":"誰"},{"id":"L1-0326","hanzi":"身上","pinyin":"shēnshang","meanings":["on the body","at hand","among"],"pos":["N"],"level":1},{"id":"L1-0327","hanzi":"身体","pinyin":"shēntǐ","meanings":["the body","one's health"],"pos":["N"],"level":1,"traditional":"身體"},{"id":"L1-0328","hanzi":"什么","pinyin":"shénme","meanings":["what?","something; anything"],"pos":["Pron"],"level":1,"traditional":"什麼"},{"id":"L1-0329","hanzi":"生病","pinyin":"shēng bìng","meanings":["to fall ill"],"pos":[],"level":1},{"id":"L1-0330","hanzi":"生气","pinyin":"shēng qì","meanings":["to get angry; to be furious","vitality; liveliness"],"pos":[],"level":1,"traditional":"生氣"},{"id":"L1-0331","hanzi":"生日","pinyin":"shēngrì","meanings":["birthday"],"pos":["N"],"level":1},{"id":"L1-0332","hanzi":"十","pinyin":"shí","meanings":["ten","10"],"pos":["Num"],"level":1},{"id":"L1-0333","hanzi":"时候","pinyin":"shíhou","meanings":["time","length of time","moment"],"pos":["N"],"level":1,"traditional":"時候"},{"id":"L1-0334","hanzi":"时间","pinyin":"shíjiān","meanings":["time"],"pos":["N"],"level":1,"traditional":"時間"},{"id":"L1-0335","hanzi":"事","pinyin":"shì","meanings":["matter","thing","item"],"pos":["N"],"level":1},{"id":"L1-0336","hanzi":"试","pinyin":"shì","meanings":["to test","to try","experiment"],"pos":["V"],"level":1,"traditional":"試"},{"id":"L1-0337","hanzi":"是","pinyin":"shì","meanings":["to be","correct; right; true","very well"],"pos":["V"],"level":1},{"id":"L1-0338","hanzi":"是不是","pinyin":"shì bu shì","meanings":[],"pos":[],"level":1},{"id":"L1-0339","hanzi":"手","pinyin":"shǒu","meanings":["hand","to hold","person engaged in certain types of work"],"pos":["N"],"level":1},{"id":"L1-0340","hanzi":"手机","pinyin":"shǒujī","meanings":["cell phone; mobile phone"],"pos":["N"],"level":1,"traditional":"手機"},{"id":"L1-0341","hanzi":"书","pinyin":"shū","meanings":["book","letter","document"],"pos":["N"],"level":1,"traditional":"書"},{"id":"L1-0342","hanzi":"书包","pinyin":"shūbāo","meanings":["schoolbag","satchel","bookbag"],"pos":["N"],"level":1,"traditional":"書包"},{"id":"L1-0343","hanzi":"书店","pinyin":"shūdiàn","meanings":["bookstore"],"pos":["N"],"level":1,"traditional":"書店"},{"id":"L1-0344","hanzi":"树","pinyin":"shù","meanings":["tree","to cultivate","to set up"],"pos":["N"],"level":1,"traditional":"樹"},{"id":"L1-0345","hanzi":"水","pinyin":"shuǐ","meanings":["water","... River","to swim"],"pos":["N"],"level":1},{"id":"L1-0346","hanzi":"水果","pinyin":"shuǐguǒ","meanings":["fruit"],"pos":["N"],"level":1},{"id":"L1-0347","hanzi":"睡","pinyin":"shuì","meanings":["to sleep","to lie down"],"pos":["V"],"level":1},{"id":"L1-0348","hanzi":"睡觉","pinyin":"shuì jiào","meanings":["to go to bed","to sleep"],"pos":[],"level":1,"traditional":"睡覺"},{"id":"L1-0349","hanzi":"说","pinyin":"shuō","meanings":["to speak; to talk; to say","to explain; to comment","to scold; to tell off"],"pos":["V"],"level":1,"traditional":"說"},{"id":"L1-0350","hanzi":"说话","pinyin":"shuō huà","meanings":["to speak","to say","to talk"],"pos":[],"level":1,"traditional":"說話"},{"id":"L1-0351","hanzi":"四","pinyin":"sì","meanings":["four","4"],"pos":["Num"],"level":1},{"id":"L1-0352","hanzi":"送","pinyin":"sòng","meanings":["to send; to deliver; to transmit","to give","to see off"],"pos":["V"],"level":1},{"id":"L1-0353","hanzi":"岁","pinyin":"suì","meanings":["classifier for years","year"],"pos":["M"],"level":1,"traditional":"歲"},{"id":"L1-0354","hanzi":"他","pinyin":"tā","meanings":["he; him; his","other; another; some other"],"pos":["Pron"],"level":1},{"id":"L1-0355","hanzi":"他们","pinyin":"tāmen","meanings":["they; them"],"pos":["Pron"],"level":1,"traditional":"他們"},{"id":"L1-0356","hanzi":"她","pinyin":"tā","meanings":["she"],"pos":["Pron"],"level":1},{"id":"L1-0357","hanzi":"她们","pinyin":"tāmen","meanings":["they; them"],"pos":["Pron"],"level":1,"traditional":"她們"},{"id":"L1-0358","hanzi":"太","pinyin":"tài","meanings":["highest","greatest","too"],"pos":["Adv"],"level":1},{"id":"L1-0359","hanzi":"天","pinyin":"tiān","meanings":["day","sky","heaven"],"pos":["N","M"],"level":1},{"id":"L1-0360","hanzi":"天气","pinyin":"tiānqì","meanings":["weather"],"pos":["N"],"level":1,"traditional":"天氣"},{"id":"L1-0361","hanzi":"听","pinyin":"tīng","meanings":["to listen to; to hear","to heed; to obey","a can"],"pos":["V"],"level":1,"traditional":"聽"},{"id":"L1-0362","hanzi":"听到","pinyin":"tīngdào","meanings":["to hear"],"pos":[],"level":1,"traditional":"聽到"},{"id":"L1-0363","hanzi":"听见","pinyin":"tīng jiàn","meanings":["to hear"],"pos":[],"level":1,"traditional":"聽見"},{"id":"L1-0364","hanzi":"听写","pinyin":"tīngxiě","meanings":["to write down; dictation","to transcribe by ear"],"pos":["V"],"level":1,"traditional":"聽寫"},{"id":"L1-0365","hanzi":"同学","pinyin":"tóngxué","meanings":["to study at the same school","fellow student","classmate"],"pos":["N"],"level":1,"traditional":"同學"},{"id":"L1-0366","hanzi":"图书馆","pinyin":"túshūguǎn","meanings":["library"],"pos":["N"],"level":1,"traditional":"圖書館"},{"id":"L1-0367","hanzi":"外","pinyin":"wài","meanings":["outside","in addition","foreign"],"pos":["N"],"level":1},{"id":"L1-0368","hanzi":"外边","pinyin":"wàibian","meanings":["outside","outer surface","abroad"],"pos":["N"],"level":1,"traditional":"外邊"},{"id":"L1-0369","hanzi":"外国","pinyin":"wàiguó","meanings":["foreign country"],"pos":["N"],"level":1,"traditional":"外國"},{"id":"L1-0370","hanzi":"外语","pinyin":"wàiyǔ","meanings":["foreign language"],"pos":["N"],"level":1,"traditional":"外語"},{"id":"L1-0371","hanzi":"玩儿","pinyin":"wánr","meanings":["to play","to have fun","to hang out"],"pos":["V"],"level":1,"traditional":"玩兒"},{"id":"L1-0372","hanzi":"晚","pinyin":"wǎn","meanings":["evening","night","late"],"pos":["Adj"],"level":1},{"id":"L1-0373","hanzi":"晚饭","pinyin":"wǎnfàn","meanings":["evening meal","dinner","supper"],"pos":["N"],"level":1,"traditional":"晚飯"},{"id":"L1-0374","hanzi":"晚上","pinyin":"wǎnshang","meanings":["evening","night","in the evening"],"pos":["N"],"level":1},{"id":"L1-0375","hanzi":"网上","pinyin":"wǎng shang","meanings":["online"],"pos":[],"level":1,"traditional":"網上"},{"id":"L1-0376","hanzi":"网友","pinyin":"wǎngyǒu","meanings":["online friend","netizen; Internet user"],"pos":["N"],"level":1,"traditional":"網友"},{"id":"L1-0377","hanzi":"忘","pinyin":"wàng","meanings":["to forget","to overlook","to neglect"],"pos":["V"],"level":1},{"id":"L1-0378","hanzi":"忘记","pinyin":"wàngjì","meanings":["to forget"],"pos":["V"],"level":1,"traditional":"忘記"},{"id":"L1-0379","hanzi":"问","pinyin":"wèn","meanings":["to ask; to inquire"],"pos":["V"],"level":1,"traditional":"問"},{"id":"L1-0380","hanzi":"我","pinyin":"wǒ","meanings":["I; me; my"],"pos":["Pron"],"level":1},{"id":"L1-0381","hanzi":"我们","pinyin":"wǒmen","meanings":["we; us; ourselves; our"],"pos":["Pron"],"level":1,"traditional":"我們"},{"id":"L1-0382","hanzi":"五","pinyin":"wǔ","meanings":["five","5"],"pos":["Num"],"level":1},{"id":"L1-0383","hanzi":"午饭","pinyin":"wǔfàn","meanings":["lunch"],"pos":["N"],"level":1,"traditional":"午飯"},{"id":"L1-0384","hanzi":"西","pinyin":"xī","meanings":["west"],"pos":["N"],"level":1},{"id":"L1-0385","hanzi":"西边","pinyin":"xībian","meanings":["west","west side","western part"],"pos":["N"],"level":1,"traditional":"西邊"},{"id":"L1-0386","hanzi":"洗","pinyin":"xǐ","meanings":["to wash; to bathe","to develop","to shuffle"],"pos":["V"],"level":1},{"id":"L1-0387","hanzi":"洗手间","pinyin":"xǐshǒujiān","meanings":["toilet","lavatory","washroom"],"pos":["N"],"level":1,"traditional":"洗手間"},{"id":"L1-0388","hanzi":"喜欢","pinyin":"xǐhuan","meanings":["to like; to be fond of"],"pos":["V"],"level":1,"traditional":"喜歡"},{"id":"L1-0389","hanzi":"下","pinyin":"xià","meanings":["down","downwards","below"],"pos":["N","V","M"],"level":1},{"id":"L1-0390","hanzi":"下班","pinyin":"xià bān","meanings":["to finish work; to get off work","next service"],"pos":[],"level":1},{"id":"L1-0391","hanzi":"下边","pinyin":"xiàbian","meanings":["under","the underside","below"],"pos":["N"],"level":1,"traditional":"下邊"},{"id":"L1-0392","hanzi":"下车","pinyin":"xià chē","meanings":["to get off or out of"],"pos":[],"level":1,"traditional":"下車"},{"id":"L1-0393","hanzi":"下次","pinyin":"xià cì","meanings":["next time"],"pos":[],"level":1},{"id":"L1-0394","hanzi":"下课","pinyin":"xià kè","meanings":["to finish class","to get out of class","to be dismissed"],"pos":[],"level":1,"traditional":"下課"},{"id":"L1-0395","hanzi":"下午","pinyin":"xiàwǔ","meanings":["afternoon","p.m."],"pos":["N"],"level":1},{"id":"L1-0396","hanzi":"下雨","pinyin":"xià yǔ","meanings":["to rain"],"pos":[],"level":1},{"id":"L1-0397","hanzi":"先","pinyin":"xiān","meanings":["beforehand; first; earlier","at first; originally","for the time being; for now"],"pos":["Adv"],"level":1},{"id":"L1-0398","hanzi":"先生","pinyin":"xiānsheng","meanings":["teacher","gentleman; sir; mister","husband"],"pos":["N"],"level":1},{"id":"L1-0399","hanzi":"现在","pinyin":"xiànzài","meanings":["now; at present; currently"],"pos":["N"],"level":1,"traditional":"現在"},{"id":"L1-0400","hanzi":"想","pinyin":"xiǎng","meanings":["to think","to think of; to devise","to think; to believe"],"pos":["V"],"level":1},{"id":"L1-0401","hanzi":"小","pinyin":"xiǎo","meanings":["small","tiny","few"],"pos":["Adj"],"level":1},{"id":"L1-0402","hanzi":"小孩儿","pinyin":"xiǎoháir","meanings":[],"pos":["N"],"level":1,"traditional":"小孩兒"},{"id":"L1-0403","hanzi":"小姐","pinyin":"xiǎojiě","meanings":["young lady","miss","prostitute"],"pos":["N"],"level":1},{"id":"L1-0404","hanzi":"小朋友","pinyin":"xiǎopéngyǒu","meanings":["child; kid"],"pos":["N"],"level":1},{"id":"L1-0405","hanzi":"小时","pinyin":"xiǎoshí","meanings":["hour"],"pos":["N"],"level":1,"traditional":"小時"},{"id":"L1-0406","hanzi":"小学","pinyin":"xiǎoxué","meanings":["elementary school; primary school"],"pos":["N"],"level":1,"traditional":"小學"},{"id":"L1-0407","hanzi":"小学生","pinyin":"xiǎoxuéshēng","meanings":["primary school student","schoolchild","beginner"],"pos":["N"],"level":1,"traditional":"小學生"},{"id":"L1-0408","hanzi":"笑","pinyin":"xiào","meanings":["to laugh; to smile","to laugh at"],"pos":["V"],"level":1},{"id":"L1-0409","hanzi":"写","pinyin":"xiě","meanings":["to write"],"pos":["V"],"level":1,"traditional":"寫"},{"id":"L1-0410","hanzi":"谢谢","pinyin":"xièxie","meanings":["to thank","thanks","thank you"],"pos":["V"],"level":1,"traditional":"謝謝"},{"id":"L1-0411","hanzi":"新","pinyin":"xīn","meanings":["new","newly","meso"],"pos":["Adj"],"level":1},{"id":"L1-0412","hanzi":"新年","pinyin":"xīnnián","meanings":["New Year"],"pos":["N"],"level":1},{"id":"L1-0413","hanzi":"星期","pinyin":"xīngqī","meanings":["week","day of the week","Sunday"],"pos":["N"],"level":1},{"id":"L1-0414","hanzi":"星期日","pinyin":"xīngqīrì","meanings":["Sunday"],"pos":["N"],"level":1},{"id":"L1-0415","hanzi":"星期天","pinyin":"xīngqītiān","meanings":["Sunday"],"pos":["N"],"level":1},{"id":"L1-0416","hanzi":"行","pinyin":"xíng","meanings":["to walk; to go; to travel","trip; journey; visit","temporary; makeshift"],"pos":["V","Adj"],"level":1},{"id":"L1-0417","hanzi":"休息","pinyin":"xiūxi","meanings":["rest","to rest"],"pos":["V"],"level":1},{"id":"L1-0418","hanzi":"学","pinyin":"xué","meanings":["to learn","to study","to imitate"],"pos":["V"],"level":1,"traditional":"學"},{"id":"L1-0419","hanzi":"学生","pinyin":"xuéshēng","meanings":["student","schoolchild"],"pos":["N"],"level":1,"traditional":"學生"},{"id":"L1-0420","hanzi":"学习","pinyin":"xuéxí","meanings":["to learn; to study"],"pos":["V"],"level":1,"traditional":"學習"},{"id":"L1-0421","hanzi":"学校","pinyin":"xuéxiào","meanings":["school"],"pos":["N"],"level":1,"traditional":"學校"},{"id":"L1-0422","hanzi":"学院","pinyin":"xuéyuàn","meanings":["college","educational institute","school"],"pos":["N"],"level":1,"traditional":"學院"},{"id":"L1-0423","hanzi":"要","pinyin":"yào","meanings":["to want; to need; to ask for","will; shall; about to","need to; should"],"pos":["V","Conj"],"level":1},{"id":"L1-0424","hanzi":"爷爷","pinyin":"yéye","meanings":["paternal grandfather; grandpa"],"pos":["N"],"level":1,"traditional":"爺爺"},{"id":"L1-0425","hanzi":"也","pinyin":"yě","meanings":["also; too; as well; either","even","particle having functions similar to"],"pos":["Adv"],"level":1},{"id":"L1-0426","hanzi":"页","pinyin":"yè","meanings":["page","leaf"],"pos":["M"],"level":1,"traditional":"頁"},{"id":"L1-0427","hanzi":"一","pinyin":"yī","meanings":["one","single","a"],"pos":["Num"],"level":1},{"id":"L1-0428","hanzi":"衣服","pinyin":"yīfu","meanings":["clothes"],"pos":["N"],"level":1},{"id":"L1-0429","hanzi":"医生","pinyin":"yīshēng","meanings":["doctor; medical practitioner"],"pos":["N"],"level":1,"traditional":"醫生"},{"id":"L1-0430","hanzi":"医院","pinyin":"yīyuàn","meanings":["hospital"],"pos":["N"],"level":1,"traditional":"醫院"},{"id":"L1-0431","hanzi":"一半","pinyin":"yíbàn","meanings":["half"],"pos":["Num"],"level":1},{"id":"L1-0432","hanzi":"一会儿","pinyin":"yíhuìr","meanings":["a moment","a while","in a moment"],"pos":["Adv"],"level":1,"traditional":"一會兒"},{"id":"L1-0433","hanzi":"一块儿","pinyin":"yíkuàir","meanings":[],"pos":["N","Adv"],"level":1,"traditional":"一塊兒"},{"id":"L1-0434","hanzi":"一下儿","pinyin":"yíxiàr","meanings":["erhua form of"],"pos":["Adv"],"level":1,"traditional":"一下兒"},{"id":"L1-0435","hanzi":"一样","pinyin":"yíyàng","meanings":["same","like","equal to"],"pos":["Adj"],"level":1,"traditional":"一樣"},{"id":"L1-0436","hanzi":"一边","pinyin":"yìbiān","meanings":["one side","either side","on the one hand"],"pos":["N","Adv"],"level":1,"traditional":"一邊"},{"id":"L1-0437","hanzi":"一点儿","pinyin":"yìdiǎnr","meanings":[],"pos":[],"level":1,"traditional":"一點兒"},{"id":"L1-0438","hanzi":"一起","pinyin":"yìqǐ","meanings":["the same place","together; in company","altogether; in total"],"pos":["Adv","N"],"level":1},{"id":"L1-0439","hanzi":"一些","pinyin":"yìxiē","meanings":["some; a few; a little; slightly ...er"],"pos":[],"level":1},{"id":"L1-0440","hanzi":"用","pinyin":"yòng","meanings":["to use; to make use of; to employ","with; using","to need; to have to"],"pos":["V"],"level":1},{"id":"L1-0441","hanzi":"有","pinyin":"yǒu","meanings":["to have; there is","having; with; -ful; -ed; -al"],"pos":["V"],"level":1},{"id":"L1-0442","hanzi":"有的","pinyin":"yǒude","meanings":["some"],"pos":["Pron"],"level":1},{"id":"L1-0443","hanzi":"有名","pinyin":"yǒu míng","meanings":["famous","well-known"],"pos":[],"level":1},{"id":"L1-0444","hanzi":"有时候","pinyin":"yǒushíhou|yǒushí","meanings":["sometimes"],"pos":["Adv"],"level":1,"traditional":"有時候"},{"id":"L1-0445","hanzi":"有些","pinyin":"yǒu(yì)xiē","meanings":["some","somewhat; rather; a bit"],"pos":["Pron"],"level":1,"traditional":"有（一）些"},{"id":"L1-0446","hanzi":"有用","pinyin":"yǒuyòng","meanings":["useful"],"pos":["V"],"level":1},{"id":"L1-0447","hanzi":"右","pinyin":"yòu","meanings":["right; right-hand side","right of center","west"],"pos":["N"],"level":1},{"id":"L1-0448","hanzi":"右边","pinyin":"yòubian","meanings":["right side","right, to the right"],"pos":["N"],"level":1,"traditional":"右邊"},{"id":"L1-0449","hanzi":"雨","pinyin":"yǔ","meanings":["rain"],"pos":["N"],"level":1},{"id":"L1-0450","hanzi":"元","pinyin":"yuán","meanings":["currency unit","first; original; primary","basic; fundamental"],"pos":["M"],"level":1},{"id":"L1-0451","hanzi":"远","pinyin":"yuǎn","meanings":["far","distant","remote"],"pos":["Adj"],"level":1,"traditional":"遠"},{"id":"L1-0452","hanzi":"月","pinyin":"yuè","meanings":["moon","month","monthly"],"pos":["N"],"level":1},{"id":"L1-0453","hanzi":"再","pinyin":"zài","meanings":["again; once more; re","further; beyond this point of time","more"],"pos":["Adv"],"level":1},{"id":"L1-0454","hanzi":"再见","pinyin":"zàijiàn","meanings":["goodbye"],"pos":["V"],"level":1,"traditional":"再見"},{"id":"L1-0455","hanzi":"在","pinyin":"zài","meanings":["to exist; to be alive","to be at"],"pos":["V","Prep","Adv"],"level":1},{"id":"L1-0456","hanzi":"在家","pinyin":"zàijiā","meanings":["to be at home","to be in","to remain a layman"],"pos":["V"],"level":1},{"id":"L1-0457","hanzi":"早","pinyin":"zǎo","meanings":["early","morning","Good morning!"],"pos":["Adj"],"level":1},{"id":"L1-0458","hanzi":"早饭","pinyin":"zǎofàn","meanings":["breakfast"],"pos":["N"],"level":1,"traditional":"早飯"},{"id":"L1-0459","hanzi":"早上","pinyin":"zǎoshang","meanings":["early morning"],"pos":["N"],"level":1},{"id":"L1-0460","hanzi":"怎么","pinyin":"zěnme","meanings":["how?","what?","why?"],"pos":["Pron"],"level":1,"traditional":"怎麼"},{"id":"L1-0461","hanzi":"站","pinyin":"zhàn","meanings":["station","to stand","to halt"],"pos":["N","V"],"level":1},{"id":"L1-0462","hanzi":"找","pinyin":"zhǎo","meanings":["to try to find","to look for","to call on sb"],"pos":["V"],"level":1},{"id":"L1-0463","hanzi":"找到","pinyin":"zhǎodào","meanings":["to find"],"pos":[],"level":1},{"id":"L1-0464","hanzi":"这","pinyin":"zhè","meanings":["this; these","this; the"],"pos":["Pron"],"level":1,"traditional":"這"},{"id":"L1-0465","hanzi":"这边","pinyin":"zhèbiān","meanings":["this side","here"],"pos":["Pron"],"level":1,"traditional":"這邊"},{"id":"L1-0466","hanzi":"这里","pinyin":"zhèlǐ","meanings":["here"],"pos":["Pron"],"level":1,"traditional":"這裡"},{"id":"L1-0467","hanzi":"这儿","pinyin":"zhèr","meanings":["here"],"pos":["Pron"],"level":1,"traditional":"這兒"},{"id":"L1-0468","hanzi":"这些","pinyin":"zhèxiē","meanings":["these"],"pos":["Pron"],"level":1,"traditional":"這些"},{"id":"L1-0469","hanzi":"着","pinyin":"zhe","meanings":[],"pos":["Aux"],"level":1,"traditional":"著"},{"id":"L1-0470","hanzi":"真","pinyin":"zhēn","meanings":["really","truly","indeed"],"pos":["Adv","Adj"],"level":1},{"id":"L1-0471","hanzi":"真的","pinyin":"zhēn de","meanings":["really; truly; indeed","real; true; genuine","proper"],"pos":[],"level":1},{"id":"L1-0472","hanzi":"正","pinyin":"zhèng","meanings":["straight","upright","proper"],"pos":["Adv","Adj"],"level":1},{"id":"L1-0473","hanzi":"正在","pinyin":"zhèngzài","meanings":[],"pos":["Adv"],"level":1},{"id":"L1-0474","hanzi":"知道","pinyin":"zhīdào","meanings":["to know; to become aware of","also pr."],"pos":["V"],"level":1},{"id":"L1-0475","hanzi":"知识","pinyin":"zhīshi","meanings":["knowledge","intellectual"],"pos":["N"],"level":1,"traditional":"知識"},{"id":"L1-0476","hanzi":"中","pinyin":"zhōng","meanings":["within; among; in","middle; center","while; during"],"pos":["N"],"level":1},{"id":"L1-0477","hanzi":"中国","pinyin":"Zhōngguó","meanings":["China"],"pos":["N"],"level":1,"traditional":"中國"},{"id":"L1-0478","hanzi":"中间","pinyin":"zhōngjiān","meanings":["the middle; the inside","in the middle; within; between; among","during; in the meantime"],"pos":["N"],"level":1,"traditional":"中間"},{"id":"L1-0479","hanzi":"中文","pinyin":"Zhōngwén","meanings":["Chinese language"],"pos":["N"],"level":1},{"id":"L1-0480","hanzi":"中午","pinyin":"zhōngwǔ","meanings":["noon","midday"],"pos":["N"],"level":1},{"id":"L1-0481","hanzi":"中学","pinyin":"zhōngxué","meanings":["middle school"],"pos":["N"],"level":1,"traditional":"中學"},{"id":"L1-0482","hanzi":"中学生","pinyin":"zhōngxuéshēng","meanings":["middle-school student","high school student"],"pos":["N"],"level":1,"traditional":"中學生"},{"id":"L1-0483","hanzi":"重","pinyin":"zhòng","meanings":["heavy","serious","to attach importance to"],"pos":["Adj"],"level":1},{"id":"L1-0484","hanzi":"重要","pinyin":"zhòngyào","meanings":["important; significant; major"],"pos":["Adj"],"level":1},{"id":"L1-0485","hanzi":"住","pinyin":"zhù","meanings":["to live; to reside; to stay","to stop; to cease"],"pos":["V"],"level":1},{"id":"L1-0486","hanzi":"准备","pinyin":"zhǔnbèi","meanings":["preparation","to prepare","to intend"],"pos":["V"],"level":1,"traditional":"準備"},{"id":"L1-0487","hanzi":"桌子","pinyin":"zhuōzi","meanings":["table","desk"],"pos":["N"],"level":1},{"id":"L1-0488","hanzi":"字","pinyin":"zì","meanings":["letter","symbol","character"],"pos":["N"],"level":1},{"id":"L1-0489","hanzi":"子","pinyin":"zi (zhuōzi)","meanings":["noun suffix, as in \"chair\""],"pos":["Suffix"],"level":1,"traditional":"子（桌子）"},{"id":"L1-0490","hanzi":"走","pinyin":"zǒu","meanings":["to walk","to go","to run"],"pos":["V"],"level":1},{"id":"L1-0491","hanzi":"走路","pinyin":"zǒu lù","meanings":["to walk; to go on foot","to leave; to depart","to clear off; to beat it"],"pos":[],"level":1},{"id":"L1-0492","hanzi":"最","pinyin":"zuì","meanings":["to the highest degree; most ...; -est","best or most extreme example"],"pos":["Adv"],"level":1},{"id":"L1-0493","hanzi":"最好","pinyin":"zuìhǎo","meanings":["best","had better ...; it would be best to ..."],"pos":["Adv"],"level":1},{"id":"L1-0494","hanzi":"最后","pinyin":"zuìhòu","meanings":["final; last; ultimate","finally; in the end"],"pos":["N"],"level":1,"traditional":"最後"},{"id":"L1-0495","hanzi":"昨天","pinyin":"zuótiān","meanings":["yesterday"],"pos":["N"],"level":1},{"id":"L1-0496","hanzi":"左","pinyin":"zuǒ","meanings":["left","the Left","east"],"pos":["N"],"level":1},{"id":"L1-0497","hanzi":"左边","pinyin":"zuǒbian","meanings":["left","the left side","to the left of"],"pos":["N"],"level":1,"traditional":"左邊"},{"id":"L1-0498","hanzi":"坐","pinyin":"zuò","meanings":["to sit","to take a seat","to take"],"pos":["V"],"level":1},{"id":"L1-0499","hanzi":"坐下","pinyin":"zuò xia","meanings":["to sit down"],"pos":[],"level":1},{"id":"L1-0500","hanzi":"做","pinyin":"zuò","meanings":["to make; to produce","to write; to compose","to do; to engage in; to hold"],"pos":["V"],"level":1}]
+[
+	{
+		"id": "L1-0001",
+		"hanzi": "爱",
+		"traditional": "愛",
+		"pinyin": "ài",
+		"meanings": ["to love", "affection"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0002",
+		"hanzi": "爱好",
+		"traditional": "愛好",
+		"pinyin": "àihào",
+		"meanings": ["hobby", "to be fond of"],
+		"pos": ["V", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0003",
+		"hanzi": "八",
+		"pinyin": "bā",
+		"meanings": ["eight"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0004",
+		"hanzi": "爸爸",
+		"pinyin": "bàba",
+		"meanings": ["father"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0005",
+		"hanzi": "吧",
+		"pinyin": "ba",
+		"meanings": ["suggestion particle", "right?"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0006",
+		"hanzi": "白",
+		"pinyin": "bái",
+		"meanings": ["white", "in vain"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0007",
+		"hanzi": "白天",
+		"pinyin": "báitiān",
+		"meanings": ["daytime", "during the day"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0008",
+		"hanzi": "百",
+		"pinyin": "bǎi",
+		"meanings": ["hundred", "numerous"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0009",
+		"hanzi": "班",
+		"pinyin": "bān",
+		"meanings": ["class", "work shift"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0010",
+		"hanzi": "半",
+		"pinyin": "bàn",
+		"meanings": ["half"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0011",
+		"hanzi": "半年",
+		"pinyin": "bàn nián",
+		"meanings": ["half a year"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0012",
+		"hanzi": "半天",
+		"pinyin": "bàntiān",
+		"meanings": ["half of the day", "a long time"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0013",
+		"hanzi": "帮",
+		"traditional": "幫",
+		"pinyin": "bāng",
+		"meanings": ["to help"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0014",
+		"hanzi": "帮忙",
+		"traditional": "幫忙",
+		"pinyin": "bāng máng",
+		"meanings": ["to lend a hand", "to do a favor"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0015",
+		"hanzi": "包",
+		"pinyin": "bāo",
+		"meanings": ["bag", "to wrap"],
+		"pos": ["N", "M", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0016",
+		"hanzi": "包子",
+		"pinyin": "bāozi",
+		"meanings": ["baozi"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0017",
+		"hanzi": "杯",
+		"pinyin": "bēi",
+		"meanings": ["measure word: cups, glasses"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0018",
+		"hanzi": "杯子",
+		"pinyin": "bēizi",
+		"meanings": ["cup", "glass"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0019",
+		"hanzi": "北",
+		"pinyin": "běi",
+		"meanings": ["north"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0020",
+		"hanzi": "北边",
+		"traditional": "北邊",
+		"pinyin": "běibian",
+		"meanings": ["the north side"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0021",
+		"hanzi": "北京",
+		"pinyin": "Běijīng",
+		"meanings": ["Beijing"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0022",
+		"hanzi": "本",
+		"pinyin": "běn",
+		"meanings": ["measure word: books"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0023",
+		"hanzi": "本子",
+		"pinyin": "běnzi",
+		"meanings": ["notebook"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0024",
+		"hanzi": "比",
+		"pinyin": "bǐ",
+		"meanings": ["to compare", "than"],
+		"pos": ["Prep", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0025",
+		"hanzi": "别",
+		"traditional": "別",
+		"pinyin": "bié",
+		"meanings": ["don't ...!", "category"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0026",
+		"hanzi": "别的",
+		"traditional": "別的",
+		"pinyin": "biéde",
+		"meanings": ["else", "other"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0027",
+		"hanzi": "别人",
+		"traditional": "別人",
+		"pinyin": "biérén",
+		"meanings": ["other people"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0028",
+		"hanzi": "病",
+		"pinyin": "bìng",
+		"meanings": ["illness", "to fall ill"],
+		"pos": ["N", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0029",
+		"hanzi": "病人",
+		"pinyin": "bìngrén",
+		"meanings": ["sick person", "patient"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0030",
+		"hanzi": "不大",
+		"pinyin": "bú dà",
+		"meanings": ["not very", "not often"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0031",
+		"hanzi": "不对",
+		"traditional": "不對",
+		"pinyin": "búduì",
+		"meanings": ["incorrect", "wrong"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0032",
+		"hanzi": "不客气",
+		"traditional": "不客氣",
+		"pinyin": "bú kèqì",
+		"meanings": ["you're welcome", "don't mention it"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0033",
+		"hanzi": "不用",
+		"pinyin": "búyòng",
+		"meanings": ["need not"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0034",
+		"hanzi": "不",
+		"pinyin": "bù",
+		"meanings": ["not", "no"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0035",
+		"hanzi": "菜",
+		"pinyin": "cài",
+		"meanings": ["vegetable", "dish"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0036",
+		"hanzi": "茶",
+		"pinyin": "chá",
+		"meanings": ["tea"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0037",
+		"hanzi": "差",
+		"pinyin": "chà",
+		"meanings": ["different", "wrong"],
+		"pos": ["V", "Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0038",
+		"hanzi": "常",
+		"pinyin": "cháng",
+		"meanings": ["always", "ever"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0039",
+		"hanzi": "常常",
+		"pinyin": "chángcháng",
+		"meanings": ["frequently"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0040",
+		"hanzi": "唱",
+		"pinyin": "chàng",
+		"meanings": ["to sing", "to call loudly"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0041",
+		"hanzi": "唱歌",
+		"pinyin": "chàng gē",
+		"meanings": ["to sing a song"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0042",
+		"hanzi": "车",
+		"traditional": "車",
+		"pinyin": "chē",
+		"meanings": ["vehicle", "car"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0043",
+		"hanzi": "车票",
+		"traditional": "車票",
+		"pinyin": "chēpiào",
+		"meanings": ["travel ticket"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0044",
+		"hanzi": "车上",
+		"traditional": "車上",
+		"pinyin": "chē shang",
+		"meanings": ["in the car", "on the bus"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0045",
+		"hanzi": "车站",
+		"traditional": "車站",
+		"pinyin": "chēzhàn",
+		"meanings": ["rail station", "bus stop"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0046",
+		"hanzi": "吃",
+		"pinyin": "chī",
+		"meanings": ["to eat", "to eradicate"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0047",
+		"hanzi": "吃饭",
+		"traditional": "吃飯",
+		"pinyin": "chī fàn",
+		"meanings": ["to have a meal", "to eat"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0048",
+		"hanzi": "出",
+		"pinyin": "chū",
+		"meanings": ["to exit", "to produce"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0049",
+		"hanzi": "出来",
+		"traditional": "出來",
+		"pinyin": "chū lái",
+		"meanings": ["to come out", "to appear"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0050",
+		"hanzi": "出去",
+		"pinyin": "chū qù",
+		"meanings": ["to go out"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0051",
+		"hanzi": "穿",
+		"pinyin": "chuān",
+		"meanings": ["to bore through", "to go through"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0052",
+		"hanzi": "床",
+		"pinyin": "chuáng",
+		"meanings": ["bed", "frame"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0053",
+		"hanzi": "次",
+		"pinyin": "cì",
+		"meanings": ["measure word: times"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0054",
+		"hanzi": "从",
+		"traditional": "從",
+		"pinyin": "cóng",
+		"meanings": ["from", "starting at"],
+		"pos": ["Prep"],
+		"level": 1
+	},
+	{
+		"id": "L1-0055",
+		"hanzi": "错",
+		"traditional": "錯",
+		"pinyin": "cuò",
+		"meanings": ["a mistake", "wrong"],
+		"pos": ["Adj", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0056",
+		"hanzi": "打",
+		"pinyin": "dǎ",
+		"meanings": ["to hit", "to strike"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0057",
+		"hanzi": "打车",
+		"traditional": "打車",
+		"pinyin": "dǎ chē",
+		"meanings": ["to take a taxi", "to hitch a lift"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0058",
+		"hanzi": "打电话",
+		"traditional": "打電話",
+		"pinyin": "dǎ diànhuà",
+		"meanings": ["to make a telephone call"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0059",
+		"hanzi": "打开",
+		"traditional": "打開",
+		"pinyin": "dǎ kāi",
+		"meanings": ["to open up", "to switch on"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0060",
+		"hanzi": "打球",
+		"pinyin": "dǎ qiú",
+		"meanings": ["to play ball", "to play with a ball"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0061",
+		"hanzi": "大",
+		"pinyin": "dà",
+		"meanings": ["big", "large"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0062",
+		"hanzi": "大学",
+		"traditional": "大學",
+		"pinyin": "dàxué",
+		"meanings": ["university"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0063",
+		"hanzi": "大学生",
+		"traditional": "大學生",
+		"pinyin": "dàxuéshēng",
+		"meanings": ["university student"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0064",
+		"hanzi": "到",
+		"pinyin": "dào",
+		"meanings": ["to reach", "to arrive at"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0065",
+		"hanzi": "得到",
+		"pinyin": "dé dào",
+		"meanings": ["to get"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0066",
+		"hanzi": "地",
+		"pinyin": "de",
+		"meanings": ["adverb particle, before a verb"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0067",
+		"hanzi": "的",
+		"pinyin": "de",
+		"meanings": ["possessive particle", "of"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0068",
+		"hanzi": "等",
+		"pinyin": "děng",
+		"meanings": ["to wait for", "by the time"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0069",
+		"hanzi": "地",
+		"pinyin": "dì",
+		"meanings": ["earth", "ground"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0070",
+		"hanzi": "地点",
+		"traditional": "地點",
+		"pinyin": "dìdiǎn",
+		"meanings": ["location", "site"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0071",
+		"hanzi": "地方",
+		"pinyin": "dìfang",
+		"meanings": ["place", "area"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0072",
+		"hanzi": "地上",
+		"pinyin": "dìshang",
+		"meanings": ["on the ground", "on the floor"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0073",
+		"hanzi": "地图",
+		"traditional": "地圖",
+		"pinyin": "dìtú",
+		"meanings": ["map"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0074",
+		"hanzi": "弟弟",
+		"pinyin": "dìdi",
+		"meanings": ["younger brother"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0075",
+		"hanzi": "第",
+		"pinyin": "dì",
+		"meanings": ["prefix for ordinal numbers"],
+		"pos": ["Prefix"],
+		"level": 1
+	},
+	{
+		"id": "L1-0076",
+		"hanzi": "点",
+		"traditional": "點",
+		"pinyin": "diǎn",
+		"meanings": ["o'clock", "a little", "to order food"],
+		"pos": ["M", "V", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0077",
+		"hanzi": "电",
+		"traditional": "電",
+		"pinyin": "diàn",
+		"meanings": ["lightning", "electricity"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0078",
+		"hanzi": "电话",
+		"traditional": "電話",
+		"pinyin": "diànhuà",
+		"meanings": ["telephone", "phone call"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0079",
+		"hanzi": "电脑",
+		"traditional": "電腦",
+		"pinyin": "diànnǎo",
+		"meanings": ["computer"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0080",
+		"hanzi": "电视",
+		"traditional": "電視",
+		"pinyin": "diànshì",
+		"meanings": ["television"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0081",
+		"hanzi": "电视机",
+		"traditional": "電視機",
+		"pinyin": "diànshìjī",
+		"meanings": ["television set"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0082",
+		"hanzi": "电影",
+		"traditional": "電影",
+		"pinyin": "diànyǐng",
+		"meanings": ["movie"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0083",
+		"hanzi": "电影院",
+		"traditional": "電影院",
+		"pinyin": "diànyǐngyuàn",
+		"meanings": ["cinema"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0084",
+		"hanzi": "东",
+		"traditional": "東",
+		"pinyin": "dōng",
+		"meanings": ["east"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0085",
+		"hanzi": "东边",
+		"traditional": "東邊",
+		"pinyin": "dōngbian",
+		"meanings": ["the east side"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0086",
+		"hanzi": "东西",
+		"traditional": "東西",
+		"pinyin": "dōngxi",
+		"meanings": ["thing", "stuff"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0087",
+		"hanzi": "动",
+		"traditional": "動",
+		"pinyin": "dòng",
+		"meanings": ["to move", "to set in movement"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0088",
+		"hanzi": "动作",
+		"traditional": "動作",
+		"pinyin": "dòngzuò",
+		"meanings": ["movement", "to act"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0089",
+		"hanzi": "都",
+		"pinyin": "dōu",
+		"meanings": ["all", "both"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0090",
+		"hanzi": "读",
+		"traditional": "讀",
+		"pinyin": "dú",
+		"meanings": ["to read out", "to attend"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0091",
+		"hanzi": "读书",
+		"traditional": "讀書",
+		"pinyin": "dú shū",
+		"meanings": ["to read a book", "to study"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0092",
+		"hanzi": "对",
+		"traditional": "對",
+		"pinyin": "duì",
+		"meanings": ["correct", "right"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0093",
+		"hanzi": "对不起",
+		"traditional": "對不起",
+		"pinyin": "duìbuqǐ",
+		"meanings": ["to let down", "I'm sorry"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0094",
+		"hanzi": "多",
+		"pinyin": "duō",
+		"meanings": ["many", "a lot of"],
+		"pos": ["Adj", "Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0095",
+		"hanzi": "多少",
+		"pinyin": "duōshao",
+		"meanings": ["how much?", "what number?"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0096",
+		"hanzi": "饿",
+		"traditional": "餓",
+		"pinyin": "è",
+		"meanings": ["hungry", "to starve"],
+		"pos": ["Adj", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0097",
+		"hanzi": "儿子",
+		"traditional": "兒子",
+		"pinyin": "érzi",
+		"meanings": ["son"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0098",
+		"hanzi": "二",
+		"pinyin": "èr",
+		"meanings": ["two"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0099",
+		"hanzi": "饭",
+		"traditional": "飯",
+		"pinyin": "fàn",
+		"meanings": ["cooked rice", "a meal"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0100",
+		"hanzi": "饭店",
+		"traditional": "飯店",
+		"pinyin": "fàndiàn",
+		"meanings": ["restaurant", "hotel"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0101",
+		"hanzi": "房间",
+		"traditional": "房間",
+		"pinyin": "fángjiān",
+		"meanings": ["room"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0102",
+		"hanzi": "房子",
+		"pinyin": "fángzi",
+		"meanings": ["house", "building"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0103",
+		"hanzi": "放",
+		"pinyin": "fàng",
+		"meanings": ["to put", "to place"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0104",
+		"hanzi": "放假",
+		"pinyin": "fàng jià",
+		"meanings": ["to have a holiday or vacation"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0105",
+		"hanzi": "放学",
+		"traditional": "放學",
+		"pinyin": "fàng xué",
+		"meanings": ["to finish school for the day"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0106",
+		"hanzi": "飞",
+		"traditional": "飛",
+		"pinyin": "fēi",
+		"meanings": ["to fly"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0107",
+		"hanzi": "飞机",
+		"traditional": "飛機",
+		"pinyin": "fēijī",
+		"meanings": ["airplane"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0108",
+		"hanzi": "非常",
+		"pinyin": "fēicháng",
+		"meanings": ["extremely"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0109",
+		"hanzi": "分",
+		"pinyin": "fēn",
+		"meanings": ["minute", "point in a score"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0110",
+		"hanzi": "风",
+		"traditional": "風",
+		"pinyin": "fēng",
+		"meanings": ["wind", "news"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0111",
+		"hanzi": "干",
+		"traditional": "乾",
+		"pinyin": "gān",
+		"meanings": ["dry", "dried"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0112",
+		"hanzi": "干净",
+		"traditional": "乾淨",
+		"pinyin": "gānjìng",
+		"meanings": ["clean", "neat"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0113",
+		"hanzi": "干",
+		"traditional": "幹",
+		"pinyin": "gàn",
+		"meanings": ["to manage", "to work"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0114",
+		"hanzi": "干什么",
+		"traditional": "幹什麼",
+		"pinyin": "gàn shénme",
+		"meanings": ["what are you doing?", "what's he up to?"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0115",
+		"hanzi": "高",
+		"pinyin": "gāo",
+		"meanings": ["high", "tall"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0116",
+		"hanzi": "高兴",
+		"traditional": "高興",
+		"pinyin": "gāoxìng",
+		"meanings": ["happy", "glad"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0117",
+		"hanzi": "告诉",
+		"traditional": "告訴",
+		"pinyin": "gàosu",
+		"meanings": ["to tell"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0118",
+		"hanzi": "哥哥",
+		"pinyin": "gēge",
+		"meanings": ["older brother"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0119",
+		"hanzi": "歌",
+		"pinyin": "gē",
+		"meanings": ["song", "to sing"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0120",
+		"hanzi": "个",
+		"traditional": "個",
+		"pinyin": "gè",
+		"meanings": ["measure word: general purpose"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0121",
+		"hanzi": "给",
+		"traditional": "給",
+		"pinyin": "gěi",
+		"meanings": ["to give", "for"],
+		"pos": ["V", "Prep"],
+		"level": 1
+	},
+	{
+		"id": "L1-0122",
+		"hanzi": "跟",
+		"pinyin": "gēn",
+		"meanings": ["with", "to follow"],
+		"pos": ["Prep", "Conj", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0123",
+		"hanzi": "工人",
+		"pinyin": "gōngrén",
+		"meanings": ["worker"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0124",
+		"hanzi": "工作",
+		"pinyin": "gōngzuò",
+		"meanings": ["to work", "to operate"],
+		"pos": ["V", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0125",
+		"hanzi": "关",
+		"traditional": "關",
+		"pinyin": "guān",
+		"meanings": ["to shut", "to turn off"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0126",
+		"hanzi": "关上",
+		"traditional": "關上",
+		"pinyin": "guānshang",
+		"meanings": ["to close up"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0127",
+		"hanzi": "贵",
+		"traditional": "貴",
+		"pinyin": "guì",
+		"meanings": ["expensive", "your"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0128",
+		"hanzi": "国",
+		"traditional": "國",
+		"pinyin": "guó",
+		"meanings": ["nation"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0129",
+		"hanzi": "国家",
+		"traditional": "國家",
+		"pinyin": "guójiā",
+		"meanings": ["country"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0130",
+		"hanzi": "国外",
+		"traditional": "國外",
+		"pinyin": "guó wài",
+		"meanings": ["abroad", "external"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0131",
+		"hanzi": "过",
+		"traditional": "過",
+		"pinyin": "guò",
+		"meanings": ["to cross", "to go over"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0132",
+		"hanzi": "还",
+		"traditional": "還",
+		"pinyin": "hái",
+		"meanings": ["still", "yet"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0133",
+		"hanzi": "还是",
+		"traditional": "還是",
+		"pinyin": "háishi",
+		"meanings": ["or, in a question", "still"],
+		"pos": ["Adv", "Conj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0134",
+		"hanzi": "还有",
+		"traditional": "還有",
+		"pinyin": "hái yǒu",
+		"meanings": ["there still remain", "in addition"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0135",
+		"hanzi": "孩子",
+		"pinyin": "háizi",
+		"meanings": ["child"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0136",
+		"hanzi": "汉语",
+		"traditional": "漢語",
+		"pinyin": "Hànyǔ",
+		"meanings": ["the Chinese language"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0137",
+		"hanzi": "汉字",
+		"traditional": "漢字",
+		"pinyin": "Hànzì",
+		"meanings": ["Chinese character"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0138",
+		"hanzi": "好",
+		"pinyin": "hǎo",
+		"meanings": ["good", "appropriate"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0139",
+		"hanzi": "好吃",
+		"pinyin": "hǎochī",
+		"meanings": ["tasty"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0140",
+		"hanzi": "好看",
+		"pinyin": "hǎokàn",
+		"meanings": ["good-looking", "good"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0141",
+		"hanzi": "好听",
+		"traditional": "好聽",
+		"pinyin": "hǎotīng",
+		"meanings": ["pleasant to hear"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0142",
+		"hanzi": "好玩儿",
+		"traditional": "好玩兒",
+		"pinyin": "hǎowánr",
+		"meanings": ["fun", "amusing"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0143",
+		"hanzi": "号",
+		"traditional": "號",
+		"pinyin": "hào",
+		"meanings": ["day of the month", "number"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0144",
+		"hanzi": "喝",
+		"pinyin": "hē",
+		"meanings": ["to drink"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0145",
+		"hanzi": "和",
+		"pinyin": "hé",
+		"meanings": ["and", "with"],
+		"pos": ["Prep", "Conj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0146",
+		"hanzi": "很",
+		"pinyin": "hěn",
+		"meanings": ["very"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0147",
+		"hanzi": "后",
+		"traditional": "後",
+		"pinyin": "hòu",
+		"meanings": ["back", "behind"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0148",
+		"hanzi": "后边",
+		"traditional": "後邊",
+		"pinyin": "hòubian",
+		"meanings": ["the back", "behind"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0149",
+		"hanzi": "后天",
+		"traditional": "後天",
+		"pinyin": "hòutiān",
+		"meanings": ["the day after tomorrow", "life after birth"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0150",
+		"hanzi": "花",
+		"pinyin": "huā",
+		"meanings": ["flower", "blossom"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0151",
+		"hanzi": "话",
+		"traditional": "話",
+		"pinyin": "huà",
+		"meanings": ["words", "speech", "language"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0152",
+		"hanzi": "坏",
+		"traditional": "壞",
+		"pinyin": "huài",
+		"meanings": ["bad", "spoiled"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0153",
+		"hanzi": "还",
+		"traditional": "還",
+		"pinyin": "huán",
+		"meanings": ["to pay back", "to return"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0154",
+		"hanzi": "回",
+		"pinyin": "huí",
+		"meanings": ["to return", "to reply"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0155",
+		"hanzi": "回答",
+		"pinyin": "huídá",
+		"meanings": ["to reply"],
+		"pos": ["V", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0156",
+		"hanzi": "回到",
+		"pinyin": "huídào",
+		"meanings": ["to return to"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0157",
+		"hanzi": "回家",
+		"pinyin": "huí jiā",
+		"meanings": ["to return home"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0158",
+		"hanzi": "回来",
+		"traditional": "回來",
+		"pinyin": "huí lái",
+		"meanings": ["to come back"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0159",
+		"hanzi": "回去",
+		"pinyin": "huí qù",
+		"meanings": ["to go back"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0160",
+		"hanzi": "会",
+		"traditional": "會",
+		"pinyin": "huì",
+		"meanings": ["to know how to", "will"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0161",
+		"hanzi": "火车",
+		"traditional": "火車",
+		"pinyin": "huǒchē",
+		"meanings": ["train"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0162",
+		"hanzi": "机场",
+		"traditional": "機場",
+		"pinyin": "jīchǎng",
+		"meanings": ["airport"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0163",
+		"hanzi": "机票",
+		"traditional": "機票",
+		"pinyin": "jīpiào",
+		"meanings": ["plane ticket"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0164",
+		"hanzi": "鸡蛋",
+		"traditional": "雞蛋",
+		"pinyin": "jīdàn",
+		"meanings": ["egg", "hen's egg"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0165",
+		"hanzi": "几",
+		"traditional": "幾",
+		"pinyin": "jǐ",
+		"meanings": ["how many", "a few"],
+		"pos": ["Num", "Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0166",
+		"hanzi": "记",
+		"traditional": "記",
+		"pinyin": "jì",
+		"meanings": ["to record", "to note"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0167",
+		"hanzi": "记得",
+		"traditional": "記得",
+		"pinyin": "jìde",
+		"meanings": ["to remember"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0168",
+		"hanzi": "记住",
+		"traditional": "記住",
+		"pinyin": "jìzhù",
+		"meanings": ["to memorize", "to bear in mind"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0169",
+		"hanzi": "家",
+		"pinyin": "jiā",
+		"meanings": ["home", "family"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0170",
+		"hanzi": "家里",
+		"traditional": "家裡",
+		"pinyin": "jiā li",
+		"meanings": ["at home"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0171",
+		"hanzi": "家人",
+		"pinyin": "jiārén",
+		"meanings": ["family member", "servant"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0172",
+		"hanzi": "间",
+		"traditional": "間",
+		"pinyin": "jiān",
+		"meanings": ["measure word: rooms"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0173",
+		"hanzi": "见",
+		"traditional": "見",
+		"pinyin": "jiàn",
+		"meanings": ["to meet with"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0174",
+		"hanzi": "见面",
+		"traditional": "見面",
+		"pinyin": "jiàn miàn",
+		"meanings": ["to meet"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0175",
+		"hanzi": "教",
+		"pinyin": "jiāo",
+		"meanings": ["to teach"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0176",
+		"hanzi": "叫",
+		"pinyin": "jiào",
+		"meanings": ["to shout", "to call"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0177",
+		"hanzi": "教学楼",
+		"traditional": "教學樓",
+		"pinyin": "jiàoxuélóu",
+		"meanings": ["school building"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0178",
+		"hanzi": "姐姐",
+		"pinyin": "jiějie",
+		"meanings": ["older sister"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0179",
+		"hanzi": "介绍",
+		"traditional": "介紹",
+		"pinyin": "jièshào",
+		"meanings": ["to introduce", "to give a presentation"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0180",
+		"hanzi": "今年",
+		"pinyin": "jīnnián",
+		"meanings": ["this year"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0181",
+		"hanzi": "今天",
+		"pinyin": "jīntiān",
+		"meanings": ["today", "the present time"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0182",
+		"hanzi": "进",
+		"traditional": "進",
+		"pinyin": "jìn",
+		"meanings": ["to go forward", "to advance"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0183",
+		"hanzi": "进来",
+		"traditional": "進來",
+		"pinyin": "jìn lái",
+		"meanings": ["to come in"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0184",
+		"hanzi": "进去",
+		"traditional": "進去",
+		"pinyin": "jìn qù",
+		"meanings": ["to go in"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0185",
+		"hanzi": "九",
+		"pinyin": "jiǔ",
+		"meanings": ["nine"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0186",
+		"hanzi": "就",
+		"pinyin": "jiù",
+		"meanings": ["then, right away", "only"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0187",
+		"hanzi": "觉得",
+		"traditional": "覺得",
+		"pinyin": "juéde",
+		"meanings": ["to think that", "to feel"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0188",
+		"hanzi": "开",
+		"traditional": "開",
+		"pinyin": "kāi",
+		"meanings": ["to open", "to start"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0189",
+		"hanzi": "开车",
+		"traditional": "開車",
+		"pinyin": "kāi chē",
+		"meanings": ["to drive a car", "to post sexual content online"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0190",
+		"hanzi": "开会",
+		"traditional": "開會",
+		"pinyin": "kāi huì",
+		"meanings": ["to hold a meeting", "to attend a meeting"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0191",
+		"hanzi": "开玩笑",
+		"traditional": "開玩笑",
+		"pinyin": "kāi wánxiào",
+		"meanings": ["to play a joke"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0192",
+		"hanzi": "看",
+		"pinyin": "kàn",
+		"meanings": ["to look at", "to watch"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0193",
+		"hanzi": "看病",
+		"pinyin": "kàn bìng",
+		"meanings": ["to visit a doctor", "to see a patient"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0194",
+		"hanzi": "看到",
+		"pinyin": "kàndào",
+		"meanings": ["to catch sight of"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0195",
+		"hanzi": "看见",
+		"traditional": "看見",
+		"pinyin": "kàn jiàn",
+		"meanings": ["to see", "to notice"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0196",
+		"hanzi": "考",
+		"pinyin": "kǎo",
+		"meanings": ["to check", "to verify"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0197",
+		"hanzi": "考试",
+		"traditional": "考試",
+		"pinyin": "kǎo shì",
+		"meanings": ["to take an exam", "exam"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0198",
+		"hanzi": "渴",
+		"pinyin": "kě",
+		"meanings": ["thirsty"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0199",
+		"hanzi": "课",
+		"traditional": "課",
+		"pinyin": "kè",
+		"meanings": ["subject", "course"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0200",
+		"hanzi": "课本",
+		"traditional": "課本",
+		"pinyin": "kèběn",
+		"meanings": ["textbook"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0201",
+		"hanzi": "课文",
+		"traditional": "課文",
+		"pinyin": "kèwén",
+		"meanings": ["text"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0202",
+		"hanzi": "口",
+		"pinyin": "kǒu",
+		"meanings": ["mouth", "measure word: family members"],
+		"pos": ["M", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0203",
+		"hanzi": "块",
+		"traditional": "塊",
+		"pinyin": "kuài",
+		"meanings": ["piece", "yuan, in speech"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0204",
+		"hanzi": "快",
+		"pinyin": "kuài",
+		"meanings": ["rapid", "quick"],
+		"pos": ["Adj", "Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0205",
+		"hanzi": "来",
+		"traditional": "來",
+		"pinyin": "lái",
+		"meanings": ["to come", "hither"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0206",
+		"hanzi": "来到",
+		"traditional": "來到",
+		"pinyin": "láidào",
+		"meanings": ["to arrive"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0207",
+		"hanzi": "老",
+		"pinyin": "lǎo",
+		"meanings": ["old", "aged"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0208",
+		"hanzi": "老人",
+		"pinyin": "lǎorén",
+		"meanings": ["an old person", "the elderly"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0209",
+		"hanzi": "老师",
+		"traditional": "老師",
+		"pinyin": "lǎoshī",
+		"meanings": ["teacher"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0210",
+		"hanzi": "了",
+		"pinyin": "le",
+		"meanings": ["completed-action particle", "marks a change of state"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0211",
+		"hanzi": "累",
+		"pinyin": "lèi",
+		"meanings": ["tired", "weary"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0212",
+		"hanzi": "冷",
+		"pinyin": "lěng",
+		"meanings": ["cold"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0213",
+		"hanzi": "里",
+		"traditional": "裡",
+		"pinyin": "lǐ",
+		"meanings": ["inside", "in"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0214",
+		"hanzi": "里边",
+		"traditional": "裡邊",
+		"pinyin": "lǐbian",
+		"meanings": ["the inside", "in there"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0215",
+		"hanzi": "两",
+		"traditional": "兩",
+		"pinyin": "liǎng",
+		"meanings": ["two, before a measure word"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0216",
+		"hanzi": "零",
+		"pinyin": "líng",
+		"meanings": ["zero"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0217",
+		"hanzi": "六",
+		"pinyin": "liù",
+		"meanings": ["six"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0218",
+		"hanzi": "楼",
+		"traditional": "樓",
+		"pinyin": "lóu",
+		"meanings": ["house with more than 1 story", "storied building"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0219",
+		"hanzi": "楼上",
+		"traditional": "樓上",
+		"pinyin": "lóu shàng",
+		"meanings": ["upstairs"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0220",
+		"hanzi": "楼下",
+		"traditional": "樓下",
+		"pinyin": "lóu xià",
+		"meanings": ["downstairs"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0221",
+		"hanzi": "路",
+		"pinyin": "lù",
+		"meanings": ["road", "route"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0222",
+		"hanzi": "路口",
+		"pinyin": "lùkǒu",
+		"meanings": ["crossing", "intersection"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0223",
+		"hanzi": "路上",
+		"pinyin": "lùshang",
+		"meanings": ["on the road", "on the way"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0224",
+		"hanzi": "妈妈",
+		"traditional": "媽媽",
+		"pinyin": "māma",
+		"meanings": ["mama", "mommy"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0225",
+		"hanzi": "马路",
+		"traditional": "馬路",
+		"pinyin": "mǎlù",
+		"meanings": ["street", "road"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0226",
+		"hanzi": "马上",
+		"traditional": "馬上",
+		"pinyin": "mǎshàng",
+		"meanings": ["at once", "right away"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0227",
+		"hanzi": "吗",
+		"traditional": "嗎",
+		"pinyin": "ma",
+		"meanings": ["yes-no question particle"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0228",
+		"hanzi": "买",
+		"traditional": "買",
+		"pinyin": "mǎi",
+		"meanings": ["to buy", "to purchase"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0229",
+		"hanzi": "慢",
+		"pinyin": "màn",
+		"meanings": ["slow"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0230",
+		"hanzi": "忙",
+		"pinyin": "máng",
+		"meanings": ["busy", "hurriedly"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0231",
+		"hanzi": "毛",
+		"pinyin": "máo",
+		"meanings": ["ten cents"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0232",
+		"hanzi": "没",
+		"traditional": "沒",
+		"pinyin": "méi",
+		"meanings": ["have not"],
+		"pos": ["Adv", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0233",
+		"hanzi": "没关系",
+		"traditional": "沒關係",
+		"pinyin": "méi guānxi",
+		"meanings": ["it doesn't matter"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0234",
+		"hanzi": "没什么",
+		"traditional": "沒什麼",
+		"pinyin": "méi shénme",
+		"meanings": ["it's nothing", "never mind"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0235",
+		"hanzi": "没事儿",
+		"traditional": "沒事兒",
+		"pinyin": "méi shìr",
+		"meanings": ["to have spare time", "free from work"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0236",
+		"hanzi": "没有",
+		"traditional": "沒有",
+		"pinyin": "méiyǒu",
+		"meanings": ["haven't", "hasn't"],
+		"pos": ["V", "Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0237",
+		"hanzi": "妹妹",
+		"pinyin": "mèimei",
+		"meanings": ["younger sister", "young woman"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0238",
+		"hanzi": "门",
+		"traditional": "門",
+		"pinyin": "mén",
+		"meanings": ["door", "measure word: school subjects"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0239",
+		"hanzi": "门口",
+		"traditional": "門口",
+		"pinyin": "ménkǒu",
+		"meanings": ["doorway", "gate"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0240",
+		"hanzi": "门票",
+		"traditional": "門票",
+		"pinyin": "ménpiào",
+		"meanings": ["entry ticket"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0241",
+		"hanzi": "们",
+		"traditional": "們",
+		"pinyin": "men",
+		"meanings": ["plural marker for people"],
+		"pos": ["Suffix"],
+		"level": 1
+	},
+	{
+		"id": "L1-0242",
+		"hanzi": "米饭",
+		"traditional": "米飯",
+		"pinyin": "mǐfàn",
+		"meanings": ["rice"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0243",
+		"hanzi": "面包",
+		"traditional": "麵包",
+		"pinyin": "miànbāo",
+		"meanings": ["bread"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0244",
+		"hanzi": "面条儿",
+		"traditional": "麵條兒",
+		"pinyin": "miàntiáor",
+		"meanings": ["noodles"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0245",
+		"hanzi": "名字",
+		"pinyin": "míngzi",
+		"meanings": ["name"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0246",
+		"hanzi": "明白",
+		"pinyin": "míngbai",
+		"meanings": ["clear", "sensible"],
+		"pos": ["Adj", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0247",
+		"hanzi": "明年",
+		"pinyin": "míngnián",
+		"meanings": ["next year"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0248",
+		"hanzi": "明天",
+		"pinyin": "míngtiān",
+		"meanings": ["tomorrow"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0249",
+		"hanzi": "拿",
+		"pinyin": "ná",
+		"meanings": ["to hold", "to seize"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0250",
+		"hanzi": "哪",
+		"pinyin": "nǎ",
+		"meanings": ["which"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0251",
+		"hanzi": "哪里",
+		"traditional": "哪裡",
+		"pinyin": "nǎlǐ",
+		"meanings": ["where"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0252",
+		"hanzi": "哪儿",
+		"traditional": "哪兒",
+		"pinyin": "nǎr",
+		"meanings": ["where, colloquial"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0253",
+		"hanzi": "哪些",
+		"pinyin": "nǎxiē",
+		"meanings": ["which ones?", "who?"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0254",
+		"hanzi": "那",
+		"pinyin": "nà",
+		"meanings": ["that", "those"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0255",
+		"hanzi": "那边",
+		"traditional": "那邊",
+		"pinyin": "nàbiān",
+		"meanings": ["that side", "over there"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0256",
+		"hanzi": "那里",
+		"traditional": "那裡",
+		"pinyin": "nàlǐ",
+		"meanings": ["there"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0257",
+		"hanzi": "那儿",
+		"traditional": "那兒",
+		"pinyin": "nàr",
+		"meanings": ["there, colloquial"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0258",
+		"hanzi": "那些",
+		"pinyin": "nàxiē",
+		"meanings": ["those"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0259",
+		"hanzi": "奶",
+		"pinyin": "nǎi",
+		"meanings": ["breast", "milk"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0260",
+		"hanzi": "奶奶",
+		"pinyin": "nǎinai",
+		"meanings": ["grandma", "mistress of the house"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0261",
+		"hanzi": "男",
+		"pinyin": "nán",
+		"meanings": ["male"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0262",
+		"hanzi": "男孩儿",
+		"traditional": "男孩兒",
+		"pinyin": "nánháir",
+		"meanings": ["boy"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0263",
+		"hanzi": "男朋友",
+		"pinyin": "nánpéngyou",
+		"meanings": ["boyfriend"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0264",
+		"hanzi": "男人",
+		"pinyin": "nánrén",
+		"meanings": ["man", "men"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0265",
+		"hanzi": "男生",
+		"pinyin": "nánshēng",
+		"meanings": ["male student", "schoolboy"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0266",
+		"hanzi": "南",
+		"pinyin": "nán",
+		"meanings": ["south"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0267",
+		"hanzi": "南边",
+		"traditional": "南邊",
+		"pinyin": "nánbian",
+		"meanings": ["the south side"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0268",
+		"hanzi": "难",
+		"traditional": "難",
+		"pinyin": "nán",
+		"meanings": ["difficult", "problem"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0269",
+		"hanzi": "呢",
+		"pinyin": "ne",
+		"meanings": ["softening question particle", "marks an ongoing state"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0270",
+		"hanzi": "能",
+		"pinyin": "néng",
+		"meanings": ["can", "to be able to"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0271",
+		"hanzi": "你",
+		"pinyin": "nǐ",
+		"meanings": ["you"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0272",
+		"hanzi": "你们",
+		"traditional": "你們",
+		"pinyin": "nǐmen",
+		"meanings": ["you all"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0273",
+		"hanzi": "年",
+		"pinyin": "nián",
+		"meanings": ["year"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0274",
+		"hanzi": "您",
+		"pinyin": "nín",
+		"meanings": ["you, politely"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0275",
+		"hanzi": "牛奶",
+		"pinyin": "niúnǎi",
+		"meanings": ["cow's milk"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0276",
+		"hanzi": "女",
+		"pinyin": "nǚ",
+		"meanings": ["female", "woman"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0277",
+		"hanzi": "女儿",
+		"traditional": "女兒",
+		"pinyin": "nǚ'ér",
+		"meanings": ["daughter"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0278",
+		"hanzi": "女孩儿",
+		"traditional": "女孩兒",
+		"pinyin": "nǚháir",
+		"meanings": ["girl"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0279",
+		"hanzi": "女朋友",
+		"pinyin": "nǚpéngyou",
+		"meanings": ["girlfriend"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0280",
+		"hanzi": "女人",
+		"pinyin": "nǚrén",
+		"meanings": ["woman"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0281",
+		"hanzi": "女生",
+		"pinyin": "nǚshēng",
+		"meanings": ["schoolgirl", "female student"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0282",
+		"hanzi": "旁边",
+		"traditional": "旁邊",
+		"pinyin": "pángbiān",
+		"meanings": ["side"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0283",
+		"hanzi": "跑",
+		"pinyin": "pǎo",
+		"meanings": ["to run", "to escape"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0284",
+		"hanzi": "朋友",
+		"pinyin": "péngyou",
+		"meanings": ["friend"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0285",
+		"hanzi": "票",
+		"pinyin": "piào",
+		"meanings": ["ticket"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0286",
+		"hanzi": "七",
+		"pinyin": "qī",
+		"meanings": ["seven"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0287",
+		"hanzi": "起",
+		"pinyin": "qǐ",
+		"meanings": ["to rise", "to raise"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0288",
+		"hanzi": "起床",
+		"pinyin": "qǐ chuáng",
+		"meanings": ["to get out of bed"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0289",
+		"hanzi": "起来",
+		"traditional": "起來",
+		"pinyin": "qǐ lái",
+		"meanings": ["to get up", "to stand up"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0290",
+		"hanzi": "汽车",
+		"traditional": "汽車",
+		"pinyin": "qìchē",
+		"meanings": ["car", "automobile"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0291",
+		"hanzi": "前",
+		"pinyin": "qián",
+		"meanings": ["front", "before"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0292",
+		"hanzi": "前边",
+		"traditional": "前邊",
+		"pinyin": "qiánbian",
+		"meanings": ["the front side", "ahead"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0293",
+		"hanzi": "前天",
+		"pinyin": "qiántiān",
+		"meanings": ["the day before yesterday"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0294",
+		"hanzi": "钱",
+		"traditional": "錢",
+		"pinyin": "qián",
+		"meanings": ["coin", "money"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0295",
+		"hanzi": "钱包",
+		"traditional": "錢包",
+		"pinyin": "qiánbāo",
+		"meanings": ["purse", "wallet"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0296",
+		"hanzi": "请",
+		"traditional": "請",
+		"pinyin": "qǐng",
+		"meanings": ["please", "to invite"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0297",
+		"hanzi": "请假",
+		"traditional": "請假",
+		"pinyin": "qǐng jià",
+		"meanings": ["to request leave of absence"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0298",
+		"hanzi": "请进",
+		"traditional": "請進",
+		"pinyin": "qǐng jìn",
+		"meanings": ["please come in"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0299",
+		"hanzi": "请问",
+		"traditional": "請問",
+		"pinyin": "qǐngwèn",
+		"meanings": ["Excuse me, may I ask...?"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0300",
+		"hanzi": "请坐",
+		"traditional": "請坐",
+		"pinyin": "qǐng zuò",
+		"meanings": ["please, have a seat"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0301",
+		"hanzi": "球",
+		"pinyin": "qiú",
+		"meanings": ["ball", "sphere"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0302",
+		"hanzi": "去",
+		"pinyin": "qù",
+		"meanings": ["to go", "to send"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0303",
+		"hanzi": "去年",
+		"pinyin": "qùnián",
+		"meanings": ["last year"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0304",
+		"hanzi": "热",
+		"traditional": "熱",
+		"pinyin": "rè",
+		"meanings": ["hot", "to heat up"],
+		"pos": ["Adj", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0305",
+		"hanzi": "人",
+		"pinyin": "rén",
+		"meanings": ["person"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0306",
+		"hanzi": "认识",
+		"traditional": "認識",
+		"pinyin": "rènshi",
+		"meanings": ["to know someone", "to recognize"],
+		"pos": ["V", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0307",
+		"hanzi": "认真",
+		"traditional": "認真",
+		"pinyin": "rènzhēn",
+		"meanings": ["conscientious", "earnest"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0308",
+		"hanzi": "日",
+		"pinyin": "rì",
+		"meanings": ["sun", "day of the month"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0309",
+		"hanzi": "日期",
+		"pinyin": "rìqī",
+		"meanings": ["date"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0310",
+		"hanzi": "肉",
+		"pinyin": "ròu",
+		"meanings": ["meat", "flesh"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0311",
+		"hanzi": "三",
+		"pinyin": "sān",
+		"meanings": ["three"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0312",
+		"hanzi": "山",
+		"pinyin": "shān",
+		"meanings": ["mountain"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0313",
+		"hanzi": "商场",
+		"traditional": "商場",
+		"pinyin": "shāngchǎng",
+		"meanings": ["shopping mall", "shopping center"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0314",
+		"hanzi": "商店",
+		"pinyin": "shāngdiàn",
+		"meanings": ["store"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0315",
+		"hanzi": "上",
+		"pinyin": "shàng",
+		"meanings": ["to climb", "to attend"],
+		"pos": ["N", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0316",
+		"hanzi": "上班",
+		"pinyin": "shàng bān",
+		"meanings": ["to go to work", "to be on duty"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0317",
+		"hanzi": "上边",
+		"traditional": "上邊",
+		"pinyin": "shàngbian",
+		"meanings": ["the top", "above"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0318",
+		"hanzi": "上车",
+		"traditional": "上車",
+		"pinyin": "shàng chē",
+		"meanings": ["to get on or into"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0319",
+		"hanzi": "上次",
+		"pinyin": "shàng cì",
+		"meanings": ["last time"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0320",
+		"hanzi": "上课",
+		"traditional": "上課",
+		"pinyin": "shàng kè",
+		"meanings": ["to go to class", "to attend class"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0321",
+		"hanzi": "上网",
+		"traditional": "上網",
+		"pinyin": "shàng wǎng",
+		"meanings": ["to go online", "to connect to the Internet"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0322",
+		"hanzi": "上午",
+		"pinyin": "shàngwǔ",
+		"meanings": ["morning"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0323",
+		"hanzi": "上学",
+		"traditional": "上學",
+		"pinyin": "shàng xué",
+		"meanings": ["to go to school", "to attend school"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0324",
+		"hanzi": "少",
+		"pinyin": "shǎo",
+		"meanings": ["few", "less"],
+		"pos": ["Adj", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0325",
+		"hanzi": "谁",
+		"traditional": "誰",
+		"pinyin": "shéi/shuí",
+		"meanings": ["who"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0326",
+		"hanzi": "身上",
+		"pinyin": "shēnshang",
+		"meanings": ["on the body", "at hand"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0327",
+		"hanzi": "身体",
+		"traditional": "身體",
+		"pinyin": "shēntǐ",
+		"meanings": ["the body", "one's health"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0328",
+		"hanzi": "什么",
+		"traditional": "什麼",
+		"pinyin": "shénme",
+		"meanings": ["what"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0329",
+		"hanzi": "生病",
+		"pinyin": "shēng bìng",
+		"meanings": ["to get sick"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0330",
+		"hanzi": "生气",
+		"traditional": "生氣",
+		"pinyin": "shēng qì",
+		"meanings": ["to get angry", "vitality"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0331",
+		"hanzi": "生日",
+		"pinyin": "shēngrì",
+		"meanings": ["birthday"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0332",
+		"hanzi": "十",
+		"pinyin": "shí",
+		"meanings": ["ten"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0333",
+		"hanzi": "时候",
+		"traditional": "時候",
+		"pinyin": "shíhou",
+		"meanings": ["moment", "the time when"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0334",
+		"hanzi": "时间",
+		"traditional": "時間",
+		"pinyin": "shíjiān",
+		"meanings": ["time"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0335",
+		"hanzi": "事",
+		"pinyin": "shì",
+		"meanings": ["matter", "thing"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0336",
+		"hanzi": "试",
+		"traditional": "試",
+		"pinyin": "shì",
+		"meanings": ["to test", "to try"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0337",
+		"hanzi": "是",
+		"pinyin": "shì",
+		"meanings": ["to be", "correct"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0338",
+		"hanzi": "是不是",
+		"pinyin": "shì bu shì",
+		"meanings": ["is it or not?"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0339",
+		"hanzi": "手",
+		"pinyin": "shǒu",
+		"meanings": ["hand", "personal"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0340",
+		"hanzi": "手机",
+		"traditional": "手機",
+		"pinyin": "shǒujī",
+		"meanings": ["cell phone"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0341",
+		"hanzi": "书",
+		"traditional": "書",
+		"pinyin": "shū",
+		"meanings": ["book"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0342",
+		"hanzi": "书包",
+		"traditional": "書包",
+		"pinyin": "shūbāo",
+		"meanings": ["schoolbag", "satchel"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0343",
+		"hanzi": "书店",
+		"traditional": "書店",
+		"pinyin": "shūdiàn",
+		"meanings": ["bookstore"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0344",
+		"hanzi": "树",
+		"traditional": "樹",
+		"pinyin": "shù",
+		"meanings": ["tree", "to cultivate"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0345",
+		"hanzi": "水",
+		"pinyin": "shuǐ",
+		"meanings": ["water", "River"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0346",
+		"hanzi": "水果",
+		"pinyin": "shuǐguǒ",
+		"meanings": ["fruit"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0347",
+		"hanzi": "睡",
+		"pinyin": "shuì",
+		"meanings": ["to sleep", "to lie down"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0348",
+		"hanzi": "睡觉",
+		"traditional": "睡覺",
+		"pinyin": "shuì jiào",
+		"meanings": ["to go to bed", "to sleep"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0349",
+		"hanzi": "说",
+		"traditional": "說",
+		"pinyin": "shuō",
+		"meanings": ["to say"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0350",
+		"hanzi": "说话",
+		"traditional": "說話",
+		"pinyin": "shuō huà",
+		"meanings": ["to talk"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0351",
+		"hanzi": "四",
+		"pinyin": "sì",
+		"meanings": ["four"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0352",
+		"hanzi": "送",
+		"pinyin": "sòng",
+		"meanings": ["to send", "to give"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0353",
+		"hanzi": "岁",
+		"traditional": "歲",
+		"pinyin": "suì",
+		"meanings": ["years of age"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0354",
+		"hanzi": "他",
+		"pinyin": "tā",
+		"meanings": ["he", "him"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0355",
+		"hanzi": "他们",
+		"traditional": "他們",
+		"pinyin": "tāmen",
+		"meanings": ["they", "them"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0356",
+		"hanzi": "她",
+		"pinyin": "tā",
+		"meanings": ["she", "her"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0357",
+		"hanzi": "她们",
+		"traditional": "她們",
+		"pinyin": "tāmen",
+		"meanings": ["they, all women"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0358",
+		"hanzi": "太",
+		"pinyin": "tài",
+		"meanings": ["too", "excessively"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0359",
+		"hanzi": "天",
+		"pinyin": "tiān",
+		"meanings": ["day", "sky"],
+		"pos": ["N", "M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0360",
+		"hanzi": "天气",
+		"traditional": "天氣",
+		"pinyin": "tiānqì",
+		"meanings": ["weather"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0361",
+		"hanzi": "听",
+		"traditional": "聽",
+		"pinyin": "tīng",
+		"meanings": ["to listen to", "to heed"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0362",
+		"hanzi": "听到",
+		"traditional": "聽到",
+		"pinyin": "tīngdào",
+		"meanings": ["to hear"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0363",
+		"hanzi": "听见",
+		"traditional": "聽見",
+		"pinyin": "tīng jiàn",
+		"meanings": ["to catch a sound"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0364",
+		"hanzi": "听写",
+		"traditional": "聽寫",
+		"pinyin": "tīngxiě",
+		"meanings": ["to write down", "to transcribe by ear"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0365",
+		"hanzi": "同学",
+		"traditional": "同學",
+		"pinyin": "tóngxué",
+		"meanings": ["fellow student", "classmate"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0366",
+		"hanzi": "图书馆",
+		"traditional": "圖書館",
+		"pinyin": "túshūguǎn",
+		"meanings": ["library"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0367",
+		"hanzi": "外",
+		"pinyin": "wài",
+		"meanings": ["outside", "foreign"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0368",
+		"hanzi": "外边",
+		"traditional": "外邊",
+		"pinyin": "wàibian",
+		"meanings": ["the outside", "out there"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0369",
+		"hanzi": "外国",
+		"traditional": "外國",
+		"pinyin": "wàiguó",
+		"meanings": ["foreign country"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0370",
+		"hanzi": "外语",
+		"traditional": "外語",
+		"pinyin": "wàiyǔ",
+		"meanings": ["foreign language"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0371",
+		"hanzi": "玩儿",
+		"traditional": "玩兒",
+		"pinyin": "wánr",
+		"meanings": ["to play", "to have fun"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0372",
+		"hanzi": "晚",
+		"pinyin": "wǎn",
+		"meanings": ["late"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0373",
+		"hanzi": "晚饭",
+		"traditional": "晚飯",
+		"pinyin": "wǎnfàn",
+		"meanings": ["evening meal", "dinner"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0374",
+		"hanzi": "晚上",
+		"pinyin": "wǎnshang",
+		"meanings": ["evening", "at night"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0375",
+		"hanzi": "网上",
+		"traditional": "網上",
+		"pinyin": "wǎng shang",
+		"meanings": ["online"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0376",
+		"hanzi": "网友",
+		"traditional": "網友",
+		"pinyin": "wǎngyǒu",
+		"meanings": ["online friend", "netizen"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0377",
+		"hanzi": "忘",
+		"pinyin": "wàng",
+		"meanings": ["to forget"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0378",
+		"hanzi": "忘记",
+		"traditional": "忘記",
+		"pinyin": "wàngjì",
+		"meanings": ["to forget about"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0379",
+		"hanzi": "问",
+		"traditional": "問",
+		"pinyin": "wèn",
+		"meanings": ["to ask"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0380",
+		"hanzi": "我",
+		"pinyin": "wǒ",
+		"meanings": ["I", "me"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0381",
+		"hanzi": "我们",
+		"traditional": "我們",
+		"pinyin": "wǒmen",
+		"meanings": ["we", "us"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0382",
+		"hanzi": "五",
+		"pinyin": "wǔ",
+		"meanings": ["five"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0383",
+		"hanzi": "午饭",
+		"traditional": "午飯",
+		"pinyin": "wǔfàn",
+		"meanings": ["lunch"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0384",
+		"hanzi": "西",
+		"pinyin": "xī",
+		"meanings": ["west"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0385",
+		"hanzi": "西边",
+		"traditional": "西邊",
+		"pinyin": "xībian",
+		"meanings": ["the west side"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0386",
+		"hanzi": "洗",
+		"pinyin": "xǐ",
+		"meanings": ["to wash", "to develop"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0387",
+		"hanzi": "洗手间",
+		"traditional": "洗手間",
+		"pinyin": "xǐshǒujiān",
+		"meanings": ["toilet", "lavatory"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0388",
+		"hanzi": "喜欢",
+		"traditional": "喜歡",
+		"pinyin": "xǐhuan",
+		"meanings": ["to like"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0389",
+		"hanzi": "下",
+		"pinyin": "xià",
+		"meanings": ["to go down", "below"],
+		"pos": ["N", "V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0390",
+		"hanzi": "下班",
+		"pinyin": "xià bān",
+		"meanings": ["to finish work", "next service"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0391",
+		"hanzi": "下边",
+		"traditional": "下邊",
+		"pinyin": "xiàbian",
+		"meanings": ["under", "the underside"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0392",
+		"hanzi": "下车",
+		"traditional": "下車",
+		"pinyin": "xià chē",
+		"meanings": ["to get off a vehicle"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0393",
+		"hanzi": "下次",
+		"pinyin": "xià cì",
+		"meanings": ["next time"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0394",
+		"hanzi": "下课",
+		"traditional": "下課",
+		"pinyin": "xià kè",
+		"meanings": ["to finish class", "to get out of class"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0395",
+		"hanzi": "下午",
+		"pinyin": "xiàwǔ",
+		"meanings": ["afternoon", "p.m"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0396",
+		"hanzi": "下雨",
+		"pinyin": "xià yǔ",
+		"meanings": ["to rain"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0397",
+		"hanzi": "先",
+		"pinyin": "xiān",
+		"meanings": ["beforehand", "at first"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0398",
+		"hanzi": "先生",
+		"pinyin": "xiānsheng",
+		"meanings": ["Mr", "gentleman"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0399",
+		"hanzi": "现在",
+		"traditional": "現在",
+		"pinyin": "xiànzài",
+		"meanings": ["now"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0400",
+		"hanzi": "想",
+		"pinyin": "xiǎng",
+		"meanings": ["to think", "to desire"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0401",
+		"hanzi": "小",
+		"pinyin": "xiǎo",
+		"meanings": ["small", "tiny"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0402",
+		"hanzi": "小孩儿",
+		"traditional": "小孩兒",
+		"pinyin": "xiǎoháir",
+		"meanings": ["kid", "little one"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0403",
+		"hanzi": "小姐",
+		"pinyin": "xiǎojiě",
+		"meanings": ["young lady", "miss"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0404",
+		"hanzi": "小朋友",
+		"pinyin": "xiǎopéngyǒu",
+		"meanings": ["youngster"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0405",
+		"hanzi": "小时",
+		"traditional": "小時",
+		"pinyin": "xiǎoshí",
+		"meanings": ["hour"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0406",
+		"hanzi": "小学",
+		"traditional": "小學",
+		"pinyin": "xiǎoxué",
+		"meanings": ["elementary school"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0407",
+		"hanzi": "小学生",
+		"traditional": "小學生",
+		"pinyin": "xiǎoxuéshēng",
+		"meanings": ["primary school student", "schoolchild"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0408",
+		"hanzi": "笑",
+		"pinyin": "xiào",
+		"meanings": ["to laugh"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0409",
+		"hanzi": "写",
+		"traditional": "寫",
+		"pinyin": "xiě",
+		"meanings": ["to write"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0410",
+		"hanzi": "谢谢",
+		"traditional": "謝謝",
+		"pinyin": "xièxie",
+		"meanings": ["to thank", "thanks"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0411",
+		"hanzi": "新",
+		"pinyin": "xīn",
+		"meanings": ["new", "newly"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0412",
+		"hanzi": "新年",
+		"pinyin": "xīnnián",
+		"meanings": ["New Year"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0413",
+		"hanzi": "星期",
+		"pinyin": "xīngqī",
+		"meanings": ["week", "day of the week"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0414",
+		"hanzi": "星期日",
+		"pinyin": "xīngqīrì",
+		"meanings": ["Sunday"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0415",
+		"hanzi": "星期天",
+		"pinyin": "xīngqītiān",
+		"meanings": ["Sunday, colloquial"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0416",
+		"hanzi": "行",
+		"pinyin": "xíng",
+		"meanings": ["capable", "all right"],
+		"pos": ["V", "Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0417",
+		"hanzi": "休息",
+		"pinyin": "xiūxi",
+		"meanings": ["to rest"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0418",
+		"hanzi": "学",
+		"traditional": "學",
+		"pinyin": "xué",
+		"meanings": ["to learn"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0419",
+		"hanzi": "学生",
+		"traditional": "學生",
+		"pinyin": "xuéshēng",
+		"meanings": ["student", "schoolchild"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0420",
+		"hanzi": "学习",
+		"traditional": "學習",
+		"pinyin": "xuéxí",
+		"meanings": ["to study"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0421",
+		"hanzi": "学校",
+		"traditional": "學校",
+		"pinyin": "xuéxiào",
+		"meanings": ["school"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0422",
+		"hanzi": "学院",
+		"traditional": "學院",
+		"pinyin": "xuéyuàn",
+		"meanings": ["college", "educational institute"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0423",
+		"hanzi": "要",
+		"pinyin": "yào",
+		"meanings": ["to want", "will"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0424",
+		"hanzi": "爷爷",
+		"traditional": "爺爺",
+		"pinyin": "yéye",
+		"meanings": ["paternal grandfather"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0425",
+		"hanzi": "也",
+		"pinyin": "yě",
+		"meanings": ["also", "even"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0426",
+		"hanzi": "页",
+		"traditional": "頁",
+		"pinyin": "yè",
+		"meanings": ["page"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0427",
+		"hanzi": "一",
+		"pinyin": "yī",
+		"meanings": ["one"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0428",
+		"hanzi": "衣服",
+		"pinyin": "yīfu",
+		"meanings": ["clothes"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0429",
+		"hanzi": "医生",
+		"traditional": "醫生",
+		"pinyin": "yīshēng",
+		"meanings": ["doctor"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0430",
+		"hanzi": "医院",
+		"traditional": "醫院",
+		"pinyin": "yīyuàn",
+		"meanings": ["hospital"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0431",
+		"hanzi": "一半",
+		"pinyin": "yíbàn",
+		"meanings": ["one half"],
+		"pos": ["Num"],
+		"level": 1
+	},
+	{
+		"id": "L1-0432",
+		"hanzi": "一会儿",
+		"traditional": "一會兒",
+		"pinyin": "yíhuìr",
+		"meanings": ["a moment", "a while"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0433",
+		"hanzi": "一块儿",
+		"traditional": "一塊兒",
+		"pinyin": "yíkuàir",
+		"meanings": ["together"],
+		"pos": ["N", "Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0434",
+		"hanzi": "一下儿",
+		"traditional": "一下兒",
+		"pinyin": "yíxiàr",
+		"meanings": ["briefly", "once"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0435",
+		"hanzi": "一样",
+		"traditional": "一樣",
+		"pinyin": "yíyàng",
+		"meanings": ["same", "like"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0436",
+		"hanzi": "一边",
+		"traditional": "一邊",
+		"pinyin": "yìbiān",
+		"meanings": ["one side", "either side"],
+		"pos": ["N", "Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0437",
+		"hanzi": "一点儿",
+		"traditional": "一點兒",
+		"pinyin": "yìdiǎnr",
+		"meanings": ["a little", "a bit"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0438",
+		"hanzi": "一起",
+		"pinyin": "yìqǐ",
+		"meanings": ["the same place", "together"],
+		"pos": ["Adv", "N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0439",
+		"hanzi": "一些",
+		"pinyin": "yìxiē",
+		"meanings": ["some"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0440",
+		"hanzi": "用",
+		"pinyin": "yòng",
+		"meanings": ["to use", "to need"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0441",
+		"hanzi": "有",
+		"pinyin": "yǒu",
+		"meanings": ["to have", "having"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0442",
+		"hanzi": "有的",
+		"pinyin": "yǒude",
+		"meanings": ["some of them"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0443",
+		"hanzi": "有名",
+		"pinyin": "yǒu míng",
+		"meanings": ["famous", "well-known"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0444",
+		"hanzi": "有时候",
+		"traditional": "有時候",
+		"pinyin": "yǒushíhou",
+		"meanings": ["sometimes"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0445",
+		"hanzi": "有些",
+		"pinyin": "yǒu xiē",
+		"meanings": ["certain ones", "somewhat"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0446",
+		"hanzi": "有用",
+		"pinyin": "yǒuyòng",
+		"meanings": ["useful"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0447",
+		"hanzi": "右",
+		"pinyin": "yòu",
+		"meanings": ["right, the direction"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0448",
+		"hanzi": "右边",
+		"traditional": "右邊",
+		"pinyin": "yòubian",
+		"meanings": ["right side", "right, to the right"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0449",
+		"hanzi": "雨",
+		"pinyin": "yǔ",
+		"meanings": ["rain"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0450",
+		"hanzi": "元",
+		"pinyin": "yuán",
+		"meanings": ["yuan", "Chinese currency unit"],
+		"pos": ["M"],
+		"level": 1
+	},
+	{
+		"id": "L1-0451",
+		"hanzi": "远",
+		"traditional": "遠",
+		"pinyin": "yuǎn",
+		"meanings": ["far", "distant"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0452",
+		"hanzi": "月",
+		"pinyin": "yuè",
+		"meanings": ["moon", "month"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0453",
+		"hanzi": "再",
+		"pinyin": "zài",
+		"meanings": ["again", "further"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0454",
+		"hanzi": "再见",
+		"traditional": "再見",
+		"pinyin": "zàijiàn",
+		"meanings": ["goodbye"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0455",
+		"hanzi": "在",
+		"pinyin": "zài",
+		"meanings": ["at", "to be at"],
+		"pos": ["V", "Prep", "Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0456",
+		"hanzi": "在家",
+		"pinyin": "zàijiā",
+		"meanings": ["to be at home"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0457",
+		"hanzi": "早",
+		"pinyin": "zǎo",
+		"meanings": ["early", "morning"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0458",
+		"hanzi": "早饭",
+		"traditional": "早飯",
+		"pinyin": "zǎofàn",
+		"meanings": ["breakfast"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0459",
+		"hanzi": "早上",
+		"pinyin": "zǎoshang",
+		"meanings": ["early morning"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0460",
+		"hanzi": "怎么",
+		"traditional": "怎麼",
+		"pinyin": "zěnme",
+		"meanings": ["how?", "what?"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0461",
+		"hanzi": "站",
+		"pinyin": "zhàn",
+		"meanings": ["station", "website"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0462",
+		"hanzi": "找",
+		"pinyin": "zhǎo",
+		"meanings": ["to try to find", "to look for"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0463",
+		"hanzi": "找到",
+		"pinyin": "zhǎodào",
+		"meanings": ["to find"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0464",
+		"hanzi": "这",
+		"traditional": "這",
+		"pinyin": "zhè",
+		"meanings": ["this", "these"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0465",
+		"hanzi": "这边",
+		"traditional": "這邊",
+		"pinyin": "zhèbiān",
+		"meanings": ["this side", "over here"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0466",
+		"hanzi": "这里",
+		"traditional": "這裡",
+		"pinyin": "zhèlǐ",
+		"meanings": ["here"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0467",
+		"hanzi": "这儿",
+		"traditional": "這兒",
+		"pinyin": "zhèr",
+		"meanings": ["here, colloquial"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0468",
+		"hanzi": "这些",
+		"traditional": "這些",
+		"pinyin": "zhèxiē",
+		"meanings": ["these"],
+		"pos": ["Pron"],
+		"level": 1
+	},
+	{
+		"id": "L1-0469",
+		"hanzi": "着",
+		"traditional": "著",
+		"pinyin": "zhe",
+		"meanings": ["ongoing-action particle"],
+		"pos": ["Aux"],
+		"level": 1
+	},
+	{
+		"id": "L1-0470",
+		"hanzi": "真",
+		"pinyin": "zhēn",
+		"meanings": ["true", "real"],
+		"pos": ["Adv", "Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0471",
+		"hanzi": "真的",
+		"pinyin": "zhēn de",
+		"meanings": ["really", "truly"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0472",
+		"hanzi": "正",
+		"pinyin": "zhèng",
+		"meanings": ["straight", "upright"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0473",
+		"hanzi": "正在",
+		"pinyin": "zhèngzài",
+		"meanings": ["to be in the process of"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0474",
+		"hanzi": "知道",
+		"pinyin": "zhīdào",
+		"meanings": ["to know a fact"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0475",
+		"hanzi": "知识",
+		"traditional": "知識",
+		"pinyin": "zhīshi",
+		"meanings": ["knowledge", "intellectual"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0476",
+		"hanzi": "中",
+		"pinyin": "zhōng",
+		"meanings": ["within", "middle"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0477",
+		"hanzi": "中国",
+		"traditional": "中國",
+		"pinyin": "Zhōngguó",
+		"meanings": ["China"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0478",
+		"hanzi": "中间",
+		"traditional": "中間",
+		"pinyin": "zhōngjiān",
+		"meanings": ["the middle", "in the middle"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0479",
+		"hanzi": "中文",
+		"pinyin": "Zhōngwén",
+		"meanings": ["Chinese, especially written"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0480",
+		"hanzi": "中午",
+		"pinyin": "zhōngwǔ",
+		"meanings": ["noon", "midday"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0481",
+		"hanzi": "中学",
+		"traditional": "中學",
+		"pinyin": "zhōngxué",
+		"meanings": ["middle school"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0482",
+		"hanzi": "中学生",
+		"traditional": "中學生",
+		"pinyin": "zhōngxuéshēng",
+		"meanings": ["middle-school student", "high school student"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0483",
+		"hanzi": "重",
+		"pinyin": "zhòng",
+		"meanings": ["heavy", "serious"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0484",
+		"hanzi": "重要",
+		"pinyin": "zhòngyào",
+		"meanings": ["important"],
+		"pos": ["Adj"],
+		"level": 1
+	},
+	{
+		"id": "L1-0485",
+		"hanzi": "住",
+		"pinyin": "zhù",
+		"meanings": ["to live", "to stop"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0486",
+		"hanzi": "准备",
+		"traditional": "準備",
+		"pinyin": "zhǔnbèi",
+		"meanings": ["to prepare", "to intend"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0487",
+		"hanzi": "桌子",
+		"pinyin": "zhuōzi",
+		"meanings": ["table", "desk"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0488",
+		"hanzi": "字",
+		"pinyin": "zì",
+		"meanings": ["letter", "symbol"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0489",
+		"hanzi": "子",
+		"pinyin": "zi",
+		"meanings": ["noun suffix"],
+		"pos": ["Suffix"],
+		"level": 1
+	},
+	{
+		"id": "L1-0490",
+		"hanzi": "走",
+		"pinyin": "zǒu",
+		"meanings": ["to walk", "to leave"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0491",
+		"hanzi": "走路",
+		"pinyin": "zǒu lù",
+		"meanings": ["to go on foot"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0492",
+		"hanzi": "最",
+		"pinyin": "zuì",
+		"meanings": ["best or most extreme example", "to the highest degree"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0493",
+		"hanzi": "最好",
+		"pinyin": "zuìhǎo",
+		"meanings": ["best", "had better"],
+		"pos": ["Adv"],
+		"level": 1
+	},
+	{
+		"id": "L1-0494",
+		"hanzi": "最后",
+		"traditional": "最後",
+		"pinyin": "zuìhòu",
+		"meanings": ["final", "finally"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0495",
+		"hanzi": "昨天",
+		"pinyin": "zuótiān",
+		"meanings": ["yesterday"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0496",
+		"hanzi": "左",
+		"pinyin": "zuǒ",
+		"meanings": ["left"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0497",
+		"hanzi": "左边",
+		"traditional": "左邊",
+		"pinyin": "zuǒbian",
+		"meanings": ["the left side"],
+		"pos": ["N"],
+		"level": 1
+	},
+	{
+		"id": "L1-0498",
+		"hanzi": "坐",
+		"pinyin": "zuò",
+		"meanings": ["to sit", "to take a seat"],
+		"pos": ["V"],
+		"level": 1
+	},
+	{
+		"id": "L1-0499",
+		"hanzi": "坐下",
+		"pinyin": "zuò xia",
+		"meanings": ["to sit down"],
+		"pos": [],
+		"level": 1
+	},
+	{
+		"id": "L1-0500",
+		"hanzi": "做",
+		"pinyin": "zuò",
+		"meanings": ["to make", "to write"],
+		"pos": ["V"],
+		"level": 1
+	}
+]
