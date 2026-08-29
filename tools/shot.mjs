@@ -19,9 +19,16 @@ const flag = (n, d) => {
 };
 const has = (n) => args.includes(`--${n}`);
 
+// Playwright takes width/height nested under `viewport`; top-level w/h are silently ignored
+// and you get the 1280x720 default instead.
 const VP = {
-	mobile: { width: 375, height: 812, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
-	desktop: { width: 1440, height: 900, deviceScaleFactor: 2 }
+	mobile: {
+		viewport: { width: 375, height: 812 },
+		deviceScaleFactor: 2,
+		isMobile: true,
+		hasTouch: true
+	},
+	desktop: { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 }
 };
 const want = flag('viewports', 'mobile,desktop')
 	.split(',')
