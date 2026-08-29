@@ -1,0 +1,43 @@
+/*
+ * Shell-only document rules.
+ *
+ * The design system in `src/routes/layout.css` already owns the palette, the type stacks,
+ * the base element styling, the focus ring and the reduced-motion reset. This file adds only
+ * the three things a design system cannot express and a shell must guarantee:
+ *
+ *   1. the page can never scroll sideways,
+ *   2. the safe-area insets are readable as plain tokens, so no route has to spell out env(),
+ *   3. the sticky header has a published height that other layers can offset against.
+ *
+ * Everything sits in `@layer base` so any Tailwind utility still wins over it.
+ */
+
+@layer base {
+	:root {
+		/* Height of the sticky app bar, excluding the top inset it sits under. */
+		--app-header-h: 3.5rem;
+
+		/* Device insets, resolved once. `env()` is only valid in a property value, so a route
+		   that needs one — a sticky answer bar clearing the home indicator, say — reads these. */
+		--app-safe-top: env(safe-area-inset-top, 0px);
+		--app-safe-right: env(safe-area-inset-right, 0px);
+		--app-safe-bottom: env(safe-area-inset-bottom, 0px);
+		--app-safe-left: env(safe-area-inset-left, 0px);
+	}
+
+	html {
+		/*
+		 * `clip`, not `hidden`. Both stop a sideways scrollbar, but `hidden` turns the
+		 * viewport into a scroll container and breaks every `position: sticky` element in
+		 * the app — including this shell's header.
+		 */
+		overflow-x: clip;
+		/* Reserve the classic scrollbar always, so a short page and a tall one line up. */
+		scrollbar-gutter: stable;
+	}
+
+	body {
+		/* A stray long token — a URL, a run-on pinyin string — must never widen the page. */
+		overflow-wrap: break-word;
+	}
+}
