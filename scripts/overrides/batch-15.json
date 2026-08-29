@@ -1,0 +1,490 @@
+{
+	"L4-0402": {
+		"meanings": ["to tie a knot", "a knot"],
+		"note": "jié row: the knot senses. 'to bear fruit' belongs to the jiē reading of 结, not this card; 系 L4 already owns the bare 'to tie'."
+	},
+	"L4-0404": {
+		"meanings": ["conclusion", "a verdict"],
+		"note": "N row. CEDICT's list mixes in the verb 'to conclude'; the card is the noun a learner meets in 得出结论."
+	},
+	"L4-0405": {
+		"meanings": ["sisters"],
+		"note": "N row. CEDICT's 'sister city/school' sense is not met at L4; one clean gloss is enough."
+	},
+	"L4-0406": {
+		"meanings": ["to explain", "to interpret"],
+		"note": "V row, so the noun 'explanation' cannot lead. 说明 sits at L2, so 'to explain' is free within L4."
+	},
+	"L4-0407": {
+		"meanings": ["as soon as possible", "as quickly as one can"],
+		"note": "Adv row. The English a learner actually says is 'as soon as possible'; CEDICT's clause 2 was being dropped."
+	},
+	"L4-0409": {
+		"meanings": ["to do all one can", "to try one's best"],
+		"note": "Verb phrase 尽+力. 'to strive one's hardest' is register-heavy for a beginner card."
+	},
+	"L4-0410": {
+		"meanings": ["to import", "imported goods"],
+		"note": "V/N row. The 'inlet for air or water' sense is technical; the trade sense is the L4 one."
+	},
+	"L4-0411": {
+		"meanings": ["recent history", "early modern times"],
+		"note": "N row. 'the not-very-distant past' is unusable copy, and plain 'modern times' is 现代 at L3."
+	},
+	"L4-0412": {
+		"meanings": ["to prohibit", "to forbid"],
+		"note": "V row; the machine pick was already right, kept and trimmed to two senses."
+	},
+	"L4-0415": {
+		"meanings": ["unexpectedly", "to one's surprise"],
+		"note": "Adv row. 'in spite of everything' reads as a different word; 竟然 marks surprise at what happened."
+	},
+	"L4-0416": {
+		"meanings": ["camera lens", "a shot in a film"],
+		"note": "N row. Keeps both senses a learner meets, with the film sense spelled out rather than left as bare 'shot'."
+	},
+	"L4-0417": {
+		"meanings": ["mirror", "looking glass"],
+		"note": "N row; the object itself. Depends on 反映 (L4-0231) leading with 'to reflect' rather than 'to mirror'."
+	},
+	"L4-0418": {
+		"meanings": ["exactly", "after all"],
+		"note": "Adv row. 究竟 sharpens a question — 你究竟想要什么 'what exactly do you want' — so lead with 'exactly', not CEDICT's noun senses."
+	},
+	"L4-0420": {
+		"meanings": ["resident", "inhabitant"],
+		"note": "N row. CEDICT's clause 2 was dropped by the splitter; both senses are one short card."
+	},
+	"L4-0421": {
+		"meanings": ["to reside", "to live in a place"],
+		"note": "V row. 'to dwell' is literary; the second gloss says where 住 differs from 生活."
+	},
+	"L4-0422": {
+		"meanings": ["a government bureau", "situation"],
+		"note": "N row. Bare 'office' answers to 办公室 at L2; 局 is the bureau in 邮局 and the state of play in 局面."
+	},
+	"L4-0423": {
+		"meanings": ["huge", "enormous"],
+		"note": "Adj row. CEDICT piles four synonyms into one clause; two is what a card can hold."
+	},
+	"L4-0424": {
+		"meanings": ["to be equipped with", "to possess"],
+		"note": "V row. 具备 is about meeting requirements, which 'to have' (具有 L3) does not convey."
+	},
+	"L4-0425": {
+		"meanings": ["distance", "to be apart from"],
+		"note": "V/N row, so the noun may lead — and 距离 is met first as a noun (两地的距离)."
+	},
+	"L4-0426": {
+		"meanings": ["to come together", "to meet up"],
+		"note": "V row. 集合 already ships 'to gather together' at L4, so this one takes the plainer wording."
+	},
+	"L4-0428": {
+		"meanings": ["to roll up"],
+		"note": "juǎn row, V. CC-CEDICT keys nothing to this row; the rolling sense is the whole card."
+	},
+	"L4-0429": {
+		"meanings": ["measure word: books and volumes", "an exam paper"],
+		"note": "juàn row, M. Rolls belong to the juǎn card (L4-0428); juàn counts volumes and names an exam script."
+	},
+	"L4-0430": {
+		"meanings": ["role", "a part in a play"],
+		"note": "N row. CEDICT's alternate reading note is not learner copy."
+	},
+	"L4-0431": {
+		"meanings": ["to bloom", "to blossom"],
+		"note": "The literal sense only; CEDICT's three fig. senses (to burst, to burst with joy, to spring up) are excluded."
+	},
+	"L4-0434": {
+		"meanings": ["it seems", "apparently"],
+		"note": "No official POS; 看来 opens a judgement, so lead with the clause a learner would say."
+	},
+	"L4-0435": {
+		"meanings": ["to visit someone", "to call on"],
+		"note": "V row. 看望 is visiting a person, unlike 参观 (a place) at L2 — the gloss has to say so."
+	},
+	"L4-0436": {
+		"meanings": ["to investigate on the spot", "to inspect"],
+		"note": "V/N row. 考察 is fieldwork, which bare 'to inspect' (检查 L2) does not distinguish."
+	},
+	"L4-0437": {
+		"meanings": ["to consider", "to think over"],
+		"note": "V row. 'to consider' is the answer a learner gives; the noun 'consideration' cannot lead a V card."
+	},
+	"L4-0438": {
+		"meanings": ["measure word: trees and plants"],
+		"note": "M row. The classifier reading is the whole card; commas inside would read as separate senses."
+	},
+	"L4-0439": {
+		"meanings": ["so it is clear that", "which shows that"],
+		"note": "Conj row. Says what 可见 does to the sentence that follows instead of naming a grammar class."
+	},
+	"L4-0440": {
+		"meanings": ["space", "room to move"],
+		"note": "N row. The astronomy and maths senses are out of level; 'scope' was a fig. reading."
+	},
+	"L4-0441": {
+		"meanings": ["vacant", "to leave blank"],
+		"note": "kòng row, V/Adj. 空 kōng 'empty' is the L3 card; kòng is the unoccupied space and the act of leaving it."
+	},
+	"L4-0442": {
+		"meanings": ["pocket", "a cloth sack"],
+		"note": "N row. Bare 'bag' answers to 袋 at the same level, so the second sense is spelled out."
+	},
+	"L4-0443": {
+		"meanings": ["spoken language", "everyday speech"],
+		"note": "N row. 'colloquial speech' leads with a register label; CEDICT's 'slander/gossip' senses are excluded."
+	},
+	"L4-0444": {
+		"meanings": ["bitter", "hard to bear"],
+		"note": "Adj row, so the noun 'hardship' and the verb 'to suffer' cannot lead."
+	},
+	"L4-0445": {
+		"meanings": ["accountant", "accounting"],
+		"note": "N row; the person first, since that is how 会计 is used of someone's job."
+	},
+	"L4-0447": {
+		"meanings": ["wide"],
+		"note": "Adj row. One gloss keeps 'broad' free for 宽广 at the same level."
+	},
+	"L4-0450": {
+		"meanings": ["to expand", "to enlarge"],
+		"note": "V row. Paired deliberately with 扩展 below so the two L4 cards do not answer to the same English."
+	},
+	"L4-0451": {
+		"meanings": ["to extend", "to broaden"],
+		"note": "V row. 扩展 is reaching further out, 扩大 is growing bigger; the glosses are split along that line."
+	},
+	"L4-0452": {
+		"meanings": ["parentheses", "brackets"],
+		"note": "N row; CEDICT's clause 2 was being dropped by the splitter."
+	},
+	"L4-0453": {
+		"meanings": ["trash", "garbage"],
+		"note": "N row. CEDICT's '(coll.) of poor quality' sense is excluded from a beginner card."
+	},
+	"L4-0454": {
+		"meanings": ["to pull open", "to pull apart"],
+		"note": "No official POS. The physical senses only; 'to increase (a gap)' is figurative."
+	},
+	"L4-0455": {
+		"meanings": ["spicy", "hot in taste"],
+		"note": "Adj row. 'hot' alone would answer to 热 at L1; 辣 is the chilli sense."
+	},
+	"L4-0456": {
+		"meanings": ["there is not enough time", "too late to do it"],
+		"note": "V row that has no 'to …' form in English; the clause is the honest gloss, split from 来得及."
+	},
+	"L4-0457": {
+		"meanings": ["there is still time", "to be able to make it"],
+		"note": "V row, the positive twin of 来不及 — worded so the two cards cannot be confused in a quiz."
+	},
+	"L4-0460": {
+		"meanings": ["one's hometown", "native place"],
+		"note": "N row. 老家 is where the family is from; the possessive keeps it apart from 家乡 at L3."
+	},
+	"L4-0463": {
+		"meanings": ["pleasure", "delight"],
+		"note": "N row. CEDICT's clause 2 and 3 were dropped; 乐趣 is the enjoyment something gives."
+	},
+	"L4-0464": {
+		"meanings": ["tears from the eyes"],
+		"note": "Bound N. 眼泪 and 泪水 sit at the same level, so this card has to name the thing without stealing their gloss."
+	},
+	"L4-0466": {
+		"meanings": ["type", "category"],
+		"note": "N row. The programming sense is out of level; 种类 keeps 'kind' at the same level."
+	},
+	"L4-0468": {
+		"meanings": ["centimeter"],
+		"note": "Unit M row, glossed like 米 and 公斤 elsewhere in the corpus — the unit name, not a classifier phrase."
+	},
+	"L4-0469": {
+		"meanings": ["cannot do without", "cannot be separated from"],
+		"note": "No official POS. 离不开 is what you cannot manage without; 'inseparable' reads as an adjective about two things."
+	},
+	"L4-0472": {
+		"meanings": ["immediately", "without delay"],
+		"note": "Adv row. Second gloss added so the card carries more than a one-word synonym of 立刻."
+	},
+	"L4-0475": {
+		"meanings": ["the two of them"],
+		"note": "Colloquial contraction of 两个. CEDICT leads with a bracketed equivalence, not a gloss."
+	},
+	"L4-0476": {
+		"meanings": ["good", "in good condition"],
+		"note": "Adj row. 良好 describes a state or a rating, which the second gloss pins down."
+	},
+	"L4-0477": {
+		"meanings": ["to measure"],
+		"note": "liáng row, V. One gloss; 测量 at the same level takes 'to survey'."
+	},
+	"L4-0479": {
+		"meanings": ["either side", "both sides"],
+		"note": "N row. Leads with 'either side' so it is not the same answer as 双方 'both sides' of a dispute."
+	},
+	"L4-0480": {
+		"meanings": ["to recuperate", "to rest and get well"],
+		"note": "V row. 'to convalesce' is above a learner's English; 'to get well' alone loses the resting."
+	},
+	"L4-0481": {
+		"meanings": ["amazing", "extraordinary"],
+		"note": "Adj row; the everyday compliment 真了不起."
+	},
+	"L4-0482": {
+		"meanings": ["to know well", "to find out about"],
+		"note": "V row. CC-CEDICT keys nothing here. 理解 L3 holds 'to comprehend'; 了解 is knowing about something."
+	},
+	"L4-0483": {
+		"meanings": ["to set out in a row", "measure word: trains"],
+		"note": "V/M row. Worded away from 排列 'to arrange in order' at the same level."
+	},
+	"L4-0484": {
+		"meanings": ["railway train"],
+		"note": "N row. Bare 'train' is 火车 at L1; 列车 is the railway service word."
+	},
+	"L4-0486": {
+		"meanings": ["to be classified as", "to be listed as"],
+		"note": "No official POS. Second gloss added because the single CEDICT clause is the whole entry."
+	},
+	"L4-0487": {
+		"meanings": ["temporary", "at the last moment"],
+		"note": "Adj/Adv row. 'as the time draws near' is not a gloss a learner can answer with; both real senses kept."
+	},
+	"L4-0488": {
+		"meanings": ["snack", "food between meals"],
+		"note": "N row. Second gloss says what kind of snack, since 快餐 holds 'snack' loosely at L2."
+	},
+	"L4-0489": {
+		"meanings": ["to be handed down", "to circulate widely"],
+		"note": "V row. Bare 'to spread' is 传播 at L3; 流传 is passing down through time."
+	},
+	"L4-0492": {
+		"meanings": ["one after another over time", "in a steady stream"],
+		"note": "Adv row. 'in turn' suggests taking turns; the wording also keeps 陆续 apart from 纷纷 at the same level, which is the many-at-once word."
+	},
+	"L4-0495": {
+		"meanings": ["a round or turn", "to take turns", "measure word: rounds"],
+		"note": "N/V/M row. 'wheel' is 轮子 at the same level, so the noun gloss is the round-of-events sense."
+	},
+	"L4-0496": {
+		"meanings": ["steamship"],
+		"note": "N row; the CL: marker was the only other clause CEDICT offered."
+	},
+	"L4-0499": {
+		"meanings": ["academic paper", "thesis"],
+		"note": "N row. Bare 'paper' would answer to 纸; 'treatise' is register-heavy."
+	},
+	"L4-0500": {
+		"meanings": ["to fall", "to drop down"],
+		"note": "luò row, V. CEDICT lists eleven senses; the two a learner meets at L4 are falling and dropping."
+	},
+	"L4-0504": {
+		"meanings": ["that's right", "you can't go wrong"],
+		"note": "No official POS. Confirming reply; CEDICT's 'sure!' and 'rest assured!' are exclamations, not senses."
+	},
+	"L4-0505": {
+		"meanings": ["there is no way to do it", "nothing can be done"],
+		"note": "V row with no 'to …' form in English. CEDICT marks every clause (coll.); the content is fine, the label is not."
+	},
+	"L4-0506": {
+		"meanings": ["did not expect"],
+		"note": "No official POS. One clause is the whole entry; the contraction is spelled out for legibility."
+	},
+	"L4-0507": {
+		"meanings": ["American dollars", "US currency"],
+		"note": "N row. CC-CEDICT keys nothing here; 'American' keeps it apart from 美元 'US dollar' at L3."
+	},
+	"L4-0509": {
+		"meanings": ["a dream while asleep"],
+		"note": "N/V row. 做梦 'to dream' normalises to the same answer as a bare 'a dream', so this card names the sleeping kind; 梦想 holds the ambition sense."
+	},
+	"L4-0510": {
+		"meanings": ["to dream about", "to see in a dream"],
+		"note": "Dreaming of something while asleep, as against 梦想's waking ambition."
+	},
+	"L4-0511": {
+		"meanings": ["a cherished dream", "to dream of"],
+		"note": "V/N row. Leads with the noun so it is not confused with 梦 'a dream' or 梦见; CEDICT's only verb clause is marked fig."
+	},
+	"L4-0512": {
+		"meanings": ["a secret", "confidential"],
+		"note": "Adj/N row. Shipping 'secret' and 'a secret' together was one sense written twice."
+	},
+	"L4-0514": {
+		"meanings": ["dense", "closely packed"],
+		"note": "Adj row. The bound 'secret' sense belongs to 秘密/密码; the Internet-slang sense is excluded."
+	},
+	"L4-0515": {
+		"meanings": ["password", "secret code"],
+		"note": "N row. A learner meets 密码 at a cash machine or a login, so the password sense leads."
+	},
+	"L4-0516": {
+		"meanings": ["closely connected", "to strengthen ties"],
+		"note": "Adj/V row. Bare 'close' is already spoken for by 亲密 and 紧密 at this level."
+	},
+	"L4-0517": {
+		"meanings": ["free of charge"],
+		"note": "No official POS. 'free' alone would read as free-as-in-liberty."
+	},
+	"L4-0518": {
+		"meanings": ["to be faced with", "to confront"],
+		"note": "V row. 面对 L3 holds 'to face'; 面临 is being confronted by a situation."
+	},
+	"L4-0522": {
+		"meanings": ["a famous brand", "a name tag"],
+		"note": "N row. CEDICT only records this as the erhua form of 名牌, which is not a gloss."
+	},
+	"L4-0525": {
+		"meanings": ["to feel with the hand", "to stroke"],
+		"note": "V row. Bare 'to touch' is 着 zháo at the same level; CEDICT's 'to steal' sense is excluded."
+	},
+	"L4-0528": {
+		"meanings": ["the end", "the final stage"],
+		"note": "N row. The powder and opera-role senses are out of level."
+	},
+	"L4-0529": {
+		"meanings": ["silently", "without a word"],
+		"note": "Adv row, so an adverb has to lead; 'in silence' reads as a noun phrase."
+	},
+	"L4-0531": {
+		"meanings": ["adds emphasis at sentence end"],
+		"note": "Particle. Describes what 哪 does to a sentence rather than naming a grammar category."
+	},
+	"L4-0534": {
+		"meanings": ["hard to avoid", "bound to happen"],
+		"note": "Adj row. 'difficult to escape from' reads as being trapped; 难免 is about inevitability."
+	},
+	"L4-0535": {
+		"meanings": ["head", "brains"],
+		"note": "N row. 'skull' is the bone; 脑袋 is the head and, by extension, the wits in it."
+	},
+	"L4-0536": {
+		"meanings": ["noisy", "to make a racket"],
+		"note": "Adj/V row. 'cacophonous' is not a word a learner can answer with."
+	},
+	"L4-0538": {
+		"meanings": ["the interior", "internal"],
+		"note": "N row. 内部 is the inside of an organization or object, not the location word 里面 at L3."
+	},
+	"L4-0539": {
+		"meanings": ["internal medicine"],
+		"note": "N row; the hospital department a learner is sent to."
+	},
+	"L4-0541": {
+		"meanings": ["peaceful and quiet", "serene"],
+		"note": "Adj row. The noun 'tranquility' cannot lead an Adj card, and 平静 at this level takes 'calm'."
+	},
+	"L4-0542": {
+		"meanings": ["concentrated", "strong in flavor"],
+		"note": "Adj row. 'thick' is 厚 at the same level; 浓 is strength of a liquid, smoke or smell."
+	},
+	"L4-0544": {
+		"meanings": ["central heating", "a radiator"],
+		"note": "N row. 'warm air' is the literal reading, not what 暖气 names in a flat."
+	},
+	"L4-0545": {
+		"meanings": ["to take a photo", "to photograph"],
+		"note": "Verb phrase 拍+照; kept apart from 照相 'to take a photograph' at L2."
+	},
+	"L4-0547": {
+		"meanings": ["a sign or plate", "brand", "playing cards"],
+		"note": "N row. Three senses because 打牌, 名牌 and 门牌 are all met at L4; the poetry-form sense is not."
+	},
+	"L4-0548": {
+		"meanings": ["a tray or flat dish", "measure word: games"],
+		"note": "N/M row. 盘子 at the same level takes 'a plate'; the finance and computing senses are bound forms."
+	},
+	"L4-0549": {
+		"meanings": ["a plate", "a serving dish"],
+		"note": "N row. Split from 盘 above so the two cards do not answer to the same English."
+	},
+	"L4-0551": {
+		"meanings": ["to train staff or students", "to give training"],
+		"note": "V row. 训练 L3 holds 'to train'; 培训 is instruction in a skill, hence 培训班."
+	},
+	"L4-0555": {
+		"meanings": ["measure word: batches", "to approve in writing"],
+		"note": "Merged V/M rows. The classifier is what a learner meets first (一批学生); the verb is the 批文件 sense."
+	},
+	"L4-0558": {
+		"meanings": ["moral character", "quality of a product"],
+		"note": "N row. Split from 质量 at the same level, which takes plain 'quality'."
+	},
+	"L4-0559": {
+		"meanings": ["square meter", "the square of a number"],
+		"note": "N/M row. 五十平方 means fifty square metres in speech; the maths sense is the second."
+	},
+	"L4-0560": {
+		"meanings": ["calm", "tranquil"],
+		"note": "Adj row. 'peaceful' is 安静's second gloss; 冷静 at this level is level-headedness, 平静 is stillness."
+	},
+	"L4-0561": {
+		"meanings": ["average", "shared out evenly"],
+		"note": "V/Adj row. The verb sense is dividing something equally, which 'evenly' alone does not say."
+	},
+	"L4-0562": {
+		"meanings": ["smooth", "steady and even"],
+		"note": "Adj row. 稳定 at the same level takes 'steady'; 平稳 is a ride or a trend without jolts."
+	},
+	"L4-0563": {
+		"meanings": ["urgent", "pressing"],
+		"note": "Adj row. CEDICT's clause 2 was being dropped; both words are ones a learner has."
+	},
+	"L4-0566": {
+		"meanings": ["to look forward to", "to await"],
+		"note": "V row, so the noun 'expectation' cannot lead."
+	},
+	"L4-0567": {
+		"meanings": ["duration", "period of time"],
+		"note": "N row. Leads with 'duration' because 期 at L3 already ships 'period of time'."
+	},
+	"L4-0569": {
+		"meanings": ["time limit", "deadline"],
+		"note": "N row; the two senses a learner meets, with the CL: clause dropped."
+	},
+	"L4-0571": {
+		"meanings": ["the rest", "the others"],
+		"note": "Pron row. 'remainder' is arithmetic; 其余 points at the people or things left over."
+	},
+	"L4-0572": {
+		"meanings": ["business enterprise", "a firm"],
+		"note": "N row. Bare 'company' is 公司 at L2; 企业 is the enterprise as an economic unit."
+	},
+	"L4-0574": {
+		"meanings": ["a fizzy soft drink", "soda"],
+		"note": "N row. 'soda pop' is regional; the leading gloss describes the drink."
+	},
+	"L4-0576": {
+		"meanings": ["a body organ"],
+		"note": "N row. Unqualified 'organ' reads as the instrument; the physiology label is not learner copy."
+	},
+	"L4-0577": {
+		"meanings": ["in front", "the front part"],
+		"note": "N row. 'at the head' reads as leadership; 前头 is a position."
+	},
+	"L4-0578": {
+		"meanings": ["future prospects", "outlook"],
+		"note": "N row. 未来 at the same level holds plain 'future'; 前途 is what lies ahead for someone."
+	},
+	"L4-0579": {
+		"meanings": ["shallow", "light in color"],
+		"note": "Adj row. CEDICT's colour sense was a bare parenthetical, which cannot ship."
+	},
+	"L4-0581": {
+		"meanings": ["to cut", "to slice"],
+		"note": "qiē row, V. The maths 'tangential' sense is out of level."
+	},
+	"L4-0582": {
+		"meanings": ["dear", "beloved"],
+		"note": "Adj row; the 亲爱的 of a letter's opening."
+	},
+	"L4-0585": {
+		"meanings": ["relaxed", "easy and unhurried"],
+		"note": "Adj row. 'light, gentle' is the character-by-character reading; 轻松 is being free of pressure."
+	},
+	"L4-0586": {
+		"meanings": ["easily", "rashly"],
+		"note": "Adj/Adv row, and 轻易 is nearly always adverbial (不要轻易相信). 'easy' alone answers to 容易."
+	}
+}
