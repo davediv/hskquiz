@@ -48,17 +48,35 @@ export interface Word {
 /** Which way a question runs. */
 export type Direction = 'hanzi-to-meaning' | 'meaning-to-hanzi';
 
-/** Per-word learning record, persisted to localStorage. */
+/**
+ * Per-word learning record, persisted to localStorage.
+ *
+ * `seen` counts ANSWERS, not appearances. A word's first card teaches it and asks nothing, and
+ * that card stamps `lastSeen` alone — so `seen === 0 && lastSeen > 0` is one exposure and no
+ * answer, a shape `applyAnswer` can never produce because it always bumps the two together.
+ * `src/lib/session/record.ts` is the one place that reading lives.
+ */
 export interface WordProgress {
 	wordId: string;
+	/** Answers given. An introduction is not an answer, so it does not appear here. */
 	seen: number;
 	correct: number;
 	/** Consecutive correct answers; resets to 0 on a miss. */
 	streak: number;
-	/** Epoch ms of the last answer, or 0 if never answered. */
+	/** Epoch ms of the last time the word was shown — answered or merely introduced. */
 	lastSeen: number;
 	/** Epoch ms of the last incorrect answer, or 0 if never missed. */
 	lastMissed: number;
+	/**
+	 * The reset generation this record was written under; absent means 0.
+	 *
+	 * Owned by `src/lib/progress/progress-core.ts`, which is the only thing that reads or
+	 * writes it — but it is declared here because it rides inside the record through every
+	 * spread, merge, `$state` proxy and JSON round trip, and a reader of this file should be
+	 * able to see that it exists. Left off the object entirely at 0, so a learner who has never
+	 * reset stores byte-identical bytes to a build that predates generations.
+	 */
+	gen?: number;
 }
 
 /** One question in a session. */
@@ -83,6 +101,6 @@ export interface Session {
 export interface ProgressState {
 	version: number;
 	byWord: Record<string, WordProgress>;
-	/** Per-level session counters, for the level-select screen. */
-	levels: Partial<Record<Level, { sessions: number; lastPlayed: number }>>;
+	/** Per-level session counters, for the level-select screen. `gen` as on `WordProgress`. */
+	levels: Partial<Record<Level, { sessions: number; lastPlayed: number; gen?: number }>>;
 }
