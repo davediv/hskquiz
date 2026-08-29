@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { EXPLORE_SHARE, WEIGHTS, familiarity, wordWeight } from './weighting';
+import { EXPLORE_SHARE, WEIGHTS, leechBrake, wordWeight } from './weighting';
 import { DAY, HOUR, mastered, record, shaky } from './test-fixtures';
 
 const NOW = 1_700_000_000_000;
@@ -71,13 +71,25 @@ describe('wordWeight', () => {
 		expect(wordWeight(missedJustNow, NOW)).toBeGreaterThan(
 			wordWeight(oldAndOftenMissed, NOW) * 0.5
 		);
-		// …and with the same recency, the more-missed word wins.
-		const sameDayOften = record('c', {
+		// …and with the same recency, the more-missed word wins — up to the point where being
+		// missed *this* often stops meaning "drill me" and starts meaning "rest me": at 15
+		// misses the leech brake pulls the same record back under the word missed once.
+		const missedFiveOfSix = record('c', {
+			seen: 6,
+			correct: 1,
+			streak: 0,
+			lastSeen: NOW - 60_000,
+			lastMissed: NOW - 60_000
+		});
+		expect(wordWeight(missedFiveOfSix, NOW)).toBeGreaterThan(wordWeight(missedJustNow, NOW));
+
+		const leechToday = record('d', {
 			...oldAndOftenMissed,
 			lastSeen: NOW - 60_000,
 			lastMissed: NOW - 60_000
 		});
-		expect(wordWeight(sameDayOften, NOW)).toBeGreaterThan(wordWeight(missedJustNow, NOW));
+		expect(wordWeight(leechToday, NOW)).toBeLessThan(wordWeight(missedJustNow, NOW));
+		expect(wordWeight(leechToday, NOW)).toBeGreaterThan(wordWeight(mastered('e', NOW, DAY), NOW));
 	});
 
 	it('rests a word answered correctly moments ago, but never one just missed', () => {
@@ -120,10 +132,76 @@ describe('wordWeight', () => {
 	});
 });
 
-describe('familiarity', () => {
-	it('ranks unseen below seen, and seen below mastered', () => {
-		expect(familiarity(undefined)).toBeLessThan(familiarity(shaky('a', NOW)));
-		expect(familiarity(shaky('a', NOW))).toBeLessThan(familiarity(mastered('b', NOW)));
+describe('the leech brake', () => {
+	const missedNDaysAgo = (seen: number, misses: number, days = 2) =>
+		record('w', {
+			seen,
+			correct: seen - misses,
+			streak: 0,
+			lastSeen: NOW - days * DAY,
+			lastMissed: NOW - days * DAY
+		});
+
+	it('leaves an ordinary run of misses completely alone', () => {
+		for (let misses = 0; misses <= WEIGHTS.leechLapses; misses++) {
+			expect(leechBrake(misses)).toBe(1);
+		}
+	});
+
+	it('keeps pulling a word down the more the learner fails it', () => {
+		const brakes = [7, 10, 20, 40].map(leechBrake);
+		for (let i = 1; i < brakes.length; i++) expect(brakes[i]).toBeLessThan(brakes[i - 1]);
+		expect(brakes[0]).toBeLessThan(1);
+	});
+
+	it('never brakes all the way to unreachable', () => {
+		expect(leechBrake(1000)).toBe(WEIGHTS.leechFloor);
+		expect(leechBrake(Number.POSITIVE_INFINITY)).toBe(1);
+	});
+
+	// The whole point: without this, `missed 1 of 1` and `missed 20 of 20` are the same number,
+	// because the error rate saturates at 1.0 on the first miss.
+	it('separates a word missed once from a word missed twenty times', () => {
+		const once = wordWeight(missedNDaysAgo(1, 1), NOW);
+		const twenty = wordWeight(missedNDaysAgo(20, 20), NOW);
+		const sixty = wordWeight(missedNDaysAgo(60, 60), NOW);
+		expect(twenty).toBeLessThan(once / 10);
+		expect(sixty).toBeLessThan(twenty);
+		expect(sixty).toBeGreaterThan(0);
+	});
+
+	it('still puts a leech ahead of a word the learner has mastered', () => {
+		expect(wordWeight(missedNDaysAgo(20, 20), NOW)).toBeGreaterThan(
+			wordWeight(mastered('b', NOW, DAY), NOW)
+		);
+	});
+
+	it('lets a word climb back out as soon as the misses stop', () => {
+		const stuck = wordWeight(missedNDaysAgo(20, 20), NOW);
+		const recovering = wordWeight(
+			record('w', {
+				seen: 26,
+				correct: 6,
+				streak: 6,
+				lastSeen: NOW - DAY,
+				lastMissed: NOW - 7 * DAY
+			}),
+			NOW
+		);
+		expect(recovering).toBeLessThan(stuck);
+	});
+});
+
+describe('wordWeight — corrupt records', () => {
+	it('reads a non-finite field as no information rather than as a NaN weight', () => {
+		const fields = ['seen', 'correct', 'streak', 'lastSeen', 'lastMissed'] as const;
+		for (const field of fields) {
+			for (const value of [Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY]) {
+				const weight = wordWeight({ ...shaky('w', NOW, HOUR), [field]: value }, NOW);
+				expect(Number.isFinite(weight)).toBe(true);
+				expect(weight).toBeGreaterThan(0);
+			}
+		}
 	});
 });
 

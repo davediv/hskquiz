@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import type { Direction, Session, Word } from '../types';
-import { CHOICE_COUNT, SESSION_SIZE, buildSession, isCorrect, mulberry32 } from './index';
+import type { Direction, Question, Session, Word } from '../types';
+import {
+	CHOICE_COUNT,
+	SESSION_SIZE,
+	buildSession,
+	cardKind,
+	cardKindFor,
+	isCorrect,
+	isIntroduction,
+	isScored,
+	mulberry32
+} from './index';
 import { sharesSense } from './distractors';
 import { HOUR, makeLevel, mastered, progressState, record, shaky } from './test-fixtures';
 
@@ -62,11 +72,29 @@ describe('buildSession — shape', () => {
 		}
 	});
 
-	it('mixes both directions, evenly', () => {
-		const counts = new Map<Direction, number>();
-		for (const q of session.questions) counts.set(q.direction, (counts.get(q.direction) ?? 0) + 1);
-		expect(counts.get('hanzi-to-meaning')).toBe(5);
-		expect(counts.get('meaning-to-hanzi')).toBe(5);
+	it('gives every card a direction a renderer that ignores `kind` can still draw', () => {
+		const legal: Direction[] = ['hanzi-to-meaning', 'meaning-to-hanzi'];
+		for (const question of session.questions) {
+			expect(legal).toContain(question.direction);
+			// An introduction shows the hanzi and reads out its meaning, so it degrades to
+			// recognition rather than to a card with nothing on it.
+			if (isIntroduction(question)) expect(question.direction).toBe('hanzi-to-meaning');
+		}
+	});
+
+	it('never asks two questions that answer each other', () => {
+		// `answerIds` already keeps one question's answer off another's buttons; this is the
+		// other half — two *answers* that normalise to the same sense, so the learner reads
+		// "the middle / in the middle" on one card and "within / middle" on another.
+		for (let seed = 0; seed < 60; seed++) {
+			const questions = build(LEVEL_1, null, seed).questions;
+			for (let i = 0; i < questions.length; i++) {
+				for (let j = i + 1; j < questions.length; j++) {
+					expect(questions[i].word.hanzi).not.toBe(questions[j].word.hanzi);
+					expect(sharesSense(questions[i].word, questions[j].word)).toBe(false);
+				}
+			}
+		}
 	});
 
 	it('only draws from the requested level', () => {
@@ -149,11 +177,80 @@ describe('buildSession — explore / exploit', () => {
 		expect(ids(session).every((id) => id in everything.byWord)).toBe(true);
 	});
 
-	it('introduces new words as recognition rather than testing them cold', () => {
+	it('introduces new words rather than testing them cold', () => {
 		const session = build(LEVEL_1, history, 11);
 		for (const question of session.questions) {
 			if (question.word.id in history.byWord) continue;
-			expect(question.direction).toBe('hanzi-to-meaning');
+			expect(cardKind(question)).toBe('introduce');
+		}
+	});
+});
+
+describe('buildSession — the card a word gets comes from that word', () => {
+	const shakyWords = LEVEL_1.slice(0, 5);
+	const masteredWords = LEVEL_1.slice(5, 40);
+	const midway = progressState([
+		...shakyWords.map((w) => shaky(w.id, NOW)),
+		...masteredWords.map((w) => mastered(w.id, NOW))
+	]);
+
+	function kinds(saved: Parameters<typeof build>[1], runs: number, of?: ReadonlySet<string>) {
+		const counts = { introduce: 0, 'hanzi-to-meaning': 0, 'meaning-to-hanzi': 0, total: 0 };
+		for (let seed = 0; seed < runs; seed++) {
+			for (const question of build(LEVEL_1, saved, seed).questions) {
+				if (of && !of.has(question.word.id)) continue;
+				counts[cardKind(question)]++;
+				counts.total++;
+			}
+		}
+		return counts;
+	}
+
+	// The bug this replaces: `assignDirections` sorted the ten drawn words by familiarity and
+	// gave recognition to the better half, so on a first session — where every word is equally
+	// unknown — half the run came out as cold production. 1000 of 2000, measured.
+	it('never scores a word the app has not taught: a first session is all introductions', () => {
+		const counts = kinds(progressState([]), 200);
+		expect(counts.total).toBe(200 * SESSION_SIZE);
+		expect(counts.introduce).toBe(counts.total);
+		expect(counts['meaning-to-hanzi']).toBe(0);
+	});
+
+	it('scores nothing on a first session, so no miss is manufactured about a new word', () => {
+		let scored = 0;
+		for (let seed = 0; seed < 200; seed++) {
+			for (const question of build(LEVEL_1, progressState([]), seed).questions) {
+				if (isScored(question)) scored++;
+			}
+		}
+		expect(scored).toBe(0);
+	});
+
+	it('keeps a word the learner keeps missing out of the harder direction', () => {
+		const shakyIds = new Set(shakyWords.map((w) => w.id));
+		const counts = kinds(midway, 200, shakyIds);
+		expect(counts.total).toBeGreaterThan(100);
+		// Was 79.6% — the four explore-quota words were the least familiar in the draw and
+		// soaked up the recognition slots, which pushed the shaky ones into production.
+		expect(counts['meaning-to-hanzi'] / counts.total).toBeLessThan(0.25);
+	});
+
+	it('asks a mastered word both ways rather than locking it to production', () => {
+		const everything = progressState(LEVEL_1.map((w) => mastered(w.id, NOW)));
+		const counts = kinds(everything, 200);
+		expect(counts['meaning-to-hanzi']).toBeGreaterThan(0);
+		expect(counts['hanzi-to-meaning']).toBeGreaterThan(0);
+		expect(counts['meaning-to-hanzi'] / counts.total).toBeGreaterThan(0.5);
+	});
+
+	it('gives a word the same card however the rest of the draw came out', () => {
+		const saveds = [progressState([]), midway, progressState(LEVEL_1.map((w) => shaky(w.id, NOW)))];
+		for (const saved of saveds) {
+			for (let seed = 0; seed < 25; seed++) {
+				for (const question of build(LEVEL_1, saved, seed).questions) {
+					expect(cardKind(question)).toBe(cardKindFor(saved.byWord[question.word.id]));
+				}
+			}
 		}
 	});
 });
@@ -255,9 +352,48 @@ describe('buildSession — inputs it has to survive', () => {
 		expect(build(LEVEL_1, null, 1, 4).questions).toHaveLength(4);
 	});
 
+	it('reads a nonsense size as a caller mistake, not as a request for no questions', () => {
+		// `Math.floor(NaN)` is `NaN` and survives `Math.max(0, Math.min(…))`, so the old clamp
+		// turned a typo into the quiz screen's "HSK 1 has no questions to build from".
+		expect(build(LEVEL_1, null, 1, Number.NaN).questions).toHaveLength(SESSION_SIZE);
+		expect(build(LEVEL_1, null, 1, -5).questions).toHaveLength(SESSION_SIZE);
+		expect(build(LEVEL_1, null, 1, 0).questions).toHaveLength(SESSION_SIZE);
+		expect(build(LEVEL_1, null, 1, 1e9).questions.length).toBeGreaterThan(SESSION_SIZE);
+	});
+
 	it('ignores progress records for words that are not in the level', () => {
 		const strays = progressState([record('L9-9999', { seen: 5, correct: 0, streak: 0 })]);
 		expect(build(LEVEL_1, strays).questions).toHaveLength(SESSION_SIZE);
+	});
+});
+
+describe('cardKind, isIntroduction, isScored', () => {
+	const session = build(LEVEL_1, null, 31);
+
+	it('reads the kind off a built question', () => {
+		for (const question of session.questions) {
+			expect(cardKind(question)).toBe('introduce');
+			expect(isIntroduction(question)).toBe(true);
+			expect(isScored(question)).toBe(false);
+		}
+	});
+
+	it('falls back to the direction for a question assembled by hand', () => {
+		const plain: Question = {
+			word: session.questions[0].word,
+			direction: 'meaning-to-hanzi',
+			choices: session.questions[0].choices
+		};
+		expect(cardKind(plain)).toBe('meaning-to-hanzi');
+		expect(isIntroduction(plain)).toBe(false);
+		expect(isScored(plain)).toBe(true);
+	});
+
+	it('scores every card that is a question', () => {
+		const history = progressState(LEVEL_1.map((w) => mastered(w.id, NOW)));
+		for (const question of build(LEVEL_1, history, 5).questions) {
+			expect(isScored(question)).toBe(true);
+		}
 	});
 });
 

@@ -35,14 +35,58 @@ export function shuffle<T>(items: readonly T[], rng: Rng): T[] {
 	return out;
 }
 
+/** What an unweighable item is worth: exactly as likely as an ordinary one, never a decision. */
+const NEUTRAL_WEIGHT = 1;
+
 /**
- * Weighted sampling **without replacement**, via the Efraimidis–Spirakis A-Res key
- * `u ** (1 / w)`: draw one uniform per item, then keep the `k` largest keys. The
- * probability of a given ordering matches repeated weighted draws without replacement,
- * which is exactly what "pick 6 review words, weighted by how shaky they are" means.
+ * A weight the sort can actually order by.
  *
- * Weights of zero or less are floored rather than dropped, so no word is ever
- * permanently unreachable.
+ * `Math.max(w, MIN_VALUE)` does not catch `NaN` — `Math.max(NaN, x)` is `NaN` — and a `NaN`
+ * sort key is worse than a wrong one: the comparator returns `NaN` for every pair, V8 leaves
+ * the array in whatever order the insertion sort happened to leave it, and the item's *position
+ * in the input* decides whether it is always drawn or never drawn. Measured before this guard,
+ * over 500 draws of 5 from 20: the `NaN`-weighted item at index 0 was picked 500/500 times, and
+ * the same item at index 7 or 19, 0/500.
+ *
+ * The two failures are not the same, so they do not get the same answer. A weight of zero or
+ * less is a *computed* "as unlikely as possible", floored rather than dropped. A weight that is
+ * not a number at all is a corrupt record, and the honest reading of it is "no idea" — so it
+ * falls back to the reference weight of an unseen word rather than to a value that would bury
+ * the word forever, which is what `rng.ts` promises when it says nothing is unreachable.
+ */
+function usableWeight(value: number): number {
+	if (typeof value !== 'number' || Number.isNaN(value)) return NEUTRAL_WEIGHT;
+	if (value === Infinity) return NEUTRAL_WEIGHT;
+	return value > Number.MIN_VALUE ? value : Number.MIN_VALUE;
+}
+
+/**
+ * A **complete** weighted shuffle, via the Efraimidis–Spirakis A-Res key `u ** (1 / w)`: draw
+ * one uniform per item and sort by the key descending. Every prefix of the result is
+ * distributed exactly as a weighted draw without replacement of that length, which is what
+ * lets a caller walk the order and skip candidates it turns out not to want without biasing
+ * what it takes instead.
+ */
+export function orderWeighted<T>(
+	items: readonly T[],
+	weightOf: (item: T) => number,
+	rng: Rng
+): T[] {
+	const keyed = items.map((item) => {
+		const weight = usableWeight(weightOf(item));
+		const u = Math.max(rng(), Number.MIN_VALUE);
+		return { item, key: Math.pow(u, 1 / weight) };
+	});
+	keyed.sort((a, b) => b.key - a.key);
+	return keyed.map((entry) => entry.item);
+}
+
+/**
+ * Weighted sampling **without replacement**: the first `k` of the weighted shuffle above.
+ * "Pick 6 review words, weighted by how shaky they are", exactly.
+ *
+ * Weights of zero or less are floored rather than dropped, so no word is ever permanently
+ * unreachable.
  */
 export function sampleWeighted<T>(
 	items: readonly T[],
@@ -51,11 +95,5 @@ export function sampleWeighted<T>(
 	rng: Rng
 ): T[] {
 	if (k <= 0 || items.length === 0) return [];
-	const keyed = items.map((item) => {
-		const weight = Math.max(weightOf(item), Number.MIN_VALUE);
-		const u = Math.max(rng(), Number.MIN_VALUE);
-		return { item, key: Math.pow(u, 1 / weight) };
-	});
-	keyed.sort((a, b) => b.key - a.key);
-	return keyed.slice(0, Math.min(k, keyed.length)).map((entry) => entry.item);
+	return orderWeighted(items, weightOf, rng).slice(0, Math.min(k, items.length));
 }

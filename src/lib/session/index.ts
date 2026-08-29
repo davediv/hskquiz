@@ -5,25 +5,33 @@
  * which wrong answers. Everything random goes through an injected `Rng`, so the app gets
  * variety and tests get reproducibility.
  *
- * The scheduling model lives in `weighting.ts`; the distractor model in `distractors.ts`.
+ * The scheduling model lives in `weighting.ts`; the direction ladder in `direction.ts`; the
+ * distractor model in `distractors.ts`.
  */
 
-import type {
-	Direction,
-	Level,
-	ProgressState,
-	Question,
-	Session,
-	Word,
-	WordProgress
-} from '../types';
-import { EXPLORE_SHARE, familiarity, wordWeight } from './weighting';
-import { CHOICE_COUNT, makePool, pickDistractors, sharesSense } from './distractors';
-import { mulberry32, sampleWeighted, shuffle, type Rng } from './rng';
+import type { Level, ProgressState, Question, Session, Word, WordProgress } from '../types';
+import { EXPLORE_SHARE, wordWeight } from './weighting';
+import { cardKindFor, directionOf, kindIsScored, type CardKind } from './direction';
+import {
+	CHOICE_COUNT,
+	isAmbiguousWith,
+	makePool,
+	pickDistractors,
+	sharesSense,
+	type DistractorPool
+} from './distractors';
+import { mulberry32, orderWeighted, shuffle, type Rng } from './rng';
 
 export { CHOICE_COUNT, senseSet, sharesSense, isUsable } from './distractors';
-export { EXPLORE_SHARE, WEIGHTS, wordWeight, familiarity } from './weighting';
-export { mulberry32, shuffle, sampleWeighted, type Rng } from './rng';
+export { EXPLORE_SHARE, WEIGHTS, wordWeight, leechBrake } from './weighting';
+export {
+	PRODUCTION_STREAK,
+	REFRESH_EVERY,
+	cardKindFor,
+	directionOf,
+	type CardKind
+} from './direction';
+export { mulberry32, shuffle, sampleWeighted, orderWeighted, type Rng } from './rng';
 
 /** Questions per session, unless a caller asks for a different count. */
 export const SESSION_SIZE = 10;
@@ -41,10 +49,43 @@ export interface SessionOptions {
 	now?: number;
 }
 
+/**
+ * A question plus the kind of card it is.
+ *
+ * `Question.direction` stays exactly what `src/lib/types.ts` says it is — one of the two ways
+ * a *question* can run — and `kind` says whether this card is a question at all. A screen that
+ * has never heard of `kind` reads `direction` and draws a normal recognition card, so the
+ * extra field can only ever add behaviour, never remove any.
+ */
+export interface SessionQuestion extends Question {
+	readonly kind: CardKind;
+}
+
+/** What `buildSession` returns: a plain `Session` whose questions carry their `kind`. */
+export interface BuiltSession extends Session {
+	questions: SessionQuestion[];
+}
+
 function resolveProgress(source: ProgressSource | null | undefined): Record<string, WordProgress> {
 	if (!source) return {};
 	const state = 'byWord' in source ? source : source.state;
 	return state?.byWord ?? {};
+}
+
+/**
+ * How many questions the caller actually asked for.
+ *
+ * `NaN`, `-5` and `0` are caller mistakes, not requests for an empty run: `Math.floor(NaN)` is
+ * `NaN`, and `NaN` survives `Math.max(0, Math.min(…))` untouched, so the old clamp turned a
+ * typo into a session with no questions in it and the quiz screen rendered "HSK 1 has no
+ * questions to build from" over a level with 500 words in it. A dead end is the worst possible
+ * answer to a bad number, and throwing from the render path is the second worst, so anything
+ * that is not a positive finite count falls back to the default length.
+ */
+function requestedSize(size: number): number {
+	if (typeof size !== 'number' || !Number.isFinite(size)) return SESSION_SIZE;
+	const floored = Math.floor(size);
+	return floored > 0 ? floored : SESSION_SIZE;
 }
 
 /**
@@ -65,29 +106,42 @@ function splitQuota(size: number, reviewAvailable: number, freshAvailable: numbe
 }
 
 /**
- * Assign directions across the chosen words.
+ * Walk a weighted order and take `want` words that do not answer each other's questions.
  *
- * Half recognition, half production — but not at random. Recognition (see the hanzi, pick
- * the meaning) is the easier task, so it goes to the words the learner knows least well,
- * which in practice means every brand-new word is *introduced* rather than tested cold.
- * Production goes to the words they have already got right. The overall split stays 50/50,
- * so a session is always mixed.
+ * `isAmbiguousWith` already stops a card carrying two right answers, and `answerIds` already
+ * stops one question's answer turning up as another's distractor — but nothing compared the
+ * ten *answers* to each other, so a session could ask "the middle / in the middle" (中间) and
+ * four cards later "within / middle" (中), with different characters marked correct. Measured
+ * over 2,000 L1 sessions: 38 contained a colliding pair and 8 had both halves in production,
+ * where the learner reads two near-identical English prompts.
+ *
+ * Rejects are held rather than dropped: on a level too small to fill the quota without one,
+ * a session with a near-duplicate in it still beats a session with nine questions in it.
+ * Because the input is a full weighted shuffle, skipping a candidate does not bias what gets
+ * taken in its place — every prefix of the order is a correct weighted draw.
  */
-function assignDirections(words: readonly Word[], byWord: Record<string, WordProgress>, rng: Rng) {
-	const jitter = new Map(words.map((word) => [word.id, rng()]));
-	const ordered = words
-		.slice()
-		.sort(
-			(a, b) =>
-				familiarity(byWord[a.id]) - familiarity(byWord[b.id]) ||
-				(jitter.get(a.id) ?? 0) - (jitter.get(b.id) ?? 0)
-		);
-	const recognitionCount = Math.ceil(ordered.length / 2);
-	const directions = new Map<string, Direction>();
-	ordered.forEach((word, i) => {
-		directions.set(word.id, i < recognitionCount ? 'hanzi-to-meaning' : 'meaning-to-hanzi');
-	});
-	return directions;
+function takeDistinct(
+	pool: DistractorPool,
+	into: Word[],
+	candidates: readonly Word[],
+	want: number
+) {
+	let taken = 0;
+	const held: Word[] = [];
+	for (const word of candidates) {
+		if (taken >= want) break;
+		if (into.some((other) => isAmbiguousWith(pool, other, word))) {
+			held.push(word);
+			continue;
+		}
+		into.push(word);
+		taken++;
+	}
+	for (const word of held) {
+		if (taken >= want) break;
+		into.push(word);
+		taken++;
+	}
 }
 
 /**
@@ -105,44 +159,56 @@ export function buildSession(
 	progress: ProgressSource | null | undefined,
 	size: number = SESSION_SIZE,
 	options: SessionOptions = {}
-): Session {
+): BuiltSession {
 	const rng = options.rng ?? Math.random;
 	const now = options.now ?? Date.now();
 	const byWord = resolveProgress(progress);
 
 	const pool = makePool(words.filter((word) => word.level === level));
-	const target = Math.max(0, Math.min(Math.floor(size), pool.words.length));
+	const target = Math.min(requestedSize(size), pool.words.length);
 
 	const fresh: Word[] = [];
 	const review: Word[] = [];
 	for (const word of pool.words) {
 		const record = byWord[word.id];
-		if (!record || record.seen <= 0) fresh.push(word);
-		else review.push(word);
+		// `> 0` rather than `<= 0`: a corrupt `NaN` seen count reads as never-studied, which is
+		// also what `cardKindFor` makes of it, so the two never disagree about a word.
+		if (record && record.seen > 0) review.push(word);
+		else fresh.push(word);
 	}
 
 	const quota = splitQuota(target, review.length, fresh.length);
-	const picked = [
-		...sampleWeighted(review, (word) => wordWeight(byWord[word.id], now), quota.review, rng),
-		// Nothing distinguishes one unseen word from another, so this is a plain shuffle.
-		...sampleWeighted(fresh, () => 1, quota.fresh, rng)
-	];
+	const picked: Word[] = [];
+	takeDistinct(
+		pool,
+		picked,
+		orderWeighted(review, (word) => wordWeight(byWord[word.id], now), rng),
+		quota.review
+	);
+	// Nothing distinguishes one unseen word from another, so this is a plain shuffle.
+	takeDistinct(
+		pool,
+		picked,
+		orderWeighted(fresh, () => 1, rng),
+		quota.fresh
+	);
 
-	const directions = assignDirections(picked, byWord, rng);
 	const order = shuffle(picked, rng);
 	// A word that is the answer to one question must not turn up as a wrong answer in
 	// another: it would either hint at the coming question or contradict the last one.
 	const answerIds = new Set(order.map((word) => word.id));
 
-	const wanted = CHOICE_COUNT - 1;
-	const questions: Question[] = order.map((word) => {
-		const direction = directions.get(word.id) ?? 'hanzi-to-meaning';
-		let distractors = pickDistractors(pool, word, direction, wanted, rng, answerIds);
+	const wantedDistractors = CHOICE_COUNT - 1;
+	const questions: SessionQuestion[] = order.map((word) => {
+		// The word's own record decides this, and nothing else — not its rank in this draw.
+		const kind = cardKindFor(byWord[word.id]);
+		const direction = directionOf(kind);
+		let distractors = pickDistractors(pool, word, direction, wantedDistractors, rng, answerIds);
 		// On a level too small to spare its own answers, a full card beats a pure one.
-		if (distractors.length < wanted) {
-			distractors = pickDistractors(pool, word, direction, wanted, rng);
+		if (distractors.length < wantedDistractors) {
+			distractors = pickDistractors(pool, word, direction, wantedDistractors, rng);
 		}
-		return { word, direction, choices: shuffle([word, ...distractors], rng) };
+		return { word, kind, direction, choices: shuffle([word, ...distractors], rng) };
 	});
 
 	return {
@@ -151,6 +217,46 @@ export function buildSession(
 		index: 0,
 		answers: questions.map(() => null)
 	};
+}
+
+/**
+ * The kind of card `question` is, for a caller holding it as a plain `Question`.
+ *
+ * The quiz screen's `session` is typed `Session`, so the `kind` a `SessionQuestion` carries is
+ * not visible through it. This reads the field when it is there and falls back to the
+ * question's direction when it is not, so a `Question` built by hand — a test fixture, a
+ * caller that assembled one itself — is simply the question it looks like.
+ */
+export function cardKind(question: Question): CardKind {
+	const kind: unknown = (question as { kind?: unknown }).kind;
+	if (kind === 'introduce' || kind === 'hanzi-to-meaning' || kind === 'meaning-to-hanzi') {
+		return kind;
+	}
+	return question.direction;
+}
+
+/**
+ * True for a word's very first exposure: teach it, do not test it.
+ *
+ * The card is the reveal shown up front — hanzi, tone-marked pinyin, every gloss, part of
+ * speech — with one "Got it" to continue and no choices to get wrong.
+ */
+export function isIntroduction(question: Question): boolean {
+	return cardKind(question) === 'introduce';
+}
+
+/**
+ * Whether an answer to this card belongs in the learner's record.
+ *
+ * `false` only for an introduction, and it means exactly one thing to the caller: do not call
+ * `progress.recordAnswer` for it. A word nobody has been taught cannot be got wrong, and the
+ * `lastMissed` written for one is a miss the app manufactured about itself and then fed back
+ * into its own scheduler. Marking it *correct* instead is the same lie pointing the other way:
+ * it inflates `correct` and `streak`, and `streak` is what promotes a word to production.
+ * The record should gain `seen` and `lastSeen` and nothing else.
+ */
+export function isScored(question: Question): boolean {
+	return kindIsScored(cardKind(question));
 }
 
 /**
