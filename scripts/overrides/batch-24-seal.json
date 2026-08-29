@@ -1,0 +1,54 @@
+{
+	"L3-0645": {
+		"meanings": ["actual strength", "real capability"],
+		"note": "N. 力 L3-0443 owns bare \"strength\"; 实力 is the strength a team or country actually has."
+	},
+	"L4-0673": {
+		"meanings": ["a scrubbing brush"],
+		"note": "N. 刷 L4-0671 ships \"to brush\", which strips to the same answer as a bare \"brush\"."
+	},
+	"L5-0934": {
+		"meanings": ["to anticipate", "to expect beforehand"],
+		"note": "V. The 预- prefix is \"in advance\"; 期望 L5-0569 keeps the hopes-placed-on sense."
+	},
+	"L1-0448": {
+		"meanings": ["right side", "on the right"],
+		"note": "N. Second gloss reworded off \"right, to the right\", whose commas made the row unparseable. 右 L1-0447 keeps \"the right-hand side\"."
+	},
+	"L3-0478": {
+		"meanings": ["the news media", "mass media"],
+		"note": "N. \"esp.\" is dictionary shorthand; 新闻 L2 ships \"news\"."
+	},
+	"L5-0015": {
+		"meanings": ["to repay a kindness", "to show gratitude"],
+		"note": "V. 报答 is gratitude paid back to a benefactor (报答父母); \"to requite\" is archaic. 回报 L5-0339 takes the reciprocation sense."
+	},
+	"L5-0069": {
+		"meanings": ["a part of the body", "a position on something"],
+		"note": "N. CEDICT gives one long clause and the picker reduced it to a bare \"part\", which is 部分 L3's answer; 部位 names a specific region, usually of the body."
+	},
+	"L2-0530": {
+		"meanings": ["physical education", "sports as a subject"],
+		"note": "N. 运动 L2-0702 owns \"sport\"; 体育 is the school subject and the sporting world, not an activity you do."
+	},
+	"L4-0465": {
+		"meanings": ["flowing tears"],
+		"note": "N. 眼泪 L4-0852 ships \"tears\"; 泪水 is the water itself, so it must not read as a bare plural of the same word."
+	},
+	"L5-0164": {
+		"meanings": ["the brain", "the cerebrum"],
+		"note": "N. The organ. 脑子 L5-0524 takes the colloquial \"mind\", so neither is a plural of the other."
+	},
+	"L5-0524": {
+		"meanings": ["the mind", "one's head for thinking"],
+		"note": "N. Colloquial 脑子 is where you think (动脑子), against 大脑 L5-0164 the organ."
+	},
+	"L5-0527": {
+		"meanings": ["a fiscal or school year", "annual"],
+		"note": "N. Not a bare \"year\" — 年 owns that, and 岁月 L5-0733 must not read as its plural."
+	},
+	"L5-0733": {
+		"meanings": ["the passing years", "time gone by"],
+		"note": "N. 岁月 is time as it passes, not a count of years."
+	}
+}
