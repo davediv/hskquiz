@@ -3,8 +3,9 @@
  *
  * This is not `LEVEL_SIZES`. That constant is the official HSK 3.0 row count, and it is the
  * right number to audit the build against — `vocab.spec.ts` does exactly that. It is the
- * wrong number to show a learner: eight official rows are same-level homographs that collapse
- * into one card each (老, 省, 把, 初, 任, 为, 批, 品), so a level ships a word or two fewer than the standard lists.
+ * wrong number to show a learner: eight *pairs* of official rows are same-level homographs —
+ * sixteen rows collapsing to eight cards (老, 省, 把, 初, 任, 为, 批, 品) — so the box holds
+ * 4,316 − 8 = 4,308 and a level ships a word or two fewer than the standard lists.
  *
  * Every screen that counts words for a person — "500 words" on a level card, "1,070 words"
  * on the browse header, the denominator under a session summary's arc — has to use the same
