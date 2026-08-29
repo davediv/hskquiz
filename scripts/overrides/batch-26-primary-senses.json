@@ -1,0 +1,66 @@
+{
+	"L1-0201": {
+		"meanings": ["the text of a lesson"],
+		"note": "N. Machine-picked \"text\" lost the 课 half; 课 L1-0199 owns \"lesson\"."
+	},
+	"L2-0335": {
+		"meanings": ["to come from", "to originate from"],
+		"note": "V. The second gloss shipped as a bare capitalised \"From\" out of CC-CEDICT."
+	},
+	"L2-0609": {
+		"meanings": ["the head of a school", "a headmaster"],
+		"note": "N. CC-CEDICT's \"(college, university) president\" lost its qualifier; 主要 L2-0746 owns \"principal\"."
+	},
+	"L3-0103": {
+		"meanings": ["first, in a lunar month date"],
+		"note": "Prefix. 初一…初十 number the first ten days of a lunar month; the L3-0102 merge dropped this sense entirely."
+	},
+	"L3-0429": {
+		"meanings": ["ordinary people", "common folk"],
+		"note": "N. The shipped second gloss was truncated mid-quotation: `the \"person in the street`."
+	},
+	"L3-0487": {
+		"meanings": ["uncooked rice", "husked rice"],
+		"note": "N. 米 L2-0376 is the measure word for metres; shipping \"meter\" on both made the pair indistinguishable."
+	},
+	"L4-0150": {
+		"meanings": ["a middle-aged woman", "father's elder brother's wife"],
+		"note": "N. 阿姨 L4-0001 owns \"auntie\" and 大姐 L4-0147 the polite-name gloss; 大妈 leads with who she is."
+	},
+	"L4-0523": {
+		"meanings": ["a business card"],
+		"note": "N. CC-CEDICT's \"(business) card\" lost its qualifier and shipped as bare \"card\"."
+	},
+	"L4-0639": {
+		"meanings": ["a poet"],
+		"note": "N. \"bard\" led the card out of CC-CEDICT; it is not the word a learner needs."
+	},
+	"L4-0703": {
+		"meanings": ["gymnastics"],
+		"note": "N. \"gymnastic\" is the adjective and led a noun card."
+	},
+	"L4-0805": {
+		"meanings": ["a photo", "a printed picture"],
+		"note": "N. \"image\" led the card; 拍照 L4-0545 already carries \"to photograph\"."
+	},
+	"L4-0883": {
+		"meanings": ["to bring in from abroad", "to introduce a technology"],
+		"note": "V. The L4 sense is importing technology or people; 进口 L4-0410 owns \"to import\" for goods."
+	},
+	"L5-0179": {
+		"meanings": ["timid", "easily frightened"],
+		"note": "Adj. \"cowardice\" is a noun and led an adjective card."
+	},
+	"L5-0556": {
+		"meanings": ["a TV channel"],
+		"note": "N. A 频道 is a broadcast channel; 频率 L5-0555 is frequency."
+	},
+	"L5-0562": {
+		"meanings": ["a plain", "flat open country"],
+		"note": "N. \"field\" led the card; a 平原 is a plain."
+	},
+	"L5-0893": {
+		"meanings": ["for a short moment", "in one go"],
+		"note": "Adv. 一下儿 L1-0434 owns \"briefly\"; shipping it on both left the two levels identical."
+	}
+}

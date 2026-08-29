@@ -183,10 +183,6 @@
 		"meanings": ["to take off"],
 		"note": "Aircraft sense only; CEDICT's second sense is explicitly figurative and is barred from a learner card."
 	},
-	"L2-0431": {
-		"meanings": ["air or gas", "to make someone angry"],
-		"note": "Replaces the baseline's 'anger' lead: 生气 already owns 'to get angry' and the noun reading is what 气 carries alone."
-	},
 	"L2-0433": {
 		"meanings": ["a thousand"],
 		"note": "Num row; the numeral is the whole word and needs no dictionary framing."

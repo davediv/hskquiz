@@ -39,10 +39,6 @@
 		"meanings": ["husband and wife", "a married couple"],
 		"note": "Unchanged in substance; second sense makes the noun reading explicit."
 	},
-	"L4-0253": {
-		"meanings": ["symbol or sign", "a written mark"],
-		"note": "字 L1 carries 'symbol' as a second sense, so 符号 leads with the paired form."
-	},
 	"L4-0254": {
 		"meanings": ["to conform to", "to match or fit"],
 		"note": "V row: 符合要求. Old lead 'in accordance with' was a preposition, and the physics 'coincidence' sense is off-level."
@@ -255,10 +251,6 @@
 		"meanings": ["measure word for households", "a household"],
 		"note": "Official POS is M only, so the classifier leads: 一户人家."
 	},
-	"L4-0327": {
-		"meanings": ["multicolored or patterned", "blurred"],
-		"note": "The Adj reading of 花, kept apart from 花 L1 'flower' and 花 L2 'to spend'. Dropped the lecherous sense."
-	},
 	"L4-0328": {
 		"meanings": ["to row a boat", "to scratch a surface"],
 		"note": "The huá reading."
@@ -450,10 +442,6 @@
 	"L4-0388": {
 		"meanings": ["prize money", "a bonus"],
 		"note": "Both the competition prize and the workplace bonus."
-	},
-	"L4-0390": {
-		"meanings": ["to descend or drop", "to lower"],
-		"note": "降落 L4 ships 'to descend', 下降 L4 'to decline' and 掉 L2 'to drop'."
 	},
 	"L4-0392": {
 		"meanings": ["to cut the price"],

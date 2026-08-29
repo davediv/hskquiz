@@ -743,7 +743,7 @@
 			{ "py": "bù", "tone": 4 },
 			{ "py": "liáng", "tone": 2 }
 		],
-		"meanings": ["harmful or bad", "faulty"],
+		"meanings": ["bad or undesirable", "faulty"],
 		"pos": ["Adj"],
 		"level": 5
 	},
@@ -927,7 +927,7 @@
 			{ "py": "cān", "tone": 1 },
 			{ "py": "tīng", "tone": 1 }
 		],
-		"meanings": ["a restaurant or dining hall", "a canteen"],
+		"meanings": ["a dining hall", "a canteen"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -1405,7 +1405,7 @@
 			{ "py": "chōng", "tone": 1 },
 			{ "py": "dòng", "tone": 4 }
 		],
-		"meanings": ["an impulse or urge", "impulsive"],
+		"meanings": ["an impulse", "impulsive"],
 		"pos": ["N", "Adj"],
 		"level": 5
 	},
@@ -2156,7 +2156,7 @@
 		"traditional": "膽",
 		"pinyin": "dǎn",
 		"syllables": [{ "py": "dǎn", "tone": 3 }],
-		"meanings": ["guts or nerve", "the gall bladder"],
+		"meanings": ["guts", "the gall bladder"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -2169,7 +2169,7 @@
 			{ "py": "dǎn", "tone": 3 },
 			{ "py": "xiǎo", "tone": 3 }
 		],
-		"meanings": ["cowardice", "timid"],
+		"meanings": ["timid", "easily frightened"],
 		"pos": ["Adj"],
 		"level": 5
 	},
@@ -6209,7 +6209,7 @@
 			{ "py": "mó", "tone": 2 },
 			{ "py": "shì", "tone": 4 }
 		],
-		"meanings": ["a pattern or model", "mode"],
+		"meanings": ["a pattern", "a mode of operation"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -6714,7 +6714,7 @@
 			{ "py": "pín", "tone": 2 },
 			{ "py": "dào", "tone": 4 }
 		],
-		"meanings": ["frequency", "channel"],
+		"meanings": ["a TV channel"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -6774,7 +6774,7 @@
 			{ "py": "píng", "tone": 2 },
 			{ "py": "yuán", "tone": 2 }
 		],
-		"meanings": ["field", "plain"],
+		"meanings": ["a plain", "flat open country"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -7297,7 +7297,7 @@
 			{ "py": "qū", "tone": 1 },
 			{ "py": "yù", "tone": 4 }
 		],
-		"meanings": ["a zone or area"],
+		"meanings": ["a region", "a designated area"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -8173,7 +8173,7 @@
 			{ "py": "shí", "tone": 2 },
 			{ "py": "zú", "tone": 2 }
 		],
-		"meanings": ["ample", "one hundred percent"],
+		"meanings": ["one hundred percent", "downright"],
 		"pos": ["Adj"],
 		"level": 5
 	},
@@ -8527,7 +8527,7 @@
 			{ "py": "shǔ", "tone": 3 },
 			{ "py": "biāo", "tone": 1 }
 		],
-		"meanings": ["mouse"],
+		"meanings": ["a computer mouse"],
 		"pos": ["N"],
 		"level": 5
 	},
@@ -10762,7 +10762,7 @@
 			{ "py": "xià", "tone": 4 },
 			{ "py": "r", "tone": 0 }
 		],
-		"meanings": ["for a short moment", "briefly"],
+		"meanings": ["for a short moment", "in one go"],
 		"pos": ["Adv"],
 		"level": 5
 	},

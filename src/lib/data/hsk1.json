@@ -2077,7 +2077,7 @@
 		"hanzi": "就",
 		"pinyin": "jiù",
 		"syllables": [{ "py": "jiù", "tone": 4 }],
-		"meanings": ["then or right away", "only"],
+		"meanings": ["then", "as early as", "only"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -2253,7 +2253,7 @@
 			{ "py": "kè", "tone": 4 },
 			{ "py": "wén", "tone": 2 }
 		],
-		"meanings": ["text"],
+		"meanings": ["the text of a lesson"],
 		"pos": ["N"],
 		"level": 1
 	},

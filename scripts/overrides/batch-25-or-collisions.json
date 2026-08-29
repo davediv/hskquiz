@@ -1,0 +1,130 @@
+{
+	"L1-0186": {
+		"meanings": ["then", "as early as", "only"],
+		"note": "Adv. 马上 L1-0226 owns \"right away\"; 就 is the sequencer, and 八岁就会 is \"as early as\"."
+	},
+	"L2-0064": {
+		"meanings": ["an achievement", "results at school or work"],
+		"note": "N. 分数 L2-0166 owns \"a score\" and 结果 L2-0291 owns \"result\"; 成绩 is what was achieved."
+	},
+	"L2-0172": {
+		"meanings": ["to be one's turn", "should"],
+		"note": "V. 应该 L2-0675 owns the bare obligation; 该我了 is the sense only 该 carries."
+	},
+	"L2-0214": {
+		"meanings": ["very", "easy to do"],
+		"note": "Adv. 好大/好久 is degree. 这么 L2-0721 keeps \"so or such\"; 好 L1-0138 keeps \"good\"."
+	},
+	"L2-0286": {
+		"meanings": ["to carry on", "right after that"],
+		"note": "V/Adv. 接下来 L2-0285 owns \"next\" and 那 L2-0387 owns \"then\"; 接着 is continuation."
+	},
+	"L2-0431": {
+		"meanings": ["gas", "breath", "to make someone angry"],
+		"note": "N/V. 空气 L2-0327 owns \"air\". 煤气 is the gas sense, 喘气 the breath sense."
+	},
+	"L3-0071": {
+		"meanings": ["to take measures", "to adopt an attitude"],
+		"note": "V. 采用 L3-0072 owns bare \"to adopt\"; 采取 collocates with 措施, 行动 and 态度."
+	},
+	"L3-0087": {
+		"meanings": ["underclothes", "a shirt worn next to the skin"],
+		"note": "N. 衬衫 L3-0086 owns \"shirt\"; 衬 is the lining layer, which is what 衬衣 names."
+	},
+	"L3-0148": {
+		"meanings": ["a region", "an area of a country"],
+		"note": "N. 区 L3-0570 owns \"district\" and \"zone\"; 地区 is the larger territorial word."
+	},
+	"L3-0164": {
+		"meanings": ["to snap in two", "to cut off"],
+		"note": "V. 打破 L3-0125 owns \"to break\"; 断 breaks something long into two, as in 断了腿."
+	},
+	"L3-0246": {
+		"meanings": ["public", "for everyone to use"],
+		"note": "Adj. 共同 L3-0253 owns \"shared\"; 公共汽车 and 公共场所 are the open-to-all sense."
+	},
+	"L3-0328": {
+		"meanings": ["to process materials", "to refine or finish"],
+		"note": "V. 过程 L3-0278 owns \"a process\"; 加工 is what a workshop does to raw material."
+	},
+	"L3-0530": {
+		"meanings": ["to go with", "to mix or blend"],
+		"note": "V. 比赛 L3-0039 owns \"a match\"; 这件衣服配这条裤子 is the goes-together sense."
+	},
+	"L3-0877": {
+		"meanings": ["to construct", "to fabricate"],
+		"note": "V. 建 owns \"to build\", 制作 \"to make\", 制造 \"to manufacture\", 创造 \"to create\"."
+	},
+	"L4-0043": {
+		"meanings": ["a logo or emblem", "to symbolize"],
+		"note": "V/N. 符号 L4-0253 owns \"symbol\" and 牌 L4-0547 \"signboard\"; 标志 is the emblem."
+	},
+	"L4-0193": {
+		"meanings": ["to decide on", "to settle on"],
+		"note": "V. 修理 L4-0828 owns \"to fix\"; 定时间 and 定计划 are the settle-on sense."
+	},
+	"L4-0222": {
+		"meanings": ["a way of doing something", "a method"],
+		"note": "N. 法律 L4-0224 owns \"law\" and 规则 L4-0299 \"rule\"; 法 here is the 办法/方法 sense."
+	},
+	"L4-0253": {
+		"meanings": ["a written symbol", "a notation mark"],
+		"note": "N. 标志 L4-0043 keeps the emblem sense; 符号 is what is written on a page."
+	},
+	"L4-0327": {
+		"meanings": ["patterned", "blurred"],
+		"note": "Adj. 五颜六色 L4-0771 owns \"multicolored\"; 花衬衫 is patterned, 眼花 is blurred."
+	},
+	"L4-0390": {
+		"meanings": ["to drop", "to bring down"],
+		"note": "V. 降落 L4-0393 owns \"to descend\" and 降低 L4-0391 \"to lower\"; 降价, 降温."
+	},
+	"L4-0495": {
+		"meanings": ["a round in a contest", "to take turns", "measure word: rounds"],
+		"note": "N/V/M. 圆 L4-0913 owns \"round\" and 轮子 L4-0498 \"wheel\"; 第一轮 is this card."
+	},
+	"L4-0547": {
+		"meanings": ["a signboard", "a brand", "playing cards"],
+		"note": "N. 盘子 L4-0549 owns \"a plate\"; 标志/符号 own \"sign\"; 牌 is the board and the brand."
+	},
+	"L4-0821": {
+		"meanings": ["a model", "a mold"],
+		"note": "N. 类型 L4-0466 owns \"type\"; 血型, 新型, 型号 are all the model-of-a-thing sense."
+	},
+	"L4-0953": {
+		"meanings": ["plant life", "vegetation"],
+		"note": "N. 种 L4-0964 owns the verb \"to plant\"; naming it plant life keeps the two apart."
+	},
+	"L5-0061": {
+		"meanings": ["bad or undesirable", "faulty"],
+		"note": "Adj. 有害 L5-0926 owns \"harmful\"; 不良习惯 is undesirable, not actively harmful."
+	},
+	"L5-0076": {
+		"meanings": ["a dining hall", "a canteen"],
+		"note": "N. 餐馆 L5-0075 owns \"restaurant\"; 学生餐厅 is the room, not the business."
+	},
+	"L5-0116": {
+		"meanings": ["an impulse", "impulsive"],
+		"note": "N/Adj. 劝 L5-0610 owns \"to urge\"; 冲动 is the impulse itself and acting on one."
+	},
+	"L5-0178": {
+		"meanings": ["guts", "the gall bladder"],
+		"note": "N. 神经 L5-0669 owns \"nerve\"; 胆's figurative sense is courage, not the nervous system."
+	},
+	"L5-0513": {
+		"meanings": ["a pattern", "a mode of operation"],
+		"note": "N. 模范 L5-0510 owns \"model\"; 工作模式 is the pattern something runs to."
+	},
+	"L5-0606": {
+		"meanings": ["a region", "a designated area"],
+		"note": "N. 地带 L5-0195 owns \"zone\"; 区域 is the marked-out area, as in 服务区域."
+	},
+	"L5-0681": {
+		"meanings": ["one hundred percent", "downright"],
+		"note": "Adj. 充足 L5-0118 owns \"ample\"; 十足的傻瓜 is the intensifier, not sufficiency."
+	},
+	"L5-0710": {
+		"meanings": ["a computer mouse"],
+		"note": "N. 鼠 L5-0709 keeps \"rat or mouse\"; naming the device is what tells the two apart."
+	}
+}

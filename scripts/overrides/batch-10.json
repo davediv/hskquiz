@@ -1,8 +1,4 @@
 {
-	"L3-0487": {
-		"meanings": ["uncooked rice", "meter"],
-		"note": "米饭 is the cooked rice; CEDICT's third sense is slang for yuan and is dropped."
-	},
 	"L3-0488": {
 		"meanings": ["to face", "to confront"],
 		"note": "CEDICT ships one semicolon-piled clause; these are the two senses a learner meets."
@@ -98,10 +94,6 @@
 	"L3-0529": {
 		"meanings": ["to go running", "to jog"],
 		"note": "Separated from 跑 \"to run\" at HSK 1 — 跑步 is the activity."
-	},
-	"L3-0530": {
-		"meanings": ["to match or go with", "to mix or blend"],
-		"note": "配 at L3 is pairing things that suit each other (配衣服), not mating or prescriptions."
 	},
 	"L3-0532": {
 		"meanings": ["to criticize"],

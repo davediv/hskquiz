@@ -39,10 +39,6 @@
 		"meanings": ["to await", "to wait for something"],
 		"note": "等 L1 already ships 'to wait for'; 等待 is the more formal member of the pair, so 'to await' both differentiates and matches register."
 	},
-	"L3-0148": {
-		"meanings": ["a region or district"],
-		"note": "Kept off 区域 L5 'area' and 面积 L3 'area in size'. Dropped CEDICT's PRC-administrative 'prefecture'."
-	},
 	"L3-0150": {
 		"meanings": ["television station"],
 		"note": "CEDICT row is only a variant pointer; gloss authored directly."
@@ -78,10 +74,6 @@
 	"L3-0161": {
 		"meanings": ["a shortcoming", "a weak point"],
 		"note": "N row. CEDICT's \"defect / fault\" read as blame; 短处 is the weak point a person has."
-	},
-	"L3-0164": {
-		"meanings": ["to break or snap", "to cut off"],
-		"note": "Excluded CEDICT's adverbial 'absolutely / decidedly', which only occurs in negatives like 断不可."
 	},
 	"L3-0167": {
 		"meanings": ["the other party", "the other side"],
@@ -298,10 +290,6 @@
 	"L3-0245": {
 		"meanings": ["to release officially", "to announce to the public"],
 		"note": "CEDICT row is only a variant pointer. 宣布 L3 ships 'to declare / to announce', so 公布 takes the 'publish results or figures' framing."
-	},
-	"L3-0246": {
-		"meanings": ["public or shared", "communal"],
-		"note": "Shared-by-everyone sense (公共汽车, 公共场所). Bare 'public' is taken by 大众 L4 as shipped, and 公开 below covers 'not hidden'."
 	},
 	"L3-0247": {
 		"meanings": ["open and public", "to make known publicly"],

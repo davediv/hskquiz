@@ -179,10 +179,6 @@
 		"meanings": ["to succeed or work out", "to become"],
 		"note": "V. Primary deliberately avoids \"to become\" (成为) and \"to turn into\" (变成) and \"to complete\" (完成)."
 	},
-	"L2-0064": {
-		"meanings": ["grades or results", "achievement"],
-		"note": "N; the school-report sense is what an L2 learner meets."
-	},
 	"L2-0065": {
 		"meanings": ["to become"],
 		"note": "V; holds the plain \"to become\" for the three-way 成/变成/成为 split."
@@ -450,10 +446,6 @@
 	"L2-0171": {
 		"meanings": ["to review lessons", "to revise for a test"],
 		"note": "V; CEDICT only carries a variant-character pointer for this key."
-	},
-	"L2-0172": {
-		"meanings": ["should or ought to", "to be one's turn"],
-		"note": "V. 应该 ships \"ought to\" and 应当 ships \"should\", so this primary is deliberately the pair."
 	},
 	"L2-0173": {
 		"meanings": ["to alter", "to correct"],

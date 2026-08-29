@@ -18,10 +18,12 @@
  *   2. Rank a register-flagged CC-CEDICT sense onto a flashcard. Slang, vulgar, dialect,
  *      figurative and variant-character senses are EXCLUDED, and the exclusion is tested on
  *      the raw sense — before the parenthetical stripper deletes the "(slang)" marker.
- *   3. Emit anything that trips one of the four gloss gates below. `meanings[0]` is the quiz
- *      question (src/lib/components/quiz/quiz.ts), so a wrong primary sense is a wrong answer
- *      shipped to a learner. The gates fail the build; scripts/vocab-audit.json is the work
- *      list that clears them.
+ *   3. Emit anything that trips one of the five gloss gates below, or let two cards in a level
+ *      answer to the same English. `meanings[0]` is the quiz question
+ *      (src/lib/components/quiz/quiz.ts), so a wrong primary sense is a wrong answer shipped
+ *      to a learner. The gates fail the build; scripts/vocab-audit.json is the work list that
+ *      clears them. What counts as "the same English" is src/lib/data/senses.ts, which the
+ *      quiz's own distractor guard imports too — one implementation, not two copies.
  *
  * Authored glosses live in scripts/overrides/*.json, not in this file — see readOverrides().
  *
@@ -31,6 +33,9 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import prettier from 'prettier';
+// The app's own sense normaliser, not a copy of it — see the gates section. Node strips the
+// types, so the build and the browser run byte-identical logic.
+import { senseKeys, senseKey, intersects } from '../src/lib/data/senses.ts';
 
 const OUT = 'src/lib/data';
 const REF = 'reference/hsk';
@@ -661,14 +666,25 @@ function build(official, overrides) {
 		prev.ids.push(...e.ids);
 		prev.notes = [...new Set([...prev.notes, ...e.notes, 'merged-rows'])];
 		if (!prev.authored && e.authored) {
-			prev.meanings = e.meanings;
+			prev.meanings = [...e.meanings];
 			prev.authored = true;
-		} else if (!prev.authored) {
+		}
+
+		// The second row is a second *official* row: it is there because the standard gives
+		// this word a second part of speech, and that label is usually the only place its
+		// second sense lives. Loop 2 dropped it whenever the surviving row was authored —
+		// which is why 初 shipped "at the beginning, early" under `pos: [Adv, Prefix]` with
+		// the lunar-date prefix (初一…初十) gone. An authored row now unions with an authored
+		// row; a hand-written gloss is never overwritten by a machine-picked one, and when
+		// that is what stops the union the card is flagged for a human.
+		if (prev.authored === e.authored) {
 			for (const m of e.meanings) {
 				if (prev.meanings.length < 3 && !prev.meanings.some((x) => overlaps(x, m))) {
 					prev.meanings.push(m);
 				}
 			}
+		} else if (!e.authored && e.meanings.some((m) => !prev.meanings.some((x) => overlaps(x, m)))) {
+			prev.notes = [...new Set([...prev.notes, 'merged-row-sense-not-authored'])];
 		}
 		for (const p of e.pos) if (!prev.pos.includes(p)) prev.pos.push(p);
 	}
@@ -679,35 +695,16 @@ function build(official, overrides) {
 /* ------------------------------------------------------------------ gates */
 
 /**
- * Article-stripped senses, matching `senseSet()` in src/lib/session/distractors.ts exactly.
+ * The gates compare glosses through `src/lib/data/senses.ts` — the same function the quiz's
+ * distractor guard uses, imported rather than copied.
  *
- * The app's own distractor guard already treats "a crowd" and "crowd" as the same answer, so
- * a uniqueness check that does not strip the article is checking something the app does not
- * believe. Loop 1's did not, and four same-level pairs passed it by shipping an identical
- * meaning set in a different order.
+ * Loop 2 had two hand-kept-identical copies of this normaliser, and they were identical in
+ * the wrong way: both split senses on `;` and `/` only, so the house style's own "X or Y"
+ * glosses hid 38 same-level pairs whose *primary* glosses answer to the same English. 衬衫
+ * shipped "shirt" while 衬衣 shipped "a shirt or blouse", and nothing on either side of the
+ * pipeline could see it. There is now one implementation; `node` reads the `.ts` directly.
  */
-const ARTICLE = /^(?:to|a|an|the)\s+/;
-
-function senseKeys(meanings) {
-	const out = new Set();
-	for (const meaning of meanings || []) {
-		for (const part of String(meaning).split(/[;/]/)) {
-			const normalised = part
-				.toLowerCase()
-				.replace(/\([^)]*\)/g, ' ')
-				.replace(/[.;,!?"'’“”()[\]]/g, ' ')
-				.replace(/\s+/g, ' ')
-				.trim()
-				.replace(ARTICLE, '')
-				.trim();
-			if (normalised) out.add(normalised);
-		}
-	}
-	return out;
-}
-
-const primaryKey = (word) => [...senseKeys([word.meanings[0]])].sort().join(' / ');
-const senseSetKey = (word) => [...senseKeys(word.meanings)].sort().join(' / ');
+const senseSetKey = (word) => senseKey(senseKeys(word.meanings));
 
 /** The word's own pinyin with the tones and the spacing taken off: 包子 becomes "baozi". */
 function romanization(pinyin) {
@@ -765,9 +762,11 @@ function gateProblems(shipped) {
 		}
 	}
 
-	// (b) No two cards sharing hanzi + pinyin across levels ship the same primary gloss.
-	//     白, 才, 牛, 火, 头, 称, 好, 多, 一会儿 and 出口 all did, which makes the pair
-	//     indistinguishable and guarantees one of the two is wrong for its level.
+	// (b) No two cards sharing hanzi + pinyin across levels may answer to the same English.
+	//     白, 才, 牛, 火, 头, 称, 好, 多, 一会儿 and 出口 all shipped identical primaries in
+	//     loop 1, which makes the pair indistinguishable and guarantees one of the two is
+	//     wrong for its level. Tested on *any* shared sense, not on the primary alone: 米 L2
+	//     "meter" was L3 米's second gloss verbatim, and string inequality could not see it.
 	const byWord = new Map();
 	for (const w of shipped) {
 		const key = `${w.hanzi} ${w.pinyin.toLowerCase()}`;
@@ -776,16 +775,17 @@ function gateProblems(shipped) {
 	}
 	for (const [key, group] of byWord) {
 		if (group.length < 2) continue;
-		const seen = new Map();
-		for (const w of group) {
-			const p = primaryKey(w);
-			const other = seen.get(p);
-			if (other && other.level !== w.level) {
-				problems.push(
-					`gate:cross-level ${key}: L${other.level} ${other.id} and L${w.level} ${w.id} both lead with "${w.meanings[0]}"`
-				);
-			} else if (!other) {
-				seen.set(p, w);
+		const senses = new Map(group.map((w) => [w.id, senseKeys(w.meanings)]));
+		for (let i = 0; i < group.length; i++) {
+			for (let j = i + 1; j < group.length; j++) {
+				const [a, b] = [group[i], group[j]];
+				if (a.level === b.level) continue;
+				const shared = [...senses.get(a.id)].filter((s) => senses.get(b.id).has(s));
+				if (shared.length) {
+					problems.push(
+						`gate:cross-level ${key}: L${a.level} ${a.id} and L${b.level} ${b.id} both mean "${shared[0]}"`
+					);
+				}
 			}
 		}
 	}
@@ -815,28 +815,72 @@ function gateProblems(shipped) {
 		}
 	}
 
+	// (e) Punctuation closes. L3 老百姓 shipped `the "person in the street` straight onto an
+	//     answer button — a sense truncated mid-quote — and every battery in loop 2 called
+	//     the corpus clean, because nothing was counting quotation marks.
+	for (const w of shipped) {
+		for (const m of w.meanings) {
+			if ((m.match(/"/g) ?? []).length % 2 || /[“”]/.test(m)) {
+				problems.push(`gate:punctuation ${w.id} ${w.hanzi}: unclosed quotation in "${m}"`);
+			}
+		}
+	}
+
 	return problems;
 }
 
 /**
- * Within a level, two cards must never answer to the same English — not the same primary
- * gloss, and not the same set of glosses in a different order.
+ * Every same-level pair whose *primary* glosses answer to one of the same senses.
+ *
+ * `meanings[0]` is the text on the answer button (src/lib/components/quiz/quiz.ts), so a
+ * shared sense here is not a near-synonym worth arguing about: it is a card where the learner
+ * reads "shirt", presses the button that says "shirt", and is marked wrong because the other
+ * shirt was the answer. Testing *intersection* rather than string equality is the whole
+ * point — 衬衫 "shirt" and 衬衣 "a shirt or blouse" are not equal strings and never were.
+ *
+ * Shared senses in the *secondary* glosses are left to the runtime guard in
+ * `pickDistractors`, which simply never puts the two words on one card. Only the primary is
+ * worth failing a build over, because only the primary is a question.
+ */
+function primaryCollisions(shipped) {
+	const found = [];
+	for (const level of LEVELS) {
+		const bySense = new Map();
+		const seenPairs = new Set();
+		for (const w of shipped.filter((x) => x.level === level)) {
+			for (const sense of senseKeys(w.meanings.slice(0, 1))) {
+				const others = bySense.get(sense);
+				if (!others) {
+					bySense.set(sense, [w]);
+					continue;
+				}
+				for (const other of others) {
+					const pair = `${other.id} ${w.id}`;
+					if (seenPairs.has(pair)) continue;
+					seenPairs.add(pair);
+					found.push({ level, sense, a: other, b: w });
+				}
+				others.push(w);
+			}
+		}
+	}
+	return found;
+}
+
+/**
+ * Within a level, two cards must never answer to the same English — not a shared sense in
+ * the primary gloss, and not the same set of glosses in a different order.
  */
 function uniquenessProblems(shipped) {
 	const problems = [];
+	for (const { level, sense, a, b } of primaryCollisions(shipped)) {
+		problems.push(
+			`unique:primary L${level} "${sense}": ${a.hanzi} (${a.id}) "${a.meanings[0]}" / ${b.hanzi} (${b.id}) "${b.meanings[0]}"`
+		);
+	}
 	for (const level of LEVELS) {
-		const rows = shipped.filter((w) => w.level === level);
-		const primaries = new Map();
 		const sets = new Map();
-		for (const w of rows) {
-			const p = primaryKey(w);
-			const other = primaries.get(p);
-			if (other) {
-				problems.push(
-					`unique:primary L${level} "${p}": ${other.hanzi} (${other.id}) / ${w.hanzi} (${w.id})`
-				);
-			} else primaries.set(p, w);
-
+		for (const w of shipped.filter((x) => x.level === level)) {
 			const s = senseSetKey(w);
 			const twin = sets.get(s);
 			if (twin) {
@@ -847,6 +891,33 @@ function uniquenessProblems(shipped) {
 		}
 	}
 	return problems;
+}
+
+/**
+ * Same-level pairs that share a sense somewhere *outside* the primary gloss.
+ *
+ * Not a build failure — the runtime guard keeps them off the same card, and forcing every
+ * one apart would push authors into inventing paraphrases, which is what produced 听见 "to
+ * catch a sound" in loop 1. It is a work list: `scripts/vocab-audit.json` carries the reason
+ * so a human can decide whether the second gloss is earning its place.
+ */
+function secondarySharing(shipped) {
+	const out = [];
+	const primaries = new Set(primaryCollisions(shipped).map(({ a, b }) => `${a.id} ${b.id}`));
+	for (const level of LEVELS) {
+		const rows = shipped.filter((x) => x.level === level);
+		const senses = new Map(rows.map((w) => [w.id, senseKeys(w.meanings)]));
+		for (let i = 0; i < rows.length; i++) {
+			for (let j = i + 1; j < rows.length; j++) {
+				const pair = `${rows[i].id} ${rows[j].id}`;
+				if (primaries.has(pair)) continue;
+				if (intersects(senses.get(rows[i].id), senses.get(rows[j].id))) {
+					out.push({ level, a: rows[i], b: rows[j] });
+				}
+			}
+		}
+	}
+	return out;
 }
 
 /* ----------------------------------------------------------------- verify */
@@ -952,7 +1023,9 @@ function auditEntries(shipped) {
 				? 'cross-level-duplicate-gloss'
 				: problem.startsWith('gate:romanization')
 					? 'gloss-is-its-own-romanization'
-					: 'pos-and-gloss-disagree';
+					: problem.startsWith('gate:punctuation')
+						? 'unclosed-punctuation'
+						: 'pos-and-gloss-disagree';
 		for (const m of problem.matchAll(/\b(L[1-5]-\d{4})\b/g)) if (byId.has(m[1])) note(m[1], reason);
 	}
 	for (const problem of uniquenessProblems(shipped)) {
@@ -960,6 +1033,11 @@ function auditEntries(shipped) {
 			? 'primary-gloss-collision'
 			: 'identical-meaning-set';
 		for (const m of problem.matchAll(/\b(L[1-5]-\d{4})\b/g)) if (byId.has(m[1])) note(m[1], reason);
+	}
+	// Not a build failure — see secondarySharing(). Listed so it is work someone can see.
+	for (const { a, b } of secondarySharing(shipped)) {
+		note(a.id, 'shares-sense-with-level-mate');
+		note(b.id, 'shares-sense-with-level-mate');
 	}
 
 	const out = [];
@@ -1002,6 +1080,9 @@ function auditEntries(shipped) {
 			reasons.add('no-usable-cedict-sense');
 		}
 		if (w.notes.includes('merged-rows')) reasons.add('merged-rows');
+		if (w.notes.includes('merged-row-sense-not-authored')) {
+			reasons.add('merged-row-sense-not-authored');
+		}
 
 		if (!reasons.size) continue;
 		// Context, not a trigger: whether a human has been here yet.

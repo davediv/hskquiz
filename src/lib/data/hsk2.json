@@ -756,7 +756,7 @@
 			{ "py": "chéng", "tone": 2 },
 			{ "py": "jì", "tone": 4 }
 		],
-		"meanings": ["grades or results", "achievement"],
+		"meanings": ["an achievement", "results at school or work"],
 		"pos": ["N"],
 		"level": 2
 	},
@@ -2024,7 +2024,7 @@
 		"traditional": "該",
 		"pinyin": "gāi",
 		"syllables": [{ "py": "gāi", "tone": 1 }],
-		"meanings": ["should or ought to", "to be one's turn"],
+		"meanings": ["to be one's turn", "should"],
 		"pos": ["V"],
 		"level": 2
 	},
@@ -2532,7 +2532,7 @@
 		"hanzi": "好",
 		"pinyin": "hǎo",
 		"syllables": [{ "py": "hǎo", "tone": 3 }],
-		"meanings": ["so or very", "easy to do"],
+		"meanings": ["very", "easy to do"],
 		"pos": ["Adv"],
 		"level": 2
 	},
@@ -3367,7 +3367,7 @@
 			{ "py": "jiē", "tone": 1 },
 			{ "py": "zhe", "tone": 0 }
 		],
-		"meanings": ["then or next", "to carry on"],
+		"meanings": ["to carry on", "right after that"],
 		"pos": ["V", "Adv"],
 		"level": 2
 	},
@@ -3934,7 +3934,7 @@
 			{ "py": "lái", "tone": 2 },
 			{ "py": "zì", "tone": 4 }
 		],
-		"meanings": ["to come from", "From"],
+		"meanings": ["to come from", "to originate from"],
 		"pos": ["V"],
 		"level": 2
 	},
@@ -5031,7 +5031,7 @@
 		"traditional": "氣",
 		"pinyin": "qì",
 		"syllables": [{ "py": "qì", "tone": 4 }],
-		"meanings": ["air or gas", "to make someone angry"],
+		"meanings": ["gas", "breath", "to make someone angry"],
 		"pos": ["V", "N"],
 		"level": 2
 	},
@@ -7123,7 +7123,7 @@
 			{ "py": "xiào", "tone": 4 },
 			{ "py": "zhǎng", "tone": 3 }
 		],
-		"meanings": ["president", "headmaster"],
+		"meanings": ["the head of a school", "a headmaster"],
 		"pos": ["N"],
 		"level": 2
 	},

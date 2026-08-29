@@ -23,10 +23,6 @@
 		"meanings": ["long since", "already a long time ago"],
 		"note": "Adv row. CEDICT's second sense is marked dialect and is excluded; the clause 'long since' is the one 早已 carries."
 	},
-	"L3-0877": {
-		"meanings": ["to build or make"],
-		"note": "V row. 造 is the general build-or-make character; its specific readings are all owned by L3 compounds — 建 'to build', 制作 'to make', 生产 'to produce', 创造 'to create' — so one joined gloss keeps it honest and unique."
-	},
 	"L3-0878": {
 		"meanings": ["to bring about", "to result in"],
 		"note": "V row. Another L3 card (使) leads with 'to cause', so 造成 takes the bring-about reading it carries in 造成损失."
@@ -462,10 +458,6 @@
 	"L4-0042": {
 		"meanings": ["to debate", "a debate"],
 		"note": "V/N row; the verb leads as the POS orders it and the CL: plumbing is dropped."
-	},
-	"L4-0043": {
-		"meanings": ["a sign or symbol", "to symbolize"],
-		"note": "V/N row; 标志 is met first as the noun on a road sign, and both POS keep a gloss."
 	},
 	"L4-0046": {
 		"meanings": ["to part from someone", "to pin something on"],

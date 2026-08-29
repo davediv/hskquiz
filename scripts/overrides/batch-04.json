@@ -83,10 +83,6 @@
 		"meanings": ["to yell", "to call out"],
 		"note": "V. Not \"to shout\" — that is 叫 at L1."
 	},
-	"L2-0214": {
-		"meanings": ["so or very", "easy to do"],
-		"note": "Official POS is Adv; L1 好 ships the Adj \"good\". This row is the intensifier (好大, 好久) plus the pre-verb \"easy to\" (好写)."
-	},
 	"L2-0215": {
 		"meanings": ["advantage", "benefit"],
 		"note": "N. Led with \"advantage\" so it does not duplicate 优点 (L3) \"merit, benefit\"."
@@ -274,10 +270,6 @@
 	"L2-0282": {
 		"meanings": ["to answer the phone", "to pick someone up"],
 		"note": "V. The two HSK 2 uses, spelled out so the primary does not collide with 答应/答 \"to answer\"."
-	},
-	"L2-0286": {
-		"meanings": ["then or next", "to carry on"],
-		"note": "Adv/V. Plain-words primary; \"to catch and hold on\" is not the HSK 2 sense."
 	},
 	"L2-0287": {
 		"meanings": ["a city street"],

@@ -3,11 +3,16 @@
  * what the official HSK 3.0 standard says, and that every entry is answerable as a quiz
  * question.
  *
- * The four `gloss gates` blocks mirror the gates in scripts/build-vocab.mjs. They are
+ * The `gloss gates` blocks mirror the gates in scripts/build-vocab.mjs. The *checks* are
  * deliberately duplicated rather than imported: the build gate stops a bad gloss being
  * written, and this one stops a bad gloss being checked in by hand or surviving a build
- * that was never re-run. Loop 1 shipped all four defects with this suite green, because
+ * that was never re-run. Loop 1 shipped four such defects with this suite green, because
  * nothing here looked at what a gloss actually said.
+ *
+ * What is *not* duplicated is the comparison itself. Both sides call `$lib/data/senses`,
+ * because loop 2's two hand-kept-identical copies of that normaliser were identical in the
+ * wrong way — neither knew the word "or" — and 38 same-level pairs shipped answering to the
+ * same English.
  *
  * Files are read with `readFileSync` rather than imported: a static `import './hsk1.json'`
  * would drag 4,308 JSON entries into the TypeScript program and slow every `svelte-check`.
@@ -18,7 +23,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Level, Word } from '$lib/types';
 import { LEVEL_SIZES, LEVELS } from '$lib/types';
-import { senseSet } from '$lib/session/distractors';
+import { intersects, senseKey, senseKeys } from '$lib/data/senses';
 import { SHIPPED_SIZES, SHIPPED_TOTAL } from './sizes';
 
 interface ShippedWord extends Word {
@@ -260,10 +265,9 @@ function isBareNounGloss(text: string): boolean {
 	return NOUN_SUFFIX.test(head);
 }
 
-/** The article-stripped senses the app's own distractor guard compares on. */
-const primaryKey = (word: ShippedWord) =>
-	[...senseSet({ ...word, meanings: word.meanings.slice(0, 1) })].sort().join(' / ');
-const senseSetKey = (word: ShippedWord) => [...senseSet(word)].sort().join(' / ');
+/** The senses the app's own distractor guard compares on — see src/lib/data/senses.ts. */
+const primarySenses = (word: ShippedWord) => senseKeys(word.meanings.slice(0, 1));
+const senseSetKey = (word: ShippedWord) => senseKey(senseKeys(word.meanings));
 
 describe('gloss gates', () => {
 	it('(a) ships no slang, vulgar, dialect, figurative or variant-character gloss', () => {
@@ -280,10 +284,11 @@ describe('gloss gates', () => {
 		expect(bad).toEqual([]);
 	});
 
-	it('(b) never gives two levels of the same word the same primary gloss', () => {
+	it('(b) never gives two levels of the same word a gloss that means the same thing', () => {
 		// 白, 才, 牛, 火, 头, 称, 好, 多, 一会儿 and 出口 each appear at two levels. Shipping
-		// the same primary gloss at both makes the pair indistinguishable to a learner and
-		// guarantees that one of the two is wrong for its level.
+		// the same sense at both makes the pair indistinguishable to a learner and guarantees
+		// that one of the two is wrong for its level. Compared on any shared sense, not on
+		// primary-gloss equality: L2 米 "meter" was L3 米's *second* gloss word for word.
 		const byWord = new Map<string, ShippedWord[]>();
 		for (const word of shipped) {
 			const key = `${word.hanzi} ${word.pinyin.toLowerCase()}`;
@@ -292,12 +297,15 @@ describe('gloss gates', () => {
 		const clashes: string[] = [];
 		for (const [key, group] of byWord) {
 			if (group.length < 2) continue;
-			const seen = new Map<string, ShippedWord>();
-			for (const word of group) {
-				const other = seen.get(primaryKey(word));
-				if (other && other.level !== word.level) {
-					clashes.push(`${key}: L${other.level} and L${word.level} both "${word.meanings[0]}"`);
-				} else if (!other) seen.set(primaryKey(word), word);
+			const senses = new Map(group.map((word) => [word.id, senseKeys(word.meanings)]));
+			for (let i = 0; i < group.length; i++) {
+				for (let j = i + 1; j < group.length; j++) {
+					const [a, b] = [group[i], group[j]];
+					if (a.level === b.level) continue;
+					const shared = [...senses.get(a.id)!].filter((sense) => senses.get(b.id)!.has(sense));
+					if (shared.length)
+						clashes.push(`${key}: L${a.level} and L${b.level} both "${shared[0]}"`);
+				}
 			}
 		}
 		expect(clashes).toEqual([]);
@@ -310,6 +318,20 @@ describe('gloss gates', () => {
 			const rom = romanization(word.pinyin);
 			for (const meaning of word.meanings) {
 				if (rom && asLetters(meaning) === rom) bad.push(`${label(word)}: "${meaning}"`);
+			}
+		}
+		expect(bad).toEqual([]);
+	});
+
+	it('(e) closes every quotation it opens', () => {
+		// L3 老百姓 shipped `the "person in the street` — a CC-CEDICT sense truncated inside
+		// its own quotation marks — straight onto an answer button.
+		const bad: string[] = [];
+		for (const word of shipped) {
+			for (const meaning of word.meanings) {
+				if ((meaning.match(/"/g) ?? []).length % 2 || /[\u201c\u201d]/.test(meaning)) {
+					bad.push(`${label(word)}: ${JSON.stringify(meaning)}`);
+				}
 			}
 		}
 		expect(bad).toEqual([]);
@@ -355,18 +377,21 @@ describe('every entry is quizzable', () => {
 		expect(bad.map((word) => `${word.id} ${word.hanzi}: ${word.meanings.join(' | ')}`)).toEqual([]);
 	});
 
-	it('never gives two words in a level the same primary meaning', () => {
-		// Compared on the app's own `senseSet` normalisation, which strips a leading
-		// `a/an/the/to`. Without it, 群 "a crowd" and 人群 "crowd" pass a test that the
-		// distractor picker already treats as the same answer.
+	it('never gives two words in a level a primary meaning that means the same thing', () => {
+		// `meanings[0]` is the text on the answer button, so a shared sense here is a card
+		// where the learner presses a button that says exactly what the prompt asked for and
+		// is marked wrong. Compared on src/lib/data/senses.ts, which knows that "a shirt or
+		// blouse" contains "shirt" — loop 2 compared whole strings and could not see it.
 		const clashes: string[] = [];
 		for (const level of LEVELS) {
-			const seen = new Map<string, ShippedWord>();
-			for (const word of readShipped(level)) {
-				const key = primaryKey(word);
-				const other = seen.get(key);
-				if (other) clashes.push(`L${level} "${key}": ${other.hanzi} / ${word.hanzi}`);
-				else seen.set(key, word);
+			const rows = readShipped(level);
+			const senses = new Map(rows.map((word) => [word.id, primarySenses(word)]));
+			for (let i = 0; i < rows.length; i++) {
+				for (let j = i + 1; j < rows.length; j++) {
+					const [a, b] = [rows[i], rows[j]];
+					if (!intersects(senses.get(a.id)!, senses.get(b.id)!)) continue;
+					clashes.push(`L${level}: ${a.hanzi} "${a.meanings[0]}" / ${b.hanzi} "${b.meanings[0]}"`);
+				}
 			}
 		}
 		expect(clashes).toEqual([]);

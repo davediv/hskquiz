@@ -824,7 +824,7 @@
 			{ "py": "cǎi", "tone": 3 },
 			{ "py": "qǔ", "tone": 3 }
 		],
-		"meanings": ["to adopt or carry out", "to take"],
+		"meanings": ["to take measures", "to adopt an attitude"],
 		"pos": ["V"],
 		"level": 3
 	},
@@ -1019,7 +1019,7 @@
 			{ "py": "chèn", "tone": 4 },
 			{ "py": "yī", "tone": 1 }
 		],
-		"meanings": ["a shirt or blouse"],
+		"meanings": ["underclothes", "a shirt worn next to the skin"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -1195,7 +1195,7 @@
 		"hanzi": "初",
 		"pinyin": "chū",
 		"syllables": [{ "py": "chū", "tone": 1 }],
-		"meanings": ["at the beginning", "early"],
+		"meanings": ["at the beginning", "early", "first, in a lunar month date"],
 		"pos": ["Adv", "Prefix"],
 		"level": 3,
 		"ids": ["L3-0102", "L3-0103"]
@@ -1752,7 +1752,7 @@
 			{ "py": "dì", "tone": 4 },
 			{ "py": "qū", "tone": 1 }
 		],
-		"meanings": ["a region or district"],
+		"meanings": ["a region", "an area of a country"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -1953,7 +1953,7 @@
 		"traditional": "斷",
 		"pinyin": "duàn",
 		"syllables": [{ "py": "duàn", "tone": 4 }],
-		"meanings": ["to break or snap", "to cut off"],
+		"meanings": ["to snap in two", "to cut off"],
 		"pos": ["V"],
 		"level": 3
 	},
@@ -2963,7 +2963,7 @@
 			{ "py": "gōng", "tone": 1 },
 			{ "py": "gòng", "tone": 4 }
 		],
-		"meanings": ["public or shared", "communal"],
+		"meanings": ["public", "for everyone to use"],
 		"pos": ["Adj"],
 		"level": 3
 	},
@@ -3968,7 +3968,7 @@
 			{ "py": "jiā", "tone": 1 },
 			{ "py": "gōng", "tone": 1 }
 		],
-		"meanings": ["to process", "to refine or finish"],
+		"meanings": ["to process materials", "to refine or finish"],
 		"pos": [],
 		"level": 3
 	},
@@ -5210,7 +5210,7 @@
 			{ "py": "bǎi", "tone": 3 },
 			{ "py": "xìng", "tone": 4 }
 		],
-		"meanings": ["ordinary people", "the \"person in the street"],
+		"meanings": ["ordinary people", "common folk"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -5905,7 +5905,7 @@
 		"hanzi": "米",
 		"pinyin": "mǐ",
 		"syllables": [{ "py": "mǐ", "tone": 3 }],
-		"meanings": ["uncooked rice", "meter"],
+		"meanings": ["uncooked rice", "husked rice"],
 		"pos": ["N"],
 		"level": 3
 	},
@@ -6411,7 +6411,7 @@
 		"hanzi": "配",
 		"pinyin": "pèi",
 		"syllables": [{ "py": "pèi", "tone": 4 }],
-		"meanings": ["to match or go with", "to mix or blend"],
+		"meanings": ["to go with", "to mix or blend"],
 		"pos": ["V"],
 		"level": 3
 	},
@@ -10553,7 +10553,7 @@
 		"hanzi": "造",
 		"pinyin": "zào",
 		"syllables": [{ "py": "zào", "tone": 4 }],
-		"meanings": ["to build or make"],
+		"meanings": ["to construct", "to fabricate"],
 		"pos": ["V"],
 		"level": 3
 	},

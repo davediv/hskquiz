@@ -492,7 +492,7 @@
 			{ "py": "biāo", "tone": 1 },
 			{ "py": "zhì", "tone": 4 }
 		],
-		"meanings": ["a sign or symbol", "to symbolize"],
+		"meanings": ["a logo or emblem", "to symbolize"],
 		"pos": ["V", "N"],
 		"level": 4
 	},
@@ -1771,7 +1771,7 @@
 			{ "py": "dà", "tone": 4 },
 			{ "py": "mā", "tone": 1 }
 		],
-		"meanings": ["father's elder brother's wife", "aunt"],
+		"meanings": ["a middle-aged woman", "father's elder brother's wife"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -2286,7 +2286,7 @@
 		"hanzi": "定",
 		"pinyin": "dìng",
 		"syllables": [{ "py": "dìng", "tone": 4 }],
-		"meanings": ["to fix or decide", "to settle on"],
+		"meanings": ["to decide on", "to settle on"],
 		"pos": ["V"],
 		"level": 4
 	},
@@ -2645,7 +2645,7 @@
 		"hanzi": "法",
 		"pinyin": "fǎ",
 		"syllables": [{ "py": "fǎ", "tone": 3 }],
-		"meanings": ["law or rule", "a way of doing something"],
+		"meanings": ["a way of doing something", "a method"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -3014,7 +3014,7 @@
 			{ "py": "fú", "tone": 2 },
 			{ "py": "hào", "tone": 4 }
 		],
-		"meanings": ["symbol or sign", "a written mark"],
+		"meanings": ["a written symbol", "a notation mark"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -3895,7 +3895,7 @@
 		"hanzi": "花",
 		"pinyin": "huā",
 		"syllables": [{ "py": "huā", "tone": 1 }],
-		"meanings": ["multicolored or patterned", "blurred"],
+		"meanings": ["patterned", "blurred"],
 		"pos": ["Adj"],
 		"level": 4
 	},
@@ -4648,7 +4648,7 @@
 		"hanzi": "降",
 		"pinyin": "jiàng",
 		"syllables": [{ "py": "jiàng", "tone": 4 }],
-		"meanings": ["to descend or drop", "to lower"],
+		"meanings": ["to drop", "to bring down"],
 		"pos": ["V"],
 		"level": 4
 	},
@@ -5933,7 +5933,7 @@
 		"traditional": "輪",
 		"pinyin": "lún",
 		"syllables": [{ "py": "lún", "tone": 2 }],
-		"meanings": ["a round or turn", "to take turns", "measure word: rounds"],
+		"meanings": ["a round in a contest", "to take turns", "measure word: rounds"],
 		"pos": ["N", "V", "M"],
 		"level": 4
 	},
@@ -6280,7 +6280,7 @@
 			{ "py": "míng", "tone": 2 },
 			{ "py": "piàn", "tone": 4 }
 		],
-		"meanings": ["card"],
+		"meanings": ["a business card"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -6562,7 +6562,7 @@
 		"hanzi": "牌",
 		"pinyin": "pái",
 		"syllables": [{ "py": "pái", "tone": 2 }],
-		"meanings": ["a sign or plate", "brand", "playing cards"],
+		"meanings": ["a signboard", "a brand", "playing cards"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -7658,7 +7658,7 @@
 			{ "py": "shī", "tone": 1 },
 			{ "py": "rén", "tone": 2 }
 		],
-		"meanings": ["bard", "poet"],
+		"meanings": ["a poet"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -8440,7 +8440,7 @@
 			{ "py": "tǐ", "tone": 3 },
 			{ "py": "cāo", "tone": 1 }
 		],
-		"meanings": ["gymnastic", "gymnastics"],
+		"meanings": ["gymnastics"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -9668,7 +9668,7 @@
 			{ "py": "xiàng", "tone": 4 },
 			{ "py": "piàn", "tone": 4 }
 		],
-		"meanings": ["image", "photograph"],
+		"meanings": ["a photo", "a printed picture"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -9859,7 +9859,7 @@
 		"hanzi": "型",
 		"pinyin": "xíng",
 		"syllables": [{ "py": "xíng", "tone": 2 }],
-		"meanings": ["a type or model"],
+		"meanings": ["a model", "a mold"],
 		"pos": ["N"],
 		"level": 4
 	},
@@ -10617,7 +10617,7 @@
 			{ "py": "yǐn", "tone": 3 },
 			{ "py": "jìn", "tone": 4 }
 		],
-		"meanings": ["to recommend", "to introduce"],
+		"meanings": ["to bring in from abroad", "to introduce a technology"],
 		"pos": ["V"],
 		"level": 4
 	},
@@ -11478,7 +11478,7 @@
 			{ "py": "zhí", "tone": 2 },
 			{ "py": "wù", "tone": 4 }
 		],
-		"meanings": ["plant", "vegetation"],
+		"meanings": ["plant life", "vegetation"],
 		"pos": ["N"],
 		"level": 4
 	},

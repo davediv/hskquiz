@@ -3,10 +3,6 @@
 		"meanings": ["to prop up", "to pay out money"],
 		"note": "CEDICT leads \"to support\", which is 支持's gloss at L3; 支 as a verb is 支帐篷 / 支钱."
 	},
-	"L4-0953": {
-		"meanings": ["plant", "vegetation"],
-		"note": "Plain noun kept here; 种 zhòng L4 takes a verb gloss so the two no longer collide."
-	},
 	"L4-0954": {
 		"meanings": ["to direct or command", "conductor of an orchestra"],
 		"note": "V/N row: the verb sense leads, the orchestra noun follows as its own sense."
@@ -283,10 +279,6 @@
 		"meanings": ["you flatter me", "I don't deserve the praise"],
 		"note": "A set polite reply to praise; the literal CEDICT gloss teaches nothing."
 	},
-	"L5-0061": {
-		"meanings": ["harmful or bad", "faulty"],
-		"note": "不良习惯 / 不良反应; second sense covers 接触不良."
-	},
 	"L5-0062": {
 		"meanings": ["cannot help but", "inevitably"],
 		"note": "Leads with the literal force so it is not confused with 难免 at L4."
@@ -322,10 +314,6 @@
 	"L5-0072": {
 		"meanings": ["a referee or umpire", "to judge a contest"],
 		"note": "V/N row; the sports noun is what a learner meets, so it leads."
-	},
-	"L5-0076": {
-		"meanings": ["a restaurant or dining hall", "a canteen"],
-		"note": "Kept off bare \"restaurant\", which 饭店 L1 and 饭馆 L2 already carry."
 	},
 	"L5-0077": {
 		"meanings": ["catering", "the food and drink trade"],
@@ -426,10 +414,6 @@
 	"L5-0115": {
 		"meanings": ["late", "delayed"],
 		"note": "Adj row; 迟到 L4 holds the verb \"to arrive late\"."
-	},
-	"L5-0116": {
-		"meanings": ["an impulse or urge", "impulsive"],
-		"note": "N/Adj row, so a verb gloss cannot lead."
 	},
 	"L5-0117": {
 		"meanings": ["a conflict or clash", "to clash"],
