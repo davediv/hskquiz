@@ -1,0 +1,16 @@
+{
+	"piece": "vocab-browse",
+	"loop": 3,
+	"rule": "\"vocab-browse\" has 12 characters (EVEN) -> ours = A.png, reference = B.png",
+	"A": {
+		"which": "ours",
+		"source": "progress/shots/loop-3/vocab-browse-mobile.png",
+		"description": "hskquiz /browse/1 vocabulary list, 375x812 @2x mobile viewport"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"description": "Pleco iOS dictionary search results for \"shouji\", iPhone 1242x2208"
+	},
+	"why": "Both are vocabulary list screens: a scrolling column of hanzi + pinyin + English gloss, one row per word, on a phone. Pleco's list is the closest reference screen to what /browse/[level] is."
+}
