@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import type { Level, Word } from '../types';
 import { buildSession, isCorrect, mulberry32 } from './index';
 import { sharesSense } from './distractors';
+import { senseSet } from '$lib/data/senses';
 
 const NOW = 1_700_000_000_000;
 const LEVELS: Level[] = [1, 2, 3, 4, 5];
@@ -83,6 +84,40 @@ describe.skipIf(!available)('buildSession against the shipped HSK list', () => {
 		}
 	});
 
+	it('never offers a shorter form of the answer as a wrong answer', () => {
+		// 出去 "to go out" beside 去 "to go": same character, and a gloss the learner cannot
+		// tell apart from the prompt they were given. 243 such pairs exist inside the five
+		// shipped levels; none of them may share a card. Re-derived here rather than imported,
+		// so the property is checked and not merely the implementation restated.
+		const opens = (a: string, b: string) => {
+			const [s, l] =
+				a.length <= b.length ? [a.split(' '), b.split(' ')] : [b.split(' '), a.split(' ')];
+			return s.length > 0 && s.length < l.length && s.every((t, i) => l[i] === t);
+		};
+		const nested = (a: Word, b: Word) => {
+			const chars = new Set([...a.hanzi]);
+			if (![...b.hanzi].some((c) => chars.has(c))) return false;
+			for (const x of senseSet(a)) for (const y of senseSet(b)) if (opens(x, y)) return true;
+			return false;
+		};
+		let checked = 0;
+		for (const [level, words] of levels) {
+			for (let seed = 0; seed < 40; seed++) {
+				const session = buildSession(words, level, null, 10, {
+					rng: mulberry32(seed * 31 + level),
+					now: NOW
+				});
+				for (const question of session.questions) {
+					for (const choice of question.choices) {
+						if (choice.id === question.word.id) continue;
+						checked++;
+						expect(nested(question.word, choice)).toBe(false);
+					}
+				}
+			}
+		}
+		expect(checked).toBeGreaterThan(5000);
+	});
 	it('shows a different set of wrong answers each time a word comes round', () => {
 		const [, words] = levels[1];
 		const seen = new Set<string>();

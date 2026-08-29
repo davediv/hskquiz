@@ -1,4 +1,5 @@
 import type { Direction, Word } from '../types';
+import { intersects, senseSet } from '$lib/data/senses';
 import { shuffle, type Rng } from './rng';
 
 /**
@@ -11,45 +12,16 @@ import { shuffle, type Rng } from './rng';
  */
 export const CHOICE_COUNT = 4;
 
-const ARTICLE = /^(?:to|a|an|the)\s+/;
-
 /**
- * Split a gloss into comparable senses.
+ * Sense normalisation is `$lib/data/senses`, and only ever that.
  *
- * The shipped meanings are semicolon-joined (`'to love; to be fond of; to like'`), so a
- * naive string compare would call 那 two different words. Normalising to a set of bare
- * senses — parentheticals dropped, articles and the verbal `to` stripped, punctuation and
- * case flattened — is what lets the picker tell "genuinely different word" from "the same
- * answer wearing a different gloss".
+ * This file used to carry its own `senseSet`, deliberately written to match `senseKeys()` in
+ * `scripts/build-vocab.mjs` line for line. Two copies of one rule is one copy too many: the
+ * build gate that guarantees no two shipped words share a sense, and the picker that keeps
+ * two such words off one card, have to be asking the *same* question or the guarantee is
+ * about a different app than the one that ships. Both import the one module now.
  */
-export function senseSet(word: Word): Set<string> {
-	const out = new Set<string>();
-	for (const meaning of word.meanings ?? []) {
-		for (const part of meaning.split(/[;/]/)) {
-			const normalised = part
-				.toLowerCase()
-				.replace(/\([^)]*\)/g, ' ')
-				.replace(/[.;,!?"'’“”()[\]]/g, ' ')
-				.replace(/\s+/g, ' ')
-				.trim()
-				.replace(ARTICLE, '')
-				.trim();
-			if (normalised) out.add(normalised);
-		}
-	}
-	return out;
-}
-
-function intersects(a: ReadonlySet<string>, b: ReadonlySet<string>): boolean {
-	const [small, large] = a.size <= b.size ? [a, b] : [b, a];
-	for (const value of small) if (large.has(value)) return true;
-	return false;
-}
-
-/** True when two entries share any sense — i.e. both would be right for the same prompt. */
-export function sharesSense(a: Word, b: Word): boolean {
-	return intersects(senseSet(a), senseSet(b));
-}
+export { senseSet, sharesSense } from '$lib/data/senses';
 
 /** A word the app can actually put on a card: it needs a headword and at least one gloss. */
 export function isUsable(word: Word): boolean {
@@ -71,8 +43,23 @@ function isVerbal(word: Word): boolean {
 	return /^to\s/i.test(word.meanings[0] ?? '');
 }
 
+/**
+ * Characters of a word, memoised.
+ *
+ * `sharesCharacter` runs once per candidate per question in `plausibility` and again in the
+ * nesting test, which is ~10,000 calls a session on a 500-word level; rebuilding two sets on
+ * every one of them made a full session measurably slower than picking its distractors.
+ * Keyed by the string, so entries that render identically share an entry and the map is
+ * bounded by the vocabulary rather than by the number of sessions.
+ */
+const CHARS = new Map<string, Set<string>>();
+
 function charSet(word: Word): Set<string> {
-	return new Set([...word.hanzi]);
+	const cached = CHARS.get(word.hanzi);
+	if (cached) return cached;
+	const made = new Set([...word.hanzi]);
+	CHARS.set(word.hanzi, made);
+	return made;
 }
 
 function sharesCharacter(a: Word, b: Word): boolean {
@@ -130,18 +117,69 @@ export interface DistractorPool {
 	/** Every word eligible to appear as a wrong answer, already filtered for usability. */
 	readonly words: readonly Word[];
 	readonly senses: ReadonlyMap<string, Set<string>>;
+	/** The same senses, split into words, for the nesting test below. */
+	readonly phrases: ReadonlyMap<string, string[][]>;
 }
 
 /** Precompute the sense sets once per session instead of once per comparison. */
 export function makePool(words: readonly Word[]): DistractorPool {
 	const usable = words.filter(isUsable);
 	const senses = new Map<string, Set<string>>();
-	for (const word of usable) senses.set(word.id, senseSet(word));
-	return { words: usable, senses };
+	const phrases = new Map<string, string[][]>();
+	for (const word of usable) {
+		const set = senseSet(word);
+		senses.set(word.id, set);
+		phrases.set(word.id, [...set].map(splitWords));
+	}
+	return { words: usable, senses, phrases };
+}
+
+function splitWords(sense: string): string[] {
+	return sense.split(' ').filter(Boolean);
 }
 
 function sensesOf(pool: DistractorPool, word: Word): ReadonlySet<string> {
 	return pool.senses.get(word.id) ?? senseSet(word);
+}
+
+function phrasesOf(pool: DistractorPool, word: Word): readonly string[][] {
+	return pool.phrases.get(word.id) ?? [...senseSet(word)].map(splitWords);
+}
+
+/** `['to','go']` opens `['to','go','out']`. Equal phrases are `sharesSense`'s business. */
+function opens(short: readonly string[], long: readonly string[]): boolean {
+	if (short.length === 0 || short.length >= long.length) return false;
+	for (let i = 0; i < short.length; i++) if (short[i] !== long[i]) return false;
+	return true;
+}
+
+/**
+ * True when one word's gloss is the opening of the other's *and* the two share a character.
+ *
+ * Neither half is enough on its own. Nested glosses alone catch 827 same-level pairs, most of
+ * them unrelated words that happen to start the same way ("not" inside "not very much"), and
+ * throwing that many candidates out of the picker costs more than it buys. A shared character
+ * alone is a *feature*: producing 开机 "to switch on a machine" when asked for 开学 "to start
+ * school" is the mistake a real learner makes, and `SIGNALS.share` deliberately rewards it.
+ *
+ * Together they are the trap. 出去 "to go out" beside 去 "to go", 回来 "to come back" beside 来
+ * "to come", 唱歌 "to sing a song" beside 唱 "to sing", 大学生 "university student" beside 大学
+ * "university" — same character, and a gloss the learner cannot tell apart from the prompt
+ * they were given. The learner picks the shorter one, is told they are wrong, and is right.
+ * 243 such pairs across the five shipped levels; each one loses one candidate out of hundreds.
+ *
+ * What this cannot see is a synonym that shares no spelling: 没关系 "it does not matter" beside
+ * 没事儿 "it is all right", or 记住 "memorize" beside 记得 "remember". Those need a thesaurus,
+ * not a string compare, and pretending otherwise is how the 827-pair version happened.
+ */
+function nestsWith(pool: DistractorPool, a: Word, b: Word): boolean {
+	if (!sharesCharacter(a, b)) return false;
+	for (const x of phrasesOf(pool, a)) {
+		for (const y of phrasesOf(pool, b)) {
+			if (opens(x, y) || opens(y, x)) return true;
+		}
+	}
+	return false;
 }
 
 /**
@@ -152,11 +190,16 @@ function sensesOf(pool: DistractorPool, word: Word): ReadonlySet<string> {
  * also correct when the prompt is the hanzi. And ~40 words per level share a gloss with
  * another word, so a same-sense distractor is also correct when the prompt is the gloss.
  * Filtering on the displayed side only would leave the other half of the bug in place.
+ *
+ * The last clause is not ambiguity in the strict sense — 去 is not a correct answer to "to go
+ * out" — but it is indistinguishable from one at the moment of choosing, which is the only
+ * moment that matters. See `nestsWith`.
  */
 export function isAmbiguousWith(pool: DistractorPool, answer: Word, candidate: Word): boolean {
 	if (candidate.id === answer.id) return true;
 	if (candidate.hanzi === answer.hanzi) return true;
-	return intersects(sensesOf(pool, answer), sensesOf(pool, candidate));
+	if (intersects(sensesOf(pool, answer), sensesOf(pool, candidate))) return true;
+	return nestsWith(pool, answer, candidate);
 }
 
 /**

@@ -9,7 +9,10 @@ import {
 	isCorrect,
 	isIntroduction,
 	isScored,
-	mulberry32
+	mulberry32,
+	readRecord,
+	recordOutcome,
+	type ProgressWriter
 } from './index';
 import { sharesSense } from './distractors';
 import { HOUR, makeLevel, mastered, progressState, record, shaky } from './test-fixtures';
@@ -425,5 +428,163 @@ describe('isCorrect', () => {
 			meanings: ['a completely unrelated sense']
 		};
 		expect(isCorrect(question, homograph)).toBe(false);
+	});
+});
+
+/**
+ * The whole point of the piece, played end to end.
+ *
+ * Everything above tests one session in isolation. This plays a learner: build a session,
+ * fold each card into the record the way `recordOutcome` says it must be folded, build the
+ * next one from what that left behind. It is the only place the ladder, the weights, the
+ * quota and the record reader are all under load at once, and every defect this loop closed
+ * was invisible to a single-session test.
+ */
+describe('a learner, over sessions', () => {
+	/** The minimum honest progress store: `recordAnswer` plus a `noteSeen` that only stamps. */
+	function store(now: () => number) {
+		const byWord: Record<string, Record<string, number | string>> = {};
+		const touch = (wordId: string) =>
+			(byWord[wordId] ??= { wordId, seen: 0, correct: 0, streak: 0, lastSeen: 0, lastMissed: 0 });
+		const writer: ProgressWriter = {
+			recordAnswer(wordId, correct) {
+				const r = touch(wordId);
+				r.seen = (r.seen as number) + 1;
+				r.lastSeen = now();
+				if (correct) {
+					r.correct = (r.correct as number) + 1;
+					r.streak = (r.streak as number) + 1;
+				} else {
+					r.streak = 0;
+					r.lastMissed = now();
+				}
+			},
+			// No schema change: an exposure is a timestamp with no answer behind it.
+			noteSeen(wordId) {
+				touch(wordId).lastSeen = now();
+			}
+		};
+		return { byWord, writer };
+	}
+
+	function play(sessions: number, seed: number, accuracy = 0.8) {
+		const rng = mulberry32(seed);
+		let at = NOW;
+		const { byWord, writer } = store(() => at);
+		const kinds: Record<string, number>[] = [];
+		const drawn: string[][] = [];
+		const outcomes = { answered: 0, introduced: 0, dropped: 0 };
+		for (let s = 0; s < sessions; s++) {
+			at = NOW + s * 24 * HOUR;
+			const built = buildSession(
+				LEVEL_1,
+				1,
+				{ version: 1, byWord, levels: {} } as never,
+				SESSION_SIZE,
+				{
+					rng,
+					now: at
+				}
+			);
+			const here: Record<string, number> = {
+				introduce: 0,
+				'hanzi-to-meaning': 0,
+				'meaning-to-hanzi': 0
+			};
+			drawn.push(built.questions.map((q) => q.word.id));
+			for (const question of built.questions) {
+				here[cardKind(question)]++;
+				const picked = isScored(question)
+					? rng() < accuracy
+						? question.word
+						: (question.choices.find((c) => c.id !== question.word.id) ?? null)
+					: null;
+				outcomes[recordOutcome(writer, question, picked)]++;
+			}
+			kinds.push(here);
+		}
+		return { byWord, kinds, drawn, outcomes };
+	}
+
+	it('teaches the first session and asks about it in the second', () => {
+		const run = play(2, 11);
+		expect(run.kinds[0].introduce).toBe(SESSION_SIZE);
+		expect(run.kinds[1].introduce).toBeLessThanOrEqual(2);
+		// Session 2 is mostly the words session 1 taught. That is not a repeat, it is the
+		// question the introduction was setting up.
+		const taught = new Set(run.drawn[0]);
+		expect(run.drawn[1].filter((id) => taught.has(id)).length).toBeGreaterThanOrEqual(8);
+	});
+
+	it('never writes a miss about a word it only ever showed', () => {
+		for (const seed of [1, 2, 3, 4, 5]) {
+			const run = play(12, seed);
+			for (const raw of Object.values(run.byWord)) {
+				const facts = readRecord(raw as never);
+				// Every miss belongs to an answer. A record with a miss and no answers is one
+				// the app manufactured about itself.
+				if (facts.misses > 0) expect(facts.answers).toBeGreaterThan(0);
+				if (facts.taughtOnly) expect(facts.lastMissed).toBe(0);
+			}
+			expect(run.outcomes.dropped).toBe(0);
+			expect(run.outcomes.introduced).toBeGreaterThan(0);
+		}
+	});
+
+	it('asks in both directions, as a share of the questions it actually asks', () => {
+		// Measured at `PRODUCTION_STREAK = 2`: 0.2% of questions were production, because the
+		// records that qualified were the records `0.45 ** streak` had already retired.
+		let recognition = 0;
+		let production = 0;
+		for (const seed of [21, 22, 23, 24]) {
+			for (const here of play(24, seed).kinds) {
+				recognition += here['hanzi-to-meaning'];
+				production += here['meaning-to-hanzi'];
+			}
+		}
+		expect(production / (production + recognition)).toBeGreaterThan(0.15);
+		expect(production / (production + recognition)).toBeLessThan(0.5);
+	});
+
+	it('finishes what it starts: the backlog of untested words stays bounded', () => {
+		// The explore quota bends around it, and half the review slots are reserved for it.
+		for (const seed of [31, 32, 33]) {
+			const run = play(24, seed);
+			const owed = Object.values(run.byWord).filter((r) => readRecord(r as never).taughtOnly);
+			expect(owed.length).toBeLessThanOrEqual(SESSION_SIZE);
+		}
+	});
+
+	it('keeps meeting new words while it clears the backlog', () => {
+		const run = play(10, 41);
+		const met = new Set(Object.keys(run.byWord));
+		expect(met.size).toBeGreaterThan(25);
+	});
+
+	it('records nothing at all rather than a lie, when the store cannot note an exposure', () => {
+		// An older progress store with no `noteSeen`. Writing `recordAnswer(id, false)` would
+		// invent a miss; writing `recordAnswer(id, true)` would invent a success and promote
+		// the word to production. Both are the same lie.
+		const seen: string[] = [];
+		const legacy: ProgressWriter = { recordAnswer: (id) => seen.push(id) };
+		const built = build(LEVEL_1, null);
+		const results = built.questions.map((q) => recordOutcome(legacy, q, null));
+		expect(new Set(results)).toEqual(new Set(['dropped']));
+		expect(seen).toEqual([]);
+	});
+
+	it('scores a real question exactly once, right or wrong', () => {
+		const answered: [string, boolean][] = [];
+		const writer: ProgressWriter = {
+			recordAnswer: (id, correct) => answered.push([id, correct]),
+			noteSeen: () => answered.push(['NOTED', false])
+		};
+		const saved = progressState(LEVEL_1.map((w) => mastered(w.id, NOW)));
+		const built = build(LEVEL_1, saved);
+		for (const question of built.questions) {
+			expect(recordOutcome(writer, question, question.word)).toBe('answered');
+		}
+		expect(answered).toHaveLength(SESSION_SIZE);
+		expect(answered.every(([, correct]) => correct)).toBe(true);
 	});
 });

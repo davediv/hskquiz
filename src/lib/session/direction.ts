@@ -10,19 +10,25 @@
  * learner missed, and `applyAnswer` wrote a `lastMissed` the app had manufactured about
  * itself, which then fed the scheduler.
  *
- * The ladder now runs per word, and every word climbs it in the same order:
+ * The ladder now runs per word, and every word climbs the same four rungs:
  *
- *   introduce         Never answered. Show the whole word — hanzi, tone-marked pinyin, every
+ *   introduce         Never shown. Show the whole word — hanzi, tone-marked pinyin, every
  *                     gloss, part of speech — and ask nothing. Nobody can be wrong about a
  *                     word they have not been taught, so nothing about this card is scored.
+ *
+ *   hanzi-to-meaning  Shown, and owed its first question. This rung is the reason the ladder
+ *                     reads `readRecord` rather than `WordProgress.seen`: once an introduction
+ *                     is correctly left *unscored*, "shown" and "answered" stop being the same
+ *                     number, and a ladder that only knows `seen` re-introduces the word every
+ *                     draw for the rest of the learner's life.
  *
  *   hanzi-to-meaning  Answered, but not yet `PRODUCTION_STREAK` right in a row. Recognition is
  *                     the easier task and the right one while a word is still being learned —
  *                     including *after* a lapse, which resets the streak and drops the word
  *                     back to this rung rather than leaving it in the hard direction.
  *
- *   meaning-to-hanzi  Two correct in a row or better: production, which is what knowing a word
- *                     actually means. Every `REFRESH_EVERY`-th exposure still comes back as
+ *   meaning-to-hanzi  A correct recognition behind it: production, which is what knowing a
+ *                     word actually means. One question in `REFRESH_EVERY` still comes back as
  *                     recognition, so "quizzing in both directions" is true of a *word* over
  *                     its life and not merely of a session that happens to contain both.
  *
@@ -31,7 +37,8 @@
  * it changed.
  */
 
-import type { Direction, WordProgress } from '../types';
+import type { Direction } from '../types';
+import { readRecord, type RecordLike } from './record';
 
 /**
  * The shared `Direction` plus the card that only teaches.
@@ -43,25 +50,32 @@ import type { Direction, WordProgress } from '../types';
  */
 export type CardKind = Direction | 'introduce';
 
-/** Consecutive correct answers before a word is asked in the harder direction. */
-export const PRODUCTION_STREAK = 2;
+/**
+ * Correct answers in a row before a word is asked in the harder direction.
+ *
+ * One, not two. At two, measured over 40 simulated learners x 24 real HSK 1 sessions,
+ * production was 0.2% of the questions asked: `cardKindFor` promoted at `streak >= 2` while
+ * `wordWeight` multiplied by `0.45 ** streak`, so the records that qualified were precisely
+ * the records the sampler had already retired, and README's "quizzing in both directions" was
+ * false of the shipped app. The two rules were fighting; the ladder lost.
+ *
+ * One correct recognition is also the honest threshold. The rung below production is not
+ * "never asked" — it is "taught, then recognised correctly", and the next thing worth knowing
+ * about that word is whether the learner can produce it. A miss resets the streak to 0 and
+ * drops the word straight back to recognition, so the ladder corrects itself in one answer
+ * rather than punishing a lucky guess for three.
+ */
+export const PRODUCTION_STREAK = 1;
 
-/** One exposure in this many sends a mastered word back to recognition. */
+/** One question in this many sends a word that has earned production back to recognition. */
 export const REFRESH_EVERY = 3;
-
-/** Any field of a persisted record, coerced to a non-negative integer. `NaN`/`-3`/`'x'` → 0. */
-function counted(value: unknown): number {
-	const n = typeof value === 'number' ? value : Number(value);
-	if (!Number.isFinite(n) || n <= 0) return 0;
-	return Math.floor(n);
-}
 
 /**
  * A stable per-word offset in `[0, REFRESH_EVERY)`.
  *
- * Without it `seen % REFRESH_EVERY` puts every word first met in the same session on the same
- * phase for the rest of its life, so a whole cohort flips to recognition together and a
- * synthetic cohort — every record identical — sits at 100% of one direction. FNV-1a over the
+ * Without it `answers % REFRESH_EVERY` puts every word first met in the same session on the
+ * same phase for the rest of its life, so a whole cohort flips to recognition together and a
+ * synthetic cohort - every record identical - sits at 100% of one direction. FNV-1a over the
  * id: stable across sessions, devices and reloads, which a random phase would not be.
  */
 function phase(wordId: string): number {
@@ -74,18 +88,27 @@ function phase(wordId: string): number {
 }
 
 /**
- * The card this word has earned. `undefined`, or any record with nothing answered in it, is a
- * word the learner has never met.
+ * The card this word has earned.
+ *
+ * Reads `readRecord`, not the raw fields, so "has this word been shown?" and "has this word
+ * been answered?" are two different questions here exactly as they are in `weighting.ts`. A
+ * record that has been *taught* and never *asked* is the second rung, not the first: without
+ * that case the ladder never leaves `introduce`, and a learner whose introductions are
+ * correctly left unscored is shown ten teach cards a session, forever. (Measured, before this
+ * distinction existed: 9,600 of 9,600 cards over 40 learners x 24 sessions were introductions
+ * and not one question was ever asked.)
  */
-export function cardKindFor(record: WordProgress | null | undefined): CardKind {
-	if (!record) return 'introduce';
+export function cardKindFor(record: RecordLike): CardKind {
+	const facts = readRecord(record);
+	if (!facts.met) return 'introduce';
+	// Taught, never asked: it is owed its first question, and recognition is that question.
+	if (facts.answers <= 0) return 'hanzi-to-meaning';
+	if (facts.streak < PRODUCTION_STREAK) return 'hanzi-to-meaning';
 
-	const seen = counted(record.seen);
-	if (seen <= 0) return 'introduce';
-	if (counted(record.streak) < PRODUCTION_STREAK) return 'hanzi-to-meaning';
-
-	const wordId = typeof record.wordId === 'string' ? record.wordId : '';
-	return (seen + phase(wordId)) % REFRESH_EVERY === 0 ? 'hanzi-to-meaning' : 'meaning-to-hanzi';
+	const wordId = typeof record?.wordId === 'string' ? record.wordId : '';
+	return (facts.answers + phase(wordId)) % REFRESH_EVERY === 0
+		? 'hanzi-to-meaning'
+		: 'meaning-to-hanzi';
 }
 
 /**

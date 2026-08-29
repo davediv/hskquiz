@@ -1,4 +1,4 @@
-import type { WordProgress } from '../types';
+import { readRecord, type RecordLike } from './record';
 
 const MINUTE = 60_000;
 const DAY = 24 * 60 * MINUTE;
@@ -27,6 +27,17 @@ const DAY = 24 * 60 * MINUTE;
  * ago: 1 × 0.091 × 1 × 1 × 1.01 × 1 ≈ 0.09. The shaky word is ~215× likelier. An unseen word
  * sits at 1.0 — but unseen words are drawn from their own quota (see EXPLORE_SHARE) rather
  * than competing on weight, so a first session is not a coin flip.
+ *
+ * ## Every signal is read off answers, and an introduction is not an answer
+ *
+ * Five of the six terms are functions of the learner's *answers*: an error rate, a streak, a
+ * miss stamp, a rest window that only a correct answer opens, a lapse count. A card that only
+ * teaches produces none of those, and the moment the app started leaving introductions
+ * unscored, `seen` stopped being the number of answers and every one of the five was reading
+ * the wrong number. So the record is read through `readRecord`, which separates the two, and
+ * the *only* input to `accuracy` and `fatigue` here is `misses` — answers given minus answers
+ * right. A word that has been taught and not yet asked has no accuracy and no lapses: it
+ * enters at 1.000, exactly where an unseen word sits, and climbs only on `stale`.
  *
  * ## Why `fatigue` exists
  *
@@ -106,38 +117,46 @@ function halfLife(dt: number, halfLifeMs: number): number {
 }
 
 /**
- * Selection weight for one word. `undefined` or a zero-`seen` record means never studied.
+ * Selection weight for one word. `undefined`, or a record nothing has ever touched, is a word
+ * the learner has never met and sits at the reference weight of 1.
  *
  * `now` is injected rather than read from the clock so tests — and the demo session behind
  * `?state=summary` — are reproducible.
  */
-export function wordWeight(progress: WordProgress | undefined, now: number): number {
-	if (!progress) return 1;
+export function wordWeight(progress: RecordLike, now: number): number {
+	// One reading of the record, shared with `direction.ts` and with the pool split in
+	// `index.ts`, so the three can never disagree about what a word's history says. It is also
+	// where every field is sanitised: `decode()` already does that for anything read out of
+	// storage, but records are mutated in place by the progress store and this function is
+	// exported, so a `NaN` seen count is reachable from outside — and a `NaN` weight does not
+	// merely mis-order the draw, it makes the sort comparator useless.
+	const facts = readRecord(progress);
+	if (!facts.met) return 1;
 
-	// Every field is sanitised on the way in rather than trusted. `decode()` already does this
-	// for anything read out of storage, but records are mutated in place by the progress store
-	// and this function is exported, so a `NaN` seen count is reachable from outside — and a
-	// `NaN` weight does not merely mis-order the draw, it makes the sort comparator useless.
-	const seen = finite(progress.seen, 0);
-	if (seen <= 0) return 1;
-
-	const correct = clamp(finite(progress.correct, 0), 0, seen);
-	const errorRate = (seen - correct) / seen;
+	// An exposure is not an answer, so a word that has only been *taught* has no error rate to
+	// read: `(seen - correct) / seen` over an introduction is 1.0, a 100% error rate invented
+	// out of a card the learner was never asked to answer, and it was worth 5.714 against an
+	// unseen word's 1.000 — an introduction made a word 5.7x more urgent than never showing it
+	// at all, and 10 subsequent perfect answers never washed it out (0.064 against a clean
+	// 0.047). With no answers behind it every term below is neutral and the weight collapses to
+	// `stale` alone: 1.000 the moment it is taught, rising the same way any other forgotten word
+	// rises, capped at 3.0.
+	const errorRate = facts.answers > 0 ? facts.misses / facts.answers : 0;
 	const accuracy = 1 + WEIGHTS.errorGain * errorRate;
 
-	const rawStreak = finite(progress.streak, 0);
-	const streak = Math.pow(WEIGHTS.streakDecay, clamp(rawStreak, 0, WEIGHTS.streakCap));
+	const streak = Math.pow(WEIGHTS.streakDecay, clamp(facts.streak, 0, WEIGHTS.streakCap));
 
-	const lastMissed = finite(progress.lastMissed, 0);
 	const missRecency =
-		lastMissed > 0 ? 1 + WEIGHTS.missBoost * halfLife(now - lastMissed, WEIGHTS.missHalfLifeMs) : 1;
+		facts.lastMissed > 0
+			? 1 + WEIGHTS.missBoost * halfLife(now - facts.lastMissed, WEIGHTS.missHalfLifeMs)
+			: 1;
 
-	const sinceSeen = Math.max(0, now - finite(progress.lastSeen, 0));
+	const sinceSeen = Math.max(0, now - facts.lastSeen);
 	// `streak > 0` is exactly "the last answer was correct".
-	const rest = rawStreak > 0 ? clamp(sinceSeen / WEIGHTS.restMs, WEIGHTS.restFloor, 1) : 1;
+	const rest = facts.streak > 0 ? clamp(sinceSeen / WEIGHTS.restMs, WEIGHTS.restFloor, 1) : 1;
 	const stale = 1 + Math.min(sinceSeen / WEIGHTS.staleMs, WEIGHTS.staleMax);
 
-	const fatigue = leechBrake(seen - correct);
+	const fatigue = leechBrake(facts.misses);
 
 	const weight = accuracy * streak * missRecency * rest * stale * fatigue;
 	return Number.isFinite(weight) ? Math.max(WEIGHTS.floor, weight) : WEIGHTS.floor;
@@ -146,8 +165,9 @@ export function wordWeight(progress: WordProgress | undefined, now: number): num
 /**
  * How much a word's weight is divided by for being a leech.
  *
- * `WordProgress` carries no lapse counter, but `seen - correct` is exactly the number of times
- * the learner has got this word wrong, which is the same quantity Anki suspends on. Below the
+ * `WordProgress` carries no lapse counter, but `readRecord`'s `misses` — answers given minus
+ * answers right, with introductions excluded from both — is exactly the number of times the
+ * learner has got this word wrong, which is the same quantity Anki suspends on. Below the
  * threshold this is a flat 1 and the model is unchanged; above it the divisor grows linearly,
  * so the weight falls hyperbolically rather than off a cliff — 7 misses is 0.455×, 10 is 0.172×,
  * 20 is 0.056×, and past 41 the floor holds it at 0.02×.

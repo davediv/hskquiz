@@ -11,6 +11,7 @@
 
 import type { Level, ProgressState, Question, Session, Word, WordProgress } from '../types';
 import { EXPLORE_SHARE, wordWeight } from './weighting';
+import { readRecord } from './record';
 import { cardKindFor, directionOf, kindIsScored, type CardKind } from './direction';
 import {
 	CHOICE_COUNT,
@@ -23,6 +24,7 @@ import {
 import { mulberry32, orderWeighted, shuffle, type Rng } from './rng';
 
 export { CHOICE_COUNT, senseSet, sharesSense, isUsable } from './distractors';
+export { readRecord, UNMET, type RecordFacts, type RecordLike } from './record';
 export { EXPLORE_SHARE, WEIGHTS, wordWeight, leechBrake } from './weighting';
 export {
 	PRODUCTION_STREAK,
@@ -89,14 +91,39 @@ function requestedSize(size: number): number {
 }
 
 /**
- * Split the session between words never seen and words already met.
+ * How many sessions of review backlog it takes to stop the flow of new words entirely.
+ *
+ * The explore quota was a flat 40% of every session. That was defensible while a "new word"
+ * cost one *question* — it is not, once a new word costs a card that teaches and asks nothing.
+ * A learner who meets four words a session and answers six accumulates introductions faster
+ * than the review slots can retire them, and every unanswered introduction is a word the app
+ * taught and then dropped.
+ *
+ * So the quota bends: for every word that has been shown and not yet asked, the session takes
+ * one fewer new word, reaching zero new words at two sessions' worth of outstanding review.
+ * A learner who is keeping up sees the full 40%; one with a backlog spends the session
+ * clearing it. `MIN_FRESH` is the floor — discovery slows to a trickle and never stops.
+ */
+const OWED_SESSIONS = 2;
+
+/** New words a session offers however deep the backlog, as long as any new word exists. */
+const MIN_FRESH = 1;
+
+/**
+ * Split the session between words never shown and words already met.
  *
  * Review takes its quota first; whatever is left goes to new words; if either pool is too
  * small the other backfills. A first session is therefore all-new, an exhausted level is
- * all-review, and everything in between holds the 60/40 line.
+ * all-review, and everything in between holds the 60/40 line — less whatever the backlog
+ * brake above takes off the explore side.
  */
-function splitQuota(size: number, reviewAvailable: number, freshAvailable: number) {
-	const reviewQuota = size - Math.round(size * EXPLORE_SHARE);
+function splitQuota(size: number, reviewAvailable: number, freshAvailable: number, owed: number) {
+	const exploreShare = size - Math.round(size * (1 - EXPLORE_SHARE));
+	const capacity = Math.max(1, OWED_SESSIONS * (size - exploreShare));
+	const brake = Math.max(0, 1 - Math.max(0, owed) / capacity);
+	const explore = Math.max(MIN_FRESH, Math.round(exploreShare * brake));
+
+	const reviewQuota = size - explore;
 	let review = Math.min(reviewQuota, reviewAvailable);
 	let fresh = Math.min(size - review, freshAvailable);
 	const short = size - review - fresh;
@@ -168,23 +195,40 @@ export function buildSession(
 	const target = Math.min(requestedSize(size), pool.words.length);
 
 	const fresh: Word[] = [];
-	const review: Word[] = [];
+	/** Met, and still owed its first question — the app's own debt. */
+	const owed: Word[] = [];
+	/** Met and answered at least once: ordinary review, ordered by `wordWeight`. */
+	const due: Word[] = [];
 	for (const word of pool.words) {
-		const record = byWord[word.id];
-		// `> 0` rather than `<= 0`: a corrupt `NaN` seen count reads as never-studied, which is
-		// also what `cardKindFor` makes of it, so the two never disagree about a word.
-		if (record && record.seen > 0) review.push(word);
-		else fresh.push(word);
+		const read = readRecord(byWord[word.id]);
+		// `met`, not `seen > 0`: an introduction is a real meeting with a word even though it
+		// is not an answer, and this is the same reading `cardKindFor` and `wordWeight` use, so
+		// the three can never disagree about whether the learner has met a word.
+		if (!read.met) fresh.push(word);
+		else if (read.taughtOnly) owed.push(word);
+		else due.push(word);
 	}
 
-	const quota = splitQuota(target, review.length, fresh.length);
+	const weightOf = (word: Word) => wordWeight(byWord[word.id], now);
+	const quota = splitQuota(target, owed.length + due.length, fresh.length, owed.length);
+
+	// A word that was taught and never asked is worth 1.0 — deliberately no more, because
+	// inflating it is exactly the fabricated urgency this whole change exists to delete. So the
+	// debt is paid out of a *quota* rather than a weight, the same way `EXPLORE_SHARE` is: up to
+	// half the review slots go to first questions before anything competes on weight. Without
+	// it the two rules deadlock — `splitQuota`'s backlog brake throttles new words until the
+	// debt is paid, and the debt is never paid because a 1.0 word loses every draw to a 20.0
+	// one, so the
+	// session settles at 1.8 new words a session instead of 3.0 and discovery nearly halves.
+	const owedOrder = orderWeighted(owed, weightOf, rng);
+	const debt = Math.min(owedOrder.length, Math.ceil(quota.review / 2));
+	const reviewOrder = [
+		...owedOrder.slice(0, debt),
+		...orderWeighted([...owedOrder.slice(debt), ...due], weightOf, rng)
+	];
+
 	const picked: Word[] = [];
-	takeDistinct(
-		pool,
-		picked,
-		orderWeighted(review, (word) => wordWeight(byWord[word.id], now), rng),
-		quota.review
-	);
+	takeDistinct(pool, picked, reviewOrder, quota.review);
 	// Nothing distinguishes one unseen word from another, so this is a plain shuffle.
 	takeDistinct(
 		pool,
@@ -271,6 +315,57 @@ export function isCorrect(question: Question, picked: Word | null): boolean {
 	if (!picked) return false;
 	if (picked.id === question.word.id) return true;
 	return picked.hanzi === question.word.hanzi && sharesSense(picked, question.word);
+}
+
+/**
+ * The one place a card turns into a change to the learner's record.
+ *
+ * `isScored` says what must happen; this makes it happen, so a screen cannot get it half
+ * right. The whole failure this closes was a screen that read the session's questions and
+ * never read the decision attached to them: `progress.recordAnswer(...)` ran for all ten
+ * cards, introductions included, and a brand-new learner's very first run wrote seven
+ * `lastMissed` stamps about words the app had shown once and never asked. The scheduler then
+ * ate its own fabricated misses, the home screen reported "accuracy 0", and the browse chips
+ * called ten untouched words "Missed last time".
+ *
+ * Three outcomes, and the caller is told which happened so a summary can count the same way:
+ *
+ *   `answered`     a real question, folded in as right or wrong.
+ *   `introduced`   an introduction: the exposure is noted, and nothing that reads as an
+ *                  answer is written.
+ *   `dropped`      an introduction, and the store has no way to note an exposure. Nothing is
+ *                  written *at all* — a fabricated miss and a fabricated success are the same
+ *                  lie pointing in different directions, and the honest answer to "I cannot
+ *                  record this" is to record nothing. The word is introduced again next time,
+ *                  which is a repeat, not a wrong number.
+ */
+export type Outcome = 'answered' | 'introduced' | 'dropped';
+
+/**
+ * The slice of the progress store this needs. Structural on purpose: the store is another
+ * module's, and `noteSeen` may not exist there yet.
+ */
+export interface ProgressWriter {
+	recordAnswer(wordId: string, correct: boolean): void;
+	/** Note that the word was shown without being asked: `lastSeen`, and nothing else. */
+	noteSeen?(wordId: string): void;
+}
+
+/** Fold one card's outcome into the record, honouring `isScored`. See `Outcome`. */
+export function recordOutcome(
+	writer: ProgressWriter,
+	question: Question,
+	picked: Word | null
+): Outcome {
+	const wordId = question.word?.id;
+	if (typeof wordId !== 'string' || wordId === '') return 'dropped';
+	if (!isScored(question)) {
+		if (typeof writer.noteSeen !== 'function') return 'dropped';
+		writer.noteSeen(wordId);
+		return 'introduced';
+	}
+	writer.recordAnswer(wordId, isCorrect(question, picked));
+	return 'answered';
 }
 
 /** Convenience for the demo session behind `?state=summary` and for tests. */
