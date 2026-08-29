@@ -1,0 +1,247 @@
+{
+	"L1-0016": {
+		"hanzi": "我早上吃了两个包子。",
+		"pinyin": "wǒ zǎo shang chī le liǎng ge bāo zi.",
+		"english": "I ate two steamed buns this morning."
+	},
+	"L1-0042": {
+		"hanzi": "这是我家的新车。",
+		"pinyin": "zhè shì wǒ jiā de xīn chē.",
+		"english": "This is our family's new car."
+	},
+	"L1-0068": {
+		"hanzi": "我在车站等你。",
+		"pinyin": "wǒ zài chē zhàn děng nǐ.",
+		"english": "I'll wait for you at the station."
+	},
+	"L1-0094": {
+		"hanzi": "今天路上的人很多。",
+		"pinyin": "jīn tiān lù shang de rén hěn duō.",
+		"english": "There are a lot of people out today."
+	},
+	"L1-0120": {
+		"hanzi": "我有两个哥哥。",
+		"pinyin": "wǒ yǒu liǎng ge gē ge.",
+		"english": "I have two older brothers."
+	},
+	"L1-0146": {
+		"hanzi": "今天天气很热。",
+		"pinyin": "jīn tiān tiān qì hěn rè.",
+		"english": "It's very hot today."
+	},
+	"L1-0172": {
+		"hanzi": "我家有三间房。",
+		"pinyin": "wǒ jiā yǒu sān jiān fáng.",
+		"english": "There are three rooms in my home."
+	},
+	"L1-0198": {
+		"hanzi": "我渴了，想喝水。",
+		"pinyin": "wǒ kě le xiǎng hē shuǐ.",
+		"english": "I'm thirsty and want a drink of water."
+	},
+	"L1-0224": {
+		"hanzi": "我妈妈在医院工作。",
+		"pinyin": "wǒ mā ma zài yī yuàn gōng zuò.",
+		"english": "My mum works at a hospital."
+	},
+	"L1-0250": {
+		"hanzi": "你是哪国人？",
+		"pinyin": "nǐ shì nǎ guó rén?",
+		"english": "Which country are you from?"
+	},
+	"L1-0276": {
+		"hanzi": "她是我的女朋友。",
+		"pinyin": "tā shì wǒ de nǚ péng you.",
+		"english": "She's my girlfriend."
+	},
+	"L1-0302": {
+		"hanzi": "我明天去北京。",
+		"pinyin": "wǒ míng tiān qù Běi jīng.",
+		"english": "I'm going to Beijing tomorrow."
+	},
+	"L1-0328": {
+		"hanzi": "你在做什么？",
+		"pinyin": "nǐ zài zuò shén me?",
+		"english": "What are you doing?"
+	},
+	"L1-0354": {
+		"hanzi": "他今天没来上课。",
+		"pinyin": "tā jīn tiān méi lái shàng kè.",
+		"english": "He didn't come to class today."
+	},
+	"L1-0380": {
+		"hanzi": "我在学校学习汉语。",
+		"pinyin": "wǒ zài xué xiào xué xí hàn yǔ.",
+		"english": "I study Chinese at school."
+	},
+	"L1-0406": {
+		"hanzi": "我弟弟在小学读书。",
+		"pinyin": "wǒ dì di zài xiǎo xué dú shū.",
+		"english": "My younger brother is at primary school."
+	},
+	"L1-0432": {
+		"hanzi": "请等我一会儿。",
+		"pinyin": "qǐng děng wǒ yí huì r.",
+		"english": "Please wait for me a moment."
+	},
+	"L1-0458": {
+		"hanzi": "我今天没吃早饭。",
+		"pinyin": "wǒ jīn tiān méi chī zǎo fàn.",
+		"english": "I didn't have breakfast today."
+	},
+	"L1-0484": {
+		"hanzi": "这本书对我很重要。",
+		"pinyin": "zhè běn shū duì wǒ hěn zhòng yào.",
+		"english": "This book matters a lot to me."
+	},
+	"L2-0010": {
+		"hanzi": "老师在办公室里。",
+		"pinyin": "lǎo shī zài bàn gōng shì lǐ.",
+		"english": "The teacher is in the office."
+	},
+	"L2-0036": {
+		"hanzi": "他觉得很不好意思。",
+		"pinyin": "tā jué de hěn bù hǎo yì si.",
+		"english": "He felt quite embarrassed."
+	},
+	"L2-0062": {
+		"hanzi": "大家都称他为老师。",
+		"pinyin": "dà jiā dōu chēng tā wéi lǎo shī.",
+		"english": "Everyone calls him teacher."
+	},
+	"L2-0088": {
+		"hanzi": "请帮我打印这份文件。",
+		"pinyin": "qǐng bāng wǒ dǎ yìn zhè fèn wén jiàn.",
+		"english": "Please print this document for me."
+	},
+	"L2-0114": {
+		"hanzi": "这条道路上的车很多。",
+		"pinyin": "zhè tiáo dào lù shang de chē hěn duō.",
+		"english": "There's a lot of traffic on this road."
+	},
+	"L2-0140": {
+		"hanzi": "她的头发很短。",
+		"pinyin": "tā de tóu fa hěn duǎn.",
+		"english": "Her hair is very short."
+	},
+	"L2-0166": {
+		"hanzi": "他这次考试的分数很高。",
+		"pinyin": "tā zhè cì kǎo shì de fēn shù hěn gāo.",
+		"english": "He got a high score on this exam."
+	},
+	"L2-0192": {
+		"hanzi": "我们开车走这条公路。",
+		"pinyin": "wǒ men kāi chē zǒu zhè tiáo gōng lù.",
+		"english": "We'll drive along this highway."
+	},
+	"L2-0218": {
+		"hanzi": "他是一个好人。",
+		"pinyin": "tā shì yí ge hǎo rén.",
+		"english": "He's a good person."
+	},
+	"L2-0244": {
+		"hanzi": "他下个月就要回国了。",
+		"pinyin": "tā xià ge yuè jiù yào huí guó le.",
+		"english": "He's going back to his home country next month."
+	},
+	"L2-0270": {
+		"hanzi": "她交给我一封信。",
+		"pinyin": "tā jiāo gěi wǒ yì fēng xìn.",
+		"english": "She handed me a letter."
+	},
+	"L2-0296": {
+		"hanzi": "学校的运动会正在进行。",
+		"pinyin": "xué xiào de yùn dòng huì zhèng zài jìn xíng.",
+		"english": "The school sports day is under way."
+	},
+	"L2-0322": {
+		"hanzi": "我可以进来吗？",
+		"pinyin": "wǒ kě yǐ jìn lái ma?",
+		"english": "May I come in?"
+	},
+	"L2-0349": {
+		"hanzi": "我喜欢很多运动，例如打球。",
+		"pinyin": "wǒ xǐ huan hěn duō yùn dòng lì rú dǎ qiú.",
+		"english": "I like a lot of sports, ball games for instance."
+	},
+	"L2-0375": {
+		"hanzi": "那只猫在床上睡觉。",
+		"pinyin": "nà zhī māo zài chuáng shang shuì jiào.",
+		"english": "That cat is asleep on the bed."
+	},
+	"L2-0401": {
+		"hanzi": "树上有两只鸟。",
+		"pinyin": "shù shang yǒu liǎng zhī niǎo.",
+		"english": "There are two birds in the tree."
+	},
+	"L2-0427": {
+		"hanzi": "我买了三本书，其中一本是英语书。",
+		"pinyin": "wǒ mǎi le sān běn shū qí zhōng yì běn shì yīng yǔ shū.",
+		"english": "I bought three books, one of which is an English book."
+	},
+	"L2-0453": {
+		"hanzi": "这些菜他全部吃完了。",
+		"pinyin": "zhè xiē cài tā quán bù chī wán le.",
+		"english": "He ate every last one of these dishes."
+	},
+	"L2-0479": {
+		"hanzi": "现在的生活比以前好。",
+		"pinyin": "xiàn zài de shēng huó bǐ yǐ qián hǎo.",
+		"english": "Life is better now than it was before."
+	},
+	"L2-0506": {
+		"hanzi": "我爸爸是出租车司机。",
+		"pinyin": "wǒ bà ba shì chū zū chē sī jī.",
+		"english": "My dad is a taxi driver."
+	},
+	"L2-0532": {
+		"hanzi": "我们在体育馆打篮球。",
+		"pinyin": "wǒ men zài tǐ yù guǎn dǎ lán qiú.",
+		"english": "We play basketball at the gym."
+	},
+	"L2-0558": {
+		"hanzi": "我已经完成了今天的工作。",
+		"pinyin": "wǒ yǐ jīng wán chéng le jīn tiān de gōng zuò.",
+		"english": "I've already finished today's work."
+	},
+	"L2-0584": {
+		"hanzi": "云南在中国的西南。",
+		"pinyin": "Yún nán zài zhōng guó de xī nán.",
+		"english": "Yunnan is in the southwest of China."
+	},
+	"L2-0610": {
+		"hanzi": "你别笑话他的中文。",
+		"pinyin": "nǐ bié xiào hua tā de zhōng wén.",
+		"english": "Don't make fun of his Chinese."
+	},
+	"L2-0636": {
+		"hanzi": "我家养了一只狗。",
+		"pinyin": "wǒ jiā yǎng le yì zhī gǒu.",
+		"english": "We keep a dog at home."
+	},
+	"L2-0662": {
+		"hanzi": "他一生都在教书。",
+		"pinyin": "tā yì shēng dōu zài jiāo shū.",
+		"english": "He spent his whole life teaching."
+	},
+	"L2-0688": {
+		"hanzi": "你怎么又忘了？",
+		"pinyin": "nǐ zěn me yòu wàng le?",
+		"english": "How could you forget again?"
+	},
+	"L2-0714": {
+		"hanzi": "他听见有人喊站住。",
+		"pinyin": "tā tīng jiàn yǒu rén hǎn zhàn zhù.",
+		"english": "He heard someone shout at him to halt."
+	},
+	"L2-0740": {
+		"hanzi": "老师讲了这课的重点。",
+		"pinyin": "lǎo shī jiǎng le zhè kè de zhòng diǎn.",
+		"english": "The teacher went over the key points of this lesson."
+	},
+	"L2-0766": {
+		"hanzi": "今天的作业不太多。",
+		"pinyin": "jīn tiān de zuò yè bú tài duō.",
+		"english": "There isn't much homework today."
+	}
+}
