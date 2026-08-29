@@ -1,0 +1,422 @@
+{
+	"L5-0897": {
+		"meanings": ["so that", "in order to"],
+		"note": "Conj joining a purpose clause; plain-words function gloss, no grammar label"
+	},
+	"L5-0898": {
+		"meanings": ["in the past", "former days"],
+		"note": "N. Kept off 'the past' so it does not collide with 过去 L3; 以往 = time before now"
+	},
+	"L5-0899": {
+		"meanings": ["in one breath", "in one go"],
+		"note": "Adv, so the adverbial reading leads; CEDICT's noun 'one breath' cannot lead an Adv card"
+	},
+	"L5-0900": {
+		"meanings": ["from head to toe", "a whole outfit"],
+		"note": "N. 全身 L2 already owns 'the whole body', so the idiomatic head-to-toe reading leads"
+	},
+	"L5-0901": {
+		"meanings": ["consciousness", "to be aware of"],
+		"note": "POS is N/V with N first; noun sense leads, verb sense (意识到) kept second"
+	},
+	"L5-0902": {
+		"meanings": ["to mean", "to signify"],
+		"note": "V. 这意味着… = 'this means that…' is the sense a learner meets"
+	},
+	"L5-0904": {
+		"meanings": ["consequently", "and so"],
+		"note": "Conj. 所以 L2 owns 'therefore' and 因此 L3 owns 'thus'; 因而 is the written-register one"
+	},
+	"L5-0906": {
+		"meanings": ["diet", "food and drink"],
+		"note": "N. 饮食习惯 is the L5 use — what a person eats, not the industry."
+	},
+	"L5-0908": {
+		"meanings": ["to respond", "to answer"],
+		"note": "yìng (4th tone) V sense, not yīng 'ought to'; 应邀 / 有求必应"
+	},
+	"L5-0909": {
+		"meanings": ["hard", "stiff", "obstinately"],
+		"note": "Adj/Adv. Physical hardness leads; third gloss covers the Adv use 硬要 'insist on'"
+	},
+	"L5-0914": {
+		"meanings": ["user", "subscriber"],
+		"note": "N. Dropped 'consumer' — that is 消费者; 顾客/客户 already hold customer/client"
+	},
+	"L5-0915": {
+		"meanings": ["used to do something", "used for"],
+		"note": "用来 takes a verb after it; glossed apart from 用于 which takes a noun"
+	},
+	"L5-0916": {
+		"meanings": ["to be used in", "to be applied to"],
+		"note": "用于 takes a field or object after it; deliberately unlike 用来"
+	},
+	"L5-0917": {
+		"meanings": ["preferential", "discounted"],
+		"note": "POS is Adj, so CEDICT's noun 'privilege' cannot lead; 优惠价 = preferential price"
+	},
+	"L5-0918": {
+		"meanings": ["to have priority", "to take precedence"],
+		"note": "V"
+	},
+	"L5-0920": {
+		"meanings": ["particularly", "especially"],
+		"note": "Adv. 格外 L4 already ships 'especially' as its primary, so this leads with 'particularly'"
+	},
+	"L5-0921": {
+		"meanings": ["from this", "hence"],
+		"note": "Dropped legalese 'hereby'; 由此可见 = 'from this one can see'"
+	},
+	"L5-0922": {
+		"meanings": ["hesitant", "to hesitate"],
+		"note": "POS is Adj, so an adjective must lead; the verb reading is kept second"
+	},
+	"L5-0924": {
+		"meanings": ["friendship", "companionship"],
+		"note": "N"
+	},
+	"L5-0925": {
+		"meanings": ["poisonous", "toxic"],
+		"note": "No official POS; both glosses are adjectival, matching 有毒的"
+	},
+	"L5-0926": {
+		"meanings": ["harmful", "damaging"],
+		"note": "No official POS; 'destructive' overstates it"
+	},
+	"L5-0927": {
+		"meanings": ["forceful", "powerful"],
+		"note": "Adj. Leads with 'forceful' so it does not collide with 强 / 强大"
+	},
+	"L5-0928": {
+		"meanings": ["to be beneficial to", "to be good for"],
+		"note": "Distinct from 有利 L3 'advantageous'; 有利于 always takes an object"
+	},
+	"L5-0931": {
+		"meanings": ["down jacket"],
+		"note": "N. One sense is enough"
+	},
+	"L5-0932": {
+		"meanings": ["rainwater", "rainfall"],
+		"note": "N. Distinct from 雨 L1 'rain'"
+	},
+	"L5-0933": {
+		"meanings": ["to prepare in advance", "to get ready"],
+		"note": "V. 准备 L1 owns bare 'to prepare'; 预备 is the advance-preparation word"
+	},
+	"L5-0936": {
+		"meanings": ["landscape gardens", "a classical Chinese garden"],
+		"note": "N. 公园 L2 'park' and 花园 L2 'garden' are taken; 园林 is the designed-landscape word"
+	},
+	"L5-0938": {
+		"meanings": ["primitive", "raw or original"],
+		"note": "Adj. 'or' avoids an internal comma; 原始社会 primitive society / 原始数据 raw data"
+	},
+	"L5-0939": {
+		"meanings": ["originally", "formerly"],
+		"note": "N by the standard but used adverbially; means before a change, unlike 以往 (before now)"
+	},
+	"L5-0940": {
+		"meanings": ["pre-existing", "already in place"],
+		"note": "No official POS. Attributive only (原有的制度); kept clear of 原来 / 原先 / 原始"
+	},
+	"L5-0942": {
+		"meanings": ["to resent", "to bear a grudge"],
+		"note": "V. CEDICT's bound noun 'resentment' dropped; kept off 'to blame' (指责) and 'to complain' (抱怨)"
+	},
+	"L5-0943": {
+		"meanings": ["to be willing", "to wish for"],
+		"note": "V. CEDICT leads with a bound noun; 愿意 L2 is the everyday form of the same idea"
+	},
+	"L5-0948": {
+		"meanings": ["to ship", "to transport goods"],
+		"note": "V. 运输 L3 already ships 'to transport'; 运 is the single-character freight verb"
+	},
+	"L5-0949": {
+		"meanings": ["to be in operation", "to be running"],
+		"note": "V, of a machine, system or service. Dropped the celestial-bodies sense CEDICT leads with"
+	},
+	"L5-0950": {
+		"meanings": ["calamity", "disaster"],
+		"note": "N, bound form (火灾 水灾). 灾难 ships 'disaster' and 灾害 'a natural disaster', so this leads with 'calamity'"
+	},
+	"L5-0953": {
+		"meanings": ["disaster area"],
+		"note": "N"
+	},
+	"L5-0954": {
+		"meanings": ["once again", "a second time"],
+		"note": "Adv"
+	},
+	"L5-0955": {
+		"meanings": ["never again", "no longer"],
+		"note": "Always paired with a negative (再也不 / 再也没); the gloss states the whole meaning it carries"
+	},
+	"L5-0956": {
+		"meanings": ["to be present", "to be on the scene"],
+		"note": "V"
+	},
+	"L5-0957": {
+		"meanings": ["to be included", "counted in"],
+		"note": "V. 包括在内 = counted in; distinct from 包括 'to include'"
+	},
+	"L5-0958": {
+		"meanings": ["temporary", "for the time being"],
+		"note": "Adj. Distinct from 临时 L4 'at the last moment'"
+	},
+	"L5-0959": {
+		"meanings": ["to pause", "to suspend"],
+		"note": "V. Dropped the sports/media-player noun senses"
+	},
+	"L5-0960": {
+		"meanings": ["in a mess", "ruined"],
+		"note": "POS is Adj, so CEDICT's noun 'dregs' cannot lead; 事情弄糟了. Kept apart from 糟糕"
+	},
+	"L5-0961": {
+		"meanings": ["too bad", "terrible"],
+		"note": "Adj. Leads with the exclamation reading 糟糕！; 厉害 and 可怕 already hold 'terrible' and 'awful'"
+	},
+	"L5-0962": {
+		"meanings": ["the early period", "the early years"],
+		"note": "N. 初期 L5 ships 'initial stage', so this leads differently"
+	},
+	"L5-0963": {
+		"meanings": ["to add to", "to increase in amount"],
+		"note": "V, bound form. 加 L2 'to add' and 增长 L3 'to increase' are both taken"
+	},
+	"L5-0964": {
+		"meanings": ["to increase production", "to raise output"],
+		"note": "No official POS; verb phrase"
+	},
+	"L5-0968": {
+		"meanings": ["to give as a gift", "to present"],
+		"note": "V. CEDICT's 'to repel' is spurious and its posthumous-title sense is archaic"
+	},
+	"L5-0970": {
+		"meanings": ["to pick flowers or fruit", "to take off"],
+		"note": "V. Specific primary keeps it clear of 选 L2 'to choose' and 脱 L4 'to take off'"
+	},
+	"L5-0971": {
+		"meanings": ["to exhibit", "an exhibition"],
+		"note": "V/N with V first; both POS covered"
+	},
+	"L5-0972": {
+		"meanings": ["to showcase", "to put on display"],
+		"note": "V. 显示 L3 already ships 'to display'"
+	},
+	"L5-0973": {
+		"meanings": ["to reveal", "to unfold before the eyes"],
+		"note": "V. Kept distinct from 展示 (deliberate display) and 展览 (an exhibition)"
+	},
+	"L5-0974": {
+		"meanings": ["to occupy by force", "to capture"],
+		"note": "V. 占 L2 already ships 'to occupy'; 占领 is the military reading"
+	},
+	"L5-0976": {
+		"meanings": ["to rise in price", "to swell or rise"],
+		"note": "V. 上升 L3 owns 'to rise'; 涨 is prices and water levels"
+	},
+	"L5-0978": {
+		"meanings": ["to master a skill", "to have a good grasp of"],
+		"note": "V. Old primary 'to control' collided with 控制 L5; qualified so it does not read as 师傅 'master'"
+	},
+	"L5-0979": {
+		"meanings": ["to enroll new students", "to recruit students"],
+		"note": "No official POS; verb phrase"
+	},
+	"L5-0980": {
+		"meanings": ["to wave one's hand", "to beckon"],
+		"note": "No official POS; verb phrase"
+	},
+	"L5-0982": {
+		"meanings": ["to treasure", "to value highly"],
+		"note": "V. 爱护 L4 ships 'to cherish' / 'to treasure', so this avoids 'to cherish' entirely"
+	},
+	"L5-0983": {
+		"meanings": ["pearl"],
+		"note": "N. Dropped CEDICT's figurative 'tear'"
+	},
+	"L5-0984": {
+		"meanings": ["sincere", "heartfelt"],
+		"note": "Adj. 真实 L3 'true' and 真正 L2 'genuine' are taken"
+	},
+	"L5-0986": {
+		"meanings": ["the truth of a matter", "the real facts"],
+		"note": "N. 真理 L5 ships bare 'truth' (the philosophical one); 真相 is the truth behind an event"
+	},
+	"L5-0988": {
+		"meanings": ["to vibrate", "to shake back and forth"],
+		"note": "V. 摇 L4 owns 'to shake'"
+	},
+	"L5-0990": {
+		"meanings": ["to dispute", "controversy"],
+		"note": "POS is V, so the verb leads even though CEDICT puts the noun first"
+	},
+	"L5-0993": {
+		"meanings": ["just as", "exactly as"],
+		"note": "Standard marks it V but it functions as a connective before a clause; a 'to ...' gloss would be false"
+	},
+	"L5-0994": {
+		"meanings": ["justice", "righteous"],
+		"note": "N/Adj, both covered. Avoided 'just' — 公正 L5 already ships that"
+	},
+	"L5-0997": {
+		"meanings": ["to earn", "to struggle free"],
+		"note": "V, zhèng. Both live senses; kept shorter than 挣钱 so the two cards differ"
+	},
+	"L5-0998": {
+		"meanings": ["to earn money", "to make a living"],
+		"note": "No official POS; verb phrase, distinct from the single character 挣"
+	},
+	"L5-1001": {
+		"meanings": ["underneath", "under"],
+		"note": "N-ish locative used as 在…之下; leads with 'underneath' to stay clear of 下面 L3"
+	},
+	"L5-1003": {
+		"meanings": ["to spend money", "spending"],
+		"note": "V/N with V first; 支付 L3 owns 'to pay out' and 费用 L3 owns 'cost' / 'expenditure'"
+	},
+	"L5-1007": {
+		"meanings": ["to work a shift", "to be on duty"],
+		"note": "No official POS. 上班 L1 and 值 L3 both already ship 'to be on duty' as a secondary"
+	},
+	"L5-1012": {
+		"meanings": ["and then one saw", "all one could see was"],
+		"note": "Narrative marker introducing what comes into view (只见他站了起来); no clean one-word English"
+	},
+	"L5-1013": {
+		"meanings": ["an indicator", "a target figure"],
+		"note": "N. 目标 L3 owns 'goal' / 'objective'"
+	},
+	"L5-1016": {
+		"meanings": ["to blame", "to accuse"],
+		"note": "V. 批评 L3 owns 'to criticize'"
+	},
+	"L5-1017": {
+		"meanings": ["to reach as far as", "up to"],
+		"note": "POS is V and 到 L1 owns 'to reach', so the primary spells out the extent reading (从…至…)"
+	},
+	"L5-1018": {
+		"meanings": ["to make into", "to be made into"],
+		"note": "No official POS. 制造 L3 owns 'to manufacture'; 制成 is the resultative"
+	},
+	"L5-1021": {
+		"meanings": ["to govern", "to bring under control"],
+		"note": "V. Second gloss covers 治理污染 = to bring pollution under control"
+	},
+	"L5-1022": {
+		"meanings": ["to break off", "to be discontinued"],
+		"note": "V"
+	},
+	"L5-1023": {
+		"meanings": ["Mid-Autumn Festival"],
+		"note": "N, proper noun; already correct"
+	},
+	"L5-1024": {
+		"meanings": ["the very center", "central government"],
+		"note": "N. 中心 L2 'center' and 中间 L1 'the middle' are taken; second gloss covers 党中央 / 中央电视台"
+	},
+	"L5-1026": {
+		"meanings": ["the end point", "the finish line"],
+		"note": "N"
+	},
+	"L5-1027": {
+		"meanings": ["lifelong", "for one's entire life"],
+		"note": "一生 L2 ships 'all one's life'; 终身 is nearly always attributive (终身学习)"
+	},
+	"L5-1028": {
+		"meanings": ["to terminate", "to call a halt to"],
+		"note": "V. 结束 L3 'to end' and 停止 L3 'to stop' are taken"
+	},
+	"L5-1029": {
+		"meanings": ["to be poisoned"],
+		"note": "No official POS; verb phrase (食物中毒)"
+	},
+	"L5-1036": {
+		"meanings": ["to be in charge of", "the person in charge"],
+		"note": "V/N with V first; both POS covered"
+	},
+	"L5-1037": {
+		"meanings": ["the main body", "the bulk"],
+		"note": "N. 主要 L2 'main' and 整体 L3 'as a whole' are taken"
+	},
+	"L5-1040": {
+		"meanings": ["to register officially", "to sign up for an account"],
+		"note": "报名 L2 owns 'to sign up' and 登记 L4 owns 'to register', so the primary is qualified"
+	},
+	"L5-1041": {
+		"meanings": ["to inject", "an injection"],
+		"note": "POS is V, so the verb leads even though CEDICT puts the noun first"
+	},
+	"L5-1042": {
+		"meanings": ["to gaze at", "to watch closely"],
+		"note": "V"
+	},
+	"L5-1045": {
+		"meanings": ["an album of songs", "a special collection"],
+		"note": "N. 唱片 L4 ships 'a record' / 'a music album', so this names the form differently"
+	},
+	"L5-1046": {
+		"meanings": ["a patent", "an exclusive right"],
+		"note": "N"
+	},
+	"L5-1050": {
+		"meanings": ["to change course", "to turn toward"],
+		"note": "V. 转 L3 already ships 'to change direction'; figurative sense dropped"
+	},
+	"L5-1052": {
+		"meanings": ["to crash into", "to bump into"],
+		"note": "V. 碰 L2 owns 'to touch' / 'to meet with'"
+	},
+	"L5-1055": {
+		"meanings": ["to give financial aid to", "to fund"],
+		"note": "V. Old bare 'to fund' collided; 赞助 L4 owns 'to sponsor'"
+	},
+	"L5-1057": {
+		"meanings": ["careful and thorough", "attentive"],
+		"note": "Adj. 小心 L2 owns 'to be careful'; dialect sense 'thrifty' dropped"
+	},
+	"L5-1058": {
+		"meanings": ["purple", "violet"],
+		"note": "Adj colour word"
+	},
+	"L5-1060": {
+		"meanings": ["to commit suicide", "to take one's own life"],
+		"note": "V. Stated plainly and neutrally"
+	},
+	"L5-1061": {
+		"meanings": ["to do willingly", "of one's own accord"],
+		"note": "POS is V, so bare adjective 'voluntary' cannot lead; 志愿 L3 owns 'aspiration'"
+	},
+	"L5-1063": {
+		"meanings": ["the total number", "the sum"],
+		"note": "N"
+	},
+	"L5-1064": {
+		"meanings": ["at long last", "finally"],
+		"note": "Adv. 终于 L3 ships 'at last'; 总算 carries the extra note of relief after a wait"
+	},
+	"L5-1065": {
+		"meanings": ["overall", "the total picture"],
+		"note": "N. Old glosses 'completely' / 'totally' were flat wrong; 整体 L3 owns 'as a whole'"
+	},
+	"L5-1066": {
+		"meanings": ["to hinder", "an obstacle"],
+		"note": "V/N with V first; 阻止 L4 owns 'to prevent'"
+	},
+	"L5-1068": {
+		"meanings": ["to get drunk", "drunk"],
+		"note": "POS is V, so the verb leads; adjective reading kept second"
+	},
+	"L5-1069": {
+		"meanings": ["to look up to", "to revere", "respected"],
+		"note": "V/Adj. Deliberately unlike 尊重; third gloss covers 尊敬的… in letters"
+	},
+	"L5-1070": {
+		"meanings": ["to respect", "to hold in esteem"],
+		"note": "V. 尊重 is respecting rights, opinions and people; 尊敬 is looking up to someone"
+	},
+	"L5-1071": {
+		"meanings": ["to abide by", "to comply with"],
+		"note": "V. 服从 L5 owns 'to obey'"
+	}
+}
