@@ -1,0 +1,247 @@
+{
+	"L1-0022": {
+		"hanzi": "我买了两本书。",
+		"pinyin": "wǒ mǎi le liǎng běn shū",
+		"english": "I bought two books."
+	},
+	"L1-0048": {
+		"hanzi": "他从房间里出来了。",
+		"pinyin": "tā cóng fáng jiān lǐ chū lái le",
+		"english": "He came out of the room."
+	},
+	"L1-0074": {
+		"hanzi": "我弟弟今年八岁。",
+		"pinyin": "wǒ dì di jīn nián bā suì",
+		"english": "My younger brother is eight this year."
+	},
+	"L1-0100": {
+		"hanzi": "这家饭店的菜很好吃。",
+		"pinyin": "zhè jiā fàn diàn de cài hěn hǎo chī",
+		"english": "The food at this restaurant is delicious."
+	},
+	"L1-0126": {
+		"hanzi": "走的时候请关上门。",
+		"pinyin": "zǒu de shí hou qǐng guān shang mén",
+		"english": "Please close the door when you leave."
+	},
+	"L1-0152": {
+		"hanzi": "他不是坏人。",
+		"pinyin": "tā bú shì huài rén",
+		"english": "He is not a bad person."
+	},
+	"L1-0178": {
+		"hanzi": "我姐姐是老师。",
+		"pinyin": "wǒ jiě jie shì lǎo shī",
+		"english": "My older sister is a teacher."
+	},
+	"L1-0204": {
+		"hanzi": "你走得太快了。",
+		"pinyin": "nǐ zǒu de tài kuài le",
+		"english": "You walk too fast."
+	},
+	"L1-0230": {
+		"hanzi": "爸爸今天很忙。",
+		"pinyin": "bà ba jīn tiān hěn máng",
+		"english": "Dad is very busy today."
+	},
+	"L1-0256": {
+		"hanzi": "我的书在那里。",
+		"pinyin": "wǒ de shū zài nà lǐ",
+		"english": "My book is over there."
+	},
+	"L1-0282": {
+		"hanzi": "我家旁边有一个商店。",
+		"pinyin": "wǒ jiā páng biān yǒu yí ge shāng diàn",
+		"english": "There is a shop next to my house."
+	},
+	"L1-0308": {
+		"hanzi": "今天是五月八日。",
+		"pinyin": "jīn tiān shì wǔ yuè bā rì",
+		"english": "Today is the eighth of May."
+	},
+	"L1-0334": {
+		"hanzi": "我明天没有时间。",
+		"pinyin": "wǒ míng tiān méi yǒu shí jiān",
+		"english": "I don't have time tomorrow."
+	},
+	"L1-0360": {
+		"hanzi": "今天天气很好。",
+		"pinyin": "jīn tiān tiān qì hěn hǎo",
+		"english": "The weather is lovely today."
+	},
+	"L1-0386": {
+		"hanzi": "吃饭前要洗手。",
+		"pinyin": "chī fàn qián yào xǐ shǒu",
+		"english": "Wash your hands before you eat."
+	},
+	"L1-0412": {
+		"hanzi": "我在家过新年。",
+		"pinyin": "wǒ zài jiā guò xīn nián",
+		"english": "I spend New Year at home."
+	},
+	"L1-0438": {
+		"hanzi": "我们一起去看电影吧。",
+		"pinyin": "wǒ men yì qǐ qù kàn diàn yǐng ba",
+		"english": "Let's go and see a film together."
+	},
+	"L1-0464": {
+		"hanzi": "这是我的书。",
+		"pinyin": "zhè shì wǒ de shū",
+		"english": "This is my book."
+	},
+	"L1-0490": {
+		"hanzi": "我们走路去学校。",
+		"pinyin": "wǒ men zǒu lù qù xué xiào",
+		"english": "We walk to school."
+	},
+	"L2-0016": {
+		"hanzi": "北方的冬天很冷。",
+		"pinyin": "běi fāng de dōng tiān hěn lěng",
+		"english": "Winter in the north is very cold."
+	},
+	"L2-0042": {
+		"hanzi": "明天去不行吗？",
+		"pinyin": "míng tiān qù bù xíng ma",
+		"english": "Would tomorrow not work?"
+	},
+	"L2-0068": {
+		"hanzi": "我们明天早上八点出发。",
+		"pinyin": "wǒ men míng tiān zǎo shang bā diǎn chū fā",
+		"english": "We set off at eight tomorrow morning."
+	},
+	"L2-0094": {
+		"hanzi": "这里有大量的水果。",
+		"pinyin": "zhè lǐ yǒu dà liàng de shuǐ guǒ",
+		"english": "There is a large amount of fruit here."
+	},
+	"L2-0120": {
+		"hanzi": "桌子上有书和笔等东西。",
+		"pinyin": "zhuō zi shang yǒu shū hé bǐ děng dōng xi",
+		"english": "There are books, pens and so on lying on the desk."
+	},
+	"L2-0146": {
+		"hanzi": "我们用汉语对话。",
+		"pinyin": "wǒ men yòng hàn yǔ duì huà",
+		"english": "We talk to each other in Chinese."
+	},
+	"L2-0172": {
+		"hanzi": "现在该你说了。",
+		"pinyin": "xiàn zài gāi nǐ shuō le",
+		"english": "It's your turn to speak now."
+	},
+	"L2-0198": {
+		"hanzi": "妈妈给我讲了一个故事。",
+		"pinyin": "mā ma gěi wǒ jiǎng le yí ge gù shi",
+		"english": "Mum told me a story."
+	},
+	"L2-0224": {
+		"hanzi": "老师在黑板上写字。",
+		"pinyin": "lǎo shī zài hēi bǎn shang xiě zì",
+		"english": "The teacher is writing on the blackboard."
+	},
+	"L2-0250": {
+		"hanzi": "我家养了几只鸡。",
+		"pinyin": "wǒ jiā yǎng le jǐ zhī jī",
+		"english": "We keep a few chickens at home."
+	},
+	"L2-0276": {
+		"hanzi": "我的脚很疼。",
+		"pinyin": "wǒ de jiǎo hěn téng",
+		"english": "My foot really hurts."
+	},
+	"L2-0302": {
+		"hanzi": "我们住在这家酒店。",
+		"pinyin": "wǒ men zhù zài zhè jiā jiǔ diàn",
+		"english": "We are staying at this hotel."
+	},
+	"L2-0328": {
+		"hanzi": "他难过得哭了。",
+		"pinyin": "tā nán guò de kū le",
+		"english": "He was so sad that he cried."
+	},
+	"L2-0355": {
+		"hanzi": "今天天气很凉快。",
+		"pinyin": "jīn tiān tiān qì hěn liáng kuai",
+		"english": "The weather is pleasantly cool today."
+	},
+	"L2-0381": {
+		"hanzi": "这个东西的名称是什么？",
+		"pinyin": "zhè ge dōng xi de míng chēng shì shén me",
+		"english": "What is this thing called?"
+	},
+	"L2-0407": {
+		"hanzi": "我们坐在第一排。",
+		"pinyin": "wǒ men zuò zài dì yī pái",
+		"english": "We are sitting in the first row."
+	},
+	"L2-0433": {
+		"hanzi": "这个手机三千块钱。",
+		"pinyin": "zhè ge shǒu jī sān qiān kuài qián",
+		"english": "This phone costs three thousand yuan."
+	},
+	"L2-0459": {
+		"hanzi": "我先写作业然后看电视。",
+		"pinyin": "wǒ xiān xiě zuò yè rán hòu kàn diàn shì",
+		"english": "I do my homework first and then watch TV."
+	},
+	"L2-0486": {
+		"hanzi": "他实现了自己的理想。",
+		"pinyin": "tā shí xiàn le zì jǐ de lǐ xiǎng",
+		"english": "He made his own dream come true."
+	},
+	"L2-0512": {
+		"hanzi": "有问题随时问我。",
+		"pinyin": "yǒu wèn tí suí shí wèn wǒ",
+		"english": "Ask me any time you have a question."
+	},
+	"L2-0538": {
+		"hanzi": "外面的雨停了。",
+		"pinyin": "wài miàn de yǔ tíng le",
+		"english": "The rain outside has stopped."
+	},
+	"L2-0564": {
+		"hanzi": "我吃了两碗米饭。",
+		"pinyin": "wǒ chī le liǎng wǎn mǐ fàn",
+		"english": "I ate two bowls of rice."
+	},
+	"L2-0590": {
+		"hanzi": "冬天这里常常下雪。",
+		"pinyin": "dōng tiān zhè lǐ cháng cháng xià xuě",
+		"english": "It often snows here in winter."
+	},
+	"L2-0616": {
+		"hanzi": "爸爸晚上喜欢看新闻。",
+		"pinyin": "bà ba wǎn shang xǐ huan kàn xīn wén",
+		"english": "Dad likes watching the news in the evening."
+	},
+	"L2-0642": {
+		"hanzi": "医生给我开了一瓶药水。",
+		"pinyin": "yī shēng gěi wǒ kāi le yì píng yào shuǐ",
+		"english": "The doctor prescribed me a bottle of liquid medicine."
+	},
+	"L2-0668": {
+		"hanzi": "今天是阴天。",
+		"pinyin": "jīn tiān shì yīn tiān",
+		"english": "It is overcast today."
+	},
+	"L2-0694": {
+		"hanzi": "他是我们医院的院长。",
+		"pinyin": "tā shì wǒ men yī yuàn de yuàn zhǎng",
+		"english": "He is the director of our hospital."
+	},
+	"L2-0720": {
+		"hanzi": "我喜欢在公园里照相。",
+		"pinyin": "wǒ xǐ huan zài gōng yuán lǐ zhào xiàng",
+		"english": "I like taking photos in the park."
+	},
+	"L2-0746": {
+		"hanzi": "这是我们主要的问题。",
+		"pinyin": "zhè shì wǒ men zhǔ yào de wèn tí",
+		"english": "This is our main problem."
+	},
+	"L2-0772": {
+		"hanzi": "妈妈晚上给我们做饭。",
+		"pinyin": "mā ma wǎn shang gěi wǒ men zuò fàn",
+		"english": "Mum cooks for us in the evening."
+	}
+}
