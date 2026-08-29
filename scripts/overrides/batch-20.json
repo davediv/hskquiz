@@ -1,0 +1,490 @@
+{
+	"L5-0332": {
+		"meanings": ["to divide up into parts", "to demarcate"],
+		"note": "Bare 'to divide' is 分 (L2) and 分成 (L5); 划分 is drawing the boundaries between parts."
+	},
+	"L5-0334": {
+		"meanings": ["a link in a process", "a stage"],
+		"note": "CEDICT leads with the zoology sense; at L5 环节 is a link/step in a larger whole."
+	},
+	"L5-0335": {
+		"meanings": ["flustered", "panicky"],
+		"note": "Adj row, so no 'to get panicky'; the (coll.) '-ly unbearably' sense is dropped."
+	},
+	"L5-0337": {
+		"meanings": ["gray"],
+		"note": "The colour is the whole card; 'ash gray' is the same answer and 'gloomy' is figurative."
+	},
+	"L5-0338": {
+		"meanings": ["to return to normal", "to regain"],
+		"note": "'to recover' is 回复 (L4) and 'to restore' is 修复 (L5); 恢复 is returning to a former state."
+	},
+	"L5-0339": {
+		"meanings": ["to reciprocate", "to report back"],
+		"note": "V. Kept off \"to repay a kindness\", which is 报答 L5-0015 — 回报 is giving something back in return, or reporting back."
+	},
+	"L5-0340": {
+		"meanings": ["to dodge an issue", "to steer clear of someone"],
+		"note": "V. \"sb\" expanded — dictionary shorthand does not ship."
+	},
+	"L5-0342": {
+		"meanings": ["to recycle", "to take back"],
+		"note": "V row. Recycling is the sense a learner meets; 'to recall a product' is specialist."
+	},
+	"L5-0343": {
+		"meanings": ["in a little while", "later on"],
+		"note": "Adv row, so the 回头见 time sense, not the verb 'to turn round'. 以后 (L2) holds 'later'."
+	},
+	"L5-0344": {
+		"meanings": ["a letter in reply", "to write back"],
+		"note": "N row leads with the noun; 信 (L2) already holds bare 'letter'."
+	},
+	"L5-0346": {
+		"meanings": ["to remit money", "a money transfer"],
+		"note": "Separable verb-object; sending money is the whole card."
+	},
+	"L5-0349": {
+		"meanings": ["lively and outgoing", "vivacious"],
+		"note": "热闹 (L4) holds bare 'lively'; 活泼 describes a person's temperament, not a scene."
+	},
+	"L5-0353": {
+		"meanings": ["or alternatively", "either one or the other"],
+		"note": "或者 (L2) already answers to bare 'or'; 或是 needs to be tellable apart on a button."
+	},
+	"L5-0354": {
+		"meanings": ["robot"],
+		"note": "One sense; 'android' is the same answer and narrower."
+	},
+	"L5-0358": {
+		"meanings": ["a fund of money", "an endowment"],
+		"note": "Bare 'fund' collides with 资助 'to fund' once the leading 'to' is stripped."
+	},
+	"L5-0359": {
+		"meanings": ["even if", "even supposing"],
+		"note": "Conj row; 即使...也 is the hypothetical concession a learner meets at L5."
+	},
+	"L5-0360": {
+		"meanings": ["a business group", "a bloc"],
+		"note": "组 and 小组 (L2) hold bare 'group'; 集团 is a corporate or political grouping."
+	},
+	"L5-0361": {
+		"meanings": ["to squeeze", "crowded"],
+		"note": "V/Adj row: the verb leads, the Adj sense follows. 'to force others aside' is register-heavy."
+	},
+	"L5-0362": {
+		"meanings": ["memory", "to commit to memory"],
+		"note": "记得 (L1) is 'to remember'; 记忆 is chiefly the faculty and the thing remembered."
+	},
+	"L5-0364": {
+		"meanings": ["to inherit property", "to carry on a tradition"],
+		"note": "遗传 (L4) is the genetic 'to inherit'; 继承 is succession to property or a legacy."
+	},
+	"L5-0365": {
+		"meanings": ["to heat up"],
+		"note": "Bare 'to heat' normalises onto 热量 'heat'; 加热 is applying heat to something."
+	},
+	"L5-0366": {
+		"meanings": ["plus", "on top of that"],
+		"note": "Conj row. 'in addition' is already 另外 (L3); 加上 adds a further reason to a clause."
+	},
+	"L5-0367": {
+		"meanings": ["to speed up", "to accelerate"],
+		"note": "加快 (L3) leads with 'to accelerate', so the plainer phrasing leads here."
+	},
+	"L5-0368": {
+		"meanings": ["to go on to act on it", "moreover"],
+		"note": "Formal light verb before a two-syllable verb; 'to carry out' is 执行 (L5)."
+	},
+	"L5-0369": {
+		"meanings": ["to hold between two things", "to clip"],
+		"note": "握 (L5) is bare 'to hold'; 夹 is pressing something from both sides."
+	},
+	"L5-0370": {
+		"meanings": ["first in a lettered list", "shell or armor"],
+		"note": "The Heavenly Stem is how 甲 is used: 甲乙丙 labels items the way A B C does."
+	},
+	"L5-0371": {
+		"meanings": ["price of goods", "value"],
+		"note": "价格 (L3) holds bare 'price'; the bound single character needs to read differently."
+	},
+	"L5-0372": {
+		"meanings": ["to drive a vehicle", "to pilot"],
+		"note": "V row. 'driver' is a noun and cannot lead a verb card."
+	},
+	"L5-0374": {
+		"meanings": ["firm and unwavering", "resolute"],
+		"note": "坚决 (L3) and 坚固 (L4) both ship bare 'firm'; 坚定 is firmness of resolve."
+	},
+	"L5-0375": {
+		"meanings": ["shoulder"],
+		"note": "N row, body part; 'to shoulder responsibility' is the verb use and not led with."
+	},
+	"L5-0378": {
+		"meanings": ["to test and verify", "to inspect"],
+		"note": "检查 (L2) is 'to examine' and 考察 (L4) 'to inspect'; 检验 is testing against a standard."
+	},
+	"L5-0379": {
+		"meanings": ["to lighten", "to ease"],
+		"note": "Lightening a burden or a penalty; kept short so it does not read as two senses."
+	},
+	"L5-0380": {
+		"meanings": ["to cut with scissors", "to trim"],
+		"note": "V row; the '(bound form) scissors' noun sense belongs to 剪刀 and 剪子, not here."
+	},
+	"L5-0382": {
+		"meanings": ["a pair of scissors", "shears"],
+		"note": "剪刀 (L5) already answers to 'scissors'; 剪子 is the same tool under another name."
+	},
+	"L5-0387": {
+		"meanings": ["a key on a keyboard", "a button"],
+		"note": "Not the key to a lock (钥匙); the chemical-bond sense is specialist."
+	},
+	"L5-0389": {
+		"meanings": ["shall or will", "puts the object before the verb"],
+		"note": "Adv/Prep row: the future marker plus the formal 把. 就要 (L2) holds bare 'will'."
+	},
+	"L5-0390": {
+		"meanings": ["will soon", "about to happen"],
+		"note": "Adv row must not lead 'to be about to'; 即将 (L4) holds 'about to'."
+	},
+	"L5-0393": {
+		"meanings": ["the suburbs", "outskirts"],
+		"note": "N row; the area outside the city centre."
+	},
+	"L5-0397": {
+		"meanings": ["to come into contact with", "to make contact"],
+		"note": "碰 (L2) and 摸 (L4) hold 'to touch'; 接触 is meeting or dealing with people and ideas."
+	},
+	"L5-0398": {
+		"meanings": ["in a row", "time after time"],
+		"note": "Adv row. 纷纷 (L4) holds 'one after another'; 接连 is repeated events in quick succession."
+	},
+	"L5-0399": {
+		"meanings": ["to lift or cancel", "to relieve someone of duty"],
+		"note": "V. \"sb\" expanded."
+	},
+	"L5-0400": {
+		"meanings": ["to liberate", "to set free"],
+		"note": "The 1949 historical note in CEDICT is encyclopedia content and not a gloss."
+	},
+	"L5-0401": {
+		"meanings": ["to quit a habit", "to guard against"],
+		"note": "戒烟 is the use a learner meets; 防 (L3) holds 'to guard against'."
+	},
+	"L5-0402": {
+		"meanings": ["measure word: sessions or events"],
+		"note": "M row. The old gloss had an internal comma, which the UI reads as a second sense."
+	},
+	"L5-0404": {
+		"meanings": ["even though", "go ahead and do it"],
+		"note": "Both L5 uses: the concessive conjunction and the 尽管问 'feel free to' adverb."
+	},
+	"L5-0405": {
+		"meanings": ["tightly", "closely"],
+		"note": "Adverbial reduplication: 紧紧抓住. 'tightly' is the sense that leads."
+	},
+	"L5-0406": {
+		"meanings": ["as far as possible"],
+		"note": "CEDICT only cross-references 尽可能; 尽量 (L3) holds 'as much as possible'."
+	},
+	"L5-0407": {
+		"meanings": ["to evolve"],
+		"note": "V row; 'evolution' is the noun and would not match the part of speech."
+	},
+	"L5-0412": {
+		"meanings": ["to compete in a contest", "a contest"],
+		"note": "V row cannot lead with the noun 'a contest'; 竞争 (L5) holds bare 'to compete'."
+	},
+	"L5-0415": {
+		"meanings": ["to provide disaster relief"],
+		"note": "Separable verb-object; one gloss covers both CEDICT clauses."
+	},
+	"L5-0416": {
+		"meanings": ["surprisingly", "of all things"],
+		"note": "竟然 (L4) already ships 'unexpectedly'; 居然 needs its own answer on a button."
+	},
+	"L5-0417": {
+		"meanings": ["state of affairs", "how things stand"],
+		"note": "'situation' answers to 状况 (L3) and 形势 (L4); 局面 is the configuration of a situation."
+	},
+	"L5-0420": {
+		"meanings": ["to refuse", "to turn down"],
+		"note": "V row, plain and unambiguous."
+	},
+	"L5-0422": {
+		"meanings": ["a script for a play or film"],
+		"note": "文字 (L3) holds bare 'script' in the writing-system sense, which is a different word."
+	},
+	"L5-0423": {
+		"meanings": ["absolutely not", "under no circumstances"],
+		"note": "Emphatic negation; 'simply (can) not' reads as broken English on a card."
+	},
+	"L5-0424": {
+		"meanings": ["to lose all hope", "despair"],
+		"note": "失望 is disappointment; 绝望 is hope gone entirely, so the gloss says so."
+	},
+	"L5-0425": {
+		"meanings": ["a member of the military", "serviceman"],
+		"note": "士兵 and 战士 (L4) both ship 'soldier'; 军人 is anyone serving, not just a private."
+	},
+	"L5-0426": {
+		"meanings": ["to open a conference", "to start an event"],
+		"note": "开 (L1) holds bare 'to open'; 开幕 is the curtain going up on an event."
+	},
+	"L5-0428": {
+		"meanings": ["to see one thing as another", "to take for"],
+		"note": "V. \"sth\" expanded."
+	},
+	"L5-0429": {
+		"meanings": ["to tell by looking", "to make out"],
+		"note": "看出 is perceiving something that was not obvious, not merely seeing."
+	},
+	"L5-0430": {
+		"meanings": ["to look upon", "to treat someone a certain way"],
+		"note": "V. \"sb\" expanded."
+	},
+	"L5-0431": {
+		"meanings": ["to appraise performance", "to assess"],
+		"note": "评估 (L5) leads with 'to evaluate'; 考核 is assessing a person against requirements."
+	},
+	"L5-0432": {
+		"meanings": ["barbecued meat", "roast meat"],
+		"note": "N row leads with the food, not 'to barbecue meat'."
+	},
+	"L5-0434": {
+		"meanings": ["to move close to", "to be near"],
+		"note": "接近 (L3) holds 'to approach'; 靠近 is drawing physically nearer."
+	},
+	"L5-0435": {
+		"meanings": ["measure word: small round things"],
+		"note": "M row: 一颗星, 一颗牙. Naming what it counts beats CEDICT's list of examples."
+	},
+	"L5-0436": {
+		"meanings": ["to cough"],
+		"note": "V row cannot lead with the bare noun 'cough'."
+	},
+	"L5-0437": {
+		"meanings": ["adds emphasis: really", "but"],
+		"note": "Adv sense leads (这可不行); 但 (L2) and 却 (L4) already answer to bare 'but'."
+	},
+	"L5-0438": {
+		"meanings": ["pitiful", "to take pity on"],
+		"note": "Adj/V row: the adjective leads, the verb follows."
+	},
+	"L5-0439": {
+		"meanings": ["it is a pity", "unfortunate"],
+		"note": "Adj row. 'what a pity' is the same answer written twice, so it is dropped."
+	},
+	"L5-0441": {
+		"meanings": ["to carve", "to engrave"],
+		"note": "V row: the quarter-hour and classifier senses are the 一刻 noun, not this row."
+	},
+	"L5-0442": {
+		"meanings": ["a client"],
+		"note": "顾客 (L2) is the shop customer; 客户 is the business client a firm serves."
+	},
+	"L5-0443": {
+		"meanings": ["polite", "to stand on ceremony"],
+		"note": "Adj/V row: 不客气 is the verb use, so both senses are worth carrying."
+	},
+	"L5-0444": {
+		"meanings": ["living room"],
+		"note": "One sense; 'sitting room' is the same answer."
+	},
+	"L5-0445": {
+		"meanings": ["a research topic", "an issue to tackle"],
+		"note": "题 (L2) holds bare 'topic'; 课题 is a subject set for study or work."
+	},
+	"L5-0446": {
+		"meanings": ["to be sure of something", "definitely"],
+		"note": "V. \"sth\" expanded."
+	},
+	"L5-0448": {
+		"meanings": ["to control", "to keep in check"],
+		"note": "掌握 (L5) leads with 'to grasp', so 控制 keeps the plain verb it is the word for."
+	},
+	"L5-0450": {
+		"meanings": ["warehouse", "a depot"],
+		"note": "N row; the '(file) library' sense is computing jargon."
+	},
+	"L5-0453": {
+		"meanings": ["wild", "unrestrained"],
+		"note": "疯 (L5) holds 'insane' and 'mad'; 狂 is uncontrolled intensity."
+	},
+	"L5-0454": {
+		"meanings": ["to lose money", "to treat someone unfairly"],
+		"note": "V. \"sb\" expanded."
+	},
+	"L5-0455": {
+		"meanings": ["to trouble someone", "to perplex"],
+		"note": "V. \"sb\" expanded."
+	},
+	"L5-0456": {
+		"meanings": ["to leave something behind", "to be missing"],
+		"note": "V. \"sth\" expanded."
+	},
+	"L5-0458": {
+		"meanings": ["rotten", "mushy"],
+		"note": "Adj row. The 'crappy' sense is slang and does not ship."
+	},
+	"L5-0461": {
+		"meanings": ["manual labor", "to do physical work"],
+		"note": "作品 (L3) holds bare 'work'; 劳动 is physical labour specifically."
+	},
+	"L5-0462": {
+		"meanings": ["pear"],
+		"note": "One sense; the CL: note is dictionary apparatus."
+	},
+	"L5-0463": {
+		"meanings": ["courtesy", "a rite"],
+		"note": "礼物 (L2) holds 'gift' and 典礼 (L5) holds 'ceremony'; 礼 itself is propriety."
+	},
+	"L5-0464": {
+		"meanings": ["a week in spoken use", "to attend worship"],
+		"note": "星期 (L1) and 周 (L2) hold bare 'week'; 做礼拜 is the verb sense."
+	},
+	"L5-0465": {
+		"meanings": ["good manners", "courteous"],
+		"note": "N/Adj row; 'courtesy' is kept for 礼 and 'polite' for 客气."
+	},
+	"L5-0466": {
+		"meanings": ["impressive", "intense"],
+		"note": "严厉 (L5) holds 'severe'; 厉害 is the two-sided 'makes a strong impression' word."
+	},
+	"L5-0467": {
+		"meanings": ["to stand upright", "to set up"],
+		"note": "站 (L2) holds bare 'to stand'; 立 is standing something up or founding it."
+	},
+	"L5-0470": {
+		"meanings": ["an exception"],
+		"note": "V/N row; 'to be an exception' restates the noun and adds nothing on a button."
+	},
+	"L5-0471": {
+		"meanings": ["to connect", "to join up"],
+		"note": "连 (L3) holds 'to link'; 连接 is joining two things into one."
+	},
+	"L5-0472": {
+		"meanings": ["to keep in touch", "to make contact"],
+		"note": "联系 (L3) holds 'to get in touch with'; 联络 is maintaining the contact."
+	},
+	"L5-0476": {
+		"meanings": ["to be in love", "a romance"],
+		"note": "V/N row: 谈恋爱 is the use; 'to have an affair' is the wrong register entirely."
+	},
+	"L5-0477": {
+		"meanings": ["both banks of a river"],
+		"note": "The literal sense; the cross-Strait political reading is not beginner content."
+	},
+	"L5-0479": {
+		"meanings": ["a small bell"],
+		"note": "钟 (L3) holds 'a bell' and 'clock'; 铃 is the little ringing kind."
+	},
+	"L5-0480": {
+		"meanings": ["ringtone", "the sound of a bell"],
+		"note": "N row; the phone sense is the one a learner meets."
+	},
+	"L5-0482": {
+		"meanings": ["to make someone feel something", "to command"],
+		"note": "V. \"sb\"/\"sth\" expanded."
+	},
+	"L5-0483": {
+		"meanings": ["to flow or move about", "to be mobile"],
+		"note": "流 (L2) holds bare 'to flow'; 流动 covers 流动人口 as well as water."
+	},
+	"L5-0484": {
+		"meanings": ["to circulate", "to be in circulation"],
+		"note": "V row; goods, money and air 流通."
+	},
+	"L5-0485": {
+		"meanings": ["to leak", "to let slip"],
+		"note": "V row; the waterclock sense is archaic."
+	},
+	"L5-0486": {
+		"meanings": ["a loophole", "a flaw or gap"],
+		"note": "洞 (L5) holds 'hole' and 漏 holds 'to leak'; 漏洞 is the flaw in a plan or a rule."
+	},
+	"L5-0489": {
+		"meanings": ["dock", "wharf"],
+		"note": "N row; the place boats tie up."
+	},
+	"L5-0490": {
+		"meanings": ["to scold", "to swear at"],
+		"note": "V row; kept at the everyday register a learner needs."
+	},
+	"L5-0491": {
+		"meanings": ["buying and selling", "trade"],
+		"note": "N row cannot lead 'to buy and sell'; 生意 (L3) holds 'business dealings'."
+	},
+	"L5-0493": {
+		"meanings": ["comics", "a cartoon strip"],
+		"note": "N row; 'caricature' is the narrow political-cartoon sense."
+	},
+	"L5-0495": {
+		"meanings": ["a contradiction", "contradictory"],
+		"note": "N/Adj row: the noun leads and the adjective follows."
+	},
+	"L5-0496": {
+		"meanings": ["to give off smoke or steam", "to brave danger"],
+		"note": "冒烟 and 冒险 are the two L5 uses; the 'to feign' sense is literary."
+	},
+	"L5-0498": {
+		"meanings": ["coal"],
+		"note": "One sense; the CL: note is dictionary apparatus."
+	},
+	"L5-0500": {
+		"meanings": ["to see patients at a clinic", "outpatient clinic"],
+		"note": "The official row is V, so the verb use leads and the noun follows."
+	},
+	"L5-0501": {
+		"meanings": ["charming", "enchanting"],
+		"note": "Adj row; a person or a view can be 迷人."
+	},
+	"L5-0502": {
+		"meanings": ["superstition", "to be superstitious"],
+		"note": "V/N row; the noun is the sense a learner meets first."
+	},
+	"L5-0503": {
+		"meanings": ["facial features", "the look of a place"],
+		"note": "模样 (L5) holds bare 'appearance'; 面貌 is the face and by extension a place's character."
+	},
+	"L5-0504": {
+		"meanings": ["one's dignity or prestige", "the outer surface"],
+		"note": "面子 is social face: 给面子, 丢面子. The literal surface sense follows."
+	},
+	"L5-0505": {
+		"meanings": ["a second of time"],
+		"note": "M row; 次 (L4) holds 'second' in the ordinal sense, so the unit is spelled out."
+	},
+	"L5-0507": {
+		"meanings": ["bright and well lit"],
+		"note": "亮 (L2) holds bare 'bright'; 明亮 describes a room or eyes full of light."
+	},
+	"L5-0508": {
+		"meanings": ["obviously", "plainly"],
+		"note": "Adv row; 明明知道 sets up a contrast with what follows."
+	},
+	"L5-0509": {
+		"meanings": ["an order", "to give an order"],
+		"note": "N/V row with the noun first; 令 carries 'to make sb feel sth' on its own card."
+	},
+	"L5-0511": {
+		"meanings": ["to imitate", "to copy"],
+		"note": "V row; 'model' is a noun and cannot lead here."
+	},
+	"L5-0512": {
+		"meanings": ["blurry", "vague"],
+		"note": "Adj row; 'to blur' is the verb use and does not lead an adjective card."
+	},
+	"L5-0513": {
+		"meanings": ["a pattern or model", "mode"],
+		"note": "方式 (L3) is 'way' and 形式 (L3) is 'form'; 模式 is the repeatable pattern."
+	},
+	"L5-0514": {
+		"meanings": ["friction", "rubbing"],
+		"note": "V/N row; the 'fig. disharmony' sense is figurative and does not ship."
+	},
+	"L5-0515": {
+		"meanings": ["a motorbike", "a motor"],
+		"note": "摩托车 is not in the list, so 摩托 carries the vehicle; loanword markers are dropped."
+	}
+}
