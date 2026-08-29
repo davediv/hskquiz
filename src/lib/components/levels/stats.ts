@@ -1,4 +1,5 @@
 import { MASTERY_STREAK } from '$lib/progress';
+import { SHIPPED_SIZES, SHIPPED_TOTAL } from '$lib/data/sizes';
 import type { Level, ProgressState, WordProgress } from '$lib/types';
 
 /** What the level-select screen needs to know about one level's history. */
@@ -58,6 +59,14 @@ export function levelStats(state: ProgressState | null | undefined, level: Level
 		stats.correct += record.correct;
 	}
 
+	// A record can exist for an official row that ships merged into another card, so the count
+	// of records is not automatically a count of cards. Clamped to what the level actually
+	// ships, or the card reads "772 of 770". `ProgressStore.levelSummary` clamps the same way.
+	const size = SHIPPED_SIZES[level];
+	stats.practised = Math.min(stats.practised, size);
+	stats.mastered = Math.min(stats.mastered, stats.practised);
+	stats.shaky = Math.min(stats.shaky, stats.practised);
+
 	stats.accuracy = stats.answered > 0 ? stats.correct / stats.answered : null;
 
 	const levelRecord = state.levels?.[level];
@@ -105,6 +114,10 @@ export function overallSummary(state: ProgressState | null | undefined): Overall
 		summary.sessions += levelRecord.sessions ?? 0;
 		summary.lastPlayed = Math.max(summary.lastPlayed, levelRecord.lastPlayed ?? 0);
 	}
+
+	// Same clamp as `levelStats`, against the whole box.
+	summary.practised = Math.min(summary.practised, SHIPPED_TOTAL);
+	summary.mastered = Math.min(summary.mastered, summary.practised);
 
 	summary.accuracy = answered > 0 ? correct / answered : null;
 	summary.started = summary.practised > 0 || summary.sessions > 0;
