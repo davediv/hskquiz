@@ -1,0 +1,490 @@
+{
+	"L2-0008": {
+		"meanings": ["to handle", "to take care of a matter"],
+		"note": "V; CEDICT leads with a comma-piled clause. 办 at L2 = deal with a matter; \"to set up\" is the 办 in 办公司 and is secondary."
+	},
+	"L2-0010": {
+		"meanings": ["office"],
+		"note": "Kept; correct N gloss, dropped \"business premises\"."
+	},
+	"L2-0012": {
+		"meanings": ["to help or assist"],
+		"note": "V. Deliberately not bare \"to help\": 帮 (L1) already owns that string and the distractor guard strips a leading \"to\"."
+	},
+	"L2-0013": {
+		"meanings": ["full after eating"],
+		"note": "Adj row; CEDICT sense 1 \"to eat till full\" is a verb and cannot lead an Adj card."
+	},
+	"L2-0014": {
+		"meanings": ["to sign up", "to enroll"],
+		"note": "Six near-identical CEDICT verbs collapsed to the two a learner needs."
+	},
+	"L2-0016": {
+		"meanings": ["the northern part of a country", "the North of China"],
+		"note": "N. Bare \"north\" is 北 (L1); 北方 is the region, not the compass point."
+	},
+	"L2-0017": {
+		"meanings": ["to learn by heart", "to recite from memory"],
+		"note": "bèi V. The bēi \"carry on the back\" verb is L3-0028 and the noun \"back\" is L3-0030, so this row is the 背单词 sense. Machine pick \"to turn one's back\" is a minor sense."
+	},
+	"L2-0018": {
+		"meanings": ["for example", "such as"],
+		"note": "Official POS is V, but 比如 is only ever met as a discourse connector; a \"to ...\" gloss would be unusable on a card."
+	},
+	"L2-0020": {
+		"meanings": ["pen", "measure word: sums of money"],
+		"note": "Kept the authored pair; both senses are live at L2."
+	},
+	"L2-0021": {
+		"meanings": ["notes"],
+		"note": "N row; dropped the verbal \"to take down\" so the card stays a noun."
+	},
+	"L2-0022": {
+		"meanings": ["notebook for taking notes", "laptop computer"],
+		"note": "N; 本子 (L1) already ships bare \"notebook\", so this card names what kind. Both senses current at L2."
+	},
+	"L2-0023": {
+		"meanings": ["must", "have to"],
+		"note": "Adv. Dropped \"compulsory\" (adjectival) and \"necessarily\"."
+	},
+	"L2-0024": {
+		"meanings": ["edge", "side"],
+		"note": "N. Leads with \"edge\" because 旁边 (L1) and 旁 (L5) both carry \"side\"."
+	},
+	"L2-0025": {
+		"meanings": ["to change", "to become different"],
+		"note": "V, intransitive change of state — distinct from 改 (to alter sth) and 换 (to exchange)."
+	},
+	"L2-0026": {
+		"meanings": ["to turn into", "to change into"],
+		"note": "Deliberately not \"to become\": that primary belongs to 成为 (L2-0065)."
+	},
+	"L2-0027": {
+		"meanings": ["measure word: times through"],
+		"note": "M. Distinguishes 遍 from 次 \"measure word: times\" — 遍 counts a whole run-through."
+	},
+	"L2-0028": {
+		"meanings": ["a watch", "a form or table"],
+		"note": "N. Second sense reworded so it does not duplicate 表格 (L3) \"a form to fill in\"."
+	},
+	"L2-0029": {
+		"meanings": ["to indicate", "to express"],
+		"note": "V/N. Leads with the (of sth) sense so it does not duplicate 表达 (L3) \"to express\"; both senses stay on the card."
+	},
+	"L2-0031": {
+		"meanings": ["not only"],
+		"note": "Conj. Plain-words function gloss; the paired 而且 clause is described on that card."
+	},
+	"L2-0032": {
+		"meanings": ["not enough", "insufficient"],
+		"note": "Kept."
+	},
+	"L2-0034": {
+		"meanings": ["not too", "not very"],
+		"note": "Ordered so the primary differs from 不大 (L1) \"not very\"; the two glosses are interchangeable here."
+	},
+	"L2-0035": {
+		"meanings": ["don't", "must not"],
+		"note": "Adv. Dropped the exclamation mark — the quiz prints the gloss verbatim."
+	},
+	"L2-0036": {
+		"meanings": ["to feel embarrassed", "sorry for troubling someone"],
+		"note": "Second sense is the everyday apology use, which the machine pick ranked below a paraphrase of the first."
+	},
+	"L2-0037": {
+		"meanings": ["not long", "soon afterwards"],
+		"note": "Adj row; kept adjectival."
+	},
+	"L2-0038": {
+		"meanings": ["dissatisfied", "discontented"],
+		"note": "Adj. Dropped \"(before a number) to be less than\" — wrong register and wrong POS for L2."
+	},
+	"L2-0039": {
+		"meanings": ["not as good as", "worse than"],
+		"note": "Comparative construction; a \"to ...\" gloss would misrepresent how it is used."
+	},
+	"L2-0041": {
+		"meanings": ["different", "not the same"],
+		"note": "Kept the sense, dropped the two synonym-padding clauses."
+	},
+	"L2-0042": {
+		"meanings": ["won't do", "not allowed"],
+		"note": "Second gloss reworded from \"be out of the question\" for readability."
+	},
+	"L2-0043": {
+		"meanings": ["not necessarily"],
+		"note": "Adv; dropped \"maybe\", which is 也许 and would collide."
+	},
+	"L2-0044": {
+		"meanings": ["after a short while", "before long"],
+		"note": "No CEDICT row. Kept clear of 一会儿 (L1/L2) \"a moment\"."
+	},
+	"L2-0045": {
+		"meanings": ["part", "portion"],
+		"note": "N; sits against 全部 \"whole\" and 大部分 \"the greater part\"."
+	},
+	"L2-0046": {
+		"meanings": ["not until then", "only then"],
+		"note": "Adv row — the shipped card was two noun senses (ability / a talent), which is the L4 才 (N). Named in the loop-1 verdict."
+	},
+	"L2-0048": {
+		"meanings": ["to visit a place", "to tour"],
+		"note": "V. 参观 is places only; \"to visit a person\" is 访问/看."
+	},
+	"L2-0049": {
+		"meanings": ["to take part in", "to attend"],
+		"note": "V; kept clear of 加入 \"to join\" and 参与 (L4)."
+	},
+	"L2-0050": {
+		"meanings": ["grass", "straw"],
+		"note": "N; dropped \"manuscript/draft\" and the adjectival \"careless\"."
+	},
+	"L2-0052": {
+		"meanings": ["measure word: floors or layers"],
+		"note": "Official POS is M only; the shipped \"floor of a building\" was a bare noun."
+	},
+	"L2-0053": {
+		"meanings": ["to look up", "to check"],
+		"note": "V. 查词典/查资料 is the L2 use; \"to research\" overstates it."
+	},
+	"L2-0054": {
+		"meanings": ["about the same", "almost"],
+		"note": "Adj/Adv row; leads with the adjectival sense to match POS order."
+	},
+	"L2-0055": {
+		"meanings": ["long"],
+		"note": "Adj (cháng). Dropped the bound-form \"length\" noun, which belongs to 长度."
+	},
+	"L2-0056": {
+		"meanings": ["commonly seen", "often met with"],
+		"note": "Kept clear of 普通/平常 \"common\"."
+	},
+	"L2-0057": {
+		"meanings": ["commonly used", "in everyday use"],
+		"note": "Reworded to read as English on a button."
+	},
+	"L2-0058": {
+		"meanings": ["measure word: matches or shows"],
+		"note": "M. No internal comma: the browse row joins meanings on \", \"."
+	},
+	"L2-0059": {
+		"meanings": ["to exceed", "to overtake"],
+		"note": "V; kept."
+	},
+	"L2-0062": {
+		"meanings": ["to call by a name", "to be known as"],
+		"note": "称1 (L2) is the 叫/名称 entry; 称2 (L5) is the weighing entry. Both currently ship \"to weigh, to state\". Flagged as a hard case."
+	},
+	"L2-0063": {
+		"meanings": ["to succeed or work out", "to become"],
+		"note": "V. Primary deliberately avoids \"to become\" (成为) and \"to turn into\" (变成) and \"to complete\" (完成)."
+	},
+	"L2-0064": {
+		"meanings": ["grades or results", "achievement"],
+		"note": "N; the school-report sense is what an L2 learner meets."
+	},
+	"L2-0065": {
+		"meanings": ["to become"],
+		"note": "V; holds the plain \"to become\" for the three-way 成/变成/成为 split."
+	},
+	"L2-0069": {
+		"meanings": ["to go abroad"],
+		"note": "Kept."
+	},
+	"L2-0070": {
+		"meanings": ["an exit", "the way out"],
+		"note": "N row. The identical L4 出口 card should take the verbal \"to export\" sense — noted in the verdict as a cross-level duplicate."
+	},
+	"L2-0071": {
+		"meanings": ["to leave the house", "to go out"],
+		"note": "Leads with the sense that separates it from 出去 (L1) \"to go out\". Dropped \"(of a woman) to get married\" — dated register."
+	},
+	"L2-0073": {
+		"meanings": ["to appear", "to show up"],
+		"note": "V; kept."
+	},
+	"L2-0074": {
+		"meanings": ["to leave hospital", "to be discharged"],
+		"note": "Kept, second gloss shortened."
+	},
+	"L2-0077": {
+		"meanings": ["boat", "ship"],
+		"note": "N; \"vessel\" is the wrong register for L2."
+	},
+	"L2-0078": {
+		"meanings": ["to blow", "to play a wind instrument"],
+		"note": "Dropped \"to boast/brag\" (colloquial) and \"to fall through\"."
+	},
+	"L2-0081": {
+		"meanings": ["a word", "a term"],
+		"note": "N; sits against 生词 \"new word\" and 词语 \"words and phrases\". Dropped the Song-dynasty 词 poetry sense."
+	},
+	"L2-0084": {
+		"meanings": ["from childhood", "since one was little"],
+		"note": "Adv; kept."
+	},
+	"L2-0085": {
+		"meanings": ["to promise or agree", "to answer"],
+		"note": "The 答应 a learner meets is consent, which CEDICT lists second; kept clear of 同意."
+	},
+	"L2-0088": {
+		"meanings": ["to print out"],
+		"note": "V. CEDICT senses 1-2 (\"to affix a seal\") are the archaic use; 打印 today is a printer."
+	},
+	"L2-0089": {
+		"meanings": ["the greater part", "most of them"],
+		"note": "N; kept clear of 大多数 \"the great majority\" and 部分 \"part\"."
+	},
+	"L2-0090": {
+		"meanings": ["greatly", "enormously"],
+		"note": "Adv; dropped the \"(dialect) dad\" and \"uncle\" senses."
+	},
+	"L2-0093": {
+		"meanings": ["everyone"],
+		"note": "Pron; dropped \"influential family\" and \"great expert\", neither of which is the L2 word."
+	},
+	"L2-0094": {
+		"meanings": ["a large amount of", "numerous"],
+		"note": "Adj; dropped \"generous/magnanimous\" (a different, literary sense)."
+	},
+	"L2-0097": {
+		"meanings": ["in a loud voice", "loudly"],
+		"note": "Used adverbially (大声说); the shipped noun primary \"loud voice\" was wrong for the use."
+	},
+	"L2-0098": {
+		"meanings": ["size", "how big something is"],
+		"note": "N; dropped \"adults and children\" and \"at any rate\"."
+	},
+	"L2-0099": {
+		"meanings": ["overcoat"],
+		"note": "N; \"topcoat/cloak\" add nothing at L2."
+	},
+	"L2-0101": {
+		"meanings": ["to take along", "to lead"],
+		"note": "V. Shipped primary was \"to wear\", which is 戴; and \"to bring\" is held by 带来 (L2-0102)."
+	},
+	"L2-0102": {
+		"meanings": ["to bring"],
+		"note": "Dropped CEDICT's \"(fig.) to bring about\" per the no-fig rule."
+	},
+	"L2-0103": {
+		"meanings": ["unit of measurement", "one's workplace"],
+		"note": "N; both senses are live at L2 and the work-unit sense needed plain words."
+	},
+	"L2-0104": {
+		"meanings": ["but"],
+		"note": "Conj; 但是 ships \"however\" and 可是 \"yet\", so the plain \"but\" belongs here."
+	},
+	"L2-0106": {
+		"meanings": ["egg of a bird"],
+		"note": "N. 鸡蛋 (L1) ships bare \"egg\"; 蛋 is the generic word, so the gloss says so."
+	},
+	"L2-0107": {
+		"meanings": ["to serve as", "at the time of"],
+		"note": "V/Prep row — second gloss restores the prepositional 当…的时候 use."
+	},
+	"L2-0109": {
+		"meanings": ["to fall over", "to collapse"],
+		"note": "dǎo V; kept and paired against 倒 dào below."
+	},
+	"L2-0110": {
+		"meanings": ["everywhere"],
+		"note": "Adv; kept."
+	},
+	"L2-0111": {
+		"meanings": ["to pour", "to turn upside down"],
+		"note": "dào V. 倒水 is the L2 use; \"to invert\" led the shipped card."
+	},
+	"L2-0112": {
+		"meanings": ["measure word: dishes or questions"],
+		"note": "M. Counts courses in a meal and questions in an exam."
+	},
+	"L2-0113": {
+		"meanings": ["sense or logic", "a principle"],
+		"note": "N. 有道理 = \"that makes sense\"; \"reason\" would collide with 理由 and 原因."
+	},
+	"L2-0114": {
+		"meanings": ["a road or route"],
+		"note": "N; bare \"road\" belongs to 路 (L1)."
+	},
+	"L2-0115": {
+		"meanings": ["to gain or obtain"],
+		"note": "dé V. \"to get\" is 得到 (L1), \"to obtain\" is 获得 (L4) and \"to gain\" is 获取 (L4), so this card takes the pair."
+	},
+	"L2-0118": {
+		"meanings": ["links a verb to how it is done"],
+		"note": "de Aux. Function described in plain words instead of \"structural particle\" / \"complement\"."
+	},
+	"L2-0119": {
+		"meanings": ["lamp", "light"],
+		"note": "N; kept."
+	},
+	"L2-0120": {
+		"meanings": ["and so on", "and the like"],
+		"note": "Aux/N row (děng in enumerations) — distinct from 等 \"to wait\" at L1."
+	},
+	"L2-0122": {
+		"meanings": ["to be equal to", "to amount to"],
+		"note": "V; \"to be tantamount to\" is above level."
+	},
+	"L2-0123": {
+		"meanings": ["low", "to lower"],
+		"note": "Adj/V; kept, both POS represented in order."
+	},
+	"L2-0125": {
+		"meanings": ["subway", "underground railway"],
+		"note": "N; leads with the term most learners use."
+	},
+	"L2-0127": {
+		"meanings": ["to nod one's head"],
+		"note": "Kept, expanded slightly so the card is not a bare word."
+	},
+	"L2-0128": {
+		"meanings": ["a shop or store"],
+		"note": "N; 商店 (L1) holds \"store\", so this is worded as the pair."
+	},
+	"L2-0129": {
+		"meanings": ["to drop", "to fall"],
+		"note": "V; dropped the 17-item CEDICT tail including the resultative-suffix note."
+	},
+	"L2-0134": {
+		"meanings": ["to understand"],
+		"note": "V; 理解 is \"to comprehend\" and 明白 is \"clear\", so the plain gloss sits here."
+	},
+	"L2-0138": {
+		"meanings": ["the pronunciation of a character"],
+		"note": "N; differentiates from 发音 and drops the literary-vs-colloquial reading note."
+	},
+	"L2-0139": {
+		"meanings": ["degree of temperature or angle", "extent"],
+		"note": "N/M; makes the concrete 30度 sense explicit."
+	},
+	"L2-0140": {
+		"meanings": ["short in length", "brief"],
+		"note": "Adj; \"short in height\" is 矮 (L4), so the length is stated."
+	},
+	"L2-0142": {
+		"meanings": ["measure word: lengths or periods"],
+		"note": "Official POS is M only; the old \"paragraph/section\" was a bare noun."
+	},
+	"L2-0143": {
+		"meanings": ["a team", "a line or queue"],
+		"note": "N; \"squadron\" is military register and wrong for L2. Queue sense supports 排队."
+	},
+	"L2-0145": {
+		"meanings": ["towards someone", "to treat someone a certain way"],
+		"note": "Prep/V row. Not bare \"towards\" — that is 朝 (L3), a direction; 对 marks the person an action or attitude is aimed at."
+	},
+	"L2-0146": {
+		"meanings": ["to talk with someone", "a dialogue"],
+		"note": "V/N; both POS represented."
+	},
+	"L2-0147": {
+		"meanings": ["the opposite side", "directly across"],
+		"note": "N; kept, second gloss shortened from \"directly in front of one\"."
+	},
+	"L2-0148": {
+		"meanings": ["how much or how old", "more"],
+		"note": "Adv row — 多 L1 (Adj/Pron) already ships \"many\", so this card carries the adverbial 多大/多远 and 多吃点 uses."
+	},
+	"L2-0149": {
+		"meanings": ["how long"],
+		"note": "Pron; dropped the \"(not) a long time\" bracket, which is unreadable on a card."
+	},
+	"L2-0153": {
+		"meanings": ["and also", "moreover"],
+		"note": "Conj; \"but also\" only makes sense inside the 不但 pair."
+	},
+	"L2-0154": {
+		"meanings": ["to send out", "to issue"],
+		"note": "V; \"to send\" alone belongs to 送 (L1). 发短信/发工资 are the L2 uses."
+	},
+	"L2-0155": {
+		"meanings": ["to discover", "to notice"],
+		"note": "V/N; leads with the stronger sense, kept clear of 找到 \"to find\"."
+	},
+	"L2-0157": {
+		"meanings": ["convenient", "handy"],
+		"note": "Adj. Dropped \"having money to spare\" and the euphemistic sense."
+	},
+	"L2-0159": {
+		"meanings": ["a way of doing something", "method"],
+		"note": "N. Bare \"method\" is taken by 法 (L4) and 手段 (L5); this phrasing also stays clear of 方式 (L3) \"way\"."
+	},
+	"L2-0160": {
+		"meanings": ["an aspect", "a side of a matter"],
+		"note": "N; \"respect\" is ambiguous in English."
+	},
+	"L2-0161": {
+		"meanings": ["direction"],
+		"note": "N; kept."
+	},
+	"L2-0162": {
+		"meanings": ["to put down", "to set aside"],
+		"note": "Kept; dropped \"to lower the blinds\"."
+	},
+	"L2-0163": {
+		"meanings": ["to feel reassured", "to stop worrying"],
+		"note": "Second gloss says what 放心 actually does for a learner."
+	},
+	"L2-0164": {
+		"meanings": ["to divide", "to hand out"],
+		"note": "V row (L1 分 is the N/M minute-and-point card). Second gloss is 分东西, kept clear of 分开 \"to separate\"."
+	},
+	"L2-0165": {
+		"meanings": ["to separate", "to part from each other"],
+		"note": "Kept; differentiated from 分 above."
+	},
+	"L2-0167": {
+		"meanings": ["a minute of time"],
+		"note": "M row; worded so it does not read identically to 分 (L1) \"minute\"."
+	},
+	"L2-0168": {
+		"meanings": ["measure word: portions or copies"],
+		"note": "M. Removed the internal comma in the shipped gloss."
+	},
+	"L2-0169": {
+		"meanings": ["measure word: letters or envelopes"],
+		"note": "M; CEDICT sense 1 \"to confer\" is the L5 封 verb."
+	},
+	"L2-0171": {
+		"meanings": ["to review lessons", "to revise for a test"],
+		"note": "V; CEDICT only carries a variant-character pointer for this key."
+	},
+	"L2-0172": {
+		"meanings": ["should or ought to", "to be one's turn"],
+		"note": "V. 应该 ships \"ought to\" and 应当 ships \"should\", so this primary is deliberately the pair."
+	},
+	"L2-0173": {
+		"meanings": ["to alter", "to correct"],
+		"note": "V. Not \"to change\" (that is 变) and not \"to correct\" as primary (that is 改正 at L4)."
+	},
+	"L2-0175": {
+		"meanings": ["to drink a toast", "cheers"],
+		"note": "Kept; dropped \"Bottoms up!\" and the literal gloss."
+	},
+	"L2-0179": {
+		"meanings": ["to express thanks", "to be grateful"],
+		"note": "V; 谢谢 (L1) already ships \"to thank\"."
+	},
+	"L2-0180": {
+		"meanings": ["to do manual work"],
+		"note": "Kept; CEDICT only carries an erhua-variant pointer."
+	},
+	"L2-0181": {
+		"meanings": ["only just", "barely"],
+		"note": "Adv. Shipped primary \"exactly\" is the 刚好 sense and the literary \"hard, firm\" sense is dropped; kept clear of 刚才 (L2) \"just now\"."
+	},
+	"L2-0183": {
+		"meanings": ["just a moment ago"],
+		"note": "Adv; worded apart from 刚 \"only just\" and 刚才 \"just now\"."
+	},
+	"L2-0184": {
+		"meanings": ["advanced level", "high grade"],
+		"note": "Adj; matches the 初级/中级 series already shipping \"junior/primary\" and \"middle level\"."
+	},
+	"L2-0186": {
+		"meanings": ["a person's height", "build"],
+		"note": "N; \"stature\" is the wrong register for L2."
+	}
+}
