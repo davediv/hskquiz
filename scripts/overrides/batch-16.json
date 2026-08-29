@@ -1,0 +1,470 @@
+{
+	"L4-0587": {
+		"meanings": ["clear-headed", "wide awake"],
+		"note": "Adj row. 醒 at this level already leads 'to wake up', so 清醒 takes the state, not the act."
+	},
+	"L4-0588": {
+		"meanings": ["a scene or situation", "the sight before one"],
+		"note": "情况 L3 owns 'circumstances' and 现场 L3 owns 'the scene of an event'; 情景 is the sight itself."
+	},
+	"L4-0589": {
+		"meanings": ["poor", "short of money"],
+		"note": "Adj row; CEDICT's 'to use up' and the coll. sense are wrong register for a beginner card."
+	},
+	"L4-0592": {
+		"meanings": ["a trend", "the way things are going"],
+		"note": "N row. The second gloss says what a trend is without repeating the headword."
+	},
+	"L4-0593": {
+		"meanings": ["a circle or ring", "to draw a circle around"],
+		"note": "N/V row lists N first; loop 1 shipped only the verb. The fig. 'social circle' sense is dropped."
+	},
+	"L4-0595": {
+		"meanings": ["yet or nevertheless", "all the same"],
+		"note": "Adv row. 但是 and 可是 already own 'however' and 'yet'; 却 is the contrast adverb before the verb."
+	},
+	"L4-0596": {
+		"meanings": ["to confirm", "to check and make sure"],
+		"note": "V row. 确定 L3 leads 'definite', so 'to confirm' is free here."
+	},
+	"L4-0597": {
+		"meanings": ["however", "but even so"],
+		"note": "Conj row; the written-style contrast connective, distinct from 却's adverb slot."
+	},
+	"L4-0599": {
+		"meanings": ["to catch fire and burn", "to combust"],
+		"note": "Kept apart from 烧: 燃烧 is something being alight, 烧 is what a person does to it."
+	},
+	"L4-0601": {
+		"meanings": ["eager to help", "warm-hearted"],
+		"note": "热情 L2 owns 'warm and friendly'; 热心 is specifically willingness to help others."
+	},
+	"L4-0602": {
+		"meanings": ["other people", "somebody else"],
+		"note": "Pron row. The 'I, me' reading is a colloquial flourish a learner does not meet at HSK 4."
+	},
+	"L4-0605": {
+		"meanings": ["nowadays", "these days"],
+		"note": "N row of time. 目前 L3 already says 'at the present time'."
+	},
+	"L4-0606": {
+		"meanings": ["weak", "feeble"],
+		"note": "Adj row; CEDICT's 'slightly less than' is arithmetic notation, not a learner sense."
+	},
+	"L4-0607": {
+		"meanings": ["an umbrella"],
+		"note": "N row, one thing; the CL: clause CEDICT carries is dictionary plumbing."
+	},
+	"L4-0609": {
+		"meanings": ["to sweep with a broom", "to sweep away"],
+		"note": "打扫 at the same level leads 'to clean', so 扫 names the physical action itself."
+	},
+	"L4-0610": {
+		"meanings": ["color or shade", "the look on a face"],
+		"note": "颜色 already answers to 'color'; 色 is the bound form and carries 脸色 as its second sense."
+	},
+	"L4-0611": {
+		"meanings": ["coloring and hue", "shades of color"],
+		"note": "Kept off plain 'color' so 色 and 颜色 stay distinct; the fig. 'flavor, character' sense is dropped."
+	},
+	"L4-0613": {
+		"meanings": ["to bask in the sun", "to dry in the sun"],
+		"note": "V row. The two uses a learner meets are 晒太阳 and 晒衣服; the 'share online' sense is fig. slang."
+	},
+	"L4-0614": {
+		"meanings": ["to flash", "to dodge aside"],
+		"note": "闪电 and 闪光 are what an HSK 4 learner meets; CEDICT's 'to beat it' is slang."
+	},
+	"L4-0617": {
+		"meanings": ["to be good at"],
+		"note": "V row taking a verb object; one gloss is the whole card."
+	},
+	"L4-0618": {
+		"meanings": ["to harm", "to injure"],
+		"note": "伤 L3 already leads 'to injure', so 伤害 leads with the broader 'to harm'."
+	},
+	"L4-0619": {
+		"meanings": ["business affairs", "commercial matters"],
+		"note": "N row. 商业 L3 owns 'commerce' and 生意 L3 owns 'business dealings'."
+	},
+	"L4-0620": {
+		"meanings": ["to enjoy looking at", "to give a reward"],
+		"note": "V row. 赏花 and 赏月 are the living uses; 奖 at this level already means 'to award'."
+	},
+	"L4-0621": {
+		"meanings": ["last month"],
+		"note": "Transparent time word; the literal reading is the taught one."
+	},
+	"L4-0622": {
+		"meanings": ["to go upstairs"],
+		"note": "Transparent verb-object phrase, one sense."
+	},
+	"L4-0623": {
+		"meanings": ["to call at someone's home", "to visit in person"],
+		"note": "Bare 'to visit' would answer to 访问 as well; 上门 is going to where the person is."
+	},
+	"L4-0624": {
+		"meanings": ["to burn", "to heat over a fire"],
+		"note": "烧水 and 烧菜 are the HSK 4 uses; the coll. 'full of oneself' sense is dropped."
+	},
+	"L4-0626": {
+		"meanings": ["to set up", "to configure"],
+		"note": "V row. 安装 L3 leads 'to install'; 设置 is arranging or configuring what is already there."
+	},
+	"L4-0628": {
+		"meanings": ["one's build or figure", "physique"],
+		"note": "N row about the body; 'stature' reads as height alone and misses 身材好."
+	},
+	"L4-0629": {
+		"meanings": ["identity", "one's status or role"],
+		"note": "N row. CEDICT piles six clauses into one sense; the card keeps the two a learner uses."
+	},
+	"L4-0631": {
+		"meanings": ["deep and lasting", "profound"],
+		"note": "深 L3 owns plain 'deep'; 深厚 is depth of feeling or foundation, not physical depth."
+	},
+	"L4-0632": {
+		"meanings": ["a myth", "mythology"],
+		"note": "传说 L3 already covers 'legend', so this card takes the myth sense."
+	},
+	"L4-0635": {
+		"meanings": ["to fail", "to be defeated"],
+		"note": "V/Adj row. 输 L3 owns 'to lose a game'; 失败 is failing at an attempt."
+	},
+	"L4-0636": {
+		"meanings": ["disappointed", "let down"],
+		"note": "Adj row; 'to lose hope' is too strong and reads as 绝望."
+	},
+	"L4-0637": {
+		"meanings": ["to lose one's job", "unemployment"],
+		"note": "Separable verb-object phrase, so the verb reading leads."
+	},
+	"L4-0638": {
+		"meanings": ["a poem", "poetry"],
+		"note": "N row; the CL: clause is dropped."
+	},
+	"L4-0640": {
+		"meanings": ["wet"],
+		"note": "Adj row. 潮湿 at the same level answers to 'damp', so this card keeps 'wet' alone."
+	},
+	"L4-0642": {
+		"meanings": ["practical", "useful in daily life"],
+		"note": "Adj row, so the verbal 'to apply in practice' that CEDICT leads with cannot start the card."
+	},
+	"L4-0643": {
+		"meanings": ["a canteen", "a cafeteria"],
+		"note": "餐厅 answers to 'dining hall'; 食堂 is the workplace or school one."
+	},
+	"L4-0644": {
+		"meanings": ["to use all one's strength", "to push hard"],
+		"note": "Verb-object phrase; the second gloss gives the everyday 使劲推 use."
+	},
+	"L4-0646": {
+		"meanings": ["the downtown area", "the urban part of a city"],
+		"note": "N row. 城市 L3 owns 'city'; 市区 is the built-up centre of one."
+	},
+	"L4-0647": {
+		"meanings": ["just like", "as if"],
+		"note": "Particle after a noun in 像…似的; said in plain words rather than named as a structural auxiliary."
+	},
+	"L4-0648": {
+		"meanings": ["a thing or object", "things in the world"],
+		"note": "东西 L1 owns bare 'thing'; 事物 is the abstract 'things and phenomena' word."
+	},
+	"L4-0649": {
+		"meanings": ["beforehand", "in advance"],
+		"note": "N row used adverbially; 提前 L3 is the verb 'to do ahead of time', this is the time word."
+	},
+	"L4-0652": {
+		"meanings": ["to take back", "to withdraw"],
+		"note": "收 L2 leads 'to collect'; 收回 is taking back something already given out."
+	},
+	"L4-0653": {
+		"meanings": ["to harvest", "gains from an effort"],
+		"note": "V/N row: the crop sense leads, and the figurative-free 'gains' noun follows for 很有收获."
+	},
+	"L4-0656": {
+		"meanings": ["in one's hands", "in one's possession"],
+		"note": "Location phrase; both the literal grip and the control reading are met at this level."
+	},
+	"L4-0659": {
+		"meanings": ["to guard", "to keep watch over"],
+		"note": "V row. 保护 L3 owns 'to protect'; 守 is staying put and watching."
+	},
+	"L4-0661": {
+		"meanings": ["to be unable to bear", "cannot stand it"],
+		"note": "V row, so the adjective 'unbearable' cannot lead the card."
+	},
+	"L4-0662": {
+		"meanings": ["a shop assistant", "a sales clerk"],
+		"note": "N row naming the job; 服务员 stays free for the restaurant one."
+	},
+	"L4-0663": {
+		"meanings": ["father's younger brother", "uncle"],
+		"note": "The precise kinship term leads; 'uncle' follows because that is how a child addresses him."
+	},
+	"L4-0665": {
+		"meanings": ["skilled", "proficient"],
+		"note": "Adj row; 熟 L2 and 成熟 L3 hold 'familiar' and 'mature', so this card is about practised skill."
+	},
+	"L4-0667": {
+		"meanings": ["woods", "a grove of trees"],
+		"note": "森林 at the same level answers to 'forest'; 树林 is the smaller stand of trees."
+	},
+	"L4-0671": {
+		"meanings": ["to brush", "to swipe a card"],
+		"note": "V row. CEDICT leads with the noun 'a brush'; the gaming and fig. senses are dropped."
+	},
+	"L4-0672": {
+		"meanings": ["to brush one's teeth"],
+		"note": "Verb-object phrase, one sense."
+	},
+	"L4-0674": {
+		"meanings": ["handsome", "sharp-looking"],
+		"note": "Adj row. CEDICT leads with the bound military 'commander-in-chief', which HSK 4 never uses."
+	},
+	"L4-0675": {
+		"meanings": ["a good-looking guy"],
+		"note": "N row. 'lady-killer' is the wrong register for a flashcard."
+	},
+	"L4-0676": {
+		"meanings": ["ahead of everyone else", "taking the lead"],
+		"note": "Adv row, so a 'to ...' gloss is wrong; 首先 L3 keeps 'first of all'."
+	},
+	"L4-0677": {
+		"meanings": ["to fall asleep"],
+		"note": "Resultative compound, one sense."
+	},
+	"L4-0679": {
+		"meanings": ["maybe", "there's no telling"],
+		"note": "The guess reading is what a learner meets in 说不定他来了; 也许 L2 keeps 'perhaps'."
+	},
+	"L4-0680": {
+		"meanings": ["to persuade", "to talk someone round"],
+		"note": "V row; the Taiwan pronunciation note CEDICT carries is not a sense."
+	},
+	"L4-0682": {
+		"meanings": ["it appears that", "seemingly"],
+		"note": "Adv row. 看来 at the same level answers to 'it seems' and 好像 L2 to 'to seem like'."
+	},
+	"L4-0683": {
+		"meanings": ["loose", "to loosen"],
+		"note": "Adj/V row in that order; the 'meat floss' food sense is not a beginner gloss."
+	},
+	"L4-0685": {
+		"meanings": ["plastic"],
+		"note": "N row, one material; CEDICT's parenthetical definition is longer than a card can hold."
+	},
+	"L4-0687": {
+		"meanings": ["sour", "sore and aching"],
+		"note": "Both senses are met at HSK 4 in 酸的 and 腰酸; the 'pedantic' and sarcasm senses are dropped."
+	},
+	"L4-0689": {
+		"meanings": ["while you are at it", "in passing"],
+		"note": "Adv row; 随手关门 is doing it without extra effort as you go, not conveniently in the abstract."
+	},
+	"L4-0692": {
+		"meanings": ["to shorten", "to cut short"],
+		"note": "V row. 减少 at the same level leads 'to lessen'; 缩短 is length or time specifically."
+	},
+	"L4-0694": {
+		"meanings": ["a flight of steps", "a step"],
+		"note": "楼梯 answers to 'stairs'; the fig. 'way out of embarrassment' sense is dropped."
+	},
+	"L4-0696": {
+		"meanings": ["to lie down", "to recline"],
+		"note": "V row; the everyday order puts 躺下 first."
+	},
+	"L4-0697": {
+		"meanings": ["a set meal", "a meal combo"],
+		"note": "N row. The fig. 'service package' sense belongs to phone plans, not to an HSK 4 card."
+	},
+	"L4-0699": {
+		"meanings": ["special or unusual", "out of the ordinary"],
+		"note": "Kept off bare 'special', which 特别 L2 already answers to."
+	},
+	"L4-0700": {
+		"meanings": ["a distinguishing feature", "a trait"],
+		"note": "特点 L2 and 特色 L3 hold the other 'feature' glosses; 特征 is the identifying mark."
+	},
+	"L4-0701": {
+		"meanings": ["to provide", "to offer"],
+		"note": "V row; 供应 at the same level keeps 'to supply'."
+	},
+	"L4-0702": {
+		"meanings": ["to remind", "to call attention to"],
+		"note": "Separable verb; both glosses are the same everyday act, ordered by frequency."
+	},
+	"L4-0708": {
+		"meanings": ["innocent and childlike", "naive"],
+		"note": "The neutral sense leads; 单纯 and 纯 at this level hold 'simple' and 'pure'."
+	},
+	"L4-0709": {
+		"meanings": ["to fill in a form", "to fill or stuff"],
+		"note": "填表 is the HSK 4 use, so the form sense leads the card."
+	},
+	"L4-0710": {
+		"meanings": ["to fill in the blank", "to fill a vacancy"],
+		"note": "The exercise sense is the one a learner meets; the job-vacancy reading follows."
+	},
+	"L4-0711": {
+		"meanings": ["to pick out", "to carry on a shoulder pole"],
+		"note": "tiāo row. 挑选 at the same level owns 'to choose', so this card leads 'to pick out'."
+	},
+	"L4-0713": {
+		"meanings": ["naughty", "mischievous"],
+		"note": "Adj row describing a child; both glosses are the same everyday sense."
+	},
+	"L4-0714": {
+		"meanings": ["to lift or poke with a stick", "to stir up"],
+		"note": "tiǎo row — the other tone of 挑; kept clear of tiāo's 'to pick out'."
+	},
+	"L4-0715": {
+		"meanings": ["to challenge", "a challenge"],
+		"note": "Separable verb-object phrase; the noun reading follows because 接受挑战 is common."
+	},
+	"L4-0716": {
+		"meanings": ["to stick or paste on", "to keep close to"],
+		"note": "贴 in 贴邮票 leads; the subsidy and classifier senses are not HSK 4 readings."
+	},
+	"L4-0717": {
+		"meanings": ["to come to a stop", "to halt"],
+		"note": "停 L2 and 停止 L3 already answer to 'to stop'; 停下 is the moment of stopping."
+	},
+	"L4-0718": {
+		"meanings": ["to straighten up", "to hold out or endure"],
+		"note": "V row at this level; the adverb 'quite' is 挺 at HSK 2 and must stay distinct from it."
+	},
+	"L4-0723": {
+		"meanings": ["to count up", "to compile statistics"],
+		"note": "V row, so CEDICT's leading noun 'statistics' cannot start the card."
+	},
+	"L4-0724": {
+		"meanings": ["to unify", "unified"],
+		"note": "V/Adj row in that order; both readings are met at this level."
+	},
+	"L4-0725": {
+		"meanings": ["delighted", "forthright"],
+		"note": "Adj row: 玩得痛快 is the first sense, 说话痛快 the second; the pronunciation note is not a sense."
+	},
+	"L4-0726": {
+		"meanings": ["to throw at a target", "to cast a vote"],
+		"note": "扔 is plain throwing; 投 is aimed — 投篮 and 投票 are the HSK 4 uses."
+	},
+	"L4-0727": {
+		"meanings": ["to invest time or money", "to throw oneself into"],
+		"note": "V/N row; 'to throw into' read literally and missed what 投入工作 actually says."
+	},
+	"L4-0730": {
+		"meanings": ["to soak through", "thoroughly"],
+		"note": "V/Adj row. The bound 'to penetrate' sense is what 湿透 and 看透 carry."
+	},
+	"L4-0731": {
+		"meanings": ["transparent", "see-through"],
+		"note": "Adj row; CEDICT's second sense is flagged figurative and is dropped."
+	},
+	"L4-0732": {
+		"meanings": ["a decorative pattern", "a design"],
+		"note": "N row. 图 L3 owns 'diagram' and 图片 L2 owns 'picture'."
+	},
+	"L4-0734": {
+		"meanings": ["land", "the soil of a place"],
+		"note": "土 L3 answers to 'soil' alone, so the second gloss ties 土地 to a place."
+	},
+	"L4-0735": {
+		"meanings": ["to postpone", "to put off"],
+		"note": "V row; both glosses are the same act of moving a time later."
+	},
+	"L4-0737": {
+		"meanings": ["to take off clothes", "to come off"],
+		"note": "脱衣服 is the HSK 4 use and it is the opposite of 穿, so the clothing sense leads."
+	},
+	"L4-0741": {
+		"meanings": ["a coat or jacket", "an outer garment"],
+		"note": "N row. 大衣 L2 keeps 'overcoat'; 外套 is any outer layer."
+	},
+	"L4-0742": {
+		"meanings": ["bent or curved", "to bend"],
+		"note": "Adj/V row in that order; the noun 'a bend in the road' is the third reading and is dropped."
+	},
+	"L4-0743": {
+		"meanings": ["behind schedule", "running late"],
+		"note": "Said of trains and flights; 迟到 at the same level is a person arriving late."
+	},
+	"L4-0744": {
+		"meanings": ["just in case", "if by any chance"],
+		"note": "Both glosses say what 万一 does to a clause instead of naming it a noun-conjunction."
+	},
+	"L4-0745": {
+		"meanings": ["a king", "a monarch"],
+		"note": "N row. 'best or strongest of its type' is a suffix use and would not identify the character."
+	},
+	"L4-0747": {
+		"meanings": ["a web address"],
+		"note": "N row; 网站 L2 keeps 'website', which is the site itself rather than its address."
+	},
+	"L4-0748": {
+		"meanings": ["to smile"],
+		"note": "V row, so the noun 'a smile' cannot lead; 笑 L1 covers laughing."
+	},
+	"L4-0751": {
+		"meanings": ["to keep something going", "to sustain"],
+		"note": "保持 L3 owns 'to maintain'; 维持 is holding a state together — 维持秩序, 维持生活."
+	},
+	"L4-0752": {
+		"meanings": ["to safeguard", "to uphold"],
+		"note": "保护 L3 owns 'to protect'; 维护 is defending rights, order or a reputation."
+	},
+	"L4-0753": {
+		"meanings": ["to service and maintain", "to repair"],
+		"note": "修理 at the same level leads 'to repair'; 维修 is the upkeep that includes it."
+	},
+	"L4-0755": {
+		"meanings": ["not necessarily", "maybe not"],
+		"note": "Adv row hedging a claim; both glosses are the everyday reading."
+	},
+	"L4-0756": {
+		"meanings": ["the future", "the years ahead"],
+		"note": "N row. 将来 L3 answers to 'the time ahead'; 未来 is the noun for the future itself."
+	},
+	"L4-0757": {
+		"meanings": ["to be located at", "to be situated in"],
+		"note": "在于 at the same level owns 'to lie in', so that gloss is kept off this card."
+	},
+	"L4-0760": {
+		"meanings": ["to feed"],
+		"note": "V row at this level; 喂 as the telephone 'hello' is the HSK 2 card and stays distinct."
+	},
+	"L4-0761": {
+		"meanings": ["firm and steady", "sure and reliable"],
+		"note": "Kept off 'stable', which 稳定 answers to at the same level."
+	},
+	"L4-0762": {
+		"meanings": ["stable", "settled and unchanging"],
+		"note": "Adj row about a situation holding; the verb 'to stabilize' belongs to 稳定下来, not the card."
+	},
+	"L4-0763": {
+		"meanings": ["to send one's regards", "to ask after someone"],
+		"note": "招呼 at the same level owns 'to greet'; the coll. offensive sense CEDICT lists is dropped."
+	},
+	"L4-0765": {
+		"meanings": ["to be unable to", "there is no way to"],
+		"note": "V row taking a verb after it, so the gloss has to stay verbal rather than 'unable to'."
+	},
+	"L4-0766": {
+		"meanings": ["bored", "boring"],
+		"note": "Adj row; both directions are met at HSK 4 and the order follows frequency."
+	},
+	"L4-0767": {
+		"meanings": ["no matter what or how", "whether or not"],
+		"note": "Conj row. 不管 at the same level answers to 'regardless of', so this card takes the other phrasing."
+	},
+	"L4-0768": {
+		"meanings": ["countless", "too many to count"],
+		"note": "Adj row; 'numberless' is not English a learner will produce."
+	},
+	"L4-0769": {
+		"meanings": ["to not care either way", "it makes no difference"],
+		"note": "V row, so the gloss stays verbal; 'cannot be said to be' is a separate literary use."
+	}
+}
