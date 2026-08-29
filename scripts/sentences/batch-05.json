@@ -1,0 +1,247 @@
+{
+	"L1-0006": {
+		"hanzi": "我的衣服是白的。",
+		"pinyin": "wǒ de yī fu shì bái de",
+		"english": "My clothes are white."
+	},
+	"L1-0032": {
+		"hanzi": "谢谢你！不客气。",
+		"pinyin": "xiè xie nǐ bú kè qì",
+		"english": "Thank you! — You're welcome."
+	},
+	"L1-0058": {
+		"hanzi": "我给妈妈打电话。",
+		"pinyin": "wǒ gěi mā ma dǎ diàn huà",
+		"english": "I'm calling my mom."
+	},
+	"L1-0084": {
+		"hanzi": "我家在学校的东边。",
+		"pinyin": "wǒ jiā zài xué xiào de dōng bian",
+		"english": "My home is east of the school."
+	},
+	"L1-0110": {
+		"hanzi": "今天风很大。",
+		"pinyin": "jīn tiān fēng hěn dà",
+		"english": "It's very windy today."
+	},
+	"L1-0136": {
+		"hanzi": "我想学好汉语。",
+		"pinyin": "wǒ xiǎng xué hǎo Hàn yǔ",
+		"english": "I want to learn Chinese well."
+	},
+	"L1-0162": {
+		"hanzi": "我们明天去机场。",
+		"pinyin": "wǒ men míng tiān qù jī chǎng",
+		"english": "We're going to the airport tomorrow."
+	},
+	"L1-0188": {
+		"hanzi": "请你开一下门。",
+		"pinyin": "qǐng nǐ kāi yí xià mén",
+		"english": "Please open the door."
+	},
+	"L1-0214": {
+		"hanzi": "书包里边有课本。",
+		"pinyin": "shū bāo lǐ bian yǒu kè běn",
+		"english": "There's a textbook inside the backpack."
+	},
+	"L1-0240": {
+		"hanzi": "电影院的门票不贵。",
+		"pinyin": "diàn yǐng yuàn de mén piào bú guì",
+		"english": "Tickets at the cinema aren't expensive."
+	},
+	"L1-0266": {
+		"hanzi": "商店在山的南边。",
+		"pinyin": "shāng diàn zài shān de nán bian",
+		"english": "The shop is south of the mountain."
+	},
+	"L1-0292": {
+		"hanzi": "学校前边有一家商店。",
+		"pinyin": "xué xiào qián bian yǒu yì jiā shāng diàn",
+		"english": "There's a shop in front of the school."
+	},
+	"L1-0318": {
+		"hanzi": "我们快上车吧。",
+		"pinyin": "wǒ men kuài shàng chē ba",
+		"english": "Let's get on the bus, quick."
+	},
+	"L1-0344": {
+		"hanzi": "学校里有很多树。",
+		"pinyin": "xué xiào lǐ yǒu hěn duō shù",
+		"english": "There are a lot of trees at the school."
+	},
+	"L1-0370": {
+		"hanzi": "我很喜欢学外语。",
+		"pinyin": "wǒ hěn xǐ huan xué wài yǔ",
+		"english": "I really like studying foreign languages."
+	},
+	"L1-0396": {
+		"hanzi": "外边下雨了。",
+		"pinyin": "wài bian xià yǔ le",
+		"english": "It's raining outside."
+	},
+	"L1-0422": {
+		"hanzi": "她在这个学院学习。",
+		"pinyin": "tā zài zhè ge xué yuàn xué xí",
+		"english": "She studies at this college."
+	},
+	"L1-0448": {
+		"hanzi": "医院在马路右边。",
+		"pinyin": "yī yuàn zài mǎ lù yòu bian",
+		"english": "The hospital is on the right side of the road."
+	},
+	"L1-0474": {
+		"hanzi": "我不知道他的名字。",
+		"pinyin": "wǒ bù zhī dào tā de míng zi",
+		"english": "I don't know his name."
+	},
+	"L1-0500": {
+		"hanzi": "妈妈在家做饭。",
+		"pinyin": "mā ma zài jiā zuò fàn",
+		"english": "Mom is cooking at home."
+	},
+	"L2-0026": {
+		"hanzi": "小雨变成了大雨。",
+		"pinyin": "xiǎo yǔ biàn chéng le dà yǔ",
+		"english": "The drizzle turned into a downpour."
+	},
+	"L2-0052": {
+		"hanzi": "这座楼一共有十层。",
+		"pinyin": "zhè zuò lóu yí gòng yǒu shí céng",
+		"english": "This building has ten floors in all."
+	},
+	"L2-0078": {
+		"hanzi": "外边吹着大风。",
+		"pinyin": "wài bian chuī zhe dà fēng",
+		"english": "A strong wind is blowing outside."
+	},
+	"L2-0104": {
+		"hanzi": "他很累，但还在工作。",
+		"pinyin": "tā hěn lèi dàn hái zài gōng zuò",
+		"english": "He's very tired, but he's still working."
+	},
+	"L2-0130": {
+		"hanzi": "我的老家在东北。",
+		"pinyin": "wǒ de lǎo jiā zài dōng běi",
+		"english": "My hometown is in the northeast."
+	},
+	"L2-0156": {
+		"hanzi": "这家饭馆的菜很好吃。",
+		"pinyin": "zhè jiā fàn guǎn de cài hěn hǎo chī",
+		"english": "The food at this restaurant is delicious."
+	},
+	"L2-0182": {
+		"hanzi": "他刚才还在这里。",
+		"pinyin": "tā gāng cái hái zài zhè lǐ",
+		"english": "He was still here a moment ago."
+	},
+	"L2-0208": {
+		"hanzi": "我们回老家过年。",
+		"pinyin": "wǒ men huí lǎo jiā guò nián",
+		"english": "We go back to our hometown for New Year."
+	},
+	"L2-0234": {
+		"hanzi": "他在纸上画了一条鱼。",
+		"pinyin": "tā zài zhǐ shàng huà le yì tiáo yú",
+		"english": "He drew a fish on the paper."
+	},
+	"L2-0260": {
+		"hanzi": "这些花是假的。",
+		"pinyin": "zhè xiē huā shì jiǎ de",
+		"english": "These flowers are fake."
+	},
+	"L2-0286": {
+		"hanzi": "你说完，我接着说。",
+		"pinyin": "nǐ shuō wán wǒ jiē zhe shuō",
+		"english": "You finish, then I'll carry on."
+	},
+	"L2-0312": {
+		"hanzi": "下周就要开学了。",
+		"pinyin": "xià zhōu jiù yào kāi xué le",
+		"english": "The new term starts next week."
+	},
+	"L2-0338": {
+		"hanzi": "他们在球场上打篮球。",
+		"pinyin": "tā men zài qiú chǎng shàng dǎ lán qiú",
+		"english": "They're playing basketball on the court."
+	},
+	"L2-0365": {
+		"hanzi": "这样的鞋最近很流行。",
+		"pinyin": "zhè yàng de xié zuì jìn hěn liú xíng",
+		"english": "Shoes like these are very popular right now."
+	},
+	"L2-0391": {
+		"hanzi": "你别那样说他。",
+		"pinyin": "nǐ bié nà yàng shuō tā",
+		"english": "Don't talk about him like that."
+	},
+	"L2-0417": {
+		"hanzi": "这条路很平，很好走。",
+		"pinyin": "zhè tiáo lù hěn píng hěn hǎo zǒu",
+		"english": "This road is flat and easy to walk on."
+	},
+	"L2-0443": {
+		"hanzi": "今天我请客，你们多吃点。",
+		"pinyin": "jīn tiān wǒ qǐng kè nǐ men duō chī diǎn",
+		"english": "It's my treat today, so eat plenty."
+	},
+	"L2-0469": {
+		"hanzi": "公园的入口在那边。",
+		"pinyin": "gōng yuán de rù kǒu zài nà biān",
+		"english": "The entrance to the park is over there."
+	},
+	"L2-0496": {
+		"hanzi": "他的收入不高，但很快乐。",
+		"pinyin": "tā de shōu rù bù gāo dàn hěn kuài lè",
+		"english": "His income isn't high, but he's happy."
+	},
+	"L2-0522": {
+		"hanzi": "今天是个特别的日子。",
+		"pinyin": "jīn tiān shì ge tè bié de rì zi",
+		"english": "Today is a special day."
+	},
+	"L2-0548": {
+		"hanzi": "我们用同样的方法。",
+		"pinyin": "wǒ men yòng tóng yàng de fāng fǎ",
+		"english": "We use the same method."
+	},
+	"L2-0574": {
+		"hanzi": "喂，请问你找谁？",
+		"pinyin": "wèi qǐng wèn nǐ zhǎo shéi",
+		"english": "Hello? Who are you looking for?"
+	},
+	"L2-0600": {
+		"hanzi": "我用相机照了很多照片。",
+		"pinyin": "wǒ yòng xiàng jī zhào le hěn duō zhào piàn",
+		"english": "I took a lot of photos with the camera."
+	},
+	"L2-0626": {
+		"hanzi": "中国人的姓在前，名在后。",
+		"pinyin": "Zhōng guó rén de xìng zài qián míng zài hòu",
+		"english": "For Chinese people the family name comes first and the given name last."
+	},
+	"L2-0652": {
+		"hanzi": "他已经回家了。",
+		"pinyin": "tā yǐ jīng huí jiā le",
+		"english": "He has already gone home."
+	},
+	"L2-0678": {
+		"hanzi": "这部影片很好看。",
+		"pinyin": "zhè bù yǐng piàn hěn hǎo kàn",
+		"english": "This film is really good."
+	},
+	"L2-0704": {
+		"hanzi": "咱们一起去吃饭吧。",
+		"pinyin": "zán men yì qǐ qù chī fàn ba",
+		"english": "Let's go and eat together."
+	},
+	"L2-0730": {
+		"hanzi": "我只吃了一个面包。",
+		"pinyin": "wǒ zhǐ chī le yí ge miàn bāo",
+		"english": "I only ate one piece of bread."
+	},
+	"L2-0756": {
+		"hanzi": "老师走进了教室。",
+		"pinyin": "lǎo shī zǒu jìn le jiào shì",
+		"english": "The teacher walked into the classroom."
+	}
+}
