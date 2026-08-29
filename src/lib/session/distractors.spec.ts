@@ -15,7 +15,15 @@ import { makeLevel } from './test-fixtures';
 const DIRECTIONS: Direction[] = ['hanzi-to-meaning', 'meaning-to-hanzi'];
 
 function word(over: Partial<Word> & Pick<Word, 'id'>): Word {
-	return { hanzi: '字', pinyin: 'zì', meanings: ['thing'], pos: ['N'], level: 1, ...over };
+	return {
+		hanzi: '字',
+		pinyin: 'zì',
+		syllables: [{ py: 'zì', tone: 4 }],
+		meanings: ['thing'],
+		pos: ['N'],
+		level: 1,
+		...over
+	};
 }
 
 describe('senseSet', () => {

@@ -9,7 +9,7 @@
  * what the picker has to survive.
  */
 
-import type { Level, ProgressState, Word, WordProgress } from '../types';
+import type { Level, ProgressState, Syllable, Word, WordProgress } from '../types';
 
 const POS_CYCLE: string[][] = [['N'], ['V'], ['Adj'], ['Adv'], [], ['V', 'N'], ['N'], ['V'], []];
 
@@ -29,6 +29,14 @@ function hanziFor(index: number, length: number): string {
 }
 
 /**
+ * One syllable per character, like the real list. Every fixture syllable is neutral tone: a
+ * fixture `py` carries no diacritic, and `tone` must never contradict what `py` prints.
+ */
+function syllablesFor(index: number, length: number): Syllable[] {
+	return Array.from({ length }, (_, i) => ({ py: `pin${index}${i}`, tone: 0 }) as Syllable);
+}
+
+/**
  * A level of `count` synthetic words.
  *
  * Injected on purpose: every 17th word repeats the previous word's hanzi with a different
@@ -38,10 +46,12 @@ function hanziFor(index: number, length: number): string {
 export function makeLevel(level: Level, count: number): Word[] {
 	const words: Word[] = [];
 	for (let n = 0; n < count; n++) {
+		const syllables = syllablesFor(n, 1 + (n % 3));
 		const word: Word = {
 			id: `L${level}-${String(n + 1).padStart(4, '0')}`,
 			hanzi: hanziFor(n, 1 + (n % 3)),
-			pinyin: `pin${n}`,
+			pinyin: syllables.map((syllable) => syllable.py).join(' '),
+			syllables,
 			meanings: GLOSS_CYCLE[n % GLOSS_CYCLE.length](n),
 			pos: POS_CYCLE[n % POS_CYCLE.length],
 			level

@@ -4,7 +4,8 @@
 		"hanzi": "爱",
 		"traditional": "愛",
 		"pinyin": "ài",
-		"meanings": ["to love", "affection"],
+		"syllables": [{ "py": "ài", "tone": 4 }],
+		"meanings": ["to love"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -13,6 +14,10 @@
 		"hanzi": "爱好",
 		"traditional": "愛好",
 		"pinyin": "àihào",
+		"syllables": [
+			{ "py": "ài", "tone": 4 },
+			{ "py": "hào", "tone": 4 }
+		],
 		"meanings": ["hobby", "to be fond of"],
 		"pos": ["V", "N"],
 		"level": 1
@@ -21,6 +26,7 @@
 		"id": "L1-0003",
 		"hanzi": "八",
 		"pinyin": "bā",
+		"syllables": [{ "py": "bā", "tone": 1 }],
 		"meanings": ["eight"],
 		"pos": ["Num"],
 		"level": 1
@@ -29,7 +35,11 @@
 		"id": "L1-0004",
 		"hanzi": "爸爸",
 		"pinyin": "bàba",
-		"meanings": ["father"],
+		"syllables": [
+			{ "py": "bà", "tone": 4 },
+			{ "py": "ba", "tone": 0 }
+		],
+		"meanings": ["father", "dad"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -37,7 +47,8 @@
 		"id": "L1-0005",
 		"hanzi": "吧",
 		"pinyin": "ba",
-		"meanings": ["suggestion particle", "right?"],
+		"syllables": [{ "py": "ba", "tone": 0 }],
+		"meanings": ["softens a suggestion or guess", "...right?"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -45,7 +56,8 @@
 		"id": "L1-0006",
 		"hanzi": "白",
 		"pinyin": "bái",
-		"meanings": ["white", "in vain"],
+		"syllables": [{ "py": "bái", "tone": 2 }],
+		"meanings": ["white"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -53,7 +65,11 @@
 		"id": "L1-0007",
 		"hanzi": "白天",
 		"pinyin": "báitiān",
-		"meanings": ["daytime", "during the day"],
+		"syllables": [
+			{ "py": "bái", "tone": 2 },
+			{ "py": "tiān", "tone": 1 }
+		],
+		"meanings": ["daytime"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -61,7 +77,8 @@
 		"id": "L1-0008",
 		"hanzi": "百",
 		"pinyin": "bǎi",
-		"meanings": ["hundred", "numerous"],
+		"syllables": [{ "py": "bǎi", "tone": 3 }],
+		"meanings": ["hundred"],
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -69,7 +86,8 @@
 		"id": "L1-0009",
 		"hanzi": "班",
 		"pinyin": "bān",
-		"meanings": ["class", "work shift"],
+		"syllables": [{ "py": "bān", "tone": 1 }],
+		"meanings": ["class of students", "work shift"],
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -77,6 +95,7 @@
 		"id": "L1-0010",
 		"hanzi": "半",
 		"pinyin": "bàn",
+		"syllables": [{ "py": "bàn", "tone": 4 }],
 		"meanings": ["half"],
 		"pos": ["Num"],
 		"level": 1
@@ -85,6 +104,10 @@
 		"id": "L1-0011",
 		"hanzi": "半年",
 		"pinyin": "bàn nián",
+		"syllables": [
+			{ "py": "bàn", "tone": 4 },
+			{ "py": "nián", "tone": 2 }
+		],
 		"meanings": ["half a year"],
 		"pos": [],
 		"level": 1
@@ -93,7 +116,11 @@
 		"id": "L1-0012",
 		"hanzi": "半天",
 		"pinyin": "bàntiān",
-		"meanings": ["half of the day", "a long time"],
+		"syllables": [
+			{ "py": "bàn", "tone": 4 },
+			{ "py": "tiān", "tone": 1 }
+		],
+		"meanings": ["half a day", "quite a while"],
 		"pos": [],
 		"level": 1
 	},
@@ -102,6 +129,7 @@
 		"hanzi": "帮",
 		"traditional": "幫",
 		"pinyin": "bāng",
+		"syllables": [{ "py": "bāng", "tone": 1 }],
 		"meanings": ["to help"],
 		"pos": ["V"],
 		"level": 1
@@ -111,6 +139,10 @@
 		"hanzi": "帮忙",
 		"traditional": "幫忙",
 		"pinyin": "bāng máng",
+		"syllables": [
+			{ "py": "bāng", "tone": 1 },
+			{ "py": "máng", "tone": 2 }
+		],
 		"meanings": ["to lend a hand", "to do a favor"],
 		"pos": [],
 		"level": 1
@@ -119,6 +151,7 @@
 		"id": "L1-0015",
 		"hanzi": "包",
 		"pinyin": "bāo",
+		"syllables": [{ "py": "bāo", "tone": 1 }],
 		"meanings": ["bag", "to wrap"],
 		"pos": ["N", "M", "V"],
 		"level": 1
@@ -127,7 +160,11 @@
 		"id": "L1-0016",
 		"hanzi": "包子",
 		"pinyin": "bāozi",
-		"meanings": ["baozi"],
+		"syllables": [
+			{ "py": "bāo", "tone": 1 },
+			{ "py": "zi", "tone": 0 }
+		],
+		"meanings": ["steamed bun with filling"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -135,7 +172,8 @@
 		"id": "L1-0017",
 		"hanzi": "杯",
 		"pinyin": "bēi",
-		"meanings": ["measure word: cups, glasses"],
+		"syllables": [{ "py": "bēi", "tone": 1 }],
+		"meanings": ["measure word: cups or glasses"],
 		"pos": ["M"],
 		"level": 1
 	},
@@ -143,6 +181,10 @@
 		"id": "L1-0018",
 		"hanzi": "杯子",
 		"pinyin": "bēizi",
+		"syllables": [
+			{ "py": "bēi", "tone": 1 },
+			{ "py": "zi", "tone": 0 }
+		],
 		"meanings": ["cup", "glass"],
 		"pos": ["N"],
 		"level": 1
@@ -151,6 +193,7 @@
 		"id": "L1-0019",
 		"hanzi": "北",
 		"pinyin": "běi",
+		"syllables": [{ "py": "běi", "tone": 3 }],
 		"meanings": ["north"],
 		"pos": ["N"],
 		"level": 1
@@ -160,6 +203,10 @@
 		"hanzi": "北边",
 		"traditional": "北邊",
 		"pinyin": "běibian",
+		"syllables": [
+			{ "py": "běi", "tone": 3 },
+			{ "py": "bian", "tone": 0 }
+		],
 		"meanings": ["the north side"],
 		"pos": ["N"],
 		"level": 1
@@ -168,7 +215,11 @@
 		"id": "L1-0021",
 		"hanzi": "北京",
 		"pinyin": "Běijīng",
-		"meanings": ["Beijing"],
+		"syllables": [
+			{ "py": "Běi", "tone": 3 },
+			{ "py": "jīng", "tone": 1 }
+		],
+		"meanings": ["capital city of China"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -176,6 +227,7 @@
 		"id": "L1-0022",
 		"hanzi": "本",
 		"pinyin": "běn",
+		"syllables": [{ "py": "běn", "tone": 3 }],
 		"meanings": ["measure word: books"],
 		"pos": ["M"],
 		"level": 1
@@ -184,6 +236,10 @@
 		"id": "L1-0023",
 		"hanzi": "本子",
 		"pinyin": "běnzi",
+		"syllables": [
+			{ "py": "běn", "tone": 3 },
+			{ "py": "zi", "tone": 0 }
+		],
 		"meanings": ["notebook"],
 		"pos": ["N"],
 		"level": 1
@@ -192,7 +248,8 @@
 		"id": "L1-0024",
 		"hanzi": "比",
 		"pinyin": "bǐ",
-		"meanings": ["to compare", "than"],
+		"syllables": [{ "py": "bǐ", "tone": 3 }],
+		"meanings": ["than", "to compare"],
 		"pos": ["Prep", "V"],
 		"level": 1
 	},
@@ -201,7 +258,8 @@
 		"hanzi": "别",
 		"traditional": "別",
 		"pinyin": "bié",
-		"meanings": ["don't ...!", "category"],
+		"syllables": [{ "py": "bié", "tone": 2 }],
+		"meanings": ["don't ...!"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -210,7 +268,11 @@
 		"hanzi": "别的",
 		"traditional": "別的",
 		"pinyin": "biéde",
-		"meanings": ["else", "other"],
+		"syllables": [
+			{ "py": "bié", "tone": 2 },
+			{ "py": "de", "tone": 0 }
+		],
+		"meanings": ["other", "another"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -219,7 +281,11 @@
 		"hanzi": "别人",
 		"traditional": "別人",
 		"pinyin": "biérén",
-		"meanings": ["other people"],
+		"syllables": [
+			{ "py": "bié", "tone": 2 },
+			{ "py": "rén", "tone": 2 }
+		],
+		"meanings": ["other people", "somebody else"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -227,6 +293,7 @@
 		"id": "L1-0028",
 		"hanzi": "病",
 		"pinyin": "bìng",
+		"syllables": [{ "py": "bìng", "tone": 4 }],
 		"meanings": ["illness", "to fall ill"],
 		"pos": ["N", "V"],
 		"level": 1
@@ -235,7 +302,11 @@
 		"id": "L1-0029",
 		"hanzi": "病人",
 		"pinyin": "bìngrén",
-		"meanings": ["sick person", "patient"],
+		"syllables": [
+			{ "py": "bìng", "tone": 4 },
+			{ "py": "rén", "tone": 2 }
+		],
+		"meanings": ["patient", "sick person"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -243,6 +314,10 @@
 		"id": "L1-0030",
 		"hanzi": "不大",
 		"pinyin": "bú dà",
+		"syllables": [
+			{ "py": "bú", "tone": 2 },
+			{ "py": "dà", "tone": 4 }
+		],
 		"meanings": ["not very", "not often"],
 		"pos": [],
 		"level": 1
@@ -252,7 +327,11 @@
 		"hanzi": "不对",
 		"traditional": "不對",
 		"pinyin": "búduì",
-		"meanings": ["incorrect", "wrong"],
+		"syllables": [
+			{ "py": "bú", "tone": 2 },
+			{ "py": "duì", "tone": 4 }
+		],
+		"meanings": ["not right", "incorrect"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -261,6 +340,11 @@
 		"hanzi": "不客气",
 		"traditional": "不客氣",
 		"pinyin": "bú kèqì",
+		"syllables": [
+			{ "py": "bú", "tone": 2 },
+			{ "py": "kè", "tone": 4 },
+			{ "py": "qì", "tone": 4 }
+		],
 		"meanings": ["you're welcome", "don't mention it"],
 		"pos": [],
 		"level": 1
@@ -269,7 +353,11 @@
 		"id": "L1-0033",
 		"hanzi": "不用",
 		"pinyin": "búyòng",
-		"meanings": ["need not"],
+		"syllables": [
+			{ "py": "bú", "tone": 2 },
+			{ "py": "yòng", "tone": 4 }
+		],
+		"meanings": ["need not", "there is no need"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -277,6 +365,7 @@
 		"id": "L1-0034",
 		"hanzi": "不",
 		"pinyin": "bù",
+		"syllables": [{ "py": "bù", "tone": 4 }],
 		"meanings": ["not", "no"],
 		"pos": ["Adv"],
 		"level": 1
@@ -285,7 +374,8 @@
 		"id": "L1-0035",
 		"hanzi": "菜",
 		"pinyin": "cài",
-		"meanings": ["vegetable", "dish"],
+		"syllables": [{ "py": "cài", "tone": 4 }],
+		"meanings": ["vegetable", "a dish of food"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -293,6 +383,7 @@
 		"id": "L1-0036",
 		"hanzi": "茶",
 		"pinyin": "chá",
+		"syllables": [{ "py": "chá", "tone": 2 }],
 		"meanings": ["tea"],
 		"pos": ["N"],
 		"level": 1
@@ -301,7 +392,8 @@
 		"id": "L1-0037",
 		"hanzi": "差",
 		"pinyin": "chà",
-		"meanings": ["different", "wrong"],
+		"syllables": [{ "py": "chà", "tone": 4 }],
+		"meanings": ["to be short of", "poor or inferior"],
 		"pos": ["V", "Adj"],
 		"level": 1
 	},
@@ -309,7 +401,8 @@
 		"id": "L1-0038",
 		"hanzi": "常",
 		"pinyin": "cháng",
-		"meanings": ["always", "ever"],
+		"syllables": [{ "py": "cháng", "tone": 2 }],
+		"meanings": ["often"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -317,6 +410,10 @@
 		"id": "L1-0039",
 		"hanzi": "常常",
 		"pinyin": "chángcháng",
+		"syllables": [
+			{ "py": "cháng", "tone": 2 },
+			{ "py": "cháng", "tone": 2 }
+		],
 		"meanings": ["frequently"],
 		"pos": ["Adv"],
 		"level": 1
@@ -325,7 +422,8 @@
 		"id": "L1-0040",
 		"hanzi": "唱",
 		"pinyin": "chàng",
-		"meanings": ["to sing", "to call loudly"],
+		"syllables": [{ "py": "chàng", "tone": 4 }],
+		"meanings": ["to sing"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -333,6 +431,10 @@
 		"id": "L1-0041",
 		"hanzi": "唱歌",
 		"pinyin": "chàng gē",
+		"syllables": [
+			{ "py": "chàng", "tone": 4 },
+			{ "py": "gē", "tone": 1 }
+		],
 		"meanings": ["to sing a song"],
 		"pos": [],
 		"level": 1
@@ -342,6 +444,7 @@
 		"hanzi": "车",
 		"traditional": "車",
 		"pinyin": "chē",
+		"syllables": [{ "py": "chē", "tone": 1 }],
 		"meanings": ["vehicle", "car"],
 		"pos": ["N"],
 		"level": 1
@@ -351,6 +454,10 @@
 		"hanzi": "车票",
 		"traditional": "車票",
 		"pinyin": "chēpiào",
+		"syllables": [
+			{ "py": "chē", "tone": 1 },
+			{ "py": "piào", "tone": 4 }
+		],
 		"meanings": ["travel ticket"],
 		"pos": ["N"],
 		"level": 1
@@ -360,7 +467,11 @@
 		"hanzi": "车上",
 		"traditional": "車上",
 		"pinyin": "chē shang",
-		"meanings": ["in the car", "on the bus"],
+		"syllables": [
+			{ "py": "chē", "tone": 1 },
+			{ "py": "shang", "tone": 0 }
+		],
+		"meanings": ["in the car or on the bus"],
 		"pos": [],
 		"level": 1
 	},
@@ -369,6 +480,10 @@
 		"hanzi": "车站",
 		"traditional": "車站",
 		"pinyin": "chēzhàn",
+		"syllables": [
+			{ "py": "chē", "tone": 1 },
+			{ "py": "zhàn", "tone": 4 }
+		],
 		"meanings": ["rail station", "bus stop"],
 		"pos": ["N"],
 		"level": 1
@@ -377,7 +492,8 @@
 		"id": "L1-0046",
 		"hanzi": "吃",
 		"pinyin": "chī",
-		"meanings": ["to eat", "to eradicate"],
+		"syllables": [{ "py": "chī", "tone": 1 }],
+		"meanings": ["to eat"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -386,7 +502,11 @@
 		"hanzi": "吃饭",
 		"traditional": "吃飯",
 		"pinyin": "chī fàn",
-		"meanings": ["to have a meal", "to eat"],
+		"syllables": [
+			{ "py": "chī", "tone": 1 },
+			{ "py": "fàn", "tone": 4 }
+		],
+		"meanings": ["to have a meal"],
 		"pos": [],
 		"level": 1
 	},
@@ -394,7 +514,8 @@
 		"id": "L1-0048",
 		"hanzi": "出",
 		"pinyin": "chū",
-		"meanings": ["to exit", "to produce"],
+		"syllables": [{ "py": "chū", "tone": 1 }],
+		"meanings": ["to exit", "to come or go out"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -403,7 +524,11 @@
 		"hanzi": "出来",
 		"traditional": "出來",
 		"pinyin": "chū lái",
-		"meanings": ["to come out", "to appear"],
+		"syllables": [
+			{ "py": "chū", "tone": 1 },
+			{ "py": "lái", "tone": 2 }
+		],
+		"meanings": ["to come out"],
 		"pos": [],
 		"level": 1
 	},
@@ -411,6 +536,10 @@
 		"id": "L1-0050",
 		"hanzi": "出去",
 		"pinyin": "chū qù",
+		"syllables": [
+			{ "py": "chū", "tone": 1 },
+			{ "py": "qù", "tone": 4 }
+		],
 		"meanings": ["to go out"],
 		"pos": [],
 		"level": 1
@@ -419,7 +548,8 @@
 		"id": "L1-0051",
 		"hanzi": "穿",
 		"pinyin": "chuān",
-		"meanings": ["to bore through", "to go through"],
+		"syllables": [{ "py": "chuān", "tone": 1 }],
+		"meanings": ["to wear", "to put on clothes"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -427,7 +557,8 @@
 		"id": "L1-0052",
 		"hanzi": "床",
 		"pinyin": "chuáng",
-		"meanings": ["bed", "frame"],
+		"syllables": [{ "py": "chuáng", "tone": 2 }],
+		"meanings": ["bed"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -435,6 +566,7 @@
 		"id": "L1-0053",
 		"hanzi": "次",
 		"pinyin": "cì",
+		"syllables": [{ "py": "cì", "tone": 4 }],
 		"meanings": ["measure word: times"],
 		"pos": ["M"],
 		"level": 1
@@ -444,7 +576,8 @@
 		"hanzi": "从",
 		"traditional": "從",
 		"pinyin": "cóng",
-		"meanings": ["from", "starting at"],
+		"syllables": [{ "py": "cóng", "tone": 2 }],
+		"meanings": ["from", "starting from"],
 		"pos": ["Prep"],
 		"level": 1
 	},
@@ -453,7 +586,8 @@
 		"hanzi": "错",
 		"traditional": "錯",
 		"pinyin": "cuò",
-		"meanings": ["a mistake", "wrong"],
+		"syllables": [{ "py": "cuò", "tone": 4 }],
+		"meanings": ["wrong", "a mistake"],
 		"pos": ["Adj", "N"],
 		"level": 1
 	},
@@ -461,6 +595,7 @@
 		"id": "L1-0056",
 		"hanzi": "打",
 		"pinyin": "dǎ",
+		"syllables": [{ "py": "dǎ", "tone": 3 }],
 		"meanings": ["to hit", "to strike"],
 		"pos": ["V"],
 		"level": 1
@@ -470,7 +605,11 @@
 		"hanzi": "打车",
 		"traditional": "打車",
 		"pinyin": "dǎ chē",
-		"meanings": ["to take a taxi", "to hitch a lift"],
+		"syllables": [
+			{ "py": "dǎ", "tone": 3 },
+			{ "py": "chē", "tone": 1 }
+		],
+		"meanings": ["to take a taxi"],
 		"pos": [],
 		"level": 1
 	},
@@ -479,7 +618,12 @@
 		"hanzi": "打电话",
 		"traditional": "打電話",
 		"pinyin": "dǎ diànhuà",
-		"meanings": ["to make a telephone call"],
+		"syllables": [
+			{ "py": "dǎ", "tone": 3 },
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "huà", "tone": 4 }
+		],
+		"meanings": ["to make a phone call"],
 		"pos": [],
 		"level": 1
 	},
@@ -488,6 +632,10 @@
 		"hanzi": "打开",
 		"traditional": "打開",
 		"pinyin": "dǎ kāi",
+		"syllables": [
+			{ "py": "dǎ", "tone": 3 },
+			{ "py": "kāi", "tone": 1 }
+		],
 		"meanings": ["to open up", "to switch on"],
 		"pos": [],
 		"level": 1
@@ -496,7 +644,11 @@
 		"id": "L1-0060",
 		"hanzi": "打球",
 		"pinyin": "dǎ qiú",
-		"meanings": ["to play ball", "to play with a ball"],
+		"syllables": [
+			{ "py": "dǎ", "tone": 3 },
+			{ "py": "qiú", "tone": 2 }
+		],
+		"meanings": ["to play a ball game"],
 		"pos": [],
 		"level": 1
 	},
@@ -504,6 +656,7 @@
 		"id": "L1-0061",
 		"hanzi": "大",
 		"pinyin": "dà",
+		"syllables": [{ "py": "dà", "tone": 4 }],
 		"meanings": ["big", "large"],
 		"pos": ["Adj"],
 		"level": 1
@@ -513,6 +666,10 @@
 		"hanzi": "大学",
 		"traditional": "大學",
 		"pinyin": "dàxué",
+		"syllables": [
+			{ "py": "dà", "tone": 4 },
+			{ "py": "xué", "tone": 2 }
+		],
 		"meanings": ["university"],
 		"pos": ["N"],
 		"level": 1
@@ -522,6 +679,11 @@
 		"hanzi": "大学生",
 		"traditional": "大學生",
 		"pinyin": "dàxuéshēng",
+		"syllables": [
+			{ "py": "dà", "tone": 4 },
+			{ "py": "xué", "tone": 2 },
+			{ "py": "shēng", "tone": 1 }
+		],
 		"meanings": ["university student"],
 		"pos": ["N"],
 		"level": 1
@@ -530,7 +692,8 @@
 		"id": "L1-0064",
 		"hanzi": "到",
 		"pinyin": "dào",
-		"meanings": ["to reach", "to arrive at"],
+		"syllables": [{ "py": "dào", "tone": 4 }],
+		"meanings": ["to reach", "to arrive"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -538,7 +701,11 @@
 		"id": "L1-0065",
 		"hanzi": "得到",
 		"pinyin": "dé dào",
-		"meanings": ["to get"],
+		"syllables": [
+			{ "py": "dé", "tone": 2 },
+			{ "py": "dào", "tone": 4 }
+		],
+		"meanings": ["to get", "to obtain"],
 		"pos": [],
 		"level": 1
 	},
@@ -546,7 +713,8 @@
 		"id": "L1-0066",
 		"hanzi": "地",
 		"pinyin": "de",
-		"meanings": ["adverb particle, before a verb"],
+		"syllables": [{ "py": "de", "tone": 0 }],
+		"meanings": ["turns a word into an adverb"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -554,7 +722,8 @@
 		"id": "L1-0067",
 		"hanzi": "的",
 		"pinyin": "de",
-		"meanings": ["possessive particle", "of"],
+		"syllables": [{ "py": "de", "tone": 0 }],
+		"meanings": ["marks possession like 's", "of"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -562,7 +731,8 @@
 		"id": "L1-0068",
 		"hanzi": "等",
 		"pinyin": "děng",
-		"meanings": ["to wait for", "by the time"],
+		"syllables": [{ "py": "děng", "tone": 3 }],
+		"meanings": ["to wait"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -570,7 +740,8 @@
 		"id": "L1-0069",
 		"hanzi": "地",
 		"pinyin": "dì",
-		"meanings": ["earth", "ground"],
+		"syllables": [{ "py": "dì", "tone": 4 }],
+		"meanings": ["the ground", "land"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -579,6 +750,10 @@
 		"hanzi": "地点",
 		"traditional": "地點",
 		"pinyin": "dìdiǎn",
+		"syllables": [
+			{ "py": "dì", "tone": 4 },
+			{ "py": "diǎn", "tone": 3 }
+		],
 		"meanings": ["location", "site"],
 		"pos": ["N"],
 		"level": 1
@@ -587,6 +762,10 @@
 		"id": "L1-0071",
 		"hanzi": "地方",
 		"pinyin": "dìfang",
+		"syllables": [
+			{ "py": "dì", "tone": 4 },
+			{ "py": "fang", "tone": 0 }
+		],
 		"meanings": ["place", "area"],
 		"pos": ["N"],
 		"level": 1
@@ -595,7 +774,11 @@
 		"id": "L1-0072",
 		"hanzi": "地上",
 		"pinyin": "dìshang",
-		"meanings": ["on the ground", "on the floor"],
+		"syllables": [
+			{ "py": "dì", "tone": 4 },
+			{ "py": "shang", "tone": 0 }
+		],
+		"meanings": ["on the ground"],
 		"pos": [],
 		"level": 1
 	},
@@ -604,6 +787,10 @@
 		"hanzi": "地图",
 		"traditional": "地圖",
 		"pinyin": "dìtú",
+		"syllables": [
+			{ "py": "dì", "tone": 4 },
+			{ "py": "tú", "tone": 2 }
+		],
 		"meanings": ["map"],
 		"pos": ["N"],
 		"level": 1
@@ -612,6 +799,10 @@
 		"id": "L1-0074",
 		"hanzi": "弟弟",
 		"pinyin": "dìdi",
+		"syllables": [
+			{ "py": "dì", "tone": 4 },
+			{ "py": "di", "tone": 0 }
+		],
 		"meanings": ["younger brother"],
 		"pos": ["N"],
 		"level": 1
@@ -620,7 +811,8 @@
 		"id": "L1-0075",
 		"hanzi": "第",
 		"pinyin": "dì",
-		"meanings": ["prefix for ordinal numbers"],
+		"syllables": [{ "py": "dì", "tone": 4 }],
+		"meanings": ["makes 'one' into 'first'"],
 		"pos": ["Prefix"],
 		"level": 1
 	},
@@ -629,6 +821,7 @@
 		"hanzi": "点",
 		"traditional": "點",
 		"pinyin": "diǎn",
+		"syllables": [{ "py": "diǎn", "tone": 3 }],
 		"meanings": ["o'clock", "a little", "to order food"],
 		"pos": ["M", "V", "N"],
 		"level": 1
@@ -638,7 +831,8 @@
 		"hanzi": "电",
 		"traditional": "電",
 		"pinyin": "diàn",
-		"meanings": ["lightning", "electricity"],
+		"syllables": [{ "py": "diàn", "tone": 4 }],
+		"meanings": ["electricity"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -647,6 +841,10 @@
 		"hanzi": "电话",
 		"traditional": "電話",
 		"pinyin": "diànhuà",
+		"syllables": [
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "huà", "tone": 4 }
+		],
 		"meanings": ["telephone", "phone call"],
 		"pos": ["N"],
 		"level": 1
@@ -656,6 +854,10 @@
 		"hanzi": "电脑",
 		"traditional": "電腦",
 		"pinyin": "diànnǎo",
+		"syllables": [
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "nǎo", "tone": 3 }
+		],
 		"meanings": ["computer"],
 		"pos": ["N"],
 		"level": 1
@@ -665,6 +867,10 @@
 		"hanzi": "电视",
 		"traditional": "電視",
 		"pinyin": "diànshì",
+		"syllables": [
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "shì", "tone": 4 }
+		],
 		"meanings": ["television"],
 		"pos": ["N"],
 		"level": 1
@@ -674,6 +880,11 @@
 		"hanzi": "电视机",
 		"traditional": "電視機",
 		"pinyin": "diànshìjī",
+		"syllables": [
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "shì", "tone": 4 },
+			{ "py": "jī", "tone": 1 }
+		],
 		"meanings": ["television set"],
 		"pos": ["N"],
 		"level": 1
@@ -683,7 +894,11 @@
 		"hanzi": "电影",
 		"traditional": "電影",
 		"pinyin": "diànyǐng",
-		"meanings": ["movie"],
+		"syllables": [
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "yǐng", "tone": 3 }
+		],
+		"meanings": ["movie", "film"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -692,6 +907,11 @@
 		"hanzi": "电影院",
 		"traditional": "電影院",
 		"pinyin": "diànyǐngyuàn",
+		"syllables": [
+			{ "py": "diàn", "tone": 4 },
+			{ "py": "yǐng", "tone": 3 },
+			{ "py": "yuàn", "tone": 4 }
+		],
 		"meanings": ["cinema"],
 		"pos": ["N"],
 		"level": 1
@@ -701,6 +921,7 @@
 		"hanzi": "东",
 		"traditional": "東",
 		"pinyin": "dōng",
+		"syllables": [{ "py": "dōng", "tone": 1 }],
 		"meanings": ["east"],
 		"pos": ["N"],
 		"level": 1
@@ -710,6 +931,10 @@
 		"hanzi": "东边",
 		"traditional": "東邊",
 		"pinyin": "dōngbian",
+		"syllables": [
+			{ "py": "dōng", "tone": 1 },
+			{ "py": "bian", "tone": 0 }
+		],
 		"meanings": ["the east side"],
 		"pos": ["N"],
 		"level": 1
@@ -719,6 +944,10 @@
 		"hanzi": "东西",
 		"traditional": "東西",
 		"pinyin": "dōngxi",
+		"syllables": [
+			{ "py": "dōng", "tone": 1 },
+			{ "py": "xi", "tone": 0 }
+		],
 		"meanings": ["thing", "stuff"],
 		"pos": ["N"],
 		"level": 1
@@ -728,7 +957,8 @@
 		"hanzi": "动",
 		"traditional": "動",
 		"pinyin": "dòng",
-		"meanings": ["to move", "to set in movement"],
+		"syllables": [{ "py": "dòng", "tone": 4 }],
+		"meanings": ["to move"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -737,7 +967,11 @@
 		"hanzi": "动作",
 		"traditional": "動作",
 		"pinyin": "dòngzuò",
-		"meanings": ["movement", "to act"],
+		"syllables": [
+			{ "py": "dòng", "tone": 4 },
+			{ "py": "zuò", "tone": 4 }
+		],
+		"meanings": ["movement", "action"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -745,6 +979,7 @@
 		"id": "L1-0089",
 		"hanzi": "都",
 		"pinyin": "dōu",
+		"syllables": [{ "py": "dōu", "tone": 1 }],
 		"meanings": ["all", "both"],
 		"pos": ["Adv"],
 		"level": 1
@@ -754,7 +989,8 @@
 		"hanzi": "读",
 		"traditional": "讀",
 		"pinyin": "dú",
-		"meanings": ["to read out", "to attend"],
+		"syllables": [{ "py": "dú", "tone": 2 }],
+		"meanings": ["to read", "to read aloud"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -763,7 +999,11 @@
 		"hanzi": "读书",
 		"traditional": "讀書",
 		"pinyin": "dú shū",
-		"meanings": ["to read a book", "to study"],
+		"syllables": [
+			{ "py": "dú", "tone": 2 },
+			{ "py": "shū", "tone": 1 }
+		],
+		"meanings": ["to read a book", "to attend school"],
 		"pos": [],
 		"level": 1
 	},
@@ -772,6 +1012,7 @@
 		"hanzi": "对",
 		"traditional": "對",
 		"pinyin": "duì",
+		"syllables": [{ "py": "duì", "tone": 4 }],
 		"meanings": ["correct", "right"],
 		"pos": ["Adj"],
 		"level": 1
@@ -781,7 +1022,12 @@
 		"hanzi": "对不起",
 		"traditional": "對不起",
 		"pinyin": "duìbuqǐ",
-		"meanings": ["to let down", "I'm sorry"],
+		"syllables": [
+			{ "py": "duì", "tone": 4 },
+			{ "py": "bu", "tone": 0 },
+			{ "py": "qǐ", "tone": 3 }
+		],
+		"meanings": ["I'm sorry", "excuse me"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -789,6 +1035,7 @@
 		"id": "L1-0094",
 		"hanzi": "多",
 		"pinyin": "duō",
+		"syllables": [{ "py": "duō", "tone": 1 }],
 		"meanings": ["many", "a lot of"],
 		"pos": ["Adj", "Pron"],
 		"level": 1
@@ -797,7 +1044,11 @@
 		"id": "L1-0095",
 		"hanzi": "多少",
 		"pinyin": "duōshao",
-		"meanings": ["how much?", "what number?"],
+		"syllables": [
+			{ "py": "duō", "tone": 1 },
+			{ "py": "shao", "tone": 0 }
+		],
+		"meanings": ["how much?", "how many?"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -806,7 +1057,8 @@
 		"hanzi": "饿",
 		"traditional": "餓",
 		"pinyin": "è",
-		"meanings": ["hungry", "to starve"],
+		"syllables": [{ "py": "è", "tone": 4 }],
+		"meanings": ["hungry"],
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -815,6 +1067,10 @@
 		"hanzi": "儿子",
 		"traditional": "兒子",
 		"pinyin": "érzi",
+		"syllables": [
+			{ "py": "ér", "tone": 2 },
+			{ "py": "zi", "tone": 0 }
+		],
 		"meanings": ["son"],
 		"pos": ["N"],
 		"level": 1
@@ -823,6 +1079,7 @@
 		"id": "L1-0098",
 		"hanzi": "二",
 		"pinyin": "èr",
+		"syllables": [{ "py": "èr", "tone": 4 }],
 		"meanings": ["two"],
 		"pos": ["Num"],
 		"level": 1
@@ -832,6 +1089,7 @@
 		"hanzi": "饭",
 		"traditional": "飯",
 		"pinyin": "fàn",
+		"syllables": [{ "py": "fàn", "tone": 4 }],
 		"meanings": ["cooked rice", "a meal"],
 		"pos": ["N"],
 		"level": 1
@@ -841,6 +1099,10 @@
 		"hanzi": "饭店",
 		"traditional": "飯店",
 		"pinyin": "fàndiàn",
+		"syllables": [
+			{ "py": "fàn", "tone": 4 },
+			{ "py": "diàn", "tone": 4 }
+		],
 		"meanings": ["restaurant", "hotel"],
 		"pos": ["N"],
 		"level": 1
@@ -850,6 +1112,10 @@
 		"hanzi": "房间",
 		"traditional": "房間",
 		"pinyin": "fángjiān",
+		"syllables": [
+			{ "py": "fáng", "tone": 2 },
+			{ "py": "jiān", "tone": 1 }
+		],
 		"meanings": ["room"],
 		"pos": ["N"],
 		"level": 1
@@ -858,7 +1124,11 @@
 		"id": "L1-0102",
 		"hanzi": "房子",
 		"pinyin": "fángzi",
-		"meanings": ["house", "building"],
+		"syllables": [
+			{ "py": "fáng", "tone": 2 },
+			{ "py": "zi", "tone": 0 }
+		],
+		"meanings": ["house"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -866,6 +1136,7 @@
 		"id": "L1-0103",
 		"hanzi": "放",
 		"pinyin": "fàng",
+		"syllables": [{ "py": "fàng", "tone": 4 }],
 		"meanings": ["to put", "to place"],
 		"pos": ["V"],
 		"level": 1
@@ -874,7 +1145,11 @@
 		"id": "L1-0104",
 		"hanzi": "放假",
 		"pinyin": "fàng jià",
-		"meanings": ["to have a holiday or vacation"],
+		"syllables": [
+			{ "py": "fàng", "tone": 4 },
+			{ "py": "jià", "tone": 4 }
+		],
+		"meanings": ["to have a holiday"],
 		"pos": [],
 		"level": 1
 	},
@@ -883,6 +1158,10 @@
 		"hanzi": "放学",
 		"traditional": "放學",
 		"pinyin": "fàng xué",
+		"syllables": [
+			{ "py": "fàng", "tone": 4 },
+			{ "py": "xué", "tone": 2 }
+		],
 		"meanings": ["to finish school for the day"],
 		"pos": [],
 		"level": 1
@@ -892,6 +1171,7 @@
 		"hanzi": "飞",
 		"traditional": "飛",
 		"pinyin": "fēi",
+		"syllables": [{ "py": "fēi", "tone": 1 }],
 		"meanings": ["to fly"],
 		"pos": ["V"],
 		"level": 1
@@ -901,6 +1181,10 @@
 		"hanzi": "飞机",
 		"traditional": "飛機",
 		"pinyin": "fēijī",
+		"syllables": [
+			{ "py": "fēi", "tone": 1 },
+			{ "py": "jī", "tone": 1 }
+		],
 		"meanings": ["airplane"],
 		"pos": ["N"],
 		"level": 1
@@ -909,6 +1193,10 @@
 		"id": "L1-0108",
 		"hanzi": "非常",
 		"pinyin": "fēicháng",
+		"syllables": [
+			{ "py": "fēi", "tone": 1 },
+			{ "py": "cháng", "tone": 2 }
+		],
 		"meanings": ["extremely"],
 		"pos": ["Adv"],
 		"level": 1
@@ -917,6 +1205,7 @@
 		"id": "L1-0109",
 		"hanzi": "分",
 		"pinyin": "fēn",
+		"syllables": [{ "py": "fēn", "tone": 1 }],
 		"meanings": ["minute", "point in a score"],
 		"pos": ["N", "M"],
 		"level": 1
@@ -926,7 +1215,8 @@
 		"hanzi": "风",
 		"traditional": "風",
 		"pinyin": "fēng",
-		"meanings": ["wind", "news"],
+		"syllables": [{ "py": "fēng", "tone": 1 }],
+		"meanings": ["wind"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -935,7 +1225,8 @@
 		"hanzi": "干",
 		"traditional": "乾",
 		"pinyin": "gān",
-		"meanings": ["dry", "dried"],
+		"syllables": [{ "py": "gān", "tone": 1 }],
+		"meanings": ["dry"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -944,6 +1235,10 @@
 		"hanzi": "干净",
 		"traditional": "乾淨",
 		"pinyin": "gānjìng",
+		"syllables": [
+			{ "py": "gān", "tone": 1 },
+			{ "py": "jìng", "tone": 4 }
+		],
 		"meanings": ["clean", "neat"],
 		"pos": ["Adj"],
 		"level": 1
@@ -953,7 +1248,8 @@
 		"hanzi": "干",
 		"traditional": "幹",
 		"pinyin": "gàn",
-		"meanings": ["to manage", "to work"],
+		"syllables": [{ "py": "gàn", "tone": 4 }],
+		"meanings": ["to do a job", "to work at"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -962,7 +1258,12 @@
 		"hanzi": "干什么",
 		"traditional": "幹什麼",
 		"pinyin": "gàn shénme",
-		"meanings": ["what are you doing?", "what's he up to?"],
+		"syllables": [
+			{ "py": "gàn", "tone": 4 },
+			{ "py": "shén", "tone": 2 },
+			{ "py": "me", "tone": 0 }
+		],
+		"meanings": ["what are you doing?"],
 		"pos": [],
 		"level": 1
 	},
@@ -970,7 +1271,8 @@
 		"id": "L1-0115",
 		"hanzi": "高",
 		"pinyin": "gāo",
-		"meanings": ["high", "tall"],
+		"syllables": [{ "py": "gāo", "tone": 1 }],
+		"meanings": ["tall", "high"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -979,6 +1281,10 @@
 		"hanzi": "高兴",
 		"traditional": "高興",
 		"pinyin": "gāoxìng",
+		"syllables": [
+			{ "py": "gāo", "tone": 1 },
+			{ "py": "xìng", "tone": 4 }
+		],
 		"meanings": ["happy", "glad"],
 		"pos": ["Adj"],
 		"level": 1
@@ -988,6 +1294,10 @@
 		"hanzi": "告诉",
 		"traditional": "告訴",
 		"pinyin": "gàosu",
+		"syllables": [
+			{ "py": "gào", "tone": 4 },
+			{ "py": "su", "tone": 0 }
+		],
 		"meanings": ["to tell"],
 		"pos": ["V"],
 		"level": 1
@@ -996,6 +1306,10 @@
 		"id": "L1-0118",
 		"hanzi": "哥哥",
 		"pinyin": "gēge",
+		"syllables": [
+			{ "py": "gē", "tone": 1 },
+			{ "py": "ge", "tone": 0 }
+		],
 		"meanings": ["older brother"],
 		"pos": ["N"],
 		"level": 1
@@ -1004,7 +1318,8 @@
 		"id": "L1-0119",
 		"hanzi": "歌",
 		"pinyin": "gē",
-		"meanings": ["song", "to sing"],
+		"syllables": [{ "py": "gē", "tone": 1 }],
+		"meanings": ["song"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1013,6 +1328,7 @@
 		"hanzi": "个",
 		"traditional": "個",
 		"pinyin": "gè",
+		"syllables": [{ "py": "gè", "tone": 4 }],
 		"meanings": ["measure word: general purpose"],
 		"pos": ["M"],
 		"level": 1
@@ -1022,7 +1338,8 @@
 		"hanzi": "给",
 		"traditional": "給",
 		"pinyin": "gěi",
-		"meanings": ["to give", "for"],
+		"syllables": [{ "py": "gěi", "tone": 3 }],
+		"meanings": ["to give", "for someone"],
 		"pos": ["V", "Prep"],
 		"level": 1
 	},
@@ -1030,6 +1347,7 @@
 		"id": "L1-0122",
 		"hanzi": "跟",
 		"pinyin": "gēn",
+		"syllables": [{ "py": "gēn", "tone": 1 }],
 		"meanings": ["with", "to follow"],
 		"pos": ["Prep", "Conj", "V"],
 		"level": 1
@@ -1038,6 +1356,10 @@
 		"id": "L1-0123",
 		"hanzi": "工人",
 		"pinyin": "gōngrén",
+		"syllables": [
+			{ "py": "gōng", "tone": 1 },
+			{ "py": "rén", "tone": 2 }
+		],
 		"meanings": ["worker"],
 		"pos": ["N"],
 		"level": 1
@@ -1046,7 +1368,11 @@
 		"id": "L1-0124",
 		"hanzi": "工作",
 		"pinyin": "gōngzuò",
-		"meanings": ["to work", "to operate"],
+		"syllables": [
+			{ "py": "gōng", "tone": 1 },
+			{ "py": "zuò", "tone": 4 }
+		],
+		"meanings": ["to work", "a job"],
 		"pos": ["V", "N"],
 		"level": 1
 	},
@@ -1055,7 +1381,8 @@
 		"hanzi": "关",
 		"traditional": "關",
 		"pinyin": "guān",
-		"meanings": ["to shut", "to turn off"],
+		"syllables": [{ "py": "guān", "tone": 1 }],
+		"meanings": ["to close", "to turn off"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1064,6 +1391,10 @@
 		"hanzi": "关上",
 		"traditional": "關上",
 		"pinyin": "guānshang",
+		"syllables": [
+			{ "py": "guān", "tone": 1 },
+			{ "py": "shang", "tone": 0 }
+		],
 		"meanings": ["to close up"],
 		"pos": [],
 		"level": 1
@@ -1073,7 +1404,8 @@
 		"hanzi": "贵",
 		"traditional": "貴",
 		"pinyin": "guì",
-		"meanings": ["expensive", "your"],
+		"syllables": [{ "py": "guì", "tone": 4 }],
+		"meanings": ["expensive"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1082,6 +1414,7 @@
 		"hanzi": "国",
 		"traditional": "國",
 		"pinyin": "guó",
+		"syllables": [{ "py": "guó", "tone": 2 }],
 		"meanings": ["nation"],
 		"pos": ["N"],
 		"level": 1
@@ -1091,6 +1424,10 @@
 		"hanzi": "国家",
 		"traditional": "國家",
 		"pinyin": "guójiā",
+		"syllables": [
+			{ "py": "guó", "tone": 2 },
+			{ "py": "jiā", "tone": 1 }
+		],
 		"meanings": ["country"],
 		"pos": ["N"],
 		"level": 1
@@ -1100,7 +1437,11 @@
 		"hanzi": "国外",
 		"traditional": "國外",
 		"pinyin": "guó wài",
-		"meanings": ["abroad", "external"],
+		"syllables": [
+			{ "py": "guó", "tone": 2 },
+			{ "py": "wài", "tone": 4 }
+		],
+		"meanings": ["abroad", "overseas"],
 		"pos": [],
 		"level": 1
 	},
@@ -1109,7 +1450,8 @@
 		"hanzi": "过",
 		"traditional": "過",
 		"pinyin": "guò",
-		"meanings": ["to cross", "to go over"],
+		"syllables": [{ "py": "guò", "tone": 4 }],
+		"meanings": ["to cross", "to go past"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1118,7 +1460,8 @@
 		"hanzi": "还",
 		"traditional": "還",
 		"pinyin": "hái",
-		"meanings": ["still", "yet"],
+		"syllables": [{ "py": "hái", "tone": 2 }],
+		"meanings": ["still", "in addition"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -1127,7 +1470,11 @@
 		"hanzi": "还是",
 		"traditional": "還是",
 		"pinyin": "háishi",
-		"meanings": ["or, in a question", "still"],
+		"syllables": [
+			{ "py": "hái", "tone": 2 },
+			{ "py": "shi", "tone": 0 }
+		],
+		"meanings": ["or in a question", "still"],
 		"pos": ["Adv", "Conj"],
 		"level": 1
 	},
@@ -1136,7 +1483,11 @@
 		"hanzi": "还有",
 		"traditional": "還有",
 		"pinyin": "hái yǒu",
-		"meanings": ["there still remain", "in addition"],
+		"syllables": [
+			{ "py": "hái", "tone": 2 },
+			{ "py": "yǒu", "tone": 3 }
+		],
+		"meanings": ["and also", "there is still more"],
 		"pos": [],
 		"level": 1
 	},
@@ -1144,6 +1495,10 @@
 		"id": "L1-0135",
 		"hanzi": "孩子",
 		"pinyin": "háizi",
+		"syllables": [
+			{ "py": "hái", "tone": 2 },
+			{ "py": "zi", "tone": 0 }
+		],
 		"meanings": ["child"],
 		"pos": ["N"],
 		"level": 1
@@ -1153,6 +1508,10 @@
 		"hanzi": "汉语",
 		"traditional": "漢語",
 		"pinyin": "Hànyǔ",
+		"syllables": [
+			{ "py": "Hàn", "tone": 4 },
+			{ "py": "yǔ", "tone": 3 }
+		],
 		"meanings": ["the Chinese language"],
 		"pos": ["N"],
 		"level": 1
@@ -1162,6 +1521,10 @@
 		"hanzi": "汉字",
 		"traditional": "漢字",
 		"pinyin": "Hànzì",
+		"syllables": [
+			{ "py": "Hàn", "tone": 4 },
+			{ "py": "zì", "tone": 4 }
+		],
 		"meanings": ["Chinese character"],
 		"pos": ["N"],
 		"level": 1
@@ -1170,7 +1533,8 @@
 		"id": "L1-0138",
 		"hanzi": "好",
 		"pinyin": "hǎo",
-		"meanings": ["good", "appropriate"],
+		"syllables": [{ "py": "hǎo", "tone": 3 }],
+		"meanings": ["good", "fine"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1178,7 +1542,11 @@
 		"id": "L1-0139",
 		"hanzi": "好吃",
 		"pinyin": "hǎochī",
-		"meanings": ["tasty"],
+		"syllables": [
+			{ "py": "hǎo", "tone": 3 },
+			{ "py": "chī", "tone": 1 }
+		],
+		"meanings": ["tasty", "delicious"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1186,7 +1554,11 @@
 		"id": "L1-0140",
 		"hanzi": "好看",
 		"pinyin": "hǎokàn",
-		"meanings": ["good-looking", "good"],
+		"syllables": [
+			{ "py": "hǎo", "tone": 3 },
+			{ "py": "kàn", "tone": 4 }
+		],
+		"meanings": ["good-looking", "nice to look at"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1195,6 +1567,10 @@
 		"hanzi": "好听",
 		"traditional": "好聽",
 		"pinyin": "hǎotīng",
+		"syllables": [
+			{ "py": "hǎo", "tone": 3 },
+			{ "py": "tīng", "tone": 1 }
+		],
 		"meanings": ["pleasant to hear"],
 		"pos": ["Adj"],
 		"level": 1
@@ -1204,6 +1580,11 @@
 		"hanzi": "好玩儿",
 		"traditional": "好玩兒",
 		"pinyin": "hǎowánr",
+		"syllables": [
+			{ "py": "hǎo", "tone": 3 },
+			{ "py": "wán", "tone": 2 },
+			{ "py": "r", "tone": 0 }
+		],
 		"meanings": ["fun", "amusing"],
 		"pos": ["Adj"],
 		"level": 1
@@ -1213,7 +1594,8 @@
 		"hanzi": "号",
 		"traditional": "號",
 		"pinyin": "hào",
-		"meanings": ["day of the month", "number"],
+		"syllables": [{ "py": "hào", "tone": 4 }],
+		"meanings": ["day of the month in speech", "number"],
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -1221,6 +1603,7 @@
 		"id": "L1-0144",
 		"hanzi": "喝",
 		"pinyin": "hē",
+		"syllables": [{ "py": "hē", "tone": 1 }],
 		"meanings": ["to drink"],
 		"pos": ["V"],
 		"level": 1
@@ -1229,6 +1612,7 @@
 		"id": "L1-0145",
 		"hanzi": "和",
 		"pinyin": "hé",
+		"syllables": [{ "py": "hé", "tone": 2 }],
 		"meanings": ["and", "with"],
 		"pos": ["Prep", "Conj"],
 		"level": 1
@@ -1237,6 +1621,7 @@
 		"id": "L1-0146",
 		"hanzi": "很",
 		"pinyin": "hěn",
+		"syllables": [{ "py": "hěn", "tone": 3 }],
 		"meanings": ["very"],
 		"pos": ["Adv"],
 		"level": 1
@@ -1246,7 +1631,8 @@
 		"hanzi": "后",
 		"traditional": "後",
 		"pinyin": "hòu",
-		"meanings": ["back", "behind"],
+		"syllables": [{ "py": "hòu", "tone": 4 }],
+		"meanings": ["back or rear", "after"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1255,7 +1641,11 @@
 		"hanzi": "后边",
 		"traditional": "後邊",
 		"pinyin": "hòubian",
-		"meanings": ["the back", "behind"],
+		"syllables": [
+			{ "py": "hòu", "tone": 4 },
+			{ "py": "bian", "tone": 0 }
+		],
+		"meanings": ["behind", "the back side"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1264,7 +1654,11 @@
 		"hanzi": "后天",
 		"traditional": "後天",
 		"pinyin": "hòutiān",
-		"meanings": ["the day after tomorrow", "life after birth"],
+		"syllables": [
+			{ "py": "hòu", "tone": 4 },
+			{ "py": "tiān", "tone": 1 }
+		],
+		"meanings": ["the day after tomorrow"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1272,6 +1666,7 @@
 		"id": "L1-0150",
 		"hanzi": "花",
 		"pinyin": "huā",
+		"syllables": [{ "py": "huā", "tone": 1 }],
 		"meanings": ["flower", "blossom"],
 		"pos": ["N"],
 		"level": 1
@@ -1281,7 +1676,8 @@
 		"hanzi": "话",
 		"traditional": "話",
 		"pinyin": "huà",
-		"meanings": ["words", "speech", "language"],
+		"syllables": [{ "py": "huà", "tone": 4 }],
+		"meanings": ["words", "speech"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1290,7 +1686,8 @@
 		"hanzi": "坏",
 		"traditional": "壞",
 		"pinyin": "huài",
-		"meanings": ["bad", "spoiled"],
+		"syllables": [{ "py": "huài", "tone": 4 }],
+		"meanings": ["bad", "broken"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1299,7 +1696,8 @@
 		"hanzi": "还",
 		"traditional": "還",
 		"pinyin": "huán",
-		"meanings": ["to pay back", "to return"],
+		"syllables": [{ "py": "huán", "tone": 2 }],
+		"meanings": ["to give back", "to return something"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1307,7 +1705,8 @@
 		"id": "L1-0154",
 		"hanzi": "回",
 		"pinyin": "huí",
-		"meanings": ["to return", "to reply"],
+		"syllables": [{ "py": "huí", "tone": 2 }],
+		"meanings": ["to return", "to go back"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1315,7 +1714,11 @@
 		"id": "L1-0155",
 		"hanzi": "回答",
 		"pinyin": "huídá",
-		"meanings": ["to reply"],
+		"syllables": [
+			{ "py": "huí", "tone": 2 },
+			{ "py": "dá", "tone": 2 }
+		],
+		"meanings": ["to answer", "an answer"],
 		"pos": ["V", "N"],
 		"level": 1
 	},
@@ -1323,6 +1726,10 @@
 		"id": "L1-0156",
 		"hanzi": "回到",
 		"pinyin": "huídào",
+		"syllables": [
+			{ "py": "huí", "tone": 2 },
+			{ "py": "dào", "tone": 4 }
+		],
 		"meanings": ["to return to"],
 		"pos": ["V"],
 		"level": 1
@@ -1331,7 +1738,11 @@
 		"id": "L1-0157",
 		"hanzi": "回家",
 		"pinyin": "huí jiā",
-		"meanings": ["to return home"],
+		"syllables": [
+			{ "py": "huí", "tone": 2 },
+			{ "py": "jiā", "tone": 1 }
+		],
+		"meanings": ["to go home"],
 		"pos": [],
 		"level": 1
 	},
@@ -1340,6 +1751,10 @@
 		"hanzi": "回来",
 		"traditional": "回來",
 		"pinyin": "huí lái",
+		"syllables": [
+			{ "py": "huí", "tone": 2 },
+			{ "py": "lái", "tone": 2 }
+		],
 		"meanings": ["to come back"],
 		"pos": [],
 		"level": 1
@@ -1348,6 +1763,10 @@
 		"id": "L1-0159",
 		"hanzi": "回去",
 		"pinyin": "huí qù",
+		"syllables": [
+			{ "py": "huí", "tone": 2 },
+			{ "py": "qù", "tone": 4 }
+		],
 		"meanings": ["to go back"],
 		"pos": [],
 		"level": 1
@@ -1357,7 +1776,8 @@
 		"hanzi": "会",
 		"traditional": "會",
 		"pinyin": "huì",
-		"meanings": ["to know how to", "will"],
+		"syllables": [{ "py": "huì", "tone": 4 }],
+		"meanings": ["to know how to", "will or is likely to"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1366,6 +1786,10 @@
 		"hanzi": "火车",
 		"traditional": "火車",
 		"pinyin": "huǒchē",
+		"syllables": [
+			{ "py": "huǒ", "tone": 3 },
+			{ "py": "chē", "tone": 1 }
+		],
 		"meanings": ["train"],
 		"pos": ["N"],
 		"level": 1
@@ -1375,6 +1799,10 @@
 		"hanzi": "机场",
 		"traditional": "機場",
 		"pinyin": "jīchǎng",
+		"syllables": [
+			{ "py": "jī", "tone": 1 },
+			{ "py": "chǎng", "tone": 3 }
+		],
 		"meanings": ["airport"],
 		"pos": ["N"],
 		"level": 1
@@ -1384,6 +1812,10 @@
 		"hanzi": "机票",
 		"traditional": "機票",
 		"pinyin": "jīpiào",
+		"syllables": [
+			{ "py": "jī", "tone": 1 },
+			{ "py": "piào", "tone": 4 }
+		],
 		"meanings": ["plane ticket"],
 		"pos": ["N"],
 		"level": 1
@@ -1393,6 +1825,10 @@
 		"hanzi": "鸡蛋",
 		"traditional": "雞蛋",
 		"pinyin": "jīdàn",
+		"syllables": [
+			{ "py": "jī", "tone": 1 },
+			{ "py": "dàn", "tone": 4 }
+		],
 		"meanings": ["egg", "hen's egg"],
 		"pos": ["N"],
 		"level": 1
@@ -1402,6 +1838,7 @@
 		"hanzi": "几",
 		"traditional": "幾",
 		"pinyin": "jǐ",
+		"syllables": [{ "py": "jǐ", "tone": 3 }],
 		"meanings": ["how many", "a few"],
 		"pos": ["Num", "Pron"],
 		"level": 1
@@ -1411,7 +1848,8 @@
 		"hanzi": "记",
 		"traditional": "記",
 		"pinyin": "jì",
-		"meanings": ["to record", "to note"],
+		"syllables": [{ "py": "jì", "tone": 4 }],
+		"meanings": ["to write down", "to remember"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1420,6 +1858,10 @@
 		"hanzi": "记得",
 		"traditional": "記得",
 		"pinyin": "jìde",
+		"syllables": [
+			{ "py": "jì", "tone": 4 },
+			{ "py": "de", "tone": 0 }
+		],
 		"meanings": ["to remember"],
 		"pos": ["V"],
 		"level": 1
@@ -1429,6 +1871,10 @@
 		"hanzi": "记住",
 		"traditional": "記住",
 		"pinyin": "jìzhù",
+		"syllables": [
+			{ "py": "jì", "tone": 4 },
+			{ "py": "zhù", "tone": 4 }
+		],
 		"meanings": ["to memorize", "to bear in mind"],
 		"pos": [],
 		"level": 1
@@ -1437,6 +1883,7 @@
 		"id": "L1-0169",
 		"hanzi": "家",
 		"pinyin": "jiā",
+		"syllables": [{ "py": "jiā", "tone": 1 }],
 		"meanings": ["home", "family"],
 		"pos": ["N", "M"],
 		"level": 1
@@ -1446,6 +1893,10 @@
 		"hanzi": "家里",
 		"traditional": "家裡",
 		"pinyin": "jiā li",
+		"syllables": [
+			{ "py": "jiā", "tone": 1 },
+			{ "py": "li", "tone": 0 }
+		],
 		"meanings": ["at home"],
 		"pos": [],
 		"level": 1
@@ -1454,7 +1905,11 @@
 		"id": "L1-0171",
 		"hanzi": "家人",
 		"pinyin": "jiārén",
-		"meanings": ["family member", "servant"],
+		"syllables": [
+			{ "py": "jiā", "tone": 1 },
+			{ "py": "rén", "tone": 2 }
+		],
+		"meanings": ["family member"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1463,7 +1918,8 @@
 		"hanzi": "间",
 		"traditional": "間",
 		"pinyin": "jiān",
-		"meanings": ["measure word: rooms"],
+		"syllables": [{ "py": "jiān", "tone": 1 }],
+		"meanings": ["measure word for rooms"],
 		"pos": ["M"],
 		"level": 1
 	},
@@ -1472,7 +1928,8 @@
 		"hanzi": "见",
 		"traditional": "見",
 		"pinyin": "jiàn",
-		"meanings": ["to meet with"],
+		"syllables": [{ "py": "jiàn", "tone": 4 }],
+		"meanings": ["to meet with", "to see someone"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1481,7 +1938,11 @@
 		"hanzi": "见面",
 		"traditional": "見面",
 		"pinyin": "jiàn miàn",
-		"meanings": ["to meet"],
+		"syllables": [
+			{ "py": "jiàn", "tone": 4 },
+			{ "py": "miàn", "tone": 4 }
+		],
+		"meanings": ["to meet face to face"],
 		"pos": [],
 		"level": 1
 	},
@@ -1489,6 +1950,7 @@
 		"id": "L1-0175",
 		"hanzi": "教",
 		"pinyin": "jiāo",
+		"syllables": [{ "py": "jiāo", "tone": 1 }],
 		"meanings": ["to teach"],
 		"pos": ["V"],
 		"level": 1
@@ -1497,7 +1959,8 @@
 		"id": "L1-0176",
 		"hanzi": "叫",
 		"pinyin": "jiào",
-		"meanings": ["to shout", "to call"],
+		"syllables": [{ "py": "jiào", "tone": 4 }],
+		"meanings": ["to be called", "to shout"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1506,7 +1969,12 @@
 		"hanzi": "教学楼",
 		"traditional": "教學樓",
 		"pinyin": "jiàoxuélóu",
-		"meanings": ["school building"],
+		"syllables": [
+			{ "py": "jiào", "tone": 4 },
+			{ "py": "xué", "tone": 2 },
+			{ "py": "lóu", "tone": 2 }
+		],
+		"meanings": ["classroom building"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1514,6 +1982,10 @@
 		"id": "L1-0178",
 		"hanzi": "姐姐",
 		"pinyin": "jiějie",
+		"syllables": [
+			{ "py": "jiě", "tone": 3 },
+			{ "py": "jie", "tone": 0 }
+		],
 		"meanings": ["older sister"],
 		"pos": ["N"],
 		"level": 1
@@ -1523,7 +1995,11 @@
 		"hanzi": "介绍",
 		"traditional": "介紹",
 		"pinyin": "jièshào",
-		"meanings": ["to introduce", "to give a presentation"],
+		"syllables": [
+			{ "py": "jiè", "tone": 4 },
+			{ "py": "shào", "tone": 4 }
+		],
+		"meanings": ["to introduce"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1531,6 +2007,10 @@
 		"id": "L1-0180",
 		"hanzi": "今年",
 		"pinyin": "jīnnián",
+		"syllables": [
+			{ "py": "jīn", "tone": 1 },
+			{ "py": "nián", "tone": 2 }
+		],
 		"meanings": ["this year"],
 		"pos": ["N"],
 		"level": 1
@@ -1539,7 +2019,11 @@
 		"id": "L1-0181",
 		"hanzi": "今天",
 		"pinyin": "jīntiān",
-		"meanings": ["today", "the present time"],
+		"syllables": [
+			{ "py": "jīn", "tone": 1 },
+			{ "py": "tiān", "tone": 1 }
+		],
+		"meanings": ["today"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1548,7 +2032,8 @@
 		"hanzi": "进",
 		"traditional": "進",
 		"pinyin": "jìn",
-		"meanings": ["to go forward", "to advance"],
+		"syllables": [{ "py": "jìn", "tone": 4 }],
+		"meanings": ["to enter"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1557,6 +2042,10 @@
 		"hanzi": "进来",
 		"traditional": "進來",
 		"pinyin": "jìn lái",
+		"syllables": [
+			{ "py": "jìn", "tone": 4 },
+			{ "py": "lái", "tone": 2 }
+		],
 		"meanings": ["to come in"],
 		"pos": [],
 		"level": 1
@@ -1566,6 +2055,10 @@
 		"hanzi": "进去",
 		"traditional": "進去",
 		"pinyin": "jìn qù",
+		"syllables": [
+			{ "py": "jìn", "tone": 4 },
+			{ "py": "qù", "tone": 4 }
+		],
 		"meanings": ["to go in"],
 		"pos": [],
 		"level": 1
@@ -1574,6 +2067,7 @@
 		"id": "L1-0185",
 		"hanzi": "九",
 		"pinyin": "jiǔ",
+		"syllables": [{ "py": "jiǔ", "tone": 3 }],
 		"meanings": ["nine"],
 		"pos": ["Num"],
 		"level": 1
@@ -1582,7 +2076,8 @@
 		"id": "L1-0186",
 		"hanzi": "就",
 		"pinyin": "jiù",
-		"meanings": ["then, right away", "only"],
+		"syllables": [{ "py": "jiù", "tone": 4 }],
+		"meanings": ["then or right away", "only"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -1591,7 +2086,11 @@
 		"hanzi": "觉得",
 		"traditional": "覺得",
 		"pinyin": "juéde",
-		"meanings": ["to think that", "to feel"],
+		"syllables": [
+			{ "py": "jué", "tone": 2 },
+			{ "py": "de", "tone": 0 }
+		],
+		"meanings": ["to feel that", "to think"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1600,7 +2099,8 @@
 		"hanzi": "开",
 		"traditional": "開",
 		"pinyin": "kāi",
-		"meanings": ["to open", "to start"],
+		"syllables": [{ "py": "kāi", "tone": 1 }],
+		"meanings": ["to open", "to turn on"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1609,7 +2109,11 @@
 		"hanzi": "开车",
 		"traditional": "開車",
 		"pinyin": "kāi chē",
-		"meanings": ["to drive a car", "to post sexual content online"],
+		"syllables": [
+			{ "py": "kāi", "tone": 1 },
+			{ "py": "chē", "tone": 1 }
+		],
+		"meanings": ["to drive a car"],
 		"pos": [],
 		"level": 1
 	},
@@ -1618,7 +2122,11 @@
 		"hanzi": "开会",
 		"traditional": "開會",
 		"pinyin": "kāi huì",
-		"meanings": ["to hold a meeting", "to attend a meeting"],
+		"syllables": [
+			{ "py": "kāi", "tone": 1 },
+			{ "py": "huì", "tone": 4 }
+		],
+		"meanings": ["to have a meeting", "to attend a meeting"],
 		"pos": [],
 		"level": 1
 	},
@@ -1627,7 +2135,12 @@
 		"hanzi": "开玩笑",
 		"traditional": "開玩笑",
 		"pinyin": "kāi wánxiào",
-		"meanings": ["to play a joke"],
+		"syllables": [
+			{ "py": "kāi", "tone": 1 },
+			{ "py": "wán", "tone": 2 },
+			{ "py": "xiào", "tone": 4 }
+		],
+		"meanings": ["to make a joke", "to joke around"],
 		"pos": [],
 		"level": 1
 	},
@@ -1635,7 +2148,8 @@
 		"id": "L1-0192",
 		"hanzi": "看",
 		"pinyin": "kàn",
-		"meanings": ["to look at", "to watch"],
+		"syllables": [{ "py": "kàn", "tone": 4 }],
+		"meanings": ["to look at", "to watch", "to read"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1643,7 +2157,11 @@
 		"id": "L1-0193",
 		"hanzi": "看病",
 		"pinyin": "kàn bìng",
-		"meanings": ["to visit a doctor", "to see a patient"],
+		"syllables": [
+			{ "py": "kàn", "tone": 4 },
+			{ "py": "bìng", "tone": 4 }
+		],
+		"meanings": ["to see a doctor"],
 		"pos": [],
 		"level": 1
 	},
@@ -1651,6 +2169,10 @@
 		"id": "L1-0194",
 		"hanzi": "看到",
 		"pinyin": "kàndào",
+		"syllables": [
+			{ "py": "kàn", "tone": 4 },
+			{ "py": "dào", "tone": 4 }
+		],
 		"meanings": ["to catch sight of"],
 		"pos": [],
 		"level": 1
@@ -1660,6 +2182,10 @@
 		"hanzi": "看见",
 		"traditional": "看見",
 		"pinyin": "kàn jiàn",
+		"syllables": [
+			{ "py": "kàn", "tone": 4 },
+			{ "py": "jiàn", "tone": 4 }
+		],
 		"meanings": ["to see", "to notice"],
 		"pos": [],
 		"level": 1
@@ -1668,7 +2194,8 @@
 		"id": "L1-0196",
 		"hanzi": "考",
 		"pinyin": "kǎo",
-		"meanings": ["to check", "to verify"],
+		"syllables": [{ "py": "kǎo", "tone": 3 }],
+		"meanings": ["to take a test", "to give a test"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1677,7 +2204,11 @@
 		"hanzi": "考试",
 		"traditional": "考試",
 		"pinyin": "kǎo shì",
-		"meanings": ["to take an exam", "exam"],
+		"syllables": [
+			{ "py": "kǎo", "tone": 3 },
+			{ "py": "shì", "tone": 4 }
+		],
+		"meanings": ["exam", "to take an exam"],
 		"pos": [],
 		"level": 1
 	},
@@ -1685,6 +2216,7 @@
 		"id": "L1-0198",
 		"hanzi": "渴",
 		"pinyin": "kě",
+		"syllables": [{ "py": "kě", "tone": 3 }],
 		"meanings": ["thirsty"],
 		"pos": ["Adj"],
 		"level": 1
@@ -1694,7 +2226,8 @@
 		"hanzi": "课",
 		"traditional": "課",
 		"pinyin": "kè",
-		"meanings": ["subject", "course"],
+		"syllables": [{ "py": "kè", "tone": 4 }],
+		"meanings": ["class", "lesson"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1703,6 +2236,10 @@
 		"hanzi": "课本",
 		"traditional": "課本",
 		"pinyin": "kèběn",
+		"syllables": [
+			{ "py": "kè", "tone": 4 },
+			{ "py": "běn", "tone": 3 }
+		],
 		"meanings": ["textbook"],
 		"pos": ["N"],
 		"level": 1
@@ -1712,6 +2249,10 @@
 		"hanzi": "课文",
 		"traditional": "課文",
 		"pinyin": "kèwén",
+		"syllables": [
+			{ "py": "kè", "tone": 4 },
+			{ "py": "wén", "tone": 2 }
+		],
 		"meanings": ["text"],
 		"pos": ["N"],
 		"level": 1
@@ -1720,7 +2261,8 @@
 		"id": "L1-0202",
 		"hanzi": "口",
 		"pinyin": "kǒu",
-		"meanings": ["mouth", "measure word: family members"],
+		"syllables": [{ "py": "kǒu", "tone": 3 }],
+		"meanings": ["mouth", "measure word for family members"],
 		"pos": ["M", "N"],
 		"level": 1
 	},
@@ -1729,7 +2271,8 @@
 		"hanzi": "块",
 		"traditional": "塊",
 		"pinyin": "kuài",
-		"meanings": ["piece", "yuan, in speech"],
+		"syllables": [{ "py": "kuài", "tone": 4 }],
+		"meanings": ["piece", "yuan in spoken Chinese"],
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -1737,7 +2280,8 @@
 		"id": "L1-0204",
 		"hanzi": "快",
 		"pinyin": "kuài",
-		"meanings": ["rapid", "quick"],
+		"syllables": [{ "py": "kuài", "tone": 4 }],
+		"meanings": ["fast", "soon"],
 		"pos": ["Adj", "Adv"],
 		"level": 1
 	},
@@ -1746,7 +2290,8 @@
 		"hanzi": "来",
 		"traditional": "來",
 		"pinyin": "lái",
-		"meanings": ["to come", "hither"],
+		"syllables": [{ "py": "lái", "tone": 2 }],
+		"meanings": ["to come"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1755,7 +2300,11 @@
 		"hanzi": "来到",
 		"traditional": "來到",
 		"pinyin": "láidào",
-		"meanings": ["to arrive"],
+		"syllables": [
+			{ "py": "lái", "tone": 2 },
+			{ "py": "dào", "tone": 4 }
+		],
+		"meanings": ["to come to", "to arrive at"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1763,7 +2312,8 @@
 		"id": "L1-0207",
 		"hanzi": "老",
 		"pinyin": "lǎo",
-		"meanings": ["old", "aged"],
+		"syllables": [{ "py": "lǎo", "tone": 3 }],
+		"meanings": ["old in years", "elderly"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1771,6 +2321,10 @@
 		"id": "L1-0208",
 		"hanzi": "老人",
 		"pinyin": "lǎorén",
+		"syllables": [
+			{ "py": "lǎo", "tone": 3 },
+			{ "py": "rén", "tone": 2 }
+		],
 		"meanings": ["an old person", "the elderly"],
 		"pos": ["N"],
 		"level": 1
@@ -1780,6 +2334,10 @@
 		"hanzi": "老师",
 		"traditional": "老師",
 		"pinyin": "lǎoshī",
+		"syllables": [
+			{ "py": "lǎo", "tone": 3 },
+			{ "py": "shī", "tone": 1 }
+		],
 		"meanings": ["teacher"],
 		"pos": ["N"],
 		"level": 1
@@ -1788,7 +2346,8 @@
 		"id": "L1-0210",
 		"hanzi": "了",
 		"pinyin": "le",
-		"meanings": ["completed-action particle", "marks a change of state"],
+		"syllables": [{ "py": "le", "tone": 0 }],
+		"meanings": ["marks a completed action", "marks a change of situation"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -1796,7 +2355,8 @@
 		"id": "L1-0211",
 		"hanzi": "累",
 		"pinyin": "lèi",
-		"meanings": ["tired", "weary"],
+		"syllables": [{ "py": "lèi", "tone": 4 }],
+		"meanings": ["tired"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1804,6 +2364,7 @@
 		"id": "L1-0212",
 		"hanzi": "冷",
 		"pinyin": "lěng",
+		"syllables": [{ "py": "lěng", "tone": 3 }],
 		"meanings": ["cold"],
 		"pos": ["Adj"],
 		"level": 1
@@ -1813,6 +2374,7 @@
 		"hanzi": "里",
 		"traditional": "裡",
 		"pinyin": "lǐ",
+		"syllables": [{ "py": "lǐ", "tone": 3 }],
 		"meanings": ["inside", "in"],
 		"pos": ["N"],
 		"level": 1
@@ -1822,7 +2384,11 @@
 		"hanzi": "里边",
 		"traditional": "裡邊",
 		"pinyin": "lǐbian",
-		"meanings": ["the inside", "in there"],
+		"syllables": [
+			{ "py": "lǐ", "tone": 3 },
+			{ "py": "bian", "tone": 0 }
+		],
+		"meanings": ["the inside part", "in there"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1831,7 +2397,8 @@
 		"hanzi": "两",
 		"traditional": "兩",
 		"pinyin": "liǎng",
-		"meanings": ["two, before a measure word"],
+		"syllables": [{ "py": "liǎng", "tone": 3 }],
+		"meanings": ["two of something"],
 		"pos": ["Num"],
 		"level": 1
 	},
@@ -1839,6 +2406,7 @@
 		"id": "L1-0216",
 		"hanzi": "零",
 		"pinyin": "líng",
+		"syllables": [{ "py": "líng", "tone": 2 }],
 		"meanings": ["zero"],
 		"pos": ["Num"],
 		"level": 1
@@ -1847,6 +2415,7 @@
 		"id": "L1-0217",
 		"hanzi": "六",
 		"pinyin": "liù",
+		"syllables": [{ "py": "liù", "tone": 4 }],
 		"meanings": ["six"],
 		"pos": ["Num"],
 		"level": 1
@@ -1856,7 +2425,8 @@
 		"hanzi": "楼",
 		"traditional": "樓",
 		"pinyin": "lóu",
-		"meanings": ["house with more than 1 story", "storied building"],
+		"syllables": [{ "py": "lóu", "tone": 2 }],
+		"meanings": ["building", "floor of a building"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1865,6 +2435,10 @@
 		"hanzi": "楼上",
 		"traditional": "樓上",
 		"pinyin": "lóu shàng",
+		"syllables": [
+			{ "py": "lóu", "tone": 2 },
+			{ "py": "shàng", "tone": 4 }
+		],
 		"meanings": ["upstairs"],
 		"pos": [],
 		"level": 1
@@ -1874,6 +2448,10 @@
 		"hanzi": "楼下",
 		"traditional": "樓下",
 		"pinyin": "lóu xià",
+		"syllables": [
+			{ "py": "lóu", "tone": 2 },
+			{ "py": "xià", "tone": 4 }
+		],
 		"meanings": ["downstairs"],
 		"pos": [],
 		"level": 1
@@ -1882,6 +2460,7 @@
 		"id": "L1-0221",
 		"hanzi": "路",
 		"pinyin": "lù",
+		"syllables": [{ "py": "lù", "tone": 4 }],
 		"meanings": ["road", "route"],
 		"pos": ["N", "M"],
 		"level": 1
@@ -1890,6 +2469,10 @@
 		"id": "L1-0222",
 		"hanzi": "路口",
 		"pinyin": "lùkǒu",
+		"syllables": [
+			{ "py": "lù", "tone": 4 },
+			{ "py": "kǒu", "tone": 3 }
+		],
 		"meanings": ["crossing", "intersection"],
 		"pos": ["N"],
 		"level": 1
@@ -1898,7 +2481,11 @@
 		"id": "L1-0223",
 		"hanzi": "路上",
 		"pinyin": "lùshang",
-		"meanings": ["on the road", "on the way"],
+		"syllables": [
+			{ "py": "lù", "tone": 4 },
+			{ "py": "shang", "tone": 0 }
+		],
+		"meanings": ["on the way", "on the road"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1907,7 +2494,11 @@
 		"hanzi": "妈妈",
 		"traditional": "媽媽",
 		"pinyin": "māma",
-		"meanings": ["mama", "mommy"],
+		"syllables": [
+			{ "py": "mā", "tone": 1 },
+			{ "py": "ma", "tone": 0 }
+		],
+		"meanings": ["mother", "mom"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -1916,6 +2507,10 @@
 		"hanzi": "马路",
 		"traditional": "馬路",
 		"pinyin": "mǎlù",
+		"syllables": [
+			{ "py": "mǎ", "tone": 3 },
+			{ "py": "lù", "tone": 4 }
+		],
 		"meanings": ["street", "road"],
 		"pos": ["N"],
 		"level": 1
@@ -1925,7 +2520,11 @@
 		"hanzi": "马上",
 		"traditional": "馬上",
 		"pinyin": "mǎshàng",
-		"meanings": ["at once", "right away"],
+		"syllables": [
+			{ "py": "mǎ", "tone": 3 },
+			{ "py": "shàng", "tone": 4 }
+		],
+		"meanings": ["right away", "immediately"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -1934,7 +2533,8 @@
 		"hanzi": "吗",
 		"traditional": "嗎",
 		"pinyin": "ma",
-		"meanings": ["yes-no question particle"],
+		"syllables": [{ "py": "ma", "tone": 0 }],
+		"meanings": ["makes a sentence a yes-no question"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -1943,7 +2543,8 @@
 		"hanzi": "买",
 		"traditional": "買",
 		"pinyin": "mǎi",
-		"meanings": ["to buy", "to purchase"],
+		"syllables": [{ "py": "mǎi", "tone": 3 }],
+		"meanings": ["to buy"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -1951,6 +2552,7 @@
 		"id": "L1-0229",
 		"hanzi": "慢",
 		"pinyin": "màn",
+		"syllables": [{ "py": "màn", "tone": 4 }],
 		"meanings": ["slow"],
 		"pos": ["Adj"],
 		"level": 1
@@ -1959,7 +2561,8 @@
 		"id": "L1-0230",
 		"hanzi": "忙",
 		"pinyin": "máng",
-		"meanings": ["busy", "hurriedly"],
+		"syllables": [{ "py": "máng", "tone": 2 }],
+		"meanings": ["busy"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -1967,7 +2570,8 @@
 		"id": "L1-0231",
 		"hanzi": "毛",
 		"pinyin": "máo",
-		"meanings": ["ten cents"],
+		"syllables": [{ "py": "máo", "tone": 2 }],
+		"meanings": ["ten cents", "one tenth of a yuan"],
 		"pos": ["M"],
 		"level": 1
 	},
@@ -1976,7 +2580,8 @@
 		"hanzi": "没",
 		"traditional": "沒",
 		"pinyin": "méi",
-		"meanings": ["have not"],
+		"syllables": [{ "py": "méi", "tone": 2 }],
+		"meanings": ["did not", "to not have"],
 		"pos": ["Adv", "V"],
 		"level": 1
 	},
@@ -1985,6 +2590,11 @@
 		"hanzi": "没关系",
 		"traditional": "沒關係",
 		"pinyin": "méi guānxi",
+		"syllables": [
+			{ "py": "méi", "tone": 2 },
+			{ "py": "guān", "tone": 1 },
+			{ "py": "xi", "tone": 0 }
+		],
 		"meanings": ["it doesn't matter"],
 		"pos": [],
 		"level": 1
@@ -1994,7 +2604,12 @@
 		"hanzi": "没什么",
 		"traditional": "沒什麼",
 		"pinyin": "méi shénme",
-		"meanings": ["it's nothing", "never mind"],
+		"syllables": [
+			{ "py": "méi", "tone": 2 },
+			{ "py": "shén", "tone": 2 },
+			{ "py": "me", "tone": 0 }
+		],
+		"meanings": ["it's nothing", "no big deal"],
 		"pos": [],
 		"level": 1
 	},
@@ -2003,7 +2618,12 @@
 		"hanzi": "没事儿",
 		"traditional": "沒事兒",
 		"pinyin": "méi shìr",
-		"meanings": ["to have spare time", "free from work"],
+		"syllables": [
+			{ "py": "méi", "tone": 2 },
+			{ "py": "shì", "tone": 4 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["it's all right", "no problem"],
 		"pos": [],
 		"level": 1
 	},
@@ -2012,7 +2632,11 @@
 		"hanzi": "没有",
 		"traditional": "沒有",
 		"pinyin": "méiyǒu",
-		"meanings": ["haven't", "hasn't"],
+		"syllables": [
+			{ "py": "méi", "tone": 2 },
+			{ "py": "yǒu", "tone": 3 }
+		],
+		"meanings": ["to not have", "there is not"],
 		"pos": ["V", "Adv"],
 		"level": 1
 	},
@@ -2020,6 +2644,10 @@
 		"id": "L1-0237",
 		"hanzi": "妹妹",
 		"pinyin": "mèimei",
+		"syllables": [
+			{ "py": "mèi", "tone": 4 },
+			{ "py": "mei", "tone": 0 }
+		],
 		"meanings": ["younger sister", "young woman"],
 		"pos": ["N"],
 		"level": 1
@@ -2029,7 +2657,8 @@
 		"hanzi": "门",
 		"traditional": "門",
 		"pinyin": "mén",
-		"meanings": ["door", "measure word: school subjects"],
+		"syllables": [{ "py": "mén", "tone": 2 }],
+		"meanings": ["door", "measure word for school courses"],
 		"pos": ["N", "M"],
 		"level": 1
 	},
@@ -2038,6 +2667,10 @@
 		"hanzi": "门口",
 		"traditional": "門口",
 		"pinyin": "ménkǒu",
+		"syllables": [
+			{ "py": "mén", "tone": 2 },
+			{ "py": "kǒu", "tone": 3 }
+		],
 		"meanings": ["doorway", "gate"],
 		"pos": ["N"],
 		"level": 1
@@ -2047,6 +2680,10 @@
 		"hanzi": "门票",
 		"traditional": "門票",
 		"pinyin": "ménpiào",
+		"syllables": [
+			{ "py": "mén", "tone": 2 },
+			{ "py": "piào", "tone": 4 }
+		],
 		"meanings": ["entry ticket"],
 		"pos": ["N"],
 		"level": 1
@@ -2056,7 +2693,8 @@
 		"hanzi": "们",
 		"traditional": "們",
 		"pinyin": "men",
-		"meanings": ["plural marker for people"],
+		"syllables": [{ "py": "men", "tone": 0 }],
+		"meanings": ["plural ending for people"],
 		"pos": ["Suffix"],
 		"level": 1
 	},
@@ -2065,6 +2703,10 @@
 		"hanzi": "米饭",
 		"traditional": "米飯",
 		"pinyin": "mǐfàn",
+		"syllables": [
+			{ "py": "mǐ", "tone": 3 },
+			{ "py": "fàn", "tone": 4 }
+		],
 		"meanings": ["rice"],
 		"pos": ["N"],
 		"level": 1
@@ -2074,6 +2716,10 @@
 		"hanzi": "面包",
 		"traditional": "麵包",
 		"pinyin": "miànbāo",
+		"syllables": [
+			{ "py": "miàn", "tone": 4 },
+			{ "py": "bāo", "tone": 1 }
+		],
 		"meanings": ["bread"],
 		"pos": ["N"],
 		"level": 1
@@ -2083,6 +2729,11 @@
 		"hanzi": "面条儿",
 		"traditional": "麵條兒",
 		"pinyin": "miàntiáor",
+		"syllables": [
+			{ "py": "miàn", "tone": 4 },
+			{ "py": "tiáo", "tone": 2 },
+			{ "py": "r", "tone": 0 }
+		],
 		"meanings": ["noodles"],
 		"pos": ["N"],
 		"level": 1
@@ -2091,6 +2742,10 @@
 		"id": "L1-0245",
 		"hanzi": "名字",
 		"pinyin": "míngzi",
+		"syllables": [
+			{ "py": "míng", "tone": 2 },
+			{ "py": "zi", "tone": 0 }
+		],
 		"meanings": ["name"],
 		"pos": ["N"],
 		"level": 1
@@ -2099,7 +2754,11 @@
 		"id": "L1-0246",
 		"hanzi": "明白",
 		"pinyin": "míngbai",
-		"meanings": ["clear", "sensible"],
+		"syllables": [
+			{ "py": "míng", "tone": 2 },
+			{ "py": "bai", "tone": 0 }
+		],
+		"meanings": ["to understand clearly", "clear and obvious"],
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -2107,6 +2766,10 @@
 		"id": "L1-0247",
 		"hanzi": "明年",
 		"pinyin": "míngnián",
+		"syllables": [
+			{ "py": "míng", "tone": 2 },
+			{ "py": "nián", "tone": 2 }
+		],
 		"meanings": ["next year"],
 		"pos": ["N"],
 		"level": 1
@@ -2115,6 +2778,10 @@
 		"id": "L1-0248",
 		"hanzi": "明天",
 		"pinyin": "míngtiān",
+		"syllables": [
+			{ "py": "míng", "tone": 2 },
+			{ "py": "tiān", "tone": 1 }
+		],
 		"meanings": ["tomorrow"],
 		"pos": ["N"],
 		"level": 1
@@ -2123,7 +2790,8 @@
 		"id": "L1-0249",
 		"hanzi": "拿",
 		"pinyin": "ná",
-		"meanings": ["to hold", "to seize"],
+		"syllables": [{ "py": "ná", "tone": 2 }],
+		"meanings": ["to take", "to hold"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2131,6 +2799,7 @@
 		"id": "L1-0250",
 		"hanzi": "哪",
 		"pinyin": "nǎ",
+		"syllables": [{ "py": "nǎ", "tone": 3 }],
 		"meanings": ["which"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2140,7 +2809,11 @@
 		"hanzi": "哪里",
 		"traditional": "哪裡",
 		"pinyin": "nǎlǐ",
-		"meanings": ["where"],
+		"syllables": [
+			{ "py": "nǎ", "tone": 3 },
+			{ "py": "lǐ", "tone": 3 }
+		],
+		"meanings": ["where", "what place"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2149,7 +2822,11 @@
 		"hanzi": "哪儿",
 		"traditional": "哪兒",
 		"pinyin": "nǎr",
-		"meanings": ["where, colloquial"],
+		"syllables": [
+			{ "py": "nǎ", "tone": 3 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["the spoken word for where"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2157,7 +2834,11 @@
 		"id": "L1-0253",
 		"hanzi": "哪些",
 		"pinyin": "nǎxiē",
-		"meanings": ["which ones?", "who?"],
+		"syllables": [
+			{ "py": "nǎ", "tone": 3 },
+			{ "py": "xiē", "tone": 1 }
+		],
+		"meanings": ["which ones"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2165,7 +2846,8 @@
 		"id": "L1-0254",
 		"hanzi": "那",
 		"pinyin": "nà",
-		"meanings": ["that", "those"],
+		"syllables": [{ "py": "nà", "tone": 4 }],
+		"meanings": ["that"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2174,6 +2856,10 @@
 		"hanzi": "那边",
 		"traditional": "那邊",
 		"pinyin": "nàbiān",
+		"syllables": [
+			{ "py": "nà", "tone": 4 },
+			{ "py": "biān", "tone": 1 }
+		],
 		"meanings": ["that side", "over there"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2183,7 +2869,11 @@
 		"hanzi": "那里",
 		"traditional": "那裡",
 		"pinyin": "nàlǐ",
-		"meanings": ["there"],
+		"syllables": [
+			{ "py": "nà", "tone": 4 },
+			{ "py": "lǐ", "tone": 3 }
+		],
+		"meanings": ["there", "that place"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2192,7 +2882,11 @@
 		"hanzi": "那儿",
 		"traditional": "那兒",
 		"pinyin": "nàr",
-		"meanings": ["there, colloquial"],
+		"syllables": [
+			{ "py": "nà", "tone": 4 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["the spoken word for there"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2200,6 +2894,10 @@
 		"id": "L1-0258",
 		"hanzi": "那些",
 		"pinyin": "nàxiē",
+		"syllables": [
+			{ "py": "nà", "tone": 4 },
+			{ "py": "xiē", "tone": 1 }
+		],
 		"meanings": ["those"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2208,7 +2906,8 @@
 		"id": "L1-0259",
 		"hanzi": "奶",
 		"pinyin": "nǎi",
-		"meanings": ["breast", "milk"],
+		"syllables": [{ "py": "nǎi", "tone": 3 }],
+		"meanings": ["milk"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2216,7 +2915,11 @@
 		"id": "L1-0260",
 		"hanzi": "奶奶",
 		"pinyin": "nǎinai",
-		"meanings": ["grandma", "mistress of the house"],
+		"syllables": [
+			{ "py": "nǎi", "tone": 3 },
+			{ "py": "nai", "tone": 0 }
+		],
+		"meanings": ["paternal grandmother", "grandma"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2224,6 +2927,7 @@
 		"id": "L1-0261",
 		"hanzi": "男",
 		"pinyin": "nán",
+		"syllables": [{ "py": "nán", "tone": 2 }],
 		"meanings": ["male"],
 		"pos": ["Adj"],
 		"level": 1
@@ -2233,6 +2937,11 @@
 		"hanzi": "男孩儿",
 		"traditional": "男孩兒",
 		"pinyin": "nánháir",
+		"syllables": [
+			{ "py": "nán", "tone": 2 },
+			{ "py": "hái", "tone": 2 },
+			{ "py": "r", "tone": 0 }
+		],
 		"meanings": ["boy"],
 		"pos": ["N"],
 		"level": 1
@@ -2241,6 +2950,11 @@
 		"id": "L1-0263",
 		"hanzi": "男朋友",
 		"pinyin": "nánpéngyou",
+		"syllables": [
+			{ "py": "nán", "tone": 2 },
+			{ "py": "péng", "tone": 2 },
+			{ "py": "you", "tone": 0 }
+		],
 		"meanings": ["boyfriend"],
 		"pos": ["N"],
 		"level": 1
@@ -2249,6 +2963,10 @@
 		"id": "L1-0264",
 		"hanzi": "男人",
 		"pinyin": "nánrén",
+		"syllables": [
+			{ "py": "nán", "tone": 2 },
+			{ "py": "rén", "tone": 2 }
+		],
 		"meanings": ["man", "men"],
 		"pos": ["N"],
 		"level": 1
@@ -2257,6 +2975,10 @@
 		"id": "L1-0265",
 		"hanzi": "男生",
 		"pinyin": "nánshēng",
+		"syllables": [
+			{ "py": "nán", "tone": 2 },
+			{ "py": "shēng", "tone": 1 }
+		],
 		"meanings": ["male student", "schoolboy"],
 		"pos": ["N"],
 		"level": 1
@@ -2265,6 +2987,7 @@
 		"id": "L1-0266",
 		"hanzi": "南",
 		"pinyin": "nán",
+		"syllables": [{ "py": "nán", "tone": 2 }],
 		"meanings": ["south"],
 		"pos": ["N"],
 		"level": 1
@@ -2274,6 +2997,10 @@
 		"hanzi": "南边",
 		"traditional": "南邊",
 		"pinyin": "nánbian",
+		"syllables": [
+			{ "py": "nán", "tone": 2 },
+			{ "py": "bian", "tone": 0 }
+		],
 		"meanings": ["the south side"],
 		"pos": ["N"],
 		"level": 1
@@ -2283,7 +3010,8 @@
 		"hanzi": "难",
 		"traditional": "難",
 		"pinyin": "nán",
-		"meanings": ["difficult", "problem"],
+		"syllables": [{ "py": "nán", "tone": 2 }],
+		"meanings": ["difficult"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2291,7 +3019,8 @@
 		"id": "L1-0269",
 		"hanzi": "呢",
 		"pinyin": "ne",
-		"meanings": ["softening question particle", "marks an ongoing state"],
+		"syllables": [{ "py": "ne", "tone": 0 }],
+		"meanings": ["and what about ...?", "shows an action is still going on"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -2299,7 +3028,8 @@
 		"id": "L1-0270",
 		"hanzi": "能",
 		"pinyin": "néng",
-		"meanings": ["can", "to be able to"],
+		"syllables": [{ "py": "néng", "tone": 2 }],
+		"meanings": ["to be able to", "to be allowed to"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2307,6 +3037,7 @@
 		"id": "L1-0271",
 		"hanzi": "你",
 		"pinyin": "nǐ",
+		"syllables": [{ "py": "nǐ", "tone": 3 }],
 		"meanings": ["you"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2316,6 +3047,10 @@
 		"hanzi": "你们",
 		"traditional": "你們",
 		"pinyin": "nǐmen",
+		"syllables": [
+			{ "py": "nǐ", "tone": 3 },
+			{ "py": "men", "tone": 0 }
+		],
 		"meanings": ["you all"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2324,6 +3059,7 @@
 		"id": "L1-0273",
 		"hanzi": "年",
 		"pinyin": "nián",
+		"syllables": [{ "py": "nián", "tone": 2 }],
 		"meanings": ["year"],
 		"pos": ["M"],
 		"level": 1
@@ -2332,7 +3068,8 @@
 		"id": "L1-0274",
 		"hanzi": "您",
 		"pinyin": "nín",
-		"meanings": ["you, politely"],
+		"syllables": [{ "py": "nín", "tone": 2 }],
+		"meanings": ["the polite word for you"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -2340,6 +3077,10 @@
 		"id": "L1-0275",
 		"hanzi": "牛奶",
 		"pinyin": "niúnǎi",
+		"syllables": [
+			{ "py": "niú", "tone": 2 },
+			{ "py": "nǎi", "tone": 3 }
+		],
 		"meanings": ["cow's milk"],
 		"pos": ["N"],
 		"level": 1
@@ -2348,7 +3089,8 @@
 		"id": "L1-0276",
 		"hanzi": "女",
 		"pinyin": "nǚ",
-		"meanings": ["female", "woman"],
+		"syllables": [{ "py": "nǚ", "tone": 3 }],
+		"meanings": ["female"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2357,6 +3099,10 @@
 		"hanzi": "女儿",
 		"traditional": "女兒",
 		"pinyin": "nǚ'ér",
+		"syllables": [
+			{ "py": "nǚ", "tone": 3 },
+			{ "py": "ér", "tone": 2 }
+		],
 		"meanings": ["daughter"],
 		"pos": ["N"],
 		"level": 1
@@ -2366,6 +3112,11 @@
 		"hanzi": "女孩儿",
 		"traditional": "女孩兒",
 		"pinyin": "nǚháir",
+		"syllables": [
+			{ "py": "nǚ", "tone": 3 },
+			{ "py": "hái", "tone": 2 },
+			{ "py": "r", "tone": 0 }
+		],
 		"meanings": ["girl"],
 		"pos": ["N"],
 		"level": 1
@@ -2374,6 +3125,11 @@
 		"id": "L1-0279",
 		"hanzi": "女朋友",
 		"pinyin": "nǚpéngyou",
+		"syllables": [
+			{ "py": "nǚ", "tone": 3 },
+			{ "py": "péng", "tone": 2 },
+			{ "py": "you", "tone": 0 }
+		],
 		"meanings": ["girlfriend"],
 		"pos": ["N"],
 		"level": 1
@@ -2382,6 +3138,10 @@
 		"id": "L1-0280",
 		"hanzi": "女人",
 		"pinyin": "nǚrén",
+		"syllables": [
+			{ "py": "nǚ", "tone": 3 },
+			{ "py": "rén", "tone": 2 }
+		],
 		"meanings": ["woman"],
 		"pos": ["N"],
 		"level": 1
@@ -2390,7 +3150,11 @@
 		"id": "L1-0281",
 		"hanzi": "女生",
 		"pinyin": "nǚshēng",
-		"meanings": ["schoolgirl", "female student"],
+		"syllables": [
+			{ "py": "nǚ", "tone": 3 },
+			{ "py": "shēng", "tone": 1 }
+		],
+		"meanings": ["female student", "schoolgirl"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2399,7 +3163,11 @@
 		"hanzi": "旁边",
 		"traditional": "旁邊",
 		"pinyin": "pángbiān",
-		"meanings": ["side"],
+		"syllables": [
+			{ "py": "páng", "tone": 2 },
+			{ "py": "biān", "tone": 1 }
+		],
+		"meanings": ["the side of something", "beside"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2407,7 +3175,8 @@
 		"id": "L1-0283",
 		"hanzi": "跑",
 		"pinyin": "pǎo",
-		"meanings": ["to run", "to escape"],
+		"syllables": [{ "py": "pǎo", "tone": 3 }],
+		"meanings": ["to run"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2415,6 +3184,10 @@
 		"id": "L1-0284",
 		"hanzi": "朋友",
 		"pinyin": "péngyou",
+		"syllables": [
+			{ "py": "péng", "tone": 2 },
+			{ "py": "you", "tone": 0 }
+		],
 		"meanings": ["friend"],
 		"pos": ["N"],
 		"level": 1
@@ -2423,6 +3196,7 @@
 		"id": "L1-0285",
 		"hanzi": "票",
 		"pinyin": "piào",
+		"syllables": [{ "py": "piào", "tone": 4 }],
 		"meanings": ["ticket"],
 		"pos": ["N"],
 		"level": 1
@@ -2431,6 +3205,7 @@
 		"id": "L1-0286",
 		"hanzi": "七",
 		"pinyin": "qī",
+		"syllables": [{ "py": "qī", "tone": 1 }],
 		"meanings": ["seven"],
 		"pos": ["Num"],
 		"level": 1
@@ -2439,6 +3214,7 @@
 		"id": "L1-0287",
 		"hanzi": "起",
 		"pinyin": "qǐ",
+		"syllables": [{ "py": "qǐ", "tone": 3 }],
 		"meanings": ["to rise", "to raise"],
 		"pos": ["V"],
 		"level": 1
@@ -2447,6 +3223,10 @@
 		"id": "L1-0288",
 		"hanzi": "起床",
 		"pinyin": "qǐ chuáng",
+		"syllables": [
+			{ "py": "qǐ", "tone": 3 },
+			{ "py": "chuáng", "tone": 2 }
+		],
 		"meanings": ["to get out of bed"],
 		"pos": [],
 		"level": 1
@@ -2456,7 +3236,11 @@
 		"hanzi": "起来",
 		"traditional": "起來",
 		"pinyin": "qǐ lái",
-		"meanings": ["to get up", "to stand up"],
+		"syllables": [
+			{ "py": "qǐ", "tone": 3 },
+			{ "py": "lái", "tone": 2 }
+		],
+		"meanings": ["to stand up", "to get up"],
 		"pos": [],
 		"level": 1
 	},
@@ -2465,6 +3249,10 @@
 		"hanzi": "汽车",
 		"traditional": "汽車",
 		"pinyin": "qìchē",
+		"syllables": [
+			{ "py": "qì", "tone": 4 },
+			{ "py": "chē", "tone": 1 }
+		],
 		"meanings": ["car", "automobile"],
 		"pos": ["N"],
 		"level": 1
@@ -2473,7 +3261,8 @@
 		"id": "L1-0291",
 		"hanzi": "前",
 		"pinyin": "qián",
-		"meanings": ["front", "before"],
+		"syllables": [{ "py": "qián", "tone": 2 }],
+		"meanings": ["in front", "before in time"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2482,6 +3271,10 @@
 		"hanzi": "前边",
 		"traditional": "前邊",
 		"pinyin": "qiánbian",
+		"syllables": [
+			{ "py": "qián", "tone": 2 },
+			{ "py": "bian", "tone": 0 }
+		],
 		"meanings": ["the front side", "ahead"],
 		"pos": ["N"],
 		"level": 1
@@ -2490,6 +3283,10 @@
 		"id": "L1-0293",
 		"hanzi": "前天",
 		"pinyin": "qiántiān",
+		"syllables": [
+			{ "py": "qián", "tone": 2 },
+			{ "py": "tiān", "tone": 1 }
+		],
 		"meanings": ["the day before yesterday"],
 		"pos": ["N"],
 		"level": 1
@@ -2499,7 +3296,8 @@
 		"hanzi": "钱",
 		"traditional": "錢",
 		"pinyin": "qián",
-		"meanings": ["coin", "money"],
+		"syllables": [{ "py": "qián", "tone": 2 }],
+		"meanings": ["money"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2508,6 +3306,10 @@
 		"hanzi": "钱包",
 		"traditional": "錢包",
 		"pinyin": "qiánbāo",
+		"syllables": [
+			{ "py": "qián", "tone": 2 },
+			{ "py": "bāo", "tone": 1 }
+		],
 		"meanings": ["purse", "wallet"],
 		"pos": ["N"],
 		"level": 1
@@ -2517,7 +3319,8 @@
 		"hanzi": "请",
 		"traditional": "請",
 		"pinyin": "qǐng",
-		"meanings": ["please", "to invite"],
+		"syllables": [{ "py": "qǐng", "tone": 3 }],
+		"meanings": ["to invite", "please"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2526,7 +3329,11 @@
 		"hanzi": "请假",
 		"traditional": "請假",
 		"pinyin": "qǐng jià",
-		"meanings": ["to request leave of absence"],
+		"syllables": [
+			{ "py": "qǐng", "tone": 3 },
+			{ "py": "jià", "tone": 4 }
+		],
+		"meanings": ["to ask for time off"],
 		"pos": [],
 		"level": 1
 	},
@@ -2535,6 +3342,10 @@
 		"hanzi": "请进",
 		"traditional": "請進",
 		"pinyin": "qǐng jìn",
+		"syllables": [
+			{ "py": "qǐng", "tone": 3 },
+			{ "py": "jìn", "tone": 4 }
+		],
 		"meanings": ["please come in"],
 		"pos": [],
 		"level": 1
@@ -2544,7 +3355,11 @@
 		"hanzi": "请问",
 		"traditional": "請問",
 		"pinyin": "qǐngwèn",
-		"meanings": ["Excuse me, may I ask...?"],
+		"syllables": [
+			{ "py": "qǐng", "tone": 3 },
+			{ "py": "wèn", "tone": 4 }
+		],
+		"meanings": ["may I ask", "excuse me"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2553,7 +3368,11 @@
 		"hanzi": "请坐",
 		"traditional": "請坐",
 		"pinyin": "qǐng zuò",
-		"meanings": ["please, have a seat"],
+		"syllables": [
+			{ "py": "qǐng", "tone": 3 },
+			{ "py": "zuò", "tone": 4 }
+		],
+		"meanings": ["please sit down"],
 		"pos": [],
 		"level": 1
 	},
@@ -2561,7 +3380,8 @@
 		"id": "L1-0301",
 		"hanzi": "球",
 		"pinyin": "qiú",
-		"meanings": ["ball", "sphere"],
+		"syllables": [{ "py": "qiú", "tone": 2 }],
+		"meanings": ["ball"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2569,7 +3389,8 @@
 		"id": "L1-0302",
 		"hanzi": "去",
 		"pinyin": "qù",
-		"meanings": ["to go", "to send"],
+		"syllables": [{ "py": "qù", "tone": 4 }],
+		"meanings": ["to go"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2577,6 +3398,10 @@
 		"id": "L1-0303",
 		"hanzi": "去年",
 		"pinyin": "qùnián",
+		"syllables": [
+			{ "py": "qù", "tone": 4 },
+			{ "py": "nián", "tone": 2 }
+		],
 		"meanings": ["last year"],
 		"pos": ["N"],
 		"level": 1
@@ -2586,6 +3411,7 @@
 		"hanzi": "热",
 		"traditional": "熱",
 		"pinyin": "rè",
+		"syllables": [{ "py": "rè", "tone": 4 }],
 		"meanings": ["hot", "to heat up"],
 		"pos": ["Adj", "V"],
 		"level": 1
@@ -2594,7 +3420,8 @@
 		"id": "L1-0305",
 		"hanzi": "人",
 		"pinyin": "rén",
-		"meanings": ["person"],
+		"syllables": [{ "py": "rén", "tone": 2 }],
+		"meanings": ["person", "people"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2603,6 +3430,10 @@
 		"hanzi": "认识",
 		"traditional": "認識",
 		"pinyin": "rènshi",
+		"syllables": [
+			{ "py": "rèn", "tone": 4 },
+			{ "py": "shi", "tone": 0 }
+		],
 		"meanings": ["to know someone", "to recognize"],
 		"pos": ["V", "N"],
 		"level": 1
@@ -2612,7 +3443,11 @@
 		"hanzi": "认真",
 		"traditional": "認真",
 		"pinyin": "rènzhēn",
-		"meanings": ["conscientious", "earnest"],
+		"syllables": [
+			{ "py": "rèn", "tone": 4 },
+			{ "py": "zhēn", "tone": 1 }
+		],
+		"meanings": ["serious and careful", "conscientious"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -2620,7 +3455,8 @@
 		"id": "L1-0308",
 		"hanzi": "日",
 		"pinyin": "rì",
-		"meanings": ["sun", "day of the month"],
+		"syllables": [{ "py": "rì", "tone": 4 }],
+		"meanings": ["day of the month in writing", "sun"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2628,6 +3464,10 @@
 		"id": "L1-0309",
 		"hanzi": "日期",
 		"pinyin": "rìqī",
+		"syllables": [
+			{ "py": "rì", "tone": 4 },
+			{ "py": "qī", "tone": 1 }
+		],
 		"meanings": ["date"],
 		"pos": ["N"],
 		"level": 1
@@ -2636,7 +3476,8 @@
 		"id": "L1-0310",
 		"hanzi": "肉",
 		"pinyin": "ròu",
-		"meanings": ["meat", "flesh"],
+		"syllables": [{ "py": "ròu", "tone": 4 }],
+		"meanings": ["meat"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2644,6 +3485,7 @@
 		"id": "L1-0311",
 		"hanzi": "三",
 		"pinyin": "sān",
+		"syllables": [{ "py": "sān", "tone": 1 }],
 		"meanings": ["three"],
 		"pos": ["Num"],
 		"level": 1
@@ -2652,7 +3494,8 @@
 		"id": "L1-0312",
 		"hanzi": "山",
 		"pinyin": "shān",
-		"meanings": ["mountain"],
+		"syllables": [{ "py": "shān", "tone": 1 }],
+		"meanings": ["mountain", "hill"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2661,7 +3504,11 @@
 		"hanzi": "商场",
 		"traditional": "商場",
 		"pinyin": "shāngchǎng",
-		"meanings": ["shopping mall", "shopping center"],
+		"syllables": [
+			{ "py": "shāng", "tone": 1 },
+			{ "py": "chǎng", "tone": 3 }
+		],
+		"meanings": ["shopping mall", "department store"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2669,7 +3516,11 @@
 		"id": "L1-0314",
 		"hanzi": "商店",
 		"pinyin": "shāngdiàn",
-		"meanings": ["store"],
+		"syllables": [
+			{ "py": "shāng", "tone": 1 },
+			{ "py": "diàn", "tone": 4 }
+		],
+		"meanings": ["shop", "store"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2677,7 +3528,8 @@
 		"id": "L1-0315",
 		"hanzi": "上",
 		"pinyin": "shàng",
-		"meanings": ["to climb", "to attend"],
+		"syllables": [{ "py": "shàng", "tone": 4 }],
+		"meanings": ["above or on top", "to go up"],
 		"pos": ["N", "V"],
 		"level": 1
 	},
@@ -2685,7 +3537,11 @@
 		"id": "L1-0316",
 		"hanzi": "上班",
 		"pinyin": "shàng bān",
-		"meanings": ["to go to work", "to be on duty"],
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "bān", "tone": 1 }
+		],
+		"meanings": ["to go to work"],
 		"pos": [],
 		"level": 1
 	},
@@ -2694,7 +3550,11 @@
 		"hanzi": "上边",
 		"traditional": "上邊",
 		"pinyin": "shàngbian",
-		"meanings": ["the top", "above"],
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "bian", "tone": 0 }
+		],
+		"meanings": ["the top", "the upper side"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2703,7 +3563,11 @@
 		"hanzi": "上车",
 		"traditional": "上車",
 		"pinyin": "shàng chē",
-		"meanings": ["to get on or into"],
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "chē", "tone": 1 }
+		],
+		"meanings": ["to get on a bus or train", "to get into a car"],
 		"pos": [],
 		"level": 1
 	},
@@ -2711,6 +3575,10 @@
 		"id": "L1-0319",
 		"hanzi": "上次",
 		"pinyin": "shàng cì",
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "cì", "tone": 4 }
+		],
 		"meanings": ["last time"],
 		"pos": [],
 		"level": 1
@@ -2720,6 +3588,10 @@
 		"hanzi": "上课",
 		"traditional": "上課",
 		"pinyin": "shàng kè",
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "kè", "tone": 4 }
+		],
 		"meanings": ["to go to class", "to attend class"],
 		"pos": [],
 		"level": 1
@@ -2729,7 +3601,11 @@
 		"hanzi": "上网",
 		"traditional": "上網",
 		"pinyin": "shàng wǎng",
-		"meanings": ["to go online", "to connect to the Internet"],
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "wǎng", "tone": 3 }
+		],
+		"meanings": ["to go online", "to use the Internet"],
 		"pos": [],
 		"level": 1
 	},
@@ -2737,6 +3613,10 @@
 		"id": "L1-0322",
 		"hanzi": "上午",
 		"pinyin": "shàngwǔ",
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "wǔ", "tone": 3 }
+		],
 		"meanings": ["morning"],
 		"pos": ["N"],
 		"level": 1
@@ -2746,6 +3626,10 @@
 		"hanzi": "上学",
 		"traditional": "上學",
 		"pinyin": "shàng xué",
+		"syllables": [
+			{ "py": "shàng", "tone": 4 },
+			{ "py": "xué", "tone": 2 }
+		],
 		"meanings": ["to go to school", "to attend school"],
 		"pos": [],
 		"level": 1
@@ -2754,7 +3638,8 @@
 		"id": "L1-0324",
 		"hanzi": "少",
 		"pinyin": "shǎo",
-		"meanings": ["few", "less"],
+		"syllables": [{ "py": "shǎo", "tone": 3 }],
+		"meanings": ["few", "to lack"],
 		"pos": ["Adj", "V"],
 		"level": 1
 	},
@@ -2763,6 +3648,7 @@
 		"hanzi": "谁",
 		"traditional": "誰",
 		"pinyin": "shéi/shuí",
+		"syllables": [{ "py": "shéi", "tone": 2 }],
 		"meanings": ["who"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2771,7 +3657,11 @@
 		"id": "L1-0326",
 		"hanzi": "身上",
 		"pinyin": "shēnshang",
-		"meanings": ["on the body", "at hand"],
+		"syllables": [
+			{ "py": "shēn", "tone": 1 },
+			{ "py": "shang", "tone": 0 }
+		],
+		"meanings": ["on one's body", "carried with you"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2780,6 +3670,10 @@
 		"hanzi": "身体",
 		"traditional": "身體",
 		"pinyin": "shēntǐ",
+		"syllables": [
+			{ "py": "shēn", "tone": 1 },
+			{ "py": "tǐ", "tone": 3 }
+		],
 		"meanings": ["the body", "one's health"],
 		"pos": ["N"],
 		"level": 1
@@ -2789,6 +3683,10 @@
 		"hanzi": "什么",
 		"traditional": "什麼",
 		"pinyin": "shénme",
+		"syllables": [
+			{ "py": "shén", "tone": 2 },
+			{ "py": "me", "tone": 0 }
+		],
 		"meanings": ["what"],
 		"pos": ["Pron"],
 		"level": 1
@@ -2797,6 +3695,10 @@
 		"id": "L1-0329",
 		"hanzi": "生病",
 		"pinyin": "shēng bìng",
+		"syllables": [
+			{ "py": "shēng", "tone": 1 },
+			{ "py": "bìng", "tone": 4 }
+		],
 		"meanings": ["to get sick"],
 		"pos": [],
 		"level": 1
@@ -2806,7 +3708,11 @@
 		"hanzi": "生气",
 		"traditional": "生氣",
 		"pinyin": "shēng qì",
-		"meanings": ["to get angry", "vitality"],
+		"syllables": [
+			{ "py": "shēng", "tone": 1 },
+			{ "py": "qì", "tone": 4 }
+		],
+		"meanings": ["to get angry"],
 		"pos": [],
 		"level": 1
 	},
@@ -2814,6 +3720,10 @@
 		"id": "L1-0331",
 		"hanzi": "生日",
 		"pinyin": "shēngrì",
+		"syllables": [
+			{ "py": "shēng", "tone": 1 },
+			{ "py": "rì", "tone": 4 }
+		],
 		"meanings": ["birthday"],
 		"pos": ["N"],
 		"level": 1
@@ -2822,6 +3732,7 @@
 		"id": "L1-0332",
 		"hanzi": "十",
 		"pinyin": "shí",
+		"syllables": [{ "py": "shí", "tone": 2 }],
 		"meanings": ["ten"],
 		"pos": ["Num"],
 		"level": 1
@@ -2831,7 +3742,11 @@
 		"hanzi": "时候",
 		"traditional": "時候",
 		"pinyin": "shíhou",
-		"meanings": ["moment", "the time when"],
+		"syllables": [
+			{ "py": "shí", "tone": 2 },
+			{ "py": "hou", "tone": 0 }
+		],
+		"meanings": ["the time when", "point in time"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2840,6 +3755,10 @@
 		"hanzi": "时间",
 		"traditional": "時間",
 		"pinyin": "shíjiān",
+		"syllables": [
+			{ "py": "shí", "tone": 2 },
+			{ "py": "jiān", "tone": 1 }
+		],
 		"meanings": ["time"],
 		"pos": ["N"],
 		"level": 1
@@ -2848,7 +3767,8 @@
 		"id": "L1-0335",
 		"hanzi": "事",
 		"pinyin": "shì",
-		"meanings": ["matter", "thing"],
+		"syllables": [{ "py": "shì", "tone": 4 }],
+		"meanings": ["matter", "affair"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2857,7 +3777,8 @@
 		"hanzi": "试",
 		"traditional": "試",
 		"pinyin": "shì",
-		"meanings": ["to test", "to try"],
+		"syllables": [{ "py": "shì", "tone": 4 }],
+		"meanings": ["to try", "to test"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2865,7 +3786,8 @@
 		"id": "L1-0337",
 		"hanzi": "是",
 		"pinyin": "shì",
-		"meanings": ["to be", "correct"],
+		"syllables": [{ "py": "shì", "tone": 4 }],
+		"meanings": ["to be"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2873,7 +3795,12 @@
 		"id": "L1-0338",
 		"hanzi": "是不是",
 		"pinyin": "shì bu shì",
-		"meanings": ["is it or not?"],
+		"syllables": [
+			{ "py": "shì", "tone": 4 },
+			{ "py": "bu", "tone": 0 },
+			{ "py": "shì", "tone": 4 }
+		],
+		"meanings": ["is it or not?", "used to ask for confirmation"],
 		"pos": [],
 		"level": 1
 	},
@@ -2881,7 +3808,8 @@
 		"id": "L1-0339",
 		"hanzi": "手",
 		"pinyin": "shǒu",
-		"meanings": ["hand", "personal"],
+		"syllables": [{ "py": "shǒu", "tone": 3 }],
+		"meanings": ["hand"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2890,7 +3818,11 @@
 		"hanzi": "手机",
 		"traditional": "手機",
 		"pinyin": "shǒujī",
-		"meanings": ["cell phone"],
+		"syllables": [
+			{ "py": "shǒu", "tone": 3 },
+			{ "py": "jī", "tone": 1 }
+		],
+		"meanings": ["cell phone", "mobile phone"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2899,6 +3831,7 @@
 		"hanzi": "书",
 		"traditional": "書",
 		"pinyin": "shū",
+		"syllables": [{ "py": "shū", "tone": 1 }],
 		"meanings": ["book"],
 		"pos": ["N"],
 		"level": 1
@@ -2908,7 +3841,11 @@
 		"hanzi": "书包",
 		"traditional": "書包",
 		"pinyin": "shūbāo",
-		"meanings": ["schoolbag", "satchel"],
+		"syllables": [
+			{ "py": "shū", "tone": 1 },
+			{ "py": "bāo", "tone": 1 }
+		],
+		"meanings": ["schoolbag", "book bag"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2917,6 +3854,10 @@
 		"hanzi": "书店",
 		"traditional": "書店",
 		"pinyin": "shūdiàn",
+		"syllables": [
+			{ "py": "shū", "tone": 1 },
+			{ "py": "diàn", "tone": 4 }
+		],
 		"meanings": ["bookstore"],
 		"pos": ["N"],
 		"level": 1
@@ -2926,7 +3867,8 @@
 		"hanzi": "树",
 		"traditional": "樹",
 		"pinyin": "shù",
-		"meanings": ["tree", "to cultivate"],
+		"syllables": [{ "py": "shù", "tone": 4 }],
+		"meanings": ["tree"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2934,7 +3876,8 @@
 		"id": "L1-0345",
 		"hanzi": "水",
 		"pinyin": "shuǐ",
-		"meanings": ["water", "River"],
+		"syllables": [{ "py": "shuǐ", "tone": 3 }],
+		"meanings": ["water"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -2942,6 +3885,10 @@
 		"id": "L1-0346",
 		"hanzi": "水果",
 		"pinyin": "shuǐguǒ",
+		"syllables": [
+			{ "py": "shuǐ", "tone": 3 },
+			{ "py": "guǒ", "tone": 3 }
+		],
 		"meanings": ["fruit"],
 		"pos": ["N"],
 		"level": 1
@@ -2950,7 +3897,8 @@
 		"id": "L1-0347",
 		"hanzi": "睡",
 		"pinyin": "shuì",
-		"meanings": ["to sleep", "to lie down"],
+		"syllables": [{ "py": "shuì", "tone": 4 }],
+		"meanings": ["to sleep"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2959,6 +3907,10 @@
 		"hanzi": "睡觉",
 		"traditional": "睡覺",
 		"pinyin": "shuì jiào",
+		"syllables": [
+			{ "py": "shuì", "tone": 4 },
+			{ "py": "jiào", "tone": 4 }
+		],
 		"meanings": ["to go to bed", "to sleep"],
 		"pos": [],
 		"level": 1
@@ -2968,7 +3920,8 @@
 		"hanzi": "说",
 		"traditional": "說",
 		"pinyin": "shuō",
-		"meanings": ["to say"],
+		"syllables": [{ "py": "shuō", "tone": 1 }],
+		"meanings": ["to say", "to speak"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -2977,6 +3930,10 @@
 		"hanzi": "说话",
 		"traditional": "說話",
 		"pinyin": "shuō huà",
+		"syllables": [
+			{ "py": "shuō", "tone": 1 },
+			{ "py": "huà", "tone": 4 }
+		],
 		"meanings": ["to talk"],
 		"pos": [],
 		"level": 1
@@ -2985,6 +3942,7 @@
 		"id": "L1-0351",
 		"hanzi": "四",
 		"pinyin": "sì",
+		"syllables": [{ "py": "sì", "tone": 4 }],
 		"meanings": ["four"],
 		"pos": ["Num"],
 		"level": 1
@@ -2993,7 +3951,8 @@
 		"id": "L1-0352",
 		"hanzi": "送",
 		"pinyin": "sòng",
-		"meanings": ["to send", "to give"],
+		"syllables": [{ "py": "sòng", "tone": 4 }],
+		"meanings": ["to give as a gift", "to see someone off", "to deliver"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3002,6 +3961,7 @@
 		"hanzi": "岁",
 		"traditional": "歲",
 		"pinyin": "suì",
+		"syllables": [{ "py": "suì", "tone": 4 }],
 		"meanings": ["years of age"],
 		"pos": ["M"],
 		"level": 1
@@ -3010,6 +3970,7 @@
 		"id": "L1-0354",
 		"hanzi": "他",
 		"pinyin": "tā",
+		"syllables": [{ "py": "tā", "tone": 1 }],
 		"meanings": ["he", "him"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3019,6 +3980,10 @@
 		"hanzi": "他们",
 		"traditional": "他們",
 		"pinyin": "tāmen",
+		"syllables": [
+			{ "py": "tā", "tone": 1 },
+			{ "py": "men", "tone": 0 }
+		],
 		"meanings": ["they", "them"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3027,6 +3992,7 @@
 		"id": "L1-0356",
 		"hanzi": "她",
 		"pinyin": "tā",
+		"syllables": [{ "py": "tā", "tone": 1 }],
 		"meanings": ["she", "her"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3036,7 +4002,11 @@
 		"hanzi": "她们",
 		"traditional": "她們",
 		"pinyin": "tāmen",
-		"meanings": ["they, all women"],
+		"syllables": [
+			{ "py": "tā", "tone": 1 },
+			{ "py": "men", "tone": 0 }
+		],
+		"meanings": ["they for a group of women"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3044,7 +4014,8 @@
 		"id": "L1-0358",
 		"hanzi": "太",
 		"pinyin": "tài",
-		"meanings": ["too", "excessively"],
+		"syllables": [{ "py": "tài", "tone": 4 }],
+		"meanings": ["excessively", "too"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -3052,6 +4023,7 @@
 		"id": "L1-0359",
 		"hanzi": "天",
 		"pinyin": "tiān",
+		"syllables": [{ "py": "tiān", "tone": 1 }],
 		"meanings": ["day", "sky"],
 		"pos": ["N", "M"],
 		"level": 1
@@ -3061,6 +4033,10 @@
 		"hanzi": "天气",
 		"traditional": "天氣",
 		"pinyin": "tiānqì",
+		"syllables": [
+			{ "py": "tiān", "tone": 1 },
+			{ "py": "qì", "tone": 4 }
+		],
 		"meanings": ["weather"],
 		"pos": ["N"],
 		"level": 1
@@ -3070,7 +4046,8 @@
 		"hanzi": "听",
 		"traditional": "聽",
 		"pinyin": "tīng",
-		"meanings": ["to listen to", "to heed"],
+		"syllables": [{ "py": "tīng", "tone": 1 }],
+		"meanings": ["to listen", "to hear"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3079,6 +4056,10 @@
 		"hanzi": "听到",
 		"traditional": "聽到",
 		"pinyin": "tīngdào",
+		"syllables": [
+			{ "py": "tīng", "tone": 1 },
+			{ "py": "dào", "tone": 4 }
+		],
 		"meanings": ["to hear"],
 		"pos": [],
 		"level": 1
@@ -3088,6 +4069,10 @@
 		"hanzi": "听见",
 		"traditional": "聽見",
 		"pinyin": "tīng jiàn",
+		"syllables": [
+			{ "py": "tīng", "tone": 1 },
+			{ "py": "jiàn", "tone": 4 }
+		],
 		"meanings": ["to catch a sound"],
 		"pos": [],
 		"level": 1
@@ -3097,7 +4082,11 @@
 		"hanzi": "听写",
 		"traditional": "聽寫",
 		"pinyin": "tīngxiě",
-		"meanings": ["to write down", "to transcribe by ear"],
+		"syllables": [
+			{ "py": "tīng", "tone": 1 },
+			{ "py": "xiě", "tone": 3 }
+		],
+		"meanings": ["to take dictation", "to write down what you hear"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3106,7 +4095,11 @@
 		"hanzi": "同学",
 		"traditional": "同學",
 		"pinyin": "tóngxué",
-		"meanings": ["fellow student", "classmate"],
+		"syllables": [
+			{ "py": "tóng", "tone": 2 },
+			{ "py": "xué", "tone": 2 }
+		],
+		"meanings": ["classmate", "fellow student"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3115,6 +4108,11 @@
 		"hanzi": "图书馆",
 		"traditional": "圖書館",
 		"pinyin": "túshūguǎn",
+		"syllables": [
+			{ "py": "tú", "tone": 2 },
+			{ "py": "shū", "tone": 1 },
+			{ "py": "guǎn", "tone": 3 }
+		],
 		"meanings": ["library"],
 		"pos": ["N"],
 		"level": 1
@@ -3123,7 +4121,8 @@
 		"id": "L1-0367",
 		"hanzi": "外",
 		"pinyin": "wài",
-		"meanings": ["outside", "foreign"],
+		"syllables": [{ "py": "wài", "tone": 4 }],
+		"meanings": ["outside"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3132,7 +4131,11 @@
 		"hanzi": "外边",
 		"traditional": "外邊",
 		"pinyin": "wàibian",
-		"meanings": ["the outside", "out there"],
+		"syllables": [
+			{ "py": "wài", "tone": 4 },
+			{ "py": "bian", "tone": 0 }
+		],
+		"meanings": ["out there", "outdoors"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3141,6 +4144,10 @@
 		"hanzi": "外国",
 		"traditional": "外國",
 		"pinyin": "wàiguó",
+		"syllables": [
+			{ "py": "wài", "tone": 4 },
+			{ "py": "guó", "tone": 2 }
+		],
 		"meanings": ["foreign country"],
 		"pos": ["N"],
 		"level": 1
@@ -3150,6 +4157,10 @@
 		"hanzi": "外语",
 		"traditional": "外語",
 		"pinyin": "wàiyǔ",
+		"syllables": [
+			{ "py": "wài", "tone": 4 },
+			{ "py": "yǔ", "tone": 3 }
+		],
 		"meanings": ["foreign language"],
 		"pos": ["N"],
 		"level": 1
@@ -3159,6 +4170,10 @@
 		"hanzi": "玩儿",
 		"traditional": "玩兒",
 		"pinyin": "wánr",
+		"syllables": [
+			{ "py": "wán", "tone": 2 },
+			{ "py": "r", "tone": 0 }
+		],
 		"meanings": ["to play", "to have fun"],
 		"pos": ["V"],
 		"level": 1
@@ -3167,6 +4182,7 @@
 		"id": "L1-0372",
 		"hanzi": "晚",
 		"pinyin": "wǎn",
+		"syllables": [{ "py": "wǎn", "tone": 3 }],
 		"meanings": ["late"],
 		"pos": ["Adj"],
 		"level": 1
@@ -3176,7 +4192,11 @@
 		"hanzi": "晚饭",
 		"traditional": "晚飯",
 		"pinyin": "wǎnfàn",
-		"meanings": ["evening meal", "dinner"],
+		"syllables": [
+			{ "py": "wǎn", "tone": 3 },
+			{ "py": "fàn", "tone": 4 }
+		],
+		"meanings": ["dinner", "the evening meal"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3184,6 +4204,10 @@
 		"id": "L1-0374",
 		"hanzi": "晚上",
 		"pinyin": "wǎnshang",
+		"syllables": [
+			{ "py": "wǎn", "tone": 3 },
+			{ "py": "shang", "tone": 0 }
+		],
 		"meanings": ["evening", "at night"],
 		"pos": ["N"],
 		"level": 1
@@ -3193,7 +4217,11 @@
 		"hanzi": "网上",
 		"traditional": "網上",
 		"pinyin": "wǎng shang",
-		"meanings": ["online"],
+		"syllables": [
+			{ "py": "wǎng", "tone": 3 },
+			{ "py": "shang", "tone": 0 }
+		],
+		"meanings": ["online", "on the internet"],
 		"pos": [],
 		"level": 1
 	},
@@ -3202,7 +4230,11 @@
 		"hanzi": "网友",
 		"traditional": "網友",
 		"pinyin": "wǎngyǒu",
-		"meanings": ["online friend", "netizen"],
+		"syllables": [
+			{ "py": "wǎng", "tone": 3 },
+			{ "py": "yǒu", "tone": 3 }
+		],
+		"meanings": ["online friend", "internet user"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3210,6 +4242,7 @@
 		"id": "L1-0377",
 		"hanzi": "忘",
 		"pinyin": "wàng",
+		"syllables": [{ "py": "wàng", "tone": 4 }],
 		"meanings": ["to forget"],
 		"pos": ["V"],
 		"level": 1
@@ -3219,6 +4252,10 @@
 		"hanzi": "忘记",
 		"traditional": "忘記",
 		"pinyin": "wàngjì",
+		"syllables": [
+			{ "py": "wàng", "tone": 4 },
+			{ "py": "jì", "tone": 4 }
+		],
 		"meanings": ["to forget about"],
 		"pos": ["V"],
 		"level": 1
@@ -3228,6 +4265,7 @@
 		"hanzi": "问",
 		"traditional": "問",
 		"pinyin": "wèn",
+		"syllables": [{ "py": "wèn", "tone": 4 }],
 		"meanings": ["to ask"],
 		"pos": ["V"],
 		"level": 1
@@ -3236,6 +4274,7 @@
 		"id": "L1-0380",
 		"hanzi": "我",
 		"pinyin": "wǒ",
+		"syllables": [{ "py": "wǒ", "tone": 3 }],
 		"meanings": ["I", "me"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3245,6 +4284,10 @@
 		"hanzi": "我们",
 		"traditional": "我們",
 		"pinyin": "wǒmen",
+		"syllables": [
+			{ "py": "wǒ", "tone": 3 },
+			{ "py": "men", "tone": 0 }
+		],
 		"meanings": ["we", "us"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3253,6 +4296,7 @@
 		"id": "L1-0382",
 		"hanzi": "五",
 		"pinyin": "wǔ",
+		"syllables": [{ "py": "wǔ", "tone": 3 }],
 		"meanings": ["five"],
 		"pos": ["Num"],
 		"level": 1
@@ -3262,6 +4306,10 @@
 		"hanzi": "午饭",
 		"traditional": "午飯",
 		"pinyin": "wǔfàn",
+		"syllables": [
+			{ "py": "wǔ", "tone": 3 },
+			{ "py": "fàn", "tone": 4 }
+		],
 		"meanings": ["lunch"],
 		"pos": ["N"],
 		"level": 1
@@ -3270,6 +4318,7 @@
 		"id": "L1-0384",
 		"hanzi": "西",
 		"pinyin": "xī",
+		"syllables": [{ "py": "xī", "tone": 1 }],
 		"meanings": ["west"],
 		"pos": ["N"],
 		"level": 1
@@ -3279,6 +4328,10 @@
 		"hanzi": "西边",
 		"traditional": "西邊",
 		"pinyin": "xībian",
+		"syllables": [
+			{ "py": "xī", "tone": 1 },
+			{ "py": "bian", "tone": 0 }
+		],
 		"meanings": ["the west side"],
 		"pos": ["N"],
 		"level": 1
@@ -3287,7 +4340,8 @@
 		"id": "L1-0386",
 		"hanzi": "洗",
 		"pinyin": "xǐ",
-		"meanings": ["to wash", "to develop"],
+		"syllables": [{ "py": "xǐ", "tone": 3 }],
+		"meanings": ["to wash"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3296,7 +4350,12 @@
 		"hanzi": "洗手间",
 		"traditional": "洗手間",
 		"pinyin": "xǐshǒujiān",
-		"meanings": ["toilet", "lavatory"],
+		"syllables": [
+			{ "py": "xǐ", "tone": 3 },
+			{ "py": "shǒu", "tone": 3 },
+			{ "py": "jiān", "tone": 1 }
+		],
+		"meanings": ["restroom", "washroom"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3305,6 +4364,10 @@
 		"hanzi": "喜欢",
 		"traditional": "喜歡",
 		"pinyin": "xǐhuan",
+		"syllables": [
+			{ "py": "xǐ", "tone": 3 },
+			{ "py": "huan", "tone": 0 }
+		],
 		"meanings": ["to like"],
 		"pos": ["V"],
 		"level": 1
@@ -3313,7 +4376,8 @@
 		"id": "L1-0389",
 		"hanzi": "下",
 		"pinyin": "xià",
-		"meanings": ["to go down", "below"],
+		"syllables": [{ "py": "xià", "tone": 4 }],
+		"meanings": ["below", "to go down"],
 		"pos": ["N", "V"],
 		"level": 1
 	},
@@ -3321,7 +4385,11 @@
 		"id": "L1-0390",
 		"hanzi": "下班",
 		"pinyin": "xià bān",
-		"meanings": ["to finish work", "next service"],
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "bān", "tone": 1 }
+		],
+		"meanings": ["to finish work", "to get off work"],
 		"pos": [],
 		"level": 1
 	},
@@ -3330,7 +4398,11 @@
 		"hanzi": "下边",
 		"traditional": "下邊",
 		"pinyin": "xiàbian",
-		"meanings": ["under", "the underside"],
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "bian", "tone": 0 }
+		],
+		"meanings": ["the underside", "underneath"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3339,6 +4411,10 @@
 		"hanzi": "下车",
 		"traditional": "下車",
 		"pinyin": "xià chē",
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "chē", "tone": 1 }
+		],
 		"meanings": ["to get off a vehicle"],
 		"pos": [],
 		"level": 1
@@ -3347,6 +4423,10 @@
 		"id": "L1-0393",
 		"hanzi": "下次",
 		"pinyin": "xià cì",
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "cì", "tone": 4 }
+		],
 		"meanings": ["next time"],
 		"pos": [],
 		"level": 1
@@ -3356,6 +4436,10 @@
 		"hanzi": "下课",
 		"traditional": "下課",
 		"pinyin": "xià kè",
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "kè", "tone": 4 }
+		],
 		"meanings": ["to finish class", "to get out of class"],
 		"pos": [],
 		"level": 1
@@ -3364,6 +4448,10 @@
 		"id": "L1-0395",
 		"hanzi": "下午",
 		"pinyin": "xiàwǔ",
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "wǔ", "tone": 3 }
+		],
 		"meanings": ["afternoon", "p.m"],
 		"pos": ["N"],
 		"level": 1
@@ -3372,7 +4460,11 @@
 		"id": "L1-0396",
 		"hanzi": "下雨",
 		"pinyin": "xià yǔ",
-		"meanings": ["to rain"],
+		"syllables": [
+			{ "py": "xià", "tone": 4 },
+			{ "py": "yǔ", "tone": 3 }
+		],
+		"meanings": ["it is raining", "to rain"],
 		"pos": [],
 		"level": 1
 	},
@@ -3380,7 +4472,8 @@
 		"id": "L1-0397",
 		"hanzi": "先",
 		"pinyin": "xiān",
-		"meanings": ["beforehand", "at first"],
+		"syllables": [{ "py": "xiān", "tone": 1 }],
+		"meanings": ["first", "beforehand"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -3388,6 +4481,10 @@
 		"id": "L1-0398",
 		"hanzi": "先生",
 		"pinyin": "xiānsheng",
+		"syllables": [
+			{ "py": "xiān", "tone": 1 },
+			{ "py": "sheng", "tone": 0 }
+		],
 		"meanings": ["Mr", "gentleman"],
 		"pos": ["N"],
 		"level": 1
@@ -3397,7 +4494,11 @@
 		"hanzi": "现在",
 		"traditional": "現在",
 		"pinyin": "xiànzài",
-		"meanings": ["now"],
+		"syllables": [
+			{ "py": "xiàn", "tone": 4 },
+			{ "py": "zài", "tone": 4 }
+		],
+		"meanings": ["now", "at present"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3405,7 +4506,8 @@
 		"id": "L1-0400",
 		"hanzi": "想",
 		"pinyin": "xiǎng",
-		"meanings": ["to think", "to desire"],
+		"syllables": [{ "py": "xiǎng", "tone": 3 }],
+		"meanings": ["to think about", "would like to", "to miss someone"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3413,7 +4515,8 @@
 		"id": "L1-0401",
 		"hanzi": "小",
 		"pinyin": "xiǎo",
-		"meanings": ["small", "tiny"],
+		"syllables": [{ "py": "xiǎo", "tone": 3 }],
+		"meanings": ["small", "little"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3422,7 +4525,12 @@
 		"hanzi": "小孩儿",
 		"traditional": "小孩兒",
 		"pinyin": "xiǎoháir",
-		"meanings": ["kid", "little one"],
+		"syllables": [
+			{ "py": "xiǎo", "tone": 3 },
+			{ "py": "hái", "tone": 2 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["kid", "young child"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3430,7 +4538,11 @@
 		"id": "L1-0403",
 		"hanzi": "小姐",
 		"pinyin": "xiǎojiě",
-		"meanings": ["young lady", "miss"],
+		"syllables": [
+			{ "py": "xiǎo", "tone": 3 },
+			{ "py": "jiě", "tone": 3 }
+		],
+		"meanings": ["young lady", "Miss"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3438,6 +4550,11 @@
 		"id": "L1-0404",
 		"hanzi": "小朋友",
 		"pinyin": "xiǎopéngyǒu",
+		"syllables": [
+			{ "py": "xiǎo", "tone": 3 },
+			{ "py": "péng", "tone": 2 },
+			{ "py": "yǒu", "tone": 3 }
+		],
 		"meanings": ["youngster"],
 		"pos": ["N"],
 		"level": 1
@@ -3447,6 +4564,10 @@
 		"hanzi": "小时",
 		"traditional": "小時",
 		"pinyin": "xiǎoshí",
+		"syllables": [
+			{ "py": "xiǎo", "tone": 3 },
+			{ "py": "shí", "tone": 2 }
+		],
 		"meanings": ["hour"],
 		"pos": ["N"],
 		"level": 1
@@ -3456,7 +4577,11 @@
 		"hanzi": "小学",
 		"traditional": "小學",
 		"pinyin": "xiǎoxué",
-		"meanings": ["elementary school"],
+		"syllables": [
+			{ "py": "xiǎo", "tone": 3 },
+			{ "py": "xué", "tone": 2 }
+		],
+		"meanings": ["elementary school", "primary school"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3465,7 +4590,12 @@
 		"hanzi": "小学生",
 		"traditional": "小學生",
 		"pinyin": "xiǎoxuéshēng",
-		"meanings": ["primary school student", "schoolchild"],
+		"syllables": [
+			{ "py": "xiǎo", "tone": 3 },
+			{ "py": "xué", "tone": 2 },
+			{ "py": "shēng", "tone": 1 }
+		],
+		"meanings": ["primary school pupil", "schoolchild"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3473,7 +4603,8 @@
 		"id": "L1-0408",
 		"hanzi": "笑",
 		"pinyin": "xiào",
-		"meanings": ["to laugh"],
+		"syllables": [{ "py": "xiào", "tone": 4 }],
+		"meanings": ["to laugh", "to smile"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3482,6 +4613,7 @@
 		"hanzi": "写",
 		"traditional": "寫",
 		"pinyin": "xiě",
+		"syllables": [{ "py": "xiě", "tone": 3 }],
 		"meanings": ["to write"],
 		"pos": ["V"],
 		"level": 1
@@ -3491,7 +4623,11 @@
 		"hanzi": "谢谢",
 		"traditional": "謝謝",
 		"pinyin": "xièxie",
-		"meanings": ["to thank", "thanks"],
+		"syllables": [
+			{ "py": "xiè", "tone": 4 },
+			{ "py": "xie", "tone": 0 }
+		],
+		"meanings": ["to thank", "thank you"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3499,7 +4635,8 @@
 		"id": "L1-0411",
 		"hanzi": "新",
 		"pinyin": "xīn",
-		"meanings": ["new", "newly"],
+		"syllables": [{ "py": "xīn", "tone": 1 }],
+		"meanings": ["new"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3507,6 +4644,10 @@
 		"id": "L1-0412",
 		"hanzi": "新年",
 		"pinyin": "xīnnián",
+		"syllables": [
+			{ "py": "xīn", "tone": 1 },
+			{ "py": "nián", "tone": 2 }
+		],
 		"meanings": ["New Year"],
 		"pos": ["N"],
 		"level": 1
@@ -3515,7 +4656,11 @@
 		"id": "L1-0413",
 		"hanzi": "星期",
 		"pinyin": "xīngqī",
-		"meanings": ["week", "day of the week"],
+		"syllables": [
+			{ "py": "xīng", "tone": 1 },
+			{ "py": "qī", "tone": 1 }
+		],
+		"meanings": ["week"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3523,6 +4668,11 @@
 		"id": "L1-0414",
 		"hanzi": "星期日",
 		"pinyin": "xīngqīrì",
+		"syllables": [
+			{ "py": "xīng", "tone": 1 },
+			{ "py": "qī", "tone": 1 },
+			{ "py": "rì", "tone": 4 }
+		],
 		"meanings": ["Sunday"],
 		"pos": ["N"],
 		"level": 1
@@ -3531,7 +4681,12 @@
 		"id": "L1-0415",
 		"hanzi": "星期天",
 		"pinyin": "xīngqītiān",
-		"meanings": ["Sunday, colloquial"],
+		"syllables": [
+			{ "py": "xīng", "tone": 1 },
+			{ "py": "qī", "tone": 1 },
+			{ "py": "tiān", "tone": 1 }
+		],
+		"meanings": ["Sunday in everyday speech"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3539,7 +4694,8 @@
 		"id": "L1-0416",
 		"hanzi": "行",
 		"pinyin": "xíng",
-		"meanings": ["capable", "all right"],
+		"syllables": [{ "py": "xíng", "tone": 2 }],
+		"meanings": ["all right", "capable"],
 		"pos": ["V", "Adj"],
 		"level": 1
 	},
@@ -3547,7 +4703,11 @@
 		"id": "L1-0417",
 		"hanzi": "休息",
 		"pinyin": "xiūxi",
-		"meanings": ["to rest"],
+		"syllables": [
+			{ "py": "xiū", "tone": 1 },
+			{ "py": "xi", "tone": 0 }
+		],
+		"meanings": ["to rest", "to take a break"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3556,6 +4716,7 @@
 		"hanzi": "学",
 		"traditional": "學",
 		"pinyin": "xué",
+		"syllables": [{ "py": "xué", "tone": 2 }],
 		"meanings": ["to learn"],
 		"pos": ["V"],
 		"level": 1
@@ -3565,6 +4726,10 @@
 		"hanzi": "学生",
 		"traditional": "學生",
 		"pinyin": "xuéshēng",
+		"syllables": [
+			{ "py": "xué", "tone": 2 },
+			{ "py": "shēng", "tone": 1 }
+		],
 		"meanings": ["student", "schoolchild"],
 		"pos": ["N"],
 		"level": 1
@@ -3574,6 +4739,10 @@
 		"hanzi": "学习",
 		"traditional": "學習",
 		"pinyin": "xuéxí",
+		"syllables": [
+			{ "py": "xué", "tone": 2 },
+			{ "py": "xí", "tone": 2 }
+		],
 		"meanings": ["to study"],
 		"pos": ["V"],
 		"level": 1
@@ -3583,6 +4752,10 @@
 		"hanzi": "学校",
 		"traditional": "學校",
 		"pinyin": "xuéxiào",
+		"syllables": [
+			{ "py": "xué", "tone": 2 },
+			{ "py": "xiào", "tone": 4 }
+		],
 		"meanings": ["school"],
 		"pos": ["N"],
 		"level": 1
@@ -3592,7 +4765,11 @@
 		"hanzi": "学院",
 		"traditional": "學院",
 		"pinyin": "xuéyuàn",
-		"meanings": ["college", "educational institute"],
+		"syllables": [
+			{ "py": "xué", "tone": 2 },
+			{ "py": "yuàn", "tone": 4 }
+		],
+		"meanings": ["college", "academy"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3600,7 +4777,8 @@
 		"id": "L1-0423",
 		"hanzi": "要",
 		"pinyin": "yào",
-		"meanings": ["to want", "will"],
+		"syllables": [{ "py": "yào", "tone": 4 }],
+		"meanings": ["to want", "to need", "will"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3609,7 +4787,11 @@
 		"hanzi": "爷爷",
 		"traditional": "爺爺",
 		"pinyin": "yéye",
-		"meanings": ["paternal grandfather"],
+		"syllables": [
+			{ "py": "yé", "tone": 2 },
+			{ "py": "ye", "tone": 0 }
+		],
+		"meanings": ["paternal grandfather", "grandpa"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3617,7 +4799,8 @@
 		"id": "L1-0425",
 		"hanzi": "也",
 		"pinyin": "yě",
-		"meanings": ["also", "even"],
+		"syllables": [{ "py": "yě", "tone": 3 }],
+		"meanings": ["also", "too"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -3626,7 +4809,8 @@
 		"hanzi": "页",
 		"traditional": "頁",
 		"pinyin": "yè",
-		"meanings": ["page"],
+		"syllables": [{ "py": "yè", "tone": 4 }],
+		"meanings": ["page", "measure word: pages"],
 		"pos": ["M"],
 		"level": 1
 	},
@@ -3634,6 +4818,7 @@
 		"id": "L1-0427",
 		"hanzi": "一",
 		"pinyin": "yī",
+		"syllables": [{ "py": "yī", "tone": 1 }],
 		"meanings": ["one"],
 		"pos": ["Num"],
 		"level": 1
@@ -3642,6 +4827,10 @@
 		"id": "L1-0428",
 		"hanzi": "衣服",
 		"pinyin": "yīfu",
+		"syllables": [
+			{ "py": "yī", "tone": 1 },
+			{ "py": "fu", "tone": 0 }
+		],
 		"meanings": ["clothes"],
 		"pos": ["N"],
 		"level": 1
@@ -3651,7 +4840,11 @@
 		"hanzi": "医生",
 		"traditional": "醫生",
 		"pinyin": "yīshēng",
-		"meanings": ["doctor"],
+		"syllables": [
+			{ "py": "yī", "tone": 1 },
+			{ "py": "shēng", "tone": 1 }
+		],
+		"meanings": ["doctor", "physician"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3660,6 +4853,10 @@
 		"hanzi": "医院",
 		"traditional": "醫院",
 		"pinyin": "yīyuàn",
+		"syllables": [
+			{ "py": "yī", "tone": 1 },
+			{ "py": "yuàn", "tone": 4 }
+		],
 		"meanings": ["hospital"],
 		"pos": ["N"],
 		"level": 1
@@ -3668,6 +4865,10 @@
 		"id": "L1-0431",
 		"hanzi": "一半",
 		"pinyin": "yíbàn",
+		"syllables": [
+			{ "py": "yí", "tone": 2 },
+			{ "py": "bàn", "tone": 4 }
+		],
 		"meanings": ["one half"],
 		"pos": ["Num"],
 		"level": 1
@@ -3677,7 +4878,12 @@
 		"hanzi": "一会儿",
 		"traditional": "一會兒",
 		"pinyin": "yíhuìr",
-		"meanings": ["a moment", "a while"],
+		"syllables": [
+			{ "py": "yí", "tone": 2 },
+			{ "py": "huì", "tone": 4 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["a short while", "a moment"],
 		"pos": [],
 		"level": 1
 	},
@@ -3686,7 +4892,12 @@
 		"hanzi": "一块儿",
 		"traditional": "一塊兒",
 		"pinyin": "yíkuàir",
-		"meanings": ["together"],
+		"syllables": [
+			{ "py": "yí", "tone": 2 },
+			{ "py": "kuài", "tone": 4 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["together with someone", "as a group"],
 		"pos": ["N", "Adv"],
 		"level": 1
 	},
@@ -3695,7 +4906,12 @@
 		"hanzi": "一下儿",
 		"traditional": "一下兒",
 		"pinyin": "yíxiàr",
-		"meanings": ["briefly", "once"],
+		"syllables": [
+			{ "py": "yí", "tone": 2 },
+			{ "py": "xià", "tone": 4 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["briefly", "just once"],
 		"pos": [],
 		"level": 1
 	},
@@ -3704,7 +4920,11 @@
 		"hanzi": "一样",
 		"traditional": "一樣",
 		"pinyin": "yíyàng",
-		"meanings": ["same", "like"],
+		"syllables": [
+			{ "py": "yí", "tone": 2 },
+			{ "py": "yàng", "tone": 4 }
+		],
+		"meanings": ["the same", "alike"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3713,7 +4933,11 @@
 		"hanzi": "一边",
 		"traditional": "一邊",
 		"pinyin": "yìbiān",
-		"meanings": ["one side", "either side"],
+		"syllables": [
+			{ "py": "yì", "tone": 4 },
+			{ "py": "biān", "tone": 1 }
+		],
+		"meanings": ["one side", "while doing something else"],
 		"pos": ["N", "Adv"],
 		"level": 1
 	},
@@ -3722,6 +4946,11 @@
 		"hanzi": "一点儿",
 		"traditional": "一點兒",
 		"pinyin": "yìdiǎnr",
+		"syllables": [
+			{ "py": "yì", "tone": 4 },
+			{ "py": "diǎn", "tone": 3 },
+			{ "py": "r", "tone": 0 }
+		],
 		"meanings": ["a little", "a bit"],
 		"pos": [],
 		"level": 1
@@ -3730,7 +4959,11 @@
 		"id": "L1-0438",
 		"hanzi": "一起",
 		"pinyin": "yìqǐ",
-		"meanings": ["the same place", "together"],
+		"syllables": [
+			{ "py": "yì", "tone": 4 },
+			{ "py": "qǐ", "tone": 3 }
+		],
+		"meanings": ["together", "in the same place"],
 		"pos": ["Adv", "N"],
 		"level": 1
 	},
@@ -3738,6 +4971,10 @@
 		"id": "L1-0439",
 		"hanzi": "一些",
 		"pinyin": "yìxiē",
+		"syllables": [
+			{ "py": "yì", "tone": 4 },
+			{ "py": "xiē", "tone": 1 }
+		],
 		"meanings": ["some"],
 		"pos": [],
 		"level": 1
@@ -3746,7 +4983,8 @@
 		"id": "L1-0440",
 		"hanzi": "用",
 		"pinyin": "yòng",
-		"meanings": ["to use", "to need"],
+		"syllables": [{ "py": "yòng", "tone": 4 }],
+		"meanings": ["to use"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3754,7 +4992,8 @@
 		"id": "L1-0441",
 		"hanzi": "有",
 		"pinyin": "yǒu",
-		"meanings": ["to have", "having"],
+		"syllables": [{ "py": "yǒu", "tone": 3 }],
+		"meanings": ["to have", "there is"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3762,6 +5001,10 @@
 		"id": "L1-0442",
 		"hanzi": "有的",
 		"pinyin": "yǒude",
+		"syllables": [
+			{ "py": "yǒu", "tone": 3 },
+			{ "py": "de", "tone": 0 }
+		],
 		"meanings": ["some of them"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3770,6 +5013,10 @@
 		"id": "L1-0443",
 		"hanzi": "有名",
 		"pinyin": "yǒu míng",
+		"syllables": [
+			{ "py": "yǒu", "tone": 3 },
+			{ "py": "míng", "tone": 2 }
+		],
 		"meanings": ["famous", "well-known"],
 		"pos": [],
 		"level": 1
@@ -3779,6 +5026,11 @@
 		"hanzi": "有时候",
 		"traditional": "有時候",
 		"pinyin": "yǒushíhou",
+		"syllables": [
+			{ "py": "yǒu", "tone": 3 },
+			{ "py": "shí", "tone": 2 },
+			{ "py": "hou", "tone": 0 }
+		],
 		"meanings": ["sometimes"],
 		"pos": ["Adv"],
 		"level": 1
@@ -3787,6 +5039,10 @@
 		"id": "L1-0445",
 		"hanzi": "有些",
 		"pinyin": "yǒu xiē",
+		"syllables": [
+			{ "py": "yǒu", "tone": 3 },
+			{ "py": "xiē", "tone": 1 }
+		],
 		"meanings": ["certain ones", "somewhat"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3795,7 +5051,11 @@
 		"id": "L1-0446",
 		"hanzi": "有用",
 		"pinyin": "yǒuyòng",
-		"meanings": ["useful"],
+		"syllables": [
+			{ "py": "yǒu", "tone": 3 },
+			{ "py": "yòng", "tone": 4 }
+		],
+		"meanings": ["to be useful"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3803,7 +5063,8 @@
 		"id": "L1-0447",
 		"hanzi": "右",
 		"pinyin": "yòu",
-		"meanings": ["right, the direction"],
+		"syllables": [{ "py": "yòu", "tone": 4 }],
+		"meanings": ["the right-hand side"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3812,7 +5073,11 @@
 		"hanzi": "右边",
 		"traditional": "右邊",
 		"pinyin": "yòubian",
-		"meanings": ["right side", "right, to the right"],
+		"syllables": [
+			{ "py": "yòu", "tone": 4 },
+			{ "py": "bian", "tone": 0 }
+		],
+		"meanings": ["right side", "on the right"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3820,6 +5085,7 @@
 		"id": "L1-0449",
 		"hanzi": "雨",
 		"pinyin": "yǔ",
+		"syllables": [{ "py": "yǔ", "tone": 3 }],
 		"meanings": ["rain"],
 		"pos": ["N"],
 		"level": 1
@@ -3828,7 +5094,8 @@
 		"id": "L1-0450",
 		"hanzi": "元",
 		"pinyin": "yuán",
-		"meanings": ["yuan", "Chinese currency unit"],
+		"syllables": [{ "py": "yuán", "tone": 2 }],
+		"meanings": ["unit of Chinese currency"],
 		"pos": ["M"],
 		"level": 1
 	},
@@ -3837,6 +5104,7 @@
 		"hanzi": "远",
 		"traditional": "遠",
 		"pinyin": "yuǎn",
+		"syllables": [{ "py": "yuǎn", "tone": 3 }],
 		"meanings": ["far", "distant"],
 		"pos": ["Adj"],
 		"level": 1
@@ -3845,7 +5113,8 @@
 		"id": "L1-0452",
 		"hanzi": "月",
 		"pinyin": "yuè",
-		"meanings": ["moon", "month"],
+		"syllables": [{ "py": "yuè", "tone": 4 }],
+		"meanings": ["month", "moon"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3853,7 +5122,8 @@
 		"id": "L1-0453",
 		"hanzi": "再",
 		"pinyin": "zài",
-		"meanings": ["again", "further"],
+		"syllables": [{ "py": "zài", "tone": 4 }],
+		"meanings": ["once more", "again"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -3862,7 +5132,11 @@
 		"hanzi": "再见",
 		"traditional": "再見",
 		"pinyin": "zàijiàn",
-		"meanings": ["goodbye"],
+		"syllables": [
+			{ "py": "zài", "tone": 4 },
+			{ "py": "jiàn", "tone": 4 }
+		],
+		"meanings": ["goodbye", "see you again"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3870,7 +5144,8 @@
 		"id": "L1-0455",
 		"hanzi": "在",
 		"pinyin": "zài",
-		"meanings": ["at", "to be at"],
+		"syllables": [{ "py": "zài", "tone": 4 }],
+		"meanings": ["to be at", "at or in"],
 		"pos": ["V", "Prep", "Adv"],
 		"level": 1
 	},
@@ -3878,6 +5153,10 @@
 		"id": "L1-0456",
 		"hanzi": "在家",
 		"pinyin": "zàijiā",
+		"syllables": [
+			{ "py": "zài", "tone": 4 },
+			{ "py": "jiā", "tone": 1 }
+		],
 		"meanings": ["to be at home"],
 		"pos": ["V"],
 		"level": 1
@@ -3886,7 +5165,8 @@
 		"id": "L1-0457",
 		"hanzi": "早",
 		"pinyin": "zǎo",
-		"meanings": ["early", "morning"],
+		"syllables": [{ "py": "zǎo", "tone": 3 }],
+		"meanings": ["early"],
 		"pos": ["Adj"],
 		"level": 1
 	},
@@ -3895,6 +5175,10 @@
 		"hanzi": "早饭",
 		"traditional": "早飯",
 		"pinyin": "zǎofàn",
+		"syllables": [
+			{ "py": "zǎo", "tone": 3 },
+			{ "py": "fàn", "tone": 4 }
+		],
 		"meanings": ["breakfast"],
 		"pos": ["N"],
 		"level": 1
@@ -3903,6 +5187,10 @@
 		"id": "L1-0459",
 		"hanzi": "早上",
 		"pinyin": "zǎoshang",
+		"syllables": [
+			{ "py": "zǎo", "tone": 3 },
+			{ "py": "shang", "tone": 0 }
+		],
 		"meanings": ["early morning"],
 		"pos": ["N"],
 		"level": 1
@@ -3912,7 +5200,11 @@
 		"hanzi": "怎么",
 		"traditional": "怎麼",
 		"pinyin": "zěnme",
-		"meanings": ["how?", "what?"],
+		"syllables": [
+			{ "py": "zěn", "tone": 3 },
+			{ "py": "me", "tone": 0 }
+		],
+		"meanings": ["how?", "in what way?"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3920,7 +5212,8 @@
 		"id": "L1-0461",
 		"hanzi": "站",
 		"pinyin": "zhàn",
-		"meanings": ["station", "website"],
+		"syllables": [{ "py": "zhàn", "tone": 4 }],
+		"meanings": ["station", "a stop on a route"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -3928,7 +5221,8 @@
 		"id": "L1-0462",
 		"hanzi": "找",
 		"pinyin": "zhǎo",
-		"meanings": ["to try to find", "to look for"],
+		"syllables": [{ "py": "zhǎo", "tone": 3 }],
+		"meanings": ["to look for", "to try to find"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -3936,6 +5230,10 @@
 		"id": "L1-0463",
 		"hanzi": "找到",
 		"pinyin": "zhǎodào",
+		"syllables": [
+			{ "py": "zhǎo", "tone": 3 },
+			{ "py": "dào", "tone": 4 }
+		],
 		"meanings": ["to find"],
 		"pos": [],
 		"level": 1
@@ -3945,7 +5243,8 @@
 		"hanzi": "这",
 		"traditional": "這",
 		"pinyin": "zhè",
-		"meanings": ["this", "these"],
+		"syllables": [{ "py": "zhè", "tone": 4 }],
+		"meanings": ["this"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3954,6 +5253,10 @@
 		"hanzi": "这边",
 		"traditional": "這邊",
 		"pinyin": "zhèbiān",
+		"syllables": [
+			{ "py": "zhè", "tone": 4 },
+			{ "py": "biān", "tone": 1 }
+		],
 		"meanings": ["this side", "over here"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3963,6 +5266,10 @@
 		"hanzi": "这里",
 		"traditional": "這裡",
 		"pinyin": "zhèlǐ",
+		"syllables": [
+			{ "py": "zhè", "tone": 4 },
+			{ "py": "lǐ", "tone": 3 }
+		],
 		"meanings": ["here"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3972,7 +5279,11 @@
 		"hanzi": "这儿",
 		"traditional": "這兒",
 		"pinyin": "zhèr",
-		"meanings": ["here, colloquial"],
+		"syllables": [
+			{ "py": "zhè", "tone": 4 },
+			{ "py": "r", "tone": 0 }
+		],
+		"meanings": ["the spoken word for here"],
 		"pos": ["Pron"],
 		"level": 1
 	},
@@ -3981,6 +5292,10 @@
 		"hanzi": "这些",
 		"traditional": "這些",
 		"pinyin": "zhèxiē",
+		"syllables": [
+			{ "py": "zhè", "tone": 4 },
+			{ "py": "xiē", "tone": 1 }
+		],
 		"meanings": ["these"],
 		"pos": ["Pron"],
 		"level": 1
@@ -3990,7 +5305,8 @@
 		"hanzi": "着",
 		"traditional": "著",
 		"pinyin": "zhe",
-		"meanings": ["ongoing-action particle"],
+		"syllables": [{ "py": "zhe", "tone": 0 }],
+		"meanings": ["shows a continuing state", "marks an ongoing action"],
 		"pos": ["Aux"],
 		"level": 1
 	},
@@ -3998,7 +5314,8 @@
 		"id": "L1-0470",
 		"hanzi": "真",
 		"pinyin": "zhēn",
-		"meanings": ["true", "real"],
+		"syllables": [{ "py": "zhēn", "tone": 1 }],
+		"meanings": ["truly", "real"],
 		"pos": ["Adv", "Adj"],
 		"level": 1
 	},
@@ -4006,6 +5323,10 @@
 		"id": "L1-0471",
 		"hanzi": "真的",
 		"pinyin": "zhēn de",
+		"syllables": [
+			{ "py": "zhēn", "tone": 1 },
+			{ "py": "de", "tone": 0 }
+		],
 		"meanings": ["really", "truly"],
 		"pos": [],
 		"level": 1
@@ -4014,7 +5335,8 @@
 		"id": "L1-0472",
 		"hanzi": "正",
 		"pinyin": "zhèng",
-		"meanings": ["straight", "upright"],
+		"syllables": [{ "py": "zhèng", "tone": 4 }],
+		"meanings": ["just at that moment", "right in the middle of"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4022,7 +5344,11 @@
 		"id": "L1-0473",
 		"hanzi": "正在",
 		"pinyin": "zhèngzài",
-		"meanings": ["to be in the process of"],
+		"syllables": [
+			{ "py": "zhèng", "tone": 4 },
+			{ "py": "zài", "tone": 4 }
+		],
+		"meanings": ["in the process of doing", "currently"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4030,6 +5356,10 @@
 		"id": "L1-0474",
 		"hanzi": "知道",
 		"pinyin": "zhīdào",
+		"syllables": [
+			{ "py": "zhī", "tone": 1 },
+			{ "py": "dào", "tone": 4 }
+		],
 		"meanings": ["to know a fact"],
 		"pos": ["V"],
 		"level": 1
@@ -4039,6 +5369,10 @@
 		"hanzi": "知识",
 		"traditional": "知識",
 		"pinyin": "zhīshi",
+		"syllables": [
+			{ "py": "zhī", "tone": 1 },
+			{ "py": "shi", "tone": 0 }
+		],
 		"meanings": ["knowledge", "intellectual"],
 		"pos": ["N"],
 		"level": 1
@@ -4047,7 +5381,8 @@
 		"id": "L1-0476",
 		"hanzi": "中",
 		"pinyin": "zhōng",
-		"meanings": ["within", "middle"],
+		"syllables": [{ "py": "zhōng", "tone": 1 }],
+		"meanings": ["the middle part", "within"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4056,6 +5391,10 @@
 		"hanzi": "中国",
 		"traditional": "中國",
 		"pinyin": "Zhōngguó",
+		"syllables": [
+			{ "py": "Zhōng", "tone": 1 },
+			{ "py": "guó", "tone": 2 }
+		],
 		"meanings": ["China"],
 		"pos": ["N"],
 		"level": 1
@@ -4065,7 +5404,11 @@
 		"hanzi": "中间",
 		"traditional": "中間",
 		"pinyin": "zhōngjiān",
-		"meanings": ["the middle", "in the middle"],
+		"syllables": [
+			{ "py": "zhōng", "tone": 1 },
+			{ "py": "jiān", "tone": 1 }
+		],
+		"meanings": ["the middle", "in between"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4073,7 +5416,11 @@
 		"id": "L1-0479",
 		"hanzi": "中文",
 		"pinyin": "Zhōngwén",
-		"meanings": ["Chinese, especially written"],
+		"syllables": [
+			{ "py": "Zhōng", "tone": 1 },
+			{ "py": "wén", "tone": 2 }
+		],
+		"meanings": ["Chinese especially in writing"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4081,6 +5428,10 @@
 		"id": "L1-0480",
 		"hanzi": "中午",
 		"pinyin": "zhōngwǔ",
+		"syllables": [
+			{ "py": "zhōng", "tone": 1 },
+			{ "py": "wǔ", "tone": 3 }
+		],
 		"meanings": ["noon", "midday"],
 		"pos": ["N"],
 		"level": 1
@@ -4090,6 +5441,10 @@
 		"hanzi": "中学",
 		"traditional": "中學",
 		"pinyin": "zhōngxué",
+		"syllables": [
+			{ "py": "zhōng", "tone": 1 },
+			{ "py": "xué", "tone": 2 }
+		],
 		"meanings": ["middle school"],
 		"pos": ["N"],
 		"level": 1
@@ -4099,6 +5454,11 @@
 		"hanzi": "中学生",
 		"traditional": "中學生",
 		"pinyin": "zhōngxuéshēng",
+		"syllables": [
+			{ "py": "zhōng", "tone": 1 },
+			{ "py": "xué", "tone": 2 },
+			{ "py": "shēng", "tone": 1 }
+		],
 		"meanings": ["middle-school student", "high school student"],
 		"pos": ["N"],
 		"level": 1
@@ -4107,6 +5467,7 @@
 		"id": "L1-0483",
 		"hanzi": "重",
 		"pinyin": "zhòng",
+		"syllables": [{ "py": "zhòng", "tone": 4 }],
 		"meanings": ["heavy", "serious"],
 		"pos": ["Adj"],
 		"level": 1
@@ -4115,6 +5476,10 @@
 		"id": "L1-0484",
 		"hanzi": "重要",
 		"pinyin": "zhòngyào",
+		"syllables": [
+			{ "py": "zhòng", "tone": 4 },
+			{ "py": "yào", "tone": 4 }
+		],
 		"meanings": ["important"],
 		"pos": ["Adj"],
 		"level": 1
@@ -4123,7 +5488,8 @@
 		"id": "L1-0485",
 		"hanzi": "住",
 		"pinyin": "zhù",
-		"meanings": ["to live", "to stop"],
+		"syllables": [{ "py": "zhù", "tone": 4 }],
+		"meanings": ["to live somewhere", "to stay"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4132,7 +5498,11 @@
 		"hanzi": "准备",
 		"traditional": "準備",
 		"pinyin": "zhǔnbèi",
-		"meanings": ["to prepare", "to intend"],
+		"syllables": [
+			{ "py": "zhǔn", "tone": 3 },
+			{ "py": "bèi", "tone": 4 }
+		],
+		"meanings": ["to prepare", "to plan to"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4140,6 +5510,10 @@
 		"id": "L1-0487",
 		"hanzi": "桌子",
 		"pinyin": "zhuōzi",
+		"syllables": [
+			{ "py": "zhuō", "tone": 1 },
+			{ "py": "zi", "tone": 0 }
+		],
 		"meanings": ["table", "desk"],
 		"pos": ["N"],
 		"level": 1
@@ -4148,7 +5522,8 @@
 		"id": "L1-0488",
 		"hanzi": "字",
 		"pinyin": "zì",
-		"meanings": ["letter", "symbol"],
+		"syllables": [{ "py": "zì", "tone": 4 }],
+		"meanings": ["written character", "letter"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4156,7 +5531,8 @@
 		"id": "L1-0489",
 		"hanzi": "子",
 		"pinyin": "zi",
-		"meanings": ["noun suffix"],
+		"syllables": [{ "py": "zi", "tone": 0 }],
+		"meanings": ["noun suffix on objects and people"],
 		"pos": ["Suffix"],
 		"level": 1
 	},
@@ -4164,6 +5540,7 @@
 		"id": "L1-0490",
 		"hanzi": "走",
 		"pinyin": "zǒu",
+		"syllables": [{ "py": "zǒu", "tone": 3 }],
 		"meanings": ["to walk", "to leave"],
 		"pos": ["V"],
 		"level": 1
@@ -4172,6 +5549,10 @@
 		"id": "L1-0491",
 		"hanzi": "走路",
 		"pinyin": "zǒu lù",
+		"syllables": [
+			{ "py": "zǒu", "tone": 3 },
+			{ "py": "lù", "tone": 4 }
+		],
 		"meanings": ["to go on foot"],
 		"pos": [],
 		"level": 1
@@ -4180,7 +5561,8 @@
 		"id": "L1-0492",
 		"hanzi": "最",
 		"pinyin": "zuì",
-		"meanings": ["best or most extreme example", "to the highest degree"],
+		"syllables": [{ "py": "zuì", "tone": 4 }],
+		"meanings": ["the most", "to the highest degree"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4188,7 +5570,11 @@
 		"id": "L1-0493",
 		"hanzi": "最好",
 		"pinyin": "zuìhǎo",
-		"meanings": ["best", "had better"],
+		"syllables": [
+			{ "py": "zuì", "tone": 4 },
+			{ "py": "hǎo", "tone": 3 }
+		],
+		"meanings": ["had better", "it would be best to"],
 		"pos": ["Adv"],
 		"level": 1
 	},
@@ -4197,7 +5583,11 @@
 		"hanzi": "最后",
 		"traditional": "最後",
 		"pinyin": "zuìhòu",
-		"meanings": ["final", "finally"],
+		"syllables": [
+			{ "py": "zuì", "tone": 4 },
+			{ "py": "hòu", "tone": 4 }
+		],
+		"meanings": ["the last one", "in the end"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4205,6 +5595,10 @@
 		"id": "L1-0495",
 		"hanzi": "昨天",
 		"pinyin": "zuótiān",
+		"syllables": [
+			{ "py": "zuó", "tone": 2 },
+			{ "py": "tiān", "tone": 1 }
+		],
 		"meanings": ["yesterday"],
 		"pos": ["N"],
 		"level": 1
@@ -4213,7 +5607,8 @@
 		"id": "L1-0496",
 		"hanzi": "左",
 		"pinyin": "zuǒ",
-		"meanings": ["left"],
+		"syllables": [{ "py": "zuǒ", "tone": 3 }],
+		"meanings": ["the left-hand side"],
 		"pos": ["N"],
 		"level": 1
 	},
@@ -4222,6 +5617,10 @@
 		"hanzi": "左边",
 		"traditional": "左邊",
 		"pinyin": "zuǒbian",
+		"syllables": [
+			{ "py": "zuǒ", "tone": 3 },
+			{ "py": "bian", "tone": 0 }
+		],
 		"meanings": ["the left side"],
 		"pos": ["N"],
 		"level": 1
@@ -4230,7 +5629,8 @@
 		"id": "L1-0498",
 		"hanzi": "坐",
 		"pinyin": "zuò",
-		"meanings": ["to sit", "to take a seat"],
+		"syllables": [{ "py": "zuò", "tone": 4 }],
+		"meanings": ["to sit", "to travel by vehicle"],
 		"pos": ["V"],
 		"level": 1
 	},
@@ -4238,6 +5638,10 @@
 		"id": "L1-0499",
 		"hanzi": "坐下",
 		"pinyin": "zuò xia",
+		"syllables": [
+			{ "py": "zuò", "tone": 4 },
+			{ "py": "xia", "tone": 0 }
+		],
 		"meanings": ["to sit down"],
 		"pos": [],
 		"level": 1
@@ -4246,7 +5650,8 @@
 		"id": "L1-0500",
 		"hanzi": "做",
 		"pinyin": "zuò",
-		"meanings": ["to make", "to write"],
+		"syllables": [{ "py": "zuò", "tone": 4 }],
+		"meanings": ["to do", "to make"],
 		"pos": ["V"],
 		"level": 1
 	}
