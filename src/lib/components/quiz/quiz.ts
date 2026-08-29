@@ -13,7 +13,7 @@ import {
 	type Session,
 	type Word
 } from '$lib/types';
-import { isCorrect } from '$lib/session';
+import { isCorrect, isScored } from '$lib/session';
 
 /**
  * How one answer button is drawn once the question is closed. `answer` is the right choice
@@ -30,8 +30,14 @@ export function choiceStatus(question: Question, choice: Word, picked: Word | nu
 	return isAnswer ? 'answer' : 'other';
 }
 
-/** How one question reads on the progress rail. */
-export type Mark = 'correct' | 'wrong' | 'current' | 'todo';
+/**
+ * How one question reads on the progress rail.
+ *
+ * `taught` is a card that was shown and not asked. It needs its own mark because the two it
+ * would otherwise borrow are both false: it is not `todo` — the learner has dealt with it and
+ * it will never come back this run — and it is not `correct`, because nothing was answered.
+ */
+export type Mark = 'correct' | 'wrong' | 'taught' | 'current' | 'todo';
 
 export interface Tally {
 	answered: number;
@@ -57,7 +63,9 @@ export function marks(session: Session): Mark[] {
 	return session.questions.map((question, i) => {
 		const picked = session.answers[i] ?? null;
 		if (picked !== null) return isCorrect(question, picked) ? 'correct' : 'wrong';
-		return i === session.index ? 'current' : 'todo';
+		if (i === session.index) return 'current';
+		// Behind the cursor with no answer: a teach card, which is done rather than skipped.
+		return i < session.index && !isScored(question) ? 'taught' : 'todo';
 	});
 }
 
@@ -152,8 +160,9 @@ export function posLabel(word: Word): string {
 }
 
 /** The instruction above the prompt. Short, because it is on screen ten times a session. */
-export function promptLabel(direction: Direction): string {
-	return direction === 'hanzi-to-meaning' ? 'Pick the meaning' : 'Pick the character';
+export function promptLabel(kind: Direction | 'introduce'): string {
+	if (kind === 'introduce') return 'New word';
+	return kind === 'hanzi-to-meaning' ? 'Pick the meaning' : 'Pick the character';
 }
 
 /**
@@ -165,6 +174,17 @@ export function parseLevel(segment: string | null | undefined): Level | null {
 	if (typeof segment !== 'string' || segment.trim() === '') return null;
 	const n = Number(segment);
 	return LEVELS.find((level) => level === n) ?? null;
+}
+
+/**
+ * What a screen reader should hear when a teach card arrives.
+ *
+ * A card that asks nothing has no verdict to announce, and silence would leave the whole point
+ * of the card — the word — off the only channel a screen-reader user has.
+ */
+export function introductionAnnouncement(question: Question): string {
+	const word = question.word;
+	return `New word. ${word.hanzi}, ${word.pinyin}, ${fullGloss(word)}`;
 }
 
 /** What a screen reader should hear the moment an answer lands. */

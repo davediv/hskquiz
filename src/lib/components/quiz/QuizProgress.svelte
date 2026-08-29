@@ -69,6 +69,7 @@
 				class="seg"
 				class:correct={mark === 'correct'}
 				class:wrong={mark === 'wrong'}
+				class:taught={mark === 'taught'}
 				class:current={mark === 'current'}
 			></span>
 		{/each}
@@ -87,14 +88,10 @@
 		inset-block-start: var(--app-chrome-h, 0px);
 		z-index: 20;
 		flex: none;
-		padding-block: 0.5rem;
+		/* Continuous, like the rest of the run's rhythm: the stage below is whatever this row
+		   leaves, so a 4px step at a breakpoint is a 6px step in the headword. */
+		padding-block: clamp(0.5rem, calc(1.64svh - 1.3px), 0.75rem);
 		background-color: var(--color-page);
-	}
-
-	@media (min-height: 44rem) {
-		.wrap {
-			padding-block: 0.75rem;
-		}
 	}
 
 	.row {
@@ -166,6 +163,12 @@
 
 	.seg.wrong {
 		background-color: var(--color-wrong);
+	}
+
+	/* Shown, not asked. Filled, so it reads as dealt with rather than pending, but in the
+	   neutral line colour — there is no verdict on a card that asked nothing. */
+	.seg.taught {
+		background-color: var(--color-line-strong);
 	}
 
 	@media (prefers-contrast: more) {

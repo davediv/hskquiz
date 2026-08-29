@@ -12,7 +12,7 @@
  */
 
 import type { Component } from 'svelte';
-import type { Session } from '$lib/types';
+import type { ProgressState, Session, Word } from '$lib/types';
 
 /** The contract `$lib/components/summary/SessionSummary.svelte` is written to. */
 export interface SummaryProps {
@@ -46,6 +46,37 @@ export async function loadSummary(): Promise<SummaryComponent | null> {
  */
 export const DEMO_SEED = 20_260_829;
 export const DEMO_MISSES: readonly number[] = [2, 5, 8];
+
+/** A fixed point on the clock for the demo's records. Well past the decoder's 2024 floor. */
+const DEMO_AT = Date.UTC(2026, 0, 15);
+
+/**
+ * The saved progress the demo run is built against.
+ *
+ * Deliberately not `null`. A learner with no record is owed an *introduction* for every word,
+ * so building the preview against an empty map makes all ten cards teach cards and the screen
+ * becomes "10 new words" — the one state this URL exists in order not to show. The demo
+ * learner has met and answered everything, which is what puts ten real questions on the run so
+ * the seeded misses have somewhere to land.
+ *
+ * Half the words carry a clean streak and half were missed last time, keyed off the last digit
+ * of the id, so the preview shows both directions and is the same screen on every device.
+ */
+export function demoProgress(words: readonly Word[]): ProgressState {
+	const byWord: ProgressState['byWord'] = {};
+	for (const word of words) {
+		const solid = Number(word.id.slice(-1)) % 2 === 0;
+		byWord[word.id] = {
+			wordId: word.id,
+			seen: 3,
+			correct: solid ? 3 : 2,
+			streak: solid ? 3 : 0,
+			lastSeen: DEMO_AT,
+			lastMissed: solid ? 0 : DEMO_AT
+		};
+	}
+	return { version: 1, byWord, levels: {} };
+}
 
 export function seedDemoAnswers(session: Session): Session {
 	const missed = new Set(DEMO_MISSES);

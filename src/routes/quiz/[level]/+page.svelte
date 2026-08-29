@@ -18,14 +18,23 @@
 
 	  · the answer buttons reserve the missed-pick line whether or not they show it
 	    (ChoiceButton), so the stack is one height;
-	  · the prompt is a three-row grid whose middle row absorbs the difference between a
-	    question and a reveal (QuestionPrompt), so the stage never has to grow.
+	  · the prompt draws the whole reveal in both states and hides what would give the answer
+	    away (QuestionPrompt), so the stage never has to grow AND the headword never has to
+	    shrink to let the reveal in. Loop 2 had only the first half of that, and paid for it
+	    out of the character: 北京 was 112.5px as a question and 72.1px as an answer.
 
 	PACE — the learner always taps to continue, on a right answer as much as a wrong one. Auto-
 	advancing on a correct answer would buy half a second and cost the only moment the whole
 	word (hanzi, tone-marked pinyin, every gloss, part of speech) is on screen at full size; that
 	moment is the point of the exercise, not an interstitial. Enter, Space, → and `n` all mean
 	"go on" for anyone on a keyboard, so it is one keystroke rather than a reach for the mouse.
+
+	AND IT ARRIVES BEFORE IT ARMS. Reserving the continue button's space is what stops the
+	answers moving, but it also means a black pill materialises in one frame, 8px under the
+	thumb that just tapped, in a strip that read as empty when the finger came down. A tap 60ms
+	behind the first one skipped the reveal 6/6. So `.next` rises in over 260ms and refuses
+	presses — pointer and keyboard alike — for the first 400ms of its life. A deliberate press
+	is unaffected; a bounce is not a press.
 
 	STATE — everything lives here, in `$state`, for the length of the run. There is no `+page.ts`
 	on purpose: progress is `localStorage` and session construction is random, so a server render
@@ -42,7 +51,8 @@
 	import { LEVELS, type Level, type Word } from '$lib/types';
 	import { loadLevel } from '$lib/data';
 	import { progress } from '$lib/progress';
-	import { buildSession, isCorrect, seededRng } from '$lib/session';
+	import StorageNotice from '$lib/progress/StorageNotice.svelte';
+	import { buildSession, isIntroduction, recordOutcome, seededRng } from '$lib/session';
 	import ChoiceButton from '$lib/components/quiz/ChoiceButton.svelte';
 	import QuestionPrompt from '$lib/components/quiz/QuestionPrompt.svelte';
 	import QuizProgress from '$lib/components/quiz/QuizProgress.svelte';
@@ -50,6 +60,7 @@
 	import { readKey } from '$lib/components/quiz/keys';
 	import {
 		choiceStatus,
+		introductionAnnouncement,
 		marks,
 		parseLevel,
 		tally,
@@ -57,6 +68,7 @@
 	} from '$lib/components/quiz/quiz';
 	import {
 		DEMO_SEED,
+		demoProgress,
 		isSummaryPreview,
 		loadSummary,
 		seedDemoAnswers,
@@ -76,6 +88,13 @@
 	let Summary = $state<SummaryComponent | null>(null);
 	let summarySettled = $state(false);
 	let answersEl = $state<HTMLElement | null>(null);
+	/**
+	 * Whether “Next word” will accept a press yet. The button materialises 8px under the
+	 * answer the thumb just hit, into space that read as empty when the finger came down, so
+	 * for its first frames it is drawn but inert — a second tap 60ms after the first landed on
+	 * it 6/6 and skipped the reveal entirely, which is the one thing this screen exists for.
+	 */
+	let armed = $state(false);
 
 	/** Guards a slow level fetch from landing on top of a newer run. Not reactive by design. */
 	let runId = 0;
@@ -85,6 +104,14 @@
 	);
 	const picked = $derived(session && question ? (session.answers[session.index] ?? null) : null);
 	const answered = $derived(picked !== null);
+	/**
+	 * A teach card, not a question: the word's very first appearance. It shows the whole entry
+	 * up front and asks nothing, so there are no choices to render and nothing to get wrong —
+	 * the only control is "Got it". Nobody can be wrong about a word they have not been taught,
+	 * and the ten `lastMissed` stamps a first run used to write about words it had shown once
+	 * and never asked went straight back into the scheduler that chose them.
+	 */
+	const teaching = $derived(question !== null && isIntroduction(question));
 	const finished = $derived(
 		session !== null && session.questions.length > 0 && session.index >= session.questions.length
 	);
@@ -92,7 +119,11 @@
 	const rail = $derived(session ? marks(session) : []);
 	const lastQuestion = $derived(session !== null && session.index === session.questions.length - 1);
 	/** Nothing on screen announces itself to a screen reader, so the verdict is spoken here. */
-	const spoken = $derived(question && picked ? verdictAnnouncement(question, picked) : '');
+	const spoken = $derived.by(() => {
+		if (!question) return '';
+		if (teaching) return introductionAnnouncement(question);
+		return picked ? verdictAnnouncement(question, picked) : '';
+	});
 
 	async function startSession(target: Level, demo: boolean) {
 		const id = ++runId;
@@ -120,9 +151,14 @@
 		// a tracked read would rebuild the session on every answer it records.
 		const built = untrack(() =>
 			demo
-				? // The demo answers its own questions, so it is built against *no* progress: the
-					// preview is then the same ten words on every device and in every screenshot.
-					seedDemoAnswers(buildSession(words, target, null, 10, { rng: seededRng(DEMO_SEED) }))
+				? // The demo answers its own questions, so it is built against a synthetic record
+					// rather than the learner's: the preview is then the same ten words on every
+					// device and in every screenshot. `demoProgress`, not `null` — a learner with no
+					// record is owed an introduction for every word, and this URL exists to show the
+					// scored summary.
+					seedDemoAnswers(
+						buildSession(words, target, demoProgress(words), 10, { rng: seededRng(DEMO_SEED) })
+					)
 				: buildSession(words, target, progress)
 		);
 
@@ -146,21 +182,51 @@
 		void startSession(target, demo);
 	});
 
+	/* Re-arms from scratch on every card, and disarms the moment one is answered. */
+	$effect(() => {
+		// The card's identity, read so this re-runs between two consecutive teach cards. They
+		// never change `answered`, and a first run is ten of them with the same control in the
+		// same place — a bounce tap would otherwise walk straight through a word.
+		const card = session?.index ?? null;
+		if (card === null || (!answered && !teaching)) {
+			armed = false;
+			return;
+		}
+		armed = false;
+		const timer = setTimeout(() => (armed = true), 400);
+		return () => clearTimeout(timer);
+	});
+
 	function choose(choice: Word) {
 		// Two guards, because a phone can deliver two taps before a frame is painted: the
 		// buttons are `disabled` the moment an answer exists, and this refuses a second one.
-		if (!session || !question || picked !== null) return;
+		if (!session || !question || teaching || picked !== null) return;
 		session.answers[session.index] = choice;
-		progress.recordAnswer(question.word.id, isCorrect(question, choice));
+		// Not `recordAnswer` directly: `recordOutcome` is the one place a card becomes a change
+		// to the record, and it honours `isScored` so this screen cannot get it half right.
+		recordOutcome(progress, question, choice);
 	}
 
-	function advance() {
-		if (!session || picked === null) return;
+	/** "Got it" on a teach card: note the exposure — never an answer — and move on. */
+	function acknowledge() {
+		if (!session || !question || !teaching || !armed) return;
+		recordOutcome(progress, question, null);
+		step();
+	}
+
+	/** Move to the next card. The two ways off a card differ only in what they record. */
+	function step() {
+		if (!session) return;
 		const next = session.index + 1;
 		session.index = next;
 		hinted = false;
-		// Once per finished run, and only for a run that was actually answered.
+		// Once per finished run.
 		if (next >= session.questions.length) progress.noteSession(session.level);
+	}
+
+	function advance() {
+		if (!session || picked === null || !armed) return;
+		step();
 	}
 
 	async function restart() {
@@ -194,7 +260,12 @@
 
 	function onKeydown(event: KeyboardEvent) {
 		if (!question) return;
-		const action = readKey(event, { answered, choices: question.choices.length });
+		// A teach card has nothing to choose and nothing to walk, so it reads as "answered": the
+		// only key that means anything on it is the one that means "go on".
+		const action = readKey(event, {
+			answered: answered || teaching,
+			choices: teaching ? 0 : question.choices.length
+		});
 		if (!action) return;
 
 		if (action.type === 'choose') {
@@ -206,6 +277,7 @@
 		}
 		event.preventDefault();
 		if (action.type === 'move') moveFocus(action.delta);
+		else if (teaching) acknowledge();
 		else advance();
 	}
 </script>
@@ -214,6 +286,10 @@
 
 <main class="quiz">
 	<p class="sr-only" role="status" aria-live="polite">{spoken}</p>
+
+	<!-- Silent while writes are landing. When they are not, this is the screen that most needs
+	     to say so: it is where the answers are being given. -->
+	<StorageNotice />
 
 	{#if status === 'no-level'}
 		<section class="panel">
@@ -238,9 +314,12 @@
 		<section class="panel">
 			<p class="eyebrow">Could not load</p>
 			<h2 class="panel-title">The HSK {level} word list did not arrive</h2>
+			<!-- The reassurance is claimed only while writes are actually landing. When storage is
+			     unavailable or failing it is a flat lie, and `StorageNotice` is on screen saying
+			     so — the two must never contradict each other. -->
 			<p class="panel-body">
-				That is usually the network. Nothing you have practised is lost — progress is kept on this
-				device.
+				That is usually the network. {#if progress.status === 'saving'}Nothing you have practised is
+					lost — progress is kept on this device.{/if}
 			</p>
 			<button type="button" class="btn btn-primary btn-block" onclick={restart}>Try again</button>
 			<a class="btn btn-quiet btn-block mt-2.5" href={resolve('/')}>Back to levels</a>
@@ -284,22 +363,42 @@
 
 			<!-- Keyed by position, not by word: the badge on a button says `1`–`4`, so position
 			     is its identity, and a new question is a change of props rather than a reshuffle
-			     of the DOM under someone's thumb. -->
-			<div class="answers" bind:this={answersEl}>
-				{#each question.choices as choice, i (i)}
-					<ChoiceButton
-						word={choice}
-						direction={question.direction}
-						index={i}
-						status={choiceStatus(question, choice, picked)}
-						onpick={() => choose(choice)}
-					/>
-				{/each}
-			</div>
+			     of the DOM under someone's thumb.
+
+			     A teach card has no choices at all — it asks nothing — so the whole grid is gone
+			     rather than disabled, and the stage takes the height back for the character. -->
+			{#if !teaching}
+				<div class="answers" bind:this={answersEl}>
+					{#each question.choices as choice, i (i)}
+						<ChoiceButton
+							word={choice}
+							direction={question.direction}
+							index={i}
+							status={choiceStatus(question, choice, picked)}
+							onpick={() => choose(choice)}
+						/>
+					{/each}
+				</div>
+			{/if}
 
 			<div class="action">
-				{#if answered}
-					<button type="button" class="btn btn-primary btn-block next" onclick={advance}>
+				{#if teaching}
+					<button
+						type="button"
+						class="btn btn-primary btn-block next"
+						class:arming={!armed}
+						onclick={acknowledge}
+					>
+						{lastQuestion ? 'See results' : 'Got it'}
+						<kbd class="kbd" aria-hidden="true">↵</kbd>
+					</button>
+				{:else if answered}
+					<button
+						type="button"
+						class="btn btn-primary btn-block next"
+						class:arming={!armed}
+						onclick={advance}
+					>
 						{lastQuestion ? 'See results' : 'Next word'}
 						<kbd class="kbd" aria-hidden="true">↵</kbd>
 					</button>
@@ -332,16 +431,24 @@
 	 * One viewport, minus the chrome above and the home indicator below.
 	 *
 	 * The vertical rhythm is five custom properties rather than five literals, because the
-	 * phone this has to FIT (667px) and the phone it should FILL (812px) want different
-	 * numbers: 145px of difference is more than two answer buttons. 44rem = 704px is the line
-	 * between them, and ChoiceButton splits its own height on the same line.
+	 * phone this has to FIT (568px) and the phone it should FILL (932px) want different
+	 * numbers: 364px of difference is five answer buttons. Each one is a `clamp` on `svh`
+	 * rather than a step at a breakpoint, and that is not a style preference — the stage is
+	 * whatever is left after this rhythm, so a rhythm that jumps 40px at 704px of viewport
+	 * hands a 706px window a stage with nothing in it. It did: the headword collapsed to its
+	 * 2.5rem floor and overflowed the reveal at 593px, 706px and 545px, the first pixel above
+	 * each old breakpoint. Continuous in, continuous out. The lines are fitted to the two
+	 * phones that matter — every one of them lands on the old 568px number at 568px and the
+	 * old 812px number at 812px, and interpolates in between instead of jumping. `svh`, not
+	 * `vh`: the small viewport is the one with the URL bar showing, which is the height this
+	 * has to fit. ChoiceButton clamps its own height on the same principle.
 	 */
 	.run {
-		--choice-gap: 0.5rem;
-		--action-gap: 0.5rem;
-		--stage-pad-t: 0.5rem;
-		--stage-pad-b: 0.75rem;
-		--run-pad-b: 0.75rem;
+		--choice-gap: clamp(0.375rem, calc(2.46svh - 8px), 1rem);
+		--action-gap: clamp(0.375rem, calc(3.28svh - 12.6px), 1.125rem);
+		--stage-pad-t: clamp(0.25rem, calc(4.92svh - 23.9px), 1.375rem);
+		--stage-pad-b: clamp(0.5rem, calc(4.92svh - 19.9px), 1.625rem);
+		--run-pad-b: clamp(0.5rem, calc(3.28svh - 10.6px), 1.25rem);
 
 		display: flex;
 		flex-direction: column;
@@ -349,16 +456,6 @@
 		min-block-size: 0;
 		/* The shell adds the home-indicator inset under this, so a notched phone gets both. */
 		padding-block-end: var(--run-pad-b);
-	}
-
-	@media (min-height: 44rem) {
-		.run {
-			--choice-gap: 0.75rem;
-			--action-gap: 0.875rem;
-			--stage-pad-t: 1rem;
-			--stage-pad-b: 1.25rem;
-			--run-pad-b: 1rem;
-		}
 	}
 
 	/* On anything bigger than a phone a full-height column strands the buttons at the far edge
@@ -390,7 +487,7 @@
 
 	/* Landscape. See the matching block in QuestionPrompt: below ~544px of viewport there is
 	   no fit to find, so the run stops being one screen tall and becomes a page. */
-	@media (max-height: 34rem) {
+	@media (max-height: 35rem) {
 		.stage {
 			flex: 0 0 auto;
 			min-block-size: 0;
@@ -424,8 +521,30 @@
 		margin-block-start: var(--action-gap);
 	}
 
+	/*
+	 * It rises into place rather than appearing, and it is `pointer-events: none` while it
+	 * does — the space was already reserved (that is what stopped the answers moving), but a
+	 * control that becomes tappable in one frame, one thumb-width below where the finger just
+	 * was, is a skipped reveal waiting to happen.
+	 */
 	.next {
 		gap: 0.625rem;
+		animation: next-in 260ms var(--ease-out-soft) both;
+	}
+
+	.next.arming {
+		pointer-events: none;
+	}
+
+	@keyframes next-in {
+		from {
+			opacity: 0;
+			translate: 0 0.5rem;
+		}
+		to {
+			opacity: 1;
+			translate: 0 0;
+		}
 	}
 
 	.kbd {

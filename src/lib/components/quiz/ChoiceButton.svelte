@@ -102,14 +102,19 @@
 
 <style>
 	/*
-	 * The height steps come from the viewport, not the width: 667px is the phone this has to
-	 * fit and 812px the one it should fill, and the run's own stylesheet splits on the same
-	 * 44rem line. `block-size: 100%` lets the `.answers` grid equalise all four when one gloss
-	 * wraps, so the stack stays a stack.
+	 * The height comes from the viewport, not the width: 568px is the phone this has to fit
+	 * and 932px the one it should fill. It is a `clamp` on `svh` rather than a step at a
+	 * breakpoint because the stage above is whatever is left over — 46px pills at 592px of
+	 * viewport and 64px pills at 593px meant the headword had 40px of room on one side of
+	 * that line and 110px on the other. The floor is 46px, over the 44px tap minimum; the
+	 * ceiling is 72px, past which a pill holding one word is just a slab.
+	 *
+	 * `block-size: 100%` lets the `.answers` grid equalise all four when one gloss wraps, so
+	 * the stack stays a stack.
 	 */
 	.choice {
-		--choice-h: 3.25rem;
-		--choice-face: 1.875rem;
+		--choice-h: clamp(2.875rem, calc(7.38svh + 4.1px), 4.5rem);
+		--choice-face: clamp(1.625rem, calc(4.1svh + 2.7px), 2.5rem);
 
 		position: relative;
 		display: grid;
@@ -118,12 +123,14 @@
 		block-size: 100%;
 		min-block-size: var(--choice-h);
 		/*
-		 * 2.375rem clears the 22px ✓/✕ badge and its 10px inset with room to spare, and it is
-		 * 10px narrower per side than the 3rem that used to be reserved partly for a keyboard
-		 * number that is `display: none` on every touch device. The longest shipped gloss —
-		 * `makes a sentence a yes-no question` — gains 20px of line before it has to wrap.
+		 * 2.125rem is the 22px ✓/✕ badge, its 10px inset and 2px to spare — no more, because
+		 * every pixel of it is taken off the label on both sides and a label that wraps is a
+		 * taller button, and four taller buttons come out of the headword above. It was 3rem
+		 * when part of the reservation was for a keyboard number that is `display: none` on
+		 * every touch device, then 2.375rem; the longest shipped gloss — `makes a sentence a
+		 * yes-no question` — has gained 30px of line across the two moves.
 		 */
-		padding: 0.5rem 2.375rem;
+		padding: 0.5rem 2.125rem;
 		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-md);
 		background-color: var(--color-surface);
@@ -135,13 +142,6 @@
 			box-shadow 140ms var(--ease-out-soft),
 			color 180ms var(--ease-out-soft),
 			transform 110ms var(--ease-out-soft);
-	}
-
-	@media (min-height: 44rem) {
-		.choice {
-			--choice-h: 4rem;
-			--choice-face: 2.25rem;
-		}
 	}
 
 	.choice:not(:disabled):active {
@@ -243,6 +243,33 @@
 		font-weight: 600;
 		line-height: 1.3;
 		text-wrap: balance;
+	}
+
+	/*
+	 * A 320px phone left 212px of label between the two badge insets, and `turns a word into
+	 * an adverb` is 207px at 16px — so on the narrowest screen a third of the shipped glosses
+	 * wrapped, all four pills grew 16px with the one that did, and 64px came out of the stage
+	 * above. That is where 地 lost its headword to the 2.5rem floor and printed on top of its
+	 * own pinyin. One step down on each rung, plus 12px of the padding back at 320 itself,
+	 * keeps all 4,316 of them on one line: the longest — `makes a sentence a yes-no question`
+	 * — measures 210px at 12px against 224px of room, and it is the only one over 208.
+	 */
+	@media (max-width: 22.5rem) {
+		.gloss {
+			font-size: var(--text-sm);
+		}
+
+		.long .gloss {
+			font-size: var(--text-xs);
+		}
+	}
+
+	@media (max-width: 20.5rem) {
+		.choice {
+			/* The badge is absolutely positioned and the label is centred, so the two only meet
+			   if a label fills the box: the widest one starts at 35px, past the badge's 32px. */
+			padding-inline: 1.75rem;
+		}
 	}
 
 	/* :global — the span belongs to `<Hanzi>`, and this has to beat its size utility. */

@@ -10,7 +10,7 @@
 <script lang="ts">
 	import type { Session } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
-	import { isCorrect } from '$lib/session';
+	import { isCorrect, isScored } from '$lib/session';
 	import { fullGloss, tally } from './quiz';
 
 	interface Props {
@@ -22,22 +22,50 @@
 	let { session, onRestart, onHome }: Props = $props();
 
 	const score = $derived(tally(session));
-	const total = $derived(session.questions.length);
+	/**
+	 * Questions asked, not cards shown. A teach card asks nothing, so counting it here would
+	 * put a word the learner was never asked into "0/10" and again under "worth another look" —
+	 * the same fabricated miss the real summary refuses to print.
+	 */
+	const total = $derived(session.questions.filter((question) => isScored(question)).length);
 	const percent = $derived(total === 0 ? 0 : Math.round((score.correct / total) * 100));
 	const missed = $derived(
 		session.questions
-			.filter((question, i) => !isCorrect(question, session.answers[i] ?? null))
+			.filter(
+				(question, i) => isScored(question) && !isCorrect(question, session.answers[i] ?? null)
+			)
 			.map((question) => question.word)
+	);
+	/** Shown and not asked. Named as such rather than counted as a result. */
+	const taught = $derived(
+		session.questions.filter((question) => !isScored(question)).map((question) => question.word)
 	);
 </script>
 
 <section class="done">
 	<p class="eyebrow">HSK {session.level} · session complete</p>
 
-	<p class="score tabular">
-		<b>{score.correct}</b><span class="of">/{total}</span>
-	</p>
-	<p class="rate tabular">{percent}% correct</p>
+	{#if total > 0}
+		<p class="score tabular">
+			<b>{score.correct}</b><span class="of">/{total}</span>
+		</p>
+		<p class="rate tabular">{percent}% correct</p>
+	{/if}
+
+	{#if taught.length > 0}
+		<h2 class="heading">{taught.length === 1 ? 'New word' : `${taught.length} new words`}</h2>
+		<ul class="list">
+			{#each taught as word (word.id)}
+				<li class="row">
+					<Hanzi {word} size="sm" display />
+					<span class="right">
+						<Pinyin {word} size="sm" />
+						<span class="gloss">{fullGloss(word)}</span>
+					</span>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 
 	{#if missed.length > 0}
 		<h2 class="heading">Worth another look</h2>
@@ -52,8 +80,10 @@
 				</li>
 			{/each}
 		</ul>
-	{:else}
+	{:else if total > 0}
 		<p class="clean">Every answer right. Take the next ten.</p>
+	{:else}
+		<p class="clean">Shown, not tested. The next ten ask them.</p>
 	{/if}
 
 	<div class="actions">
