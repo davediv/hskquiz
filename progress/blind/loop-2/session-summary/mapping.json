@@ -1,0 +1,16 @@
+{
+	"piece": "session-summary",
+	"loop": 2,
+	"rule": "\"session-summary\" is 15 characters — ODD — so the reference is A and ours is B.",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/duchinese/ui/duchinese-iphone-05-ui.png",
+		"why": "Du Chinese's post-answer review card: the same moment in a learner's session — the word has just been tested, and the app now has to teach it. Closest comparable to a session summary's missed-word card."
+	},
+	"B": {
+		"which": "ours",
+		"source": "progress/shots/loop-2/session-summary-mobile.png",
+		"url": "http://127.0.0.1:5177/quiz/1?state=summary",
+		"viewport": "375x812 @2x"
+	}
+}
