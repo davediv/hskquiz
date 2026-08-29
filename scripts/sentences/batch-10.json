@@ -1,0 +1,247 @@
+{
+	"L1-0011": {
+		"hanzi": "我学了半年中文。",
+		"pinyin": "wǒ xué le bàn nián zhōng wén",
+		"english": "I've been studying Chinese for half a year."
+	},
+	"L1-0037": {
+		"hanzi": "我们还差一个人。",
+		"pinyin": "wǒ men hái chà yí gè rén",
+		"english": "We're still one person short."
+	},
+	"L1-0063": {
+		"hanzi": "我姐姐是大学生。",
+		"pinyin": "wǒ jiě jie shì dà xué shēng",
+		"english": "My older sister is a university student."
+	},
+	"L1-0089": {
+		"hanzi": "我们都是学生。",
+		"pinyin": "wǒ men dōu shì xué shēng",
+		"english": "We are all students."
+	},
+	"L1-0115": {
+		"hanzi": "我弟弟比我高。",
+		"pinyin": "wǒ dì di bǐ wǒ gāo",
+		"english": "My little brother is taller than me."
+	},
+	"L1-0141": {
+		"hanzi": "她唱的歌很好听。",
+		"pinyin": "tā chàng de gē hěn hǎo tīng",
+		"english": "The songs she sings are lovely."
+	},
+	"L1-0167": {
+		"hanzi": "我记得你的名字。",
+		"pinyin": "wǒ jì de nǐ de míng zi",
+		"english": "I remember your name."
+	},
+	"L1-0193": {
+		"hanzi": "我明天去医院看病。",
+		"pinyin": "wǒ míng tiān qù yī yuàn kàn bìng",
+		"english": "I'm going to the hospital tomorrow to see a doctor."
+	},
+	"L1-0219": {
+		"hanzi": "我的房间在楼上。",
+		"pinyin": "wǒ de fáng jiān zài lóu shàng",
+		"english": "My room is upstairs."
+	},
+	"L1-0245": {
+		"hanzi": "你叫什么名字？",
+		"pinyin": "nǐ jiào shén me míng zi",
+		"english": "What's your name?"
+	},
+	"L1-0271": {
+		"hanzi": "你是老师吗？",
+		"pinyin": "nǐ shì lǎo shī ma",
+		"english": "Are you a teacher?"
+	},
+	"L1-0297": {
+		"hanzi": "我今天想请假。",
+		"pinyin": "wǒ jīn tiān xiǎng qǐng jià",
+		"english": "I'd like to take the day off today."
+	},
+	"L1-0323": {
+		"hanzi": "我早上八点上学。",
+		"pinyin": "wǒ zǎo shang bā diǎn shàng xué",
+		"english": "I go to school at eight in the morning."
+	},
+	"L1-0349": {
+		"hanzi": "老师说明天有课。",
+		"pinyin": "lǎo shī shuō míng tiān yǒu kè",
+		"english": "The teacher says there's class tomorrow."
+	},
+	"L1-0375": {
+		"hanzi": "我在网上买书。",
+		"pinyin": "wǒ zài wǎng shang mǎi shū",
+		"english": "I buy books online."
+	},
+	"L1-0401": {
+		"hanzi": "这个房间很小。",
+		"pinyin": "zhè ge fáng jiān hěn xiǎo",
+		"english": "This room is very small."
+	},
+	"L1-0427": {
+		"hanzi": "我有一个哥哥。",
+		"pinyin": "wǒ yǒu yí gè gē ge",
+		"english": "I have one older brother."
+	},
+	"L1-0453": {
+		"hanzi": "请你再说一次。",
+		"pinyin": "qǐng nǐ zài shuō yí cì",
+		"english": "Please say that once more."
+	},
+	"L1-0479": {
+		"hanzi": "这本书是中文的。",
+		"pinyin": "zhè běn shū shì zhōng wén de",
+		"english": "This book is in Chinese."
+	},
+	"L2-0005": {
+		"hanzi": "这里晚上很安全。",
+		"pinyin": "zhè lǐ wǎn shang hěn ān quán",
+		"english": "It's very safe here at night."
+	},
+	"L2-0031": {
+		"hanzi": "他不但会说汉语，还会写汉字。",
+		"pinyin": "tā bú dàn huì shuō hàn yǔ hái huì xiě hàn zì",
+		"english": "Not only can he speak Chinese, he can write the characters too."
+	},
+	"L2-0057": {
+		"hanzi": "这个词很常用。",
+		"pinyin": "zhè ge cí hěn cháng yòng",
+		"english": "This word is used all the time."
+	},
+	"L2-0083": {
+		"hanzi": "老师让我们记新词语。",
+		"pinyin": "lǎo shī ràng wǒ men jì xīn cí yǔ",
+		"english": "The teacher has us memorise the new words and phrases."
+	},
+	"L2-0109": {
+		"hanzi": "风太大，树倒了。",
+		"pinyin": "fēng tài dà shù dǎo le",
+		"english": "The wind was so strong the tree fell over."
+	},
+	"L2-0135": {
+		"hanzi": "他懂得怎么和人说话。",
+		"pinyin": "tā dǒng de zěn me hé rén shuō huà",
+		"english": "He knows how to talk to people."
+	},
+	"L2-0161": {
+		"hanzi": "我们走错方向了。",
+		"pinyin": "wǒ men zǒu cuò fāng xiàng le",
+		"english": "We've gone off in the wrong direction."
+	},
+	"L2-0187": {
+		"hanzi": "今天比昨天更冷。",
+		"pinyin": "jīn tiān bǐ zuó tiān gèng lěng",
+		"english": "Today is even colder than yesterday."
+	},
+	"L2-0213": {
+		"hanzi": "别在教室里大声喊。",
+		"pinyin": "bié zài jiào shì lǐ dà shēng hǎn",
+		"english": "Don't yell in the classroom."
+	},
+	"L2-0239": {
+		"hanzi": "欢迎你来我家玩。",
+		"pinyin": "huān yíng nǐ lái wǒ jiā wán",
+		"english": "You're very welcome to come over to my place."
+	},
+	"L2-0265": {
+		"hanzi": "那件红衣服很漂亮。",
+		"pinyin": "nà jiàn hóng yī fu hěn piào liang",
+		"english": "That red dress is beautiful."
+	},
+	"L2-0291": {
+		"hanzi": "考试的结果出来了。",
+		"pinyin": "kǎo shì de jié guǒ chū lái le",
+		"english": "The exam results are out."
+	},
+	"L2-0317": {
+		"hanzi": "我最喜欢的课是科学。",
+		"pinyin": "wǒ zuì xǐ huan de kè shì kē xué",
+		"english": "Science is my favourite class."
+	},
+	"L2-0344": {
+		"hanzi": "我家离学校很近。",
+		"pinyin": "wǒ jiā lí xué xiào hěn jìn",
+		"english": "My home is close to the school."
+	},
+	"L2-0370": {
+		"hanzi": "春天到了，树都绿了。",
+		"pinyin": "chūn tiān dào le shù dōu lǜ le",
+		"english": "Spring is here and the trees have all turned green."
+	},
+	"L2-0396": {
+		"hanzi": "老师给了我们一个难题。",
+		"pinyin": "lǎo shī gěi le wǒ men yí gè nán tí",
+		"english": "The teacher set us a tough problem."
+	},
+	"L2-0422": {
+		"hanzi": "我要一瓶水。",
+		"pinyin": "wǒ yào yì píng shuǐ",
+		"english": "I'd like a bottle of water."
+	},
+	"L2-0448": {
+		"hanzi": "他是我们球队的队长。",
+		"pinyin": "tā shì wǒ men qiú duì de duì zhǎng",
+		"english": "He's the captain of our team."
+	},
+	"L2-0474": {
+		"hanzi": "那个少年是我弟弟。",
+		"pinyin": "nà ge shào nián shì wǒ dì di",
+		"english": "That teenage boy is my younger brother."
+	},
+	"L2-0501": {
+		"hanzi": "孩子在数天上的星星。",
+		"pinyin": "hái zi zài shǔ tiān shàng de xīng xing",
+		"english": "The child is counting the stars in the sky."
+	},
+	"L2-0527": {
+		"hanzi": "他刚才提到了这件事。",
+		"pinyin": "tā gāng cái tí dào le zhè jiàn shì",
+		"english": "He mentioned this a moment ago."
+	},
+	"L2-0553": {
+		"hanzi": "他推开门走了进去。",
+		"pinyin": "tā tuī kāi mén zǒu le jìn qù",
+		"english": "He pushed the door open and walked in."
+	},
+	"L2-0579": {
+		"hanzi": "我们十二点吃午餐。",
+		"pinyin": "wǒ men shí èr diǎn chī wǔ cān",
+		"english": "We have lunch at twelve."
+	},
+	"L2-0605": {
+		"hanzi": "我在看一本中文小说。",
+		"pinyin": "wǒ zài kàn yì běn zhōng wén xiǎo shuō",
+		"english": "I'm reading a Chinese novel."
+	},
+	"L2-0631": {
+		"hanzi": "这个学期我学了很多东西。",
+		"pinyin": "zhè ge xué qī wǒ xué le hěn duō dōng xi",
+		"english": "I've learned a lot this semester."
+	},
+	"L2-0657": {
+		"hanzi": "我以为今天不上课。",
+		"pinyin": "wǒ yǐ wéi jīn tiān bú shàng kè",
+		"english": "I thought we didn't have class today — I was wrong."
+	},
+	"L2-0683": {
+		"hanzi": "这里的人都很友好。",
+		"pinyin": "zhè lǐ de rén dōu hěn yǒu hǎo",
+		"english": "The people here are all very friendly."
+	},
+	"L2-0709": {
+		"hanzi": "下雨了，我们怎么办？",
+		"pinyin": "xià yǔ le wǒ men zěn me bàn",
+		"english": "It's raining — what do we do now?"
+	},
+	"L2-0735": {
+		"hanzi": "我在学中级汉语。",
+		"pinyin": "wǒ zài xué zhōng jí hàn yǔ",
+		"english": "I'm studying intermediate Chinese."
+	},
+	"L2-0761": {
+		"hanzi": "老师让他做我们的组长。",
+		"pinyin": "lǎo shī ràng tā zuò wǒ men de zǔ zhǎng",
+		"english": "The teacher made him our group leader."
+	}
+}
