@@ -1,0 +1,490 @@
+{
+	"L2-0187": {
+		"meanings": ["even more", "still more"],
+		"note": "Adv comparative. Keeping the canonical gloss on the L2 word; L3 更加 currently ships the identical \"even more\" and is the one that should move (e.g. \"all the more\")."
+	},
+	"L2-0188": {
+		"meanings": ["bus"],
+		"note": "Plain noun; CEDICT classifier tail dropped."
+	},
+	"L2-0190": {
+		"meanings": ["kilogram"],
+		"note": "Unit M; correct as shipped."
+	},
+	"L2-0191": {
+		"meanings": ["kilometer"],
+		"note": "Unit M; correct as shipped."
+	},
+	"L2-0194": {
+		"meanings": ["company", "firm"],
+		"note": "N. Kept the second CEDICT clause that the clause-1 truncation dropped."
+	},
+	"L2-0196": {
+		"meanings": ["dog"],
+		"note": "N; classifier tail dropped."
+	},
+	"L2-0197": {
+		"meanings": ["to be enough", "sufficient"],
+		"note": "V/Adv. Dropped the (coll.) \"really\" sense. Verb-form primary keeps it distinct from L3 足够 \"enough\"."
+	},
+	"L2-0198": {
+		"meanings": ["story", "tale"],
+		"note": "N. \"narrative\" is register-wrong for HSK 2; 故事 is simply a story."
+	},
+	"L2-0199": {
+		"meanings": ["on purpose", "deliberately"],
+		"note": "Adv. \"on purpose\" is the everyday reading."
+	},
+	"L2-0200": {
+		"meanings": ["customer", "shopper"],
+		"note": "N. Differentiated from 客人 \"guest\" at the same level."
+	},
+	"L2-0201": {
+		"meanings": ["to turn off a device", "to shut down"],
+		"note": "Dropped the film-industry sense. \"a device\" keeps it clear of 关 \"to close\"."
+	},
+	"L2-0202": {
+		"meanings": ["to be concerned about", "to care about"],
+		"note": "V. Led with \"to be concerned about\" because L4 在乎 already ships \"to care about\"."
+	},
+	"L2-0203": {
+		"meanings": ["point of view", "standpoint"],
+		"note": "N. Held apart from 看法 (personal view) and 意见 (opinion), both L2."
+	},
+	"L2-0204": {
+		"meanings": ["public square", "plaza"],
+		"note": "N; second clause restored."
+	},
+	"L2-0205": {
+		"meanings": ["advertisement", "commercial"],
+		"note": "N. Official POS is N, so the noun sense leads and CEDICT sense 1 \"to advertise\" is not used."
+	},
+	"L2-0207": {
+		"meanings": ["to come over", "to come here"],
+		"note": "V. Dropped \"to manage\" — the 过来 = cope sense is not an HSK 2 reading."
+	},
+	"L2-0209": {
+		"meanings": ["to go over", "to go past"],
+		"note": "Official POS here is V only; \"the past\" belongs to the L3 N row of 过去, which currently ships a byte-identical gloss. Verb-only here breaks that cross-level duplicate."
+	},
+	"L2-0210": {
+		"meanings": ["marks something done before"],
+		"note": "Aux particle. Function in plain words instead of \"experienced action marker\"."
+	},
+	"L2-0211": {
+		"meanings": ["sea", "ocean"],
+		"note": "N; dialect sense dropped."
+	},
+	"L2-0212": {
+		"meanings": ["seaside", "beach"],
+		"note": "Avoided \"coast\"/\"shore\" so it does not collide with 岸 (L5), which should be glossed shore/coast."
+	},
+	"L2-0213": {
+		"meanings": ["to yell", "to call out"],
+		"note": "V. Not \"to shout\" — that is 叫 at L1."
+	},
+	"L2-0214": {
+		"meanings": ["so or very", "easy to do"],
+		"note": "Official POS is Adv; L1 好 ships the Adj \"good\". This row is the intensifier (好大, 好久) plus the pre-verb \"easy to\" (好写)."
+	},
+	"L2-0215": {
+		"meanings": ["advantage", "benefit"],
+		"note": "N. Led with \"advantage\" so it does not duplicate 优点 (L3) \"merit, benefit\"."
+	},
+	"L2-0218": {
+		"meanings": ["good person", "kind person"],
+		"note": "Dropped \"healthy person\" and the sardonic people-pleaser sense."
+	},
+	"L2-0220": {
+		"meanings": ["to seem like", "as if"],
+		"note": "V/Adv, verb sense first per official POS."
+	},
+	"L2-0221": {
+		"meanings": ["suitable", "just right"],
+		"note": "Adj."
+	},
+	"L2-0222": {
+		"meanings": ["river"],
+		"note": "N. Dropped the bound-form Yellow River / Milky Way / rice-noodle senses."
+	},
+	"L2-0223": {
+		"meanings": ["black", "dark"],
+		"note": "Adj; sinister/illegal/hack senses dropped."
+	},
+	"L2-0226": {
+		"meanings": ["red"],
+		"note": "Adj; \"popular\"/\"revolutionary\"/\"bonus\" dropped."
+	},
+	"L2-0228": {
+		"meanings": ["later on in the past", "afterwards"],
+		"note": "N. 后来 narrates past time only, which is the distinction from 以后 and 然后 at the same level."
+	},
+	"L2-0229": {
+		"meanings": ["suddenly", "all at once"],
+		"note": "Adv."
+	},
+	"L2-0230": {
+		"meanings": ["lake"],
+		"note": "N."
+	},
+	"L2-0232": {
+		"meanings": ["to spend money or time"],
+		"note": "Official POS is V and 花 N \"flower\" is the L1 row, so dropping \"flower\" also clears a cross-level duplicate. Named the objects so it does not collide with L5 支出."
+	},
+	"L2-0233": {
+		"meanings": ["garden"],
+		"note": "N; distinct from 公园 \"park\"."
+	},
+	"L2-0234": {
+		"meanings": ["to draw", "to paint"],
+		"note": "V; variant-character 劃 senses dropped."
+	},
+	"L2-0240": {
+		"meanings": ["to change one thing for another", "to switch"],
+		"note": "V. Cannot be \"to exchange\" (L4 交换) or bare \"to change\" (L2 变 / L3 变化), so the primary spells out the swap."
+	},
+	"L2-0241": {
+		"meanings": ["yellow"],
+		"note": "Adj; the pornographic sense dropped."
+	},
+	"L2-0243": {
+		"meanings": ["measure word: occurrences"],
+		"note": "M. Kept as shipped — distinct from 次 \"measure word: times\" at L1."
+	},
+	"L2-0244": {
+		"meanings": ["to return to one's home country"],
+		"note": "Correct as shipped."
+	},
+	"L2-0245": {
+		"meanings": ["a meeting or gathering"],
+		"note": "Official POS is N; the \"can / know how to\" senses are the L1 会 V row. Worded to stay clear of L3 会议 \"meeting\". Fixes the POS mismatch and the cross-level duplicate from the loop-1 verdict."
+	},
+	"L2-0246": {
+		"meanings": ["an activity or event", "to move about"],
+		"note": "V/N. \"to exercise\"/\"shaky\" were minor CEDICT senses; the event sense is what HSK 2 uses (参加活动)."
+	},
+	"L2-0247": {
+		"meanings": ["or in written Chinese"],
+		"note": "Conj. 或 is the written monosyllable; 或者 L2-0248 owns the spoken \"or\"."
+	},
+	"L2-0248": {
+		"meanings": ["or", "or else"],
+		"note": "Conj; the everyday spoken \"or\"."
+	},
+	"L2-0249": {
+		"meanings": ["a chance", "an opportunity"],
+		"note": "N. L4 机遇 and L5 时机 both ship \"opportunity\"; \"a chance\" is the everyday HSK 2 reading (有机会)."
+	},
+	"L2-0250": {
+		"meanings": ["chicken"],
+		"note": "N. Dropped the (slang) prostitute sense and the archaic \"fowl\" lead."
+	},
+	"L2-0251": {
+		"meanings": ["a level or grade", "a rank"],
+		"note": "N. Bare \"level\" is taken by L5 平坦 and bare \"grade\" by L2 年级."
+	},
+	"L2-0252": {
+		"meanings": ["in a hurry", "urgent"],
+		"note": "Adj. Both HSK 2 readings (你别急 / 急事). Bare \"urgent\" is already on L3 紧急 and L4 迫切."
+	},
+	"L2-0255": {
+		"meanings": ["to add", "to increase"],
+		"note": "V."
+	},
+	"L2-0256": {
+		"meanings": ["to cheer someone on", "to refuel"],
+		"note": "The encouragement sense is the one every HSK 2 learner meets; CEDICT tags it (fig.) but there is nothing figurative about 加油! as an interjection. Refuelling kept second."
+	},
+	"L2-0257": {
+		"meanings": ["suffix for an expert in a field"],
+		"note": "Suffix row (画家, 科学家). The noun \"home/family\" is the L1 家 row."
+	},
+	"L2-0258": {
+		"meanings": ["family", "household"],
+		"note": "N."
+	},
+	"L2-0259": {
+		"meanings": ["parent or guardian", "head of a family"],
+		"note": "N. The school-parent sense is the HSK 2 usage; \"patriarch\" is register-wrong."
+	},
+	"L2-0260": {
+		"meanings": ["fake", "false"],
+		"note": "Adj; the jiǎ \"to borrow / if\" senses belong to other readings."
+	},
+	"L2-0262": {
+		"meanings": ["to examine", "to inspect"],
+		"note": "V/N."
+	},
+	"L2-0263": {
+		"meanings": ["to see someone"],
+		"note": "Resultative with a human object. Not \"to meet\" (L1 见面), \"to see\" (L1 看见) or \"to catch sight of\" (L1 看到)."
+	},
+	"L2-0264": {
+		"meanings": ["to have met before", "to have seen before"],
+		"note": "No CEDICT entry; authored."
+	},
+	"L2-0265": {
+		"meanings": ["measure word: clothes and matters"],
+		"note": "M. Removed the internal comma from the shipped gloss, which the browse row joins on \", \" and made unparseable."
+	},
+	"L2-0267": {
+		"meanings": ["to talk about", "to explain"],
+		"note": "V. 说 \"to say\", 告诉 \"to tell\" and 谈 \"to speak\" are taken; 讲 takes a topic (讲故事, 讲课)."
+	},
+	"L2-0268": {
+		"meanings": ["to give a talk", "a speech"],
+		"note": "Differentiated from 讲 \"to speak\" and 演讲 (L4) \"to give a lecture\"."
+	},
+	"L2-0269": {
+		"meanings": ["to hand in", "to pay a fee"],
+		"note": "V. 交作业/交钱 are the HSK 2 uses; the friends sense is carried by 交朋友."
+	},
+	"L2-0270": {
+		"meanings": ["to hand over to someone"],
+		"note": "Bare \"to give\" collides with 给; 交给 always names a recipient."
+	},
+	"L2-0271": {
+		"meanings": ["to make friends"],
+		"note": "Dialect affair sense dropped."
+	},
+	"L2-0272": {
+		"meanings": ["traffic", "transport"],
+		"note": "N. CEDICT sense 1 \"to be connected\" is not the HSK 2 noun."
+	},
+	"L2-0273": {
+		"meanings": ["one tenth of a yuan", "corner"],
+		"note": "M/N, measure-word sense first. Not \"ten cents\" — that is 毛 at L1; naming the fraction keeps the two apart and is the accurate written unit."
+	},
+	"L2-0274": {
+		"meanings": ["angle", "perspective"],
+		"note": "N; the (fig.) marker is dropped but the viewpoint sense is real."
+	},
+	"L2-0276": {
+		"meanings": ["foot"],
+		"note": "N. \"leg\" in CEDICT is the leg of an animal or object, not a human leg (腿)."
+	},
+	"L2-0280": {
+		"meanings": ["teaching", "instruction"],
+		"note": "N."
+	},
+	"L2-0281": {
+		"meanings": ["to educate", "education"],
+		"note": "V/N; the noun sense is worth carrying at this level."
+	},
+	"L2-0282": {
+		"meanings": ["to answer the phone", "to pick someone up"],
+		"note": "V. The two HSK 2 uses, spelled out so the primary does not collide with 答应/答 \"to answer\"."
+	},
+	"L2-0286": {
+		"meanings": ["then or next", "to carry on"],
+		"note": "Adv/V. Plain-words primary; \"to catch and hold on\" is not the HSK 2 sense."
+	},
+	"L2-0287": {
+		"meanings": ["a city street"],
+		"note": "N. Bare \"street\" duplicates 马路 at L1; 街 is the walkable town street."
+	},
+	"L2-0288": {
+		"meanings": ["measure word: class periods", "a section or joint"],
+		"note": "N/M; 一节课 is the HSK 2 use. Festival is 节日."
+	},
+	"L2-0289": {
+		"meanings": ["TV or radio program", "act in a show"],
+		"note": "N."
+	},
+	"L2-0291": {
+		"meanings": ["result", "in the end"],
+		"note": "N/Conj; the \"to kill\" sense dropped."
+	},
+	"L2-0292": {
+		"meanings": ["to borrow", "to lend"],
+		"note": "V. 借 genuinely carries both directions at this level."
+	},
+	"L2-0293": {
+		"meanings": ["half a kilogram", "Chinese catty"],
+		"note": "M. Kept the plain weight first; \"catty\" alone is opaque to a beginner."
+	},
+	"L2-0294": {
+		"meanings": ["from now on", "in the future"],
+		"note": "Time noun."
+	},
+	"L2-0296": {
+		"meanings": ["to be in progress", "to carry out"],
+		"note": "V. Both readings; the primary avoids L5 执行 \"to carry out\"."
+	},
+	"L2-0297": {
+		"meanings": ["near", "close to"],
+		"note": "Adj; correct as shipped."
+	},
+	"L2-0298": {
+		"meanings": ["regularly", "often"],
+		"note": "Adv. 常常 (L1) already ships \"frequently\"; 经常 carries the habitual-regularity nuance, so lead with \"regularly\"."
+	},
+	"L2-0299": {
+		"meanings": ["to pass by", "to go through"],
+		"note": "V/N."
+	},
+	"L2-0301": {
+		"meanings": ["alcohol", "liquor or wine"],
+		"note": "N. 酒 is the generic word for alcoholic drink; leading with \"wine\" mis-teaches it and clashes with 白酒/啤酒."
+	},
+	"L2-0303": {
+		"meanings": ["will soon", "on the point of"],
+		"note": "Adv. Held apart from 快要 below: 就要 can take an explicit time word."
+	},
+	"L2-0304": {
+		"meanings": ["to hold up", "to raise your hand"],
+		"note": "V. Not \"to lift\" — that is 抬 (L5)."
+	},
+	"L2-0307": {
+		"meanings": ["measure word: sentences"],
+		"note": "M; correct as shipped."
+	},
+	"L2-0309": {
+		"meanings": ["card"],
+		"note": "N. The shipped primary \"slow\" was a (computing)(coll.) CEDICT sense; 卡 at HSK 2 is the card (银行卡)."
+	},
+	"L2-0310": {
+		"meanings": ["to turn on a device", "to boot up"],
+		"note": "Pairs with 关机. \"to start an engine\" is the wrong image for a phone or computer."
+	},
+	"L2-0311": {
+		"meanings": ["cheerful", "to have a good time"],
+		"note": "Adj/V. Kept apart from 高兴 \"happy\" (L1), 快乐 \"joyful\" (L2) and 痛快 \"delighted\" (L4); the mock-someone sense dropped."
+	},
+	"L2-0312": {
+		"meanings": ["to start a new term", "school begins"],
+		"note": "The (old) found-a-school sense dropped."
+	},
+	"L2-0313": {
+		"meanings": ["one's view on something", "personal opinion"],
+		"note": "N. Separated from 观点 \"point of view\" and 意见 \"opinion\", both L2, without leaning on an article."
+	},
+	"L2-0314": {
+		"meanings": ["exam candidate"],
+		"note": "N."
+	},
+	"L2-0315": {
+		"meanings": ["to lean on", "to depend on"],
+		"note": "V. The vulgar sense and the opera-costume sense are both excluded."
+	},
+	"L2-0316": {
+		"meanings": ["branch of study", "department"],
+		"note": "N. Taxonomy/legal senses dropped; the two live readings are 文科/理科 and 内科-type departments."
+	},
+	"L2-0317": {
+		"meanings": ["science", "scientific"],
+		"note": "N/Adj, one gloss per POS."
+	},
+	"L2-0318": {
+		"meanings": ["cute", "lovable"],
+		"note": "Adj; \"cute\" is the everyday reading."
+	},
+	"L2-0319": {
+		"meanings": ["possible", "maybe"],
+		"note": "Aux/Adj/N."
+	},
+	"L2-0320": {
+		"meanings": ["frightening", "terrible"],
+		"note": "Adj; \"awful/dreadful\" reads dated."
+	},
+	"L2-0322": {
+		"meanings": ["may", "to be allowed to"],
+		"note": "Aux. Avoids \"can\", which belongs to 能 and 会 at L1."
+	},
+	"L2-0323": {
+		"meanings": ["gram"],
+		"note": "M; the kè \"to subdue\" senses are a different word."
+	},
+	"L2-0324": {
+		"meanings": ["quarter of an hour"],
+		"note": "M; the L5 刻 V row carries \"to carve\"."
+	},
+	"L2-0325": {
+		"meanings": ["guest", "visitor"],
+		"note": "N; 顾客 carries \"customer\"."
+	},
+	"L2-0328": {
+		"meanings": ["to cry"],
+		"note": "V."
+	},
+	"L2-0329": {
+		"meanings": ["fast food"],
+		"note": "N."
+	},
+	"L2-0330": {
+		"meanings": ["hurry up", "a bit faster"],
+		"note": "Correct as shipped; no usable CEDICT entry."
+	},
+	"L2-0331": {
+		"meanings": ["joyful", "happy"],
+		"note": "Adj. 高兴 (L1) already owns \"happy\" as its primary, so 快乐 leads with \"joyful\" and keeps \"happy\" second — the two are genuine near-synonyms."
+	},
+	"L2-0332": {
+		"meanings": ["about to happen", "soon"],
+		"note": "Adv; held apart from 就要 \"will soon\"."
+	},
+	"L2-0334": {
+		"meanings": ["to pull", "to drag"],
+		"note": "V; the bowel-movement colloquialism dropped."
+	},
+	"L2-0336": {
+		"meanings": ["blue"],
+		"note": "Adj."
+	},
+	"L2-0339": {
+		"meanings": ["all the time", "prefix used before a surname"],
+		"note": "Adv/Prefix merge. The Adj \"old\" is the L1 老 row, and bare \"always\" is on L1 常 and L3 总是."
+	},
+	"L2-0341": {
+		"meanings": ["old age", "later years"],
+		"note": "N. \"elderly\" is adjectival and 老人 (L1) already means an old person."
+	},
+	"L2-0342": {
+		"meanings": ["old friend"],
+		"note": "(slang) menstruation sense removed."
+	},
+	"L2-0344": {
+		"meanings": ["away from", "at a distance from"],
+		"note": "V/Prep. The departure sense belongs to 离开; 离 at HSK 2 states distance (离这儿很近)."
+	},
+	"L2-0345": {
+		"meanings": ["to leave", "to depart from"],
+		"note": "Verb pair for 离开."
+	},
+	"L2-0346": {
+		"meanings": ["gift", "present"],
+		"note": "N."
+	},
+	"L2-0347": {
+		"meanings": ["inside a place"],
+		"note": "N. 里边 (L1), 里面 (L3) and 中/内/以内/之内 have \"inside\" and \"within\" between them; 里头 is the same idea, so the gloss names the container instead."
+	},
+	"L2-0348": {
+		"meanings": ["an ideal", "aspiration"],
+		"note": "N; the Adj \"perfect\" sense dropped."
+	},
+	"L2-0349": {
+		"meanings": ["such as", "for instance"],
+		"note": "V. 比如 at the same level already ships \"for example\", and 例如 introduces a list."
+	},
+	"L2-0350": {
+		"meanings": ["example", "instance"],
+		"note": "N."
+	},
+	"L2-0351": {
+		"meanings": ["face"],
+		"note": "N."
+	},
+	"L2-0352": {
+		"meanings": ["to practice a skill", "to rehearse"],
+		"note": "V. Not bare \"to practice\" (L2 练习) and not \"to train\"/\"to drill\" (L3 训练); the literary white-silk sense dropped."
+	},
+	"L2-0354": {
+		"meanings": ["cool", "chilly"],
+		"note": "Adj; 冷 (L1) owns \"cold\"."
+	},
+	"L2-0355": {
+		"meanings": ["pleasantly cool", "refreshing"],
+		"note": "Adj. The (Tw)(slang) scanty-clothing sense and the (coll.) butt-out sense are excluded."
+	}
+}
