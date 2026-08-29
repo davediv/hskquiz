@@ -1,0 +1,16 @@
+{
+	"piece": "app-shell",
+	"loop": 1,
+	"rule": "\"app-shell\" has 9 characters (odd) -> reference is A, app screenshot is B",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+		"note": "Du Chinese Articles list: back arrow + centred title bar, card content, bottom tab bar"
+	},
+	"B": {
+		"which": "app",
+		"source": "progress/shots/loop-1/app-shell-mobile.png",
+		"note": "hskquiz level select at 375x812 @2x — wordmark bar + level cards"
+	},
+	"whyThisPair": "Both are the app's top-level 'pick a thing' list seen inside its own frame, so the chrome (bar height, identity, how much of the phone the frame consumes) is directly comparable."
+}
