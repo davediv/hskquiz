@@ -1,0 +1,490 @@
+{
+	"L2-0534": {
+		"meanings": ["measure word: long thin things"],
+		"note": "M row. The classifier use is the whole card; CEDICT's 'strip/item/clause' are the noun 条."
+	},
+	"L2-0535": {
+		"meanings": ["condition", "requirement"],
+		"note": "N row. Keeps 情况 'circumstances' separate: 条件 is a term that must be met."
+	},
+	"L2-0536": {
+		"meanings": ["to attend a lecture", "to listen in class"],
+		"note": "Verb phrase; the classroom sense is the one an HSK 2 learner meets."
+	},
+	"L2-0538": {
+		"meanings": ["to stop", "to park"],
+		"note": "V row. 'to halt' was a synonym of the lead wasting the second slot; parking is the other everyday use."
+	},
+	"L2-0539": {
+		"meanings": ["to park a car", "to stop a vehicle"],
+		"note": "'to pull up' is opaque to a beginner and 停车 is overwhelmingly parking."
+	},
+	"L2-0541": {
+		"meanings": ["quite", "rather"],
+		"note": "Adv row. The physical senses (straight, to stick out) belong to 挺 at L4."
+	},
+	"L2-0542": {
+		"meanings": ["pretty good"],
+		"note": "One gloss; 'very good' overstates 挺 and collides with 很好 territory."
+	},
+	"L2-0543": {
+		"meanings": ["to go through", "open and connected"],
+		"note": "V/Adj row. 'to know well' is the 精通 sense, not what an HSK 2 learner meets."
+	},
+	"L2-0544": {
+		"meanings": ["by means of or through", "to pass a test or a vote"],
+		"note": "Prep is the first official POS and CEDICT buried that sense in clause 4; keeps 经过 'to pass' free."
+	},
+	"L2-0545": {
+		"meanings": ["to notify", "a notice"],
+		"note": "V/N row, so one gloss for each POS instead of two verbs."
+	},
+	"L2-0546": {
+		"meanings": ["at the same time", "meanwhile"],
+		"note": "Conj/N row; both glosses read as connectives, which is how 同时 is used."
+	},
+	"L2-0547": {
+		"meanings": ["colleague", "co-worker"],
+		"note": "N row; plain everyday English for the workplace relationship."
+	},
+	"L2-0549": {
+		"meanings": ["head", "measure word: large animals"],
+		"note": "N/M row: the body part plus the livestock classifier. The L3 Adj row of 头 must take the 'first, leading' sense, not this one."
+	},
+	"L2-0550": {
+		"meanings": ["noun suffix on place words", "unstressed noun ending"],
+		"note": "Suffix row. Says what it does; 子 already owns the bare 'noun suffix' gloss at L1."
+	},
+	"L2-0553": {
+		"meanings": ["to push"],
+		"note": "V row. 'to cut' is the barber sense of 推头 and is wrong for HSK 2; one gloss keeps it opposite 拉."
+	},
+	"L2-0554": {
+		"meanings": ["leg"],
+		"note": "N row; 脚 keeps 'foot'."
+	},
+	"L2-0555": {
+		"meanings": ["another part of the country", "out of town"],
+		"note": "N row. 外地 is somewhere other than where the speaker is, not a foreign country."
+	},
+	"L2-0556": {
+		"meanings": ["takeout food", "food delivery"],
+		"note": "N/V row. 'takeout' alone could be the shop or the act; naming the food fixes it."
+	},
+	"L2-0557": {
+		"meanings": ["to finish", "to be over"],
+		"note": "V row; the adjective senses (whole, complete) belong to 完全."
+	},
+	"L2-0558": {
+		"meanings": ["to complete a task", "to accomplish"],
+		"note": "Names the object 完成 usually takes, so it does not read as the same answer as 完 'to finish'."
+	},
+	"L2-0559": {
+		"meanings": ["completely", "whole or total"],
+		"note": "Adj/Adv row. The adverb is the commoner use and it keeps 完成 'to complete' distinct."
+	},
+	"L2-0560": {
+		"meanings": ["Good night!"],
+		"note": "A parting greeting, not two. 'Good evening' is 晚上好, so dropping it prevents a wrong answer."
+	},
+	"L2-0562": {
+		"meanings": ["dinner", "supper"],
+		"note": "N row. 晚饭 already leads with 'evening meal', so 晚餐 takes the plain English word for it."
+	},
+	"L2-0564": {
+		"meanings": ["bowl"],
+		"note": "N row, one object."
+	},
+	"L2-0565": {
+		"meanings": ["ten thousand"],
+		"note": "Num row. 'a great number' is the 万分 idiom, not the numeral a learner counts with."
+	},
+	"L2-0566": {
+		"meanings": ["net", "the internet"],
+		"note": "N row. 'network' is 网络 at L4, so 网 takes the physical net and the everyday online sense."
+	},
+	"L2-0569": {
+		"meanings": ["toward", "to head for"],
+		"note": "Prep/V row. 往 marks the destination of movement; 向 keeps 'in the direction of'."
+	},
+	"L2-0570": {
+		"meanings": ["for the sake of"],
+		"note": "Prep row. 为了 already leads with bare 'for', so this card carries the fuller phrase."
+	},
+	"L2-0571": {
+		"meanings": ["why?"],
+		"note": "One question word; the second CEDICT clause only restates it."
+	},
+	"L2-0572": {
+		"meanings": ["measure word: polite for people"],
+		"note": "M row. Rewritten without the internal comma, which the browse row would have split into two senses."
+	},
+	"L2-0573": {
+		"meanings": ["flavor", "smell"],
+		"note": "N row. CEDICT's 'sense/feeling' clauses are marked fig. and its 'odor' clause dialect."
+	},
+	"L2-0574": {
+		"meanings": ["hello when answering the phone", "hey"],
+		"note": "Intj row. The old gloss carried an internal comma that rendered as two senses; 喂 'to feed' is the L4 verb row."
+	},
+	"L2-0576": {
+		"meanings": ["to smell", "to sniff"],
+		"note": "V row. CEDICT leads with the literary 'to hear'; HSK 2 闻 is the nose."
+	},
+	"L2-0578": {
+		"meanings": ["question", "problem"],
+		"note": "N row; both senses are met constantly at this level."
+	},
+	"L2-0583": {
+		"meanings": ["the Western world", "the West"],
+		"note": "N row. 西 already ships bare 'west' for the compass direction, so 西方 leads with the cultural sense; 'the Occident' is period English a beginner will not know."
+	},
+	"L2-0585": {
+		"meanings": ["Western medicine"],
+		"note": "N row. The 'doctor trained in...' sense is secondary and too long for a card."
+	},
+	"L2-0587": {
+		"meanings": ["washing machine"],
+		"note": "N row, one appliance."
+	},
+	"L2-0588": {
+		"meanings": ["to take a bath or shower"],
+		"note": "One gloss covering both, since 洗澡 does not distinguish them; 'or' avoids the comma split."
+	},
+	"L2-0589": {
+		"meanings": ["measure word: brief actions"],
+		"note": "M row. The directional senses belong to 下 at L1."
+	},
+	"L2-0590": {
+		"meanings": ["it is snowing", "to snow"],
+		"note": "Leads with the weather statement so the card is not the article-stripped twin of 雪 'snow'."
+	},
+	"L2-0591": {
+		"meanings": ["next week"],
+		"note": "One time word."
+	},
+	"L2-0593": {
+		"meanings": ["identical", "alike"],
+		"note": "Adj row. 一样 owns 'same' at L1, so 相同 takes the stronger word."
+	},
+	"L2-0595": {
+		"meanings": ["loud", "to ring or sound"],
+		"note": "Adj row, so the lead must be the adjective; 声音 keeps the noun 'sound'."
+	},
+	"L2-0596": {
+		"meanings": ["to think of", "to expect"],
+		"note": "想到 is something occurring to you; 想起 takes 'to recall' so the pair stay distinct."
+	},
+	"L2-0597": {
+		"meanings": ["idea", "way of thinking"],
+		"note": "N row, so CEDICT's verb clause 'to think of a way' cannot lead; 看法 keeps 'view'."
+	},
+	"L2-0598": {
+		"meanings": ["to recall", "to remember suddenly"],
+		"note": "记得 already owns 'to remember'; 想起 is the moment something comes back to you."
+	},
+	"L2-0599": {
+		"meanings": ["in the direction of", "to face"],
+		"note": "Prep/V row, one gloss per POS; 往 takes 'toward'."
+	},
+	"L2-0600": {
+		"meanings": ["camera"],
+		"note": "N row. CEDICT's 'at the opportune moment' is the literary adverb 相机 and never means this word here."
+	},
+	"L2-0601": {
+		"meanings": ["to resemble", "to be like"],
+		"note": "V row; the noun senses (image, portrait) are 像 as a statue, not the HSK 2 use."
+	},
+	"L2-0602": {
+		"meanings": ["friendly prefix before a name"],
+		"note": "Prefix row. Describes what 小王 does rather than glossing it 'small'."
+	},
+	"L2-0603": {
+		"meanings": ["in a low voice", "quietly"],
+		"note": "Adverbial phrase; sits opposite 大声."
+	},
+	"L2-0610": {
+		"meanings": ["to laugh at", "to make fun of"],
+		"note": "Official POS is V, so the noun 'joke' cannot lead; the erhua row 笑话儿 carries the noun."
+	},
+	"L2-0611": {
+		"meanings": ["a joke", "a funny story"],
+		"note": "N row. CEDICT only says 'erhua form of', which is not a learner gloss."
+	},
+	"L2-0612": {
+		"meanings": ["shoe"],
+		"note": "N row, one object."
+	},
+	"L2-0613": {
+		"meanings": ["in one's heart", "in one's mind"],
+		"note": "N row. 'chest' is anatomical and wrong: 心里 is where you think and feel."
+	},
+	"L2-0614": {
+		"meanings": ["mood", "state of mind"],
+		"note": "N row; plain words for how someone feels."
+	},
+	"L2-0615": {
+		"meanings": ["in one's thoughts"],
+		"note": "'central point' is the literal reading and wrong; one gloss keeps it apart from 心里."
+	},
+	"L2-0617": {
+		"meanings": ["letter", "mail"],
+		"note": "N row. The verb senses (to trust, to believe) are 相信 and 信心 at this level."
+	},
+	"L2-0619": {
+		"meanings": ["information"],
+		"note": "N row. 消息 keeps 'news' and 'message', so 信息 stays with the mass noun."
+	},
+	"L2-0622": {
+		"meanings": ["a star in the sky"],
+		"note": "Says which kind of star, since 明星 ships 'star' for the celebrity sense."
+	},
+	"L2-0623": {
+		"meanings": ["to take action", "action or operation"],
+		"note": "V/N row. 'to move about' is the physical-mobility sense; 动作 keeps 'movement'."
+	},
+	"L2-0624": {
+		"meanings": ["pedestrian", "person on foot"],
+		"note": "N row. The imperial-official sense in CEDICT is historical."
+	},
+	"L2-0626": {
+		"meanings": ["family name", "to be surnamed"],
+		"note": "N/V row and N is listed first; 名字 keeps 'name' and 姓名 'full name'."
+	},
+	"L2-0627": {
+		"meanings": ["full name"],
+		"note": "N row; 'surname and given name' is a definition, not a card answer."
+	},
+	"L2-0628": {
+		"meanings": ["to take time off work", "to be on leave"],
+		"note": "放假 is the holiday happening to you; 休假 is the leave you take, so they stay distinct."
+	},
+	"L2-0630": {
+		"meanings": ["to choose", "to elect"],
+		"note": "V row. 选择 leads with 'to select', so 选 keeps 'to choose' plus the voting sense."
+	},
+	"L2-0632": {
+		"meanings": ["snow"],
+		"note": "N row. CEDICT's 'to wipe away (a humiliation)' is literary and was shipping as sense 2."
+	},
+	"L2-0633": {
+		"meanings": ["color"],
+		"note": "N row. 'countenance' is the literary 'facial expression' sense and unknown to beginners."
+	},
+	"L2-0634": {
+		"meanings": ["a glance", "eye"],
+		"note": "N/M row. 眼睛 already ships 'eyes', so this card leads with the 看一眼 classifier use and keeps the organ as sense 2."
+	},
+	"L2-0636": {
+		"meanings": ["to raise or bring up", "to keep a pet"],
+		"note": "V row covering children and animals, which is the whole HSK 2 range of 养."
+	},
+	"L2-0637": {
+		"meanings": ["appearance", "manner"],
+		"note": "N row; how something looks or how someone carries themselves."
+	},
+	"L2-0639": {
+		"meanings": ["medicine"],
+		"note": "N row. 'drug' reads as narcotics in English, so one gloss only."
+	},
+	"L2-0640": {
+		"meanings": ["pharmacy", "drugstore"],
+		"note": "N row; the two everyday English names for the shop."
+	},
+	"L2-0642": {
+		"meanings": ["liquid medicine"],
+		"note": "N row. 'medicine in liquid form' is a definition; the compound noun is the answer."
+	},
+	"L2-0643": {
+		"meanings": ["perhaps", "possibly"],
+		"note": "Adv row. 或 currently ships 'maybe, perhaps', so 也许 avoids that pair; 可能 keeps 'might'."
+	},
+	"L2-0644": {
+		"meanings": ["night"],
+		"note": "N row, one gloss; 夜里 takes the time-of-day phrase."
+	},
+	"L2-0645": {
+		"meanings": ["during the night", "at night"],
+		"note": "N row used adverbially, which is how 夜里 appears; keeps 夜 'night' distinct."
+	},
+	"L2-0646": {
+		"meanings": ["a portion", "part of a whole"],
+		"note": "部分 ships bare 'part', so 一部分 says it is one share of something larger."
+	},
+	"L2-0647": {
+		"meanings": ["certainly", "definite or fixed"],
+		"note": "Adj/Adv row, one gloss for each POS; the adverb is far commoner so it leads."
+	},
+	"L2-0648": {
+		"meanings": ["in total", "altogether"],
+		"note": "Adv row for adding things up."
+	},
+	"L2-0649": {
+		"meanings": ["in a moment", "for a short while"],
+		"note": "Adv row. The L1 row of 一会儿 leads with 'a moment', so the L2 adverb row takes the time-until and duration readings."
+	},
+	"L2-0652": {
+		"meanings": ["already"],
+		"note": "Adv row, one gloss; 早就 takes the 'long ago' reading."
+	},
+	"L2-0653": {
+		"meanings": ["after", "later"],
+		"note": "N row used as a time word, both readings common at HSK 2."
+	},
+	"L2-0654": {
+		"meanings": ["before", "in the past"],
+		"note": "N row; mirrors 以后 and keeps 'formerly' out of a beginner card."
+	},
+	"L2-0655": {
+		"meanings": ["that amount or more", "the above-mentioned"],
+		"note": "N row. The quantity reading leads because that is how 30 岁以上 works."
+	},
+	"L2-0656": {
+		"meanings": ["apart from", "outside of"],
+		"note": "N row used as a postposition; 'except for' is the same idea and adds nothing."
+	},
+	"L2-0657": {
+		"meanings": ["to think mistakenly", "to assume wrongly"],
+		"note": "V row. Bare 'to think' is 认为 and 觉得; the whole point of 以为 is that the belief turned out wrong."
+	},
+	"L2-0658": {
+		"meanings": ["that amount or less", "the following"],
+		"note": "N row; mirrors 以上."
+	},
+	"L2-0661": {
+		"meanings": ["a tiny bit"],
+		"note": "一点儿 already ships 'a little', so the reduplicated form takes the smaller quantity."
+	},
+	"L2-0662": {
+		"meanings": ["one's whole life", "a lifetime"],
+		"note": "N row; 'all one's life' reads as an adverb."
+	},
+	"L2-0664": {
+		"meanings": ["a hundred million"],
+		"note": "Num row. Written in words so it cannot be misread as a digit string."
+	},
+	"L2-0667": {
+		"meanings": ["because", "because of"],
+		"note": "Conj/Prep row, one gloss for each POS."
+	},
+	"L2-0668": {
+		"meanings": ["overcast", "cloudy"],
+		"note": "Adj row, weather only. CEDICT's yin-yang, electrical, feminine and anatomical senses are all wrong for HSK 2."
+	},
+	"L2-0669": {
+		"meanings": ["a cloudy day"],
+		"note": "N row, one gloss; keeps the adjective 阴 separate."
+	},
+	"L2-0675": {
+		"meanings": ["ought to", "to be supposed to"],
+		"note": "V row. 该 at this level already leads with 'should', so 应该 takes the other two English modals; 必须 keeps 'must'."
+	},
+	"L2-0678": {
+		"meanings": ["a motion picture", "a film"],
+		"note": "N row. 'a copy of a film' was CEDICT's first clause and is a printing sense; 电影 keeps 'movie'."
+	},
+	"L2-0679": {
+		"meanings": ["to influence", "influence or impact"],
+		"note": "V/N row, one gloss for each POS; 作用 keeps 'effect'."
+	},
+	"L2-0680": {
+		"meanings": ["forever", "for all time"],
+		"note": "Adv row, so the adjective 'eternal' cannot ship; 总是 keeps 'always'."
+	},
+	"L2-0681": {
+		"meanings": ["oil", "grease"],
+		"note": "N row, kitchen and machine senses together."
+	},
+	"L2-0683": {
+		"meanings": ["friendly"],
+		"note": "Adj row, so CEDICT's noun 'close friend' cannot ride along."
+	},
+	"L2-0684": {
+		"meanings": ["to have time to spare", "to be free"],
+		"note": "V row. CEDICT only says 'erhua form of'; 空儿 keeps the noun 'spare time'."
+	},
+	"L2-0685": {
+		"meanings": ["there is someone", "somebody"],
+		"note": "The existential reading leads, which is how 有人 opens a sentence; 别人 keeps 'other people'."
+	},
+	"L2-0686": {
+		"meanings": ["somewhat", "slightly"],
+		"note": "Adv row before an adjective, usually of something unwelcome; 一点儿 keeps 'a little'."
+	},
+	"L2-0687": {
+		"meanings": ["interesting", "enjoyable"],
+		"note": "'meaningful' is the literal reading and misleads; 好玩儿 keeps 'fun'."
+	},
+	"L2-0688": {
+		"meanings": ["once again", "also"],
+		"note": "Adv row. 再 ships 'again' for what has not happened yet, so 又 marks the repeat that already did."
+	},
+	"L2-0689": {
+		"meanings": ["fish"],
+		"note": "N row, one animal."
+	},
+	"L2-0691": {
+		"meanings": ["as it turns out", "originally"],
+		"note": "本来 already leads with 'original/originally', so 原来 leads with the discovery reading a learner meets in 原来如此."
+	},
+	"L2-0692": {
+		"meanings": ["cause", "the reason why"],
+		"note": "N row. 'origin' is a different idea; 理由 keeps bare 'reason' at L3."
+	},
+	"L2-0693": {
+		"meanings": ["courtyard", "institution"],
+		"note": "N row, the two senses behind 院子 and 医院; 院子 keeps 'a yard'."
+	},
+	"L2-0694": {
+		"meanings": ["head of an institution", "dean or director"],
+		"note": "N row. 'chair of a board' was one clause of a long CEDICT definition and is the rarest reading."
+	},
+	"L2-0696": {
+		"meanings": ["to be willing", "to want to"],
+		"note": "V row. 要 and 想 already own plain wanting; 愿意 is consent."
+	},
+	"L2-0699": {
+		"meanings": ["the more ... the more"],
+		"note": "Adv row. The paired construction is the only way 越 appears at HSK 2; 'to exceed' is 超过."
+	},
+	"L2-0700": {
+		"meanings": ["more and more", "increasingly"],
+		"note": "The fixed phrase, kept distinct from 越 itself."
+	},
+	"L2-0701": {
+		"meanings": ["cloud"],
+		"note": "N row, one gloss."
+	},
+	"L2-0703": {
+		"meanings": ["you and I"],
+		"note": "Pron row. The northern 'I/me' use is dialect; 咱们 ships 'we, including you', so this card says it concretely."
+	},
+	"L2-0705": {
+		"meanings": ["dirty", "filthy"],
+		"note": "Adj row, opposite 干净."
+	},
+	"L2-0708": {
+		"meanings": ["already long ago", "long since"],
+		"note": "已经 keeps bare 'already'; 早就 adds that it happened much earlier than expected."
+	},
+	"L2-0709": {
+		"meanings": ["what should we do?", "what is to be done?"],
+		"note": "A set question; written as the question a speaker actually asks."
+	},
+	"L2-0710": {
+		"meanings": ["how is it?", "how about it?"],
+		"note": "Pron row. 怎么 keeps bare 'how?'; 怎么样 asks after a state or makes a suggestion."
+	},
+	"L2-0712": {
+		"meanings": ["to occupy", "to account for a share"],
+		"note": "V row, covering 占地方 and 占百分之三十."
+	},
+	"L2-0713": {
+		"meanings": ["to stand"],
+		"note": "V row. The noun 'station' is the L1 row of 站, so this card carries only the verb."
+	},
+	"L2-0714": {
+		"meanings": ["to stop where one stands", "to halt"],
+		"note": "站住 is the shouted 'stop moving', distinct from 停 'to stop'; the fig. and tenable senses are wrong for HSK 2."
+	}
+}
