@@ -14,7 +14,7 @@
  */
 
 import { MASTERY_STREAK } from '$lib/progress';
-import type { Level, ProgressState, WordProgress } from '$lib/types';
+import type { Level, ProgressState, Word, WordProgress } from '$lib/types';
 
 export type WordStatus = 'new' | 'learning' | 'shaky' | 'mastered';
 
@@ -53,23 +53,51 @@ export function statusOf(record: WordProgress | undefined | null): WordStatus {
 }
 
 /**
+ * Ids of one level's shipped words, memoised on the array itself.
+ *
+ * The word lists are cached module-level in `$lib/data`, so a level's array is the same object
+ * for the life of the session and this Set is built exactly once per level. A `WeakMap` rather
+ * than a `Map` so a list that is never asked for again is still collectable.
+ */
+const idSets = new WeakMap<readonly Word[], ReadonlySet<string>>();
+
+function idsOf(words: readonly Word[]): ReadonlySet<string> {
+	const cached = idSets.get(words);
+	if (cached) return cached;
+	const ids = new Set(words.map((word) => word.id));
+	idSets.set(words, ids);
+	return ids;
+}
+
+/**
  * Every answered word at one level, bucketed.
  *
  * Walks the stored records rather than the level's word list, so it costs what the learner has
  * actually done (tens of entries) instead of 1,071 lookups per keystroke. Anything absent from
  * the map is `new` by definition — see `statusFor`.
+ *
+ * IT IS CHECKED AGAINST THE LIST, NOT JUST THE `L5-` PREFIX. Ids are position-derived, so a
+ * store written before the word list changed shape can hold `L5-0143` for a word that no longer
+ * sits at 143 — or, after a level gains a word, for a row that has shifted. Counting those gave
+ * a screen that contradicted itself in one frame: the chip read `Shaky 50`, the header `0
+ * shaky`, and the body `No shaky words in HSK 5 yet`. The Set makes the chip a promise the list
+ * can keep: tapping it can never produce fewer rows than its own number.
  */
 export function statusMap(
 	state: ProgressState | null | undefined,
-	level: Level
+	level: Level,
+	words: readonly Word[]
 ): Map<string, WordStatus> {
 	const map = new Map<string, WordStatus>();
 	const byWord = state?.byWord;
 	if (!byWord) return map;
 
 	const prefix = `L${level}-`;
+	const shipped = idsOf(words);
 	for (const [wordId, record] of Object.entries(byWord)) {
 		if (!wordId.startsWith(prefix)) continue;
+		// A record for a word this level no longer contains is history, not a row.
+		if (!shipped.has(wordId)) continue;
 		const status = statusOf(record);
 		if (status !== 'new') map.set(wordId, status);
 	}

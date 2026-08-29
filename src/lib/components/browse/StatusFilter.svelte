@@ -8,21 +8,23 @@
 	Chips for states nobody has reached yet stay hidden — on a first visit every word is new, so
 	four buttons reading 0 would be four buttons of noise. They appear as the states do.
 
-	WHY THIS SCROLLS, AND WHY IT SAYS SO
-	Once all five exist they measure 488px against a 375px phone. Wrapping to a second line is
-	the obvious answer and the wrong one: this block is sticky, so every pixel it takes is a
-	pixel of word list gone for the whole session. So it scrolls — but a strip that scrolls
-	without saying so is worse than one that wraps, and the previous version hid its scrollbar
-	and stopped there: "Shaky" was sliced through the middle of the word and "Mastered 120",
-	the chip the whole feature exists for, was simply not on screen and nothing hinted at it.
+	WHY THE COUNT SITS ABOVE THE LABEL
+	Laid out as one line — `Shaky 14` — the five chips measured 513px against a 375px phone, so
+	`Mastered 50` was 118px off the right edge and `Shaky`'s number sat under the fade that was
+	meant to advertise the overflow. Scroll affordances were the answer to the wrong question:
+	the count is the payload, and a strip whose payload is offscreen has failed whatever it does
+	to announce the fact.
 
-	Three things fix that, and all three are needed:
-	  · it scrolls edge to edge rather than inside the text column, so a chip crossing the
-	    screen edge reads as "continues offscreen" instead of "broken layout";
-	  · the edge it continues past is masked to a fade, and the mask only appears on a side
-	    that actually has more chips behind it;
-	  · a nudge button sits on that side, so the rest is one tap away and not a discovery.
-	Selecting a chip — including with the keyboard — scrolls it fully into view.
+	Stacking the number over the label makes each chip as wide as its widest line instead of the
+	sum of both, which is what brings all five inside 375px with room to spare. It costs 12px of
+	sticky height and buys back three things: every count readable without a gesture, the number
+	first in the reading order — which is what the chip is consulted for — and a 44px-tall tap
+	target, which the 32px one-line pill was not.
+
+	The scrolling machinery below stays, because 320px phones and a future sixth state still
+	exist: it scrolls edge to edge so a clipped chip reads as "continues offscreen" rather than
+	"broken layout", the overflowing edge is masked to a fade, and a nudge button sits on it.
+	None of it fires at 375px any more. Selecting a chip still scrolls it fully into view.
 -->
 <script lang="ts">
 	import { untrack } from 'svelte';
@@ -45,19 +47,31 @@
 	const EDGE_GAP = 12;
 
 	let strip = $state<HTMLElement | null>(null);
-	let scrollLeft = $state(0);
-	let scrollWidth = $state(0);
 	let clientWidth = $state(0);
+	let moreBefore = $state(false);
+	let moreAfter = $state(false);
 
-	const overflowing = $derived(scrollWidth - clientWidth > 1);
-	const moreBefore = $derived(overflowing && scrollLeft > 1);
-	const moreAfter = $derived(overflowing && scrollLeft < scrollWidth - clientWidth - 1);
-
+	/**
+	 * Whether a *chip* is cut off, not whether the scroller has room left in it.
+	 *
+	 * `scrollWidth - clientWidth` is the obvious test and the wrong one here: the strip carries
+	 * the screen's gutter as its own inline padding so the first chip lines up with the text
+	 * column, and that trailing 20px counts as scrollable width. With all five chips fitting
+	 * inside 375px it still reported an overflow, so the fade landed on `Mastered` and greyed
+	 * out a chip that was entirely on screen. Comparing the end chip's own right edge against
+	 * the strip's says what the learner can actually see.
+	 */
 	function measure() {
 		if (!strip) return;
-		if (strip.scrollLeft !== scrollLeft) scrollLeft = strip.scrollLeft;
-		if (strip.scrollWidth !== scrollWidth) scrollWidth = strip.scrollWidth;
 		if (strip.clientWidth !== clientWidth) clientWidth = strip.clientWidth;
+
+		const box = strip.getBoundingClientRect();
+		const first = strip.firstElementChild?.getBoundingClientRect();
+		const last = strip.lastElementChild?.getBoundingClientRect();
+		const before = first !== undefined && box.left - first.left > 1;
+		const after = last !== undefined && last.right - box.right > 1;
+		if (before !== moreBefore) moreBefore = before;
+		if (after !== moreAfter) moreAfter = after;
 	}
 
 	function nudge(direction: 1 | -1) {
@@ -117,10 +131,13 @@
 				class:on={filter === value}
 				data-filter={filter}
 				aria-pressed={filter === value}
+				aria-label={`${STATUS_META[filter].label}, ${counts[filter].toLocaleString('en')} words`}
 				onclick={() => (value = filter)}
 			>
-				{STATUS_META[filter].label}
-				<span class="count">{counts[filter].toLocaleString('en')}</span>
+				<!-- Number first, label under it. Announced the other way round by `aria-label`
+				     above, because "Shaky, 14 words" is the sentence and "14 Shaky" is not. -->
+				<span class="count tabular">{counts[filter].toLocaleString('en')}</span>
+				<span class="label">{STATUS_META[filter].label}</span>
 			</button>
 		{/each}
 	</div>
@@ -228,19 +245,22 @@
 		);
 	}
 
+	/* Two lines, so the chip is as wide as its widest line rather than as wide as both — that
+	   is the whole reason five of them fit a 375px phone. `--spacing-tap` tall, so it is also
+	   the first version of this control a thumb can hit reliably. */
 	.chip-btn {
 		display: inline-flex;
 		flex: none;
+		flex-direction: column;
 		align-items: center;
-		gap: 0.375rem;
-		min-block-size: 2rem;
-		padding-inline: 0.75rem;
+		justify-content: center;
+		gap: 0.0625rem;
+		min-block-size: var(--spacing-tap);
+		padding-inline: 0.6875rem;
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-pill);
 		background-color: transparent;
 		color: var(--color-ink-muted);
-		font-size: var(--text-xs);
-		font-weight: 600;
 		white-space: nowrap;
 		scroll-snap-align: start;
 		transition:
@@ -250,9 +270,18 @@
 	}
 
 	.count {
+		color: var(--color-ink);
+		font-size: var(--text-sm);
+		font-weight: 700;
+		line-height: 1.1;
+	}
+
+	.label {
 		color: var(--color-ink-subtle);
-		font-variant-numeric: tabular-nums;
-		font-weight: 500;
+		font-size: var(--text-2xs);
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		line-height: 1.2;
 	}
 
 	.chip-btn.on {
@@ -262,7 +291,11 @@
 	}
 
 	.chip-btn.on .count {
-		color: color-mix(in srgb, var(--color-primary-ink) 70%, transparent);
+		color: var(--color-primary-ink);
+	}
+
+	.chip-btn.on .label {
+		color: color-mix(in srgb, var(--color-primary-ink) 72%, transparent);
 	}
 
 	/* The two coloured states keep their colour when selected, so the chip and the pips it
@@ -273,7 +306,11 @@
 	}
 
 	.chip-btn.shaky.on .count {
-		color: color-mix(in srgb, var(--color-accent-ink) 75%, transparent);
+		color: var(--color-accent-ink);
+	}
+
+	.chip-btn.shaky.on .label {
+		color: color-mix(in srgb, var(--color-accent-ink) 78%, transparent);
 	}
 
 	.chip-btn.mastered.on {
@@ -282,7 +319,11 @@
 	}
 
 	.chip-btn.mastered.on .count {
-		color: color-mix(in srgb, var(--color-correct-ink) 75%, transparent);
+		color: var(--color-correct-ink);
+	}
+
+	.chip-btn.mastered.on .label {
+		color: color-mix(in srgb, var(--color-correct-ink) 78%, transparent);
 	}
 
 	@media (hover: hover) {

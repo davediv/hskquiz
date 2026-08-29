@@ -43,12 +43,32 @@ const LONG: Record<string, string> = {
 	Phonetic: 'phonetic particle'
 };
 
-/** `['V','N']` → `v./n.` — empty string when a word carries no annotation. */
+/**
+ * `["V","N"]` → `v./n.` — empty string when a word carries no annotation.
+ *
+ * Kept for the spec, which holds the two registers to the same code table; the row uses
+ * `posPrimary` and the sheet `posLong`.
+ */
 export function posShort(pos: readonly string[]): string {
 	return pos
 		.map((code) => SHORT[code] ?? code.toLowerCase())
 		.filter(Boolean)
 		.join('/');
+}
+
+/**
+ * `['V','N']` → `v.` — the primary code only, for a list row.
+ *
+ * The row reserves a fixed column for this so that the 386 words with no annotation at all do
+ * not leave the gloss column with a ragged left edge. A reserved column only works if every
+ * value fits it, and the joined form does not: `n.` is 1,666 rows and `pron./adv./conj.` is
+ * one, so sizing for the worst case would spend a fifth of a 375px row on a label. Every code
+ * a word carries is still on the sheet, spelled out — `verb · noun` — one tap away.
+ */
+export function posPrimary(pos: readonly string[]): string {
+	const first = pos[0];
+	if (first === undefined) return '';
+	return SHORT[first] ?? first.toLowerCase();
 }
 
 /** `['V','N']` → `verb · noun`, for the one place there is room to spell it out. */

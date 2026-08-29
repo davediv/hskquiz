@@ -20,8 +20,10 @@
 	import { untrack } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { Hanzi, Pinyin } from '$lib/design';
-	import type { Level, Word, WordProgress } from '$lib/types';
+	import type { Word, WordProgress } from '$lib/types';
+	import CharacterCard from './CharacterCard.svelte';
 	import { posLong } from './pos';
+	import { charCard, charIndexNow, ensureCharIndex, rowBudget, type CharIndex } from './related';
 	import StatusPip from './StatusPip.svelte';
 	import { STATUS_META, progressLine, type WordStatus } from './status';
 
@@ -29,16 +31,35 @@
 		word: Word;
 		status: WordStatus;
 		record: WordProgress;
-		level: Level;
 		/** 1-based position in the filtered list, and its length — "412 of 1,070". */
 		position: number;
 		total: number;
+		/**
+		 * The word this one was reached from by tapping a character card, if any. Its presence
+		 * is what turns the sheet from a page of the list into a drill-down: the counter and the
+		 * prev/next pair belong to the list and go away, and a labelled way back takes their place.
+		 */
+		from: Word | null;
 		onclose: () => void;
+		onback: () => void;
 		onprev: () => void;
 		onnext: () => void;
+		onfollow: (word: Word) => void;
 	}
 
-	let { word, status, record, level, position, total, onclose, onprev, onnext }: Props = $props();
+	let {
+		word,
+		status,
+		record,
+		position,
+		total,
+		from,
+		onclose,
+		onback,
+		onprev,
+		onnext,
+		onfollow
+	}: Props = $props();
 
 	/** How the tone is named out loud, so the colour is never the only thing carrying it. */
 	const TONE_NAME: Record<0 | 1 | 2 | 3 | 4, string> = {
@@ -50,19 +71,59 @@
 	};
 
 	let panel = $state<HTMLElement | null>(null);
+	let body = $state<HTMLElement | null>(null);
 
 	/**
-	 * The word taken apart character by character — Pleco's CHARS tab, which is the thing a
-	 * learner opens an entry for that a list row cannot give them: *which* of those syllables
-	 * belongs to *which* character, and what tone it carries. `Word.syllables` is built one per
-	 * character and the build refuses to emit a word where that does not hold, so this is a
-	 * zip, not a guess. Single-character words are their own breakdown, so they skip it.
+	 * The cross-level character index. Already built after the first sheet of the session — the
+	 * browse screen warms it on idle — so this is normally synchronous and the cards are
+	 * complete on the first frame. When it is not, the strip renders the characters and their
+	 * glosses immediately and the word lists fill in; nothing moves except inside each card.
+	 */
+	let index = $state<CharIndex | null>(charIndexNow());
+
+	$effect(() => {
+		if (index !== null) return;
+		let live = true;
+		void ensureCharIndex().then(
+			(built) => {
+				if (live) index = built;
+			},
+			() => {
+				// A chunk that will not load leaves the strip as characters and glosses, which
+				// is still the entry it was before this loop. It retries on the next word.
+			}
+		);
+		return () => {
+			live = false;
+		};
+	});
+
+	/**
+	 * The word taken apart character by character — Pleco's CHARS tab, plus the thing Pleco's
+	 * tab does not do: every other HSK word built on the same character, so the entry has a way
+	 * out of it. `Word.syllables` is built one per character and the build refuses to emit a
+	 * word where that does not hold, so the zip below is a zip, not a guess.
+	 *
+	 * Single-character words skip the strip — 安 taken apart is 安 — but they are not a dead
+	 * end either: their `related` section renders instead, from the same index.
 	 */
 	const characters = $derived(
 		[...word.hanzi].map((hanzi, i) => {
 			const syllable = word.syllables[i] ?? { py: '', tone: 0 as const };
-			return { hanzi, syllable, tone: TONE_NAME[syllable.tone] };
+			return {
+				hanzi,
+				syllable,
+				tone: TONE_NAME[syllable.tone],
+				card: charCard(index, hanzi, word.id, rowBudget([...word.hanzi].length))
+			};
 		})
+	);
+
+	/** Words built on this one, for a single-character headword that has no strip of its own. */
+	const solo = $derived(
+		characters.length === 1
+			? charCard(index, word.hanzi, word.id, 8)
+			: { char: word.hanzi, entry: null, gloss: null, rows: [], more: 0, total: 0 }
 	);
 
 	/**
@@ -122,8 +183,12 @@
 	const pos = $derived(posLong(word.pos));
 	const meta = $derived(STATUS_META[status]);
 	const line = $derived(progressLine(record));
-	const hasPrev = $derived(position > 1);
-	const hasNext = $derived(position < total);
+	// Prev/next walk the list, and a followed word is not in it — 慰问 is HSK 5 whatever level
+	// you were browsing. Off entirely rather than quietly meaning something else.
+	const hasPrev = $derived(from === null && position > 1);
+	const hasNext = $derived(from === null && position < total);
+	/** Follows the word on screen, not the level being browsed: 安 opens as HSK 4 from 安慰. */
+	const level = $derived(word.level);
 	const practiseHref = $derived(resolve('/quiz/[level]', { level: String(level) }));
 
 	// Opening moves focus into the sheet, so Escape, Tab and the arrow keys all land here and
@@ -132,18 +197,37 @@
 		panel?.focus();
 	});
 
+	/**
+	 * Following a link swaps the whole entry, so the sheet has to behave like a page turn: back
+	 * to the top of the panel, and focus somewhere real. Prev/next keep their button under the
+	 * thumb, so focus is only reclaimed when the element that had it has just been unmounted —
+	 * which is exactly the case for the character row you tapped.
+	 */
+	$effect(() => {
+		void word.id;
+		untrack(() => {
+			body?.scrollTo({ top: 0 });
+			if (!panel) return;
+			const active = document.activeElement;
+			if (active === null || !panel.contains(active)) panel.focus();
+		});
+	});
+
 	function focusables(): HTMLElement[] {
 		if (!panel) return [];
-		const selector = 'a[href], button:not([disabled])';
+		const selector = 'a[href], button:not([disabled]):not([hidden])';
 		return [...panel.querySelectorAll<HTMLElement>(selector)];
 	}
 
 	function onKeydown(event: KeyboardEvent) {
 		if (event.metaKey || event.ctrlKey || event.altKey) return;
 
+		// Escape unwinds one step of the drill-down before it closes anything: a learner three
+		// characters deep expects to come back up, not to lose the entry they started from.
 		if (event.key === 'Escape') {
 			event.preventDefault();
-			onclose();
+			if (from !== null) onback();
+			else onclose();
 			return;
 		}
 
@@ -197,10 +281,10 @@
 		<span class="grip" aria-hidden="true"></span>
 
 		<div class="bar">
-			<p class="counter tabular">{position.toLocaleString('en')} of {total.toLocaleString('en')}</p>
-			<div class="nav">
-				<button type="button" class="step" disabled={!hasPrev} onclick={onprev}>
-					<span class="sr-only">Previous word</span>
+			{#if from}
+				<!-- Reached by tapping a character, so the way back is to the word that sent you
+				     here, named — not to a position in a list this word may not even be in. -->
+				<button type="button" class="back" onclick={onback}>
 					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 						<path
 							d="M15 5 8 12l7 7"
@@ -211,20 +295,46 @@
 							stroke-linejoin="round"
 						/>
 					</svg>
+					<span class="back-label">Back to</span>
+					<Hanzi text={from.hanzi} size="xs" class="back-hz" />
 				</button>
-				<button type="button" class="step" disabled={!hasNext} onclick={onnext}>
-					<span class="sr-only">Next word</span>
-					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-						<path
-							d="m9 5 7 7-7 7"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2.1"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-					</svg>
-				</button>
+			{:else}
+				<p class="counter tabular">
+					{position.toLocaleString('en')} of {total.toLocaleString('en')}
+				</p>
+			{/if}
+			<div class="nav">
+				<!-- Removed rather than hidden while a trail is open: `[hidden]` is a base-layer
+				     rule and this component's own `display: grid` outranks it, so the attribute
+				     alone would leave two dead chevrons on screen. -->
+				{#if from === null}
+					<button type="button" class="step" disabled={!hasPrev} onclick={onprev}>
+						<span class="sr-only">Previous word</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+							<path
+								d="M15 5 8 12l7 7"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.1"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</button>
+					<button type="button" class="step" disabled={!hasNext} onclick={onnext}>
+						<span class="sr-only">Next word</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+							<path
+								d="m9 5 7 7-7 7"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.1"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					</button>
+				{/if}
 				<button type="button" class="step close" onclick={onclose}>
 					<span class="sr-only">Close</span>
 					<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -240,7 +350,7 @@
 			</div>
 		</div>
 
-		<div class="body">
+		<div class="body" bind:this={body}>
 			<!-- Pleco puts the level badge on the right of the headword line and it is the first
 			     thing you look for; ours sat empty. -->
 			<div class="head">
@@ -304,23 +414,36 @@
 			</div>
 
 			{#if characters.length > 1}
-				<!-- Pleco's CHARS tab, inline: a compound is only learnable once you know which
-				     syllable belongs to which character. -->
+				<!-- Pleco's CHARS tab, inline and then some: which syllable belongs to which
+				     character, what that character means, and every other HSK word built on it. -->
 				<section class="chars" aria-label="Characters">
 					<h3 class="eyebrow">Characters</h3>
 					<ol class="char-list">
 						{#each characters as char, i (i)}
-							<li class="char">
-								<Hanzi text={char.hanzi} syllables={[char.syllable]} size="sm" class="char-hz" />
-								<Pinyin
-									pinyin={char.syllable.py}
-									syllables={[char.syllable]}
-									size="sm"
-									class="char-py"
-								/>
-								<span class="char-tone">{char.tone}</span>
-							</li>
+							<CharacterCard
+								card={char.card}
+								syllable={char.syllable}
+								toneName={char.tone}
+								pending={index === null}
+								onopen={onfollow}
+							/>
 						{/each}
+					</ol>
+				</section>
+			{:else}
+				<section class="chars" aria-label={`Words with ${word.hanzi}`}>
+					<h3 class="eyebrow">
+						Words with <span lang="zh-Hans" class="eyebrow-hz">{word.hanzi}</span>
+					</h3>
+					<ol class="char-list">
+						<CharacterCard
+							card={solo}
+							syllable={word.syllables[0] ?? { py: '', tone: 0 }}
+							toneName={TONE_NAME[word.syllables[0]?.tone ?? 0]}
+							pending={index === null}
+							head={false}
+							onopen={onfollow}
+						/>
 					</ol>
 				</section>
 			{/if}
@@ -402,6 +525,42 @@
 		padding-inline-start: 0.5rem;
 		color: var(--color-ink-subtle);
 		font-size: var(--text-xs);
+	}
+
+	/* Names where it goes, because "back" alone in a stack three deep is a guess. Full tap
+	   height, so it clears 44px the way the step buttons beside it do. */
+	.back {
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		min-block-size: var(--spacing-tap);
+		margin-inline-start: -0.25rem;
+		padding-inline: 0.5rem;
+		border: 0;
+		border-radius: var(--radius-pill);
+		background: none;
+		color: var(--color-ink-muted);
+	}
+
+	.back svg {
+		flex: none;
+		inline-size: 1.125rem;
+		block-size: 1.125rem;
+	}
+
+	.back-label {
+		font-size: var(--text-xs);
+	}
+
+	.back :global(.back-hz) {
+		color: var(--color-ink);
+	}
+
+	@media (hover: hover) {
+		.back:hover {
+			background-color: var(--color-surface-sunken);
+			color: var(--color-ink);
+		}
 	}
 
 	.nav {
@@ -582,33 +741,22 @@
 		margin: 0;
 	}
 
+	/* A column, not the old row of tiles: each character now carries a list of the words it
+	   builds, so a tile that fitted two syllables side by side is the wrong container. */
 	.char-list {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+		flex-direction: column;
+		gap: 0.625rem;
 		margin: 0.625rem 0 0;
 		padding: 0;
 		list-style: none;
 	}
 
-	/* One tile per character, so the compound reads left to right as the word does and each
-	   syllable sits directly under the character it belongs to. */
-	.char {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.125rem;
-		min-inline-size: 3.5rem;
-		padding: 0.5rem 0.625rem 0.4375rem;
-		border: 1px solid var(--color-line);
-		border-radius: var(--radius-sm);
-		background-color: var(--color-surface-sunken);
-	}
-
-	.char-tone {
-		color: var(--color-ink-subtle);
-		font-size: var(--text-2xs);
-		letter-spacing: 0.02em;
+	.eyebrow-hz {
+		margin-inline-start: 0.125rem;
+		font-family: var(--font-hanzi);
+		font-size: var(--text-sm);
+		letter-spacing: 0;
 	}
 
 	.record {

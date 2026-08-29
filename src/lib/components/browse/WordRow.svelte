@@ -15,7 +15,7 @@
 <script lang="ts">
 	import { Hanzi, Pinyin } from '$lib/design';
 	import type { Word } from '$lib/types';
-	import { posShort } from './pos';
+	import { posPrimary } from './pos';
 	import StatusPip from './StatusPip.svelte';
 	import { STATUS_META, type WordStatus } from './status';
 
@@ -31,7 +31,7 @@
 
 	let { word, status, index, total, onopen }: Props = $props();
 
-	const pos = $derived(posShort(word.pos));
+	const pos = $derived(posPrimary(word.pos));
 	const gloss = $derived(word.meanings.join(', '));
 </script>
 
@@ -55,8 +55,14 @@
 				<Hanzi {word} tones={false} size="sm" class="hz" />
 				<Pinyin {word} size="md" class="py" />
 			</span>
+			<!--
+				The part of speech has a column of its own rather than an indent, so the 386 words
+				that carry no annotation start their meaning on the same vertical as the 3,922
+				that do. Before this, 半年 and 帮忙 sat flush against an indented 班 and 帮 and
+				the gloss column read as broken rather than as sparse.
+			-->
 			<span class="gloss">
-				{#if pos}<span class="pos">{pos}</span>{/if}{gloss}
+				<span class="pos" aria-hidden={pos === ''}>{pos}</span><span class="text">{gloss}</span>
 			</span>
 		</span>
 
@@ -117,11 +123,19 @@
 		color: var(--color-ink-muted);
 	}
 
+	/* Fixed first column, wide enough for the longest single code (`pron.`, `prep.`, `intj.`)
+	   and no wider — that is what `posPrimary` guarantees. */
 	.gloss {
-		overflow: hidden;
+		display: grid;
+		grid-template-columns: 2.625rem minmax(0, 1fr);
+		align-items: baseline;
 		color: var(--color-ink-muted);
 		font-size: var(--text-sm);
 		line-height: 1.45;
+	}
+
+	.gloss .text {
+		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
@@ -130,12 +144,14 @@
 	   the Latin stack falls back to only fire on some of these — `n.` came out as a cap and
 	   `v.` as a lowercase italic, in the same column, which reads as two different labels. */
 	.pos {
-		margin-inline-end: 0.375rem;
+		overflow: hidden;
+		padding-inline-end: 0.375rem;
 		color: var(--color-ink-subtle);
 		font-size: var(--text-xs);
 		font-weight: 600;
 		letter-spacing: 0.03em;
 		text-transform: uppercase;
+		white-space: nowrap;
 	}
 
 	.row:active {

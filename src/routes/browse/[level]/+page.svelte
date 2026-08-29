@@ -27,14 +27,17 @@
 	import { untrack } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+	import { Hanzi, Pinyin } from '$lib/design';
 	import { loadLevel } from '$lib/data';
+	import { SHIPPED_SIZES } from '$lib/data/sizes';
 	import { progress } from '$lib/progress';
-	import { LEVELS, type Level, type Word } from '$lib/types';
+	import { LEVELS, LEVEL_SIZES, type Level, type Word } from '$lib/types';
 	import LevelSwitch from '$lib/components/browse/LevelSwitch.svelte';
 	import SearchField from '$lib/components/browse/SearchField.svelte';
 	import StatusChips from '$lib/components/browse/StatusFilter.svelte';
 	import WordRow from '$lib/components/browse/WordRow.svelte';
 	import WordSheet from '$lib/components/browse/WordSheet.svelte';
+	import { ensureCharIndex, levelLists } from '$lib/components/browse/related';
 	import { searchWords } from '$lib/components/browse/search';
 	import { scrollToShow, windowFor } from '$lib/components/browse/virtual';
 	import {
@@ -42,6 +45,7 @@
 		statusCounts,
 		statusFor,
 		statusMap,
+		statusOf,
 		type StatusFilter,
 		type WordStatus
 	} from '$lib/components/browse/status';
@@ -67,9 +71,21 @@
 
 	let words = $state<Word[]>([]);
 	let phase = $state<Phase>('loading');
-	let query = $state('');
+	/**
+	 * Seeded from `?q=`, which is how the empty screen hands a query to another level: search is
+	 * one level at a time, so "nothing here matches aihao, HSK 1 has 1" has to arrive there with
+	 * the query still typed or the offer is a dead link.
+	 */
+	let query = $state(page.url.searchParams.get('q') ?? '');
 	let filter = $state<StatusFilter>('all');
 	let openIndex = $state<number | null>(null);
+	/**
+	 * Words reached from inside the sheet by tapping a character's word list. The list row you
+	 * started from is still `openIndex`, so closing still returns focus to it and the trail is
+	 * only the detour — 安慰 → 安 → 安排 is one row and two pushes, and Escape unwinds it.
+	 * Cross-level by design: 慰问 is HSK 5 no matter which level you were browsing.
+	 */
+	let trail = $state<Word[]>([]);
 
 	// Progress lives in localStorage, so the server renders an empty store and the client a
 	// full one. Holding every progress-driven value back until after hydration keeps the two
@@ -96,6 +112,13 @@
 
 	$effect(() => {
 		const target = level;
+		// Arriving from another level's "HSK 1 has 1 match" carries the query with it; arriving
+		// from the level pills carries none, which clears whatever was typed. Both are the URL
+		// speaking, so both are read from it.
+		const carried = page.url.searchParams.get('q') ?? '';
+		untrack(() => {
+			if (carried !== query) query = carried;
+		});
 		// The first client effect on this screen, so it is also the moment the server's
 		// empty-progress markup has been matched and the real store is safe to read.
 		hydrated = true;
@@ -106,13 +129,33 @@
 			return;
 		}
 		openIndex = null;
+		trail = [];
 		void load(target);
+	});
+
+	/**
+	 * Warm the cross-level character index once this level's own list has landed.
+	 *
+	 * The sheet's character cards read every level, so without this the first word a learner
+	 * opens would wait on four more chunks. Deferred rather than eager: the level in front of
+	 * them loads first and uncontended, and a learner who only ever scrolls the list pays
+	 * nothing for it. `requestIdleCallback` is not in Safari, hence the timeout fallback.
+	 */
+	$effect(() => {
+		if (phase !== 'ready') return;
+		const warm = () => void ensureCharIndex().catch(() => {});
+		if (typeof requestIdleCallback === 'function') {
+			const handle = requestIdleCallback(warm, { timeout: 2000 });
+			return () => cancelIdleCallback(handle);
+		}
+		const handle = setTimeout(warm, 600);
+		return () => clearTimeout(handle);
 	});
 
 	const snapshot = $derived(hydrated ? progress.state : null);
 
 	const statuses = $derived(
-		level === null ? new Map<string, WordStatus>() : statusMap(snapshot, level)
+		level === null ? new Map<string, WordStatus>() : statusMap(snapshot, level, words)
 	);
 	const searched = $derived(
 		level === null ? ([] as readonly Word[]) : searchWords(level, words, query)
@@ -336,27 +379,57 @@
 	// ---------------------------------------------------------------- the sheet --------
 
 	const openWord = $derived(openIndex === null ? null : (filtered[openIndex] ?? null));
+	/** What the sheet actually shows: the row you opened, or the last word you followed to. */
+	const sheetWord = $derived(trail.length > 0 ? trail[trail.length - 1] : openWord);
+	const sheetFrom = $derived(
+		trail.length > 1 ? trail[trail.length - 2] : trail.length === 1 ? openWord : null
+	);
 
 	// The list can narrow under an open sheet — a level chunk landing late, another tab's
 	// progress arriving. If the word it was showing is gone, so is the sheet.
 	$effect(() => {
-		if (openIndex !== null && openWord === null) openIndex = null;
+		if (openIndex !== null && openWord === null) {
+			openIndex = null;
+			trail = [];
+		}
 	});
 
 	function closeSheet() {
 		const index = openIndex;
 		openIndex = null;
+		trail = [];
 		if (index !== null) focusRow(index);
 	}
 
 	function stepSheet(delta: number) {
-		if (openIndex === null) return;
+		if (openIndex === null || trail.length > 0) return;
 		const next = openIndex + delta;
 		if (next < 0 || next >= filtered.length) return;
 		openIndex = next;
 	}
 
+	/**
+	 * Follow a character's word list. Capped so a learner cannot walk 安 → 安全 → 全部 → … into
+	 * a stack that Escape takes a minute to unwind; at the cap the oldest step is dropped, which
+	 * keeps "back" honest about the word it names.
+	 */
+	const TRAIL_MAX = 12;
+
+	function followWord(word: Word) {
+		if (word.id === sheetWord?.id) return;
+		const next = [...trail, word];
+		trail = next.length > TRAIL_MAX ? next.slice(next.length - TRAIL_MAX) : next;
+	}
+
+	function backSheet() {
+		if (trail.length === 0) return;
+		trail = trail.slice(0, -1);
+	}
+
 	// ---------------------------------------------------------------- copy -------------
+
+	/** Official rows minus shipped cards for this level: 1 for HSK 5, 2 for HSK 2, 0 for HSK 1. */
+	const merged = $derived(level === null ? 0 : LEVEL_SIZES[level] - SHIPPED_SIZES[level]);
 
 	const countLabel = $derived.by(() => {
 		// Deliberately not the official size from `LEVEL_SIZES`: a handful of official rows
@@ -370,6 +443,35 @@
 		return n === 1 ? '1 word' : `${shown} words`;
 	});
 
+	/**
+	 * The same query run against the other four levels, and only when this one found nothing.
+	 *
+	 * Search is level-scoped — one index per level, built lazily — and until this loop the empty
+	 * screen dealt with that by suggesting “aihao”, a query that returns nothing anywhere except
+	 * HSK 1. Being level-scoped is a defensible design; stranding the learner inside it twice is
+	 * not. The word lists are already in memory (the character index pulled them down), so the
+	 * screen can say exactly where the word they typed actually lives.
+	 */
+	const elsewhere = $derived.by(() => {
+		if (level === null || phase !== 'ready') return [];
+		if (query.trim() === '' || filtered.length > 0) return [];
+		const lists = levelLists();
+		if (lists === null) return [];
+
+		const found: { level: Level; count: number; first: Word }[] = [];
+		for (const other of LEVELS) {
+			if (other === level) continue;
+			const list = lists.get(other);
+			if (list === undefined) continue;
+			const hits = searchWords(other, list, query);
+			if (hits.length > 0) found.push({ level: other, count: hits.length, first: hits[0] });
+		}
+		return found;
+	});
+
+	/** The query, escaped once, for the `?q=` the offers above carry to the level they name. */
+	const carried = $derived(encodeURIComponent(query.trim()));
+
 	/** Why the list is empty, and what to do about it. Never a bare "no results". */
 	const emptyCopy = $derived.by(() => {
 		if (query.trim() !== '') {
@@ -379,7 +481,7 @@
 				title: `Nothing in HSK ${level} matches “${query.trim()}”`,
 				body:
 					filter === 'all'
-						? 'Pinyin needs no tone marks and is matched whole syllables at a time — try “hao”, or “aihao” for 爱好. You can also search a character, or an English word from the meaning.'
+						? 'Search covers one level at a time. Pinyin needs no tone marks and is matched whole syllables at a time; you can also search a character, or an English word from the meaning.'
 						: `Nothing here is filed under ${STATUS_META[filter].label.toLowerCase()}. Search across every word in the level instead.`,
 				action: filter === 'all' ? 'clear-query' : 'clear-filter'
 			} as const;
@@ -479,6 +581,31 @@
 				<p class="mark-py pinyin" aria-hidden="true">{emptyCopy.pinyin}</p>
 				<h2 class="empty-title">{emptyCopy.title}</h2>
 				<p class="empty-body">{emptyCopy.body}</p>
+
+				{#if elsewhere.length > 0}
+					<!-- The one thing a stranded learner actually wants: the level the word is on,
+					     with the query carried across so it is still typed when they land. -->
+					<ul class="elsewhere">
+						{#each elsewhere as hit (hit.level)}
+							<li>
+								<a
+									class="hop"
+									href={resolve(`/browse/[level]?q=${carried}`, { level: String(hit.level) })}
+								>
+									<span class="hop-level">HSK {hit.level}</span>
+									<span class="hop-word">
+										<Hanzi word={hit.first} size="xs" class="hop-hz" />
+										<Pinyin word={hit.first} size="sm" class="hop-py" />
+									</span>
+									<span class="hop-count tabular">
+										{hit.count === 1 ? '1 match' : `${hit.count.toLocaleString('en')} matches`}
+									</span>
+								</a>
+							</li>
+						{/each}
+					</ul>
+				{/if}
+
 				{#if emptyCopy.action === 'clear-query'}
 					<button type="button" class="btn btn-quiet" onclick={() => (query = '')}>
 						Clear search
@@ -516,20 +643,38 @@
 					/>
 				{/each}
 			</div>
+
+			{#if level !== null && query.trim() === '' && filter === 'all' && merged > 0}
+				<!-- The footnote the header count needs, kept off the header.
+				     "1,070 words" up there disagrees with the standard this app cites, and the
+				     home screen already says why in plain copy; browse carried the number with
+				     none of the explanation. It belongs at the end of the list it qualifies,
+				     which is also the only place on this screen that costs nothing. -->
+				<p class="colophon">
+					{SHIPPED_SIZES[level].toLocaleString('en')} cards from the standard's
+					{LEVEL_SIZES[level].toLocaleString('en')} HSK {level} entries — {merged}
+					{merged === 1 ? 'pair' : 'pairs'} of same-pinyin homographs
+					{merged === 1 ? 'shares' : 'share'} a card.
+				</p>
+			{/if}
 		{/if}
 	{/if}
 
-	{#if openWord !== null && openIndex !== null && level !== null}
+	{#if sheetWord !== null && openIndex !== null && level !== null}
+		<!-- Status comes off the record rather than the level-scoped map: a followed word can
+		     belong to any level, and `statuses` only holds this one's. -->
 		<WordSheet
-			word={openWord}
-			status={statusFor(statuses, openWord.id)}
-			record={progress.forWord(openWord.id)}
-			{level}
+			word={sheetWord}
+			status={statusOf(progress.forWord(sheetWord.id))}
+			record={progress.forWord(sheetWord.id)}
 			position={openIndex + 1}
 			total={filtered.length}
+			from={sheetFrom}
 			onclose={closeSheet}
+			onback={backSheet}
 			onprev={() => stepSheet(-1)}
 			onnext={() => stepSheet(1)}
+			onfollow={followWord}
 		/>
 	{/if}
 </main>
@@ -554,8 +699,8 @@
 		 * may take this much more off our top edge. 3.375rem is exactly the level-pills-and-
 		 * count row — 0.625rem of `.controls` padding-block-start + the 2.25rem `.top` row +
 		 * the 0.5rem gap beneath it — so the search field and the status chips are what stay,
-		 * and the pills come back the instant the user scrolls up. `.controls` already sticks
-		 * to `--app-header-h`, which the shell drives negative by this amount.
+		 * and the pills come back the instant the user scrolls up. `.controls` sticks to
+		 * `--app-sticky-top`, which is the shell's chrome total already minus this fold.
 		 */
 		--app-chrome-fold: 3.375rem;
 
@@ -570,7 +715,10 @@
 
 	.controls {
 		position: sticky;
-		top: calc(var(--app-safe-top, 0px) + var(--app-header-h, 3.5rem));
+		/* The shell's own number: chrome total minus whatever of this screen's fold is
+		   currently folded away. Spelling it out of `--app-header-h` was the old arrangement,
+		   from when the shell drove that token negative to make room. */
+		top: var(--app-sticky-top);
 		z-index: 20;
 		/* Full-bleed background so rows scrolling under it are covered edge to edge, while the
 		   controls themselves stay on the text column. */
@@ -635,6 +783,13 @@
 			   bleeds: a strip pulled out to the page edge would leave the grid. */
 			--browse-bleed-start: 0px;
 			--browse-bleed-end: 0px;
+			/*
+			 * Nothing to fold from here up. `.controls` collapses to a single 67px row at this
+			 * width, so the 3.375rem the phone stack volunteers would eat all but 13px of it.
+			 * The shell refuses a fold a screen cannot afford whole, so the rendering is right
+			 * either way — but the screen should state its own number rather than lean on that.
+			 */
+			--app-chrome-fold: 0px;
 
 			max-inline-size: var(--container-wide);
 		}
@@ -728,6 +883,84 @@
 		margin: 0.5rem 0 1.5rem;
 		color: var(--color-ink-muted);
 		font-size: var(--text-sm);
+	}
+
+	/* Where the word they typed actually is. Rows rather than a sentence: there can be four of
+	   them, and each one is a destination. */
+	.elsewhere {
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
+		inline-size: 100%;
+		margin: -0.5rem 0 1.5rem;
+		padding: 0;
+		list-style: none;
+		text-align: start;
+	}
+
+	.hop {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 0.625rem;
+		min-block-size: var(--spacing-tap);
+		padding: 0.375rem 0.75rem;
+		border: 1px solid var(--color-line);
+		border-radius: var(--radius-md);
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.hop-level {
+		color: var(--color-ink-subtle);
+		font-size: var(--text-2xs);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		white-space: nowrap;
+	}
+
+	.hop-word {
+		display: flex;
+		align-items: baseline;
+		gap: 0.375rem;
+		min-inline-size: 0;
+		overflow: hidden;
+	}
+
+	.hop :global(.hop-hz) {
+		flex: none;
+		color: var(--color-ink);
+	}
+
+	.hop :global(.hop-py) {
+		min-inline-size: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.hop-count {
+		color: var(--color-ink-subtle);
+		font-size: var(--text-xs);
+		white-space: nowrap;
+	}
+
+	@media (hover: hover) {
+		.hop:hover {
+			border-color: var(--color-line-strong);
+			background-color: var(--color-surface-sunken);
+		}
+	}
+
+	/* The footnote to the header's word count, at the end of the list it qualifies. */
+	.colophon {
+		max-inline-size: 34rem;
+		margin: 1.5rem auto 0;
+		padding-block-end: 0.5rem;
+		color: var(--color-ink-subtle);
+		font-size: var(--text-xs);
+		text-align: center;
+		text-wrap: pretty;
 	}
 
 	/* ----------------------------------------------------------------- dead ends ------ */
