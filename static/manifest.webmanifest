@@ -1,0 +1,47 @@
+{
+	"name": "hskquiz — HSK 1–5 vocabulary practice",
+	"short_name": "hskquiz",
+	"description": "Practice HSK 1–5 Chinese vocabulary. Tone-marked pinyin, quizzing in both directions, and short sessions weighted toward the words you keep missing.",
+	"id": "/",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"orientation": "any",
+	"lang": "en",
+	"dir": "ltr",
+	"background_color": "#faf8f5",
+	"theme_color": "#faf8f5",
+	"categories": ["education", "books"],
+	"icons": [
+		{
+			"src": "/icon-192.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/icon-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "/icon-maskable-512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	],
+	"shortcuts": [
+		{
+			"name": "Practise HSK 1",
+			"short_name": "HSK 1",
+			"url": "/quiz/1"
+		},
+		{
+			"name": "Browse HSK 1 vocabulary",
+			"short_name": "Browse",
+			"url": "/browse/1"
+		}
+	]
+}

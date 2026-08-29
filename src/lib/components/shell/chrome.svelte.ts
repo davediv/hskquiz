@@ -10,22 +10,47 @@
  * an iPhone frame standing between the user and a 38,402px-tall word list. Pleco spends 72px on
  * the same job and Du Chinese 95px.
  *
- * So the bar is now a *budget the shell hands back*. Scrolling down retracts it 1:1 with the
- * finger; scrolling up brings it straight back. Because `--app-header-h` reports the live
- * on-screen height rather than the intrinsic one, every sticky layer in the app rides up with
- * it for free — no screen has to subscribe to anything. `--app-bar-h` keeps the intrinsic
- * height for whoever needs to reason about the bar itself, and `--app-chrome-h` is the live
- * total including the safe-area inset.
+ * THE BAR HAS A FLOOR. IT SHRINKS; IT DOES NOT LEAVE.
+ * The first version of this controller let the bar retract to nothing, and `visible` was a bare
+ * `barH - hidden` with nothing under it — so a screen that volunteered a fold drove
+ * `--app-header-h` to -54px, `--app-chrome-h` to `calc(0px + -54px)`, and the skip link (which
+ * rides the chrome) to top -46: the first tab stop on every page sat wholly outside the
+ * viewport. Scrolled past the fold, `/browse/1` also had no back control and nothing naming the
+ * level anywhere on a 38,402px document.
  *
- * SCREENS CAN VOLUNTEER MORE THAN THE BAR
- * Retracting the bar gets `/browse/1` from 208px of chrome to 151px, but the remaining 151px
- * is the screen's own sticky block and only the screen knows which part of it is expendable.
- * So a screen may declare `--app-chrome-fold: <length>` on the element it renders directly
- * inside `#main`, meaning "once the bar is gone, you may take this many more px off my top
- * edge". The shell then drives `--app-header-h` *negative* by that much, and the screen's own
- * `top: calc(... + var(--app-header-h))` carries its expendable row off the viewport with the
- * bar. It is registered as a real `<length>` below so the computed value arrives in px and no
- * unit maths is needed here. Nobody declares it and the fold is simply 0.
+ * So the retraction is now a *shrink between two ends*, not a disappearance:
+ *
+ *   expanded   --app-bar-h + the hairline   the full row: back, title, lateral action
+ *   docked     --app-bar-min-h + hairline   the same row, compact — still a tap target on the
+ *                                           back control and still the level's name
+ *
+ * `visible` can therefore never go below the docked height, and `--app-chrome-h` can never go
+ * below the safe inset plus that. Both references we are measured against keep permanent
+ * chrome: Du Chinese a bottom tab bar, Pleco a ~72px band. Ours is the top bar it already
+ * argues is the navigation.
+ *
+ * THE BAR SLIDES; ITS BOX DOES NOT SHRINK
+ * The obvious way to compact a bar is to animate its height. Do not: the header is a sticky
+ * element IN FLOW, so shrinking it by 16px shortens the document by 16px, the browser's scroll
+ * anchoring compensates with a 16px scroll, that scroll is a delta this controller reads, and
+ * the bar changes size again. Tabbing into the bar on `/browse/1` — `reveal()` against
+ * anchoring — put it in a 900↔916 / 41px↔57px oscillation that ran for as long as it was
+ * watched. So `barOffset` translates the bar up instead and the bar pads its own row back down
+ * by the same number: the border box stays exactly `--app-bar-h` + hairline at every point in
+ * the travel, the document never reflows, and the row still recomposes at 40px rather than
+ * being sliced off at the top edge.
+ *
+ * SCREENS CAN STILL FOLD THEIR OWN BLOCK — BUT WITH THEIR OWN NUMBER
+ * Retracting 16px of bar is not on its own enough for a screen that stacks 151px of its own
+ * search and filters underneath. So a screen may still declare `--app-chrome-fold: <length>`
+ * on the element it renders directly inside `#main`, meaning "once the bar is docked, this
+ * much of my sticky block is expendable". The shell keeps consuming scroll past the bar's own
+ * travel and reports how much of that budget is currently spent as `--app-fold-h`, from which
+ * it publishes `--app-sticky-top` — `--app-chrome-h` minus the fold. A screen that folds
+ * offsets its sticky block against `--app-sticky-top` instead of `--app-chrome-h`; the
+ * shell's own published height stays honest either way. `--app-chrome-fold` is registered as a
+ * real `<length>` in shell.css so the computed value arrives in px and no unit maths is needed
+ * here. Nobody declares it and the fold is simply 0.
  *
  * IT ALSO MEASURES THE SCREEN'S COLUMN
  * On a phone every route runs edge to edge and a full-bleed bar is right. On a desktop every
@@ -37,11 +62,11 @@
  * `--app-bar-pad`. Nobody has to tell it anything, and it cannot fall out of date.
  *
  * WHY 1:1 AND NOT A THRESHOLD TOGGLE
- * A toggle has to animate 56px of chrome (and everything stuck to it) on a timer that does not
- * match the scroll, which reads as the page fighting you. Tracking the delta is what iOS Safari
- * does: the chrome is simply attached to the content. The only timer here is the settle — if a
- * scroll ends with the bar halfway out, it glides to whichever end is nearer so the wordmark is
- * never left sliced in half.
+ * A toggle has to animate the chrome (and everything stuck to it) on a timer that does not
+ * match the scroll, which reads as the page fighting you. Tracking the delta is what iOS
+ * Safari does: the chrome is simply attached to the content. The only timer here is the settle
+ * — if a scroll ends with the bar between its two ends, it glides to whichever is nearer so
+ * the row is never left at some arbitrary in-between height.
  */
 
 /** How long the settle glide runs. Matches the design system's 180ms transitions. */
@@ -51,34 +76,50 @@ const IDLE_MS = 140;
 /**
  * Going down the chrome tracks the scroll 1:1; coming back up it moves three times as fast.
  * Retracting should feel like the chrome is attached to the page, but *reaching* for it should
- * not cost a 110px scroll-up — a flick of ~37px brings the whole toolbar back, which is the
+ * not cost a 70px scroll-up — a flick of ~23px brings the whole toolbar back, which is the
  * "it returns the instant you scroll up" half of the behaviour.
  */
 const REVEAL_GAIN = 3;
 /**
- * The bar only retracts on a page with somewhere to go. Three bar-heights of runway keeps it
- * pinned on short pages, where hiding chrome buys nothing and costs the user their bearings.
+ * The bar only retracts on a page with somewhere to go. Three budgets of runway keeps it fully
+ * expanded on short pages, where compacting chrome buys nothing and costs the user their
+ * bearings.
  */
 const MIN_RUNWAY = 3;
 /** The typed custom property a screen uses to volunteer part of its own sticky block. */
 const FOLD_PROPERTY = '--app-chrome-fold';
+/** Body height of the docked row, and the hairline under it. Both typed `<length>`. */
+const MIN_BAR_PROPERTY = '--app-bar-min-h';
+const LINE_PROPERTY = '--app-bar-line';
+/** Floor used before the tokens can be read (SSR, or a CSSOM that hands back nothing). */
+const MIN_BAR_FALLBACK = 41;
 
 export interface ChromeController {
-	/** Intrinsic height of the bar body in px, measured. 0 until the bar reports it. */
+	/** Border-box height of the expanded bar below the safe inset, px. 0 until measured. */
 	readonly barH: number;
-	/** How many px of chrome are currently retracted off the top edge — bar first, then fold. */
+	/** Border-box height of the docked row below the safe inset, px. The floor `visible` has. */
+	readonly minBarH: number;
+	/** How much scroll the chrome has absorbed — the bar's own travel first, then the fold. */
 	readonly hidden: number;
 	/**
-	 * What `--app-header-h` publishes: how much of the bar is on screen. Goes NEGATIVE once a
-	 * screen has volunteered a fold and the bar is already gone, which is how the screen's own
-	 * sticky block gets pulled up past the viewport edge.
+	 * What `--app-header-h` publishes: how much of the bar is on screen, border box included.
+	 * Clamped to `[minBarH, barH]`. It is never zero and never negative — the docked row is
+	 * always there.
 	 */
 	readonly visible: number;
-	/** How far the bar itself has translated. Capped at `barH`; the fold is not the bar's. */
+	/** How many px of the screen's volunteered fold are currently spent. Published as
+	    `--app-fold-h`; the screen subtracts it from its own sticky offset. */
+	readonly foldY: number;
+	/**
+	 * How far the bar has slid up the top edge, 0 → `barH - minBarH`. The bar translates by
+	 * this and pads its own row back down by the same amount, so its BORDER BOX never changes
+	 * size — see the note on the layout feedback loop in the file header.
+	 */
 	readonly barOffset: number;
 	/** True once the bar has measured itself; before that the CSS token stands. */
 	readonly measured: boolean;
-	/** More than half retracted. Published as `data-chrome` for screens that want to react. */
+	/** Past half of the bar's own travel. Published as `data-chrome`, and the bar reads it to
+	    switch to its compact type. */
 	readonly condensed: boolean;
 	/** True as soon as anything has scrolled under the bar — drives its hairline. */
 	readonly scrolled: boolean;
@@ -88,7 +129,7 @@ export interface ChromeController {
 	readonly columnPad: number;
 	/** Re-measure the screen's column. Call after a navigation. */
 	sync(): void;
-	/** The bar reports its own height here. */
+	/** The bar reports its own border-box height here, safe inset excluded. */
 	report(height: number): void;
 	/** Put the bar back: focus moved into it, or the route changed. */
 	reveal(instant?: boolean): void;
@@ -104,6 +145,7 @@ function prefersReducedMotion(): boolean {
 
 export function createChrome(): ChromeController {
 	let barH = $state(0);
+	let minBarH = $state(MIN_BAR_FALLBACK);
 	let hidden = $state(0);
 	let scrolled = $state(false);
 	/** Extra px the current screen has volunteered. Re-read on every scroll — it is one
@@ -122,12 +164,65 @@ export function createChrome(): ChromeController {
 		return el instanceof HTMLElement ? el : null;
 	}
 
+	/**
+	 * The screen's own sticky block — the thing a fold takes rows off the top of. Only the
+	 * screen root's direct children are considered: a fold is a statement about the block the
+	 * screen pins under the bar, not about some sticky affordance nested inside a list row.
+	 * 0 when the screen has no sticky block at all.
+	 */
+	function stickyBlockHeight(screen: HTMLElement): number {
+		for (const child of screen.children) {
+			if (!(child instanceof HTMLElement)) continue;
+			if (getComputedStyle(child).position !== 'sticky') continue;
+			return child.getBoundingClientRect().height;
+		}
+		return 0;
+	}
+
 	function readFold(): number {
 		const screen = screenRoot();
 		if (!screen) return 0;
 		// Registered as `<length>`, so the computed value is always resolved px.
 		const px = Number.parseFloat(getComputedStyle(screen).getPropertyValue(FOLD_PROPERTY));
-		return Number.isFinite(px) && px > 0 ? px : 0;
+		const declared = Number.isFinite(px) && px > 0 ? px : 0;
+		if (declared <= 0) return 0;
+
+		/*
+		 * A fold is refused outright unless the screen can afford the whole of it — the block
+		 * has to still be at least a docked bar tall once the fold is taken. Browse volunteers
+		 * 3.375rem for its level-pills row, which is right for the phone stack (151px of
+		 * controls) and wrong from 60rem up, where the same controls collapse to a single 67px
+		 * row: taking 54px off that leaves a 13px sliver of a search field under the bar, which
+		 * reads as a rendering fault rather than as a toolbar that got smaller. All or nothing
+		 * is the only rule the shell can apply honestly, because only the screen knows where
+		 * its rows are. A screen with no sticky block of its own is taken at its word.
+		 */
+		const block = stickyBlockHeight(screen);
+		if (block <= 0) return declared;
+		return declared <= block - minBarH ? declared : 0;
+	}
+
+	/**
+	 * The docked height, read off the same tokens the bar is styled from — so a media query
+	 * that shrinks the bar in landscape moves the floor with it and the two cannot disagree.
+	 * Both properties are registered `<length>`, so these arrive as px.
+	 */
+	function readFloor(): number {
+		const root = getComputedStyle(document.documentElement);
+		const body = Number.parseFloat(root.getPropertyValue(MIN_BAR_PROPERTY));
+		if (!Number.isFinite(body) || body <= 0) return MIN_BAR_FALLBACK;
+		const line = Number.parseFloat(root.getPropertyValue(LINE_PROPERTY));
+		return body + (Number.isFinite(line) && line > 0 ? line : 0);
+	}
+
+	/** How far the bar itself can shrink before the fold starts taking scroll. */
+	function barTravel(): number {
+		return Math.max(0, barH - minBarH);
+	}
+
+	/** Everything the chrome will absorb: the bar's own travel plus the screen's fold. */
+	function budget(): number {
+		return barTravel() + fold;
 	}
 
 	function measureColumn() {
@@ -168,7 +263,7 @@ export function createChrome(): ChromeController {
 	}
 
 	function settle() {
-		const max = barH + fold;
+		const max = budget();
 		if (hidden <= 0 || hidden >= max) return;
 		glide(hidden > max / 2 ? max : 0);
 	}
@@ -183,14 +278,24 @@ export function createChrome(): ChromeController {
 			scrolled = y > 2;
 
 			if (barH <= 0) return;
+			/*
+			 * A scroll event where the page did not actually move — a virtualised list
+			 * re-rendering, a scroll-anchoring adjustment — must not abort a glide that is
+			 * already running. It used to: `reveal()` would start bringing the bar back after
+			 * a tab into it, one zero-delta event from browse's windowing would freeze the
+			 * glide halfway, and the settle would then round the bar back down to docked
+			 * while the focus ring sat on the control the user had just reached. Roughly one
+			 * reveal in four ended with the bar re-docked.
+			 */
+			if (Math.abs(delta) < 1 && frame) return;
 			stopGlide();
 
 			fold = readFold();
-			const max = barH + fold;
+			const max = budget();
 			const runway = document.documentElement.scrollHeight - window.innerHeight;
-			if (y <= barH || runway < max * MIN_RUNWAY) {
-				// Inside the bar's own height the bar has not stuck yet, so retracting it would
-				// tear a gap above the content instead of covering it.
+			if (max <= 0 || y <= barH || runway < max * MIN_RUNWAY) {
+				// Inside the bar's own height nothing has passed under it yet, so compacting it
+				// would move the row while the page is still at the top.
 				hidden = 0;
 			} else {
 				const travel = delta < 0 ? delta * REVEAL_GAIN : delta;
@@ -203,10 +308,14 @@ export function createChrome(): ChromeController {
 
 		const onResize = () => {
 			last = Math.max(0, window.scrollY);
+			// A landscape breakpoint moves both ends of the bar, so re-read the floor before
+			// the bar re-reports its expanded height.
+			minBarH = readFloor();
 			measureColumn();
 			glide(0, true);
 		};
 
+		minBarH = readFloor();
 		measureColumn();
 		onScroll();
 		window.addEventListener('scroll', onScroll, { passive: true });
@@ -224,20 +333,29 @@ export function createChrome(): ChromeController {
 		get barH() {
 			return barH;
 		},
+		get minBarH() {
+			return minBarH;
+		},
 		get hidden() {
 			return hidden;
 		},
 		get visible() {
-			return barH - hidden;
+			// The floor, restated in the one place every published number comes from: whatever
+			// the fold is doing, the docked row is still on screen.
+			return Math.max(minBarH, barH - Math.min(hidden, barTravel()));
+		},
+		get foldY() {
+			return Math.max(0, Math.min(fold, hidden - barTravel()));
 		},
 		get barOffset() {
-			return Math.min(hidden, barH);
+			return Math.min(hidden, barTravel());
 		},
 		get measured() {
 			return barH > 0;
 		},
 		get condensed() {
-			return barH > 0 && hidden > barH / 2;
+			const travel = barTravel();
+			return travel > 0 && hidden > travel / 2;
 		},
 		get scrolled() {
 			return scrolled;
@@ -255,10 +373,10 @@ export function createChrome(): ChromeController {
 			requestAnimationFrame(measureColumn);
 		},
 		report(height: number) {
-			if (height > 0 && Math.abs(height - barH) > 0.5) {
-				barH = height;
-				hidden = Math.min(hidden, height + fold);
-			}
+			// Safe to take at any point in the travel: the bar's border box is the same size
+			// docked as expanded, so this is its intrinsic height and never an echo of what
+			// the controller just published.
+			if (height > 0 && Math.abs(height - barH) > 0.5) barH = height;
 		},
 		reveal(instant = false) {
 			if (idle) clearTimeout(idle);

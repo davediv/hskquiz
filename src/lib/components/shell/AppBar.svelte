@@ -8,10 +8,21 @@
 	  quiz    back and the level name. Nothing else — during a run the bottom of the screen
 	          belongs to the answer buttons.
 
-	IT RETRACTS. `chrome` (see chrome.svelte.ts) tracks the scroll delta and this bar
-	translates 1:1 with it, so on a long list the 56px it costs is only spent while the user
-	is actually at rest or heading back up. Everything stuck beneath it follows automatically
-	because `--app-header-h` publishes the live height, not the intrinsic one.
+	IT COMPACTS; IT DOES NOT LEAVE. `chrome` (see chrome.svelte.ts) tracks the scroll delta and
+	this bar compacts 1:1 with it, from `--app-bar-h` down to `--app-bar-min-h` — 56px of row
+	to 40px — and back up the moment the finger goes the other way. It used to translate itself
+	off the top edge entirely, which left `/browse/1` scrolled with no back control, nothing
+	naming the level, and (because the published chrome height went negative with it) the skip
+	link parked above the viewport. The docked row is the answer: the same three slots, one
+	step down the type scale, permanently on screen. Everything stuck beneath it follows
+	automatically because `--app-header-h` publishes the live height, not the intrinsic one.
+
+	HOW IT COMPACTS IS DELIBERATE. The <header> slides up by `chrome.barOffset` and `.inner`
+	pads itself back down by exactly the same number, inside a `block-size` that never changes.
+	So the row RECOMPOSES at 40px — nothing is sliced off the top — while the header's border
+	box stays 57px and the document never reflows. Animating the height instead is what a
+	sticky-in-flow element must not do: it shortens the document, scroll anchoring compensates,
+	the controller reads that compensation as a scroll, and the bar oscillates.
 
 	THE HEADING IS AN <h1>. It used to be a <span>, which left `/quiz/[level]` and
 	`/browse/[level]` with literally zero headings in their normal state while `/` had a full
@@ -32,10 +43,24 @@
 		backTarget
 	}: { route: ShellRoute; chrome: ChromeController; backTarget: BackTarget } = $props();
 
-	/** Reported to the controller, which turns it into the live `--app-header-h`. */
-	let innerH = $state(0);
+	/**
+	 * The header's own border box, measured — hairline included, which the old `.inner`
+	 * binding missed, so the shell published 56 while the element occupied 57 and every
+	 * sticky layer in the app sat 1px too high.
+	 */
+	let headerEl = $state<HTMLElement | null>(null);
+	let headerH = $state(0);
 
-	$effect(() => chrome.report(innerH));
+	$effect(() => {
+		const el = headerEl;
+		const measured = headerH;
+		if (!el || measured <= 0) return;
+		// `offsetHeight` includes the safe-area padding the bar sits under; the controller
+		// wants the bar itself, because the inset is added back as part of --app-chrome-h.
+		// The box is the same size docked as expanded, so this never changes under a scroll.
+		const inset = Number.parseFloat(getComputedStyle(el).paddingBlockStart) || 0;
+		chrome.report(measured - inset);
+	});
 
 	function onBack(event: MouseEvent) {
 		// Leave modified clicks, middle clicks and anything already handled to the browser:
@@ -57,10 +82,17 @@
 <header
 	class="bar"
 	class:scrolled={chrome.scrolled}
+	class:condensed={chrome.condensed}
+	bind:this={headerEl}
+	bind:offsetHeight={headerH}
 	style:translate={chrome.barOffset > 0 ? `0 ${-chrome.barOffset}px` : null}
 	onfocusin={() => chrome.reveal()}
 >
-	<div class="inner" class:home={route.mode === 'home'} bind:clientHeight={innerH}>
+	<div
+		class="inner"
+		class:home={route.mode === 'home'}
+		style:padding-block-start={chrome.barOffset > 0 ? `${chrome.barOffset}px` : null}
+	>
 		{#if route.mode === 'home'}
 			<span class="mark" lang="zh-Hans" aria-hidden="true">汉</span>
 			<span class="wordmark">{APP_NAME}</span>
@@ -104,18 +136,25 @@
 
 <style>
 	.bar {
+		/*
+		 * The live VISIBLE row: `--app-header-h` is a border-box number because that is what a
+		 * sticky layer below the bar has to clear, so the hairline comes back off to get the
+		 * height the row's contents actually have. 56px expanded, 40px docked.
+		 */
+		--bar-row-h: calc(var(--app-header-h) - var(--app-bar-line));
+
 		position: sticky;
 		top: 0;
 		z-index: 40;
 		padding-top: var(--app-safe-top);
-		border-block-end: 1px solid transparent;
+		border-block-end: var(--app-bar-line) solid transparent;
 		/* Translucent, so content passing underneath reads as motion rather than a hard cut. */
 		background-color: color-mix(in srgb, var(--color-page) 82%, transparent);
 		backdrop-filter: saturate(1.6) blur(14px);
 		-webkit-backdrop-filter: saturate(1.6) blur(14px);
 		transition: border-color 160ms var(--ease-out-soft);
 		/*
-		 * The retraction is a `translate` written per frame from JS, deliberately with no
+		 * The slide is a `translate` written per frame from JS, deliberately with no
 		 * transition of its own: it is tracking a finger, and a transition would put the bar
 		 * behind the content it is attached to. The settle glide is tweened in JS instead.
 		 */
@@ -132,11 +171,27 @@
 		border-block-end-color: var(--color-line);
 	}
 
+	/*
+	 * Docked, the bar is the only chrome left on screen and a list is running underneath it,
+	 * so it stops being glass and becomes a surface: at 82% the descenders of a 14px gloss
+	 * came through the row on every scroll.
+	 */
+	.bar.condensed {
+		background-color: var(--color-page);
+	}
+
 	.inner {
 		display: grid;
 		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
 		gap: 0.25rem;
+		/*
+		 * CONSTANT, and border-box on purpose: the compacting is `padding-block-start` growing
+		 * inside this fixed height while the header slides up by the same amount. The content
+		 * box shrinks 56 -> 40 and recentres; the border box never moves, so the document
+		 * never reflows and scroll anchoring has nothing to fight.
+		 */
+		box-sizing: border-box;
 		block-size: var(--app-bar-h);
 		/*
 		 * Full bleed on a phone: every route runs edge to edge there, so window chrome sits
@@ -205,7 +260,9 @@
 		display: grid;
 		place-items: center;
 		inline-size: var(--spacing-tap);
-		block-size: var(--spacing-tap);
+		/* Keeps its 44px width, and takes the whole row's height whatever the row is doing:
+		   44x56 expanded, 44x40 docked, and every row of the bar is tappable either way. */
+		block-size: min(var(--spacing-tap), var(--bar-row-h));
 		border-radius: var(--radius-pill);
 		color: var(--color-ink);
 		text-decoration: none;
@@ -230,12 +287,19 @@
 		letter-spacing: -0.012em;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+		transition: font-size 160ms var(--ease-out-soft);
+	}
+
+	/* One step down the scale for the docked row: the level's name is still the thing the
+	   learner needs, just no longer the loudest thing on the screen. */
+	.bar.condensed .heading {
+		font-size: var(--text-base);
 	}
 
 	.action {
 		display: inline-flex;
 		align-items: center;
-		min-block-size: var(--spacing-tap);
+		min-block-size: min(var(--spacing-tap), var(--bar-row-h));
 		padding-inline: 0.75rem;
 		border-radius: var(--radius-sm);
 		color: var(--color-accent);
@@ -272,11 +336,25 @@
 		font-family: var(--font-hanzi);
 		font-size: 1rem;
 		line-height: 1;
+		transition:
+			inline-size 160ms var(--ease-out-soft),
+			block-size 160ms var(--ease-out-soft);
+	}
+
+	.bar.condensed .mark {
+		inline-size: 1.5rem;
+		block-size: 1.5rem;
+		font-size: 0.875rem;
 	}
 
 	.wordmark {
 		font-size: var(--text-lg);
 		font-weight: 600;
 		letter-spacing: -0.02em;
+		transition: font-size 160ms var(--ease-out-soft);
+	}
+
+	.bar.condensed .wordmark {
+		font-size: var(--text-base);
 	}
 </style>

@@ -11,34 +11,55 @@
  *
  * Everything sits in `@layer base` so any Tailwind utility still wins over it.
  *
- * THE THREE HEADER TOKENS — the difference matters:
+ * THE HEADER TOKENS — the difference matters:
  *
- *   --app-bar-h      3.5rem, always. The bar's intrinsic height. Use it to reason about the
- *                    bar itself; it never changes.
- *   --app-header-h   How much of the bar is ON SCREEN right now, 0 → --app-bar-h. The shell
- *                    writes it from JS as the bar retracts under a downward scroll. Anything
- *                    that sticks below the bar should offset against THIS, which is what the
- *                    whole app already did — so browse's search + filters, the quiz progress
- *                    rail and the level screen's desktop rail all rise with the bar for free.
+ *   --app-bar-h      Body height of the EXPANDED bar. Its intrinsic top end.
+ *   --app-bar-min-h  Body height of the DOCKED bar — the compact row that never leaves, still
+ *                    carrying the back control and the level's name. Its intrinsic bottom end.
+ *   --app-bar-line   The hairline the bar draws under itself. It is part of the bar's border
+ *                    box, so it is part of every number below; naming it means the bar's own
+ *                    inner row can subtract it instead of the published height under-shooting
+ *                    by 1px the way it used to.
+ *   --app-header-h   How much of the bar is ON SCREEN right now, border box included:
+ *                    --app-bar-min-h + line  →  --app-bar-h + line. The shell writes it from
+ *                    JS as the bar compacts under a downward scroll. Anything that sticks
+ *                    below the bar offsets against THIS, which is what the whole app already
+ *                    did — so browse's search + filters, the quiz progress rail and the level
+ *                    screen's desktop rail all rise with the bar for free. ON `.shell` IT IS
+ *                    NEVER ZERO AND NEVER NEGATIVE: the bar shrinks, it does not leave. (One
+ *                    transitional exception, spelled out and dated in `+layout.svelte`: inside
+ *                    `#main` it currently resolves to `--app-sticky-top`, so the one screen
+ *                    that has not moved to that name yet keeps its fold. `--app-chrome-h` is
+ *                    not overridden there and keeps the floor.)
  *   --app-chrome-h   The live total the shell occupies: safe-area inset plus the above. This
- *                    is the one number that answers "how much of the viewport is not mine".
+ *                    is the one number that answers "how much of the viewport is not mine",
+ *                    and it has a floor for the same reason.
  *
- * `.shell[data-chrome]` is `expanded` or `condensed` (past halfway), for a screen that wants
- * to do more than move — collapse a control row, drop a label — while the bar is away.
+ * `.shell[data-chrome]` is `expanded` or `condensed` (past half the bar's travel), for a
+ * screen that wants to do more than move — collapse a control row, drop a label.
  *
- * AND ONE A SCREEN WRITES BACK
+ * AND THE PAIR A FOLDING SCREEN USES
  *   --app-chrome-fold  Declared by a screen on the element it renders directly inside `#main`:
- *                      "once the bar is gone, you may take this many more px off my top edge."
- *                      The shell answers by driving `--app-header-h` negative by that amount,
- *                      so the screen's own sticky block — which already offsets against it —
- *                      carries its expendable top row off screen with the bar and brings it
- *                      back on the way up. Default 0: nothing folds unless it volunteers.
+ *                      "once the bar is docked, this much of my own sticky block is
+ *                      expendable." The shell keeps absorbing scroll past the bar's own travel
+ *                      up to that much. Default 0: nothing folds unless it volunteers.
+ *   --app-fold-h       What the shell answers with: how many px of that budget are spent right
+ *                      now, 0 → --app-chrome-fold.
+ *   --app-sticky-top   `--app-chrome-h` minus `--app-fold-h`, ready to use. A folding screen
+ *                      sticks its block to THIS instead of to `--app-chrome-h`, so the part it
+ *                      volunteered rides up past the viewport edge and comes back on the way
+ *                      up. The shell's own published height stays honest either way — which is
+ *                      the whole point: `--app-header-h` used to be driven to -54px to get this
+ *                      effect, taking `--app-chrome-h` and the skip link that rides it off
+ *                      screen with it.
  */
 
 /*
  * Registered so `getComputedStyle` hands the shell resolved px rather than the author's
- * `3.375rem`. `inherits: false` keeps it a statement about one screen, not a document-wide
- * setting a nested component could accidentally inherit and re-report.
+ * `3.375rem`. `--app-chrome-fold` keeps `inherits: false` — it is a statement about one
+ * screen, not a document-wide setting a nested component could accidentally inherit and
+ * re-report. The bar's two ends do inherit: they are read off the root, and a media query
+ * that moves them has to move the JS floor with them.
  */
 @property --app-chrome-fold {
 	syntax: '<length>';
@@ -46,14 +67,37 @@
 	initial-value: 0px;
 }
 
+/* `initial-value` has to be computationally independent, so this one is 40px and not the
+   2.5rem the `:root` declaration below uses — a rem here makes the whole @property rule
+   invalid, the registration is silently dropped, and `getComputedStyle` hands JS the string
+   "2.5rem", which parses to a 2.5px floor and a bar that collapses to a 3px sliver. */
+@property --app-bar-min-h {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 40px;
+}
+
+@property --app-bar-line {
+	syntax: '<length>';
+	inherits: true;
+	initial-value: 1px;
+}
+
 @layer base {
 	:root {
-		/* Intrinsic height of the app bar body, excluding the top inset it sits under. */
+		/* The bar's two ends, both body heights, excluding the inset it sits under and the
+		   hairline it draws. 56px expanded; 40px docked, which still fits a 44px-wide tap
+		   target on the chevron and the level's name one step down the type scale. */
 		--app-bar-h: 3.5rem;
+		--app-bar-min-h: 2.5rem;
+		--app-bar-line: 1px;
 
-		/* Live on-screen height of that bar. Overridden inline by the shell once measured;
-		   this value is what server-rendered HTML and the first paint use. */
-		--app-header-h: var(--app-bar-h);
+		/* Live on-screen height of that bar, hairline included. Overridden inline by the shell
+		   once measured; this value is what server-rendered HTML and the first paint use. */
+		--app-header-h: calc(var(--app-bar-h) + var(--app-bar-line));
+
+		/* Live px of the current screen's volunteered fold that are spent. Overridden inline. */
+		--app-fold-h: 0px;
 
 		/* Device insets, resolved once. `env()` is only valid in a property value, so a route
 		   that needs one — a sticky answer bar clearing the home indicator, say — reads these. */
@@ -62,11 +106,25 @@
 		--app-safe-bottom: env(safe-area-inset-bottom, 0px);
 		--app-safe-left: env(safe-area-inset-left, 0px);
 
-		/* Everything the shell is currently taking off the top of the viewport. NOTE: custom
-		   properties substitute where they are declared, so this must be redeclared on `.shell`
-		   — which is where the live `--app-header-h` lands — or it freezes at 3.5rem. That
-		   redeclaration lives beside the inline write, in `+layout.svelte`. */
+		/* Everything the shell is currently taking off the top of the viewport, and the offset
+		   a folding screen sticks to. NOTE: custom properties substitute where they are
+		   declared, so both must be redeclared on `.shell` — which is where the live
+		   `--app-header-h` lands — or they freeze at the intrinsic value. That redeclaration
+		   lives beside the inline write, in `+layout.svelte`. */
 		--app-chrome-h: calc(var(--app-safe-top) + var(--app-header-h));
+		--app-sticky-top: calc(var(--app-chrome-h) - var(--app-fold-h));
+	}
+
+	/*
+	 * A phone in landscape has 375px of height to spend and the quiz has to fit a run in it.
+	 * Both ends of the bar come down; because the floor is read off the same token, the JS
+	 * clamp follows without being told.
+	 */
+	@media (orientation: landscape) and (max-height: 30rem) {
+		:root {
+			--app-bar-h: 2.875rem;
+			--app-bar-min-h: 2.25rem;
+		}
 	}
 
 	html {

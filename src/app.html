@@ -9,9 +9,21 @@
 		/>
 		<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="#100f0e" media="(prefers-color-scheme: dark)" />
-		<!-- Tapped from the home screen this launches without Safari's chrome, which is the
-		     whole point of the safe-area token system the shell carries. iOS reads these
-		     three; `mobile-web-app-capable` is the standards-track name Chrome reads. -->
+		<!-- INSTALLABLE. Tapped from the home screen this launches without Safari's chrome,
+		     which is the whole point of the safe-area token system the shell carries. The
+		     metas below only pay off *after* an install, so the two things that make the
+		     install possible have to come first:
+
+		       manifest          Chrome/Android's whole install prompt — name, start_url,
+		                         display: standalone, and the 192/512 + maskable icon set.
+		       apple-touch-icon  what iOS Add to Home Screen uses. It ignores the SVG favicon
+		                         below, so without this the home screen gets a screenshot of
+		                         the page instead of an icon.
+
+		     `mobile-web-app-capable` is the standards-track name Chrome reads; the three
+		     `apple-*` ones are the same statement for iOS. -->
+		<link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest" />
+		<link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/apple-touch-icon.png" />
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -25,7 +37,11 @@
 			property="og:description"
 			content="Short, spaced practice sessions over the official HSK 3.0 word list."
 		/>
-		<meta name="twitter:card" content="summary" />
+		<!-- `summary_large_image`, not `summary`: og:image is a 1200x630 card (built from the
+		     same 词汇练习 hero the home screen opens on), and the small variant would crop it
+		     to a square thumbnail. The image URL itself is absolute and per-request, so it is
+		     set in +layout.svelte where the origin is known. -->
+		<meta name="twitter:card" content="summary_large_image" />
 		<link
 			rel="icon"
 			href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%2264%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%23c8102e%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2247%22%20text-anchor%3D%22middle%22%20font-size%3D%2246%22%20font-family%3D%22PingFang%20SC%2CHiragino%20Sans%20GB%2CNoto%20Sans%20SC%2CMicrosoft%20YaHei%2Csans-serif%22%20fill%3D%22%23fff%22%3E%E6%B1%89%3C%2Ftext%3E%3C%2Fsvg%3E"
