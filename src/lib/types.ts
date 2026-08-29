@@ -11,6 +11,21 @@ export const LEVELS: readonly Level[] = [1, 2, 3, 4, 5];
 /** Official word counts per level, from 《国际中文教育中文水平等级标准》 (GF 0025-2021). */
 export const LEVEL_SIZES: Record<Level, number> = { 1: 500, 2: 772, 3: 973, 4: 1000, 5: 1071 };
 
+/**
+ * One syllable of a word's pinyin, aligned 1:1 with a character of its hanzi.
+ *
+ * Tone is carried as data rather than inferred from the diacritic at render time: neutral tone
+ * has no diacritic at all, so a renderer that guesses cannot tell `ba` (neutral) from a parse
+ * failure. The build reads the tone numbers out of the reference row's CEDICT key
+ * (`爸爸|爸爸[ba4 ba5]`) and fails loudly when the syllable count and character count disagree.
+ */
+export interface Syllable {
+	/** Tone-marked pinyin for this syllable alone, e.g. `bà`. */
+	py: string;
+	/** 1–4, or 0 for the neutral tone. */
+	tone: 0 | 1 | 2 | 3 | 4;
+}
+
 /** One vocabulary entry. Hanzi, pinyin and level are authoritative — see reference/hsk. */
 export interface Word {
 	/** Stable key, e.g. `L1-0001`. Progress is keyed on this. */
@@ -21,6 +36,8 @@ export interface Word {
 	traditional?: string;
 	/** Tone-marked pinyin as the official HSK list prints it, e.g. `bāng máng`. */
 	pinyin: string;
+	/** `pinyin` split per character, so every syllable can be tone-coloured and searched. */
+	syllables: Syllable[];
 	/** Short learner-facing English meanings, best first. 1–3 entries, each a few words. */
 	meanings: string[];
 	/** Part-of-speech codes: N V Adj Adv Pron Num M Prep Conj Aux Int Prefix Suffix Phonetic. */
