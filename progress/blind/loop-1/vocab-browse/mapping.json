@@ -1,0 +1,15 @@
+{
+	"piece": "vocab-browse",
+	"loop": 1,
+	"rule": "\"vocab-browse\" is 12 characters — EVEN — so the app screenshot is A and the reference is B.",
+	"A": {
+		"which": "app",
+		"source": "progress/shots/loop-1/vocab-browse-mobile.png",
+		"description": "hskquiz /browse/1 at 375x812 @2x — the HSK 1 vocabulary list, no query, no progress."
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"description": "Pleco iPhone search results for \"shouji\" — the closest reference analogue: a hanzi / pinyin / gloss row list on a phone."
+	}
+}
