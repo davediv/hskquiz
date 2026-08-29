@@ -8,15 +8,18 @@
 
 	The layout is a single 34rem column on a phone and a two-column split from 64rem, where the
 	standing information (what this is, where you are overall) parks in a sticky rail and the five
-	levels get the reading column — two abreast, so the whole list is on one screen.
+	levels get the reading column. From 80rem that column goes three abreast, which is one row per
+	band and therefore the whole list on one screen at 1440x900.
 -->
 <script lang="ts">
 	import { LEVELS, LEVEL_SIZES, type Level } from '$lib/types';
 	import { SHIPPED_SIZES, SHIPPED_TOTAL } from '$lib/data/sizes';
 	import { progress } from '$lib/progress';
+	import { Pinyin } from '$lib/design';
 	import StorageNotice from '$lib/progress/StorageNotice.svelte';
 	import LevelCard from '$lib/components/levels/LevelCard.svelte';
 	import { LEVEL_BANDS } from '$lib/components/levels/levelMeta';
+	import { weakestIds } from '$lib/components/levels/preview';
 	import {
 		formatAccuracy,
 		formatWhen,
@@ -44,7 +47,10 @@
 		LEVELS.map((level: Level) => ({
 			level,
 			total: SHIPPED_SIZES[level],
-			stats: levelStats(snapshot, level)
+			stats: levelStats(snapshot, level),
+			// Whose three words this level's card shows. Empty until there are enough misses
+			// here to fill the row, and the card falls back to the static three.
+			weakIds: weakestIds(snapshot, level)
 		}))
 	);
 	const byLevel = $derived(new Map(cards.map((card) => [card.level, card])));
@@ -67,11 +73,15 @@
 	const headline = $derived.by(() => {
 		const stats: { value: string; label: string }[] = [
 			{
-				value: String(summary.practised),
+				// Grouped, like every other figure on this screen: `4308 words practised` sat
+				// directly under `4,308 cards` in the colophon.
+				value: summary.practised.toLocaleString('en'),
 				label: summary.practised === 1 ? 'word practised' : 'words practised'
 			}
 		];
-		if (summary.mastered > 0) stats.push({ value: String(summary.mastered), label: 'mastered' });
+		if (summary.mastered > 0) {
+			stats.push({ value: summary.mastered.toLocaleString('en'), label: 'mastered' });
+		}
 		if (summary.accuracy !== null) {
 			stats.push({ value: formatAccuracy(summary.accuracy), label: 'correct' });
 		}
@@ -115,23 +125,31 @@
 	<header class="hskq-rail">
 		<p class="eyebrow">HSK 3.0 · Levels 1–5</p>
 		<h1 class="mt-1.5 hanzi-display text-hanzi-lg text-ink" lang="zh-Hans">词汇练习</h1>
-		<!-- 汉语拼音正词法基本规则 joins the syllables inside a word: cíhuì liànxí, never
-		     cí huì liàn xí. This is the app's most prominent pinyin — it teaches on sight. -->
-		<p class="mt-1.5 pinyin text-pinyin-md text-accent" lang="zh-Latn-pinyin">cíhuì liànxí</p>
+		<!--
+			The app's most prominent pinyin — it teaches on sight, so it is painted by the same
+			component and the same tone tokens as every other syllable in the app. It used to be a
+			flat `text-accent`, which is the exact red of ✕ NOT QUITE.
+
+			Two components, one per word, and not one with `spaced={false}`: 汉语拼音正词法基本规则
+			joins the syllables *inside* a word and separates the words, so cíhuì liànxí is right,
+			cí huì liàn xí (spaced) and cíhuìliànxí (unspaced, one span) are both wrong. The gap
+			between the two elements is the word gap.
+		-->
+		<p class="mt-1.5">
+			<Pinyin pinyin="cíhuì" size="md" spaced={false} />
+			<Pinyin pinyin="liànxí" size="md" spaced={false} />
+		</p>
 		<p class="mt-2.5 max-w-[38ch] text-sm text-ink-muted">
 			Five levels, ten questions a session, weighted toward what you keep missing.
 		</p>
-		<p class="mt-1.5 max-w-[44ch] text-xs text-ink-subtle">
-			{SHIPPED_TOTAL.toLocaleString('en')} cards from the standard's {officialTotal.toLocaleString(
-				'en'
-			)} entries — {mergedPairs} pairs of same-pinyin homographs share a card.
-		</p>
 
-		<!-- Hairlines rather than a card: on a phone this sits between the reader and the first
-		     level, so it has to earn every pixel it costs. Separators are drawn in CSS so that
-		     dropping a stat can never take an adjoining space with it. -->
-		<section class="hskq-strip" aria-label="Your progress">
-			{#if summary.started}
+		<!-- Hairlines rather than a card, and only once there is something to put in them: on a
+		     first visit every line here is a line between the reader and the first level. What
+		     used to sit in this slot — a homograph footnote and a storage promise — is now the
+		     colophon at the foot of the page, which is where lexicography belongs.
+		     Separators are drawn in CSS so that dropping a stat cannot strand a dot. -->
+		{#if summary.started}
+			<section class="hskq-strip" aria-label="Your progress">
 				<p class="tabular text-xs text-ink-muted">
 					{#each headline as stat (stat.label)}
 						<span class="hskq-stat">
@@ -148,18 +166,8 @@
 				>
 					{confirmingReset ? 'Tap again to erase' : 'Reset'}
 				</button>
-			{:else}
-				<!-- One line, not three: on a first visit this sits between the reader and the first
-				     level, and the five empty cards below already say nothing has been practised.
-				     Only claimed while writes are actually landing — `StorageNotice` below says
-				     the opposite when they are not, and the two must never be on screen together. -->
-				{#if !hydrated || progress.status === 'saving'}
-					<p class="text-xs text-ink-subtle">
-						Progress is kept on this device — no account needed.
-					</p>
-				{/if}
-			{/if}
-		</section>
+			</section>
+		{/if}
 
 		<!-- Silent while writes land; one line when they do not. -->
 		<StorageNotice class="mt-2.5" />
@@ -186,6 +194,7 @@
 									level={card.level}
 									total={card.total}
 									stats={card.stats}
+									weakIds={card.weakIds}
 									{now}
 									featured={card.level === featured}
 									{featuredLabel}
@@ -197,6 +206,26 @@
 			</section>
 		{/each}
 	</main>
+
+	<!--
+		The count caveat, at the foot of the page rather than over the first level.
+
+		It is correct and it has to be said — the standard this app cites says 4,316 and the box
+		holds 4,308 — but it is a lexicography footnote, and it was renting the most valuable
+		46px on the phone. Down here it sits next to the citation it qualifies.
+	-->
+	<aside class="hskq-colophon" aria-label="About this word list">
+		<p>
+			{SHIPPED_TOTAL.toLocaleString('en')} cards from the standard's {officialTotal.toLocaleString(
+				'en'
+			)} entries — {mergedPairs} pairs of same-pinyin homographs share a card.
+		</p>
+		<!-- Claimed only while writes are actually landing: `StorageNotice` says the opposite
+		     when they are not, and the two must never be on screen together. -->
+		{#if !hydrated || progress.status === 'saving'}
+			<p class="mt-1">Progress is kept on this device — no account needed.</p>
+		{/if}
+	</aside>
 </div>
 
 <style>
@@ -240,6 +269,14 @@
 		gap: 0.625rem;
 	}
 
+	/* Quiet, and last. Small type on the subtle ink, capped at a readable measure. */
+	.hskq-colophon {
+		margin-block-start: 1.25rem;
+		max-inline-size: 46ch;
+		font-size: var(--text-xs);
+		color: var(--color-ink-subtle);
+	}
+
 	.hskq-strip {
 		display: flex;
 		align-items: center;
@@ -276,6 +313,50 @@
 
 		.hskq-grid {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		/* Under the list it belongs to, not under the sticky rail — auto-placement would
+		   otherwise drop it into the left column, a screen below the thing it annotates. */
+		.hskq-colophon {
+			grid-column: 2;
+			margin-block-start: 1.5rem;
+		}
+	}
+
+	/* Wide enough for a whole band on one line: 初等 is three levels, so at two abreast HSK 3
+	   sat alone on its own row and pushed HSK 4–5 under the 900px fold. Three abreast puts the
+	   list back to one row per band — every level on one screen — and 80rem is the width at
+	   which a card is still wide enough for three 36px hanzi side by side. */
+	@media (min-width: 80rem) {
+		.hskq-page {
+			grid-template-columns: 18rem minmax(0, 58.5rem);
+			grid-template-rows: auto 1fr;
+			max-inline-size: 82rem;
+		}
+
+		.hskq-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		/* At this width the list is one screen tall, so the rail has nothing left to do below
+		   the tagline and the note has nowhere sensible to sit under a two-row grid. Putting it
+		   in the rail's column fills that void with the one thing on the page that is genuinely
+		   an aside. */
+		.hskq-rail {
+			grid-row: 1;
+			grid-column: 1;
+		}
+
+		.hskq-levels {
+			grid-row: 1 / span 2;
+			grid-column: 2;
+		}
+
+		.hskq-colophon {
+			grid-row: 2;
+			grid-column: 1;
+			align-self: start;
+			margin-block-start: 2rem;
 		}
 	}
 

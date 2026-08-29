@@ -16,7 +16,7 @@ export const LEVEL_META: Record<Level, LevelMeta> = {
 	1: {
 		band: 'Elementary',
 		bandHanzi: '初等',
-		blurb: 'Greetings, numbers, family'
+		blurb: 'Greetings, family, everyday verbs'
 	},
 	2: {
 		band: 'Elementary',
@@ -36,7 +36,7 @@ export const LEVEL_META: Record<Level, LevelMeta> = {
 	5: {
 		band: 'Intermediate',
 		bandHanzi: '中等',
-		blurb: 'News, culture, shades of meaning'
+		blurb: 'Society, culture, shades of meaning'
 	}
 };
 
