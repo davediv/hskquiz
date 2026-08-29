@@ -1,0 +1,490 @@
+{
+	"L5-0139": {
+		"meanings": ["a dictionary of words", "a lexicon"],
+		"note": "N. CEDICT only says 'variant of 词典'. 词典 already ships at L2 as 'dictionary', so this one is differentiated rather than duplicated."
+	},
+	"L5-0140": {
+		"meanings": ["to resign", "to quit a job"],
+		"note": "Separable verb 辞∥职; always about leaving a job."
+	},
+	"L5-0141": {
+		"meanings": ["from then on", "after that"],
+		"note": "Time noun. Kept clear of 以后 L2 'after' and 今后 L2 'hereafter'."
+	},
+	"L5-0142": {
+		"meanings": ["this very moment", "right now"],
+		"note": "Deliberately split from 此时 L5-0143, which shipped an identical meaning set."
+	},
+	"L5-0143": {
+		"meanings": ["at this time", "at this point"],
+		"note": "Broader than 此刻 (a point in time rather than the instant); no longer a duplicate of it."
+	},
+	"L5-0144": {
+		"meanings": ["clever", "intelligent"],
+		"note": "Adj. Dropped CEDICT's 'acute (of sight and hearing)', which is not the learner sense."
+	},
+	"L5-0145": {
+		"meanings": ["thereby", "and as a result"],
+		"note": "Conj. 'Thereby' keeps it distinct from 因此/所以-type connectives."
+	},
+	"L5-0146": {
+		"meanings": ["from among them", "out of it"],
+		"note": "Adv. Points back at something already mentioned (从中学到很多)."
+	},
+	"L5-0147": {
+		"meanings": ["crisp", "brittle"],
+		"note": "Adj. Food sense first — that is where a learner meets 脆; 'brittle' second."
+	},
+	"L5-0148": {
+		"meanings": ["bank savings", "a bank deposit"],
+		"note": "N per official POS, so the CEDICT verb sense 'to deposit money' is not led with."
+	},
+	"L5-0149": {
+		"meanings": ["a Chinese inch"],
+		"note": "M. Unit of length, about 3.3 cm — not the English inch, hence 'Chinese'."
+	},
+	"L5-0151": {
+		"meanings": ["to answer a question", "to give an answer"],
+		"note": "V. 回答 L1 already ships 'to reply', so this is worded around it."
+	},
+	"L5-0153": {
+		"meanings": ["from a place or time"],
+		"note": "Official POS here is Prep, not V — this is the 打那以后 'from' sense. Old gloss 'from, as in from here' had an internal comma that the UI would split into two senses. 打 L1 keeps 'to hit', 打 L4 keeps 'dozen'."
+	},
+	"L5-0157": {
+		"meanings": ["to get into a fight", "to scuffle"],
+		"note": "Separable 打∥架; physical fighting, unlike 吵架 L3 'to have a row'."
+	},
+	"L5-0159": {
+		"meanings": ["bold", "daring"],
+		"note": "Adj. CEDICT leads with the negative 'brazen/audacious'; the ordinary Chinese sense is positive."
+	},
+	"L5-0160": {
+		"meanings": ["mostly", "in most cases"],
+		"note": "Adv. 大多 L4 already ships 'for the most part', so this leads with 'mostly'."
+	},
+	"L5-0161": {
+		"meanings": ["an outline", "a syllabus"],
+		"note": "N. The outline of a document or course (教学大纲)."
+	},
+	"L5-0162": {
+		"meanings": ["all of us", "the whole group"],
+		"note": "Pron, colloquial. 大家 L2 ships \"everyone\" and 各位 L3 ships \"everybody\"."
+	},
+	"L5-0165": {
+		"meanings": ["a major event", "an important matter"],
+		"note": "N. Dropped CEDICT's political/wedding-funeral parentheticals."
+	},
+	"L5-0169": {
+		"meanings": ["to be greater than"],
+		"note": "V. Paired with 低于 'to be lower than' and 高于 'to be higher than' so the three stay distinguishable."
+	},
+	"L5-0170": {
+		"meanings": ["broadly speaking", "more or less"],
+		"note": "Adj/Adv. 大约 L3 ships \"approximately\" and 大概 L3 ships \"roughly\", so this takes the remaining wording."
+	},
+	"L5-0171": {
+		"meanings": ["dazed", "slow-witted"],
+		"note": "Official POS is Adj, so the 'to stay put' verb sense (which is 待 L5-0172) is removed."
+	},
+	"L5-0172": {
+		"meanings": ["to stay somewhere", "to remain"],
+		"note": "V, dāi. 留 L2 ships \"to stay\", so this specifies staying in a place."
+	},
+	"L5-0174": {
+		"meanings": ["to act as an agent for", "to stand in for someone"],
+		"note": "V. Dropped the computing 'proxy' sense."
+	},
+	"L5-0175": {
+		"meanings": ["to have an element of", "to carry as a feature"],
+		"note": "No official POS. 带有 marks a quality something carries (带有感情色彩)."
+	},
+	"L5-0176": {
+		"meanings": ["to take out a loan", "a loan"],
+		"note": "V/N. Verb sense first to match POS order; the noun sense follows."
+	},
+	"L5-0177": {
+		"meanings": ["single", "of one kind only"],
+		"note": "Adj. 唯一 L5 keeps 'the only one'; 单一 is about being of one kind, not being unique."
+	},
+	"L5-0178": {
+		"meanings": ["guts or nerve", "the gall bladder"],
+		"note": "N. 勇气 L4 already ships 'courage', so the courage sense is worded as 'guts or nerve'; the literal organ sense is kept second."
+	},
+	"L5-0181": {
+		"meanings": ["on the spot", "then and there"],
+		"note": "Adv of time and place — at the very scene, immediately."
+	},
+	"L5-0183": {
+		"meanings": ["back in those days", "in those years"],
+		"note": "N. Kept clear of 当时 L2 'at that time'; dropped CEDICT's 'to be in the prime of life'."
+	},
+	"L5-0184": {
+		"meanings": ["the present", "current"],
+		"note": "N/V. 目前 L3 ships 'at the present time', so this is shortened to 'the present'."
+	},
+	"L5-0185": {
+		"meanings": ["to be elected"],
+		"note": "V. Always passive in sense — one is elected, one does not 当选 someone."
+	},
+	"L5-0186": {
+		"meanings": ["to block", "to keep out"],
+		"note": "V. Physical blocking (挡路, 挡雨); the 'gear of a car' noun sense is out of level."
+	},
+	"L5-0189": {
+		"meanings": ["morality", "ethics"],
+		"note": "N."
+	},
+	"L5-0190": {
+		"meanings": ["that's enough", "OK that will do"],
+		"note": "Listed V but used as a set exclamation telling someone to stop or that something will do. Exclamation marks dropped so the gloss reads as a quiz answer."
+	},
+	"L5-0191": {
+		"meanings": ["to become able to", "to be made possible"],
+		"note": "V. 得以 marks that something finally becomes possible thanks to something else; kept clear of 能/会 'to be able to'."
+	},
+	"L5-0193": {
+		"meanings": ["a grade or rank", "a level of quality"],
+		"note": "N. 级 L2 ships \"level\", 年级 L2 \"school year\", 排名 L3 \"to rank\"."
+	},
+	"L5-0194": {
+		"meanings": ["to be lower than"],
+		"note": "No official POS, but the word is only ever predicative."
+	},
+	"L5-0196": {
+		"meanings": ["terrain", "the lay of the land"],
+		"note": "N."
+	},
+	"L5-0198": {
+		"meanings": ["to pass by hand", "to hand over"],
+		"note": "V. 交 L2 ships \"to hand over\" and 传递 L5 covers \"to pass on\", so 递 is the physical hand-it-across action."
+	},
+	"L5-0199": {
+		"meanings": ["to hand something to someone"],
+		"note": "Verb-plus-complement; the 给 makes the recipient explicit."
+	},
+	"L5-0200": {
+		"meanings": ["a ceremony"],
+		"note": "N. A formal ceremony such as 毕业典礼."
+	},
+	"L5-0201": {
+		"meanings": ["to set alight", "to light a fire"],
+		"note": "V. 燃烧 L4 ships \"to ignite\"; \"to light\" alone would be ambiguous with switching on a lamp."
+	},
+	"L5-0202": {
+		"meanings": ["a battery"],
+		"note": "N."
+	},
+	"L5-0206": {
+		"meanings": ["to lose an item", "to throw away"],
+		"note": "V. 失去 L3 ships the abstract \"to lose\"; 丢 is mislaying a thing. 扔 L5 keeps \"to throw\"."
+	},
+	"L5-0207": {
+		"meanings": ["a motive", "motivation"],
+		"note": "N."
+	},
+	"L5-0208": {
+		"meanings": ["to set to work", "to touch with your hands"],
+		"note": "Separable 动∥手. Dropped the 'raise a hand to hit someone' sense as the lead — the everyday sense is starting work on something."
+	},
+	"L5-0209": {
+		"meanings": ["the latest developments", "movement"],
+		"note": "N. 最新动态 is how a learner meets it; the physics 'dynamic' sense is out of level."
+	},
+	"L5-0211": {
+		"meanings": ["to freeze", "to be frozen stiff"],
+		"note": "V. Dropped the noun 'aspic or jelly'."
+	},
+	"L5-0212": {
+		"meanings": ["a hole", "a cave"],
+		"note": "N. Dropped the spoken-numeral 'zero' sense."
+	},
+	"L5-0214": {
+		"meanings": ["poison", "poisonous"],
+		"note": "N/V/Adj; noun first to match POS order. Dropped 'narcotics' and 'cruel'."
+	},
+	"L5-0215": {
+		"meanings": ["to pile up", "a pile", "measure word: heaps"],
+		"note": "V/N/M — all three official parts of speech are represented, in POS order."
+	},
+	"L5-0216": {
+		"meanings": ["to be in opposition", "to set against each other"],
+		"note": "V. 反对 L3 ships 'to oppose', so this is worded around it — 对立 is a standing antagonism, not an act of objecting."
+	},
+	"L5-0218": {
+		"meanings": ["a ton"],
+		"note": "M. Metric ton."
+	},
+	"L5-0219": {
+		"meanings": ["measure word: flowers or clouds"],
+		"note": "M. Comma replaced with 'or' — the UI joins meanings on ', ', so the old gloss split into two false senses."
+	},
+	"L5-0220": {
+		"meanings": ["to hide", "to dodge"],
+		"note": "V. Hiding oneself away or dodging something coming at you."
+	},
+	"L5-0221": {
+		"meanings": ["sons and daughters"],
+		"note": "N. 子女 L3 ships 'children'; 儿女 is the warmer 'sons and daughters'. Dropped CEDICT's 'young man and young woman in love'."
+	},
+	"L5-0223": {
+		"meanings": ["a QR code"],
+		"note": "N. The QR code is what the word actually names in daily use."
+	},
+	"L5-0224": {
+		"meanings": ["to release to the public", "to issue"],
+		"note": "V. No CEDICT gloss at all for this row. 公布 L3 ships 'to announce publicly', so this is worded around it."
+	},
+	"L5-0225": {
+		"meanings": ["to become aware of", "to realize"],
+		"note": "V. 发现 L2 ships 'to notice / to discover'; 发觉 is the inward realization."
+	},
+	"L5-0228": {
+		"meanings": ["to punish", "to fine"],
+		"note": "V."
+	},
+	"L5-0229": {
+		"meanings": ["a monetary fine", "a penalty payment"],
+		"note": "Official POS is N, so CEDICT verb \"to fine\" must not lead; 罚 L5-0228 carries the verb. \"Monetary\" keeps it from colliding with the adjective \"fine\" shipped by 美好/优良."
+	},
+	"L5-0232": {
+		"meanings": ["prosperous", "flourishing"],
+		"note": "Adj/V; adjective sense leads as POS orders it."
+	},
+	"L5-0236": {
+		"meanings": ["to give up", "to abandon"],
+		"note": "V."
+	},
+	"L5-0237": {
+		"meanings": ["to divide into", "to split into parts"],
+		"note": "No official POS. Dropped the finance senses 'tenths' and 'percentage allotment'."
+	},
+	"L5-0238": {
+		"meanings": ["to break down into parts", "to decompose"],
+		"note": "V. Kept distinct from 分成 'to divide into'."
+	},
+	"L5-0239": {
+		"meanings": ["to sort into categories", "to classify"],
+		"note": "Separable 分∥类."
+	},
+	"L5-0244": {
+		"meanings": ["graceful bearing", "poise"],
+		"note": "N. Dropped CEDICT's '(for men)' restriction, which is not how the word is used."
+	},
+	"L5-0246": {
+		"meanings": ["to seal up", "to close off"],
+		"note": "Official POS is V and 封 L2 already ships the measure word for letters, so the L5 card must be the verb. CEDICT's 'to confer a title' is literary and out of level."
+	},
+	"L5-0247": {
+		"meanings": ["insane", "mad"],
+		"note": "Adj. Split from 疯狂 L5-0248 so the two do not share a primary gloss."
+	},
+	"L5-0248": {
+		"meanings": ["frenzied", "wildly out of control"],
+		"note": "Adj. Stronger and more active than 疯; differentiated from it on purpose."
+	},
+	"L5-0249": {
+		"meanings": ["to support with your hand", "to help someone up"],
+		"note": "V. The physical steadying action (扶老人过马路)."
+	},
+	"L5-0250": {
+		"meanings": ["to obey", "to comply with"],
+		"note": "V. Obeying an order or a decision."
+	},
+	"L5-0251": {
+		"meanings": ["measure word: paintings or cloth"],
+		"note": "M. Internal comma replaced with 'or' so the UI cannot split it into two senses."
+	},
+	"L5-0254": {
+		"meanings": ["to assist", "to provide support"],
+		"note": "V. 帮助 L2 ships 'to help'; 辅助 is supporting help in a secondary role."
+	},
+	"L5-0256": {
+		"meanings": ["an email attachment", "an appendix"],
+		"note": "N. The attachment sense is the one a learner meets; the anatomy sense is dropped."
+	},
+	"L5-0257": {
+		"meanings": ["to reform", "a reform"],
+		"note": "V/N, both senses in POS order."
+	},
+	"L5-0258": {
+		"meanings": ["blunt and direct", "just go ahead and do it"],
+		"note": "Adj/Adv. First gloss is the adjective, second describes the adverbial 干脆 that urges simply doing something."
+	},
+	"L5-0260": {
+		"meanings": ["to intervene", "to interfere in"],
+		"note": "V."
+	},
+	"L5-0261": {
+		"meanings": ["thoughts and impressions"],
+		"note": "N. What you think and feel after an experience; kept clear of 想法 L2 'way of thinking'."
+	},
+	"L5-0264": {
+		"meanings": ["tall and imposing"],
+		"note": "Adj. 高 L1 ships 'high, tall', so 高大 must say more than 'tall'."
+	},
+	"L5-0265": {
+		"meanings": ["the height of something", "altitude"],
+		"note": "N/Adj. 身高 L4 ships \"height\" of a person, so this specifies the height of a thing."
+	},
+	"L5-0268": {
+		"meanings": ["to be higher than"],
+		"note": "V. Paired against 大于 'greater than' and 低于 'lower than'."
+	},
+	"L5-0270": {
+		"meanings": ["to get something done", "to work on something"],
+		"note": "V. 做 L1 owns 'to do', so 搞 is glossed as the informal get-it-done verb. Colloquial register kept out of the gloss."
+	},
+	"L5-0271": {
+		"meanings": ["to do a good job of", "to make something work well"],
+		"note": "Verb plus resultative 好; also used of keeping relations good (搞好关系)."
+	},
+	"L5-0274": {
+		"meanings": ["someone's height", "build or size"],
+		"note": "N, colloquial erhua form. Distinct from 高度 'height' of an object."
+	},
+	"L5-0275": {
+		"meanings": ["right in front of someone", "close by"],
+		"note": "N of position. Dropped CEDICT's 'just before (a date)' sense."
+	},
+	"L5-0278": {
+		"meanings": ["to update", "to renew"],
+		"note": "V."
+	},
+	"L5-0280": {
+		"meanings": ["a working day", "a weekday"],
+		"note": "N."
+	},
+	"L5-0282": {
+		"meanings": ["to be widely acknowledged", "generally recognized"],
+		"note": "V, so the gloss is put in verb form rather than CEDICT's adjectival 'publicly known'."
+	},
+	"L5-0284": {
+		"meanings": ["just and unbiased", "even-handed"],
+		"note": "Adj. 公平 L2 already ships 'fair, impartial', so 公正 is worded around it."
+	},
+	"L5-0287": {
+		"meanings": ["a ditch", "a gully"],
+		"note": "N."
+	},
+	"L5-0288": {
+		"meanings": ["to communicate with each other", "to talk things through"],
+		"note": "V. 交流 L3 ships 'to exchange'; 沟通 is reaching mutual understanding."
+	},
+	"L5-0289": {
+		"meanings": ["to estimate", "to reckon"],
+		"note": "V. Second gloss covers the very common colloquial 我估计他不来."
+	},
+	"L5-0290": {
+		"meanings": ["age-old", "from ancient times"],
+		"note": "Adj. 古 L3 ships \"ancient\", so 古老 is worded around it."
+	},
+	"L5-0291": {
+		"meanings": ["a drum", "to rouse or stir up"],
+		"note": "N/V; noun first as POS orders it. The old card led with the verb."
+	},
+	"L5-0293": {
+		"meanings": ["to applaud", "to clap"],
+		"note": "Separable 鼓∥掌."
+	},
+	"L5-0295": {
+		"meanings": ["to lay the blame on", "to find strange"],
+		"note": "Official POS at L5 is V and 怪 L4 already ships the adjective \"strange\"; 怨 L5 ships \"to blame\", so this is the 别怪我 wording."
+	},
+	"L5-0296": {
+		"meanings": ["to show care for", "to look after with concern"],
+		"note": "V, so CEDICT's noun 'care, solicitude' does not lead. 关心 L2 ships 'to be concerned about'."
+	},
+	"L5-0297": {
+		"meanings": ["the crucial point", "the key to something"],
+		"note": "N."
+	},
+	"L5-0300": {
+		"meanings": ["light rays", "the lighting in a place"],
+		"note": "N. 光 L3 ships 'light', so 光线 is glossed concretely — rays, and the light available in a room (光线不好)."
+	},
+	"L5-0301": {
+		"meanings": ["wide in extent", "broad in scope"],
+		"note": "Adj. 宽 L4 ships \"wide\", 宽广 L4 \"broad\", 广泛 L5 \"widespread\" — so 广 is qualified."
+	},
+	"L5-0303": {
+		"meanings": ["a long-term plan", "to plan out"],
+		"note": "N/V. 计划 L2 ships 'a plan'; 规划 is the larger, longer-range one."
+	},
+	"L5-0304": {
+		"meanings": ["a ghost", "a spirit"],
+		"note": "N. Dropped the 'sly/crafty' variant-character sense and the suffix use (酒鬼)."
+	},
+	"L5-0306": {
+		"meanings": ["to roll", "to boil"],
+		"note": "V. CEDICT's 'Get lost!' is rude and is excluded."
+	},
+	"L5-0307": {
+		"meanings": ["a pot", "a wok"],
+		"note": "N."
+	},
+	"L5-0309": {
+		"meanings": ["the people of a nation", "nationals"],
+		"note": "N. 公民 L3 ships 'citizen', so this is worded around it."
+	},
+	"L5-0310": {
+		"meanings": ["excessive in amount", "overdone"],
+		"note": "Adj. 过分 L4 ships 'excessive', so 过度 is qualified — it is about quantity or degree (过度疲劳)."
+	},
+	"L5-0311": {
+		"meanings": ["to be allergic to something"],
+		"note": "V/Adj. CEDICT's figurative 'oversensitive, prone to overreact' is dropped as out of level."
+	},
+	"L5-0312": {
+		"meanings": ["overly", "too much"],
+		"note": "Adv modifying an adjective (过于紧张); kept distinct from the adjective 过度."
+	},
+	"L5-0313": {
+		"meanings": ["to do harm to", "harm or damage"],
+		"note": "N/V. Led with the verb because 坏处 L2 already ships \"harm\" and 危害 L3 ships \"to harm\"; both official parts of speech are still represented."
+	},
+	"L5-0314": {
+		"meanings": ["sweat", "perspiration"],
+		"note": "N. CEDICT's internet-slang interjection sense is excluded."
+	},
+	"L5-0318": {
+		"meanings": ["to combine into one", "to synthesize"],
+		"note": "V."
+	},
+	"L5-0319": {
+		"meanings": ["measure word: boxes of something", "a box"],
+		"note": "N/M. Led with the measure-word sense (一盒巧克力) because 盒子 L5-0321 carries the plain noun and 箱 L4 already ships 'box'."
+	},
+	"L5-0321": {
+		"meanings": ["a small box", "a case"],
+		"note": "N. Dropped the northern-Chinese savoury-pie sense CEDICT lists."
+	},
+	"L5-0323": {
+		"meanings": ["to hate", "to resent"],
+		"note": "V. 讨厌 L5 ships 'to dislike'; 恨 is far stronger."
+	},
+	"L5-0324": {
+		"meanings": ["a monkey"],
+		"note": "N."
+	},
+	"L5-0325": {
+		"meanings": ["to regret", "to feel sorry about"],
+		"note": "V. Regret about something you did."
+	},
+	"L5-0326": {
+		"meanings": ["an alleyway", "a narrow lane"],
+		"note": "N, erhua form. CEDICT only gives 'erhua form of 胡同'."
+	},
+	"L5-0327": {
+		"meanings": ["a beard", "a moustache"],
+		"note": "N. CEDICT's colloquial 'bandit' sense is excluded."
+	},
+	"L5-0328": {
+		"meanings": ["a tiger"],
+		"note": "N."
+	},
+	"L5-0330": {
+		"meanings": ["slippery", "to slip"],
+		"note": "Adj/V, adjective first as POS orders it. The 'sly, not to be trusted' sense is dropped as out of level."
+	}
+}
