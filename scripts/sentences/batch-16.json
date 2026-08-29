@@ -1,0 +1,247 @@
+{
+	"L1-0017": {
+		"hanzi": "我想喝一杯水。",
+		"pinyin": "wǒ xiǎng hē yì bēi shuǐ.",
+		"english": "I'd like a glass of water."
+	},
+	"L1-0043": {
+		"hanzi": "我在车站买了车票。",
+		"pinyin": "wǒ zài chē zhàn mǎi le chē piào.",
+		"english": "I bought a ticket at the station."
+	},
+	"L1-0069": {
+		"hanzi": "我的书在地上。",
+		"pinyin": "wǒ de shū zài dì shang.",
+		"english": "My book is on the ground."
+	},
+	"L1-0095": {
+		"hanzi": "这个多少钱？",
+		"pinyin": "zhè ge duō shao qián?",
+		"english": "How much is this?"
+	},
+	"L1-0121": {
+		"hanzi": "请给我一杯茶。",
+		"pinyin": "qǐng gěi wǒ yì bēi chá.",
+		"english": "Please give me a cup of tea."
+	},
+	"L1-0147": {
+		"hanzi": "学校后面有一家店。",
+		"pinyin": "xué xiào hòu miàn yǒu yì jiā diàn.",
+		"english": "There's a shop behind the school."
+	},
+	"L1-0173": {
+		"hanzi": "明天在学校见！",
+		"pinyin": "míng tiān zài xué xiào jiàn!",
+		"english": "See you at school tomorrow!"
+	},
+	"L1-0199": {
+		"hanzi": "我们上午有课。",
+		"pinyin": "wǒ men shàng wǔ yǒu kè.",
+		"english": "We have class in the morning."
+	},
+	"L1-0225": {
+		"hanzi": "马路上有很多车。",
+		"pinyin": "mǎ lù shang yǒu hěn duō chē.",
+		"english": "There are a lot of cars on the road."
+	},
+	"L1-0251": {
+		"hanzi": "你家在哪里？",
+		"pinyin": "nǐ jiā zài nǎ lǐ?",
+		"english": "Where do you live?"
+	},
+	"L1-0277": {
+		"hanzi": "我的女儿今年八岁。",
+		"pinyin": "wǒ de nǚ ér jīn nián bā suì.",
+		"english": "My daughter is eight this year."
+	},
+	"L1-0303": {
+		"hanzi": "去年我去了北京。",
+		"pinyin": "qù nián wǒ qù le Běi jīng.",
+		"english": "Last year I went to Beijing."
+	},
+	"L1-0329": {
+		"hanzi": "我妹妹生病了。",
+		"pinyin": "wǒ mèi mei shēng bìng le.",
+		"english": "My little sister has fallen ill."
+	},
+	"L1-0355": {
+		"hanzi": "他们都是我的朋友。",
+		"pinyin": "tā men dōu shì wǒ de péng you.",
+		"english": "They're all friends of mine."
+	},
+	"L1-0381": {
+		"hanzi": "我们一起去看电影吧。",
+		"pinyin": "wǒ men yì qǐ qù kàn diàn yǐng ba.",
+		"english": "Let's go and see a film together."
+	},
+	"L1-0407": {
+		"hanzi": "我弟弟是小学生。",
+		"pinyin": "wǒ dì di shì xiǎo xué shēng.",
+		"english": "My younger brother is in primary school."
+	},
+	"L1-0433": {
+		"hanzi": "我们一块儿吃饭吧。",
+		"pinyin": "wǒ men yí kuài r chī fàn ba.",
+		"english": "Let's eat together."
+	},
+	"L1-0459": {
+		"hanzi": "早上我喝一杯牛奶。",
+		"pinyin": "zǎo shang wǒ hē yì bēi niú nǎi.",
+		"english": "In the morning I drink a glass of milk."
+	},
+	"L1-0485": {
+		"hanzi": "我住在学校旁边。",
+		"pinyin": "wǒ zhù zài xué xiào páng biān.",
+		"english": "I live right next to the school."
+	},
+	"L2-0011": {
+		"hanzi": "他半夜才睡觉。",
+		"pinyin": "tā bàn yè cái shuì jiào.",
+		"english": "He doesn't go to sleep until the middle of the night."
+	},
+	"L2-0037": {
+		"hanzi": "他来中国不久。",
+		"pinyin": "tā lái Zhōng guó bù jiǔ.",
+		"english": "He hasn't been in China long."
+	},
+	"L2-0063": {
+		"hanzi": "这件事一定能成。",
+		"pinyin": "zhè jiàn shì yí dìng néng chéng.",
+		"english": "This will definitely work out."
+	},
+	"L2-0089": {
+		"hanzi": "大部分同学都来了。",
+		"pinyin": "dà bù fen tóng xué dōu lái le.",
+		"english": "Most of the class turned up."
+	},
+	"L2-0115": {
+		"hanzi": "他考试得了第一。",
+		"pinyin": "tā kǎo shì dé le dì yī.",
+		"english": "He came first in the exam."
+	},
+	"L2-0141": {
+		"hanzi": "我给妈妈发了一条短信。",
+		"pinyin": "wǒ gěi mā ma fā le yì tiáo duǎn xìn.",
+		"english": "I sent my mum a text message."
+	},
+	"L2-0167": {
+		"hanzi": "我等了十分钟。",
+		"pinyin": "wǒ děng le shí fēn zhōng.",
+		"english": "I waited for ten minutes."
+	},
+	"L2-0193": {
+		"hanzi": "这样对他不公平。",
+		"pinyin": "zhè yàng duì tā bù gōng píng.",
+		"english": "That isn't fair to him."
+	},
+	"L2-0219": {
+		"hanzi": "帮助别人是好事。",
+		"pinyin": "bāng zhù bié rén shì hǎo shì.",
+		"english": "Helping others is a good thing to do."
+	},
+	"L2-0245": {
+		"hanzi": "今天下午有一个会。",
+		"pinyin": "jīn tiān xià wǔ yǒu yí ge huì.",
+		"english": "There's a meeting this afternoon."
+	},
+	"L2-0271": {
+		"hanzi": "他很喜欢交朋友。",
+		"pinyin": "tā hěn xǐ huan jiāo péng you.",
+		"english": "He really enjoys making friends."
+	},
+	"L2-0297": {
+		"hanzi": "我家离学校很近。",
+		"pinyin": "wǒ jiā lí xué xiào hěn jìn.",
+		"english": "My home is very close to the school."
+	},
+	"L2-0323": {
+		"hanzi": "这块肉有五百克。",
+		"pinyin": "zhè kuài ròu yǒu wǔ bǎi kè.",
+		"english": "This piece of meat weighs five hundred grams."
+	},
+	"L2-0350": {
+		"hanzi": "老师举了一个例子。",
+		"pinyin": "lǎo shī jǔ le yí ge lì zi.",
+		"english": "The teacher gave an example."
+	},
+	"L2-0376": {
+		"hanzi": "他跑了一百米。",
+		"pinyin": "tā pǎo le yì bǎi mǐ.",
+		"english": "He ran a hundred metres."
+	},
+	"L2-0402": {
+		"hanzi": "晚饭我来弄吧。",
+		"pinyin": "wǎn fàn wǒ lái nòng ba.",
+		"english": "Let me make dinner."
+	},
+	"L2-0428": {
+		"hanzi": "我骑车去学校。",
+		"pinyin": "wǒ qí chē qù xué xiào.",
+		"english": "I ride my bike to school."
+	},
+	"L2-0454": {
+		"hanzi": "这个节目全国都能看到。",
+		"pinyin": "zhè ge jié mù quán guó dōu néng kàn dào.",
+		"english": "This programme can be watched all over the country."
+	},
+	"L2-0480": {
+		"hanzi": "她的声音很好听。",
+		"pinyin": "tā de shēng yīn hěn hǎo tīng.",
+		"english": "She has a lovely voice."
+	},
+	"L2-0507": {
+		"hanzi": "水果送到我家了。",
+		"pinyin": "shuǐ guǒ sòng dào wǒ jiā le.",
+		"english": "The fruit was delivered to my house."
+	},
+	"L2-0533": {
+		"hanzi": "天上有很多星星。",
+		"pinyin": "tiān shàng yǒu hěn duō xīng xing.",
+		"english": "There are lots of stars in the sky."
+	},
+	"L2-0559": {
+		"hanzi": "我完全同意你的意见。",
+		"pinyin": "wǒ wán quán tóng yì nǐ de yì jiàn.",
+		"english": "I completely agree with you."
+	},
+	"L2-0585": {
+		"hanzi": "他学的是西医。",
+		"pinyin": "tā xué de shì xī yī.",
+		"english": "What he studied is Western medicine."
+	},
+	"L2-0611": {
+		"hanzi": "他说了一个笑话儿。",
+		"pinyin": "tā shuō le yí ge xiào hua r.",
+		"english": "He told a joke."
+	},
+	"L2-0637": {
+		"hanzi": "这件衣服的样子很好看。",
+		"pinyin": "zhè jiàn yī fu de yàng zi hěn hǎo kàn.",
+		"english": "This jacket has a really nice look to it."
+	},
+	"L2-0663": {
+		"hanzi": "他一直在等你。",
+		"pinyin": "tā yì zhí zài děng nǐ.",
+		"english": "He's been waiting for you this whole time."
+	},
+	"L2-0689": {
+		"hanzi": "妈妈买了一条鱼。",
+		"pinyin": "mā ma mǎi le yì tiáo yú.",
+		"english": "Mum bought a fish."
+	},
+	"L2-0715": {
+		"hanzi": "孩子长得真快。",
+		"pinyin": "hái zi zhǎng de zhēn kuài.",
+		"english": "Children grow up so fast."
+	},
+	"L2-0741": {
+		"hanzi": "老师很重视这个问题。",
+		"pinyin": "lǎo shī hěn zhòng shì zhè ge wèn tí.",
+		"english": "The teacher takes this problem very seriously."
+	},
+	"L2-0767": {
+		"hanzi": "这个药的作用很大。",
+		"pinyin": "zhè ge yào de zuò yòng hěn dà.",
+		"english": "This medicine has a strong effect."
+	}
+}
