@@ -1,0 +1,490 @@
+{
+	"L4-0236": {
+		"meanings": ["not or non-"],
+		"note": "Adv row. 不 L1 owns bare 'not'; CEDICT's 'wrong' is the adjective sense and does not match the official POS."
+	},
+	"L4-0237": {
+		"meanings": ["fat or fleshy", "loose-fitting"],
+		"note": "肥 is said of animals, meat and soil, and of baggy clothes — 胖 is the word for people. Dropped 'to fertilize' and 'to get rich illegally'."
+	},
+	"L4-0240": {
+		"meanings": ["to break up with someone", "to part ways"],
+		"note": "Romantic break-up is the sense a learner meets first; kept 'to part ways' for the neutral use."
+	},
+	"L4-0241": {
+		"meanings": ["to divide into parts"],
+		"note": "Trimmed CEDICT's 'sth' placeholder."
+	},
+	"L4-0242": {
+		"meanings": ["used to say fractions: two thirds"],
+		"note": "Bound form 三分之二. Old gloss 'out of, forming fractions' had an internal comma that the UI reads as two senses."
+	},
+	"L4-0243": {
+		"meanings": ["one after another", "in quick succession"],
+		"note": "Adv of many actors acting in turn."
+	},
+	"L4-0244": {
+		"meanings": ["to strive", "to struggle for a goal"],
+		"note": "Kept the goal-directed nuance so it does not read as plain 'to fight'."
+	},
+	"L4-0246": {
+		"meanings": ["landscape or scenery", "a scenic view"],
+		"note": "景色 L3 already ships bare 'scenery'; 风景 is the wider landscape one goes to look at."
+	},
+	"L4-0249": {
+		"meanings": ["otherwise", "or else"],
+		"note": "Conj joining a consequence."
+	},
+	"L4-0251": {
+		"meanings": ["husband and wife", "a married couple"],
+		"note": "Unchanged in substance; second sense makes the noun reading explicit."
+	},
+	"L4-0253": {
+		"meanings": ["symbol or sign", "a written mark"],
+		"note": "字 L1 carries 'symbol' as a second sense, so 符号 leads with the paired form."
+	},
+	"L4-0254": {
+		"meanings": ["to conform to", "to match or fit"],
+		"note": "V row: 符合要求. Old lead 'in accordance with' was a preposition, and the physics 'coincidence' sense is off-level."
+	},
+	"L4-0255": {
+		"meanings": ["to put in time or effort", "to pay a price"],
+		"note": "付 L3 and 支付 L3 already carry 'to pay'; 付出 is what you expend, not a payment."
+	},
+	"L4-0257": {
+		"meanings": ["the area nearby", "vicinity"],
+		"note": "Official POS is N, so the lead is a noun phrase rather than the adverbial 'nearby'."
+	},
+	"L4-0258": {
+		"meanings": ["to duplicate", "to reproduce"],
+		"note": "抄写 L4 ships 'to copy' and 抄 L4 'to make a copy'; 复印 L3 holds 'to photocopy'."
+	},
+	"L4-0259": {
+		"meanings": ["to make better", "to improve conditions"],
+		"note": "提高 L2 and 改进 L3 both ship 'to improve'; 改善 is improving a situation or conditions."
+	},
+	"L4-0260": {
+		"meanings": ["to correct a mistake", "to put right"],
+		"note": "Concrete object added so it does not collide with the many 'to correct' candidates."
+	},
+	"L4-0261": {
+		"meanings": ["to cover", "to build a house"],
+		"note": "V row, so the noun senses 'lid, top' are dropped; 盖房子 is the second common L4 use."
+	},
+	"L4-0262": {
+		"meanings": ["to summarize", "in broad outline"],
+		"note": "V/Adj row: verb first, adjective second, matching the official order."
+	},
+	"L4-0263": {
+		"meanings": ["to be interested in"],
+		"note": "Kept the preposition so the phrase reads as a whole."
+	},
+	"L4-0264": {
+		"meanings": ["climax or high point", "high tide"],
+		"note": "Dropped CEDICT's 'to have an orgasm'. The story/activity climax is the L4 sense; the tide sense is the literal one."
+	},
+	"L4-0266": {
+		"meanings": ["noble in character", "lofty"],
+		"note": "Adj of a person's character, not of rank."
+	},
+	"L4-0268": {
+		"meanings": ["unusually", "especially"],
+		"note": "尤其 L5 ships 'especially'; 格外 means to an unusual degree — 格外小心."
+	},
+	"L4-0269": {
+		"meanings": ["to be separated by", "to partition off"],
+		"note": "Covers both 隔壁 and 隔两天."
+	},
+	"L4-0271": {
+		"meanings": ["just one or two", "individual"],
+		"note": "Adj: 个别学生 means a scattered few, not 'each'."
+	},
+	"L4-0272": {
+		"meanings": ["a single organism or unit", "a self-employed trader"],
+		"note": "个人 L3 already ships 'an individual'; 个体 is the single unit in a group, plus the 个体户 sense."
+	},
+	"L4-0273": {
+		"meanings": ["each one", "one by one"],
+		"note": "每 L3 owns 'every'; 各个 picks the members out singly."
+	},
+	"L4-0274": {
+		"meanings": ["root", "measure word for sticks or hairs"],
+		"note": "M/N row. 条 L2 already ships 'measure word: long thin things', so 根's classifier gloss names the rigid or strand-like things it actually counts."
+	},
+	"L4-0275": {
+		"meanings": ["based on", "grounds or basis"],
+		"note": "按照 L3 ships 'according to'. 根据 leads with the prepositional 'based on' and keeps the noun sense the official N tag records."
+	},
+	"L4-0276": {
+		"meanings": ["an engineering project", "engineering work"],
+		"note": "项目 L4 ships bare 'project'."
+	},
+	"L4-0278": {
+		"meanings": ["to supply goods", "to keep in stock"],
+		"note": "提供 L4 ships 'to offer, to supply'; 供应 is supplying goods to a market."
+	},
+	"L4-0279": {
+		"meanings": ["in all", "in total"],
+		"note": "Adv row. Old lead 'common, general' was the bound adjective of 共同. 总共 L4 ships 'altogether'."
+	},
+	"L4-0280": {
+		"meanings": ["to constitute", "to add up to"],
+		"note": "组成 L2 ships 'to make up' and 形成 L3 'to form'."
+	},
+	"L4-0282": {
+		"meanings": ["to purchase"],
+		"note": "买 L1 is 'to buy'; 购买 is the formal register."
+	},
+	"L4-0283": {
+		"meanings": ["to go shopping"],
+		"note": "Official POS is V, so the bare noun 'shopping' cannot lead."
+	},
+	"L4-0284": {
+		"meanings": ["a bone"],
+		"note": "Dropped CEDICT's figurative 'moral character' and 'bitterness'."
+	},
+	"L4-0286": {
+		"meanings": ["melon or gourd", "squash"],
+		"note": "Dropped the slang 'a piece of gossip'."
+	},
+	"L4-0287": {
+		"meanings": ["odd or weird", "rather or quite"],
+		"note": "奇怪 L3 ships 'strange'. Adj/Adv row, so both readings appear; the 'monster' and 'to blame' senses are off-level."
+	},
+	"L4-0288": {
+		"meanings": ["mountain pass", "a barrier or checkpoint"],
+		"note": "Official POS is N and 关 L1 already ships the verb 'to shut'. The old card led with a noun then added 'to close', duplicating L1."
+	},
+	"L4-0290": {
+		"meanings": ["about or concerning", "with regard to"],
+		"note": "Prep row."
+	},
+	"L4-0291": {
+		"meanings": ["a government official"],
+		"note": "Dropped the bound 'organ of the body' sense."
+	},
+	"L4-0294": {
+		"meanings": ["compact disc", "a CD or DVD"],
+		"note": "Kept the everyday abbreviation as the second gloss."
+	},
+	"L4-0295": {
+		"meanings": ["to stroll around", "to browse the shops"],
+		"note": "逛街 and 逛商店 are the L4 collocations; plain 'to visit' loses the aimless-wander sense."
+	},
+	"L4-0296": {
+		"meanings": ["to return to a place", "to belong to"],
+		"note": "回 L1 and 还 huán L1 both ship 'to return', so 归 is spelled out; 归…所有 is the other common use."
+	},
+	"L4-0298": {
+		"meanings": ["scale or scope", "the size of an operation"],
+		"note": "比例 L3 carries 'scale' as its measurement sense; 规模 is the size of an undertaking."
+	},
+	"L4-0299": {
+		"meanings": ["a rule or regulation", "regular and orderly"],
+		"note": "治 L4 ships 'to rule', which normalizes to the same key as a bare 'rule'. N/Adj row, so the adjective sense follows."
+	},
+	"L4-0300": {
+		"meanings": ["fruit borne by a plant", "results or gains"],
+		"note": "水果 L1 owns 'fruit' as food; 果实 is what a plant produces. Kept 劳动果实 as the second sense."
+	},
+	"L4-0301": {
+		"meanings": ["going too far", "excessive"],
+		"note": "The complaint use 你太过分了 is what a learner meets."
+	},
+	"L4-0304": {
+		"meanings": ["to contain as an ingredient", "to hold in the mouth"],
+		"note": "包含 L4 ships 'to contain'. 含 in 含有维生素 is about what is inside a substance."
+	},
+	"L4-0306": {
+		"meanings": ["implied meaning", "connotation"],
+		"note": "意思 L2 owns plain 'meaning'; 含义 is the meaning carried underneath the words."
+	},
+	"L4-0309": {
+		"meanings": ["freezing cold", "frigid"],
+		"note": "冷 L1 is bare 'cold'; 寒冷 is the climate word."
+	},
+	"L4-0310": {
+		"meanings": ["line of business", "industry"],
+		"note": "'trade' would collide with the commerce sense of 贸易 and reads as barter."
+	},
+	"L4-0311": {
+		"meanings": ["a scheduled flight"],
+		"note": "The scheduled service, not the act of flying."
+	},
+	"L4-0312": {
+		"meanings": ["to travel by air", "aviation"],
+		"note": "Official POS is V, so the bare noun 'aviation' cannot lead even though it is the natural English."
+	},
+	"L4-0313": {
+		"meanings": ["millimeter"],
+		"note": "Unit noun; no change needed."
+	},
+	"L4-0314": {
+		"meanings": ["milliliter"],
+		"note": "Unit noun; no change needed."
+	},
+	"L4-0315": {
+		"meanings": ["a close friend", "a good buddy"],
+		"note": "Also the social-media 'friend', but the personal sense leads."
+	},
+	"L4-0317": {
+		"meanings": ["to be fond of", "to have a liking for"],
+		"note": "The hào reading. Distinct from 好 hǎo at L1/L2."
+	},
+	"L4-0318": {
+		"meanings": ["a contract"],
+		"note": "Dropped the CL notation clause."
+	},
+	"L4-0320": {
+		"meanings": ["a red envelope of gift money", "a cash gift"],
+		"note": "Dropped 'kickback' and 'bribe'."
+	},
+	"L4-0321": {
+		"meanings": ["at the back", "later on"],
+		"note": "后面 L3 ships 'the back'; 后头 is the spoken equivalent and also means later in time."
+	},
+	"L4-0322": {
+		"meanings": ["thick", "generous and kind"],
+		"note": "Adj of flat things — 薄 is its opposite. 厚道 gives the second sense."
+	},
+	"L4-0324": {
+		"meanings": ["to neglect", "to overlook"],
+		"note": "Trimmed CEDICT's four-way pile."
+	},
+	"L4-0325": {
+		"meanings": ["measure word for households", "a household"],
+		"note": "Official POS is M only, so the classifier leads: 一户人家."
+	},
+	"L4-0327": {
+		"meanings": ["multicolored or patterned", "blurred"],
+		"note": "The Adj reading of 花, kept apart from 花 L1 'flower' and 花 L2 'to spend'. Dropped the lecherous sense."
+	},
+	"L4-0328": {
+		"meanings": ["to row a boat", "to scratch a surface"],
+		"note": "The huá reading."
+	},
+	"L4-0329": {
+		"meanings": ["to mark off", "to transfer funds"],
+		"note": "The huà reading — 划分, 划款. Kept clear of 划 huá on the same level."
+	},
+	"L4-0330": {
+		"meanings": ["to cherish the memory of", "to look back fondly on"],
+		"note": "想念 is missing someone present-tense; 怀念 looks back."
+	},
+	"L4-0331": {
+		"meanings": ["to doubt", "to suspect"],
+		"note": "Both readings are common at L4."
+	},
+	"L4-0332": {
+		"meanings": ["to relieve", "to ease"],
+		"note": "缓解压力, 缓解疼痛."
+	},
+	"L4-0334": {
+		"meanings": ["gold as a precious metal", "prime or peak"],
+		"note": "金 L3 ships bare 'gold'. 黄金时间 gives the second sense."
+	},
+	"L4-0335": {
+		"meanings": ["to reply to a message", "to write back"],
+		"note": "Real fix: the card shipped 'to recover', which is 恢复. 回复邮件 is the L4 sense."
+	},
+	"L4-0336": {
+		"meanings": ["to remit money", "to converge"],
+		"note": "汇款 is the everyday use."
+	},
+	"L4-0337": {
+		"meanings": ["to report to a superior", "a progress report"],
+		"note": "报告 L3 ships 'to report'; 汇报 is upward reporting. V/N row."
+	},
+	"L4-0340": {
+		"meanings": ["hugely popular", "booming"],
+		"note": "Official POS is Adj and 火 L3 is the noun 'fire' — the two levels shipped identical glosses. 这部电影很火 is the adjective."
+	},
+	"L4-0341": {
+		"meanings": ["measure word for groups of people", "a band or gang"],
+		"note": "Official POS is M. 群 L3 counts crowds and flocks; 伙 counts a band of people acting together."
+	},
+	"L4-0342": {
+		"meanings": ["a companion", "a buddy or partner"],
+		"note": "对象 L3 ships 'partner', so 伙伴 leads with companion. CEDICT gave only 'variant of'."
+	},
+	"L4-0343": {
+		"meanings": ["possibly", "perhaps"],
+		"note": "也许 L2 ships 'perhaps' and 或 L2 'maybe'."
+	},
+	"L4-0344": {
+		"meanings": ["goods", "merchandise"],
+		"note": "Dropped the bound 'money' sense."
+	},
+	"L4-0345": {
+		"meanings": ["to reap or gain", "to capture"],
+		"note": "赢 L3 owns 'to win' and 获得 is 'to obtain'; bare 获 is the morpheme in 获奖, 收获, 捕获."
+	},
+	"L4-0346": {
+		"meanings": ["to obtain", "to receive"],
+		"note": "The plain one of the 获 family."
+	},
+	"L4-0348": {
+		"meanings": ["to obtain by seeking it out"],
+		"note": "得到 L1 'to get', 取得 L2 'to acquire' and 获得 L4 'to obtain' are all taken; 获取信息 is active seeking."
+	},
+	"L4-0349": {
+		"meanings": ["almost", "practically"],
+		"note": "The canonical 'almost'. 差不多 L2 should carry 'about the same' instead."
+	},
+	"L4-0350": {
+		"meanings": ["an organization or agency", "institution"],
+		"note": "研究机构, 金融机构. The mechanical 'mechanism' sense belongs to 机制 L5."
+	},
+	"L4-0351": {
+		"meanings": ["a lucky opportunity", "a favorable turn of events"],
+		"note": "机会 L2 ships 'opportunity'; 机遇 is the chance that falls your way."
+	},
+	"L4-0352": {
+		"meanings": ["to accumulate", "to build up over time"],
+		"note": "积累经验."
+	},
+	"L4-0353": {
+		"meanings": ["stirred up emotionally", "to move deeply"],
+		"note": "Adj/V row, so the adjective leads. 兴奋 L4 already ships 'excited'; 激动 is being moved or worked up."
+	},
+	"L4-0354": {
+		"meanings": ["fierce", "hard-fought"],
+		"note": "强烈 L3 ships 'intense'. 激烈 is of competition, argument or fighting."
+	},
+	"L4-0355": {
+		"meanings": ["to pass a test", "to reach the pass mark"],
+		"note": "及格分数 is 60 — it is the pass mark, not passing through."
+	},
+	"L4-0356": {
+		"meanings": ["extremely", "utterly"],
+		"note": "Adv row: the geography 'pole' is a noun and cannot lead. 极其 L4 holds 'exceedingly'."
+	},
+	"L4-0358": {
+		"meanings": ["about to happen", "soon"],
+		"note": "The written-style counterpart of 快要 L2."
+	},
+	"L4-0359": {
+		"meanings": ["in a rush", "hastily"],
+		"note": "赶紧 L3 ships 'hurriedly'."
+	},
+	"L4-0361": {
+		"meanings": ["to record in writing", "to document"],
+		"note": "记录 L3 ships 'to record'; 记载 is specifically a written account."
+	},
+	"L4-0364": {
+		"meanings": ["to fasten", "to tie up"],
+		"note": "The jì reading — 系鞋带, 系安全带."
+	},
+	"L4-0365": {
+		"meanings": ["a season of the year", "a quarter of the year"],
+		"note": "Bound-ish: 雨季, 旺季, 第四季. 季节 keeps the everyday 'season'."
+	},
+	"L4-0367": {
+		"meanings": ["season", "time of year"],
+		"note": "The everyday word for spring, summer, autumn, winter. Old lead 'time' was wrong."
+	},
+	"L4-0368": {
+		"meanings": ["both this and that", "given that"],
+		"note": "Adv/Conj. The 既…又… pairing is what a learner meets first; a plain-words description beats a grammar label."
+	},
+	"L4-0369": {
+		"meanings": ["now that", "seeing that"],
+		"note": "Kept apart from 既 and from 自 L4 'since'."
+	},
+	"L4-0370": {
+		"meanings": ["to mail", "to send by post"],
+		"note": "寄信, 寄包裹 is the L4 sense; CEDICT's 'to entrust' is the literary root."
+	},
+	"L4-0371": {
+		"meanings": ["to work overtime"],
+		"note": "No change needed."
+	},
+	"L4-0372": {
+		"meanings": ["to join an organization", "to add in"],
+		"note": "参加 L2 ships 'to participate'; 加入 is becoming a member, and also mixing something in."
+	},
+	"L4-0375": {
+		"meanings": ["supposing that", "if"],
+		"note": "如果 L2 and 要是 L3 both ship bare 'if'."
+	},
+	"L4-0376": {
+		"meanings": ["solid and firm", "well built"],
+		"note": "结实 L3 ships 'sturdy'. 坚固 is of structures and materials."
+	},
+	"L4-0378": {
+		"meanings": ["to subtract", "to take away"],
+		"note": "The arithmetic sense leads; 减少 keeps 'to reduce'."
+	},
+	"L4-0379": {
+		"meanings": ["to lose weight"],
+		"note": "No change needed."
+	},
+	"L4-0380": {
+		"meanings": ["to reduce", "to decrease"],
+		"note": "Trimmed the four-way pile."
+	},
+	"L4-0381": {
+		"meanings": ["a résumé or CV"],
+		"note": "One thing, two names for it — not two senses."
+	},
+	"L4-0382": {
+		"meanings": ["to exercise to keep fit", "to work out at a gym"],
+		"note": "制订 L4 ships 'to work out' and 活动 L2 'to exercise', so the purpose is spelled out."
+	},
+	"L4-0384": {
+		"meanings": ["a large river"],
+		"note": "河 L2 ships 'river'; 江 is the big one — 长江, 珠江."
+	},
+	"L4-0385": {
+		"meanings": ["to be particular about", "tastefully done"],
+		"note": "V/Adj row: 讲究卫生, and 房间很讲究."
+	},
+	"L4-0386": {
+		"meanings": ["a public lecture", "a lecture series"],
+		"note": "Dropped the academic 'chair' sense as off-level."
+	},
+	"L4-0387": {
+		"meanings": ["to award a prize", "a prize or award"],
+		"note": "V/N row, so the verb leads even though CEDICT puts the noun first."
+	},
+	"L4-0388": {
+		"meanings": ["prize money", "a bonus"],
+		"note": "Both the competition prize and the workplace bonus."
+	},
+	"L4-0390": {
+		"meanings": ["to descend or drop", "to lower"],
+		"note": "降落 L4 ships 'to descend', 下降 L4 'to decline' and 掉 L2 'to drop'."
+	},
+	"L4-0392": {
+		"meanings": ["to cut the price"],
+		"note": "Separable verb 降价."
+	},
+	"L4-0394": {
+		"meanings": ["to get colder", "to cool down"],
+		"note": "Weather turning colder is the L4 use."
+	},
+	"L4-0395": {
+		"meanings": ["to swap", "to trade with each other"],
+		"note": "换 L2 ships 'to exchange'; 交换 is mutual — 交换礼物, 交换意见."
+	},
+	"L4-0396": {
+		"meanings": ["to socialize", "to mix with people"],
+		"note": "Official POS is V, so the noun 'communication' cannot lead."
+	},
+	"L4-0398": {
+		"meanings": ["to give a talking-to", "a lesson learned"],
+		"note": "V/N row. Both senses are common: 教训孩子 and 接受教训."
+	},
+	"L4-0399": {
+		"meanings": ["stage or phase", "a period in a process"],
+		"note": "舞台 L3 ships the theatre 'stage'."
+	},
+	"L4-0400": {
+		"meanings": ["a street or avenue", "a neighborhood district"],
+		"note": "街 L2 ships bare 'street'; 街道 also names the sub-district a neighborhood office covers."
+	},
+	"L4-0401": {
+		"meanings": ["to save time or money", "to use sparingly"],
+		"note": "省 L2 ships 'to save' and 节约 L3 'to economize'."
+	}
+}
