@@ -1,0 +1,490 @@
+{
+	"L1-0154": {
+		"meanings": ["to return", "to go back"],
+		"note": "V. L1 sense is physical return (回家/回国); reply sense belongs to 回答."
+	},
+	"L1-0155": {
+		"meanings": ["to answer", "an answer"],
+		"note": "V/N — both official POS covered; CEDICT clause 2 was dropped by the builder."
+	},
+	"L1-0157": {
+		"meanings": ["to go home"],
+		"note": "Plainer than \"to return home\"; distinct from 回 \"to return\"."
+	},
+	"L1-0160": {
+		"meanings": ["to know how to", "will or is likely to"],
+		"note": "L1 V auxiliary. Kept off \"to be able to\" so it does not collide with 能; the future sense is spelled out without a parenthetical."
+	},
+	"L1-0162": {
+		"meanings": ["airport"],
+		"note": "Slang Shadowsocks sense in CEDICT dropped."
+	},
+	"L1-0163": {
+		"meanings": ["plane ticket"],
+		"note": "Distinct from 票 \"ticket\"."
+	},
+	"L1-0165": {
+		"meanings": ["how many", "a few"],
+		"note": "Num/Pron; both L1 uses (几个? / 几天)."
+	},
+	"L1-0166": {
+		"meanings": ["to write down", "to remember"],
+		"note": "Bare 记 is chiefly \"note down\"; \"to remember\" left secondary so it does not collide with 记得/记住."
+	},
+	"L1-0169": {
+		"meanings": ["home", "family"],
+		"note": "N first per the noun sense a beginner meets; measure-word use comes later."
+	},
+	"L1-0172": {
+		"meanings": ["measure word for rooms"],
+		"note": "POS is M only — 一间房间."
+	},
+	"L1-0173": {
+		"meanings": ["to meet with", "to see someone"],
+		"note": "Bare 见 is \"meet (someone)\"; visual \"to see\" is 看见, so kept apart."
+	},
+	"L1-0174": {
+		"meanings": ["to meet face to face"],
+		"note": "Concrete, and distinct from 见 and 认识."
+	},
+	"L1-0175": {
+		"meanings": ["to teach"],
+		"note": "Single clean sense."
+	},
+	"L1-0176": {
+		"meanings": ["to be called", "to shout"],
+		"note": "L1 sense is 你叫什么名字; CEDICT led with \"to shout\"."
+	},
+	"L1-0177": {
+		"meanings": ["classroom building"],
+		"note": "Distinct from 楼 \"building\"."
+	},
+	"L1-0179": {
+		"meanings": ["to introduce"],
+		"note": "One sense is enough at L1."
+	},
+	"L1-0181": {
+		"meanings": ["today"],
+		"note": "Drop the vague \"the present time\"."
+	},
+	"L1-0182": {
+		"meanings": ["to enter"],
+		"note": "L1 sense; \"to go forward/advance\" is wrong for 进 at this level. Left single so 进来/进去 stay distinct."
+	},
+	"L1-0183": {
+		"meanings": ["to come in"],
+		"note": "Motion toward the speaker."
+	},
+	"L1-0184": {
+		"meanings": ["to go in"],
+		"note": "Motion away from the speaker."
+	},
+	"L1-0185": {
+		"meanings": ["nine"],
+		"note": "Numeral."
+	},
+	"L1-0186": {
+		"meanings": ["then or right away", "only"],
+		"note": "Adv. Removed the comma-in-gloss; kept off bare \"right away\" which is 马上."
+	},
+	"L1-0187": {
+		"meanings": ["to feel that", "to think"],
+		"note": "Opinion verb; \"to feel that\" keeps it apart from 想."
+	},
+	"L1-0188": {
+		"meanings": ["to open", "to turn on"],
+		"note": "开灯/开电视 is core L1; \"to start\" was vaguer."
+	},
+	"L1-0189": {
+		"meanings": ["to drive a car"],
+		"note": "CEDICT sense 2 is sexual slang — never shipped to a learner."
+	},
+	"L1-0190": {
+		"meanings": ["to have a meeting", "to attend a meeting"],
+		"note": "Both directions are ordinary at L1."
+	},
+	"L1-0191": {
+		"meanings": ["to make a joke", "to joke around"],
+		"note": "Plain wording for a beginner."
+	},
+	"L1-0192": {
+		"meanings": ["to look at", "to watch", "to read"],
+		"note": "Three genuinely distinct L1 uses (看书/看电视)."
+	},
+	"L1-0193": {
+		"meanings": ["to see a doctor"],
+		"note": "Learner direction only; the doctor-side sense confuses at L1."
+	},
+	"L1-0196": {
+		"meanings": ["to take a test", "to give a test"],
+		"note": "V. Wording chosen so it does not collide with 考试 \"exam\"."
+	},
+	"L1-0197": {
+		"meanings": ["exam", "to take an exam"],
+		"note": "Noun first — the everyday use — and distinct from 考."
+	},
+	"L1-0198": {
+		"meanings": ["thirsty"],
+		"note": "Adj, single sense."
+	},
+	"L1-0199": {
+		"meanings": ["class", "lesson"],
+		"note": "N; \"subject\" was the weaker pick."
+	},
+	"L1-0202": {
+		"meanings": ["mouth", "measure word for family members"],
+		"note": "N sense leads; M sense (三口人) kept as second."
+	},
+	"L1-0203": {
+		"meanings": ["piece", "yuan in spoken Chinese"],
+		"note": "Removed comma-in-gloss \"yuan, in speech\"."
+	},
+	"L1-0204": {
+		"meanings": ["fast", "soon"],
+		"note": "Adj/Adv — \"fast\" for the adjective, \"soon\" for 快…了."
+	},
+	"L1-0205": {
+		"meanings": ["to come"],
+		"note": "Directional-complement senses are not L1 card material."
+	},
+	"L1-0206": {
+		"meanings": ["to come to", "to arrive at"],
+		"note": "Kept off bare \"to arrive\" so it stays distinct from 到."
+	},
+	"L1-0207": {
+		"meanings": ["old in years", "elderly"],
+		"note": "Adj. \"old in years\" is people-only, so it stays apart from 旧 L3 \"old and worn\" for things."
+	},
+	"L1-0210": {
+		"meanings": ["marks a completed action", "marks a change of situation"],
+		"note": "Particle described by function, no grammar jargon."
+	},
+	"L1-0211": {
+		"meanings": ["tired"],
+		"note": "Adj; the 累 lěi \"to strain\" senses are wrong here."
+	},
+	"L1-0212": {
+		"meanings": ["cold"],
+		"note": "Adj, single sense."
+	},
+	"L1-0213": {
+		"meanings": ["inside", "in"],
+		"note": "Locative noun/suffix (家里). Differentiated from 里边 below."
+	},
+	"L1-0214": {
+		"meanings": ["the inside part", "in there"],
+		"note": "Worded away from bare \"inside\" so 里 and 里边 are not the same answer."
+	},
+	"L1-0215": {
+		"meanings": ["two of something"],
+		"note": "Num. 二 L1-0098 is the counting number; 两 is what precedes a measure word (两个人), so the gloss says \"of something\"."
+	},
+	"L1-0216": {
+		"meanings": ["zero"],
+		"note": "Numeral."
+	},
+	"L1-0217": {
+		"meanings": ["six"],
+		"note": "Numeral."
+	},
+	"L1-0218": {
+		"meanings": ["building", "floor of a building"],
+		"note": "Both L1 uses (楼上 / 三楼); distinct from 教学楼."
+	},
+	"L1-0220": {
+		"meanings": ["downstairs"],
+		"note": "Single sense."
+	},
+	"L1-0221": {
+		"meanings": ["road", "route"],
+		"note": "N/M; \"route\" covers the bus-number use."
+	},
+	"L1-0223": {
+		"meanings": ["on the way", "on the road"],
+		"note": "Locative noun."
+	},
+	"L1-0224": {
+		"meanings": ["mother", "mom"],
+		"note": "Fixes the romanization gloss \"mama\" flagged by the loop-1 critic."
+	},
+	"L1-0226": {
+		"meanings": ["right away", "immediately"],
+		"note": "Adv; the \"on horseback\" sense is not L1."
+	},
+	"L1-0227": {
+		"meanings": ["makes a sentence a yes-no question"],
+		"note": "Particle by function; contrasts with 呢. Trimmed to fit the 34-character gloss limit."
+	},
+	"L1-0228": {
+		"meanings": ["to buy"],
+		"note": "Single sense."
+	},
+	"L1-0229": {
+		"meanings": ["slow"],
+		"note": "Adj, single sense."
+	},
+	"L1-0230": {
+		"meanings": ["busy"],
+		"note": "Adj; the verb senses are not L1."
+	},
+	"L1-0231": {
+		"meanings": ["ten cents", "one tenth of a yuan"],
+		"note": "POS is M — the money measure word, not the \"hair/fur\" noun."
+	},
+	"L1-0232": {
+		"meanings": ["did not", "to not have"],
+		"note": "Adv/V. Primary kept distinct from 没有."
+	},
+	"L1-0235": {
+		"meanings": ["it's all right", "no problem"],
+		"note": "The reassurance a learner actually hears. 没什么 L1-0234 keeps \"it's nothing\"; \"to have spare time\" was wrong for L1."
+	},
+	"L1-0236": {
+		"meanings": ["to not have", "there is not"],
+		"note": "V/Adv; distinct primary from 没."
+	},
+	"L1-0238": {
+		"meanings": ["door", "measure word for school courses"],
+		"note": "N/M both covered; the -gate suffix and sect senses dropped."
+	},
+	"L1-0241": {
+		"meanings": ["plural ending for people"],
+		"note": "Suffix described by function, within the gloss length limit."
+	},
+	"L1-0244": {
+		"meanings": ["noodles"],
+		"note": "CEDICT only had an erhua cross-reference."
+	},
+	"L1-0246": {
+		"meanings": ["to understand clearly", "clear and obvious"],
+		"note": "Adj/V both covered; qualified so it does not collide with 懂."
+	},
+	"L1-0249": {
+		"meanings": ["to take", "to hold"],
+		"note": "Physical taking in the hand; the 把-marker use is not a card sense."
+	},
+	"L1-0250": {
+		"meanings": ["which"],
+		"note": "Pron."
+	},
+	"L1-0251": {
+		"meanings": ["where", "what place"],
+		"note": "Pron; second gloss added because 哪儿 also means \"where\"."
+	},
+	"L1-0253": {
+		"meanings": ["which ones"],
+		"note": "Dropped the stray question marks CEDICT carries."
+	},
+	"L1-0254": {
+		"meanings": ["that"],
+		"note": "Pron; \"those\" left to 那些."
+	},
+	"L1-0256": {
+		"meanings": ["there", "that place"],
+		"note": "Pron; second gloss because 那儿 also means \"there\"."
+	},
+	"L1-0258": {
+		"meanings": ["those"],
+		"note": "Pron plural."
+	},
+	"L1-0259": {
+		"meanings": ["milk"],
+		"note": "N. CEDICT leads with \"breast\" — not a beginner card sense."
+	},
+	"L1-0260": {
+		"meanings": ["paternal grandmother", "grandma"],
+		"note": "Specific side of the family; CEDICT vulgar sense dropped."
+	},
+	"L1-0261": {
+		"meanings": ["male"],
+		"note": "Adj; the nobility-rank sense is not L1."
+	},
+	"L1-0262": {
+		"meanings": ["boy"],
+		"note": "CEDICT only had an erhua cross-reference."
+	},
+	"L1-0266": {
+		"meanings": ["south"],
+		"note": "Compass noun."
+	},
+	"L1-0268": {
+		"meanings": ["difficult"],
+		"note": "Adj; the noun \"problem\" reading is weaker at L1."
+	},
+	"L1-0269": {
+		"meanings": ["and what about ...?", "shows an action is still going on"],
+		"note": "Particle by function; contrasts with the yes-no 吗."
+	},
+	"L1-0270": {
+		"meanings": ["to be able to", "to be allowed to"],
+		"note": "V. Ability and permission — kept apart from 会 \"to know how to\"."
+	},
+	"L1-0271": {
+		"meanings": ["you"],
+		"note": "Pron, informal."
+	},
+	"L1-0273": {
+		"meanings": ["year"],
+		"note": "POS is M — 三年."
+	},
+	"L1-0274": {
+		"meanings": ["the polite word for you"],
+		"note": "Pron. 你 L1-0271 owns bare \"you\"."
+	},
+	"L1-0276": {
+		"meanings": ["female"],
+		"note": "Adj, matching the official POS."
+	},
+	"L1-0278": {
+		"meanings": ["girl"],
+		"note": "CEDICT only had an erhua cross-reference."
+	},
+	"L1-0281": {
+		"meanings": ["female student", "schoolgirl"],
+		"note": "Distinct from 女孩儿 \"girl\"."
+	},
+	"L1-0282": {
+		"meanings": ["the side of something", "beside"],
+		"note": "N first per POS; \"beside\" gives the everyday use."
+	},
+	"L1-0283": {
+		"meanings": ["to run"],
+		"note": "Single sense at L1."
+	},
+	"L1-0285": {
+		"meanings": ["ticket"],
+		"note": "The ransom/opera senses are not L1."
+	},
+	"L1-0286": {
+		"meanings": ["seven"],
+		"note": "Numeral."
+	},
+	"L1-0287": {
+		"meanings": ["to rise", "to raise"],
+		"note": "Kept off \"to get up\" so 起床 and 起来 stay distinct."
+	},
+	"L1-0288": {
+		"meanings": ["to get out of bed"],
+		"note": "Concrete and distinct from 起来."
+	},
+	"L1-0289": {
+		"meanings": ["to stand up", "to get up"],
+		"note": "The literal directional use a beginner meets."
+	},
+	"L1-0291": {
+		"meanings": ["in front", "before in time"],
+		"note": "Both L1 uses (前面 / 三天前); worded apart from 前边."
+	},
+	"L1-0294": {
+		"meanings": ["money"],
+		"note": "The weight-unit sense is not L1."
+	},
+	"L1-0296": {
+		"meanings": ["to invite", "please"],
+		"note": "POS is V, so the verb sense leads; the politeness use follows as a bare word."
+	},
+	"L1-0297": {
+		"meanings": ["to ask for time off"],
+		"note": "Plainer than \"to request leave of absence\"."
+	},
+	"L1-0298": {
+		"meanings": ["please come in"],
+		"note": "Fixed formula; quotes stripped."
+	},
+	"L1-0299": {
+		"meanings": ["may I ask", "excuse me"],
+		"note": "Removed the comma-in-gloss \"Excuse me, may I ask...?\"."
+	},
+	"L1-0300": {
+		"meanings": ["please sit down"],
+		"note": "Removed comma-in-gloss \"please, have a seat\"."
+	},
+	"L1-0301": {
+		"meanings": ["ball"],
+		"note": "N; the ball-game sense is carried by 球赛 later."
+	},
+	"L1-0302": {
+		"meanings": ["to go"],
+		"note": "Single sense; complement uses are not card material."
+	},
+	"L1-0304": {
+		"meanings": ["hot", "to heat up"],
+		"note": "Adj/V both covered, adjective first."
+	},
+	"L1-0305": {
+		"meanings": ["person", "people"],
+		"note": "N."
+	},
+	"L1-0307": {
+		"meanings": ["serious and careful", "conscientious"],
+		"note": "Adj. Plain English first — \"conscientious\" is harder than the Chinese word."
+	},
+	"L1-0308": {
+		"meanings": ["day of the month in writing", "sun"],
+		"note": "N. 日 is the formal written date (五月一日) against 号 in speech; the vulgar CEDICT sense is excluded."
+	},
+	"L1-0310": {
+		"meanings": ["meat"],
+		"note": "The colloquial \"flabby\" senses are not L1."
+	},
+	"L1-0311": {
+		"meanings": ["three"],
+		"note": "Numeral."
+	},
+	"L1-0312": {
+		"meanings": ["mountain", "hill"],
+		"note": "N."
+	},
+	"L1-0313": {
+		"meanings": ["shopping mall", "department store"],
+		"note": "Distinct from 商店 \"shop\"."
+	},
+	"L1-0314": {
+		"meanings": ["shop", "store"],
+		"note": "Smaller than 商场."
+	},
+	"L1-0315": {
+		"meanings": ["above or on top", "to go up"],
+		"note": "N/V. Fixes the critic-flagged \"to climb / to attend\" primary; no internal comma."
+	},
+	"L1-0316": {
+		"meanings": ["to go to work"],
+		"note": "Single clean sense."
+	},
+	"L1-0317": {
+		"meanings": ["the top", "the upper side"],
+		"note": "Worded apart from 上."
+	},
+	"L1-0318": {
+		"meanings": ["to get on a bus or train", "to get into a car"],
+		"note": "Concrete; CEDICT parenthetical unpacked."
+	},
+	"L1-0319": {
+		"meanings": ["last time"],
+		"note": "Single sense."
+	},
+	"L1-0320": {
+		"meanings": ["to go to class", "to attend class"],
+		"note": "Learner direction; the teacher sense confuses at L1."
+	},
+	"L1-0321": {
+		"meanings": ["to go online", "to use the Internet"],
+		"note": "The tennis/volleyball sense dropped."
+	},
+	"L1-0323": {
+		"meanings": ["to go to school", "to attend school"],
+		"note": "Distinct from 上课."
+	},
+	"L1-0324": {
+		"meanings": ["few", "to lack"],
+		"note": "Adj/V both covered, adjective first."
+	},
+	"L1-0325": {
+		"meanings": ["who"],
+		"note": "Pron; the pronunciation note belongs on the pinyin field."
+	},
+	"L1-0326": {
+		"meanings": ["on one's body", "carried with you"],
+		"note": "Locative noun."
+	}
+}
