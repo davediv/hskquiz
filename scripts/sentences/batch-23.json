@@ -1,0 +1,242 @@
+{
+	"L1-0024": {
+		"hanzi": "我比我弟弟高。",
+		"pinyin": "wǒ bǐ wǒ dì di gāo.",
+		"english": "I'm taller than my little brother."
+	},
+	"L1-0050": {
+		"hanzi": "我们出去玩吧。",
+		"pinyin": "wǒ men chū qù wán ba.",
+		"english": "Let's go out and play."
+	},
+	"L1-0076": {
+		"hanzi": "我早上七点起床。",
+		"pinyin": "wǒ zǎo shang qī diǎn qǐ chuáng.",
+		"english": "I get up at seven in the morning."
+	},
+	"L1-0102": {
+		"hanzi": "他们的房子很大。",
+		"pinyin": "tā men de fáng zi hěn dà.",
+		"english": "Their house is really big."
+	},
+	"L1-0128": {
+		"hanzi": "他是哪国人？",
+		"pinyin": "tā shì nǎ guó rén?",
+		"english": "What country is he from?"
+	},
+	"L1-0154": {
+		"hanzi": "你什么时候回来？",
+		"pinyin": "nǐ shén me shí hou huí lái?",
+		"english": "When are you coming back?"
+	},
+	"L1-0180": {
+		"hanzi": "我今年二十岁。",
+		"pinyin": "wǒ jīn nián èr shí suì.",
+		"english": "I'm twenty this year."
+	},
+	"L1-0206": {
+		"hanzi": "我们来到了一个新学校。",
+		"pinyin": "wǒ men lái dào le yí ge xīn xué xiào.",
+		"english": "We arrived at a new school."
+	},
+	"L1-0232": {
+		"hanzi": "我昨天没去学校。",
+		"pinyin": "wǒ zuó tiān méi qù xué xiào.",
+		"english": "I didn't go to school yesterday."
+	},
+	"L1-0258": {
+		"hanzi": "那些书是我的。",
+		"pinyin": "nà xiē shū shì wǒ de.",
+		"english": "Those books are mine."
+	},
+	"L1-0284": {
+		"hanzi": "他是我最好的朋友。",
+		"pinyin": "tā shì wǒ zuì hǎo de péng you.",
+		"english": "He's my best friend."
+	},
+	"L1-0310": {
+		"hanzi": "这个菜里没有肉。",
+		"pinyin": "zhè ge cài lǐ méi yǒu ròu.",
+		"english": "There's no meat in this dish."
+	},
+	"L1-0336": {
+		"hanzi": "你试试这个菜吧。",
+		"pinyin": "nǐ shì shi zhè ge cài ba.",
+		"english": "Give this dish a try."
+	},
+	"L1-0362": {
+		"hanzi": "我听到有人叫我。",
+		"pinyin": "wǒ tīng dào yǒu rén jiào wǒ.",
+		"english": "I heard someone calling me."
+	},
+	"L1-0388": {
+		"hanzi": "我很喜欢唱歌。",
+		"pinyin": "wǒ hěn xǐ huan chàng gē.",
+		"english": "I really like singing."
+	},
+	"L1-0414": {
+		"hanzi": "星期日我在家休息。",
+		"pinyin": "xīng qī rì wǒ zài jiā xiū xi.",
+		"english": "On Sunday I rest at home."
+	},
+	"L1-0440": {
+		"hanzi": "我用手机看书。",
+		"pinyin": "wǒ yòng shǒu jī kàn shū.",
+		"english": "I read books on my phone."
+	},
+	"L1-0466": {
+		"hanzi": "我们在这里等你。",
+		"pinyin": "wǒ men zài zhè lǐ děng nǐ.",
+		"english": "We'll wait for you here."
+	},
+	"L1-0492": {
+		"hanzi": "今天是最冷的一天。",
+		"pinyin": "jīn tiān shì zuì lěng de yì tiān.",
+		"english": "Today is the coldest day."
+	},
+	"L2-0018": {
+		"hanzi": "我喜欢很多运动，比如打篮球。",
+		"pinyin": "wǒ xǐ huan hěn duō yùn dòng bǐ rú dǎ lán qiú.",
+		"english": "I like plenty of sports — basketball, for example."
+	},
+	"L2-0044": {
+		"hanzi": "不一会儿，雨就停了。",
+		"pinyin": "bù yí huì r yǔ jiù tíng le.",
+		"english": "Before long the rain stopped."
+	},
+	"L2-0070": {
+		"hanzi": "商场的出口在右边。",
+		"pinyin": "shāng chǎng de chū kǒu zài yòu bian.",
+		"english": "The mall's exit is on the right."
+	},
+	"L2-0096": {
+		"hanzi": "这本书是给大人看的。",
+		"pinyin": "zhè běn shū shì gěi dà ren kàn de.",
+		"english": "This book is meant for adults."
+	},
+	"L2-0122": {
+		"hanzi": "二加二等于四。",
+		"pinyin": "èr jiā èr děng yú sì.",
+		"english": "Two plus two equals four."
+	},
+	"L2-0148": {
+		"hanzi": "你今年多大了？",
+		"pinyin": "nǐ jīn nián duō dà le?",
+		"english": "How old are you now?"
+	},
+	"L2-0174": {
+		"hanzi": "手机改变了我们的生活。",
+		"pinyin": "shǒu jī gǎi biàn le wǒ men de shēng huó.",
+		"english": "Phones have transformed the way we live."
+	},
+	"L2-0200": {
+		"hanzi": "店里的顾客很多。",
+		"pinyin": "diàn lǐ de gù kè hěn duō.",
+		"english": "The shop is full of customers."
+	},
+	"L2-0226": {
+		"hanzi": "她今天穿了红色的鞋。",
+		"pinyin": "tā jīn tiān chuān le hóng sè de xié.",
+		"english": "She's wearing red shoes today."
+	},
+	"L2-0252": {
+		"hanzi": "别急，还有时间。",
+		"pinyin": "bié jí hái yǒu shí jiān.",
+		"english": "Don't rush — there's still time."
+	},
+	"L2-0278": {
+		"hanzi": "我妈妈是一位教师。",
+		"pinyin": "wǒ mā ma shì yí wèi jiào shī.",
+		"english": "My mother is a teacher."
+	},
+	"L2-0304": {
+		"hanzi": "有问题的同学请举手。",
+		"pinyin": "yǒu wèn tí de tóng xué qǐng jǔ shǒu.",
+		"english": "Students with a question, please raise your hand."
+	},
+	"L2-0330": {
+		"hanzi": "快点儿，火车要开了。",
+		"pinyin": "kuài diǎn r huǒ chē yào kāi le.",
+		"english": "Hurry up — the train is about to leave."
+	},
+	"L2-0357": {
+		"hanzi": "这个房间又大又亮。",
+		"pinyin": "zhè ge fáng jiān yòu dà yòu liàng.",
+		"english": "This room is big and bright."
+	},
+	"L2-0383": {
+		"hanzi": "他是一个电影明星。",
+		"pinyin": "tā shì yí ge diàn yǐng míng xīng.",
+		"english": "He's a movie star."
+	},
+	"L2-0409": {
+		"hanzi": "我们下午一起打排球。",
+		"pinyin": "wǒ men xià wǔ yì qǐ dǎ pái qiú.",
+		"english": "We're playing volleyball together this afternoon."
+	},
+	"L2-0435": {
+		"hanzi": "前年我们在这里见过面。",
+		"pinyin": "qián nián wǒ men zài zhè lǐ jiàn guo miàn.",
+		"english": "We met here the year before last."
+	},
+	"L2-0461": {
+		"hanzi": "他对客人很热情。",
+		"pinyin": "tā duì kè rén hěn rè qíng.",
+		"english": "He's very warm towards guests."
+	},
+	"L2-0488": {
+		"hanzi": "他这个人很实在。",
+		"pinyin": "tā zhè ge rén hěn shí zai.",
+		"english": "He's a thoroughly down-to-earth person."
+	},
+	"L2-0514": {
+		"hanzi": "所有的同学都来了。",
+		"pinyin": "suǒ yǒu de tóng xué dōu lái le.",
+		"english": "All of the students have arrived."
+	},
+	"L2-0540": {
+		"hanzi": "停车场就在楼后面。",
+		"pinyin": "tíng chē chǎng jiù zài lóu hòu mian.",
+		"english": "The car park is right behind the building."
+	},
+	"L2-0566": {
+		"hanzi": "我在家上网买东西。",
+		"pinyin": "wǒ zài jiā shàng wǎng mǎi dōng xi.",
+		"english": "I shop online at home."
+	},
+	"L2-0592": {
+		"hanzi": "夏天到了，天气越来越热。",
+		"pinyin": "xià tiān dào le tiān qì yuè lái yuè rè.",
+		"english": "Summer is here and it keeps getting hotter."
+	},
+	"L2-0618": {
+		"hanzi": "这里的手机信号不太好。",
+		"pinyin": "zhè lǐ de shǒu jī xìn hào bú tài hǎo.",
+		"english": "The phone signal here isn't very good."
+	},
+	"L2-0644": {
+		"hanzi": "夜里的公园很安静。",
+		"pinyin": "yè lǐ de gōng yuán hěn ān jìng.",
+		"english": "The park is very quiet at night."
+	},
+	"L2-0670": {
+		"hanzi": "这个词有两个音节。",
+		"pinyin": "zhè ge cí yǒu liǎng ge yīn jié.",
+		"english": "This word has two syllables."
+	},
+	"L2-0696": {
+		"hanzi": "我愿意帮你的忙。",
+		"pinyin": "wǒ yuàn yì bāng nǐ de máng.",
+		"english": "I'm willing to help you out."
+	},
+	"L2-0722": {
+		"hanzi": "就在这时候，电话响了。",
+		"pinyin": "jiù zài zhè shí hou diàn huà xiǎng le.",
+		"english": "Just then, the phone rang."
+	},
+	"L2-0748": {
+		"hanzi": "奶奶住院了，我们去看她。",
+		"pinyin": "nǎi nai zhù yuàn le wǒ men qù kàn tā.",
+		"english": "Grandma is in hospital, so we're going to visit her."
+	}
+}
