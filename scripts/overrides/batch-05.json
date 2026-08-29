@@ -1,0 +1,414 @@
+{
+	"L2-0357": {
+		"meanings": ["bright", "to shine"],
+		"note": "Adj/V row: the Adj sense leads, the V sense follows; CEDICT's 'loud and clear' and 'to show one's passport' are not L2 senses."
+	},
+	"L2-0359": {
+		"meanings": ["below zero"],
+		"note": "Temperature word; CEDICT's parenthetical 'esp. temperature' cannot ship as notation."
+	},
+	"L2-0361": {
+		"meanings": ["to leave behind", "to stay behind"],
+		"note": "Both senses are met at L2 (留下地址 / 留下来); CEDICT's 'not to let sb go' is not."
+	},
+	"L2-0362": {
+		"meanings": ["student studying abroad", "international student"],
+		"note": "N row; CEDICT piles four clauses into one string, of which only these two are level-appropriate."
+	},
+	"L2-0363": {
+		"meanings": ["to flow"],
+		"note": "V row; CEDICT's 'to degenerate' and 'to banish into exile' are classical senses no L2 learner meets."
+	},
+	"L2-0365": {
+		"meanings": ["popular", "widespread"],
+		"note": "V/Adj row: at L2 流行 is met as 'popular' (流行音乐); CEDICT leads with the epidemiological sense."
+	},
+	"L2-0366": {
+		"meanings": ["roadside", "the side of the road"],
+		"note": "'Curb' was CEDICT clause 1 and is the wrong object — 路边 is the whole verge, not the kerbstone."
+	},
+	"L2-0372": {
+		"meanings": ["to sell"],
+		"note": "V row; CEDICT's 'to betray' and 'to show off' are figurative extensions, not L2 content."
+	},
+	"L2-0373": {
+		"meanings": ["full", "filled up"],
+		"note": "Adj row; CEDICT leads with the verb 'to fill'. Distinct from 饱 'satisfied' which is about eating."
+	},
+	"L2-0374": {
+		"meanings": ["to be satisfied", "pleased"],
+		"note": "V row, so the lead is verbal; CEDICT leads with the adjective 'satisfied' which is 饱's gloss at this level."
+	},
+	"L2-0379": {
+		"meanings": ["in front of a person", "in someone's presence"],
+		"note": "N row. Kept away from 前面 'ahead / in front' — 面前 is always in front of somebody."
+	},
+	"L2-0383": {
+		"meanings": ["a celebrity", "a star performer"],
+		"note": "'star' collides with 星星 'a star' at the same level and reads as the astronomical one."
+	},
+	"L2-0384": {
+		"meanings": ["purpose", "aim"],
+		"note": "N row; CEDICT ships five clauses in one string and the build kept only the first."
+	},
+	"L2-0385": {
+		"meanings": ["to take out", "to bring out"],
+		"note": "No official POS; both senses are the physical one a L2 learner meets. CEDICT's 'to come up with evidence' is not."
+	},
+	"L2-0386": {
+		"meanings": ["to get hold of", "to obtain"],
+		"note": "Kept off bare 'to get', which is 得到's gloss; 拿到 is the hand-on-it reading."
+	},
+	"L2-0389": {
+		"meanings": ["like that", "to that extent"],
+		"note": "Pron row. Described by function rather than labelled 'demonstrative'; the Conj sense 'in that case' belongs to 那."
+	},
+	"L2-0391": {
+		"meanings": ["that way", "that kind"],
+		"note": "Pron row. Differentiated from 那么 'like that' so the two are not the same answer."
+	},
+	"L2-0392": {
+		"meanings": ["the south of a country", "southern regions"],
+		"note": "Bare 'south' is 南's gloss; 南方 names the region rather than the compass direction."
+	},
+	"L2-0393": {
+		"meanings": ["sad", "upset"],
+		"note": "Adj row, so a 'to feel ...' lead is the wrong part of speech. 难过 is emotional; 难受 is physical."
+	},
+	"L2-0395": {
+		"meanings": ["uncomfortable", "feeling unwell"],
+		"note": "Adj row. The bodily sense, kept distinct from 难过 'sad'."
+	},
+	"L2-0401": {
+		"meanings": ["bird"],
+		"note": "Drops the CC-CEDICT intensifier sense and the radical note; a beginner card carries neither."
+	},
+	"L2-0402": {
+		"meanings": ["to do or make", "to handle"],
+		"note": "V row. 弄 is the general-purpose 'do something to it' verb (弄坏, 弄好); CEDICT's 'to mess with' is register-wrong."
+	},
+	"L2-0403": {
+		"meanings": ["hard-working", "diligent"],
+		"note": "Adj row, so the adjective sense leads; CEDICT sense 1 is the verb 'to make an effort'."
+	},
+	"L2-0404": {
+		"meanings": ["to climb", "to crawl"],
+		"note": "At L2 爬 is met in 爬山; CEDICT leads with 'to crawl', which is the secondary reading here."
+	},
+	"L2-0405": {
+		"meanings": ["to climb a mountain", "to go hiking"],
+		"note": "CEDICT's parenthetical 'esp. in the hills' cannot ship as notation, so the object is stated instead."
+	},
+	"L2-0406": {
+		"meanings": ["to be afraid", "to fear"],
+		"note": "V row; CEDICT's 'perhaps' is the adverbial 恐怕 reading, not 怕 at L2."
+	},
+	"L2-0408": {
+		"meanings": ["to line up", "to queue up"],
+		"note": "No official POS; the verb phrase is what a learner uses at a counter."
+	},
+	"L2-0410": {
+		"meanings": ["to bump", "to touch"],
+		"note": "V row; kept short so 碰到 and 碰见 keep their own compound senses."
+	},
+	"L2-0411": {
+		"meanings": ["to run into", "to come across"],
+		"note": "The unexpected-encounter compound; distinct from 碰见 'to meet by chance' below."
+	},
+	"L2-0412": {
+		"meanings": ["to meet by chance", "to bump into someone"],
+		"note": "CEDICT's parenthetical '(unexpectedly)' is folded into the gloss so no notation ships."
+	},
+	"L2-0413": {
+		"meanings": ["measure word: essays and articles"],
+		"note": "Replaces the baseline's 'measure word: articles, essays' — an internal comma reads as two senses once the UI joins on ', '."
+	},
+	"L2-0414": {
+		"meanings": ["cheap", "inexpensive"],
+		"note": "Adj/N row; the Adj sense leads. CEDICT's 'a petty advantage' is not a beginner sense."
+	},
+	"L2-0415": {
+		"meanings": ["measure word: thin flat pieces"],
+		"note": "Replaces the baseline's 'measure word: slices, flat pieces' — an internal comma reads as two senses in the UI."
+	},
+	"L2-0416": {
+		"meanings": ["pretty", "good-looking"],
+		"note": "Adj row; CEDICT ships 'pretty; beautiful' as one clause and the build truncated it."
+	},
+	"L2-0417": {
+		"meanings": ["flat", "level"],
+		"note": "Adj row; CEDICT's ten senses include the abbreviation for square metre and the level tone, neither of them L2."
+	},
+	"L2-0418": {
+		"meanings": ["safe and sound", "well and unharmed"],
+		"note": "Adj row; kept apart from 安全 'safe' at the same level."
+	},
+	"L2-0419": {
+		"meanings": ["usual", "most of the time"],
+		"note": "普通 owns 'ordinary' at this level; 平常 is the frequency word (平常我六点起床). Breaks the identical meaning set the two shipped."
+	},
+	"L2-0420": {
+		"meanings": ["equal in status", "equality"],
+		"note": "Adj row; 等于 already answers to bare 'equal' at this level, so 平等 names the social sense it carries."
+	},
+	"L2-0421": {
+		"meanings": ["in normal times", "day to day"],
+		"note": "N row; the 'when nothing special is happening' sense, kept distinct from 平常 'usual'."
+	},
+	"L2-0424": {
+		"meanings": ["ordinary", "common"],
+		"note": "Adj row; keeps 'ordinary' here and moves 平常 onto 'usual' so the two no longer ship the same meaning set."
+	},
+	"L2-0425": {
+		"meanings": ["standard Mandarin", "the common spoken language"],
+		"note": "'Putonghua' is the word's own romanization — the quiz would ask 'Putonghua' and answer 普通话."
+	},
+	"L2-0426": {
+		"meanings": ["the others", "the rest"],
+		"note": "Pron row; bare 'other' is 别的's gloss, and 其他 in use points at the remaining ones."
+	},
+	"L2-0427": {
+		"meanings": ["among them", "of which"],
+		"note": "N row; describes the function plainly instead of CEDICT's bare 'among'."
+	},
+	"L2-0428": {
+		"meanings": ["to ride"],
+		"note": "V row; CEDICT's classifier-for-saddle-horses sense is classical."
+	},
+	"L2-0429": {
+		"meanings": ["to ride a bike"],
+		"note": "CEDICT's parenthetical '(motorbike or bicycle)' cannot ship as notation."
+	},
+	"L2-0430": {
+		"meanings": ["to take off"],
+		"note": "Aircraft sense only; CEDICT's second sense is explicitly figurative and is barred from a learner card."
+	},
+	"L2-0431": {
+		"meanings": ["air or gas", "to make someone angry"],
+		"note": "Replaces the baseline's 'anger' lead: 生气 already owns 'to get angry' and the noun reading is what 气 carries alone."
+	},
+	"L2-0433": {
+		"meanings": ["a thousand"],
+		"note": "Num row; the numeral is the whole word and needs no dictionary framing."
+	},
+	"L2-0434": {
+		"meanings": ["kilogram in scientific use", "the metric kilogram"],
+		"note": "Replaces the baseline's 'kilogram, scientific term': the internal comma reads as two senses, and bare 'kilogram' is 公斤's answer at the same level."
+	},
+	"L2-0436": {
+		"meanings": ["a wall"],
+		"note": "Drops the CC-CEDICT internet-censorship slang sense, which no beginner card should carry."
+	},
+	"L2-0437": {
+		"meanings": ["a young person", "a young adult"],
+		"note": "N row; kept distinct from 青少年 and 少年, which the ranker glossed almost identically."
+	},
+	"L2-0438": {
+		"meanings": ["teenagers and young people", "adolescents"],
+		"note": "N row; the age band this word covers, so it is not interchangeable with 青年 or 少年."
+	},
+	"L2-0439": {
+		"meanings": ["light in weight", "gentle"],
+		"note": "Bare 'light' reads as the opposite of dark; 轻 is the opposite of heavy."
+	},
+	"L2-0443": {
+		"meanings": ["to treat someone to a meal", "to pick up the bill"],
+		"note": "'To give a dinner party' is register-wrong for what 请客 actually is at L2."
+	},
+	"L2-0446": {
+		"meanings": ["to ask for", "to beg"],
+		"note": "V row; kept distinct from 要求 'to demand' at the same level."
+	},
+	"L2-0450": {
+		"meanings": ["to fetch", "to pick up"],
+		"note": "V row; 取 is going to get something that is waiting for you (取钱, 取行李), not the general 'to take'."
+	},
+	"L2-0451": {
+		"meanings": ["to achieve", "to gain"],
+		"note": "V row; 得 owns 'to obtain' at this level, and 取得 is what you do with 成功 or 进步."
+	},
+	"L2-0453": {
+		"meanings": ["all of it", "the whole amount"],
+		"note": "N row; 'whole' alone is an adjective and collides with 全 'entirely'."
+	},
+	"L2-0454": {
+		"meanings": ["the whole country", "nationwide"],
+		"note": "N row; CEDICT's four clauses collapse to one idea."
+	},
+	"L2-0460": {
+		"meanings": ["to let someone do something", "to allow", "to give way"],
+		"note": "V/Prep row. CEDICT leads with 'to yield', but the causative is what a L2 learner meets first (让我看看)."
+	},
+	"L2-0461": {
+		"meanings": ["warm and friendly", "enthusiasm"],
+		"note": "N/Adj row; the Adj sense leads because that is how 热情 is met (他很热情)."
+	},
+	"L2-0468": {
+		"meanings": ["if", "supposing that"],
+		"note": "Conj row; CEDICT's 'in the event that' is register-wrong for L2."
+	},
+	"L2-0470": {
+		"meanings": ["to talk something over", "to consult with"],
+		"note": "V row; kept distinct from 讨论 'to discuss' at the same level — 商量 is deciding together."
+	},
+	"L2-0472": {
+		"meanings": ["last week"],
+		"note": "Transparent compound; nothing else to say and nothing to rank."
+	},
+	"L2-0473": {
+		"meanings": ["a small number", "a minority"],
+		"note": "N row; both senses are met at L2 (少数人, 少数民族)."
+	},
+	"L2-0474": {
+		"meanings": ["a boy or girl in early teens", "a youngster"],
+		"note": "N row; states the age band so it cannot be confused with 青年 or 青少年. CEDICT's 'literary youth' sense is dropped."
+	},
+	"L2-0476": {
+		"meanings": ["what kind", "what sort"],
+		"note": "Pron row; the question word stated plainly."
+	},
+	"L2-0478": {
+		"meanings": ["a new word", "an unfamiliar word"],
+		"note": "N row; CEDICT's textbook parenthetical and the CL: note cannot ship."
+	},
+	"L2-0479": {
+		"meanings": ["life", "to live"],
+		"note": "N/V row; the noun leads because 生活 is met first as 'daily life'."
+	},
+	"L2-0480": {
+		"meanings": ["a sound", "a voice"],
+		"note": "N row; CEDICT ships 'sound; voice' as one clause and the build kept only the first."
+	},
+	"L2-0483": {
+		"meanings": ["fully", "very much so"],
+		"note": "Adv row. 很 owns 'very' and 非常 'extremely' at L1, so 十分 takes its own ten-parts-out-of-ten force rather than a third synonym."
+	},
+	"L2-0484": {
+		"meanings": ["actual", "in practice"],
+		"note": "N/Adj row; CEDICT's six clauses reduce to the two readings a L2 learner meets."
+	},
+	"L2-0486": {
+		"meanings": ["to bring about", "to make come true"],
+		"note": "V row; kept off 'to achieve' so it does not answer the same prompt as 取得."
+	},
+	"L2-0490": {
+		"meanings": ["to use", "to make use of"],
+		"note": "V row; the plain verb, with CEDICT's 'to apply' and 'to employ' dropped as near-duplicates."
+	},
+	"L2-0491": {
+		"meanings": ["municipality", "city as an administrative unit"],
+		"note": "Bare 'city' is 城市's answer; 市 at L2 is the unit in 北京市. The 'market' sense belongs to 市场."
+	},
+	"L2-0493": {
+		"meanings": ["a matter", "something to deal with"],
+		"note": "N row; 'affair' was CEDICT clause 1 and reads wrongly in English."
+	},
+	"L2-0496": {
+		"meanings": ["income", "earnings"],
+		"note": "V/N row; the noun is what 收入 means on its own, and CEDICT's CL: note cannot ship."
+	},
+	"L2-0500": {
+		"meanings": ["ripe", "cooked through", "familiar"],
+		"note": "Adj row; all three are met at L2 (熟了, 熟人). CEDICT's 'also pr.' note is a pronunciation gloss, not a meaning."
+	},
+	"L2-0501": {
+		"meanings": ["to count", "to count as"],
+		"note": "V row read shǔ; kept short so 算 keeps 'to calculate'."
+	},
+	"L2-0502": {
+		"meanings": ["a numeral", "a digit"],
+		"note": "N row; 'number' alone would answer the same prompt as 号码 and 数."
+	},
+	"L2-0503": {
+		"meanings": ["level of ability", "standard"],
+		"note": "N row; 'horizontal' is CEDICT clause 1 and is the literal reading, not the one 水平 carries at L2 (汉语水平)."
+	},
+	"L2-0504": {
+		"meanings": ["going smoothly", "without a hitch"],
+		"note": "Adj row; describes an event going well, not a smooth surface."
+	},
+	"L2-0505": {
+		"meanings": ["to explain", "an explanation"],
+		"note": "V/N row; both readings are met at L2 (说明原因, 使用说明)."
+	},
+	"L2-0506": {
+		"meanings": ["a driver", "a chauffeur"],
+		"note": "N row; 'chauffeur' alone is register-wrong for a bus or taxi 司机."
+	},
+	"L2-0508": {
+		"meanings": ["to give as a present"],
+		"note": "No official POS; the giving-a-gift sense is the one 送给 carries, not the postal 'to send'."
+	},
+	"L2-0509": {
+		"meanings": ["to calculate", "to count as"],
+		"note": "V row; kept distinct from 数 'to count' — 算 is working out a figure."
+	},
+	"L2-0510": {
+		"meanings": ["although", "even though"],
+		"note": "Conj row; CEDICT's correlative note is grammar apparatus a beginner card cannot show."
+	},
+	"L2-0511": {
+		"meanings": ["as one likes", "casual"],
+		"note": "Adj row; CEDICT's 'negligent' and 'wanton' are register-wrong for the everyday 随便."
+	},
+	"L2-0512": {
+		"meanings": ["at any time", "whenever needed"],
+		"note": "Adv row; both clauses of the CEDICT entry reduce to these two."
+	},
+	"L2-0513": {
+		"meanings": ["therefore", "so"],
+		"note": "Conj row; CEDICT's 'the reason why' is the 所以然 reading, not 所以 at L2."
+	},
+	"L2-0515": {
+		"meanings": ["it"],
+		"note": "Pron row; the third-person pronoun used for things and animals."
+	},
+	"L2-0516": {
+		"meanings": ["they for things or animals"],
+		"note": "Pron row; bare 'they' would answer the same prompt as 他们, and the whole point of 它们 is that it is not people."
+	},
+	"L2-0517": {
+		"meanings": ["a married woman", "Mrs"],
+		"note": "N row; CEDICT's 'Madam' is register-wrong and the CL: note cannot ship."
+	},
+	"L2-0519": {
+		"meanings": ["an attitude", "a manner"],
+		"note": "N row; CEDICT leads with 'manner, bearing', which reads as deportment rather than attitude."
+	},
+	"L2-0520": {
+		"meanings": ["to discuss", "to debate"],
+		"note": "V row; 讨论 is the group-discussion verb, kept apart from 商量 'to talk something over'."
+	},
+	"L2-0522": {
+		"meanings": ["special", "especially"],
+		"note": "Adj/Adv row; both readings are met at L2 and the Adj one leads."
+	},
+	"L2-0523": {
+		"meanings": ["a characteristic", "a distinctive feature"],
+		"note": "N row; CEDICT ships three clauses in one string."
+	},
+	"L2-0524": {
+		"meanings": ["to hurt", "to ache"],
+		"note": "V row, so the lead must be verbal; CEDICT's 'to love dearly' is the doting sense and was ranked first by mistake."
+	},
+	"L2-0525": {
+		"meanings": ["to carry by hand", "to raise or mention"],
+		"note": "V row; CEDICT's brush-stroke and liquid-scoop senses are not L2. The hanging-from-the-hand sense is stated without notation."
+	},
+	"L2-0527": {
+		"meanings": ["to mention", "to bring up"],
+		"note": "No official POS; CEDICT's parenthetical '(a subject)' cannot ship as notation."
+	},
+	"L2-0529": {
+		"meanings": ["a question on a test", "a topic"],
+		"note": "N row; bare 'problem' would answer the same prompt as 问题. 题 at L2 is the exercise or exam item."
+	},
+	"L2-0532": {
+		"meanings": ["a gym", "an indoor stadium"],
+		"note": "N row; the CL: note cannot ship and 'stadium' alone is the outdoor 体育场."
+	},
+	"L2-0533": {
+		"meanings": ["in the sky", "up in the heavens"],
+		"note": "N row; kept distinct from 天空 'sky' at L3 by naming the location rather than the thing."
+	}
+}
