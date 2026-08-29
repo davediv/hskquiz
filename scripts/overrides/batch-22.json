@@ -1,0 +1,490 @@
+{
+	"L5-0709": {
+		"meanings": ["rat or mouse"],
+		"note": "Bound form; CEDICT's '(bound form) rat; mouse' becomes one comma-free card."
+	},
+	"L5-0712": {
+		"meanings": ["to throw something down", "to fall and break"],
+		"note": "V row. 倒 L2 owns 'to fall over' and 摔倒 owns the falling sense, so 摔 leads with the transitive throw."
+	},
+	"L5-0713": {
+		"meanings": ["to fall to the ground", "to slip and fall"],
+		"note": "倒 L2 already ships 'to fall over'; this card needs its own wording. 'To throw sb to the ground' is the rarer causative."
+	},
+	"L5-0715": {
+		"meanings": ["both hands"],
+		"note": "Transparent compound; one gloss is the whole card."
+	},
+	"L5-0717": {
+		"meanings": ["moisture content"],
+		"note": "N row. CEDICT's second sense is marked (fig.) 'overstatement; padding' and never belongs on a beginner card."
+	},
+	"L5-0720": {
+		"meanings": ["sleep"],
+		"note": "N row. 'To sleep' belongs to 睡; the computing sleep-mode sense is dropped."
+	},
+	"L5-0721": {
+		"meanings": ["a way of saying something", "a claim"],
+		"note": "N row. CEDICT's only sense, 'to expound Buddhist teachings', is a different reading and a verb; this is the everyday noun."
+	},
+	"L5-0722": {
+		"meanings": ["master's degree", "a master's graduate"],
+		"note": "N row. 'Learned person' is the literary sense and is dropped."
+	},
+	"L5-0723": {
+		"meanings": ["private", "personal"],
+		"note": "N row used attributively (私人医生, 私人问题). CEDICT's 'member of one's clique' senses are dropped."
+	},
+	"L5-0724": {
+		"meanings": ["thinking", "thought process"],
+		"note": "N row. 思想 L3 already ships 'thought', so this card names the activity."
+	},
+	"L5-0726": {
+		"meanings": ["to search"],
+		"note": "V row. The second CEDICT line is a variant-character note and never ships."
+	},
+	"L5-0728": {
+		"meanings": ["dormitory", "dorm room"],
+		"note": "N row. 'Hostel' and the CL note are dropped."
+	},
+	"L5-0729": {
+		"meanings": ["the ups and downs of life", "sour sweet bitter and spicy"],
+		"note": "Four-character idiom: the whole-life reading is what it means; the literal flavours follow, comma-free."
+	},
+	"L5-0730": {
+		"meanings": ["soon afterward", "right after that"],
+		"note": "Adv row. 然后 L2 owns 'and then' and 以后 L2 owns 'after'."
+	},
+	"L5-0731": {
+		"meanings": ["as one pleases", "without any restriction"],
+		"note": "No official POS. 'Voluntary' and 'conscious' are unrelated senses and are dropped."
+	},
+	"L5-0732": {
+		"meanings": ["along with", "as something changes"],
+		"note": "Prep row. Second gloss describes the 随着…, … pattern in plain words rather than naming it."
+	},
+	"L5-0734": {
+		"meanings": ["broken into pieces", "shattered"],
+		"note": "Adj row. 破 L3 already ships 'broken'; 'garrulous' is a literary sense."
+	},
+	"L5-0735": {
+		"meanings": ["to damage", "to impair"],
+		"note": "V row. CEDICT leads with the noun 'harm', which a V card may not."
+	},
+	"L5-0737": {
+		"meanings": ["the place where something is", "whereabouts"],
+		"note": "N row. 地点 L1, 场所 L3 and 位置 L4 already own 'location' and 'place'."
+	},
+	"L5-0738": {
+		"meanings": ["a lock", "to lock"],
+		"note": "N/V row; the noun leads because the object is what a learner meets first."
+	},
+	"L5-0740": {
+		"meanings": ["to lift up", "to carry together"],
+		"note": "V row. 举 L2 owns 'to lift' and 升高 L5 owns 'to raise'; the two-person carrying sense is 抬's own."
+	},
+	"L5-0741": {
+		"meanings": ["to raise one's head", "to look up"],
+		"note": "The (fig.) growth sense and the commerce account-name sense are both dropped."
+	},
+	"L5-0743": {
+		"meanings": ["to play a piano or guitar", "to flick"],
+		"note": "V row. Of CEDICT's ten senses only the instrument one is HSK 5; 'to pluck' alone is too vague to identify the word."
+	},
+	"L5-0744": {
+		"meanings": ["to escape", "to get away"],
+		"note": "V row. 逃跑 and 逃走 take the running-away wordings, so the bare escape sense stays here."
+	},
+	"L5-0745": {
+		"meanings": ["to flee", "to run off"],
+		"note": "'To flee from sth' reads as a fragment. 逃走 L5 already ships 'to run away' and 逃 keeps 'to escape'."
+	},
+	"L5-0747": {
+		"meanings": ["peach"],
+		"note": "N row, one sense."
+	},
+	"L5-0748": {
+		"meanings": ["peach blossom"],
+		"note": "N row. CEDICT's (fig.) 'love affair' never ships."
+	},
+	"L5-0750": {
+		"meanings": ["to dislike", "annoying"],
+		"note": "No official POS; the word is both verb and adjective, so one of each."
+	},
+	"L5-0751": {
+		"meanings": ["specific", "designated"],
+		"note": "Adj row. 特殊 L4 owns 'special' and 具体 L3 owns 'concrete'."
+	},
+	"L5-0753": {
+		"meanings": ["unique to one group or place", "distinctive"],
+		"note": "Adj row. 独特 L4 owns bare 'unique'; 特点 L2 and 特色 L3 own 'characteristic'."
+	},
+	"L5-0755": {
+		"meanings": ["to mention", "to pick up"],
+		"note": "V row. The legal \"to initiate proceedings\" sense is dropped and 抬 keeps \"to lift up\"."
+	},
+	"L5-0760": {
+		"meanings": ["genius", "a natural gift"],
+		"note": "N row. 才能 L3 already ships 'talent', which is also the weaker sense here."
+	},
+	"L5-0763": {
+		"meanings": ["to regulate", "to fine-tune"],
+		"note": "V row. 调整 L3 owns 'to adjust'; the accountancy sense is dropped."
+	},
+	"L5-0765": {
+		"meanings": ["a large public room", "a provincial department"],
+		"note": "N row. 客厅, 大厅 and 餐厅 all ship at L5 and own 'living room', 'a large hall' and 'dining hall'."
+	},
+	"L5-0767": {
+		"meanings": ["to be usable everywhere", "to be interchangeable"],
+		"note": "V row; the parenthetical examples are dropped and the sense stated plainly."
+	},
+	"L5-0768": {
+		"meanings": ["to steal", "secretly"],
+		"note": "V/Adv row: one gloss for each POS, the adverbial as in 偷看."
+	},
+	"L5-0769": {
+		"meanings": ["stealthily", "without letting anyone see"],
+		"note": "Adv row. Second gloss says what the word does rather than piling on synonyms."
+	},
+	"L5-0770": {
+		"meanings": ["to break through", "a breakthrough"],
+		"note": "V/N row: verb first, then the noun the N tag needs."
+	},
+	"L5-0772": {
+		"meanings": ["to spit out"],
+		"note": "V row, tǔ reading. The silkworm and grievance senses are not HSK 5; 吐 tù keeps vomiting."
+	},
+	"L5-0773": {
+		"meanings": ["to vomit", "to throw up"],
+		"note": "V row, tù reading — deliberately distinct from the tǔ card above."
+	},
+	"L5-0774": {
+		"meanings": ["rabbit"],
+		"note": "N row, one sense."
+	},
+	"L5-0775": {
+		"meanings": ["head of a delegation", "regiment commander"],
+		"note": "N row. The group-buy organizer sense is recent slang usage and is dropped."
+	},
+	"L5-0777": {
+		"meanings": ["to break away from", "to separate from"],
+		"note": "V row. The medical and botanical senses are dropped."
+	},
+	"L5-0781": {
+		"meanings": ["to feel awkward", "to make things hard for someone"],
+		"note": "Adj/V row: the state one is in, then the thing one does to others."
+	},
+	"L5-0782": {
+		"meanings": ["to last for a set time", "to be due by a set date"],
+		"note": "V row, so both glosses are verbs; bare 'lasting' is a participle and cannot lead a V card."
+	},
+	"L5-0783": {
+		"meanings": ["to end at a stated point", "up to that point"],
+		"note": "V row. 直到 L3 already ships 'until'; this card is the 到…为止 frame, said plainly."
+	},
+	"L5-0785": {
+		"meanings": ["to break the law", "illegal"],
+		"note": "No official POS; the word works as both, verb first."
+	},
+	"L5-0787": {
+		"meanings": ["to break the rules", "against the rules"],
+		"note": "No official POS; kept parallel with 违法 but clearly a different offence."
+	},
+	"L5-0789": {
+		"meanings": ["the only one", "sole"],
+		"note": "Adj row. 只 L2 owns bare 'only', so this card names the one-and-only reading."
+	},
+	"L5-0790": {
+		"meanings": ["to entrust", "to hand a task to someone"],
+		"note": "V row. 'To trust' is 相信's job; 委托 is handing over a task."
+	},
+	"L5-0791": {
+		"meanings": ["satellite"],
+		"note": "N row. The field markers and CL note are dropped."
+	},
+	"L5-0792": {
+		"meanings": ["stomach"],
+		"note": "N row; the CL note is dropped."
+	},
+	"L5-0793": {
+		"meanings": ["to express sympathy to", "to offer comfort"],
+		"note": "V row. CEDICT's single line ends in 'etc' and cannot ship as written."
+	},
+	"L5-0794": {
+		"meanings": ["mild", "gentle in manner"],
+		"note": "Adj row. 温暖 L3 owns 'warm'."
+	},
+	"L5-0797": {
+		"meanings": ["to grip firmly", "to clench"],
+		"note": "V row. 拿 L1 owns 'to hold'; the bound-form and classifier senses are dropped."
+	},
+	"L5-0798": {
+		"meanings": ["to pollute", "to contaminate"],
+		"note": "V row; CEDICT's '(lit. and fig.)' marker is stripped, not shipped."
+	},
+	"L5-0800": {
+		"meanings": ["house or room"],
+		"note": "N bound form. 房子 L1 owns 'house', 屋子 L3 owns 'a room' and 室 L3 owns 'room', so this card states the range in one comma-free gloss."
+	},
+	"L5-0801": {
+		"meanings": ["to have no choice", "but unfortunately"],
+		"note": "V/Conj row: the verb first, then the conjunction use."
+	},
+	"L5-0802": {
+		"meanings": ["to be beyond doubt", "undoubtedly"],
+		"note": "V row, so the verb form leads; 'undoubtedly' alone is an adverb and would fight the POS."
+	},
+	"L5-0803": {
+		"meanings": ["dancing", "to brandish"],
+		"note": "N/V row. 跳舞 L3 owns 'to dance', so this card leads with the noun."
+	},
+	"L5-0806": {
+		"meanings": ["matter", "substance"],
+		"note": "N row. 材料 L4 owns 'material'; the CL note and 'materialistic' are dropped."
+	},
+	"L5-0811": {
+		"meanings": ["a play or opera", "a show"],
+		"note": "N row. CEDICT's lead sense 'trick' belongs to 把戏, not to 戏 at HSK 5."
+	},
+	"L5-0812": {
+		"meanings": ["drama", "theater"],
+		"note": "N row. 戏 keeps 'a play or opera' so the two cards stay distinct."
+	},
+	"L5-0813": {
+		"meanings": ["to scare someone", "to startle"],
+		"note": "V row. 害怕 L3 owns 'to be afraid', which is the other side of this verb."
+	},
+	"L5-0814": {
+		"meanings": ["one after another", "order of priority"],
+		"note": "N/Adv row; the adverbial use is far commoner so it leads, with the noun sense second."
+	},
+	"L5-0815": {
+		"meanings": ["earlier on", "some time before"],
+		"note": "N row. 以前 L2 owns 'before' and 从前 L3 owns 'previously'."
+	},
+	"L5-0816": {
+		"meanings": ["brightly colored", "vivid"],
+		"note": "Adj row. The only CEDICT line is a variant-character pointer and is unusable."
+	},
+	"L5-0817": {
+		"meanings": ["idle", "not busy"],
+		"note": "Adj row. 空 L3/L4 own 'empty' and 'vacant'."
+	},
+	"L5-0818": {
+		"meanings": ["to make visible", "to look or seem"],
+		"note": "V row. 显示 L3 owns 'to display' and 显得 L3 owns 'to seem'; the prefix sense is dropped."
+	},
+	"L5-0819": {
+		"meanings": ["currently existing", "available right now"],
+		"note": "No official POS; both glosses stay attributive as the word is."
+	},
+	"L5-0821": {
+		"meanings": ["a clue", "a lead to follow"],
+		"note": "N row. 证据 L3 owns 'evidence'; 'trail' alone reads as a path in the woods."
+	},
+	"L5-0822": {
+		"meanings": ["to offer up", "to present as a gift"],
+		"note": "V row. The 'worthy person (old)' sense is archaic and dropped."
+	},
+	"L5-0823": {
+		"meanings": ["the countryside", "one's home village"],
+		"note": "N row. 村 L3 owns 'village' and 农村 L3 owns 'rural area'; the PRC township sense is administrative."
+	},
+	"L5-0824": {
+		"meanings": ["a country village"],
+		"note": "N row, kept clear of 村 L3 'village', 农村 L3 'rural area' and 乡 above."
+	},
+	"L5-0825": {
+		"meanings": ["to be equal to", "to match in amount"],
+		"note": "V row, so a verb must lead. 等于 L2 owns 'to equal' and 平等 L2 owns 'equal'."
+	},
+	"L5-0826": {
+		"meanings": ["to match accordingly", "corresponding"],
+		"note": "V row. 对应 L5 already ships 'to correspond', so this card leads with the accordingly sense it actually carries."
+	},
+	"L5-0828": {
+		"meanings": ["detailed", "thorough"],
+		"note": "Adj row, so the adverbial 'in detail' is dropped."
+	},
+	"L5-0829": {
+		"meanings": ["to enjoy", "enjoyment"],
+		"note": "V/N row: verb then noun. 'To live it up' is register-wrong for the word."
+	},
+	"L5-0831": {
+		"meanings": ["forward", "onward"],
+		"note": "No official POS. 前进 L3 owns 'to go forward'."
+	},
+	"L5-0832": {
+		"meanings": ["to move upward", "to strive to improve"],
+		"note": "V row, so both glosses are verbs; the bare adverb 'upward' cannot lead."
+	},
+	"L5-0833": {
+		"meanings": ["Chinese comic dialogue act", "crosstalk comedy"],
+		"note": "N row. 'Sketch' would answer to several words; this names the actual art form."
+	},
+	"L5-0834": {
+		"meanings": ["to symbolize", "a symbol"],
+		"note": "V/N row: verb first, then the noun the N tag needs."
+	},
+	"L5-0837": {
+		"meanings": ["to fight fires", "fire prevention"],
+		"note": "V row, so a bare noun like 'firefighting' cannot lead."
+	},
+	"L5-0839": {
+		"meanings": ["negative", "passive"],
+		"note": "Adj row. 积极 L3 ships 'active' as its opposite number; 'inactive' is dropped."
+	},
+	"L5-0840": {
+		"meanings": ["thief"],
+		"note": "N row. The only CEDICT line is an erhua pointer and is unusable."
+	},
+	"L5-0841": {
+		"meanings": ["to take a break", "to stop for a rest"],
+		"note": "V row. 休息 L1 owns 'to rest'; CEDICT's '(dialect) to sleep' never ships."
+	},
+	"L5-0842": {
+		"meanings": ["agreement", "to reach an agreement"],
+		"note": "V/N row. 合同 L4 owns 'contract'; 'protocol' and the CL note are dropped."
+	},
+	"L5-0844": {
+		"meanings": ["slanting", "at an angle"],
+		"note": "Adj row; one shape word plus how it is used."
+	},
+	"L5-0845": {
+		"meanings": ["state of mind", "mentality"],
+		"note": "N row. 态度 L2 owns 'manner', 心情 L2 owns 'mood'."
+	},
+	"L5-0846": {
+		"meanings": ["to feel bad for someone", "to begrudge spending"],
+		"note": "V row; both of the senses a learner actually meets, no comma inside either."
+	},
+	"L5-0847": {
+		"meanings": ["hard and tiring", "to work hard"],
+		"note": "Adj/V row: one for each POS. 累 L1 owns 'tired'."
+	},
+	"L5-0849": {
+		"meanings": ["belief", "conviction"],
+		"note": "N row. 信心 L2 owns 'confidence' and 'faith'."
+	},
+	"L5-0852": {
+		"meanings": ["form and structure"],
+		"note": "N row. 形状 L3 owns 'shape' and 样子 L2 owns 'appearance'; bare 'form' could answer to either."
+	},
+	"L5-0854": {
+		"meanings": ["grand and imposing", "majestic"],
+		"note": "Adj row; used of mountains and buildings, so the pair stays concrete."
+	},
+	"L5-0855": {
+		"meanings": ["bear"],
+		"note": "N row. CEDICT's two (coll.) senses — to scold, weak — never ship."
+	},
+	"L5-0856": {
+		"meanings": ["to relax in one's free time", "leisure"],
+		"note": "V row, so a verb must lead. 休息 L1 owns 'to rest'."
+	},
+	"L5-0857": {
+		"meanings": ["to repair damage", "to restore"],
+		"note": "V row. 修理 L4 owns 'to repair'; the computing file-repair sense is dropped."
+	},
+	"L5-0859": {
+		"meanings": ["personal cultivation", "good breeding"],
+		"note": "N row. 'Accomplishment' and 'training' both answer to other words."
+	},
+	"L5-0862": {
+		"meanings": ["to take as an elective", "to choose a course"],
+		"note": "V row, so the noun 'an elective' cannot lead."
+	},
+	"L5-0863": {
+		"meanings": ["academic subject", "branch of learning"],
+		"note": "N row. 专业 L3 owns 'specialty' and 课程 L3 owns 'course'."
+	},
+	"L5-0866": {
+		"meanings": ["to seek", "to try to obtain"],
+		"note": "V row. 找 L1 owns 'to look for' and 搜 owns 'to search' at this level."
+	},
+	"L5-0867": {
+		"meanings": ["to inquire", "to ask about formally"],
+		"note": "V row. 问 L1 owns 'to ask' and 打听 L3 owns 'to ask about'."
+	},
+	"L5-0869": {
+		"meanings": ["duck"],
+		"note": "N row. CEDICT's second sense is '(slang) male prostitute' and must never reach a learner."
+	},
+	"L5-0871": {
+		"meanings": ["to extend outward", "to stretch further"],
+		"note": "V row. 伸 L5 owns 'to stretch', so this card says what 延伸 adds."
+	},
+	"L5-0873": {
+		"meanings": ["solemn", "serious in manner"],
+		"note": "Adj/V row. 认真 L1 owns 'conscientious' and 严格 L4 owns 'strict'."
+	},
+	"L5-0874": {
+		"meanings": ["spoken words", "what one says"],
+		"note": "N row. 话 L1 owns 'words' and 语言 L2 owns 'language'."
+	},
+	"L5-0875": {
+		"meanings": ["research institute", "graduate school"],
+		"note": "N row; the CL note is dropped."
+	},
+	"L5-0878": {
+		"meanings": ["to shake one's head"],
+		"note": "No official POS; a single transparent action."
+	},
+	"L5-0879": {
+		"meanings": ["to bite"],
+		"note": "V row. 'To nip' adds nothing a learner needs."
+	},
+	"L5-0881": {
+		"meanings": ["professional work", "business operations"],
+		"note": "N row. 生意 L3 owns 'business dealings' and 商业 L3 owns 'commerce'."
+	},
+	"L5-0884": {
+		"meanings": ["according to the law"],
+		"note": "Adv row. 按照 L3 and 根据 L4 both ship 'according to', so this card has to name the law."
+	},
+	"L5-0885": {
+		"meanings": ["as before", "still the same"],
+		"note": "V/Adv row; both readings of the same word, no grammar label needed."
+	},
+	"L5-0887": {
+		"meanings": ["in accordance with", "going by"],
+		"note": "V/Prep row. 按照 L3 and 根据 L4 already own 'according to'."
+	},
+	"L5-0888": {
+		"meanings": ["a whole lifetime"],
+		"note": "N row. 一生 L2 ships 'all one's life', so this card is worded differently."
+	},
+	"L5-0889": {
+		"meanings": ["the area around a place"],
+		"note": "N row. 地区 L3 owns 'region' and 区域 L5 owns 'area'; 一带 is specifically the surroundings of a named spot."
+	},
+	"L5-0890": {
+		"meanings": ["once something happens", "if ever"],
+		"note": "N/Adv row. 如果 L2, 要是 L3 and 假如 L4 all own 'if', so this card carries the 'the moment that' feel."
+	},
+	"L5-0891": {
+		"meanings": ["in one sentence", "to put it briefly"],
+		"note": "总之 L4 already ships 'in a word' and 'in short'."
+	},
+	"L5-0892": {
+		"meanings": ["all the way", "the whole journey"],
+		"note": "N/Adv row; the adverbial use leads because that is how a learner meets it."
+	},
+	"L5-0893": {
+		"meanings": ["for a short moment", "briefly"],
+		"note": "Adv row. The only CEDICT line is an erhua pointer; 一下子 keeps the sudden-change sense."
+	},
+	"L5-0894": {
+		"meanings": ["all at once", "in an instant"],
+		"note": "Adv row; the suddenness reading, kept clear of 一下儿."
+	},
+	"L5-0895": {
+		"meanings": ["all along", "consistently up to now"],
+		"note": "Adv row. 从来 L3 owns 'ever' and 'never'; this word is about a habit holding up to now."
+	},
+	"L5-0896": {
+		"meanings": ["second in a list or series", "party B in a contract"],
+		"note": "N row. The Heavenly Stems, ethyl and Kangxi-radical senses are reference material, not a flashcard."
+	}
+}
