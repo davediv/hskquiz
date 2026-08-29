@@ -1,0 +1,16 @@
+{
+	"piece": "quiz-card",
+	"loop": 1,
+	"rule": "\"quiz-card\" has 9 characters (odd) -> reference is A.png, app screenshot is B.png",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"what": "Pleco headword / dictionary detail screen for 几乎 — tone-coloured hanzi, HSK 3 badge, PY + JP pinyin lines, DICT/CHARS/WORDS/SENTS tabs, ADVERB part of speech, gloss, then example sentences stacked hanzi + pinyin + English. 1242x2208 (iPhone 3x, ~414x736 CSS)."
+	},
+	"B": {
+		"which": "app",
+		"source": "progress/shots/loop-1/quiz-card-correct-mobile.png",
+		"what": "hskquiz /quiz/1, mobile 375x812 @2x, state = correct answer revealed (the app's headword/detail moment: hanzi, pinyin, all glosses, part of speech, plus the four answer buttons and the Next word CTA)."
+	},
+	"note": "The judge is instructed not to open this file."
+}
