@@ -51,7 +51,7 @@ for (const name of want) {
 		try {
 			await page.locator(sel).first().click({ timeout: 6000 });
 			await page.waitForTimeout(500);
-		} catch (e) {
+		} catch {
 			out.consoleErrors.push(`[${name}] click failed: ${sel}`);
 		}
 	}

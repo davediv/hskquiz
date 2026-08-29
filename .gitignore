@@ -24,3 +24,7 @@ vite.config.ts.timestamp-*
 
 .dev.vars*
 !.dev.vars.example
+
+# Claude Code
+.claude/
+CLAUDE.md

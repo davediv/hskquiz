@@ -5,7 +5,7 @@ Everything a builder or critic is measured against. Load this folder before judg
 ## `hsk/` — official HSK 3.0 (2021 standard, current for 2026) vocabulary, levels 1–5
 
 `hsk30-official-L{1..5}.json` — **4,316 words**, the authoritative ground truth. Level membership,
-pinyin, POS and traditional forms here are *not* negotiable: an entry in the app that contradicts
+pinyin, POS and traditional forms here are _not_ negotiable: an entry in the app that contradicts
 these files is a failure, not a style note.
 
 | Level | Words | Cumulative |
