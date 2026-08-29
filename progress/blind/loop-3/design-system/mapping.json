@@ -1,0 +1,18 @@
+{
+  "piece": "design-system",
+  "loop": 3,
+  "rule": "\"design-system\" is 13 characters (ODD) -> reference = A.png, ours = B.png",
+  "A": {
+    "which": "reference",
+    "source": "reference/screenshots/pleco/pleco-iphone-02.png",
+    "what": "Pleco iOS headword/detail screen for 几乎 jīhū (HSK 3): headword, level badge, pinyin + Jyutping rows, DICT/CHARS/WORDS/SENTS tabs, POS, gloss, four example sentences each set hanzi + bold pinyin + English."
+  },
+  "B": {
+    "which": "ours",
+    "source": "progress/shots/loop-3/design-system-quiz-mobile.png",
+    "what": "hskquiz /quiz/1 teaching card at 375x812 (2x), light theme: NEW WORD eyebrow, 这些 at ~130px, tone-coloured pinyin zhè xiē, gloss, POS, pinned Got it button."
+  },
+  "why_this_pair": "The design-system piece is judged on type scale, spacing rhythm and how Chinese is set. Pleco's entry screen is the densest test of a Chinese type scale in the reference folder — seven distinct type roles on one screen — and our quiz prompt is the screen a learner spends the most time on. Both are single-headword screens built around one large hanzi with tone-marked pinyin beneath it.",
+  "caveat_for_the_record": "A is a dictionary entry and B is a flashcard, so B carrying less content is partly by design. The question put to the judge is about the visual system, not feature parity.",
+  "judge_must_not_open_this_file": true
+}
