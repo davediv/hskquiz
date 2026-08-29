@@ -35,6 +35,20 @@
    That split is why the primary button is ink: a red CTA sitting next to a red "wrong" card
    would make the accent meaningless.
 
+   THE FOURTH FAMILY — TONE. `--color-tone-0` … `--color-tone-4` are not part of the three
+   roles above and never overlap with them, because of one hard rule:
+       Tone colour lands ONLY on Chinese text — a hanzi character or a pinyin syllable.
+       Never a border, never a fill, never an icon, never a word of English.
+   So a red thing is a state, unless it is a 汉字 or a syllable, in which case it is tone 1.
+   Nothing else in the app can be mistaken for a tone, and a tone can never be mistaken for a
+   state. Consume it through `<Hanzi>` / `<Pinyin>`, which paint it per character and per
+   syllable from `Word.syllables`; do not hand-write `var(--color-tone-*)` in a screen.
+   Tone 1 red and tone 2 green are the pair a deuteranope cannot separate, which is survivable
+   here and only here: the tone is already written in the diacritic (ā á ǎ à), so on pinyin the
+   colour is a second copy of information the reader can also see, never the only copy. That is
+   the same reason a wrong answer must carry a ✕ — and it is why tone colour must stay off
+   anything that is not Chinese text, where there would be no diacritic to fall back on.
+
    TYPE — three stacks, three scales, and they are not interchangeable:
        --font-hanzi   + --text-hanzi-*    for 汉字. Never set hanzi on the Latin scale;
                                           16px hanzi is unreadable. Smallest is 20px.
@@ -55,9 +69,17 @@
    No webfonts, deliberately: a CJK webfont is 5–15 MB, and a Latin webfont next to system
    CJK produces exactly the face mismatch this system exists to avoid.
 
-   SPACE — `--spacing` is 0.25rem, so p-4 = 16px. `--spacing-gutter` (20px) is the page edge
-   inset, `--spacing-tap` (44px) is the minimum touch target. `.app-shell` applies the gutter
-   plus the iOS safe-area insets and caps the column at `--container-app`.
+   SPACE — there is a vertical scale and screens are expected to use it instead of improvising
+   a gap per block. `--spacing` is 0.25rem, so the numeric utilities still work (p-4 = 16px),
+   but the named steps are the rhythm:
+       2xs 4 · xs 8 · sm 12 · md 16 · lg 24 · xl 32 · 2xl 48 · 3xl 64
+   as `p-lg` / `gap-xl` / `var(--spacing-lg)`, plus three role aliases that say what a gap is
+   for rather than how big it is: `--spacing-gutter` (20px page-edge inset), `--spacing-block`
+   (24px, between siblings inside one block) and `--spacing-section` (48px, between the major
+   blocks of a screen). `--spacing-tap` (44px) is the minimum touch target. `.stack` applies a
+   step to every child gap at once — `.stack .stack-sm` etc. — so a column has one rhythm and
+   not six hand-tuned margins. `.app-shell` applies the gutter plus the iOS safe-area insets and
+   caps the column at `--container-app`.
 
    ACCESSIBILITY CONTRACT — do not regress these:
        · every text token is >= 4.5:1 on every surface it is allowed on (verified, both themes)
@@ -69,8 +91,9 @@
        · `prefers-reduced-motion: reduce` kills every animation and transition
        · `prefers-contrast: more` promotes hairlines to the strong border
 
-   OPT-IN CLASSES (bottom of this file): .app-shell .card .btn (+ -primary -accent -quiet
-   -block) .chip .meter — plus utilities .hanzi .hanzi-display .pinyin .eyebrow .tabular .tap
+   OPT-IN CLASSES (bottom of this file): .app-shell .stack (+ -2xs -xs -sm -lg -xl -2xl) .card
+   .btn (+ -primary -accent -quiet -block) .chip .meter — plus utilities .hanzi .hanzi-display
+   .pinyin .eyebrow .tabular .tap
    ========================================================================================== */
 
 /* ------------------------------------------------------------------------------------------
@@ -107,12 +130,18 @@
 	--hq-primary-ink: #faf8f5;
 
 	/* Pleco's tone colouring, kept because learners already read it: 1 red, 2 green, 3 blue,
-	   4 purple, 5 grey. Opt-in — use it on pinyin, never on the hanzi itself. */
+	   4 purple, neutral grey. Numbered the way the data is (`Syllable.tone`), so 0 is neutral.
+
+	   It goes on BOTH the hanzi and the pinyin. Pleco paints the characters and leaves the
+	   pinyin black (手机 = blue 手 + red 机, "shǒujī" plain); Du Chinese paints both and spaces
+	   the pinyin per syllable (一边 / "yì biān"). We follow Du Chinese: one character is exactly
+	   one syllable, `Word.syllables` says which tone each of them is, so there is no guess to
+	   protect against on either line. */
+	--hq-tone-0: #726b5f;
 	--hq-tone-1: #c8102e;
 	--hq-tone-2: #1f7a3d;
 	--hq-tone-3: #1f5fbf;
 	--hq-tone-4: #7a3fa8;
-	--hq-tone-5: #726b5f;
 
 	--hq-shadow-near: rgb(26 24 21 / 0.05);
 	--hq-shadow-far: rgb(26 24 21 / 0.11);
@@ -145,11 +174,11 @@
 		--hq-primary-strong: #ffffff;
 		--hq-primary-ink: #100f0e;
 
+		--hq-tone-0: #9a9184;
 		--hq-tone-1: #f2685e;
 		--hq-tone-2: #5cc97e;
 		--hq-tone-3: #7faeff;
 		--hq-tone-4: #c08feb;
-		--hq-tone-5: #9a9184;
 
 		--hq-shadow-near: rgb(0 0 0 / 0.5);
 		--hq-shadow-far: rgb(0 0 0 / 0.55);
@@ -176,10 +205,15 @@
 		'Microsoft YaHei', 'Heiti SC', 'WenQuanYi Micro Hei', sans-serif;
 
 	/* CJK-first on purpose: these faces carry the full tone-marked vowel set, so ǎ ě ǐ ǒ ǔ ǚ
-	   come from the same face as the unmarked letters instead of a fallback. */
+	   come from the same face as the unmarked letters instead of a fallback. Every name here
+	   is one that has the whole U+01D5–U+01DC block — `typography.spec.ts` holds that line, and
+	   it is why `Segoe UI` and `system-ui` are absent even though they would be the obvious UI
+	   choice on Windows: `system-ui` resolves to Segoe UI there, whose ǚ depends on the version
+	   installed. Microsoft YaHei covers Windows instead, and a bare `sans-serif` is a safer last
+	   resort than a named face we cannot vouch for. */
 	--font-pinyin:
-		'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', 'Lucida Grande',
-		'DejaVu Sans', 'Segoe UI', system-ui, sans-serif;
+		'PingFang SC', 'Hiragino Sans GB', 'Source Han Sans SC', 'Noto Sans SC', 'Microsoft YaHei',
+		'DejaVu Sans', sans-serif;
 
 	--font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -285,15 +319,34 @@
 
 	--color-focus: var(--hq-accent);
 
+	/* Indexed by `Syllable.tone`, so `var(--color-tone-${tone})` is a direct lookup with no
+	   off-by-one mapping between the data and the palette. 0 is the neutral tone. */
+	--color-tone-0: var(--hq-tone-0);
 	--color-tone-1: var(--hq-tone-1);
 	--color-tone-2: var(--hq-tone-2);
 	--color-tone-3: var(--hq-tone-3);
 	--color-tone-4: var(--hq-tone-4);
-	--color-tone-5: var(--hq-tone-5);
+	/* Pleco calls the neutral tone "5". Same colour, kept so either numbering reads. */
+	--color-tone-5: var(--hq-tone-0);
 
 	/* --------------------------------------------------------- space, shape, elevation -- */
 	--spacing: 0.25rem;
+
+	/* The vertical rhythm. Every gap between blocks should be one of these, not a number
+	   somebody picked while looking at one screen. */
+	--spacing-2xs: 0.25rem;
+	--spacing-xs: 0.5rem;
+	--spacing-sm: 0.75rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 1.5rem;
+	--spacing-xl: 2rem;
+	--spacing-2xl: 3rem;
+	--spacing-3xl: 4rem;
+
+	/* Role aliases: say what the gap is for, not how big it is. */
 	--spacing-gutter: 1.25rem;
+	--spacing-block: var(--spacing-lg);
+	--spacing-section: var(--spacing-2xl);
 	--spacing-tap: 2.75rem;
 
 	--container-app: 34rem;
@@ -528,6 +581,40 @@
 		margin-inline: auto;
 		padding-inline: max(var(--spacing-gutter), env(safe-area-inset-left));
 		padding-block-end: max(var(--spacing-gutter), env(safe-area-inset-bottom));
+	}
+
+	/* One rhythm for a column, set once. `.stack` alone is the standard block gap; the
+	   modifiers step it up or down the scale. Use it instead of hanging a margin off every
+	   child — that is how a screen ends up with a 250px void nobody chose. */
+	.stack {
+		--stack-space: var(--spacing-block);
+		display: flow-root;
+	}
+
+	.stack > * + * {
+		margin-block-start: var(--stack-space);
+	}
+
+	.stack-2xs {
+		--stack-space: var(--spacing-2xs);
+	}
+	.stack-xs {
+		--stack-space: var(--spacing-xs);
+	}
+	.stack-sm {
+		--stack-space: var(--spacing-sm);
+	}
+	.stack-md {
+		--stack-space: var(--spacing-md);
+	}
+	.stack-lg {
+		--stack-space: var(--spacing-lg);
+	}
+	.stack-xl {
+		--stack-space: var(--spacing-xl);
+	}
+	.stack-2xl {
+		--stack-space: var(--spacing-2xl);
 	}
 
 	.card {

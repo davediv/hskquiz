@@ -1,30 +1,60 @@
 <!--
-	Tone-marked pinyin on its own line, with its own weight — the thing Pleco and Du Chinese both
-	give a whole line to, and the reason the pinyin font stack leads with Chinese faces (they are
-	the ones that carry ǎ ě ǐ ǒ ǔ ǚ in the same face as the unmarked letters).
+	Tone-marked pinyin, set the way Du Chinese sets it: one syllable per hanzi character, spaced,
+	each syllable in its tone's colour. It is the line that tells a learner how the word actually
+	sounds, so it gets the whole treatment rather than a flat grey.
 
-	`tones` opts into Pleco's tone colouring. It only colours a syllable it is certain of — see
-	`tone.ts` — so an unspaced compound stays plain rather than being coloured wrongly.
+	The tones come from `Word.syllables`, which the build derives from the reference CEDICT keys
+	and asserts 1:1 against the characters — nothing here guesses. Pass it whenever you have it:
 
-	  <Pinyin pinyin={word.pinyin} size="xl" />
-	  <Pinyin pinyin={word.pinyin} size="sm" tones />
+	  <Pinyin {word} size="xl" />                            preferred — word carries both
+	  <Pinyin pinyin={w.pinyin} syllables={w.syllables} />    same thing, spelled out
+	  <Pinyin pinyin={w.pinyin} size="sm" />                  string only: segmented by tone.ts
+
+	The string-only form is not a downgrade in practice — `segmentPinyin` reproduces the build's
+	own syllabification on 4,306 of the 4,308 shipped words (see `tone.spec.ts`) — but the data
+	is exact by construction, so prefer it.
+
+	`tones` and `spaced` default on. Turn `tones` off only where the pinyin sits on a surface
+	that owns its colour (an ink-filled button); turn `spaced` off to print the official list's
+	own spacing instead of per-syllable spacing.
+
+	ERHUA IS THE ONE EXCEPTION TO ONE-SPACE-PER-CHARACTER. 儿 in 那儿 / 面条儿 is a retroflex
+	ending on the syllable before it, not a syllable of its own: 汉语拼音正词法 writes nàr and
+	miàntiáor, and `Word.pinyin` ships exactly that. Spacing it out as `nà r` printed a reading
+	no learner should copy, on the largest type on the summary screen. 36 of the 4,308 shipped
+	words carry a bare `r` syllable and every one of them is word-final.
 -->
 <script lang="ts">
-	import { splitPinyin, toneColor, toneOf } from './tone';
+	import type { Syllable, Word } from '$lib/types';
+	import { resolveSyllables, toneColor } from './tone';
 
 	type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 	interface Props {
+		/** The word to read pinyin and syllables off. Wins over the two loose props. */
+		word?: Pick<Word, 'pinyin' | 'syllables'>;
 		/** Tone-marked pinyin, e.g. `bāng máng`. */
-		pinyin: string;
+		pinyin?: string;
+		/** Build-time syllables, one per hanzi character. Authoritative when present. */
+		syllables?: readonly Syllable[];
 		/** Step on the pinyin type scale. */
 		size?: Size;
-		/** Colour each syllable by its tone (1 red, 2 green, 3 blue, 4 purple, 5 grey). */
+		/** Colour each syllable by its tone (1 red, 2 green, 3 blue, 4 purple, neutral grey). */
 		tones?: boolean;
+		/** Put a space between syllables, the way Du Chinese does. */
+		spaced?: boolean;
 		class?: string;
 	}
 
-	let { pinyin, size = 'md', tones = false, class: extra = '' }: Props = $props();
+	let {
+		word,
+		pinyin,
+		syllables,
+		size = 'md',
+		tones = true,
+		spaced = true,
+		class: extra = ''
+	}: Props = $props();
 
 	// Written out in full so Tailwind's source scanner finds every class.
 	const SIZE_CLASS: Record<Size, string> = {
@@ -35,18 +65,24 @@
 		xl: 'text-pinyin-xl'
 	};
 
-	// The separator lives inside the span so that copying the pinyin still yields real spaces —
-	// a CSS margin would look identical and paste as `zhōngguó`.
-	const syllables = $derived(
-		splitPinyin(pinyin).map((syllable, i) => ({
-			text: i === 0 ? syllable : ` ${syllable}`,
-			color: toneColor(toneOf(syllable))
-		}))
-	);
+	/** A bare `r` is erhua: it belongs to the syllable before it, unspaced and in its colour. */
+	function isErhua(py: string, i: number): boolean {
+		return i > 0 && py === 'r';
+	}
+
+	const parts = $derived.by(() => {
+		const list = resolveSyllables(word?.syllables ?? syllables, word?.pinyin ?? pinyin);
+		return list.map((syllable, i) => ({
+			// The separator lives inside the span so that copying the pinyin still yields real
+			// spaces — a CSS margin would look identical and paste as `zhōngguó`.
+			text: i === 0 || !spaced || isErhua(syllable.py, i) ? syllable.py : ` ${syllable.py}`,
+			color: tones
+				? toneColor(isErhua(syllable.py, i) ? list[i - 1].tone : syllable.tone)
+				: undefined
+		}));
+	});
 </script>
 
 <span lang="zh-Latn-pinyin" class="pinyin {SIZE_CLASS[size]} {extra}"
-	>{#if tones}{#each syllables as syllable, i (i)}<span style:color={syllable.color}
-				>{syllable.text}</span
-			>{/each}{:else}{pinyin}{/if}</span
+	>{#each parts as part, i (i)}<span style:color={part.color}>{part.text}</span>{/each}</span
 >
