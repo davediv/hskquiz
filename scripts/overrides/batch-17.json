@@ -1,0 +1,490 @@
+{
+	"L4-0771": {
+		"meanings": ["multicolored", "in every color"],
+		"note": "Idiom, no official POS. Kept the descriptive gloss; \"every color under the sun\" is CEDICT's flourish, not shorter or clearer."
+	},
+	"L4-0772": {
+		"meanings": ["to get the wrong idea", "a misunderstanding"],
+		"note": "V/N. Bare \"to misunderstand\" is 误解 (L5); 误会 is the everyday word, so it gets the everyday phrasing."
+	},
+	"L4-0774": {
+		"meanings": ["to inhale", "to suck up"],
+		"note": "V. Not \"to breathe\" (呼吸 L4) and not \"to absorb\" (吸收 L4) — 吸 is the drawing-in action itself."
+	},
+	"L4-0775": {
+		"meanings": ["drinking straw"],
+		"note": "N. \"pipette\"/\"snorkel\" are lab and diving senses a learner will not meet at L4."
+	},
+	"L4-0776": {
+		"meanings": ["to absorb", "to take in"],
+		"note": "V. \"to recruit\" (吸收会员) is an institutional sense; dropped."
+	},
+	"L4-0778": {
+		"meanings": ["to attract", "to draw attention"],
+		"note": "V. CEDICT's clause pile trimmed to the one sense that matters at L4."
+	},
+	"L4-0779": {
+		"meanings": ["to be very fond of", "to adore"],
+		"note": "V. Bare \"to like\" is 喜欢 (L1) and \"to be fond of\" is 爱好 (L1); 喜爱 is the stronger, more written liking."
+	},
+	"L4-0782": {
+		"meanings": ["slender", "fine"],
+		"note": "Adj. \"thin\" is already 薄 (L4) and 瘦 (L5); 细 is thin in diameter — a thread, a waist, a line."
+	},
+	"L4-0783": {
+		"meanings": ["details"],
+		"note": "N. \"particulars\" adds nothing a learner needs."
+	},
+	"L4-0784": {
+		"meanings": ["meticulous", "fine and delicate"],
+		"note": "Adj. Distinguished from 细 (slender) and 仔细 (careful): 细致 is care taken to a fine level of detail."
+	},
+	"L4-0785": {
+		"meanings": ["next month"],
+		"note": "Transparent compound; nothing to choose."
+	},
+	"L4-0786": {
+		"meanings": ["to decline", "to go down"],
+		"note": "V. Not \"to drop\" (掉 L2) or \"to lower\" (降低 L4) — 下降 is the intransitive fall of a number or level."
+	},
+	"L4-0787": {
+		"meanings": ["to go downstairs"],
+		"note": "Transparent verb phrase."
+	},
+	"L4-0790": {
+		"meanings": ["tasty and savory", "fresh"],
+		"note": "Adj. \"fresh\" alone belongs to 新鲜 (L4). Standalone 鲜 (汤很鲜) is the savory-delicious sense; the fresh sense survives as meaning 2."
+	},
+	"L4-0792": {
+		"meanings": ["bright and distinct", "clear-cut"],
+		"note": "Adj. \"vivid\" is 生动 (L3). 鲜明 covers bright color and sharp contrast alike."
+	},
+	"L4-0793": {
+		"meanings": ["salty"],
+		"note": "Adj. \"stingy\" is a dialect extension; excluded."
+	},
+	"L4-0795": {
+		"meanings": ["county"],
+		"note": "N. Dropped \"(Japan) prefecture\" — a country-specific note, not the Chinese administrative unit a learner needs."
+	},
+	"L4-0796": {
+		"meanings": ["to restrict", "a limit"],
+		"note": "V/N in that official order, so the verb leads and the noun follows."
+	},
+	"L4-0797": {
+		"meanings": ["to get along with each other"],
+		"note": "V. CEDICT's \"to be in contact (with sb)\" reads like radio contact; 相处 is how two people get on."
+	},
+	"L4-0798": {
+		"meanings": ["exactly opposite", "on the contrary"],
+		"note": "Adj/Conj. Bare \"opposite\" is 对面 (L2, spatial) and \"contrary\" is 反 (L4); meaning 2 carries the Conj use (相反，…)."
+	},
+	"L4-0799": {
+		"meanings": ["measure word: crates or cases", "a trunk or case"],
+		"note": "M row, so the measure-word function leads. 盒 (L5) already owns small boxes; 箱 counts the big ones — 一箱苹果."
+	},
+	"L4-0800": {
+		"meanings": ["suitcase", "a large box"],
+		"note": "N. The everyday 箱子 a learner packs, not the generic \"case\"."
+	},
+	"L4-0801": {
+		"meanings": ["to miss someone", "to long to see again"],
+		"note": "V. Objects are people, so the gloss says so."
+	},
+	"L4-0802": {
+		"meanings": ["to picture in one's mind", "imagination"],
+		"note": "N/V officially; the L4 encounter is verbal (你能想象吗) and V is on the row, so a verb gloss may lead. Bare \"to imagine\" is 设想 (L5)."
+	},
+	"L4-0803": {
+		"meanings": ["measure word: items or projects"],
+		"note": "M row. Rewritten from \"items, projects\" — the UI joins meanings with a comma, so an internal comma reads as a second sense."
+	},
+	"L4-0806": {
+		"meanings": ["to digest"],
+		"note": "V. The \"(fig.) to absorb information\" clause is a figurative extension and is excluded."
+	},
+	"L4-0808": {
+		"meanings": ["street food", "a light snack"],
+		"note": "N. Bare \"snack\" is 零食 (L4); 小吃 is the small cooked dish sold at a stall."
+	},
+	"L4-0809": {
+		"meanings": ["young man", "a lad"],
+		"note": "N. Distinct from 青年 \"youth\" (L2), which is the age bracket rather than the person."
+	},
+	"L4-0812": {
+		"meanings": ["some or a few", "a small amount"],
+		"note": "M row quantifying a small number. Bare \"some\" is 一些 (L1) and \"few\" is 少 (L1), so 些 keeps both halves."
+	},
+	"L4-0813": {
+		"meanings": ["psychology", "state of mind"],
+		"note": "N. Both senses are live at L4 (心理学 / 他的心理)."
+	},
+	"L4-0814": {
+		"meanings": ["bridegroom"],
+		"note": "N. One sense, no alternatives."
+	},
+	"L4-0817": {
+		"meanings": ["of a new type", "new-model"],
+		"note": "Adj row, so the gloss is adjectival rather than the noun phrase \"new type\"."
+	},
+	"L4-0818": {
+		"meanings": ["excited", "thrilled"],
+		"note": "Adj row: CEDICT's noun \"excitement\" and its physiology sense cannot lead an Adj card."
+	},
+	"L4-0820": {
+		"meanings": ["the overall situation", "how things stand"],
+		"note": "N. Bare \"circumstances\" is 情况 (L3); 形势 is the big picture — economic, political, competitive."
+	},
+	"L4-0821": {
+		"meanings": ["a type or model"],
+		"note": "N. 类型 (L4) owns bare \"type\", so 型 names the model/version sense it carries in 新型, 血型, 型号."
+	},
+	"L4-0823": {
+		"meanings": ["to wake up", "to be awake"],
+		"note": "V. \"to sober up\" is a narrow extension; dropped."
+	},
+	"L4-0826": {
+		"meanings": ["brothers", "younger brother"],
+		"note": "N. Excluded CEDICT's humble first-person \"I, me\" sense — men's public-speech register, not learner material."
+	},
+	"L4-0828": {
+		"meanings": ["to fix", "to mend"],
+		"note": "V. 补 (L3) currently leads with \"to repair\", so 修理 takes \"to fix\". CEDICT's \"(coll.) to sort sb out\" is excluded."
+	},
+	"L4-0829": {
+		"meanings": ["to make a choice", "a choice"],
+		"note": "V/N. Bare \"to choose\"/\"to select\" are 选 (L2) and 挑选 (L4); 选择 is the act of settling on one."
+	},
+	"L4-0835": {
+		"meanings": ["to search for", "to hunt for"],
+		"note": "V. 找 (L1) is the everyday \"to look for\"; 寻找 is the deliberate, sustained search."
+	},
+	"L4-0836": {
+		"meanings": ["swift", "speedy"],
+		"note": "Adj. \"rapid\" is 快 (L1)."
+	},
+	"L4-0837": {
+		"meanings": ["tooth"],
+		"note": "N. \"ivory\" is 象牙 in practice; dropped."
+	},
+	"L4-0840": {
+		"meanings": ["adds a soft or surprised tone"],
+		"note": "Aux particle. Described by function rather than labelled; 啊 (L2) is glossed as the exclamation, 呀 as its post-vowel softener."
+	},
+	"L4-0841": {
+		"meanings": ["to lengthen", "to make last longer"],
+		"note": "V. \"to extend\" is taken three times over (推广 L3, 扩展 L4, 延伸 L5); 延长 is specifically making something longer in time or length."
+	},
+	"L4-0842": {
+		"meanings": ["to push the date back", "to extend a deadline"],
+		"note": "Separable 延∥期, no official POS. \"to postpone\" is 推迟 (L4); 延期 is specifically moving a scheduled date later."
+	},
+	"L4-0843": {
+		"meanings": ["to carry on", "to last"],
+		"note": "V. \"to continue\" is 继续 (L3); 延续 is a tradition or state persisting over time."
+	},
+	"L4-0844": {
+		"meanings": ["stern", "strict"],
+		"note": "Adj. 严格 (L4) holds bare \"strict\", so 严 leads with the person-facing \"stern\" (对孩子很严). \"father\" is a classical usage; dropped."
+	},
+	"L4-0845": {
+		"meanings": ["strict", "rigorous"],
+		"note": "Adj/V. CEDICT's comma-pile trimmed; \"tight\" belongs to 严."
+	},
+	"L4-0846": {
+		"meanings": ["serious", "severe"],
+		"note": "Adj. Of problems and illnesses. 认真 is \"conscientious\" and 严肃 \"solemn\", so \"serious\" is free here."
+	},
+	"L4-0847": {
+		"meanings": ["to study in depth", "to look into"],
+		"note": "V row, so the noun \"research\" cannot lead. 查 (L2) currently ships \"to research\", so 研究 takes the fuller phrasing."
+	},
+	"L4-0848": {
+		"meanings": ["postgraduate student"],
+		"note": "N. One sense."
+	},
+	"L4-0849": {
+		"meanings": ["to develop and manufacture"],
+		"note": "V. 研制新药 — research plus production, distinct from 开发 (L3)."
+	},
+	"L4-0850": {
+		"meanings": ["salt"],
+		"note": "N. Classifier note stripped."
+	},
+	"L4-0852": {
+		"meanings": ["tears", "a tear from the eye"],
+		"note": "N. The everyday word; 泪水 L4-0465 takes \"flowing tears\"."
+	},
+	"L4-0853": {
+		"meanings": ["in someone's eyes"],
+		"note": "N phrase; the point is figurative regard (在他眼里), so the gloss states it plainly."
+	},
+	"L4-0854": {
+		"meanings": ["to give a lecture", "to deliver a talk"],
+		"note": "V. \"to make a speech\" is 发言 (L3) and \"a speech\" is 讲话 (L2); 演讲 is the prepared public address."
+	},
+	"L4-0857": {
+		"meanings": ["the waist", "the lower back"],
+		"note": "N. Dropped the animal-kidney food sense and the metonymic money-pouch sense — both register-wrong for a beginner."
+	},
+	"L4-0858": {
+		"meanings": ["to shake", "to rock back and forth"],
+		"note": "V. 摇头, 摇船. \"to crank\" is a machine sense; dropped."
+	},
+	"L4-0859": {
+		"meanings": ["medication", "pharmaceuticals"],
+		"note": "N. 药 (L2) is \"medicine\"; 药物 is the formal collective — what a doctor or label calls it."
+	},
+	"L4-0860": {
+		"meanings": ["if in spoken Chinese", "in case"],
+		"note": "Conj row — 要 as short for 要是, not the L1 verb \"to want\". 假如 L4-0375 keeps \"supposing that\"."
+	},
+	"L4-0861": {
+		"meanings": ["in one's spare time", "amateur"],
+		"note": "Adj. 业余爱好 / 业余时间. \"outside working hours\" says the same thing longer."
+	},
+	"L4-0862": {
+		"meanings": ["leaf"],
+		"note": "N. CEDICT's second sense is drug slang and is excluded outright."
+	},
+	"L4-0863": {
+		"meanings": ["to provide medical care"],
+		"note": "Official POS is V, so a bare noun \"medical treatment\" cannot lead. 治疗 (L4) is \"to treat\" an illness; 医疗 is care as a service (医疗保险)."
+	},
+	"L4-0864": {
+		"meanings": ["medical science", "the study of medicine"],
+		"note": "N. Kept separate from 医疗 by naming the field rather than the service."
+	},
+	"L4-0865": {
+		"meanings": ["to rely on", "to depend on"],
+		"note": "V/N. 靠 (L2) is the physical \"to lean on\"; 依靠 is the abstract reliance."
+	},
+	"L4-0866": {
+		"meanings": ["still as before", "just as it was"],
+		"note": "Adv. Bare \"still\" is 仍然 (L3) and \"as before\" is 依旧 (L5); 依然 keeps both halves so the three stay distinguishable."
+	},
+	"L4-0867": {
+		"meanings": ["without exception", "all alike"],
+		"note": "Adv. \"same; identical\" is the adjectival half of the CEDICT entry and cannot lead an Adv row."
+	},
+	"L4-0868": {
+		"meanings": ["time and again", "repeatedly"],
+		"note": "Adv. \"repeatedly\" is 反复 (L3), so 一再 leads with the idiomatic English equivalent."
+	},
+	"L4-0869": {
+		"meanings": ["in agreement", "consistent"],
+		"note": "Adj/Adv. 意见一致 — people agreeing, or two things matching."
+	},
+	"L4-0870": {
+		"meanings": ["to move something over", "to shift"],
+		"note": "V. 搬 (L3) is bare \"to move\" (furniture, house); 移 is nudging something to a different spot."
+	},
+	"L4-0872": {
+		"meanings": ["to migrate to another country", "an immigrant"],
+		"note": "V/N. Chinese 移民 covers both directions, so the gloss avoids picking \"immigrate\" or \"emigrate\"."
+	},
+	"L4-0873": {
+		"meanings": ["inheritance", "cultural heritage"],
+		"note": "N. Both senses are live at L4 (遗产继承 / 世界文化遗产). 继承 (L5) is the verb, so the noun is free here."
+	},
+	"L4-0874": {
+		"meanings": ["to pass on genetically", "to run in the family"],
+		"note": "V row, so the noun \"heredity\" cannot lead; \"to inherit\" is 继承 (L5) and means property, not genes."
+	},
+	"L4-0875": {
+		"meanings": ["a point of doubt", "a query"],
+		"note": "N. Bare \"question\" is 问题 (L2) and \"to doubt\" is 怀疑 (L4); 疑问 is the doubt itself (毫无疑问)."
+	},
+	"L4-0878": {
+		"meanings": ["generally speaking"],
+		"note": "Fixed phrase, no official POS."
+	},
+	"L4-0879": {
+		"meanings": ["duty", "obligation"],
+		"note": "N. CEDICT's \"volunteer\" is the attributive 义务 of 义务劳动 and misleads as a bare noun. 责任 (L3) is \"responsibility\"."
+	},
+	"L4-0880": {
+		"meanings": ["to discuss openly", "to air opinions"],
+		"note": "V/N. \"to discuss\" is 讨论 (L2) and \"to comment on\" is 评论 (L5); 议论 is public talk about a person or event."
+	},
+	"L4-0881": {
+		"meanings": ["to lead", "to draw along"],
+		"note": "V. Single character behind 引起/引导/吸引. \"to pull\" is 拉 (L2); the classical bow-drawing and length-unit senses are dropped."
+	},
+	"L4-0882": {
+		"meanings": ["to show the way", "to guide"],
+		"note": "V. CEDICT's \"to boot\" is a computing sense and \"primer\" a noun; both excluded."
+	},
+	"L4-0884": {
+		"meanings": ["to give rise to", "to cause"],
+		"note": "V. 引起注意/误会. 导致 (L4) is \"to lead to\" and 造成 (L3) \"to bring about\", so this phrasing keeps the three apart."
+	},
+	"L4-0885": {
+		"meanings": ["ought to", "to consent"],
+		"note": "V (yīng). 应该 and 该 are L2, so \"ought to\" is free here; meaning 2 is the 应允 sense. Legal sense dropped."
+	},
+	"L4-0886": {
+		"meanings": ["heroic", "valiant"],
+		"note": "Adj. Deliberately not \"brave\" — that is 勇敢 (L4), the everyday word."
+	},
+	"L4-0889": {
+		"meanings": ["shadow", "reflection"],
+		"note": "N. The \"(fig.) hint, influence\" senses are excluded."
+	},
+	"L4-0890": {
+		"meanings": ["brave", "courageous"],
+		"note": "Adj. The plain word, kept plain."
+	},
+	"L4-0892": {
+		"meanings": ["what something is used for", "a use"],
+		"note": "N. Bare \"use\" collides with 用 (L1), 使用 (L2) and 应用 (L3); the plain-English phrasing is unambiguous and cannot be mistaken for a verb."
+	},
+	"L4-0893": {
+		"meanings": ["of fine quality", "first-rate"],
+		"note": "Adj. 优秀 (L4) is \"outstanding\" of people; 优良 describes quality, breeds, traditions."
+	},
+	"L4-0894": {
+		"meanings": ["graceful", "exquisite"],
+		"note": "Adj. Movement, scenery, music."
+	},
+	"L4-0897": {
+		"meanings": ["full of energy"],
+		"note": "Separable 有∥劲儿, no CEDICT entry. Colloquial \"that's fun\" sense omitted as spoken-register."
+	},
+	"L4-0898": {
+		"meanings": ["fun and interesting", "enjoyable"],
+		"note": "Adj. \"interesting\" is 有意思 (L2) and 可乐 (L3) holds \"amusing\"; 有趣 is what makes you smile."
+	},
+	"L4-0899": {
+		"meanings": ["limited", "finite"],
+		"note": "Adj. 时间有限."
+	},
+	"L4-0901": {
+		"meanings": ["and so", "as a result"],
+		"note": "Conj. \"thereupon\" is bookish; 所以 (L2) is \"therefore\" and 因此 (L3) \"thus\", so \"and so\" keeps 于是 distinct and readable."
+	},
+	"L4-0903": {
+		"meanings": ["speech sounds", "pronunciation"],
+		"note": "N. The Internet \"voice chat/voice message\" senses are excluded as modern-app jargon."
+	},
+	"L4-0904": {
+		"meanings": ["jade"],
+		"note": "N. One sense."
+	},
+	"L4-0908": {
+		"meanings": ["to encounter", "to come across"],
+		"note": "V, bound form. 遇到 and 遇见 (both L4) take \"to run into\" and \"to meet by chance\"; 遇 keeps the formal head word. CEDICT's \"to treat, to receive\" (待遇) is the other morpheme sense and is dropped."
+	},
+	"L4-0913": {
+		"meanings": ["round", "a circle"],
+		"note": "Adj/N in that official order, so the adjective leads. The currency sense (圆 = yuan) and the \"tactful\" sense are dropped."
+	},
+	"L4-0914": {
+		"meanings": ["completely satisfactory"],
+		"note": "Adj. 圆满成功/圆满结束 — everything ended as it should. \"perfect\" is 完美 (L3)."
+	},
+	"L4-0915": {
+		"meanings": ["to go on a date", "an arranged meeting"],
+		"note": "V/N. 约 (L3) already means \"to make an appointment\", so 约会 takes the romantic sense it usually carries."
+	},
+	"L4-0921": {
+		"meanings": ["to apply in practice", "to make use of"],
+		"note": "V. \"to use\" is 用 (L1) and 使用 (L2); \"to put to use\" is 应用 (L3). 运用 is skill or knowledge brought to bear."
+	},
+	"L4-0922": {
+		"meanings": ["over and over again", "again and again"],
+		"note": "Adv. Kept distinct from 一再 \"time and again\" and 反复 \"repeatedly\"; 再三 carries the note of insistence (再三强调)."
+	},
+	"L4-0925": {
+		"meanings": ["to approve of", "to be in favor of"],
+		"note": "V. 同意 (L3) is \"to agree\"; 赞成 is backing a proposal. The literary \"to assist\" sense is dropped."
+	},
+	"L4-0926": {
+		"meanings": ["to admire", "to speak highly of"],
+		"note": "V. 表扬 (L4) is \"to commend\" (a superior praising) and 欣赏 (L5) \"to appreciate\"; 赞赏 is warm admiration expressed."
+	},
+	"L4-0928": {
+		"meanings": ["shape and design", "a styled look"],
+		"note": "N row, so CEDICT's leading verb \"to model\" cannot lead. 形状 (L3) is plain \"shape\"; 造型 is the designed form (发型造型, 人物造型)."
+	},
+	"L4-0929": {
+		"meanings": ["to fight in battle", "combat"],
+		"note": "V/N. Distinguished from 打架 (L5) \"to fight\" — 战斗 is military."
+	},
+	"L4-0930": {
+		"meanings": ["to triumph over", "to overcome"],
+		"note": "V. 打败 (L4) is \"to defeat\"; 战胜 also takes abstract objects (战胜困难), which \"to triumph over\" carries."
+	},
+	"L4-0931": {
+		"meanings": ["a fighter", "a soldier in battle"],
+		"note": "N. 士兵 (L4) is bare \"soldier\" (the rank); 战士 is the fighter, and is used figuratively of anyone in a struggle."
+	},
+	"L4-0932": {
+		"meanings": ["war"],
+		"note": "N. One sense."
+	},
+	"L4-0934": {
+		"meanings": ["to greet", "to call out to"],
+		"note": "V. 打招呼. 问候 (L4) is \"to send one's regards\"; 招呼 is the spoken hello."
+	},
+	"L4-0935": {
+		"meanings": ["to come into contact with", "used after a verb to show success"],
+		"note": "V (zháo), not the 着 zhe particle. Meaning 2 states the function a learner actually meets it in (睡着, 找着). Excluded the colloquial \"to fall asleep\" gloss, which belongs to 睡着 as a whole."
+	},
+	"L4-0936": {
+		"meanings": ["to catch fire"],
+		"note": "Separable 着∥火. One sense."
+	},
+	"L4-0937": {
+		"meanings": ["to worry and fret", "to be in a rush"],
+		"note": "Separable 着∥急. 担心 (L4) is \"worried\"; 着急 is the impatient anxiety of waiting. The Taiwan pronunciation note is not learner copy."
+	},
+	"L4-0938": {
+		"meanings": ["to convene a meeting", "to call together"],
+		"note": "V. The object is always a meeting or conference, so the gloss names it."
+	},
+	"L4-0939": {
+		"meanings": ["to break in two", "to fold"],
+		"note": "V. 断 (L3) leads with \"to snap\". The discount sense (打折) is a noun usage on this character and is left off a V row; the theatrical-scene classifier and \"accounts book\" senses are dropped."
+	},
+	"L4-0940": {
+		"meanings": ["needle", "an injection"],
+		"note": "N. 打针 makes the injection sense common at L4, so it stays as meaning 2."
+	},
+	"L4-0941": {
+		"meanings": ["to be aimed at", "to focus on"],
+		"note": "V. 针对性/针对问题. CEDICT's four-clause pile trimmed to two."
+	},
+	"L4-0942": {
+		"meanings": ["measure word: short bursts", "a spell of wind or rain"],
+		"note": "M row, so the measure-word function leads: 一阵风, 一阵雨, 一阵笑声. \"disposition of troops\" is the classical sense; dropped."
+	},
+	"L4-0943": {
+		"meanings": ["to argue back and forth", "to debate"],
+		"note": "V/N. 辩论 (L4) is \"to argue over\" (formal debate) and 争议 (L5) \"to dispute\"; 争论 is two sides going at an issue."
+	},
+	"L4-0944": {
+		"meanings": ["to conquer by force", "to subdue"],
+		"note": "V. 克服 (L3) currently ships \"to conquer\" for difficulties, so 征服 names the military act it actually is."
+	},
+	"L4-0945": {
+		"meanings": ["to ask for opinions", "to solicit views"],
+		"note": "V. 征求意见 is the fixed collocation; bare \"to seek\" would collide with 寻找."
+	},
+	"L4-0948": {
+		"meanings": ["after that", "afterwards"],
+		"note": "N (positional). Bare \"after\" is 以后 (L2); 之后 attaches to what precedes it (三天之后)."
+	},
+	"L4-0949": {
+		"meanings": ["between", "among"],
+		"note": "N (positional). The bisyllabic-time-expression note in CEDICT is grammar trivia, not a sense."
+	},
+	"L4-0950": {
+		"meanings": ["before that", "prior to"],
+		"note": "N (positional). Bare \"before\" is 以前 (L2)."
+	},
+	"L4-0951": {
+		"meanings": ["one of a group"],
+		"note": "Bound pattern …之一. Described by what it does rather than left as the fragment \"one of\"."
+	}
+}
