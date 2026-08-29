@@ -1,0 +1,490 @@
+{
+	"L4-0952": {
+		"meanings": ["to prop up", "to pay out money"],
+		"note": "CEDICT leads \"to support\", which is 支持's gloss at L3; 支 as a verb is 支帐篷 / 支钱."
+	},
+	"L4-0953": {
+		"meanings": ["plant", "vegetation"],
+		"note": "Plain noun kept here; 种 zhòng L4 takes a verb gloss so the two no longer collide."
+	},
+	"L4-0954": {
+		"meanings": ["to direct or command", "conductor of an orchestra"],
+		"note": "V/N row: the verb sense leads, the orchestra noun follows as its own sense."
+	},
+	"L4-0956": {
+		"meanings": ["quality", "how well something is made"],
+		"note": "Shipped \"mass\" first; the physics sense is not what 质量 means to a learner."
+	},
+	"L4-0957": {
+		"meanings": ["to cure", "to govern"],
+		"note": "治病 is the everyday sense; 治疗 keeps \"to treat an illness\" so the pair stays distinct."
+	},
+	"L4-0958": {
+		"meanings": ["to treat an illness", "medical treatment"],
+		"note": "Spelled out so it cannot be confused with 治 \"to cure\" or with 对待."
+	},
+	"L4-0960": {
+		"meanings": ["smart technology", "machine intelligence"],
+		"note": "N row; kept off bare \"intelligence\", which is 智力's gloss at the same level."
+	},
+	"L4-0961": {
+		"meanings": ["an agent or middleman", "an agency"],
+		"note": "Shipped \"intermediate\", \"inter\" — a prefix fragment, not the noun 中介 names."
+	},
+	"L4-0962": {
+		"meanings": ["a kind or category", "a variety"],
+		"note": "Kept off bare \"type\", which is 类型's gloss at the same level."
+	},
+	"L4-0963": {
+		"meanings": ["to win a prize", "to win the lottery"],
+		"note": "No official POS; the lottery sense is what a learner actually meets."
+	},
+	"L4-0964": {
+		"meanings": ["to plant or grow", "to cultivate"],
+		"note": "Bare \"to plant\" normalises to 植物's \"plant\"; this keeps the verb card distinct."
+	},
+	"L4-0967": {
+		"meanings": ["step by step", "gradually"],
+		"note": "Adv row; \"progressively\" is heavier English than a learner needs."
+	},
+	"L4-0970": {
+		"meanings": ["chairperson", "president of a state"],
+		"note": "CEDICT's \"premier\" is wrong — that is 总理; 主席 chairs a body or heads a state."
+	},
+	"L4-0971": {
+		"meanings": ["to wish someone well", "a blessing"],
+		"note": "V row, so the verb leads and the noun sense follows."
+	},
+	"L4-0972": {
+		"meanings": ["famous", "well-known"],
+		"note": "Adj row; plain everyday English rather than \"noted\" or \"celebrated\"."
+	},
+	"L4-0974": {
+		"meanings": ["to make the most of time", "to grip tightly"],
+		"note": "抓紧时间 is the collocation a learner meets; the literal grip sense follows."
+	},
+	"L4-0975": {
+		"meanings": ["focused", "with full attention"],
+		"note": "Official POS is Adj; the shipped \"to focus one's attention\" was a verb gloss."
+	},
+	"L4-0977": {
+		"meanings": ["to pass on a message", "to relay word to someone"],
+		"note": "转告 is specifically relaying what someone said, unlike L5 传达 / 传递."
+	},
+	"L4-0978": {
+		"meanings": ["to turn around", "to turn one's body"],
+		"note": "CEDICT's remarriage sense is archaic; the body turn is the only live one."
+	},
+	"L4-0979": {
+		"meanings": ["to turn a corner", "to make a turn"],
+		"note": "Named concretely so it cannot be mistaken for 转身 or 转."
+	},
+	"L4-0980": {
+		"meanings": ["to shift or transfer", "to move elsewhere"],
+		"note": "CEDICT's figurative and medical senses are dropped; \"to shift\" alone was too thin."
+	},
+	"L4-0981": {
+		"meanings": ["to renovate a home", "interior decoration"],
+		"note": "装修 is fitting out a home or shop, not 装饰 \"to decorate\"."
+	},
+	"L4-0982": {
+		"meanings": ["a device or unit", "to install equipment"],
+		"note": "V/N row; the noun leads so this does not repeat 安装 \"to install\"."
+	},
+	"L4-0983": {
+		"meanings": ["to pursue a goal", "to seek after"],
+		"note": "CEDICT's courtship sense is not for a beginner card; the goal sense is the L4 one."
+	},
+	"L4-0987": {
+		"meanings": ["from a place or time", "since"],
+		"note": "Prep row. Spelled out because bare \"from\" is already 从 L1 and 由 L3."
+	},
+	"L4-0990": {
+		"meanings": ["to combine into a whole", "comprehensive"],
+		"note": "V row; \"to sum up\" is 总结's job at L3, so the combining sense leads."
+	},
+	"L4-0991": {
+		"meanings": ["altogether", "in total"],
+		"note": "Adv row; both senses are the same everyday counting adverb."
+	},
+	"L4-0994": {
+		"meanings": ["in short", "in a word"],
+		"note": "Conj row wrapping up what came before; plain English, no grammar label."
+	},
+	"L4-0998": {
+		"meanings": ["to make a decision or choice", "to come up with"],
+		"note": "作出 only ever takes an abstract object; \"to put out\" gave a learner nothing."
+	},
+	"L4-1000": {
+		"meanings": ["to have a dream while asleep", "to dream at night"],
+		"note": "Bare \"to dream\" collided with 梦 and 梦想 at the same level."
+	},
+	"L5-0001": {
+		"meanings": ["to comfort", "to console"],
+		"note": "Both clauses of the single CEDICT sense, split into two short glosses."
+	},
+	"L5-0002": {
+		"meanings": ["shore or coast", "riverbank"],
+		"note": "Shipped bare \"bank\", which reads as a bank for money."
+	},
+	"L5-0003": {
+		"meanings": ["ashore", "on the riverbank"],
+		"note": "Location phrase, kept distinct from 岸 itself."
+	},
+	"L5-0004": {
+		"meanings": ["to massage"],
+		"note": "V row; the noun \"massage\" adds nothing a learner could be graded on."
+	},
+	"L5-0005": {
+		"meanings": ["to pull out", "to pull up"],
+		"note": "拔牙 / 拔草 senses; CEDICT's \"to select\" and \"to surpass\" are literary."
+	},
+	"L5-0006": {
+		"meanings": ["Chinese grain spirit", "strong clear liquor"],
+		"note": "Shipped \"white wine\", which is wrong; 白酒 is distilled sorghum spirit."
+	},
+	"L5-0007": {
+		"meanings": ["to pay a visit", "to call on someone"],
+		"note": "拜访 is a polite call on a person, not 参观 visiting a place."
+	},
+	"L5-0008": {
+		"meanings": ["edition or version", "a printing plate"],
+		"note": "Shipped \"a register\", an obsolete sense; 第二版 / 中文版 is the live one."
+	},
+	"L5-0010": {
+		"meanings": ["excellent", "terrific"],
+		"note": "Official POS is Adj; \"stick\", \"club\" is the noun 棒子 sense, wrong for this row."
+	},
+	"L5-0011": {
+		"meanings": ["to surround", "to encircle"],
+		"note": "Both clauses of the one CEDICT sense; \"to hem in\" is rarer English."
+	},
+	"L5-0017": {
+		"meanings": ["to complain", "to grumble"],
+		"note": "Plain everyday verb; the longer CEDICT clauses say the same thing."
+	},
+	"L5-0018": {
+		"meanings": ["a backpack", "a rucksack"],
+		"note": "\"Knapsack\" and the military senses are dated English for a modern 背包."
+	},
+	"L5-0020": {
+		"meanings": ["deeply sad", "sorrowful"],
+		"note": "Adj row; 悲伤 is stronger than 难过, so the gloss says so."
+	},
+	"L5-0023": {
+		"meanings": ["a generation in a family", "people of one generation"],
+		"note": "\"Lifetime\" is 一辈子's gloss at the same level; 辈 is 长辈 / 晚辈."
+	},
+	"L5-0024": {
+		"meanings": ["I myself", "the person concerned"],
+		"note": "Pron row; bare \"I\" would collide with 我 and lose the emphatic force."
+	},
+	"L5-0026": {
+		"meanings": ["an example or analogy", "for instance"],
+		"note": "打比方 is making an analogy; 比方说 is the adverbial use, kept second."
+	},
+	"L5-0028": {
+		"meanings": ["one another", "each other"],
+		"note": "Pron row. Leads with \"one another\" since 互相 L3 already owns \"each other\"."
+	},
+	"L5-0029": {
+		"meanings": ["surely or certainly", "must"],
+		"note": "Adv row; bound adverb of 必将 / 必能, distinct from 必须 \"must\" at L2."
+	},
+	"L5-0030": {
+		"meanings": ["to be essential", "indispensable"],
+		"note": "V row, so the gloss is verbal rather than the attributive \"essential\"."
+	},
+	"L5-0031": {
+		"meanings": ["after all", "when all is said and done"],
+		"note": "Adv conceding a fact; the longer clause is kept as the second reading."
+	},
+	"L5-0032": {
+		"meanings": ["to come to a close", "the curtain falls"],
+		"note": "闭幕 is used of ceremonies and meetings, so the abstract sense leads."
+	},
+	"L5-0034": {
+		"meanings": ["a national border", "frontier area"],
+		"note": "\"Frontier\" alone is ambiguous in English; 边境 is the border zone of a country."
+	},
+	"L5-0035": {
+		"meanings": ["to edit", "to compile"],
+		"note": "V row of the biānjí / biānji pair; the noun row keeps \"an editor\"."
+	},
+	"L5-0036": {
+		"meanings": ["an editor"],
+		"note": "N row of the pair, so it must not repeat the verb card's \"to edit\"."
+	},
+	"L5-0038": {
+		"meanings": ["convenient", "handy to use"],
+		"note": "Adj/V row led by the adjective, which is how 便利 is actually met."
+	},
+	"L5-0040": {
+		"meanings": ["easy to do", "convenient for"],
+		"note": "便于携带 — 便于 introduces what something makes easy; not a bare adjective."
+	},
+	"L5-0041": {
+		"meanings": ["a guesthouse or hotel", "lodge"],
+		"note": "Kept off bare \"hotel\", which 酒店 L2 and 旅馆 L3 already carry."
+	},
+	"L5-0042": {
+		"meanings": ["a flatbread or pancake", "a round flat cake"],
+		"note": "Distinguished from 蛋糕 \"cake\" and 饼干 \"biscuit\" at the same level."
+	},
+	"L5-0043": {
+		"meanings": ["biscuit or cookie", "a cracker"],
+		"note": "One gloss with \"or\" rather than a comma, which the UI would read as two senses."
+	},
+	"L5-0045": {
+		"meanings": ["glass", "a pane of glass"],
+		"note": "Drops the CC-CEDICT slang sense that shipped to learners."
+	},
+	"L5-0046": {
+		"meanings": ["a blog", "a blogger"],
+		"note": "Both senses of the loanword; the \"loanword\" marker itself is not learner copy."
+	},
+	"L5-0047": {
+		"meanings": ["an exposition or fair", "a trade fair"],
+		"note": "Second clause of the CEDICT sense recovered; \"an exposition\" alone was thin."
+	},
+	"L5-0048": {
+		"meanings": ["a PhD or doctorate", "holder of a doctorate"],
+		"note": "Bare \"doctor\" reads as 医生; the old court-academician sense is dropped."
+	},
+	"L5-0050": {
+		"meanings": ["weak", "frail"],
+		"note": "Adj row; 基础薄弱 — weak in strength or foundation."
+	},
+	"L5-0051": {
+		"meanings": ["to disregard", "in spite of"],
+		"note": "V row, so the verb leads; \"in spite of\" is the prepositional use."
+	},
+	"L5-0052": {
+		"meanings": ["unfavorable", "disadvantageous"],
+		"note": "Adj row; 对我们不利 — working against someone."
+	},
+	"L5-0053": {
+		"meanings": ["impatient", "out of patience"],
+		"note": "No official POS; both readings are the same everyday state."
+	},
+	"L5-0054": {
+		"meanings": ["unfortunate", "a misfortune"],
+		"note": "Adj row leads with the adjective; the noun sense follows."
+	},
+	"L5-0055": {
+		"meanings": ["not easy to do", "hard to achieve"],
+		"note": "Kept off bare \"difficult\", which 难 L1, 困难 L3 and 艰难 L5 already carry."
+	},
+	"L5-0059": {
+		"meanings": ["terribly serious", "extremely"],
+		"note": "Adj row: 不得了了 is alarm; 好得不得了 is the intensifier, kept second."
+	},
+	"L5-0060": {
+		"meanings": ["you flatter me", "I don't deserve the praise"],
+		"note": "A set polite reply to praise; the literal CEDICT gloss teaches nothing."
+	},
+	"L5-0061": {
+		"meanings": ["harmful or bad", "faulty"],
+		"note": "不良习惯 / 不良反应; second sense covers 接触不良."
+	},
+	"L5-0062": {
+		"meanings": ["cannot help but", "inevitably"],
+		"note": "Leads with the literal force so it is not confused with 难免 at L4."
+	},
+	"L5-0063": {
+		"meanings": ["cannot but do something", "have to"],
+		"note": "Double negative construction, spelled out rather than labelled."
+	},
+	"L5-0064": {
+		"meanings": ["from time to time", "now and then"],
+		"note": "Adv row; distinct from 偶尔 \"occasionally\" at the same level."
+	},
+	"L5-0065": {
+		"meanings": ["without stopping", "incessantly"],
+		"note": "说个不停 — the plain phrase leads and the single-word gloss follows."
+	},
+	"L5-0066": {
+		"meanings": ["to not allow", "must not"],
+		"note": "V row; kept off 禁止's \"to forbid\" / \"to prohibit\"."
+	},
+	"L5-0067": {
+		"meanings": ["more than", "endlessly"],
+		"note": "不止一次 is the L5 use; \"incessantly\" alone missed the common sense."
+	},
+	"L5-0068": {
+		"meanings": ["insufficient", "not enough"],
+		"note": "Adj/V row; 缺乏 keeps \"to lack\" so the two stay distinct."
+	},
+	"L5-0070": {
+		"meanings": ["to guess"],
+		"note": "One sense, and CC-CEDICT has only the one."
+	},
+	"L5-0072": {
+		"meanings": ["a referee or umpire", "to judge a contest"],
+		"note": "V/N row; the sports noun is what a learner meets, so it leads."
+	},
+	"L5-0076": {
+		"meanings": ["a restaurant or dining hall", "a canteen"],
+		"note": "Kept off bare \"restaurant\", which 饭店 L1 and 饭馆 L2 already carry."
+	},
+	"L5-0077": {
+		"meanings": ["catering", "the food and drink trade"],
+		"note": "N. 餐饮业 is the trade sense; \"repast\" is not learner English."
+	},
+	"L5-0079": {
+		"meanings": ["measure word: books or volumes", "a volume"],
+		"note": "M row, so the measure-word use leads and the noun follows."
+	},
+	"L5-0080": {
+		"meanings": ["a level or tier", "a layer"],
+		"note": "层次分明 — ordered levels, not the storey sense of 层 at L2."
+	},
+	"L5-0081": {
+		"meanings": ["to cross two things", "to spear with a fork"],
+		"note": "Official POS is V; the noun \"fork\" would be the wrong part of speech."
+	},
+	"L5-0083": {
+		"meanings": ["a difference between things", "a distinction"],
+		"note": "N row; 区别 L3 holds the verb \"to distinguish\"."
+	},
+	"L5-0084": {
+		"meanings": ["a gap between two things", "a disparity"],
+		"note": "差距 is the size of the gap, 差别 the fact of a difference."
+	},
+	"L5-0085": {
+		"meanings": ["to insert", "to stick something in"],
+		"note": "插花 / 插上电源; \"to interpose\" is heavier English than the word needs."
+	},
+	"L5-0086": {
+		"meanings": ["to look up information", "to make an inquiry"],
+		"note": "查询余额 — looking something up in a system, distinct from 询问 at L5."
+	},
+	"L5-0087": {
+		"meanings": ["almost but not quite", "nearly"],
+		"note": "CEDICT only cross-references the non-erhua form; 差点儿摔倒 is the sense."
+	},
+	"L5-0088": {
+		"meanings": ["to tear open", "to take apart"],
+		"note": "拆信 / 拆开; the building sense belongs to 拆除."
+	},
+	"L5-0089": {
+		"meanings": ["to demolish a building", "to dismantle"],
+		"note": "Spelled out so it does not duplicate 拆 at the same level."
+	},
+	"L5-0090": {
+		"meanings": ["an industry or sector", "property or assets"],
+		"note": "N row; 工业 L3 holds \"industry\" alone and 行业 L4 holds \"trade\"."
+	},
+	"L5-0093": {
+		"meanings": ["intestines", "the gut"],
+		"note": "Single anatomical sense; the sausage sense belongs to 香肠."
+	},
+	"L5-0094": {
+		"meanings": ["to taste", "to try a food"],
+		"note": "No CEDICT gloss on this key; 尝一尝 is tasting, not 尝试 \"to try\"."
+	},
+	"L5-0098": {
+		"meanings": ["to champion an idea", "to initiate"],
+		"note": "提倡 at the same level already ships \"to promote\", \"to advocate\"."
+	},
+	"L5-0099": {
+		"meanings": ["to surpass", "to go beyond"],
+		"note": "超过 L4 keeps \"to exceed\"; 超越 is going beyond a limit or a rival."
+	},
+	"L5-0101": {
+		"meanings": ["to weigh something", "to measure the weight of"],
+		"note": "称2 is the 秤 entry — weighing; 称1 at L2 is the 叫/名称 entry, so the pair splits."
+	},
+	"L5-0102": {
+		"meanings": ["a title or name given", "an honorary title"],
+		"note": "荣誉称号 — a conferred title, not 标题 \"heading\" at L3."
+	},
+	"L5-0104": {
+		"meanings": ["to close a deal", "to strike a bargain"],
+		"note": "No official POS; both readings are the same commercial act."
+	},
+	"L5-0106": {
+		"meanings": ["a Chinese idiom", "a four character saying"],
+		"note": "CEDICT's full definition is 100+ characters; this keeps what defines it."
+	},
+	"L5-0108": {
+		"meanings": ["in the city", "in town"],
+		"note": "No CEDICT entry; 城里 is simply inside the city as opposed to 城外."
+	},
+	"L5-0109": {
+		"meanings": ["to travel by a vehicle", "to multiply numbers"],
+		"note": "乘车 / 乘飞机 is the L5 use; the maths sense is real and kept second."
+	},
+	"L5-0113": {
+		"meanings": ["strenuous", "requiring great effort"],
+		"note": "Adj row; the CEDICT verb clauses would have been the wrong part of speech."
+	},
+	"L5-0114": {
+		"meanings": ["a pond", "a pool"],
+		"note": "The ballroom and theatre senses are dated and not for a learner card."
+	},
+	"L5-0115": {
+		"meanings": ["late", "delayed"],
+		"note": "Adj row; 迟到 L4 holds the verb \"to arrive late\"."
+	},
+	"L5-0116": {
+		"meanings": ["an impulse or urge", "impulsive"],
+		"note": "N/Adj row, so a verb gloss cannot lead."
+	},
+	"L5-0117": {
+		"meanings": ["a conflict or clash", "to clash"],
+		"note": "V/N row; 矛盾 at the same level keeps \"contradiction\"."
+	},
+	"L5-0118": {
+		"meanings": ["ample or plentiful", "sufficient"],
+		"note": "阳光充足 / 时间充足 — plenty of something, the mirror of 不足."
+	},
+	"L5-0119": {
+		"meanings": ["to worry about something", "to feel anxious"],
+		"note": "Kept off bare \"to worry\", which 担心 already carries."
+	},
+	"L5-0120": {
+		"meanings": ["ugly", "shameful"],
+		"note": "Adj row; both senses are current in 长得丑 and 丑事."
+	},
+	"L5-0121": {
+		"meanings": ["smelly", "foul smelling"],
+		"note": "Adj row; CEDICT's \"stench\" is the noun and its tail senses are figurative."
+	},
+	"L5-0123": {
+		"meanings": ["to go on a business trip", "to travel for work"],
+		"note": "Separable verb 出∥差; the phrase is what a learner needs, not a label."
+	},
+	"L5-0124": {
+		"meanings": ["to break out in sweat", "to perspire"],
+		"note": "Separable verb. 汗 L5-0314 is the noun \"sweat\", and \"to sweat\" strips to the same answer."
+	},
+	"L5-0125": {
+		"meanings": ["to stem from", "out of a motive"],
+		"note": "出于好意 — naming the motive something comes from; V row so the verb leads."
+	},
+	"L5-0127": {
+		"meanings": ["unless", "only if"],
+		"note": "除非 is the negative conditional; \"only if\" kept for 除非…才 sentences."
+	},
+	"L5-0131": {
+		"meanings": ["a disciplinary punishment", "to discipline someone"],
+		"note": "N/V row; the noun leads because 受处分 is how it is met."
+	},
+	"L5-0133": {
+		"meanings": ["to convey a message", "to pass along word"],
+		"note": "传达 carries word or instructions downward; kept distinct from 传递."
+	},
+	"L5-0134": {
+		"meanings": ["to pass something on", "to hand along"],
+		"note": "Shipped \"transitive\", a maths label; 传递信息 is the real sense."
+	},
+	"L5-0135": {
+		"meanings": ["a fax", "to send a fax"],
+		"note": "N/V row; the literary painting sense is not learner content."
+	},
+	"L5-0137": {
+		"meanings": ["to rush in", "to break through"],
+		"note": "闯进来 / 闯红灯; 冲 L4 keeps the plain \"to rush\"."
+	}
+}
