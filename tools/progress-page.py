@@ -116,6 +116,7 @@ for lp in loops:
     passing = sum(1 for v in vs if v.get("pass"))
     note = esc(lp.get("note", ""))
     cells = []
+    strip = []
     for fr in lp["frames"]:
         img = (
             f'<button class="frame__img" data-full="{fr["desktop"] or fr["shot"]}" '
@@ -124,15 +125,33 @@ for lp in loops:
             if fr["shot"]
             else f'<div class="frame__img frame__img--none"><span>{esc(fr["kind"] or "no surface")}</span></div>'
         )
-        cells.append(
-            f"""<figure class="frame">
+        if fr["primary"]:
+            cells.append(
+                f"""<figure class="frame">
 	{img}
 	<figcaption class="frame__cap">
 		<span class="frame__name">{esc(fr["piece"])}</span>{chip(fr["pass"])}
 	</figcaption>
 	{f'<p class="frame__gap"><span>Biggest gap</span>{esc(fr["gap"])}</p>' if fr["gap"] else ""}
 </figure>"""
-        )
+            )
+        else:
+            # a state the critic captured beyond the main screen: answered, dark, empty, scrolled
+            label = fr["piece"][len(fr["base"]) + 1 :] if fr["base"] else fr["piece"]
+            strip.append(
+                f'<figure class="shot"><button class="shot__img" '
+                f'data-full="{fr["desktop"] or fr["shot"]}" aria-label="Open {esc(fr["piece"])} full size">'
+                f'<img src="{fr["shot"]}" alt="{esc(fr["piece"])}" loading="lazy"></button>'
+                f'<figcaption>{esc(fr["base"])}<span>{esc(label)}</span></figcaption></figure>'
+            )
+    extras = (
+        f"""<details class="extras">
+		<summary>{len(strip)} further states the critics captured</summary>
+		<div class="strip">{"".join(strip)}</div>
+	</details>"""
+        if strip
+        else ""
+    )
     bands.append(
         f"""<section class="band">
 	<header class="band__head">
@@ -141,6 +160,7 @@ for lp in loops:
 		{f'<p class="band__note">{note}</p>' if note else ""}
 	</header>
 	<div class="sheet">{"".join(cells)}</div>
+	{extras}
 </section>"""
     )
 
@@ -350,6 +370,44 @@ body {{
 
 .empty {{ padding: 4rem 0; color: var(--ink-soft); font-size: 1rem; }}
 
+/* ---- secondary states ---- */
+.extras {{ margin: 1.9rem 0 .4rem; }}
+.extras summary {{
+	cursor: pointer;
+	font: 500 .7rem/1 "IBM Plex Mono", ui-monospace, monospace;
+	letter-spacing: .13em;
+	text-transform: uppercase;
+	color: var(--jade);
+	padding: .5rem 0;
+}}
+.extras summary:focus-visible {{ outline: 2px solid var(--jade); outline-offset: 3px; }}
+.strip {{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+	gap: 1rem .7rem;
+	padding-top: .9rem;
+}}
+.shot {{ margin: 0; display: flex; flex-direction: column; gap: .35rem; }}
+.shot__img {{
+	display: block;
+	width: 100%;
+	padding: 0;
+	border: 1px solid var(--edge);
+	border-radius: 2px;
+	background: var(--sheet);
+	cursor: zoom-in;
+	overflow: hidden;
+	aspect-ratio: 375 / 812;
+}}
+.shot__img img {{ display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }}
+.shot__img:focus-visible {{ outline: 2px solid var(--jade); outline-offset: 3px; }}
+.shot figcaption {{
+	font: 400 .62rem/1.3 "IBM Plex Mono", ui-monospace, monospace;
+	color: var(--ink-faint);
+	overflow-wrap: anywhere;
+}}
+.shot figcaption span {{ display: block; color: var(--ink-soft); }}
+
 /* ---- lightbox ---- */
 dialog {{
 	border: 0;
@@ -394,7 +452,7 @@ dialog img {{
 <script>
 	const lb = document.getElementById('lb');
 	const lbImg = lb.querySelector('img');
-	document.querySelectorAll('.frame__img[data-full]').forEach((b) => {{
+	document.querySelectorAll('.frame__img[data-full], .shot__img[data-full]').forEach((b) => {{
 		b.addEventListener('click', () => {{
 			lbImg.src = b.dataset.full;
 			lbImg.alt = b.getAttribute('aria-label') || 'Enlarged screenshot';

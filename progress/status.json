@@ -1,1 +1,64 @@
-{ "loops": [] }
+{
+ "loops": [
+  {
+   "loop": 1,
+   "note": "First honest pass. Every piece built, integrated and judged against Pleco and Du Chinese by a critic with fresh context that ran the app itself. All nine fail — but the blind judges, shown our screen and a reference screen without being told which was which, picked ours for the quiz, the summary and the vocabulary list. What fails is behaviour and data, not craft.",
+   "verdicts": [
+    {
+     "piece": "vocab-data",
+     "kind": "data",
+     "pass": false,
+     "biggestGap": "Stop ranking CC-CEDICT senses and author meanings[0] per entry against the POS the official row assigns — then make the build refuse to ship anything else."
+    },
+    {
+     "piece": "progress-store",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Make flush() the one durable write path: read the key's current bytes, merge, then write — never blindly overwrite, never latch, never fail silently. Everything above that actually loses a learner's answers (findings 1, 3, 4,…"
+    },
+    {
+     "piece": "session-engine",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Decide direction from the word's own WordProgress, not from its rank in the draw — and make a word's first exposure teach instead of score. In src/lib/session/index.ts, delete assignDirections's familiarity sort and the…"
+    },
+    {
+     "piece": "design-system",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Move tone from a render-time guess to build-time data, and render every syllable from it."
+    },
+    {
+     "piece": "app-shell",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Give the shell a scroll-direction chrome controller and hold total chrome under ~100px on /browse. Today AppBar.svelte only tracks scrolled > 2 to toggle a hairline, and each screen stacks its own sticky toolbar underneath…"
+    },
+    {
+     "piece": "level-select",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Put real vocabulary on every level card, and make it the card's Chinese."
+    },
+    {
+     "piece": "quiz-card",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": ""
+    },
+    {
+     "piece": "session-summary",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": ""
+    },
+    {
+     "piece": "vocab-browse",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Segment every word's pinyin into syllables at build time in scripts/build-vocab.mjs, ship a syllables: string[] field on each Word, and make Pinyin.svelte and search.ts read that field instead of inferring syllables from…"
+    }
+   ]
+  }
+ ]
+}
