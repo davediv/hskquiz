@@ -1,0 +1,15 @@
+{
+  "piece": "level-select",
+  "loop": 3,
+  "rule": "\"level-select\" is 12 characters — EVEN — so ours is A.png and the reference is B.png",
+  "A": {
+    "which": "ours",
+    "source": "progress/shots/loop-3/level-select-mobile.png",
+    "description": "hskquiz level select, first-time empty state, 375x812 @2x"
+  },
+  "B": {
+    "which": "reference",
+    "source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+    "description": "Du Chinese article-collection screen — a library of things to start"
+  }
+}
