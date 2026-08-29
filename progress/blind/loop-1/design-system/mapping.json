@@ -1,0 +1,16 @@
+{
+	"piece": "design-system",
+	"loop": 1,
+	"rule": "\"design-system\" is 13 characters — ODD — so the reference is A and the app is B",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"description": "Pleco headword/detail screen for 几乎 — tone-coloured hanzi headword at ~90px on a 414pt viewport, PY line beneath, HSK 3 badge, numbered senses with hanzi/pinyin/English example stacks"
+	},
+	"B": {
+		"which": "app",
+		"source": "progress/shots/loop-1/design-system-answered-mobile.png",
+		"description": "hskquiz /quiz/1 answered (correct) state — 怎么 headword at ~130px, pinyin zěnme in accent red, gloss, POS, graded answer options"
+	},
+	"why_this_pairing": "design-system is judged on how Chinese is set, so both sides are headword/detail screens: one large hanzi word, its pinyin, its gloss, and a part-of-speech label."
+}
