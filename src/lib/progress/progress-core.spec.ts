@@ -1,43 +1,64 @@
 import { describe, expect, it } from 'vitest';
 import {
 	SCHEMA_VERSION,
+	type Generations,
 	type StoredProgress,
 	applyAnswer,
+	applyGenerations,
+	applySeen,
 	blankWord,
+	bumpGeneration,
 	decode,
 	decodeStored,
 	emptyState,
 	emptyStored,
 	encode,
+	generationFor,
+	generationForWord,
 	isShippableWordId,
 	isUsableWordId,
 	levelOfId,
-	mergeProgress
+	mergeProgress,
+	recordGen,
+	restoreInto,
+	stampLevelGen,
+	tally,
+	unexplainedLosses
 } from './progress-core.ts';
 import type { WordProgress } from '$lib/types';
 
 /** A clock inside the decoder's plausibility window, and stamps around it. */
 const NOW = 1_787_000_000_000;
 const EARLIER = NOW - 86_400_000;
+const MINUTE = 60_000;
 
-function stored(
-	words: Record<string, Partial<WordProgress>>,
-	cleared: Record<number, number> = {}
-): StoredProgress {
+type WordFields = Partial<WordProgress> & { gen?: number };
+
+function stored(words: Record<string, WordFields>, gens: Generations = {}): StoredProgress {
 	const payload = emptyStored();
 	for (const [wordId, fields] of Object.entries(words)) {
 		payload.state.byWord[wordId] = { ...blankWord(wordId), ...fields };
 	}
-	payload.cleared = { ...cleared };
+	payload.gens = { ...gens };
 	return payload;
+}
+
+function wrap(state = emptyState(), gens: Generations = {}): StoredProgress {
+	return { state, gens };
+}
+
+/** The generation a payload holds for one id, or -1 when it holds no record at all. */
+function genOf(payload: StoredProgress | null | undefined, wordId: string): number {
+	const record = payload?.state.byWord[wordId];
+	return record ? recordGen(record) : -1;
 }
 
 describe('applyAnswer', () => {
 	it('counts a correct answer and extends the streak', () => {
 		const record = blankWord('L1-0001');
 
-		applyAnswer(record, true, 1000);
-		applyAnswer(record, true, 2000);
+		applyAnswer(record, true, 1000, 0);
+		applyAnswer(record, true, 2000, 0);
 
 		expect(record).toEqual({
 			wordId: 'L1-0001',
@@ -51,12 +72,12 @@ describe('applyAnswer', () => {
 
 	it('resets the streak on a miss and stamps lastMissed, without touching correct', () => {
 		const record = blankWord('L1-0001');
-		applyAnswer(record, true, 1000);
-		applyAnswer(record, true, 2000);
-		applyAnswer(record, true, 3000);
+		applyAnswer(record, true, 1000, 0);
+		applyAnswer(record, true, 2000, 0);
+		applyAnswer(record, true, 3000, 0);
 		expect(record.streak).toBe(3);
 
-		applyAnswer(record, false, 4000);
+		applyAnswer(record, false, 4000, 0);
 
 		expect(record.streak).toBe(0);
 		expect(record.correct).toBe(3);
@@ -64,9 +85,90 @@ describe('applyAnswer', () => {
 		expect(record.lastSeen).toBe(4000);
 		expect(record.lastMissed).toBe(4000);
 
-		applyAnswer(record, true, 5000);
+		applyAnswer(record, true, 5000, 0);
 		expect(record.streak).toBe(1);
 		expect(record.lastMissed).toBe(4000);
+	});
+
+	it('stamps the reset generation the answer was given under', () => {
+		const record = blankWord('L1-0001');
+
+		applyAnswer(record, true, 1000, 3);
+
+		expect(recordGen(record)).toBe(3);
+	});
+
+	it('leaves generation 0 off the record entirely', () => {
+		const record = blankWord('L1-0001');
+
+		applyAnswer(record, true, 1000, 0);
+
+		expect('gen' in record).toBe(false);
+		expect(recordGen(record)).toBe(0);
+	});
+});
+
+describe('applySeen — the teach card', () => {
+	it('stamps the exposure and writes nothing that reads as an answer', () => {
+		const record = blankWord('L1-0001');
+
+		applySeen(record, NOW, 0);
+
+		// The whole point: an introduction asked nothing, so it can claim nothing.
+		expect(record).toEqual({
+			wordId: 'L1-0001',
+			seen: 0,
+			correct: 0,
+			streak: 0,
+			lastSeen: NOW,
+			lastMissed: 0
+		});
+	});
+
+	it('survives a round trip, so a word is not introduced again on every reload', () => {
+		const stored = emptyStored();
+		const record = blankWord('L1-0001');
+		// A real clock: the decoder floors anything before 2024 to 0, which would take the
+		// exposure with it — the store writes through `#at()`, which floors the same way.
+		applySeen(record, NOW, 0);
+		stored.state.byWord['L1-0001'] = record;
+
+		const decoded = decodeStored(encode(stored), NOW);
+
+		expect(decoded?.state.byWord['L1-0001']?.lastSeen).toBe(NOW);
+		expect(decoded?.state.byWord['L1-0001']?.seen).toBe(0);
+	});
+
+	it('is superseded by a real answer rather than competing with one', () => {
+		const record = blankWord('L1-0001');
+
+		applySeen(record, NOW, 0);
+		applyAnswer(record, true, NOW + 1000, 0);
+
+		expect(record.seen).toBe(1);
+		expect(record.correct).toBe(1);
+		expect(record.lastSeen).toBe(NOW + 1000);
+	});
+});
+
+describe('generations', () => {
+	it('sums the global counter with the level’s, so one integer covers both scopes', () => {
+		const gens: Generations = { 0: 2, 3: 1 };
+
+		expect(generationFor(gens, 3)).toBe(3);
+		expect(generationFor(gens, 1)).toBe(2);
+		// An id that names no level answers to the global counter alone.
+		expect(generationFor(gens, null)).toBe(2);
+		expect(generationForWord(gens, 'L3-0001')).toBe(3);
+		expect(generationForWord(gens, 'custom-a')).toBe(2);
+	});
+
+	it('bumps past a generation it has only just read off the key', () => {
+		// Generations merge by Math.max, so a reset in a tab holding a stale payload has to
+		// outrank what is already there or the merge simply absorbs it.
+		expect(bumpGeneration({}, 0)).toEqual({ 0: 1 });
+		expect(bumpGeneration({ 0: 1 }, 0, 7)).toEqual({ 0: 8 });
+		expect(bumpGeneration({ 0: 9 }, 0, 7)).toEqual({ 0: 10 });
 	});
 });
 
@@ -83,25 +185,26 @@ describe('encode / decode', () => {
 		};
 		state.levels[2] = { sessions: 3, lastPlayed: NOW };
 
-		const decoded = decode(encode(state), NOW);
+		const decoded = decode(encode(wrap(state)), NOW);
 
 		expect(decoded).toEqual(state);
 	});
 
-	it('round-trips tombstones alongside the state', () => {
-		const payload = stored({ 'L1-0001': { seen: 1, correct: 1, lastSeen: NOW } }, { 3: EARLIER });
+	it('round-trips generations alongside the state', () => {
+		const payload = stored({ 'L1-0001': { seen: 1, correct: 1, lastSeen: NOW, gen: 2 } }, { 3: 2 });
 
-		const decoded = decodeStored(encode(payload.state, payload.cleared), NOW);
+		const decoded = decodeStored(encode(payload), NOW);
 
-		expect(decoded?.cleared).toEqual({ 3: EARLIER });
+		expect(decoded?.gens).toEqual({ 3: 2 });
 		expect(decoded?.state.byWord['L1-0001']?.seen).toBe(1);
+		expect(genOf(decoded, 'L1-0001')).toBe(2);
 	});
 
-	it('leaves the tombstone field out entirely when nothing was ever reset', () => {
+	it('leaves the generation field out entirely when nothing was ever reset', () => {
 		const state = emptyState();
 		state.byWord['L1-0001'] = { ...blankWord('L1-0001'), seen: 1, correct: 1, lastSeen: NOW };
 
-		expect(JSON.parse(encode(state))).toEqual({
+		expect(JSON.parse(encode(wrap(state)))).toEqual({
 			v: SCHEMA_VERSION,
 			w: { 'L1-0001': [1, 1, 0, NOW, 0] },
 			l: {}
@@ -119,10 +222,25 @@ describe('encode / decode', () => {
 			lastMissed: EARLIER
 		};
 
-		expect(JSON.parse(encode(state))).toEqual({
+		expect(JSON.parse(encode(wrap(state)))).toEqual({
 			v: SCHEMA_VERSION,
 			w: { 'L1-0001': [5, 4, 2, NOW, EARLIER] },
 			l: {}
+		});
+	});
+
+	it('appends the generation to the tuple only once it is non-zero', () => {
+		const payload = stored({ 'L2-0001': { seen: 1, correct: 1, lastSeen: NOW, gen: 4 } }, { 0: 4 });
+		// The level entry was written under the same reset.
+		const level = { sessions: 2, lastPlayed: NOW };
+		stampLevelGen(level, 4);
+		payload.state.levels[2] = level;
+
+		expect(JSON.parse(encode(payload))).toEqual({
+			v: SCHEMA_VERSION,
+			w: { 'L2-0001': [1, 1, 0, NOW, 0, 4] },
+			l: { '2': [2, NOW, 4] },
+			g: { '0': 4 }
 		});
 	});
 
@@ -136,14 +254,42 @@ describe('encode / decode', () => {
 			b.byWord[id] = { ...blankWord(id), seen: 1, correct: 1, lastSeen: NOW };
 		}
 
-		expect(encode(a)).toBe(encode(b));
+		expect(encode(wrap(a))).toBe(encode(wrap(b)));
 	});
 
 	it('drops records for words that were never actually answered', () => {
 		const state = emptyState();
 		state.byWord['L1-0001'] = blankWord('L1-0001');
 
-		expect(JSON.parse(encode(state)).w).toEqual({});
+		expect(JSON.parse(encode(wrap(state))).w).toEqual({});
+	});
+
+	it('never writes bytes its own decoder reads as empty', () => {
+		// The root cause of the loop-2 data loss: the encoder ignored erasures, so the store
+		// happily wrote a payload holding one record and a reset that record predated, and the
+		// decoder resolved it to zero words. Encoder and decoder have to agree.
+		const payload = stored({ 'L1-0001': { seen: 3, correct: 3, lastSeen: NOW, gen: 0 } }, { 0: 1 });
+
+		const text = encode(payload);
+
+		expect(JSON.parse(text).w).toEqual({});
+		expect(decodeStored(text, NOW)?.state.byWord).toEqual({});
+	});
+
+	it('encoding is idempotent under decoding, whatever the clock says', () => {
+		const payload = stored(
+			{
+				'L1-0001': { seen: 2, correct: 2, lastSeen: NOW, gen: 1 },
+				'L1-0002': { seen: 1, correct: 0, lastSeen: EARLIER, gen: 0 }
+			},
+			{ 0: 1 }
+		);
+
+		const once = encode(payload);
+		for (const clock of [NOW, NOW - 40 * 3_600_000, NOW + 40 * 3_600_000]) {
+			const decoded = decodeStored(once, clock);
+			expect(Object.keys(decoded?.state.byWord ?? {})).toEqual(['L1-0001']);
+		}
 	});
 });
 
@@ -224,13 +370,36 @@ describe('decode', () => {
 
 		const decoded = decode(junk, NOW);
 
-		// Nothing was ever answered here, whatever else the tuple claims.
-		expect(decoded?.byWord['L1-0001']).toBeUndefined();
+		// A negative `seen` sanitises to 0 rather than to NaN. The record survives because its
+		// `lastSeen` is real — seen 0 with a stamp is an introduction, not junk — but every
+		// field that claimed an answer is gone.
+		expect(decoded?.byWord['L1-0001']).toEqual({
+			wordId: 'L1-0001',
+			seen: 0,
+			correct: 0,
+			streak: 0,
+			lastSeen: NOW,
+			lastMissed: 0
+		});
 		expect(decoded?.byWord['L1-0002']?.seen).toBe(9);
 		expect(decoded?.byWord['L1-0003']).toBeUndefined();
+		// Nothing ever happened to this one — no answer and no exposure — so it is dropped.
 		expect(decoded?.byWord['L1-0004']).toBeUndefined();
 		// Only real levels survive.
 		expect(Object.keys(decoded?.levels ?? {})).toEqual(['1']);
+	});
+
+	it('sanitises a junk generation rather than erasing everything with it', () => {
+		const junk = JSON.stringify({
+			v: 1,
+			w: { 'L1-0001': [1, 1, 1, NOW, 0, 'banana'] },
+			g: { '0': 'banana', '9': 4, '1': -3 }
+		});
+
+		const decoded = decodeStored(junk, NOW);
+
+		expect(decoded?.gens).toEqual({});
+		expect(decoded?.state.byWord['L1-0001']?.seen).toBe(1);
 	});
 
 	it('clamps correct to seen and streak to correct', () => {
@@ -279,18 +448,84 @@ describe('decode', () => {
 		expect(decoded?.levels[1]?.lastPlayed).toBe(NOW);
 	});
 
-	it('applies a tombstone it finds in the payload', () => {
+	it('applies a reset generation it finds in the payload', () => {
 		const payload = JSON.stringify({
 			v: 1,
-			w: { 'L1-0001': [1, 1, 1, EARLIER, 0], 'L1-0002': [1, 1, 1, NOW, 0] },
+			w: { 'L1-0001': [1, 1, 1, EARLIER, 0], 'L1-0002': [1, 1, 1, NOW, 0, 1] },
 			l: { '1': [4, EARLIER] },
-			c: { '0': EARLIER + 1000 }
+			g: { '0': 1 }
 		});
 
 		const decoded = decodeStored(payload, NOW);
 
 		expect(Object.keys(decoded?.state.byWord ?? {})).toEqual(['L1-0002']);
 		expect(decoded?.state.levels[1]).toBeUndefined();
+	});
+
+	it('keeps an answer given after a reset however wrong the device clock is', () => {
+		// The loop-2 FAIL, end to end. Reset on a phone running fast, correct the clock, answer:
+		// the answers are stamped *before* the reset and used to be deleted on the next read, for
+		// as long as the skew lasted. A generation does not care what the clock says.
+		for (const skewMs of [MINUTE, 10 * MINUTE, 2 * 3_600_000, 35 * 3_600_000]) {
+			const payload = JSON.stringify({
+				v: 1,
+				w: {
+					// Written after the reset (generation 1) but stamped before it, by the skew.
+					'L1-0001': [1, 1, 1, NOW - skewMs, 0, 1],
+					'L1-0002': [1, 1, 1, NOW - skewMs, 0, 1],
+					'L1-0003': [1, 1, 1, NOW - skewMs, 0, 1],
+					// Written before the reset. Stays erased.
+					'L1-0004': [9, 9, 9, NOW - skewMs - 1, 0]
+				},
+				g: { '0': 1 }
+			});
+
+			const decoded = decodeStored(payload, NOW);
+
+			expect(Object.keys(decoded?.state.byWord ?? {}).sort()).toEqual([
+				'L1-0001',
+				'L1-0002',
+				'L1-0003'
+			]);
+		}
+	});
+
+	it('keeps a reset stuck on a clock running years in the past', () => {
+		// The mirror: `stamp()` pulls implausible values back to `now`, so under the old rule
+		// every stored record decoded as newer than the tombstone and the reset could not stick.
+		const payload = JSON.stringify({
+			v: 1,
+			w: { 'L1-0001': [4, 4, 4, NOW, 0] },
+			g: { '0': 1 }
+		});
+
+		for (const clock of [Date.UTC(2001, 5, 1), NOW, NOW + 50 * 365 * 86_400_000]) {
+			expect(decodeStored(payload, clock)?.state.byWord).toEqual({});
+		}
+	});
+
+	it('migrates a timestamp tombstone from the pre-generation format, once', () => {
+		const legacy = JSON.stringify({
+			v: 1,
+			w: { 'L1-0001': [1, 1, 1, EARLIER, 0], 'L1-0002': [2, 2, 2, NOW, 0] },
+			l: { '1': [4, EARLIER], '2': [1, NOW] },
+			c: { '0': EARLIER + 1000 }
+		});
+
+		const decoded = decodeStored(legacy, NOW) ?? emptyStored();
+
+		// The cut is honoured by comparing two numbers from the same payload — never against a
+		// clock — and then spent: what survives is adopted at the generation it migrated to.
+		expect(Object.keys(decoded.state.byWord)).toEqual(['L1-0002']);
+		expect(Object.keys(decoded.state.levels)).toEqual(['2']);
+		expect(decoded.gens).toEqual({ 0: 1 });
+		expect(genOf(decoded, 'L1-0002')).toBe(1);
+
+		// Re-encoded, it is a generation payload and the cut never applies again.
+		const rewritten = encode(decoded);
+		expect(JSON.parse(rewritten).c).toBeUndefined();
+		expect(JSON.parse(rewritten).g).toEqual({ '0': 1 });
+		expect(Object.keys(decodeStored(rewritten, NOW)?.state.byWord ?? {})).toEqual(['L1-0002']);
 	});
 });
 
@@ -349,20 +584,18 @@ describe('mergeProgress', () => {
 		expect(merged.state.byWord['L1-0001']?.seen).toBe(4);
 	});
 
-	it('lets a tombstone erase what the other side still holds', () => {
-		const mine = emptyStored();
-		mine.cleared = { 0: NOW };
-		const theirs = stored({ 'L1-0001': { seen: 9, correct: 9, streak: 9, lastSeen: EARLIER } });
+	it('lets a reset generation erase what the other side still holds', () => {
+		const mine = stored({}, { 0: 1 });
+		const theirs = stored({ 'L1-0001': { seen: 9, correct: 9, streak: 9, lastSeen: NOW + 5 } });
 
 		const merged = mergeProgress(emptyStored(), mine, theirs);
 
 		expect(merged.state.byWord).toEqual({});
-		expect(merged.cleared).toEqual({ 0: NOW });
+		expect(merged.gens).toEqual({ 0: 1 });
 	});
 
-	it('scopes a level tombstone to that level', () => {
-		const mine = emptyStored();
-		mine.cleared = { 2: NOW };
+	it('scopes a level reset to that level', () => {
+		const mine = stored({}, { 2: 1 });
 		const theirs = stored({
 			'L1-0001': { seen: 1, correct: 1, streak: 1, lastSeen: EARLIER },
 			'L2-0001': { seen: 1, correct: 1, streak: 1, lastSeen: EARLIER }
@@ -373,22 +606,33 @@ describe('mergeProgress', () => {
 		expect(Object.keys(merged.state.byWord)).toEqual(['L1-0001']);
 	});
 
-	it('does not let a tombstone erase an answer given after it', () => {
-		const mine = stored({ 'L1-0007': { seen: 1, correct: 1, streak: 1, lastSeen: NOW + 5 } });
-		mine.cleared = { 0: NOW };
+	it('does not let a reset erase an answer given under it', () => {
+		const mine = stored(
+			{ 'L1-0007': { seen: 1, correct: 1, streak: 1, lastSeen: 0, gen: 1 } },
+			{ 0: 1 }
+		);
 
 		const merged = mergeProgress(emptyStored(), mine, emptyStored());
 
+		// `lastSeen: 0` on purpose: the timestamp is now irrelevant to whether a record survives.
 		expect(merged.state.byWord['L1-0007']?.seen).toBe(1);
 	});
 
-	it('takes the later of two tombstones for the same scope', () => {
-		const mine = emptyStored();
-		mine.cleared = { 0: EARLIER };
-		const theirs = emptyStored();
-		theirs.cleared = { 0: NOW };
+	it('takes the higher of two generations for the same scope', () => {
+		const mine = stored({}, { 0: 1 });
+		const theirs = stored({}, { 0: 4 });
 
-		expect(mergeProgress(emptyStored(), mine, theirs).cleared).toEqual({ 0: NOW });
+		expect(mergeProgress(emptyStored(), mine, theirs).gens).toEqual({ 0: 4 });
+	});
+
+	it('carries the newer generation onto a record both sides hold', () => {
+		const mine = stored({ 'L1-0001': { seen: 1, correct: 1, lastSeen: NOW, gen: 2 } }, { 0: 2 });
+		const theirs = stored({ 'L1-0001': { seen: 1, correct: 1, lastSeen: EARLIER } });
+
+		const merged = mergeProgress(emptyStored(), mine, theirs);
+
+		expect(genOf(merged, 'L1-0001')).toBe(2);
+		expect(merged.state.byWord['L1-0001']?.seen).toBe(2);
 	});
 
 	it('adds up session counts the same way it adds answers', () => {
@@ -402,6 +646,86 @@ describe('mergeProgress', () => {
 		const merged = mergeProgress(ancestor, mine, theirs);
 
 		expect(merged.state.levels[1]).toEqual({ sessions: 5, lastPlayed: NOW });
+	});
+});
+
+describe('unexplainedLosses', () => {
+	it('says nothing when a reset accounts for every record that went', () => {
+		const disk = stored({ 'L1-0001': { seen: 3, correct: 3, lastSeen: NOW } });
+		const merged = stored({}, { 0: 1 });
+
+		expect(unexplainedLosses(disk, merged)).toEqual([]);
+	});
+
+	it('names records a merge dropped that nothing accounts for', () => {
+		const disk = stored({
+			'L1-0001': { seen: 3, correct: 3, lastSeen: NOW },
+			'L1-0002': { seen: 1, correct: 0, lastSeen: NOW }
+		});
+		const merged = stored({ 'L1-0002': { seen: 1, correct: 0, lastSeen: NOW } });
+
+		expect(unexplainedLosses(disk, merged)).toEqual(['L1-0001']);
+	});
+
+	it('does not flag a record that survived under a different generation', () => {
+		const disk = stored({ 'L1-0001': { seen: 3, correct: 3, lastSeen: NOW } });
+		const merged = stored({ 'L1-0001': { seen: 4, correct: 4, lastSeen: NOW, gen: 2 } }, { 0: 2 });
+
+		expect(unexplainedLosses(disk, merged)).toEqual([]);
+	});
+});
+
+describe('restoreInto', () => {
+	it('takes the better of each field rather than adding the two up', () => {
+		const mine = stored({ 'L1-0001': { seen: 2, correct: 1, streak: 0, lastSeen: NOW } });
+		const rescued = stored({
+			'L1-0001': { seen: 5, correct: 4, streak: 2, lastSeen: EARLIER, lastMissed: EARLIER }
+		});
+
+		const restored = restoreInto(mine, rescued);
+
+		expect(restored.state.byWord['L1-0001']).toMatchObject({
+			seen: 5,
+			correct: 4,
+			// The streak belongs to whoever answered most recently, which is us, and we missed.
+			streak: 0,
+			lastSeen: NOW,
+			lastMissed: EARLIER
+		});
+	});
+
+	it('stamps restored history at the current generation so a past reset cannot re-erase it', () => {
+		const mine = stored({}, { 0: 3 });
+		const rescued = stored({ 'L1-0009': { seen: 4, correct: 4, lastSeen: EARLIER } });
+
+		const restored = restoreInto(mine, rescued);
+		applyGenerations(restored);
+
+		expect(restored.state.byWord['L1-0009']?.seen).toBe(4);
+		expect(genOf(restored, 'L1-0009')).toBe(3);
+	});
+
+	it('keeps level sessions from whichever side has more of them', () => {
+		const mine = emptyStored();
+		mine.state.levels[1] = { sessions: 1, lastPlayed: NOW };
+		const rescued = emptyStored();
+		rescued.state.levels[1] = { sessions: 6, lastPlayed: EARLIER };
+
+		const restored = restoreInto(mine, rescued);
+
+		expect(restored.state.levels[1]).toMatchObject({ sessions: 6, lastPlayed: NOW });
+	});
+});
+
+describe('tally', () => {
+	it('counts the words and answers a payload holds', () => {
+		const payload = stored({
+			'L1-0001': { seen: 3, correct: 2, lastSeen: NOW },
+			'L1-0002': { seen: 1, correct: 1, lastSeen: NOW },
+			'L1-0003': { seen: 0 }
+		});
+
+		expect(tally(payload)).toEqual({ words: 2, answers: 4 });
 	});
 });
 
