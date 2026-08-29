@@ -1,0 +1,490 @@
+{
+	"L3-0487": {
+		"meanings": ["uncooked rice", "meter"],
+		"note": "米饭 is the cooked rice; CEDICT's third sense is slang for yuan and is dropped."
+	},
+	"L3-0488": {
+		"meanings": ["to face", "to confront"],
+		"note": "CEDICT ships one semicolon-piled clause; these are the two senses a learner meets."
+	},
+	"L3-0490": {
+		"meanings": ["among the common people", "folk or popular"],
+		"note": "Noun row: 民间 is the non-official, everyday sphere — 民间故事, 民间艺术."
+	},
+	"L3-0491": {
+		"meanings": ["ethnic group", "nationality"],
+		"note": "\"ethnic group\" is the sense in 少数民族; \"nationality\" alone reads as citizenship."
+	},
+	"L3-0492": {
+		"meanings": ["clear and explicit", "to make clear"],
+		"note": "Adj first per the official POS; kept apart from 清楚 \"clear\" and 确定 \"definite\"."
+	},
+	"L3-0493": {
+		"meanings": ["obvious", "evident"],
+		"note": "明显 is \"obvious\"; \"clear/distinct\" would answer to 清楚 just as well."
+	},
+	"L3-0494": {
+		"meanings": ["fate", "destiny"],
+		"note": "Two glosses cover the card; CEDICT piles them into one clause."
+	},
+	"L3-0495": {
+		"meanings": ["a certain person or thing", "some"],
+		"note": "Pronoun: 某 stands in for a name the speaker will not give — 某人, 某天."
+	},
+	"L3-0497": {
+		"meanings": ["wood", "a log or piece of timber"],
+		"note": "The figurative \"blockhead\" sense is dictionary register, not a flashcard answer."
+	},
+	"L3-0501": {
+		"meanings": ["a male person", "a man"],
+		"note": "Formal/sporting register word; kept distinct from 男人 \"man\" at HSK 1."
+	},
+	"L3-0505": {
+		"meanings": ["within", "inner"],
+		"note": "里面 (also L3) owns \"inside\"; 内 is the bound, formal \"within\" of 国内, 室内."
+	},
+	"L3-0506": {
+		"meanings": ["content", "subject matter"],
+		"note": "CEDICT piles four clauses; \"content\" is what the learner needs."
+	},
+	"L3-0508": {
+		"meanings": ["can you or not?", "asking if something is possible"],
+		"note": "V-not-V question form of 能 — described by function, since no dictionary glosses it."
+	},
+	"L3-0514": {
+		"meanings": ["to read aloud", "to study"],
+		"note": "念 is reading out loud (念课文) and attending school (念书), not silent 看/读."
+	},
+	"L3-0515": {
+		"meanings": ["cow", "ox"],
+		"note": "The L3 noun row is the animal; the L5 牛 row is the adjective and must not repeat this."
+	},
+	"L3-0517": {
+		"meanings": ["farmer", "peasant"],
+		"note": "\"farmer\" is the neutral modern reading; \"peasant\" alone is dated and loaded."
+	},
+	"L3-0521": {
+		"meanings": ["perhaps", "I am afraid that"],
+		"note": "Official POS is Adv — 怕是不来了. The verb \"to fear\" is the separate L2 row 怕."
+	},
+	"L3-0522": {
+		"meanings": ["to pat", "to take a photo"],
+		"note": "Both senses are met at L3 (拍手, 拍照); the sports \"racket\" noun is not."
+	},
+	"L3-0523": {
+		"meanings": ["to arrange in order", "to line up"],
+		"note": "Verb row, so the \"row/platoon/classifier\" noun senses are set aside."
+	},
+	"L3-0524": {
+		"meanings": ["to rank", "ranking"],
+		"note": "Verb-object 排名; \"to rank 1st, 2nd etc\" is CEDICT plumbing."
+	},
+	"L3-0525": {
+		"meanings": ["brand", "a sign or plaque"],
+		"note": "牌子 is a brand first in modern use; \"sign\" kept second."
+	},
+	"L3-0526": {
+		"meanings": ["to send someone", "a faction or group"],
+		"note": "派 dispatches a person (派人去); the noun sense is the clique/school one."
+	},
+	"L3-0527": {
+		"meanings": ["to judge", "judgment"],
+		"note": "V then N, matching the official V/N order."
+	},
+	"L3-0528": {
+		"meanings": ["fat", "plump"],
+		"note": "Adjective of people; the CEDICT pair is already right."
+	},
+	"L3-0529": {
+		"meanings": ["to go running", "to jog"],
+		"note": "Separated from 跑 \"to run\" at HSK 1 — 跑步 is the activity."
+	},
+	"L3-0530": {
+		"meanings": ["to match or go with", "to mix or blend"],
+		"note": "配 at L3 is pairing things that suit each other (配衣服), not mating or prescriptions."
+	},
+	"L3-0532": {
+		"meanings": ["to criticize"],
+		"note": "One sense; the \"criticism\" noun clause and the CL: plumbing are dropped."
+	},
+	"L3-0534": {
+		"meanings": ["peel or rind", "leather"],
+		"note": "皮肤 (L5) owns \"skin\"; 皮 here is the outer layer and the material (皮鞋)."
+	},
+	"L3-0537": {
+		"meanings": ["ticket price", "fare"],
+		"note": "Transparent compound; two short senses cover it."
+	},
+	"L3-0540": {
+		"meanings": ["torn or worn out", "to break"],
+		"note": "Adj first per POS, and \"torn or worn out\" separates 破 from 坏 \"bad or broken\"."
+	},
+	"L3-0541": {
+		"meanings": ["to destroy", "to damage"],
+		"note": "CEDICT leads with the noun \"destruction\"; the official row is a verb."
+	},
+	"L3-0542": {
+		"meanings": ["widespread", "universal"],
+		"note": "Kept apart from 普通 \"ordinary\" and 一般 \"general\" at L2."
+	},
+	"L3-0543": {
+		"meanings": ["to become widespread", "widespread"],
+		"note": "V then Adj per the official row (电脑普及了); 推广 keeps \"to popularize\" and 普遍 keeps \"widespread\"."
+	},
+	"L3-0544": {
+		"meanings": ["measure word for issues", "a period or stage"],
+		"note": "Official POS is M, so the classifier reading leads: 第三期, 两期课程."
+	},
+	"L3-0545": {
+		"meanings": ["even and neat", "all present"],
+		"note": "齐 is both tidy-and-level and complete (人齐了) — both met at L3."
+	},
+	"L3-0546": {
+		"meanings": ["next in order", "secondly"],
+		"note": "Function described plainly: 首先… 其次… lists the second item."
+	},
+	"L3-0547": {
+		"meanings": ["actually", "in fact"],
+		"note": "Adverb; the extra CEDICT clauses are the same sense reworded."
+	},
+	"L3-0548": {
+		"meanings": ["strange", "odd"],
+		"note": "Adjective row; \"to marvel\" is a different, non-L3 use."
+	},
+	"L3-0549": {
+		"meanings": ["climate"],
+		"note": "Single clean sense; CEDICT's second is marked figurative and is barred."
+	},
+	"L3-0550": {
+		"meanings": ["be sure to", "by all means"],
+		"note": "Official POS is Adv — the urging 千万别忘了. \"Ten million\" is the numeral, wrong for this row."
+	},
+	"L3-0551": {
+		"meanings": ["front and back", "around a certain time"],
+		"note": "Noun row leads with the spatial sense; the \"approximately\" time use follows."
+	},
+	"L3-0552": {
+		"meanings": ["to advance", "to move forward"],
+		"note": "Verb row; \"onward\" is an adverb gloss."
+	},
+	"L3-0553": {
+		"meanings": ["the area in front", "ahead"],
+		"note": "Locative noun, kept distinguishable from 前 and from 前后."
+	},
+	"L3-0554": {
+		"meanings": ["to head for", "to set out for"],
+		"note": "Formal travel verb; \"to go\" alone would answer to 去."
+	},
+	"L3-0555": {
+		"meanings": ["strong", "powerful"],
+		"note": "Plain adjective; the comparative and 百强 uses are not L3."
+	},
+	"L3-0556": {
+		"meanings": ["big and powerful", "mighty"],
+		"note": "Must not answer to 强 \"strong\" — 强大 is scale plus strength."
+	},
+	"L3-0559": {
+		"meanings": ["bridge"],
+		"note": "One noun sense; the CL: clause is dictionary plumbing."
+	},
+	"L3-0560": {
+		"meanings": ["coincidental", "skillful"],
+		"note": "Adjective row: 太巧了 is the everyday use, 手巧 the second."
+	},
+	"L3-0561": {
+		"meanings": ["related by blood", "close or intimate"],
+		"note": "Adjective row: 亲人, 亲生. The internet-slang \"dear\" and the verb \"to kiss\" are barred."
+	},
+	"L3-0562": {
+		"meanings": ["warm and friendly", "kindly"],
+		"note": "Of a manner or a voice; kept apart from 热情 at L2."
+	},
+	"L3-0564": {
+		"meanings": ["personally", "in person"],
+		"note": "Adverb; doing it oneself rather than through someone else."
+	},
+	"L3-0565": {
+		"meanings": ["emotion", "sentiment"],
+		"note": "情感 is the emotion itself; 感觉 (L2) is the sensation and 感情 the attachment."
+	},
+	"L3-0566": {
+		"meanings": ["circumstances", "how things stand"],
+		"note": "情况怎么样 — kept answerable apart from 状况 \"situation\" at the same level."
+	},
+	"L3-0570": {
+		"meanings": ["district", "zone"],
+		"note": "Administrative area (海淀区); 地区 keeps \"region\"."
+	},
+	"L3-0571": {
+		"meanings": ["difference", "to tell apart"],
+		"note": "Official POS is N/V, so the noun leads; CEDICT sense 1 is the noun too."
+	},
+	"L3-0572": {
+		"meanings": ["to cancel", "to call off"],
+		"note": "One verb sense, two plain wordings."
+	},
+	"L3-0574": {
+		"meanings": ["everyone present", "the whole audience"],
+		"note": "Noun row; the adverbial \"unanimously\" reading is not the card."
+	},
+	"L3-0575": {
+		"meanings": ["covering every aspect", "comprehensive"],
+		"note": "\"all-around\" reads as a sports compliment, and 完善 already leads with \"comprehensive\"."
+	},
+	"L3-0576": {
+		"meanings": ["the entire globe", "worldwide"],
+		"note": "Kept distinguishable from 世界 \"world\" at the same level."
+	},
+	"L3-0577": {
+		"meanings": ["to be short of", "to be missing"],
+		"note": "Verb row; CEDICT leads with the noun \"deficiency\"."
+	},
+	"L3-0578": {
+		"meanings": ["a drawback", "a fault"],
+		"note": "The opposite of 优点; worded so it does not answer to 短处 \"a shortcoming\" at the same level."
+	},
+	"L3-0579": {
+		"meanings": ["to lack", "to not have enough"],
+		"note": "Verb row, and worded so it does not answer to 缺 \"to be short of\"."
+	},
+	"L3-0580": {
+		"meanings": ["to ensure", "to make sure of"],
+		"note": "保证 at this level owns \"to guarantee\", so this card must not repeat that pair."
+	},
+	"L3-0581": {
+		"meanings": ["definite", "to confirm"],
+		"note": "Adj first per POS; \"definite\" avoids answering to 一定 \"certain\" and 明确."
+	},
+	"L3-0582": {
+		"meanings": ["indeed", "truly"],
+		"note": "The adverb use (确实很好) is what a learner meets; \"reliable\" is the rarer adjective."
+	},
+	"L3-0584": {
+		"meanings": ["measure word for groups", "a flock or herd"],
+		"note": "Official POS is M only — the classifier leads, and 人群 keeps \"a crowd of people\"."
+	},
+	"L3-0586": {
+		"meanings": ["warm and spirited", "enthusiastic"],
+		"note": "Of applause and welcomes; kept apart from 热情 at L2."
+	},
+	"L3-0588": {
+		"meanings": ["human labor", "artificial or man-made"],
+		"note": "N before Adj per the official row: 人工费, then 人工智能."
+	},
+	"L3-0589": {
+		"meanings": ["humankind", "the human race"],
+		"note": "Noun row; one sense, two wordings."
+	},
+	"L3-0591": {
+		"meanings": ["Chinese currency", "the money used in China"],
+		"note": "Never gloss a word with its own romanization — \"renminbi\" made the quiz question the pinyin."
+	},
+	"L3-0592": {
+		"meanings": ["a crowd of people"],
+		"note": "Concretely a crowd of people, so it cannot be confused with the classifier 群."
+	},
+	"L3-0595": {
+		"meanings": ["to recognize on sight", "to identify"],
+		"note": "Resultative verb (CEDICT leads with the noun \"recognition\"), kept apart from 认得 \"to recognize\"."
+	},
+	"L3-0598": {
+		"meanings": ["to appoint", "no matter how or what"],
+		"note": "Merged V/Conj row: the verb leads, the 任 in 任你怎么说 follows."
+	},
+	"L3-0600": {
+		"meanings": ["any at all", "whatever"],
+		"note": "Pronoun: 任何 is \"any whatsoever\", stronger than a bare \"any\"."
+	},
+	"L3-0601": {
+		"meanings": ["task", "assignment"],
+		"note": "Noun row; the CL: clause is dropped."
+	},
+	"L3-0602": {
+		"meanings": ["even now", "still"],
+		"note": "Adverb; 仍然 at the same level owns the plain \"still\", so this leads with the 仍不明白 reading."
+	},
+	"L3-0604": {
+		"meanings": ["everyday", "day-to-day"],
+		"note": "Adjective row: 日常生活."
+	},
+	"L3-0605": {
+		"meanings": ["easy", "likely to happen"],
+		"note": "Both L3 senses: 很容易 and 容易生病."
+	},
+	"L3-0606": {
+		"meanings": ["in what way", "how"],
+		"note": "Formal counterpart of 怎么; leading with \"in what way\" keeps the two answerable apart."
+	},
+	"L3-0607": {
+		"meanings": ["to take a walk", "to go for a stroll"],
+		"note": "Verb-object; one sense, two wordings."
+	},
+	"L3-0608": {
+		"meanings": ["sofa", "couch"],
+		"note": "The \"first reply to a forum post\" sense is internet slang and is barred."
+	},
+	"L3-0610": {
+		"meanings": ["to injure", "an injury"],
+		"note": "V then N per the official V/N order."
+	},
+	"L3-0611": {
+		"meanings": ["to be heartbroken", "to feel deeply hurt"],
+		"note": "Stronger than 难过 \"sad\" at L2, which this must not answer to."
+	},
+	"L3-0612": {
+		"meanings": ["goods for sale", "merchandise"],
+		"note": "Concrete enough not to answer to 东西 or 产品."
+	},
+	"L3-0614": {
+		"meanings": ["to come up here", "to move up toward the speaker"],
+		"note": "Directional complement — the 来 half is the direction toward the speaker."
+	},
+	"L3-0616": {
+		"meanings": ["to go up there", "to move up away from here"],
+		"note": "The 去 counterpart of 上来; the two must not share a gloss."
+	},
+	"L3-0617": {
+		"meanings": ["to rise steadily", "to go up"],
+		"note": "Of levels, prices and temperatures; kept apart from 升 and from 上去."
+	},
+	"L3-0619": {
+		"meanings": ["equipment", "facilities"],
+		"note": "Noun row; two senses from one piled clause."
+	},
+	"L3-0620": {
+		"meanings": ["to design", "a design"],
+		"note": "V then N per the official V/N order."
+	},
+	"L3-0621": {
+		"meanings": ["to set up", "to establish"],
+		"note": "Of institutions and posts."
+	},
+	"L3-0624": {
+		"meanings": ["deep", "dark in color"],
+		"note": "深色 is a genuine second L3 sense; the \"profound\" reading belongs to 深刻."
+	},
+	"L3-0625": {
+		"meanings": ["profound", "deeply felt"],
+		"note": "Of impressions and lessons — 印象深刻."
+	},
+	"L3-0627": {
+		"meanings": ["to rise up", "to be promoted"],
+		"note": "Verb row; 升职/升级 is the second sense, and 上升 keeps the \"rise steadily\" gloss."
+	},
+	"L3-0628": {
+		"meanings": ["raw or uncooked", "unfamiliar"],
+		"note": "Official POS is Adj, so the adjective senses lead, not \"to be born\"."
+	},
+	"L3-0629": {
+		"meanings": ["to produce", "to manufacture"],
+		"note": "The \"give birth\" clause is a separate, non-L3 use."
+	},
+	"L3-0631": {
+		"meanings": ["vivid", "lively"],
+		"note": "Of descriptions and writing."
+	},
+	"L3-0635": {
+		"meanings": ["to declare publicly", "a public statement"],
+		"note": "V then N; \"to state\" alone would answer to 说明 or 表示."
+	},
+	"L3-0636": {
+		"meanings": ["to defeat", "to be victorious"],
+		"note": "Verb row, and it must not answer to 赢 \"to win\" at the same level."
+	},
+	"L3-0641": {
+		"meanings": ["hour or o'clock", "a point in time"],
+		"note": "The bound noun of 三时, 当…时; 时间 and 时候 keep the general \"time\"."
+	},
+	"L3-0643": {
+		"meanings": ["a precise moment", "constantly"],
+		"note": "N then Adv per the official row: 关键时刻, then 时刻准备着."
+	},
+	"L3-0646": {
+		"meanings": ["to put into practice", "to implement"],
+		"note": "Verb row; of policies and systems."
+	},
+	"L3-0649": {
+		"meanings": ["food products", "foodstuffs"],
+		"note": "The packaged-goods word, kept apart from 食物 \"food\" at L2."
+	},
+	"L3-0650": {
+		"meanings": ["to cause", "to make something happen"],
+		"note": "Causative verb; \"to make sb do sth\" is 让 at L2, so this leads with \"to cause\"."
+	},
+	"L3-0651": {
+		"meanings": ["all along", "from start to finish"],
+		"note": "Adverb: 始终没有变."
+	},
+	"L3-0655": {
+		"meanings": ["market", "marketplace"],
+		"note": "Both the place and the economic sense."
+	},
+	"L3-0657": {
+		"meanings": ["an incident", "an event"],
+		"note": "Noun row; more specific than 事情 \"matter\" at L2."
+	},
+	"L3-0660": {
+		"meanings": ["a career or life's work", "an undertaking"],
+		"note": "Kept apart from 职业 \"occupation\" at the same level."
+	},
+	"L3-0662": {
+		"meanings": ["to test out", "to experiment"],
+		"note": "Official POS is V, but CEDICT led with the noun \"experiment\"."
+	},
+	"L3-0663": {
+		"meanings": ["to suit", "to be right for"],
+		"note": "Verb row; 合适 at L2 is the adjective."
+	},
+	"L3-0664": {
+		"meanings": ["to adapt to", "to get used to"],
+		"note": "Of a person adjusting to conditions."
+	},
+	"L3-0665": {
+		"meanings": ["applicable", "suitable for use"],
+		"note": "Official POS is Adj, so it cannot lead with \"to be applicable\"."
+	},
+	"L3-0666": {
+		"meanings": ["a room in a building", "an office or department"],
+		"note": "The bound 室 of 教室 and 办公室; 房间 and 屋子 keep the plain \"room\"."
+	},
+	"L3-0674": {
+		"meanings": ["first of all", "to begin with"],
+		"note": "Adverb opening a list; pairs with 其次."
+	},
+	"L3-0675": {
+		"meanings": ["to suffer or undergo", "to endure"],
+		"note": "受伤, 受不了. \"To receive\" would answer to 收 or 接受; the LGBT sense is barred."
+	},
+	"L3-0676": {
+		"meanings": ["to be injured", "to get hurt"],
+		"note": "Verb-object 受∥伤."
+	},
+	"L3-0678": {
+		"meanings": ["to lose a game", "to be beaten"],
+		"note": "The opposite of 赢; the transport and password senses are not L3."
+	},
+	"L3-0681": {
+		"meanings": ["to be classed as", "to be born in the year of"],
+		"note": "Verb row; the zodiac use (你属什么) is the second sense a learner meets."
+	},
+	"L3-0683": {
+		"meanings": ["measure word for bunches", "a bundle"],
+		"note": "Official POS is M, so the classifier leads: 一束花."
+	},
+	"L3-0684": {
+		"meanings": ["quantity", "amount"],
+		"note": "Noun row; the maths \"scalar\" sense is dropped."
+	},
+	"L3-0685": {
+		"meanings": ["measure word for pairs", "double or even-numbered"],
+		"note": "M before Adj per the official row: 一双鞋, then 双数."
+	},
+	"L3-0686": {
+		"meanings": ["both sides", "the two parties"],
+		"note": "Of a negotiation or a match."
+	},
+	"L3-0687": {
+		"meanings": ["thought or ideology", "the way a person thinks"],
+		"note": "Weightier than 想法 \"idea\" at L2."
+	}
+}
