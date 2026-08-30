@@ -1,0 +1,16 @@
+{
+	"loop": 4,
+	"piece": "vocab-browse",
+	"rule": "\"vocab-browse\" is 12 characters — EVEN — so ours is A and the reference is B.",
+	"A": {
+		"which": "ours",
+		"source": "progress/shots/loop-4/vocab-browse-mobile.png",
+		"description": "hskquiz /browse/1 vocabulary list, 375x812 @2x, fresh progress (no words practised)"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"description": "Pleco iPhone search-results list for the query \"shouji\" — the closest list screen in reference/"
+	},
+	"note": "Loop 3 staged the same pairing (A=ours, B=Pleco) so a regression between loops is visible to the judge."
+}
