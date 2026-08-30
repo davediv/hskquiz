@@ -1,0 +1,272 @@
+{
+	"L3-0037": {
+		"hanzi": "今天的作业比较难。",
+		"pinyin": "jīn tiān de zuò yè bǐ jiào nán",
+		"english": "Today's homework is fairly hard."
+	},
+	"L3-0093": {
+		"hanzi": "树上的苹果已经成熟了。",
+		"pinyin": "shù shàng de píng guǒ yǐ jīng chéng shú le",
+		"english": "The apples on the tree are already ripe."
+	},
+	"L3-0150": {
+		"hanzi": "他在电视台工作了十年。",
+		"pinyin": "tā zài diàn shì tái gōng zuò le shí nián",
+		"english": "He has worked at the television station for ten years."
+	},
+	"L3-0206": {
+		"hanzi": "他的父亲是一位老师。",
+		"pinyin": "tā de fù qīn shì yí wèi lǎo shī",
+		"english": "His father is a teacher."
+	},
+	"L3-0262": {
+		"hanzi": "他每天观察天气的变化。",
+		"pinyin": "tā měi tiān guān chá tiān qì de biàn huà",
+		"english": "He watches the changes in the weather every day."
+	},
+	"L3-0318": {
+		"hanzi": "这个消息让大家高兴极了。",
+		"pinyin": "zhè ge xiāo xi ràng dà jiā gāo xìng jí le",
+		"english": "The news made everyone absolutely delighted."
+	},
+	"L3-0374": {
+		"hanzi": "这是一件紧急的事情。",
+		"pinyin": "zhè shì yí jiàn jǐn jí de shì qing",
+		"english": "This is an urgent matter."
+	},
+	"L3-0430": {
+		"hanzi": "老板同意了我们的计划。",
+		"pinyin": "lǎo bǎn tóng yì le wǒ men de jì huà",
+		"english": "The boss approved our plan."
+	},
+	"L3-0486": {
+		"hanzi": "他迷上了打篮球。",
+		"pinyin": "tā mí shàng le dǎ lán qiú",
+		"english": "He's got hooked on playing basketball."
+	},
+	"L3-0542": {
+		"hanzi": "这种情况在城市里很普遍。",
+		"pinyin": "zhè zhǒng qíng kuàng zài chéng shì lǐ hěn pǔ biàn",
+		"english": "This situation is very common in cities."
+	},
+	"L3-0598": {
+		"hanzi": "公司任他为经理。",
+		"pinyin": "gōng sī rèn tā wéi jīng lǐ",
+		"english": "The company appointed him manager."
+	},
+	"L3-0655": {
+		"hanzi": "今年的手机市场变化很大。",
+		"pinyin": "jīn nián de shǒu jī shì chǎng biàn huà hěn dà",
+		"english": "The phone market has changed a great deal this year."
+	},
+	"L3-0711": {
+		"hanzi": "他在运动会上参加了跳高。",
+		"pinyin": "tā zài yùn dòng huì shàng cān jiā le tiào gāo",
+		"english": "He took part in the high jump at the sports meet."
+	},
+	"L3-0768": {
+		"hanzi": "他从小就开始学习武术。",
+		"pinyin": "tā cóng xiǎo jiù kāi shǐ xué xí wǔ shù",
+		"english": "He started learning martial arts as a child."
+	},
+	"L3-0824": {
+		"hanzi": "前面有很多烟，看不清路。",
+		"pinyin": "qián miàn yǒu hěn duō yān kàn bù qīng lù",
+		"english": "There is so much smoke ahead that you can't see the road."
+	},
+	"L3-0880": {
+		"hanzi": "学校今年增加了两个班。",
+		"pinyin": "xué xiào jīn nián zēng jiā le liǎng ge bān",
+		"english": "The school added two more classes this year."
+	},
+	"L3-0936": {
+		"hanzi": "她主持了昨天晚上的节目。",
+		"pinyin": "tā zhǔ chí le zuó tiān wǎn shang de jié mù",
+		"english": "She hosted last night's programme."
+	},
+	"L4-0019": {
+		"hanzi": "我今天收到了一个包裹。",
+		"pinyin": "wǒ jīn tiān shōu dào le yí ge bāo guǒ",
+		"english": "I received a parcel today."
+	},
+	"L4-0075": {
+		"hanzi": "这些安全常识每个人都应该知道。",
+		"pinyin": "zhè xiē ān quán cháng shí měi ge rén dōu yīng gāi zhī dào",
+		"english": "Everyone ought to know these basic safety facts."
+	},
+	"L4-0131": {
+		"hanzi": "这次失败促使他重新考虑计划。",
+		"pinyin": "zhè cì shī bài cù shǐ tā chóng xīn kǎo lǜ jì huà",
+		"english": "The setback prompted him to rethink the plan."
+	},
+	"L4-0187": {
+		"hanzi": "老师上课前先点名。",
+		"pinyin": "lǎo shī shàng kè qián xiān diǎn míng",
+		"english": "The teacher takes the register before class begins."
+	},
+	"L4-0243": {
+		"hanzi": "大家纷纷提出自己的意见。",
+		"pinyin": "dà jiā fēn fēn tí chū zì jǐ de yì jiàn",
+		"english": "One after another, people put forward their own views."
+	},
+	"L4-0299": {
+		"hanzi": "每个人都要按照规则做事。",
+		"pinyin": "měi ge rén dōu yào àn zhào guī zé zuò shì",
+		"english": "Everyone has to go by the rules."
+	},
+	"L4-0355": {
+		"hanzi": "这次考试他刚好及格。",
+		"pinyin": "zhè cì kǎo shì tā gāng hǎo jí gé",
+		"english": "He just scraped a pass on this exam."
+	},
+	"L4-0411": {
+		"hanzi": "这本书讲的是中国近代的历史。",
+		"pinyin": "zhè běn shū jiǎng de shì zhōng guó jìn dài de lì shǐ",
+		"english": "This book is about China's early modern history."
+	},
+	"L4-0467": {
+		"hanzi": "遇到问题时要保持冷静。",
+		"pinyin": "yù dào wèn tí shí yào bǎo chí lěng jìng",
+		"english": "Keep a cool head when a problem comes up."
+	},
+	"L4-0523": {
+		"hanzi": "请给我一张您的名片。",
+		"pinyin": "qǐng gěi wǒ yì zhāng nín de míng piàn",
+		"english": "Could I have one of your business cards?"
+	},
+	"L4-0580": {
+		"hanzi": "她最喜欢吃黑巧克力。",
+		"pinyin": "tā zuì xǐ huan chī hēi qiǎo kè lì",
+		"english": "Dark chocolate is her favourite."
+	},
+	"L4-0636": {
+		"hanzi": "这个结果让很多人感到失望。",
+		"pinyin": "zhè ge jié guǒ ràng hěn duō rén gǎn dào shī wàng",
+		"english": "The outcome left a lot of people disappointed."
+	},
+	"L4-0692": {
+		"hanzi": "新的地铁把路上的时间缩短了一半。",
+		"pinyin": "xīn de dì tiě bǎ lù shang de shí jiān suō duǎn le yí bàn",
+		"english": "The new subway line has halved the journey time."
+	},
+	"L4-0748": {
+		"hanzi": "他向大家微笑着点了点头。",
+		"pinyin": "tā xiàng dà jiā wēi xiào zhe diǎn le diǎn tóu",
+		"english": "He smiled at everyone and gave a nod."
+	},
+	"L4-0804": {
+		"hanzi": "这个项目下个月就要完成了。",
+		"pinyin": "zhè ge xiàng mù xià ge yuè jiù yào wán chéng le",
+		"english": "This project is due to be finished next month."
+	},
+	"L4-0860": {
+		"hanzi": "你要不去，我就一个人去。",
+		"pinyin": "nǐ yào bú qù wǒ jiù yí ge rén qù",
+		"english": "If you're not going, I'll go on my own."
+	},
+	"L4-0916": {
+		"hanzi": "报告必须在月底以前完成。",
+		"pinyin": "bào gào bì xū zài yuè dǐ yǐ qián wán chéng",
+		"english": "The report has to be finished before the end of the month."
+	},
+	"L4-0972": {
+		"hanzi": "他是一位著名的作家。",
+		"pinyin": "tā shì yí wèi zhù míng de zuò jiā",
+		"english": "He is a well-known writer."
+	},
+	"L5-0028": {
+		"hanzi": "两家公司应该彼此信任。",
+		"pinyin": "liǎng jiā gōng sī yīng gāi bǐ cǐ xìn rèn",
+		"english": "The two companies ought to trust each other."
+	},
+	"L5-0084": {
+		"hanzi": "两个地区的收入差距在缩小。",
+		"pinyin": "liǎng ge dì qū de shōu rù chā jù zài suō xiǎo",
+		"english": "The income gap between the two regions is narrowing."
+	},
+	"L5-0140": {
+		"hanzi": "他上个月向公司提出辞职。",
+		"pinyin": "tā shàng ge yuè xiàng gōng sī tí chū cí zhí",
+		"english": "He handed his resignation to the company last month."
+	},
+	"L5-0196": {
+		"hanzi": "这一带的地形非常复杂。",
+		"pinyin": "zhè yí dài de dì xíng fēi cháng fù zá",
+		"english": "The terrain around here is extremely complex."
+	},
+	"L5-0252": {
+		"hanzi": "这次调整的幅度比较大。",
+		"pinyin": "zhè cì tiáo zhěng de fú dù bǐ jiào dà",
+		"english": "The scale of this adjustment is fairly large."
+	},
+	"L5-0308": {
+		"hanzi": "请在表格上填写您的国籍。",
+		"pinyin": "qǐng zài biǎo gé shàng tián xiě nín de guó jí",
+		"english": "Please enter your nationality on the form."
+	},
+	"L5-0364": {
+		"hanzi": "他继承了父亲留下的房子。",
+		"pinyin": "tā jì chéng le fù qīn liú xià de fáng zi",
+		"english": "He inherited the house his father left."
+	},
+	"L5-0420": {
+		"hanzi": "他拒绝了公司的邀请。",
+		"pinyin": "tā jù jué le gōng sī de yāo qǐng",
+		"english": "He turned down the company's invitation."
+	},
+	"L5-0476": {
+		"hanzi": "他们恋爱三年后结婚了。",
+		"pinyin": "tā men liàn ài sān nián hòu jié hūn le",
+		"english": "They married after three years together."
+	},
+	"L5-0532": {
+		"hanzi": "这个市场主要卖本地的农产品。",
+		"pinyin": "zhè ge shì chǎng zhǔ yào mài běn dì de nóng chǎn pǐn",
+		"english": "This market mainly sells local farm produce."
+	},
+	"L5-0589": {
+		"hanzi": "这次训练的强度很大。",
+		"pinyin": "zhè cì xùn liàn de qiáng dù hěn dà",
+		"english": "The intensity of this training session is high."
+	},
+	"L5-0645": {
+		"hanzi": "墙上有一扇小窗户。",
+		"pinyin": "qiáng shàng yǒu yí shàn xiǎo chuāng hu",
+		"english": "There is a small window in the wall."
+	},
+	"L5-0701": {
+		"hanzi": "政府正在帮助受灾的农民。",
+		"pinyin": "zhèng fǔ zhèng zài bāng zhù shòu zāi de nóng mín",
+		"english": "The government is helping the farmers hit by the disaster."
+	},
+	"L5-0757": {
+		"hanzi": "这部电影的题材很新。",
+		"pinyin": "zhè bù diàn yǐng de tí cái hěn xīn",
+		"english": "The subject matter of this film is fresh."
+	},
+	"L5-0813": {
+		"hanzi": "突然的声音吓了他一跳。",
+		"pinyin": "tū rán de shēng yīn xià le tā yí tiào",
+		"english": "The sudden noise gave him a fright."
+	},
+	"L5-0869": {
+		"hanzi": "河里有几只鸭子在游。",
+		"pinyin": "hé lǐ yǒu jǐ zhī yā zi zài yóu",
+		"english": "There are a few ducks swimming in the river."
+	},
+	"L5-0925": {
+		"hanzi": "工厂排出的气体有毒。",
+		"pinyin": "gōng chǎng pái chū de qì tǐ yǒu dú",
+		"english": "The gas this factory gives off is toxic."
+	},
+	"L5-0981": {
+		"hanzi": "这些老照片非常珍贵。",
+		"pinyin": "zhè xiē lǎo zhào piàn fēi cháng zhēn guì",
+		"english": "These old photographs are extremely precious."
+	},
+	"L5-1037": {
+		"hanzi": "年轻人是这次活动的主体。",
+		"pinyin": "nián qīng rén shì zhè cì huó dòng de zhǔ tǐ",
+		"english": "Young people make up the bulk of this event."
+	}
+}
