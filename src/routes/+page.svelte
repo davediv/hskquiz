@@ -19,13 +19,8 @@
 	import StorageNotice from '$lib/progress/StorageNotice.svelte';
 	import LevelCard from '$lib/components/levels/LevelCard.svelte';
 	import { LEVEL_BANDS } from '$lib/components/levels/levelMeta';
-	import { weakestIds } from '$lib/components/levels/preview';
-	import {
-		formatAccuracy,
-		formatWhen,
-		levelStats,
-		overallSummary
-	} from '$lib/components/levels/stats';
+	import { PREVIEW_COUNT, weakestIds } from '$lib/components/levels/preview';
+	import { formatAccuracy, levelStats, overallSummary } from '$lib/components/levels/stats';
 
 	// Progress lives in localStorage, so the server renders an empty store and the client
 	// renders a full one. Holding every progress-driven value back until after hydration keeps
@@ -49,8 +44,10 @@
 			total: SHIPPED_SIZES[level],
 			stats: levelStats(snapshot, level),
 			// Whose three words this level's card shows. Empty until there are enough misses
-			// here to fill the row, and the card falls back to the static three.
-			weakIds: weakestIds(snapshot, level)
+			// here to fill the row, and the card falls back to the static three. Twice as many
+			// candidates as columns: the card spends the spares on words that were merged out
+			// of the shipped list, and on ones too wide to render whole at its width.
+			weakIds: weakestIds(snapshot, level, PREVIEW_COUNT, PREVIEW_COUNT * 2)
 		}))
 	);
 	const byLevel = $derived(new Map(cards.map((card) => [card.level, card])));
@@ -67,9 +64,14 @@
 	const officialTotal = LEVELS.reduce((sum, level) => sum + LEVEL_SIZES[level], 0);
 	const mergedPairs = officialTotal - SHIPPED_TOTAL;
 
-	const lastPlayed = $derived(formatWhen(summary.lastPlayed, now));
-
-	/** The one-line headline over the level list. Only stats that have a value appear. */
+	/**
+	 * The one-line headline over the level list. Only stats that have a value appear.
+	 *
+	 * No "1h ago" here. The strip only exists for a learner who has already practised, which is
+	 * exactly the state in which the first card is furthest down the phone (344px of 812), and
+	 * a fourth stat pushed this to two lines. The card carrying `Continue` prints the same
+	 * relative time verbatim two rows below, so nothing is lost by cutting it here.
+	 */
 	const headline = $derived.by(() => {
 		const stats: { value: string; label: string }[] = [
 			{
@@ -85,7 +87,6 @@
 		if (summary.accuracy !== null) {
 			stats.push({ value: formatAccuracy(summary.accuracy), label: 'correct' });
 		}
-		if (lastPlayed) stats.push({ value: lastPlayed, label: '' });
 		return stats;
 	});
 
@@ -124,22 +125,31 @@
 <div class="hskq-page">
 	<header class="hskq-rail">
 		<p class="eyebrow">HSK 3.0 · Levels 1–5</p>
-		<h1 class="mt-1.5 hanzi-display text-hanzi-lg text-ink" lang="zh-Hans">词汇练习</h1>
 		<!--
-			The app's most prominent pinyin — it teaches on sight, so it is painted by the same
-			component and the same tone tokens as every other syllable in the app. It used to be a
-			flat `text-accent`, which is the exact red of ✕ NOT QUITE.
+			Title and reading on one baseline, and only two lines when they have to be.
+
+			The pinyin below is the app's most prominent — it teaches on sight, so it is painted
+			by the same component and the same tone tokens as every other syllable in the app. It
+			used to be a flat `text-accent`, which is the exact red of ✕ NOT QUITE.
 
 			Two components, one per word, and not one with `spaced={false}`: 汉语拼音正词法基本规则
 			joins the syllables *inside* a word and separates the words, so cíhuì liànxí is right,
 			cí huì liàn xí (spaced) and cíhuìliànxí (unspaced, one span) are both wrong. The gap
 			between the two elements is the word gap.
+
+			Wrapping rather than a breakpoint: at 375px 词汇练习 (196px) and cíhuì liànxí (92px)
+			sit side by side and the masthead is a line shorter, which on the state where this
+			screen is longest is 29px of the first card's own place on the phone. In the 14rem
+			desktop rail the same flex box wraps them back onto two lines, unchanged.
 		-->
-		<p class="mt-1.5">
-			<Pinyin pinyin="cíhuì" size="md" spaced={false} />
-			<Pinyin pinyin="liànxí" size="md" spaced={false} />
-		</p>
-		<p class="mt-2.5 max-w-[38ch] text-sm text-ink-muted">
+		<div class="hskq-title mt-1.5">
+			<h1 class="hanzi-display text-hanzi-lg text-ink" lang="zh-Hans">词汇练习</h1>
+			<p class="hskq-reading">
+				<Pinyin pinyin="cíhuì" size="md" spaced={false} />
+				<Pinyin pinyin="liànxí" size="md" spaced={false} />
+			</p>
+		</div>
+		<p class="mt-2 max-w-[38ch] text-sm text-ink-muted">
 			Five levels, ten questions a session, weighted toward what you keep missing.
 		</p>
 
@@ -233,13 +243,27 @@
 		inline-size: 100%;
 		max-inline-size: var(--container-app);
 		margin-inline: auto;
-		padding-block: 0.75rem 2.5rem;
+		padding-block: 0.5rem 2.5rem;
 		padding-inline-start: max(var(--spacing-gutter), var(--app-safe-left, 0px));
 		padding-inline-end: max(var(--spacing-gutter), var(--app-safe-right, 0px));
 	}
 
 	.hskq-levels {
-		margin-block-start: 0.875rem;
+		margin-block-start: 0.75rem;
+	}
+
+	/* Baseline-aligned, and allowed to wrap: one line at 375px, two in the desktop rail. */
+	.hskq-title {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		column-gap: 0.75rem;
+		row-gap: 0.375rem;
+	}
+
+	.hskq-reading {
+		/* Never the only thing on its line while the title is still on the one above. */
+		white-space: nowrap;
 	}
 
 	.hskq-band-section + .hskq-band-section {
@@ -264,8 +288,14 @@
 		background-color: var(--color-line);
 	}
 
+	/* `minmax(0, 1fr)` even at one column. A grid's implicit track is `auto`, so it is sized by
+	   its content's min-content — and the preview row's min-content is three whole hanzi words,
+	   which must never be cut. Left implicit, a card that could not fit its own row widened
+	   *itself*, and the page picked up a horizontal scroll instead of the card telling the row
+	   it had overflowed. Zero floor: the card is the width the column gives it, always. */
 	.hskq-grid {
 		display: grid;
+		grid-template-columns: minmax(0, 1fr);
 		gap: 0.625rem;
 	}
 
@@ -282,22 +312,29 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75rem;
-		margin-block-start: 0.875rem;
-		padding-block: 0.625rem;
+		margin-block-start: 0.75rem;
+		padding-block: 0.5rem;
 		border-block: 1px solid var(--color-line);
 	}
 
 	/* From 64rem the standing information stops scrolling with the list it describes, and the
 	   list itself goes two abreast — 1,440px was spending 480px on nothing while the fifth
-	   level sat below the fold. */
+	   level sat below the fold.
+
+	   The rail is 14rem, not the 18rem of loop 3, and the two columns are 2.5rem apart rather
+	   than 3rem. Both of those went to the cards, because at three abreast the card is the
+	   narrowest column on any device this app runs on and the preview row is 36px hanzi three
+	   times over: every 8px the rail gives back is 8px of a word that no longer has to be
+	   swapped out for a shorter one. It also gives the rail less blank to leave under itself.
+	   14rem holds 词汇练习 at 48px (196px) with room to spare, which is the constraint. */
 	@media (min-width: 64rem) {
 		.hskq-page {
 			display: grid;
-			grid-template-columns: 18rem minmax(0, 46rem);
+			grid-template-columns: 14rem minmax(0, 46rem);
 			justify-content: center;
-			gap: 3rem;
+			gap: 2.5rem;
 			max-inline-size: 70rem;
-			padding-block: 1.5rem 3rem;
+			padding-block: 1.5rem 2rem;
 			padding-inline: 2rem;
 		}
 
@@ -329,7 +366,10 @@
 	   which a card is still wide enough for three 36px hanzi side by side. */
 	@media (min-width: 80rem) {
 		.hskq-page {
-			grid-template-columns: 18rem minmax(0, 58.5rem);
+			/* Capped above what is ever available, so the reading column takes everything the
+			   rail and the gutter do not: 984px at 1440, 952px at 1280. A 58.5rem cap left
+			   32px of the page unspent and each card 11px narrower than it had to be. */
+			grid-template-columns: 14rem minmax(0, 62rem);
 			grid-template-rows: auto 1fr;
 			max-inline-size: 82rem;
 		}

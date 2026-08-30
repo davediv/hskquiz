@@ -148,9 +148,16 @@ function calendarDays(from: number, to: number): number {
 /**
  * `ts` rendered against `now` as "just now" / "3d ago" / "2 weeks ago".
  * Returns '' for a never-played timestamp so callers can branch on falsiness.
+ *
+ * A STAMP IN THE FUTURE IS A CLOCK, NOT A DATE. The store floors what it writes to the app's
+ * own epoch — it has to, or the decoder cannot read it back — so a device whose clock is set
+ * before that floor reads its own last session as years ahead and this printed "in 23y" on
+ * the level card. Nothing in this app can be practised later than now, so a forward delta is
+ * a disagreement between two clocks and the only honest reading of it is the present.
  */
 export function formatWhen(ts: number, now: number, style: 'narrow' | 'long' = 'narrow'): string {
 	if (!ts || !now) return '';
+	if (ts > now) return 'just now';
 	const rtf = relative(style);
 	const minutes = Math.round((ts - now) / 60_000);
 	if (Math.abs(minutes) < 1) return 'just now';

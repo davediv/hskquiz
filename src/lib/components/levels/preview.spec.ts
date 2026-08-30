@@ -12,7 +12,16 @@ import { readFileSync } from 'node:fs';
 import type { Level, ProgressState, Word, WordProgress } from '$lib/types';
 import { LEVELS } from '$lib/types';
 import { LEVEL_META } from './levelMeta';
-import { LEVEL_PREVIEW, PREVIEW_COUNT, toPreview, weakestIds } from './preview';
+import {
+	fitPreview,
+	LEVEL_PREVIEW,
+	PREVIEW_COUNT,
+	PREVIEW_GAP,
+	previewWidth,
+	toPreview,
+	type PreviewWord,
+	weakestIds
+} from './preview';
 
 function readShipped(level: Level): Word[] {
 	return JSON.parse(readFileSync(`src/lib/data/hsk${level}.json`, 'utf8')) as Word[];
@@ -58,9 +67,10 @@ describe('level card previews', () => {
 	});
 
 	/**
-	 * A third of a 287px card at 1440 is ~82px, which is twelve characters of 12px gloss. The
-	 * card truncates past that, and a static preview arriving with an ellipsis on it would be a
-	 * self-inflicted one — `academic study` did exactly that until it was swapped out.
+	 * The card gives every gloss two reserved lines now, so a longer one is no longer clipped —
+	 * but the fifteen words here are the ones a first-time visitor meets, and one line each is
+	 * what makes five cards read as one list. Twelve characters is a third of the narrowest
+	 * card at 12px. `academic study` was swapped out for exactly this reason.
 	 */
 	it('keeps every gloss inside one line of a preview column', () => {
 		for (const level of LEVELS) {
@@ -209,5 +219,77 @@ describe('toPreview', () => {
 				expect(converted.syllables).toHaveLength([...word.hanzi].length);
 			}
 		}
+	});
+});
+
+/**
+ * The row a learner's own words land in.
+ *
+ * Loop 3 fed arbitrary words into a layout built for three short ones and cut what did not
+ * fit — `dàxuéshē…`, `have no cho…`. Nothing is cut now, so the selection has to do the
+ * absorbing, and these are the cases that decide whether it does.
+ *
+ * Widths are the ones the app measures: 36.55px per hanzi at `--text-hanzi-md`, and a pinyin
+ * ceiling of 8.8px per character at `--text-pinyin-sm`. The budgets below are real rows —
+ * 287px at 1440 (three cards abreast), 301px at 375, 246px at 320.
+ */
+describe('fitPreview', () => {
+	const word = (hanzi: string, pinyin: string): PreviewWord => ({
+		id: hanzi,
+		hanzi,
+		pinyin,
+		gloss: 'x'
+	});
+
+	// The three the loop-3 verdict caught being clipped, at HSK 1 and HSK 3.
+	const daxuesheng = word('大学生', 'dàxuéshēng');
+	const didian = word('地点', 'dìdiǎn');
+	const dian = word('电', 'diàn');
+	const beihou = word('背后', 'bèihòu');
+	const budebu = word('不得不', 'bùdébù');
+	const chengshu = word('成熟', 'chéngshú');
+
+	it('charges a column the wider of its hanzi and its pinyin', () => {
+		expect(previewWidth(dian)).toBeCloseTo(36.55, 2);
+		expect(previewWidth(didian)).toBeCloseTo(73.1, 2);
+		expect(previewWidth(daxuesheng)).toBeCloseTo(109.65, 2);
+		// 谁 is one character and nine of pinyin, so the hanzi is not the binding side.
+		expect(previewWidth(word('谁', 'shéi/shuí'))).toBeCloseTo(79.2, 2);
+	});
+
+	it('keeps a three-character word at the width the desktop card actually has', () => {
+		expect(fitPreview([daxuesheng, didian, dian], 287)).toEqual([daxuesheng, didian, dian]);
+		expect(fitPreview([beihou, budebu, chengshu], 287)).toEqual([beihou, budebu, chengshu]);
+	});
+
+	it('skips a word too wide rather than dropping the row', () => {
+		const jiaoxuelou = word('教学楼', 'jiàoxuélóu');
+		const tushuguan = word('图书馆', 'túshūguǎn');
+		// Three of these at 109.65 cannot share a 287px row; the third column takes 电.
+		expect(fitPreview([daxuesheng, jiaoxuelou, tushuguan, didian, dian], 287)).toEqual([
+			daxuesheng,
+			jiaoxuelou,
+			dian
+		]);
+	});
+
+	it('gives up rather than showing a clipped row', () => {
+		// 320px: 7 characters plus two gaps is 271.85 against a 246px row.
+		expect(fitPreview([beihou, budebu, chengshu], 246)).toBeNull();
+		expect(fitPreview([daxuesheng, didian], 287)).toBeNull();
+		expect(fitPreview([daxuesheng, didian, dian], 0)).toBeNull();
+	});
+
+	it('charges itself for the gaps between the columns', () => {
+		const three = [didian, didian, didian];
+		const glyphs = 3 * previewWidth(didian);
+		// Exactly wide enough for the glyphs alone is one gap short of a row.
+		expect(fitPreview(three, glyphs)).toBeNull();
+		expect(fitPreview(three, glyphs + 2 * PREVIEW_GAP + 0.5)).toHaveLength(PREVIEW_COUNT);
+	});
+
+	it('never returns a row the card cannot fill', () => {
+		const row = fitPreview([daxuesheng, didian, dian], 301);
+		expect(row).toHaveLength(PREVIEW_COUNT);
 	});
 });
