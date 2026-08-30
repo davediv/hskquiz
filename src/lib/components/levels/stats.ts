@@ -1,10 +1,18 @@
-import { MASTERY_STREAK } from '$lib/progress';
+import { MASTERY_STREAK, levelOfId } from '$lib/progress';
+import { hasMet } from '$lib/session';
 import { SHIPPED_SIZES, SHIPPED_TOTAL } from '$lib/data/sizes';
 import type { Level, ProgressState, WordProgress } from '$lib/types';
 
 /** What the level-select screen needs to know about one level's history. */
 export interface LevelStats {
-	/** Distinct words at this level that have been answered at least once. */
+	/**
+	 * Distinct words at this level the learner has MET — answered, or shown by a teach card.
+	 *
+	 * `hasMet`, not `seen > 0`. `seen` counts answers, and the first session at any level is
+	 * mostly introductions, so gating on it made ten cards just taught read as "0 of 500
+	 * practised" beside a `Continue` badge. Everything below this line still counts answers:
+	 * an exposure is not an answer, so it must never make a word shaky or dilute accuracy.
+	 */
 	practised: number;
 	/** Of those, how many are on a streak of `MASTERY_STREAK` or better. */
 	mastered: number;
@@ -50,8 +58,8 @@ export function levelStats(state: ProgressState | null | undefined, level: Level
 
 	for (const record of records(state)) {
 		if (!record?.wordId?.startsWith(prefix)) continue;
+		if (hasMet(record)) stats.practised += 1;
 		if (record.seen > 0) {
-			stats.practised += 1;
 			if (record.streak === 0) stats.shaky += 1;
 			if (record.streak >= MASTERY_STREAK) stats.mastered += 1;
 		}
@@ -101,10 +109,13 @@ export function overallSummary(state: ProgressState | null | undefined): Overall
 	let answered = 0;
 	let correct = 0;
 	for (const record of records(state)) {
-		if (record.seen > 0) {
-			summary.practised += 1;
-			if (record.streak >= MASTERY_STREAK) summary.mastered += 1;
-		}
+		// A stored key can name anything — `hello`, `zz-1`, a level this build does not ship —
+		// and this headline sits directly over five level cards that each filter by prefix. An
+		// unfiltered total is the app contradicting itself in one glance. `ProgressStore`
+		// filters the same way; this is the copy the home screen actually renders.
+		if (levelOfId(record?.wordId ?? '') === null) continue;
+		if (hasMet(record)) summary.practised += 1;
+		if (record.seen > 0 && record.streak >= MASTERY_STREAK) summary.mastered += 1;
 		answered += record.seen;
 		correct += record.correct;
 	}

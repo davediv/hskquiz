@@ -29,10 +29,12 @@
  * Choosing the static three: one word per clause of `LEVEL_META.blurb`, in the same order, so
  * the row is the evidence for the sentence above it — HSK 1 is "greetings, family, everyday
  * verbs" and shows 谢谢 / 妈妈 / 喜欢. Kept to one or two characters so three columns fit a
- * 375px card without the hanzi shrinking below the scale's floor, kept to a gloss short enough
- * to sit on one line in a third of the narrowest card (`academic study` was clipping at 1440),
- * and kept off the numerals: 八 is two strokes glossed "eight", so a third of the first card's
- * Chinese taught nothing.
+ * 375px card without the hanzi shrinking below the scale's floor; kept short enough that the
+ * three glosses *joined* — `thank you · mother · to like` — set on one line under the row at
+ * every width this layout builds, which is what makes five untouched cards read as one list
+ * (a learner's own weak words are held to no such rule: they wrap, and are never cut); and kept
+ * off the numerals: 八 is two strokes glossed "eight", so a third of the first card's Chinese
+ * taught nothing.
  */
 import type { Level, ProgressState, Syllable, Word, WordProgress } from '$lib/types';
 

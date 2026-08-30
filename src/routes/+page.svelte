@@ -124,30 +124,44 @@
 
 <div class="hskq-page">
 	<header class="hskq-rail">
-		<p class="eyebrow">HSK 3.0 · Levels 1–5</p>
 		<!--
-			Title and reading on one baseline, and only two lines when they have to be.
+			Title, reading and scope on one baseline, and only two lines when they have to be.
 
-			The pinyin below is the app's most prominent — it teaches on sight, so it is painted
-			by the same component and the same tone tokens as every other syllable in the app. It
-			used to be a flat `text-accent`, which is the exact red of ✕ NOT QUITE.
+			The pinyin is the app's most prominent — it teaches on sight, so it is painted by the
+			same component and the same tone tokens as every other syllable in the app. It used
+			to be a flat `text-accent`, which is the exact red of ✕ NOT QUITE.
 
 			Two components, one per word, and not one with `spaced={false}`: 汉语拼音正词法基本规则
 			joins the syllables *inside* a word and separates the words, so cíhuì liànxí is right,
 			cí huì liàn xí (spaced) and cíhuìliànxí (unspaced, one span) are both wrong. The gap
 			between the two elements is the word gap.
 
-			Wrapping rather than a breakpoint: at 375px 词汇练习 (196px) and cíhuì liànxí (92px)
-			sit side by side and the masthead is a line shorter, which on the state where this
-			screen is longest is 29px of the first card's own place on the phone. In the 14rem
-			desktop rail the same flex box wraps them back onto two lines, unchanged.
+			`HSK 3.0` is on this line rather than in an eyebrow above it. As its own row it cost
+			21px of the phone's first screen — the finding the header has now been given three
+			loops running — to say something the page says four more times below: the two band
+			headings carry HSK 1–3 and HSK 4–5, all five cards carry their own number, and the
+			colophon names the standard next to the count it qualifies. What was worth keeping
+			above the fold is the *version*: HSK 2.0 was six levels of a different list, and a
+			learner has to know which one this is before the first card, not after the last.
+
+			36px, not 48px. The largest Chinese on this page used to be 词汇练习, and 汇 is an
+			HSK 4 character — so an HSK 1 beginner's biggest glyphs were ones they could not
+			read, with the words they *can* read set smaller on the cards below. At the hanzi
+			scale's `md` step the masthead is exactly the size of the preview words, which is
+			the right answer for a vocabulary app: nothing on the screen outsizes the vocabulary.
+			It is also 10px of the same first screen.
+
+			Wrapping rather than a breakpoint: at 375px 词汇练习 (147px), cíhuì liànxí (92px) and
+			HSK 3.0 all sit on one line. In the 14rem desktop rail the same flex box wraps them
+			onto two, unchanged.
 		-->
-		<div class="hskq-title mt-1.5">
-			<h1 class="hanzi-display text-hanzi-lg text-ink" lang="zh-Hans">词汇练习</h1>
+		<div class="hskq-title">
+			<h1 class="hanzi-display text-hanzi-md text-ink" lang="zh-Hans">词汇练习</h1>
 			<p class="hskq-reading">
 				<Pinyin pinyin="cíhuì" size="md" spaced={false} />
 				<Pinyin pinyin="liànxí" size="md" spaced={false} />
 			</p>
+			<p class="eyebrow">HSK 3.0</p>
 		</div>
 		<p class="mt-2 max-w-[38ch] text-sm text-ink-muted">
 			Five levels, ten questions a session, weighted toward what you keep missing.
@@ -226,7 +240,7 @@
 	-->
 	<aside class="hskq-colophon" aria-label="About this word list">
 		<p>
-			{SHIPPED_TOTAL.toLocaleString('en')} cards from the standard's {officialTotal.toLocaleString(
+			{SHIPPED_TOTAL.toLocaleString('en')} cards from the HSK 3.0 standard's {officialTotal.toLocaleString(
 				'en'
 			)} entries — {mergedPairs} pairs of same-pinyin homographs share a card.
 		</p>
@@ -249,7 +263,7 @@
 	}
 
 	.hskq-levels {
-		margin-block-start: 0.75rem;
+		margin-block-start: 0.5rem;
 	}
 
 	/* Baseline-aligned, and allowed to wrap: one line at 375px, two in the desktop rail. */

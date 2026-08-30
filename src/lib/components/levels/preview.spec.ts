@@ -67,14 +67,23 @@ describe('level card previews', () => {
 	});
 
 	/**
-	 * The card gives every gloss two reserved lines now, so a longer one is no longer clipped —
-	 * but the fifteen words here are the ones a first-time visitor meets, and one line each is
-	 * what makes five cards read as one list. Twelve characters is a third of the narrowest
-	 * card at 12px. `academic study` was swapped out for exactly this reason.
+	 * The three glosses share one wrapped line under the row now, not a column each, so what
+	 * has to fit is the *joined* string — `thank you · mother · to like`. Measured in the app,
+	 * a card's gloss line is 220px at 375 and 206px at 1440 three abreast once `Browse →` has
+	 * taken its end of the row, and 12px type sets ~6.1px a character there: 36 characters is
+	 * the ceiling that keeps all five on one line, and the widest of the five is 33.
+	 *
+	 * One line each is what makes five cards read as one list, and these fifteen words are the
+	 * ones a first-time visitor meets. A learner's own weak words are not held to this — they
+	 * wrap to as many as three lines and are never cut, which is the whole point of moving the
+	 * English out of the columns — but the cards nobody has touched yet must not.
 	 */
-	it('keeps every gloss inside one line of a preview column', () => {
+	it('keeps the three glosses of a card on one line together', () => {
 		for (const level of LEVELS) {
+			const joined = LEVEL_PREVIEW[level].map((preview) => preview.gloss).join(' · ');
+			expect(joined.length, `HSK ${level}: "${joined}"`).toBeLessThanOrEqual(36);
 			for (const preview of LEVEL_PREVIEW[level]) {
+				// No single gloss may eat the line on its own.
 				expect(preview.gloss.length, `${preview.hanzi}: "${preview.gloss}"`).toBeLessThanOrEqual(
 					12
 				);

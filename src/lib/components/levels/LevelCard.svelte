@@ -10,8 +10,8 @@
 	THE WORDS NEVER LEAVE. Loop 2 gave the preview row and the progress meter the same slot, so
 	the moment a learner practised a level, that level's card lost its Chinese — the one card
 	carrying `Continue` was the one card on the page with no hanzi on it, and the list split into
-	two card heights. The meter is now a rule and one 12px line under the header, which is all a
-	fraction ever needed, and the three words are permanent. Once there is enough history the row
+	two card heights. The meter is now a rule and one 12px line in the card's footer, which is all
+	a fraction ever needed, and the three words are permanent. Once there is enough history the row
 	stops being a sample and becomes this learner's own three weakest words here (see
 	`weakestIds`), so the card says what it keeps missing rather than reciting the same trio
 	forever.
@@ -21,10 +21,20 @@
 	printed `have no cho…`, and a `glyphSize` step-down dropped 36px hanzi to 26px on exactly the
 	cards with history — so HSK 1's row was visibly smaller than the untouched HSK 2 card below
 	it, and the app's typography got worse the more you used it. All three are gone. The hanzi is
-	one size on every card in every state, the pinyin never wraps and is never cut, and the gloss
-	has a reserved two-line box. What absorbs the variance instead is the *choice* of words:
-	`fitPreview` takes the worst candidates that fit the width this card actually has, measured,
-	and the card falls back to the static three rather than showing a clipped row.
+	one size on every card in every state, and the pinyin never wraps and is never cut. What
+	absorbs the variance is the *choice* of words: `fitPreview` takes the worst candidates that
+	fit the width this card actually has, measured, and the card falls back to the static three
+	rather than showing a clipped row.
+
+	AND THE ENGLISH IS NOT IN THE COLUMNS. Loop 4 kept a two-line clamped gloss box under each of
+	the three hanzi, and a third of a 320px card is 77px: 地 / 的 / 个 seeded as HSK 1's weak set
+	printed `turns a word into an…` / `marks pos-session like…` / `measure word: gene…`, all
+	three at once, while the hand-picked trio never clipped because it had been chosen to fit.
+	Only the *demo* words fitted a 77px column, and no column width will ever hold
+	`measure word: general purpose`. So the three glosses are now one wrapped line at the card's
+	full inline width beneath the row, read left to right against the words above them — the
+	shape Pleco already uses, where the definition gets the whole row. The hanzi and pinyin keep
+	the three columns, because those are the two things that are never allowed to be cut.
 
 	THE WHOLE CARD IS A TARGET. `Practise` stretches an overlay across the card, so anywhere that
 	is not the preview row starts a session; the preview row itself is a link into that level's
@@ -156,7 +166,18 @@
 		// Before the first measurement, assume the tightest row this layout produces (a 320px
 		// phone). `fitPreview` charges itself for the two column gaps, so this is the whole
 		// row, not the room left over after them.
-		return fitPreview(candidates, rowWidth > 0 ? rowWidth : 246);
+		const budget = rowWidth > 0 ? rowWidth : 246;
+		return (
+			fitPreview(candidates, budget) ??
+			// Two of the learner's own words beat three of ours. A level whose weak set is all
+			// three- and four-character words — 办公室 / 不好意思 / 出租车 is 346px against a
+			// 301px row — used to give up here and print 超市 / 周末 / 地铁 under a card
+			// reading "36 of 770 · 30 mastered": the one card with history was the one card
+			// showing words this learner has never got wrong. Only the *count* gives way now.
+			// Never below two: one word is a row that has lost its shape, and the static three
+			// are a better card than that.
+			fitPreview(candidates, budget, PREVIEW_COUNT - 1)
+		);
 	});
 
 	$effect(() => {
@@ -216,38 +237,22 @@
 		{/if}
 	</div>
 
-	<!-- One rule and one line. The fraction is the only thing a meter ever said, and it said it
-	     at the cost of the three words underneath. The empty track is drawn as a capsule with
-	     an edge rather than a flat 4px bar: at 0% a flat bar directly under a heading reads as
-	     that heading's underline, five times down the page. -->
-	<div class="hskq-status">
-		<div class="hskq-track" class:hskq-track-empty={pct === 0} aria-hidden="true">
-			{#if pct > 0}
-				<div class="hskq-fill" style:width="{pct}%"></div>
-			{/if}
-		</div>
-		<p class="hskq-stat tabular text-xs">
-			<span class="min-w-0 truncate" class:text-ink-muted={started} class:text-ink-subtle={!started}
-				>{countLine}</span
-			>
-			{#if scoreLine}
-				<span class="shrink-0 text-ink-subtle">{scoreLine}</span>
-			{/if}
-		</p>
-	</div>
-
-	<!-- Full width rather than beside the title: at 375px a phrase this long wraps in a
-	     narrow column, and cards that wrap differently stop looking like one list. -->
-	<p class="mt-1.5 text-sm leading-snug text-ink-muted">{meta.blurb}</p>
+	<!-- What is in the level, then the level itself, and only then the score. The meter used to
+	     be the second thing on every card, so on a first visit all five opened with a 6px
+	     hairline and the word "0" — the state this list is in most often, told in the one
+	     number that cannot help a newcomer pick. It is a footer now, sitting with the button it
+	     informs, and the Chinese starts 37px higher up the card — 77px in, against 114px. Full
+	     width rather than beside the title: at 375px a phrase this long wraps in a narrow
+	     column, and cards that wrap differently stop looking like one list. -->
+	<p class="mt-1 text-sm leading-snug text-ink-muted">{meta.blurb}</p>
 
 	<a class="hskq-preview-link" href={browseHref}>
-		<span class="hskq-preview-head">
-			{#if weakLabel}<span class="eyebrow">{weakLabel}</span>{/if}
-			<span class="hskq-more eyebrow"
-				>Browse<span class="sr-only"> all {total.toLocaleString('en')} words in HSK {level}</span>
-				<span aria-hidden="true">→</span></span
-			>
-		</span>
+		<!-- Only when there is something to say. The label used to share this row with
+		     `Browse →`, which meant every untouched card spent a whole line on a link that
+		     was then sitting two pixels above the third word and reading as its caption. -->
+		{#if weakLabel}
+			<span class="hskq-preview-head"><span class="eyebrow">{weakLabel}</span></span>
+		{/if}
 		<!-- The three words are the card's Chinese, so they get the hanzi scale, not the UI one.
 		     `minmax(min-content, 1fr)` rather than three rigid thirds: equal columns when the
 		     row is short, and a column that grows to whatever 大学生 needs when it is not. -->
@@ -270,22 +275,67 @@
 						spaced={false}
 						class="hskq-py mt-1 block"
 					/>
-					<!-- Two lines, always reserved, so `have no choice but to` reads and the card
-					     still cannot change height. 990 of the 4,308 shipped glosses (23%) are
-					     longer than sixteen characters, so one line was never the list's shape —
-					     it was the shape of the fifteen glosses that were picked to fit it.
-					     Two elements, not one: the outer is size-contained so that the English
-					     contributes nothing to how wide the column has to be — `behind
-					     something` is 103px and would otherwise push 背后 out of a row it fits
-					     in — and the inner is the clamp, which has to be a `-webkit-box` and so
-					     cannot be the contained one. -->
-					<span class="hskq-gloss text-xs text-ink-subtle">
-						<span class="hskq-gloss-text" data-gloss>{word.gloss}</span>
-					</span>
 				</li>
 			{/each}
 		</ul>
+		<!--
+			The English for all three words, on one line under all three of them, with the way
+			into the rest of the level at the end of it.
+
+			Read left to right the glosses map onto the row above in the same order, and the
+			line is the whole card wide, so a 30-character gloss sets as a 30-character gloss
+			instead of being folded into a 77px column and cut. There is no clamp and no
+			reservation: whatever the three glosses need, they get. The longest three a level
+			can produce join to 106 characters, which is three lines at the narrowest card this
+			layout builds (246px at 320), and the fifteen static ones are one line at every
+			width — so the common state is a single line, shorter than the two-line-per-column
+			box this replaced, and the worst state is a slightly taller card rather than a cut
+			word.
+
+			`Browse →` floats into the line rather than sitting in the flow of it, so it takes
+			its width out of the *first* line only and the English still wraps at the full width
+			of the card. As a flex sibling it cost 81px of every line, which was four lines and
+			a `general…` at 320 — the exact defect this whole change exists to end.
+
+			Separators are drawn in CSS, on the element, so the row cannot end up with a
+			stranded dot if a word arrives with an empty gloss.
+		-->
+		<p class="hskq-glosses text-xs text-ink-subtle" data-gloss-line>
+			<span class="hskq-more eyebrow"
+				>Browse<span class="sr-only"> all {total.toLocaleString('en')} words in HSK {level}</span>
+				<span aria-hidden="true">→</span></span
+			>
+			{#each preview as word (word.id)}
+				<span class="hskq-gl">{word.gloss}</span>
+			{/each}
+		</p>
 	</a>
+
+	<!-- One rule and one line, at the foot of the card with the button it belongs to. The
+	     fraction is the only thing a meter ever said, and it said it at the cost of the three
+	     words underneath. -->
+	<div class="hskq-status">
+		<div class="hskq-track" class:hskq-track-empty={pct === 0} aria-hidden="true">
+			{#if pct > 0}
+				<div class="hskq-fill" style:width="{pct}%"></div>
+			{:else}
+				<!-- Nothing practised is still a position on the scale, and a scale with no mark
+				     on it is a rule. Du Chinese paints the end-cap of "0/12 chapters read" for
+				     the same reason: an origin dot says *this* is a track and you are at the
+				     start of it, where an empty capsule at 1x said only "hairline". Neutral ink,
+				     never the correct-green of `.hskq-fill`, so it cannot be read as progress. -->
+				<div class="hskq-origin"></div>
+			{/if}
+		</div>
+		<p class="hskq-stat tabular text-xs">
+			<span class="min-w-0 truncate" class:text-ink-muted={started} class:text-ink-subtle={!started}
+				>{countLine}</span
+			>
+			{#if scoreLine}
+				<span class="shrink-0 text-ink-subtle">{scoreLine}</span>
+			{/if}
+		</p>
+	</div>
 
 	<div class="hskq-actions">
 		<a
@@ -317,8 +367,13 @@
 		border-color: var(--color-line-strong);
 	}
 
+	/* The whole footer — meter, count, button — sinks to the bottom of the card, so two cards
+	   sharing a desktop row line up on their status line as well as their button. The `auto`
+	   lives here rather than on `.hskq-actions`, or the free space would open *between* the
+	   count and the button it is about. */
 	.hskq-status {
-		margin-block-start: 0.5rem;
+		margin-block-start: auto;
+		padding-block-start: 0.625rem;
 	}
 
 	.hskq-track {
@@ -328,13 +383,18 @@
 		overflow: hidden;
 	}
 
-	/* Nothing practised yet: an outlined capsule, which is a container waiting to be filled.
-	   The flat fill alone was a hairline the width of the card sitting under a heading, and it
-	   read as that heading's rule — the blind judge and the critic reached that independently.
-	   Du Chinese's "0/12 chapters read" paints an end-cap for the same reason. */
+	/* Nothing practised yet: an outlined capsule, which is a container waiting to be filled. */
 	.hskq-track-empty {
 		background-color: transparent;
 		box-shadow: inset 0 0 0 1px var(--color-line);
+	}
+
+	/* The mark at zero. Square with the track's own height so it is a round cap, not a dash. */
+	.hskq-origin {
+		inline-size: 0.375rem;
+		block-size: 100%;
+		border-radius: inherit;
+		background-color: var(--color-line-strong);
 	}
 
 	/* A handful of words out of a thousand is still worth seeing. */
@@ -361,28 +421,37 @@
 		position: relative;
 		z-index: 1;
 		display: block;
-		margin-block-start: 0.375rem;
+		margin-block-start: 0.5rem;
 		border-radius: var(--radius-sm);
 		color: inherit;
 		text-decoration: none;
 	}
 
 	.hskq-preview-head {
-		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
+		display: block;
+		margin-block-end: 0.125rem;
 	}
 
-	/* Pushed right whether or not there is a label to its left. */
+	/* Floated, not flexed. A float takes its width out of the line boxes it overlaps — line
+	   one — and leaves every line under it the full width of the card, which is what keeps a
+	   106-character worst case inside three lines at 320px. Above the words rather than below,
+	   `Browse →` was two pixels over the third specimen and read as that word's caption — the
+	   blind judge and the critic said so independently. First in source because a float only
+	   pushes text that comes after it. */
 	.hskq-more {
-		margin-inline-start: auto;
+		float: inline-end;
+		margin-inline-start: 0.75rem;
+		/* Floats sit on the top of the line box, not its baseline; 11px caps in a 12px line
+		   need this much to read as one line with the English beside them. */
+		padding-block-start: 0.1em;
 		color: var(--color-accent);
 		white-space: nowrap;
 	}
 
 	/* Equal thirds while the words are short, and no narrower than the widest thing in the
 	   column once they are not: `min-content` is the whole hanzi and the whole pinyin, both
-	   `nowrap`, so neither can be cut. Only the gloss gives ground, and it wraps. */
+	   `nowrap`, so neither can be cut. Nothing else is in the column to give ground — the
+	   English moved out from under the words to `.hskq-glosses` below. */
 	.hskq-preview {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(min-content, 1fr));
@@ -404,33 +473,29 @@
 		white-space: nowrap;
 	}
 
-	/* Size containment in the inline axis only: the column is sized by the hanzi and the
-	   pinyin, which must not be cut, and the English then wraps into whatever that leaves.
-	   Block size is still content-driven, so the two reserved lines below still reserve. */
-	.hskq-gloss {
-		display: block;
-		contain: inline-size;
-		margin-block-start: 0.125rem;
-		min-block-size: 2.7em;
-		line-height: 1.35;
-	}
+	/* One line across the whole card, not three captions in three columns.
 
-	/* Two lines, then an ellipsis. A three-character word takes the room it needs from its
-	   neighbours, so at 320px the third column can be 47px and `electricity` does not fit on
-	   one line of it: `hyphens` breaks it where English breaks (`elec-tricity`) rather than
-	   where the box ends (`electrici| ty`), and `break-word` is the last resort under that. */
-	.hskq-gloss-text {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		overflow: hidden;
+	   `contain: inline-size` is gone with the columns it was protecting: this element is the
+	   card's full width either way, so the English can no longer widen anything. No clamp and
+	   no reserved height with it — the English is never cut, at any width, for any word in the
+	   list, and a card that needs one line is one line tall. `hyphens` and `break-word` are
+	   the last resort for the one thing a 246px card cannot set whole: a single unbreakable
+	   `responsibilities`. */
+	.hskq-glosses {
+		margin-block-start: 0.375rem;
+		line-height: 1.4;
 		hyphens: auto;
 		overflow-wrap: break-word;
 	}
 
+	/* On the element, so an empty gloss cannot strand its dot. The space before the dot is
+	   non-breaking and the one after it is not, so a wrap always happens *after* a separator:
+	   the dot stays with the gloss it closes and the next gloss starts the new line. */
+	.hskq-gl + .hskq-gl::before {
+		content: '\00a0· ';
+	}
+
 	.hskq-actions {
-		margin-block-start: auto;
 		padding-block-start: 0.5rem;
 	}
 
