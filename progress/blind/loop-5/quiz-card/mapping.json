@@ -1,0 +1,17 @@
+{
+	"piece": "quiz-card",
+	"loop": 5,
+	"rule": "\"quiz-card\" is 9 characters — ODD — so the reference is A and our screenshot is B",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"what": "Pleco headword detail for 几乎 [幾-] — hanzi + traditional inline, PY/JP rows with speakers, HSK 3 badge, DICT/CHARS/WORDS/SENTS tabs, ADVERB + gloss, four example sentences each hanzi/pinyin/English",
+		"device": "iPhone 6/7/8 Plus, 1242x2208 device px (414pt wide, 3x)"
+	},
+	"B": {
+		"which": "ours",
+		"source": "progress/shots/loop-5/quiz-card-mobile.png",
+		"what": "hskquiz teach card for 车站 at 375x812 (2x) — NEW WORD eyebrow, hanzi hero, tone-coloured pinyin + Listen pill, 〔車站〕, gloss, part of speech, SENTENCE panel, Got it",
+		"device": "375x812 @2x, touch"
+	}
+}
