@@ -18,6 +18,16 @@ export interface ShellRoute {
 	/** Document title. */
 	title: string;
 	/**
+	 * The title for the same address once the run on it has FINISHED, or null where that state
+	 * does not exist. A finished run is not a separate document — it is `/quiz/3` with the
+	 * summary swapped in, and it deliberately keeps one canonical URL (see +layout.svelte) —
+	 * so the tab, the history entry and the bookmark are the only three places left that can
+	 * tell "10 questions to go" apart from "8 of 10, two to review". They used to be
+	 * byte-identical. The shell picks between the two off the same signal it uses to hand the
+	 * <h1> over: a focus screen that has rendered a heading of its own is the summary.
+	 */
+	resultsTitle: string | null;
+	/**
 	 * A run in progress. Chrome is stripped to a single exit control and the footer is
 	 * dropped so the answer buttons own the bottom of the screen.
 	 */
@@ -48,6 +58,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 			back: false,
 			heading: '',
 			title: `${APP_NAME} — ${APP_TAGLINE}`,
+			resultsTitle: null,
 			focus: false
 		};
 	}
@@ -61,6 +72,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 			back: true,
 			heading: `HSK ${level}`,
 			title: `HSK ${level} practice · ${APP_NAME}`,
+			resultsTitle: `HSK ${level} results · ${APP_NAME}`,
 			focus: true
 		};
 	}
@@ -72,6 +84,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 			back: true,
 			heading: `HSK ${level} vocabulary`,
 			title: `HSK ${level} vocabulary · ${APP_NAME}`,
+			resultsTitle: null,
 			focus: false
 		};
 	}
@@ -82,6 +95,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 		back: true,
 		heading: '',
 		title: APP_NAME,
+		resultsTitle: null,
 		focus: false
 	};
 }

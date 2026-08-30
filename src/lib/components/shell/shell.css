@@ -15,7 +15,12 @@
  *
  *   --app-bar-h      Body height of the EXPANDED bar. Its intrinsic top end.
  *   --app-bar-min-h  Body height of the DOCKED bar — the compact row that never leaves, still
- *                    carrying the back control and the level's name. Its intrinsic bottom end.
+ *                    carrying the back control and the level's name. Its intrinsic bottom end,
+ *                    and a floor for a row with something IN it: the shell zeroes it on
+ *                    `[data-mode='home']`, where the bar carries the wordmark and no control
+ *                    at all, and the bar there is allowed to slide off whole. The controller
+ *                    reads this off the SHELL rather than off `:root` for that reason, and
+ *                    re-reads it on every navigation.
  *   --app-bar-line   The hairline the bar draws under itself. It is part of the bar's border
  *                    box, so it is part of every number below; naming it means the bar's own
  *                    inner row can subtract it instead of the published height under-shooting
@@ -25,15 +30,23 @@
  *                    JS as the bar compacts under a downward scroll. Anything that sticks
  *                    below the bar offsets against THIS, which is what the whole app already
  *                    did — so browse's search + filters, the quiz progress rail and the level
- *                    screen's desktop rail all rise with the bar for free. IT IS NEVER ZERO
- *                    AND NEVER NEGATIVE, ANYWHERE: the bar shrinks, it does not leave, and
- *                    there is no override of it in the tree — `.shell` writes it live and
- *                    `:root` holds the pre-measurement default, and that is the whole list.
+ *                    screen's desktop rail all rise with the bar for free. IT IS NEVER
+ *                    NEGATIVE, AND NEVER ZERO WHERE THE BAR HOLDS A CONTROL: on browse and
+ *                    during a run the bar shrinks, it does not leave. The landing screen is
+ *                    the single exception and the floor grants it explicitly — see
+ *                    `--app-bar-min-h` above. There is no override of this property itself in
+ *                    the tree: `.shell` writes it live and `:root` holds the pre-measurement
+ *                    default, and that is the whole list.
  *                    A screen that wants less than the full chrome subtracts its own fold
  *                    with `--app-sticky-top`; it does not get a smaller `--app-header-h`.
  *   --app-chrome-h   The live total the shell occupies: safe-area inset plus the above. This
- *                    is the one number that answers "how much of the viewport is not mine",
- *                    and it has a floor for the same reason.
+ *                    is the one number that answers "how much of the viewport is not the
+ *                    screen's", and it has a floor for the same reason. Two places answer
+ *                    "none of it": the landing screen once its bar has left, and a run in
+ *                    landscape, where the shell lifts the bar out of flow entirely so the
+ *                    card can have the whole frame (see +layout.svelte). Anything sticking
+ *                    under the chrome offsets against this, so both answers have to be
+ *                    honest — a bar that is not in the flow must not be charged for.
  *
  * `.shell[data-chrome]` is `expanded` or `condensed` (past half the bar's travel), for a
  * screen that wants to do more than move — collapse a control row, drop a label.
@@ -58,8 +71,9 @@
  * Registered so `getComputedStyle` hands the shell resolved px rather than the author's
  * `3.375rem`. `--app-chrome-fold` keeps `inherits: false` — it is a statement about one
  * screen, not a document-wide setting a nested component could accidentally inherit and
- * re-report. The bar's two ends do inherit: they are read off the root, and a media query
- * that moves them has to move the JS floor with them.
+ * re-report. The bar's two ends DO inherit: they are declared on `:root`, read back off the
+ * shell, and a media query that moves them has to move the JS floor with them — which is
+ * exactly how the landscape block below shrinks the bar and its floor in one statement.
  */
 @property --app-chrome-fold {
 	syntax: '<length>';

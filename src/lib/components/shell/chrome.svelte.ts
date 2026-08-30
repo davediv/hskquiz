@@ -165,6 +165,16 @@ export function createChrome(): ChromeController {
 	}
 
 	/**
+	 * The shell wrapper. The floor is read off THIS and not off `:root`, because it is not a
+	 * document-wide constant: it is the height of the row that has to survive on the screen
+	 * currently rendered, and one screen sets it to zero (see `readFloor`).
+	 */
+	function shellEl(): HTMLElement {
+		const el = document.getElementById('main')?.parentElement;
+		return el instanceof HTMLElement ? el : document.documentElement;
+	}
+
+	/**
 	 * The screen's own sticky block — the thing a fold takes rows off the top of. Only the
 	 * screen root's direct children are considered: a fold is a statement about the block the
 	 * screen pins under the bar, not about some sticky affordance nested inside a list row.
@@ -206,12 +216,26 @@ export function createChrome(): ChromeController {
 	 * The docked height, read off the same tokens the bar is styled from — so a media query
 	 * that shrinks the bar in landscape moves the floor with it and the two cannot disagree.
 	 * Both properties are registered `<length>`, so these arrive as px.
+	 *
+	 * ZERO IS A LEGAL ANSWER ON EXACTLY ONE SCREEN, AND IT IS NOT A LOOPHOLE IN THE FLOOR.
+	 * The floor exists to keep a *control* on screen: on `/browse/1` the docked row is the
+	 * only back control and the only thing naming the level on a 38,402px document, so it
+	 * stays. The landing screen's bar holds `汉 hskquiz` and — measured — zero interactive
+	 * elements, ever: no back (there is nowhere above it), no lateral move (a destination
+	 * here is a level, and the page is a grid of them). Pinning 41px of wordmark over a
+	 * 2,074px document is 5% of every frame spent restating the product's name to someone who
+	 * is already inside it; both references spend that row on navigation instead. So the
+	 * landing screen sets `--app-bar-min-h: 0` on the shell and its bar is allowed to leave —
+	 * still 1:1 with the finger, still back in a ~19px flick, and always whole at the top of
+	 * the document. Read off the shell rather than `:root` for that reason, and re-read on
+	 * every navigation via `sync()`, because it now changes between routes.
 	 */
 	function readFloor(): number {
-		const root = getComputedStyle(document.documentElement);
-		const body = Number.parseFloat(root.getPropertyValue(MIN_BAR_PROPERTY));
-		if (!Number.isFinite(body) || body <= 0) return MIN_BAR_FALLBACK;
-		const line = Number.parseFloat(root.getPropertyValue(LINE_PROPERTY));
+		const scope = getComputedStyle(shellEl());
+		const body = Number.parseFloat(scope.getPropertyValue(MIN_BAR_PROPERTY));
+		if (!Number.isFinite(body)) return MIN_BAR_FALLBACK;
+		if (body <= 0) return 0;
+		const line = Number.parseFloat(scope.getPropertyValue(LINE_PROPERTY));
 		return body + (Number.isFinite(line) && line > 0 ? line : 0);
 	}
 
@@ -368,9 +392,14 @@ export function createChrome(): ChromeController {
 		},
 		sync() {
 			// A route swap replaces the screen element, and the new one may not have laid out
-			// yet on the frame `afterNavigate` runs in.
+			// yet on the frame `afterNavigate` runs in. The floor comes with it: it is a
+			// property of the screen now, not of the document.
+			minBarH = readFloor();
 			measureColumn();
-			requestAnimationFrame(measureColumn);
+			requestAnimationFrame(() => {
+				minBarH = readFloor();
+				measureColumn();
+			});
 		},
 		report(height: number) {
 			// Safe to take at any point in the travel: the bar's border box is the same size

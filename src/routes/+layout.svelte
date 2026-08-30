@@ -21,8 +21,11 @@
 	what every layer beneath it can read:
 
 	  --app-header-h    live on-screen height of the bar, 57px → 41px as you scroll down.
-	                    NEVER 0, never negative: the bar compacts to a docked row that still
-	                    carries the back control and the level's name, and stays there.
+	                    Never negative, and never 0 on a screen with a control in the bar: it
+	                    compacts to a docked row that still carries the back control and the
+	                    level's name, and stays there. The landing screen's bar holds no
+	                    control at all, so there it is allowed to reach 0 — see the
+	                    `[data-mode='home']` block below.
 	  --app-chrome-h    that plus the safe-area inset: the shell's live total, floored the same
 	  --app-fold-h      px of the current screen's own volunteered fold that are spent
 	  --app-sticky-top  --app-chrome-h minus that, for a screen whose sticky block folds
@@ -135,6 +138,21 @@
 	const canonical = $derived(`${page.url.origin}${page.url.pathname}`);
 
 	/**
+	 * One address, two states — and the TITLE is allowed to tell them apart even though the
+	 * canonical URL is not. A finished run swaps the summary in under `/quiz/3`, so the tab,
+	 * the back-history entry and a bookmark were all reading "HSK 3 practice · hskquiz"
+	 * whether there were ten questions left or none. Two signals, because the state arrives
+	 * two different ways: `?state=summary` is a seeded deep link and is right during SSR,
+	 * before anything has rendered; `pageOwnsHeading` is the live swap, and it is the same
+	 * observation the bar already makes to hand its <h1> over — inside focus mode, a screen
+	 * with a heading of its own is the summary.
+	 */
+	const finished = $derived(
+		page.url.searchParams.get('state') === 'summary' || (route.focus && pageOwnsHeading)
+	);
+	const title = $derived(finished && route.resultsTitle ? route.resultsTitle : route.title);
+
+	/**
 	 * Absolute, because a crawler reads `og:image` out of the document with no page context to
 	 * resolve a relative path against. Built through `new URL` rather than by concatenating
 	 * the origin: SvelteKit's `base` is a RELATIVE path during SSR (`.` on `/`, `..` on
@@ -145,7 +163,7 @@
 </script>
 
 <svelte:head>
-	<title>{route.title}</title>
+	<title>{title}</title>
 	<link rel="canonical" href={canonical} />
 	<meta property="og:url" content={canonical} />
 	<meta property="og:image" content={shareImage} />
@@ -161,6 +179,8 @@
 <div
 	class="shell"
 	class:focus={route.focus}
+	class:owns-heading={pageOwnsHeading}
+	data-mode={route.mode}
 	data-chrome={chrome.condensed ? 'condensed' : 'expanded'}
 	style:--app-header-h={chrome.measured ? `${chrome.visible}px` : null}
 	style:--app-fold-h={chrome.measured ? `${chrome.foldY}px` : null}
@@ -196,6 +216,29 @@
 		min-block-size: 100dvh;
 	}
 
+	/*
+	 * THE ONE SCREEN WHOSE BAR IS ALLOWED TO LEAVE.
+	 *
+	 * The docked row is a floor because it is the last control standing: on `/browse/1` it is
+	 * the only back control and the only thing naming the level anywhere on a 38,402px
+	 * document. The landing screen has none of that to protect — its bar renders `汉 hskquiz`
+	 * and, counted in the running app, zero interactive elements in either state. There is no
+	 * back (this IS the top) and no lateral move (every destination here is a level, and the
+	 * page is a grid of them), so the 41px it pinned was 5% of every frame of a 1,914px
+	 * document spent telling someone already inside the app what the app is called. Pleco and
+	 * Du Chinese both spend that row on navigation; ours can spend it on the levels. Measured
+	 * at scrollY 800 on 375x812: bar bottom 41 before, 0 after.
+	 *
+	 * Zeroing the floor is all it takes: the controller reads it off THIS element (see
+	 * `readFloor`), so the bar keeps its 1:1 travel, still comes back on a ~19px flick, and is
+	 * always whole at the top of the document. `--app-header-h` therefore reaches 0 here — the
+	 * one place in the app where it may — and the level screen's sticky rail, which offsets
+	 * against it, rides up with it for free.
+	 */
+	.shell[data-mode='home'] {
+		--app-bar-min-h: 0px;
+	}
+
 	.content {
 		flex: 1 1 auto;
 		inline-size: 100%;
@@ -221,19 +264,77 @@
 	 * from flexing, not from a length — so a child asking for `block-size: 100%` gets `auto`
 	 * and the answer buttons end up stranded mid-screen. As a flex column it hands its used
 	 * height to the screen instead, and `.quiz` claims it with `flex: 1`.
-	 *
-	 * It does NOT on its own make the run one viewport tall, and the comment here used to
-	 * claim it did. `min-block-size: 100dvh` is a floor, not a ceiling: if the screen's own
-	 * content has a taller intrinsic minimum, the shell grows and the last control goes below
-	 * the fold. Measured at 812x375: `.run` is 368px whatever the viewport height is, so on
-	 * every landscape phone the shell is ~40px over and "Got it" is half cut off. The floor
-	 * that has to come down is the run's, not this one — the shell cannot shrink a child that
-	 * refuses to be shrunk.
 	 */
 	.shell.focus .content {
 		display: flex;
 		flex-direction: column;
 		padding-block-end: var(--app-safe-bottom);
+	}
+
+	/*
+	 * A RUN IN LANDSCAPE: THE SHELL BECOMES A FRAME AND OWNS THE CEILING.
+	 *
+	 * `min-block-size: 100dvh` is a floor, not a ceiling. On a landscape phone the run's
+	 * intrinsic column is 380px against 328px of space under a 47px bar, so the shell simply
+	 * grew to 427 and the only control on the screen — "Got it" / "Next word", 45px of pill —
+	 * sat at y373→419: 2px of it visible, 44px below the fold, on every cold load measured at
+	 * 812x375 and 667x375 and on 4 of 6 at 844x390. The
+	 * shell used to name that number in a comment and assign the fix to the run. It is the
+	 * shell's: "the last control is on screen" is the one guarantee focus mode exists to give.
+	 *
+	 * Three rules, and each one is load-bearing:
+	 *
+	 *   block-size 100dvh + overflow hidden   A CEILING. The document is exactly one viewport
+	 *                                         — `scrollHeight === innerHeight` — so nothing can
+	 *                                         push a control past the bottom edge any more.
+	 *   the bar leaves the flow               47px of the 52px shortfall is the bar itself.
+	 *                                         AppBar lifts it to `position: fixed` in the same
+	 *                                         media query and keeps only the exit control, so
+	 *                                         the run gets the whole frame. `--app-chrome-h`
+	 *                                         drops to the safe inset to match: it answers "how
+	 *                                         much of the viewport is not the screen's", and a
+	 *                                         bar out of flow takes none. Without that the
+	 *                                         quiz's rail (sticky at `--app-chrome-h`) would be
+	 *                                         shoved 47px down over the question.
+	 *   the screen sizes to its content       `flex: none` on whatever the screen renders into
+	 *                                         `#main`, centred with `safe center`. Growing into
+	 *                                         a definite frame is what strands a bottom control
+	 *                                         mid-air when the frame is TALLER than the run
+	 *                                         (932x430 wasted 47px under the button); shrinking
+	 *                                         into it would clip a summary. Content height,
+	 *                                         centred, and `overflow-y: auto` on the frame is
+	 *                                         the safety net for a card taller than any we can
+	 *                                         measure — it stays reachable rather than clipped.
+	 *
+	 * Scoped to a RUN, not to focus mode generally: `.owns-heading` means the screen rendered
+	 * an <h1> of its own, which is the summary and the dead-end panels. Those are pages — they
+	 * scroll, they have their own title on screen, and they want the bar in flow above them.
+	 */
+	@media (orientation: landscape) and (max-height: 30rem) {
+		.shell.focus:not(.owns-heading) {
+			--app-chrome-h: var(--app-safe-top);
+
+			block-size: 100dvh;
+			overflow: hidden;
+		}
+
+		.shell.focus:not(.owns-heading) .content {
+			min-block-size: 0;
+			justify-content: safe center;
+			overflow-y: auto;
+			overscroll-behavior: contain;
+		}
+
+		.shell.focus:not(.owns-heading) .content > :global(*) {
+			flex: none;
+			min-block-size: 0;
+		}
+
+		/* The chrome total is 0 here, and the skip link is the one thing that must not ride it
+		   down: it would land under the floating exit control. It clears the bar's real box. */
+		.shell.focus:not(.owns-heading) .skip {
+			inset-block-start: calc(var(--app-safe-top) + var(--app-header-h) + 0.5rem);
+		}
 	}
 
 	.skip {

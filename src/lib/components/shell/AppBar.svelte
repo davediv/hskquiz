@@ -24,6 +24,13 @@
 	sticky-in-flow element must not do: it shortens the document, scroll anchoring compensates,
 	the controller reads that compensation as a scroll, and the bar oscillates.
 
+	THE PAD-BACK IS FOR A ROW THAT STAYS. On the landing screen the floor is 0 — the bar there
+	carries the wordmark and no control, so it is allowed to leave (see +layout.svelte) — and
+	recomposing into a 0px row would squeeze the mark and the wordmark out of a zero-height
+	grid and paint them, half-clipped, across the top of the page it was supposed to be
+	leaving. So the compensation is tied to the floor: a bar with somewhere to dock recomposes,
+	a bar with nowhere to dock simply slides off whole.
+
 	THE HEADING IS AN <h1> ONLY WHEN THE SCREEN HAS NOT WRITTEN ONE. It used to be a <span>,
 	which left `/quiz/[level]` and `/browse/[level]` with literally zero headings in their
 	normal state while `/` had a full outline — a screen-reader user landing on browse had
@@ -103,7 +110,9 @@
 	<div
 		class="inner"
 		class:home={route.mode === 'home'}
-		style:padding-block-start={chrome.barOffset > 0 ? `${chrome.barOffset}px` : null}
+		style:padding-block-start={chrome.minBarH > 0 && chrome.barOffset > 0
+			? `${chrome.barOffset}px`
+			: null}
 	>
 		{#if route.mode === 'home'}
 			<span class="mark" lang="zh-Hans" aria-hidden="true">汉</span>
@@ -400,5 +409,64 @@
 
 	.bar.condensed .wordmark {
 		font-size: var(--text-base);
+	}
+
+	/*
+	 * A RUN IN LANDSCAPE: THE BAR STOPS TAKING HEIGHT.
+	 *
+	 * A landscape phone has 375px of height and the run's column wants 380 of it, so the 47px
+	 * this bar spends in flow is the difference between "Got it" being on screen and 44px of it
+	 * being below the fold. Everything the bar is FOR is still here — it is lifted out of flow
+	 * and reduced to the single exit control, which is what the shell says focus mode is:
+	 * "chrome stripped to a single exit control and the footer dropped so the answer buttons
+	 * own the bottom of the screen".
+	 *
+	 *   fixed, full width, pointer-events: none   The box stays where it was, so the chevron
+	 *                                             lands on the same column edge as in portrait
+	 *                                             and `--app-header-h` keeps reporting the
+	 *                                             bar's honest 47px. Taking the pointer events
+	 *                                             off is what stops a transparent band across
+	 *                                             the top of the frame from eating taps; the
+	 *                                             control itself takes them back.
+	 *   no surface                                It is glass over a page it no longer sits
+	 *                                             above, so the fill, the blur and the hairline
+	 *                                             all go; the control carries its own surface
+	 *                                             instead, and reads over anything under it.
+	 *   the heading is clipped, not removed       The bar's <h1> is the only heading a run has.
+	 *                                             `display: none` would leave the document with
+	 *                                             no outline at all; clipped, it is still the
+	 *                                             first thing a screen reader announces. It
+	 *                                             cannot stay visible — centred, it lands on the
+	 *                                             progress rail's first row.
+	 *
+	 * The shell pairs this with `--app-chrome-h: var(--app-safe-top)` — see +layout.svelte.
+	 */
+	@media (orientation: landscape) and (max-height: 30rem) {
+		:global(.shell.focus:not(.owns-heading)) .bar {
+			position: fixed;
+			inset-block-start: 0;
+			inset-inline: 0;
+			border-block-end-color: transparent;
+			background-color: transparent;
+			backdrop-filter: none;
+			-webkit-backdrop-filter: none;
+			pointer-events: none;
+		}
+
+		:global(.shell.focus:not(.owns-heading)) .icon {
+			background-color: color-mix(in srgb, var(--color-page) 72%, transparent);
+			backdrop-filter: saturate(1.6) blur(12px);
+			-webkit-backdrop-filter: saturate(1.6) blur(12px);
+			pointer-events: auto;
+		}
+
+		:global(.shell.focus:not(.owns-heading)) .heading {
+			position: absolute;
+			inline-size: 1px;
+			block-size: 1px;
+			overflow: hidden;
+			clip-path: inset(50%);
+			white-space: nowrap;
+		}
 	}
 </style>

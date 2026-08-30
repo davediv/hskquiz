@@ -9,9 +9,8 @@
 		/>
 		<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="#100f0e" media="(prefers-color-scheme: dark)" />
-		<!-- INSTALLABLE. Tapped from the home screen this launches without Safari's chrome,
-		     which is the whole point of the safe-area token system the shell carries. The
-		     metas below only pay off *after* an install, so the two things that make the
+		<!-- INSTALLABLE. Tapped from the home screen this launches without Safari's chrome.
+		     The metas below only pay off *after* an install, so the two things that make the
 		     install possible have to come first:
 
 		       manifest          Chrome/Android's whole install prompt — name, start_url,
@@ -21,7 +20,19 @@
 		                         the page instead of an icon.
 
 		     `mobile-web-app-capable` is the standards-track name Chrome reads; the three
-		     `apple-*` ones are the same statement for iOS. -->
+		     `apple-*` ones are the same statement for iOS.
+
+		     THE STATUS BAR STAYS THE OS's, AND THAT IS A CHOICE, NOT AN OVERSIGHT. `default`
+		     insets the standalone web view below the status bar, so `env(safe-area-inset-top)`
+		     is 0 and `--app-chrome-h` is the bar alone. The alternative, `black-translucent`,
+		     hands us those ~47px and reports them as the top inset — and paints the clock and
+		     the battery in fixed WHITE over a #faf8f5 page. Unreadable system glyphs is a
+		     worse trade than 47px, and this app has no dark-only surface to spend them on.
+		     The safe-area token system is not what that decision is about: three of its four
+		     edges are live under `default` on a notched phone — the home indicator every focus
+		     screen pads against (`--app-safe-bottom`), and the landscape notch the shell pads
+		     `.content` against on both sides. Only `--app-safe-top` resolves to 0, which is
+		     exactly what "the OS owns that strip" means. -->
 		<link rel="manifest" href="%sveltekit.assets%/manifest.webmanifest" />
 		<link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/apple-touch-icon.png" />
 		<meta name="mobile-web-app-capable" content="yes" />
