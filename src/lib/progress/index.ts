@@ -30,6 +30,7 @@ export {
 	type ProgressSummary,
 	type RescueInfo,
 	type RescueReason,
+	type RestoreReport,
 	type StorageLike,
 	type StorageStatus
 } from './progress.svelte.ts';
@@ -44,6 +45,7 @@ export {
 	STORAGE_KEY,
 	type Generations,
 	type Heft,
+	type Restorable,
 	type StoredLevel,
 	type StoredProgress,
 	type StoredWord,
@@ -69,9 +71,11 @@ export {
 	mergeProgress,
 	ownRecord,
 	readGeneration,
+	readRestorable,
 	recordGen,
 	recordUnderOwnKey,
 	restoreInto,
+	restoredTotals,
 	shrinks,
 	snapshot,
 	stampGen,

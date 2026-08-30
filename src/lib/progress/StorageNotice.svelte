@@ -51,6 +51,16 @@
 	const rescue = $derived(hydrated ? progress.rescue : null);
 
 	/**
+	 * What the last Restore actually put back, when it did not put back what it promised.
+	 *
+	 * The store counts this from live state after the write rather than inferring it from the
+	 * write landing, and this line is the other half of that: a restore that recovers 12 of 300
+	 * words has to say so, because a notice that simply disappears is indistinguishable from one
+	 * that worked.
+	 */
+	const report = $derived(hydrated ? progress.restoreReport : null);
+
+	/**
 	 * "40 words · 128 answers" for a copy that reads, "about 300 words" for one that does not.
 	 *
 	 * A truncated payload will not parse, but its keys are still in the bytes and can still be
@@ -60,11 +70,21 @@
 	 */
 	const rescueSize = $derived.by(() => {
 		const info = rescue;
-		if (!info || info.words === 0) return null;
+		if (!info) return null;
+		if (info.words === 0) {
+			// Records are the headline, but a copy can hold only session history — "12 sessions,
+			// last played Tuesday" is the sole record this app keeps of a learner turning up, and
+			// saying "it cannot be read" over it would be false.
+			if (!info.readable || info.levels === 0) return null;
+			return `${info.levels} ${info.levels === 1 ? 'level' : 'levels'} of session history`;
+		}
 		const words = `${info.words.toLocaleString('en')} ${info.words === 1 ? 'word' : 'words'}`;
 		if (!info.readable) return `about ${words}`;
 		return `${words} · ${info.answers.toLocaleString('en')} answers`;
 	});
+
+	/** Whether there is anything here the Restore button could actually put back. */
+	const restorable = $derived(!!rescue?.readable && (rescue.words > 0 || rescue.levels > 0));
 
 	interface Notice {
 		key: string;
@@ -88,8 +108,8 @@
 				glyph: '!',
 				title: 'Progress was not reset',
 				detail:
-					'The browser refused to write, so nothing was erased — what is on this device is still ' +
-					'there and comes back when you reload. Still trying.'
+					'The browser refused to write, so nothing was erased and nothing was changed — every ' +
+					'answer below is still exactly where it was. Try again in a moment.'
 			});
 		}
 
@@ -154,8 +174,9 @@
 							A save was about to leave less history than this device already held, so the larger
 							copy was kept instead of being written over.
 						{:else if rescue.reason === 'unreadable'}
-							What was saved before could not be read — a half-finished write, or a newer version of
-							this app. It was copied somewhere safe rather than overwritten.
+							What was saved before could not be read as a whole — a half-finished write, or a
+							version of this app that is not this one. It was copied somewhere safe rather than
+							overwritten.
 						{:else}
 							A copy from an earlier visit is still sitting here, waiting. Nothing has been thrown
 							away.
@@ -171,12 +192,17 @@
 					</p>
 					{#if restoreFailed}
 						<p class="storage-notice-line storage-notice-failed">
-							That could not be put back — the copy is unreadable, or storage is refusing writes.
-							Nothing was thrown away.
+							{#if report && report.landed > 0}
+								Only {report.landed.toLocaleString('en')} of {report.promised.toLocaleString('en')}
+								words could be put back. The rest are still in the copy, and the copy has been kept.
+							{:else}
+								Nothing could be put back — the copy cannot be read from here, or storage is
+								refusing writes. It has been kept exactly as it was; nothing was thrown away.
+							{/if}
 						</p>
 					{/if}
 					<p class="storage-notice-actions">
-						{#if rescue.readable && rescue.words > 0}
+						{#if restorable}
 							<button type="button" class="storage-notice-action" onclick={onRestore}>
 								Restore it
 							</button>

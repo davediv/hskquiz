@@ -179,8 +179,14 @@ const RESERVED_IDS = new Set([...Object.getOwnPropertyNames(Object.prototype), '
  */
 export const EPOCH_FLOOR = Date.UTC(2024, 0, 1);
 
-/** How far ahead of our clock another device's stamp may sit before we call it broken. */
-const FUTURE_SLACK_MS = 36 * 60 * 60 * 1000;
+/**
+ * How far ahead of our clock a stamp may sit and still be believed.
+ *
+ * Generous on purpose — see `stamp()`. Everything under it is some device's clock being a
+ * device's clock: a slow battery, a bad timezone, a phone that has not synced since last
+ * month. Only past it is a stamp something no clock produced.
+ */
+const FUTURE_HORIZON_MS = 400 * 24 * 60 * 60 * 1000;
 
 /** A fresh, empty state. */
 export function emptyState(): ProgressState {
@@ -385,7 +391,13 @@ export function isShippableWordId(wordId: string): boolean {
 	// `L` followed by a digit is the whole claim: it is what `levelOfId` looks at, so it is the
 	// set this guard has to cover. Anything else is someone else's key and is left alone.
 	if (!/^L\d/.test(wordId)) return true;
-	const match = /^L([1-9])-(\d{1,7})$/.exec(wordId);
+	// Exactly four digits, because that is the only form the build mints — verified across all
+	// five shipped lists, `L1-0001` … `L5-1071`, zero exceptions. A `\d{1,7}` bound accepted
+	// `L1-1`, `L1-01`, `L1-001`, `L1-0001`, `L1-00001`, `L1-000001` and `L1-0000001` as seven
+	// distinct keys for one word: all seven survived decode, and HSK 1 read "7 practised · 7
+	// mastered" over a single answered card. The map is keyed by string, so canonical form is
+	// the only thing that makes one word one key.
+	const match = /^L([1-9])-(\d{4})$/.exec(wordId);
 	if (!match) return false;
 	const level = asLevel(match[1]);
 	if (level === null) return false;
@@ -720,6 +732,172 @@ export function restoreInto(mine: StoredProgress, rescued: StoredProgress): Stor
 	return merged;
 }
 
+/** What a rescue copy can actually give back, measured once, from one decode. */
+export interface Restorable {
+	/** The records and level entries, at no generation: ready for `restoreInto`. */
+	stored: StoredProgress;
+	/** Word records that would come back. The number the notice prints and the restore must land. */
+	words: number;
+	/** Answers those records add up to. From the same decode as `words`, never a second view. */
+	answers: number;
+	/** Level entries — "12 sessions, last played Tuesday" — that come back with them. */
+	levels: number;
+}
+
+/**
+ * Read a *rescue copy* for restoring, as leniently as it can be read honestly.
+ *
+ * This is deliberately not `decodeStored`, and the difference is the whole bug it exists to
+ * fix. `decodeStored` guards the **live key**: it refuses a payload from a newer schema, and
+ * it applies every reset generation the payload carries. Both are right for the key and both
+ * are catastrophic for a backup, because a copy is set aside *precisely when* something about
+ * it could not be trusted:
+ *
+ * - **Generations are ignored here.** A payload holding 300 records under `g:{"1":3}` decodes
+ *   to zero through `decodeStored` — which is exactly why it was copied aside in the first
+ *   place. Re-applying that counter on the way back made "Restore it" fold in nothing, report
+ *   success on the strength of the write landing, and then delete the only copy. `restoreInto`
+ *   stamps every restored record at the generation in force *now*, which is the promise the
+ *   store already makes: the learner asking for this history back outranks any reset that
+ *   happened while it sat in the backup key.
+ * - **Any version is read.** `{"v":7,…}` is a rollback from a future build. Its records are
+ *   byte-identical to ours; refusing to *read* them only meant the notice offered Discard as
+ *   the single exit from a perfectly parseable payload.
+ * - **Both map shapes are read.** A word map that arrived as an array of
+ *   `{id,seen,correct,streak,lastSeen,lastMissed}` objects is the most machine-readable
+ *   corruption there is, and it too could only be thrown away.
+ *
+ * What it will not do is guess. Bytes that do not parse, or that name no record and no
+ * session, come back as `null` — there is nothing in them to restore.
+ */
+export function readRestorable(text: string | null, now: number = Date.now()): Restorable | null {
+	if (typeof text !== 'string' || text.length === 0) return null;
+
+	let raw: unknown;
+	try {
+		raw = JSON.parse(text);
+	} catch {
+		// A write that was cut off mid-payload. The prefix is still full of *complete* records —
+		// see `salvageRecords` — and throwing 240 recoverable words away because the 241st is
+		// half-written is the loss this whole file exists to prevent.
+		return salvageRecords(text, now);
+	}
+	if (!isRecord(raw)) return salvageRecords(text, now);
+
+	const stored = emptyStored();
+	readRestorableWords(raw.w ?? raw.byWord, stored, now);
+	readRestorableLevels(raw.l ?? raw.levels, stored, now);
+
+	const counts = tally(stored);
+	const levels = LEVELS.filter((level) => stored.state.levels[level] !== undefined).length;
+	if (counts.words === 0 && levels === 0) return null;
+	return { stored, words: counts.words, answers: counts.answers, levels };
+}
+
+/** Word records and level entries from `rescued` that are now live in `state`. */
+export function restoredTotals(
+	rescued: StoredProgress,
+	state: ProgressState
+): { words: number; levels: number } {
+	let words = 0;
+	for (const wordId of Object.keys(rescued.state.byWord)) {
+		const wanted = recordUnderOwnKey(rescued.state.byWord, wordId);
+		if (!wanted || !hasHistory(wanted)) continue;
+		const live = ownRecord(state.byWord, wordId);
+		if (live && hasHistory(live)) words += 1;
+	}
+
+	let levels = 0;
+	for (const level of LEVELS) {
+		if (rescued.state.levels[level] && state.levels[level]) levels += 1;
+	}
+	return { words, levels };
+}
+
+/**
+ * One complete `"L1-0001":[6,4,1,1787227200000,0]` pair. Numbers only inside the brackets, so a
+ * partial match cannot swallow the rest of the payload, and the tuple has to be *closed* — the
+ * record the write was cut off in the middle of simply does not match.
+ */
+const SALVAGE_RE = /"(L[1-9]-\d{4})"\s*:\s*\[([-\d.,eE+\s]*)\]/g;
+
+/**
+ * Pull whole records out of bytes that will not parse.
+ *
+ * A half-finished `setItem` leaves a payload with one broken record at the end and every
+ * earlier one intact. `JSON.parse` refuses the lot, and refusing the lot is how a truncated
+ * 300-word write came to offer a learner a single button reading "Discard". Each pair matched
+ * here is closed, numeric and complete — it is decoded exactly as the normal path decodes it,
+ * and anything that fails that decode is skipped rather than guessed at.
+ */
+function salvageRecords(text: string, now: number): Restorable | null {
+	const stored = emptyStored();
+	for (const match of text.matchAll(SALVAGE_RE)) {
+		const wordId = match[1];
+		if (!isUsableWordId(wordId) || !isShippableWordId(wordId)) continue;
+		let fields: unknown;
+		try {
+			fields = JSON.parse(`[${match[2]}]`);
+		} catch {
+			continue;
+		}
+		if (!Array.isArray(fields)) continue;
+		const record = decodeWord(wordId, fields, now);
+		if (!record) continue;
+		delete (record as Partial<StoredWord>).gen;
+		stored.state.byWord[wordId] = record;
+	}
+
+	const counts = tally(stored);
+	if (counts.words === 0) return null;
+	return { stored, words: counts.words, answers: counts.answers, levels: 0 };
+}
+
+function readRestorableWords(value: unknown, stored: StoredProgress, now: number): void {
+	const put = (wordId: unknown, fields: unknown): void => {
+		if (!isUsableWordId(wordId) || !isShippableWordId(wordId)) return;
+		const record = decodeWord(wordId, fields, now);
+		if (!record) return;
+		// No generation travels with a restored record: `restoreInto` stamps it at the one in
+		// force when the learner asks for it back.
+		delete (record as Partial<StoredWord>).gen;
+		const existing = recordUnderOwnKey(stored.state.byWord, wordId);
+		stored.state.byWord[wordId] = existing ? betterOf(wordId, existing, record) : record;
+	};
+
+	if (isRecord(value)) {
+		for (const [wordId, fields] of Object.entries(value)) put(wordId, fields);
+		return;
+	}
+	if (!Array.isArray(value)) return;
+	// The array shape: each entry carries its own id, as a field or as the head of a tuple.
+	for (const entry of value) {
+		if (isRecord(entry)) put(entry.id ?? entry.wordId, entry);
+		else if (Array.isArray(entry)) put(entry[0], entry.slice(1));
+	}
+}
+
+function readRestorableLevels(value: unknown, stored: StoredProgress, now: number): void {
+	const put = (key: unknown, fields: unknown): void => {
+		const level = asLevel(key);
+		if (level === null) return;
+		const entry = decodeLevel(fields, now);
+		if (!entry) return;
+		delete (entry as Partial<StoredLevel>).gen;
+		stored.state.levels[level] = entry;
+	};
+
+	if (isRecord(value)) {
+		for (const [key, fields] of Object.entries(value)) put(key, fields);
+		return;
+	}
+	if (!Array.isArray(value)) return;
+	for (const entry of value) {
+		if (isRecord(entry)) put(entry.level ?? entry.id, entry);
+		else if (Array.isArray(entry)) put(entry[0], entry.slice(1));
+	}
+}
+
 /** A detached deep copy — no `$state` proxy, safe to keep as a merge ancestor. */
 export function snapshot(stored: StoredProgress): StoredProgress {
 	const copy = emptyStored();
@@ -768,15 +946,35 @@ export interface Heft {
 }
 
 /**
- * A word id, quoted, anywhere in the bytes.
+ * A word id sitting where a *record* would be — as a map key, or as the `id` field of an
+ * object. Two shapes, because two shapes hold history.
  *
- * Deliberately not anchored to the key position. The wire format only ever puts an id there,
- * so on a healthy payload the two are the same set — but the bytes this is asked about are
- * the *unhealthy* ones, and a payload whose word map arrived as an array carries its ids as
- * `{"id":"L1-0001",…}` values. Matching the id itself measures both shapes, and the ids go
- * into a `Set`, so one that appears twice is still one word.
+ * This used to be a bare `/"(L[1-9]-\d+)"/` matching an id anywhere in the bytes, on the
+ * reasoning that the wire format only ever puts one in a key position anyway. It does; junk
+ * does not. `{"v":99,"note":["L1-0001", … 400 of them]}` weighed 400 words, `heavier()`
+ * ranks words first, and those bytes evicted a real 50-word backup on a plain page load with
+ * no user action at all — defeating the one invariant `#keepAside` rests on. A list of names
+ * is not a list of records.
+ *
+ * So the id has to be *followed by a colon* (`{"L1-0001":[8,7,3,…]}`, the wire format, and
+ * still matchable when the bytes are truncated mid-payload) or *introduced by an id field*
+ * (`{"id":"L1-0001","seen":8,…}`, the array-of-objects shape a rolled-back build writes).
+ * Ids go into a `Set`, so one that appears in both shapes is still one word.
  */
-const ID_KEY_RE = /"(L[1-9]-\d{1,7})"/g;
+const ID_KEY_RES = [/"(L[1-9]-\d{4})"\s*:/g, /"(?:id|wordId)"\s*:\s*"(L[1-9]-\d{4})"/g] as const;
+
+/** Every distinct word id these bytes hold a record for, filtered as the decoder filters. */
+function namedWordIds(text: string): Set<string> {
+	const named = new Set<string>();
+	for (const re of ID_KEY_RES) {
+		for (const match of text.matchAll(re)) {
+			// Filtered exactly as the decoder filters, so junk ids cannot inflate the count and make
+			// dropping them look like a loss.
+			if (isShippableWordId(match[1])) named.add(match[1]);
+		}
+	}
+	return named;
+}
 
 /**
  * Weigh some bytes. `decoded` lets a caller that has already parsed them skip a second parse;
@@ -799,12 +997,7 @@ export function weigh(text: string | null, decoded?: StoredProgress | null): Hef
 		return { words: clean.words, answers: clean.answers, readable: true, size: text.length };
 	}
 
-	const named = new Set<string>();
-	for (const match of text.matchAll(ID_KEY_RE)) {
-		// Filtered exactly as the decoder filters, so junk ids cannot inflate the count and make
-		// dropping them look like a loss.
-		if (isShippableWordId(match[1])) named.add(match[1]);
-	}
+	const named = namedWordIds(text);
 
 	if (stored === null) return { words: named.size, answers: 0, readable: false, size: text.length };
 
@@ -1079,16 +1272,23 @@ function count(value: unknown): number {
 /**
  * A timestamp, sanitised for plausibility and not just for sign.
  *
- * Below the app's own epoch it is junk and becomes 0 ("never"); beyond our clock by more than
- * a day and a half it is a bad device clock and gets pulled back to now. Both used to render
- * as confident nonsense — "57y ago", "in 50y" — on the home screen.
+ * Below the app's own epoch it is junk and reads better as 0 ("never") than as "57y ago".
  *
- * The future test is skipped entirely when `now` is itself impossible. A device whose clock
- * says 2001 is not a clock that can adjudicate the future, and treating it as one was worse
- * than the symptom it was fixing: five records with five real 2026 dates, opened once on a
- * slow phone, all came back stamped at the same instant, and correcting the clock could not
- * undo it — the flattened stamps had already been written back. A stamp we cannot judge is
- * left exactly as it was found.
+ * The future is the harder half, and the rule here is: **never flatten history to fix a
+ * clock.** Pulling a future stamp back to `now` looks like a tidy repair and is a data loss
+ * that cannot be undone — five records carrying five real, distinct 2026 dates, opened once
+ * on a device whose battery died and whose clock is three days slow, all came back stamped at
+ * the same instant *and were written back that way*, so correcting the clock brought nothing
+ * back. Worse, every one of them then read as "missed just now", which is the exact input the
+ * miss-weighted scheduler runs on: the store manufactured urgency about itself.
+ *
+ * A device three days slow is an ordinary post-2024 clock, so `now < EPOCH_FLOOR` never fires
+ * for it and the old 36-hour slack caught it in full. The slack is therefore only about how a
+ * date *reads*, and reading "in 2d" for an afternoon is a trivial cost next to losing the
+ * ordering of a learner's history. So anything inside `FUTURE_HORIZON_MS` is kept exactly as
+ * found, distinct stamps stay distinct, and only a value no clock skew could explain — a
+ * corrupt `1e15`, "in 50y" — is refused, as 0 rather than as `now`, because a stamp we cannot
+ * believe must not become a fresh event the scheduler acts on.
  *
  * This only ever affects how a date *reads*. Nothing is deleted on the strength of it.
  */
@@ -1096,9 +1296,9 @@ function stamp(value: unknown, now: number): number {
 	const n = count(value);
 	if (n === 0) return 0;
 	if (n < EPOCH_FLOOR) return 0;
+	// A clock that cannot be true cannot adjudicate the future either.
 	if (now < EPOCH_FLOOR) return n;
-	const ceiling = now + FUTURE_SLACK_MS;
-	return n > ceiling ? now : n;
+	return n > now + FUTURE_HORIZON_MS ? 0 : n;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

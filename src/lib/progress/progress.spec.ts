@@ -5,6 +5,7 @@ import {
 	PROBE_KEY,
 	STORAGE_KEY,
 	type StoredProgress,
+	emptyStored,
 	encode,
 	mergeProgress
 } from './progress-core.ts';
@@ -440,9 +441,16 @@ describe('hostile storage', () => {
 		// The rescue happens on load, before anything can overwrite the key.
 		expect(storage.items.get(BACKUP_KEY)).toBe(corrupt);
 		expect(store.salvaged).toBe(true);
-		// One word id is still legible in the bytes even though they will not parse, and saying
-		// "about 1 word" is more use to a learner than "we cannot tell".
-		expect(store.rescue).toEqual({ words: 1, answers: 0, readable: false, reason: 'unreadable' });
+		// The one record in there was cut off mid-tuple, so nothing can be salvaged from it — but
+		// its id is still legible, and saying "about 1 word" is more use to a learner deciding
+		// whether to keep a copy than "we cannot tell".
+		expect(store.rescue).toEqual({
+			words: 1,
+			answers: 0,
+			levels: 0,
+			readable: false,
+			reason: 'unreadable'
+		});
 
 		store.recordAnswer('L1-0009', true);
 		store.flush();
@@ -486,15 +494,22 @@ describe('hostile storage', () => {
 		const bigText = JSON.stringify({ v: 1, w: big, l: {} });
 
 		storage.items.set(BACKUP_KEY, small);
-		// Truncated, so it cannot be decoded — and it still has to win, because its bytes name
-		// forty words and the copy already kept names one.
+		// Truncated, so it will not parse as a whole — and it still has to win, because
+		// thirty-nine of its forty records survived the cut intact and the copy already kept
+		// holds one.
 		storage.items.set(STORAGE_KEY, bigText.slice(0, -30));
 
 		const store = new ProgressStore({ storage, now: () => T0 });
 
 		expect(store.salvaged).toBe(true);
 		expect(storage.items.get(BACKUP_KEY)).toBe(bigText.slice(0, -30));
-		expect(store.rescue).toEqual({ words: 40, answers: 0, readable: false, reason: 'unreadable' });
+		expect(store.rescue).toEqual({
+			words: 39,
+			answers: 117,
+			levels: 0,
+			readable: true,
+			reason: 'unreadable'
+		});
 	});
 
 	it('does not let a smaller copy displace the one already kept', () => {
@@ -509,7 +524,13 @@ describe('hostile storage', () => {
 		const store = new ProgressStore({ storage, now: () => T0 });
 
 		expect(storage.items.get(BACKUP_KEY)).toBe(bigText);
-		expect(store.rescue).toEqual({ words: 40, answers: 120, readable: true, reason: 'found' });
+		expect(store.rescue).toEqual({
+			words: 40,
+			answers: 120,
+			levels: 0,
+			readable: true,
+			reason: 'found'
+		});
 	});
 
 	it('keeps the bytes when a merge loses a record no reset accounts for', () => {
@@ -541,7 +562,13 @@ describe('hostile storage', () => {
 		store.flush();
 
 		expect(storage.items.get(BACKUP_KEY)).toBe(before);
-		expect(store.rescue).toEqual({ words: 3, answers: 3, readable: true, reason: 'lost' });
+		expect(store.rescue).toEqual({
+			words: 3,
+			answers: 3,
+			levels: 0,
+			readable: true,
+			reason: 'lost'
+		});
 		expect(store.salvaged).toBe(true);
 	});
 
@@ -631,6 +658,50 @@ describe('resetting', () => {
 		const reloaded = new ProgressStore({ storage });
 		expect(reloaded.forWord('L1-0001').seen).toBe(0);
 		expect(reloaded.forWord('L2-0500').seen).toBe(1);
+	});
+
+	it('puts the numbers back when the browser refuses the erase', () => {
+		// The erase happens in memory and is written second, so a rejected `setItem` left the
+		// screen asserting an erasure that had not happened: the stats strip gone, HSK 1 back to
+		// "Start here", and a key still holding every record. A reload brought it all back \u2014
+		// which is the tell. `restoreRescue` already rolled back; reset, the more destructive of
+		// the two, did not.
+		const { store, storage } = makeStore();
+
+		store.recordAnswer('L1-0001', true);
+		store.recordAnswer('L2-0500', true);
+		store.noteSession(1);
+		store.flush();
+		const before = storage.payload;
+
+		storage.failWrites = true;
+		expect(store.resetAll()).toBe(false);
+
+		expect(store.eraseFailed).toBe(true);
+		expect(store.forWord('L1-0001').seen).toBe(1);
+		expect(store.forWord('L2-0500').seen).toBe(1);
+		expect(store.state.levels[1]?.sessions).toBe(1);
+		expect(storage.payload).toBe(before);
+
+		storage.failWrites = false;
+		expect(new ProgressStore({ storage, now: () => T0 }).forWord('L1-0001').seen).toBe(1);
+	});
+
+	it('puts one level back when the browser refuses that erase', () => {
+		const { store, storage } = makeStore();
+
+		store.recordAnswer('L1-0001', true);
+		store.noteSession(1);
+		store.flush();
+		const before = storage.payload;
+
+		storage.failWrites = true;
+		expect(store.resetLevel(1)).toBe(false);
+
+		expect(store.eraseFailed).toBe(true);
+		expect(store.forWord('L1-0001').seen).toBe(1);
+		expect(store.state.levels[1]?.sessions).toBe(1);
+		expect(storage.payload).toBe(before);
 	});
 
 	it('lets the level be practised again straight after a reset', () => {
@@ -747,10 +818,13 @@ describe('resetting', () => {
 
 	it('resetAll takes the rescue copy with it', () => {
 		const storage = new MemoryStorage();
-		storage.items.set(STORAGE_KEY, 'broken bytes');
+		// Bytes that will not parse but do hold records. Bytes holding *nothing* are not copied
+		// aside at all any more — a panel over four bytes of junk was a fright with no cause.
+		const broken = '{"v":1,"w":{"L1-0001":[4,3,1,' + T0 + ',0],"L1-0002":[2,1,0,' + T0 + ',0]';
+		storage.items.set(STORAGE_KEY, broken);
 
 		const store = new ProgressStore({ storage, now: () => T0 });
-		expect(storage.items.get(BACKUP_KEY)).toBe('broken bytes');
+		expect(storage.items.get(BACKUP_KEY)).toBe(broken);
 
 		store.resetAll();
 
@@ -762,15 +836,16 @@ describe('resetting', () => {
 		// The exact inverse of Reset's promise: the payload survived, and the only copy of it
 		// was deleted anyway. A refresh brought every record back with nothing kept aside.
 		const storage = new MemoryStorage();
-		storage.items.set(STORAGE_KEY, 'broken bytes');
+		const broken = '{"v":1,"w":{"L1-0001":[4,3,1,' + T0 + ',0],"L1-0002":[2,1,0,' + T0 + ',0]';
+		storage.items.set(STORAGE_KEY, broken);
 		const store = new ProgressStore({ storage, now: () => T0 });
-		expect(storage.items.get(BACKUP_KEY)).toBe('broken bytes');
+		expect(storage.items.get(BACKUP_KEY)).toBe(broken);
 
 		storage.failWrites = true;
 		store.resetAll();
 
-		expect(storage.items.get(BACKUP_KEY)).toBe('broken bytes');
-		expect(storage.payload).toBe('broken bytes');
+		expect(storage.items.get(BACKUP_KEY)).toBe(broken);
+		expect(storage.payload).toBe(broken);
 		expect(store.status).toBe('failing');
 		expect(store.salvaged).toBe(true);
 	});
@@ -789,7 +864,13 @@ describe('the rescue copy', () => {
 		);
 
 		const store = new ProgressStore({ storage, now: () => T0 });
-		expect(store.rescue).toEqual({ words: 1, answers: 2, readable: true, reason: 'found' });
+		expect(store.rescue).toEqual({
+			words: 1,
+			answers: 2,
+			levels: 1,
+			readable: true,
+			reason: 'found'
+		});
 
 		store.recordAnswer('L1-0001', true);
 		store.flush();
@@ -824,17 +905,19 @@ describe('the rescue copy', () => {
 		expect(Object.keys(storage.words())).toEqual(['L2-0100']);
 	});
 
-	it('refuses to restore a copy it cannot read, and keeps it', () => {
+	it('says nothing at all about a copy holding nothing at all — and still keeps it', () => {
 		const storage = new MemoryStorage();
 		storage.items.set(BACKUP_KEY, 'not json');
 
 		const store = new ProgressStore({ storage, now: () => T0 });
-		// 'not json' names no word id at all, so there is genuinely nothing to say about it.
-		expect(store.rescue).toEqual({ words: 0, answers: 0, readable: false, reason: 'found' });
-
+		// 'not json' names no word and no session. A panel reading "Earlier progress was kept
+		// aside… it is being kept rather than guessed at", with Discard as its only control, is a
+		// fright over nothing, and it used to be redisplayed on every single load.
+		expect(store.rescue).toBeNull();
 		expect(store.restoreRescue()).toBe(false);
+		// Not offered is not the same as thrown away: these are bytes this build cannot account
+		// for, and deleting a backup for not understanding it is the bug, not the fix.
 		expect(storage.items.get(BACKUP_KEY)).toBe('not json');
-		expect(store.salvaged).toBe(true);
 	});
 
 	it('throws the copy away when the learner does not want it', () => {
@@ -849,6 +932,178 @@ describe('the rescue copy', () => {
 
 		expect(store.rescue).toBeNull();
 		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+	});
+});
+
+describe('Restore puts back what the notice promised, or keeps the copy', () => {
+	/** 300 L1 records at `seen: 6`, under a reset counter that outranks every one of them. */
+	function suppressedPayload(count = 300): string {
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= count; i += 1) {
+			w[`L1-${String(i).padStart(4, '0')}`] = [6, 4, 1, T0, T0 - MINUTE];
+		}
+		return JSON.stringify({ v: 1, w, l: { 1: [4, T0] }, g: { 1: 3 } });
+	}
+
+	it('reads a backup past its own reset counter instead of restoring nothing', () => {
+		// The loop-4 data-destruction bug, exactly. `decodeStored` re-applied the *backup\u2019s own*
+		// `g` — the very thing it was copied aside because of — so a 300-record copy decoded to
+		// zero, `restoreInto` folded in nothing, the write landed, `restoreRescue` returned true
+		// on the strength of that, and `discardRescue` deleted the only copy. "Restore it" cost
+		// the learner everything and left no failure line.
+		const storage = new MemoryStorage();
+		storage.items.set(BACKUP_KEY, suppressedPayload());
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue).toEqual({
+			words: 300,
+			answers: 1800,
+			levels: 1,
+			readable: true,
+			reason: 'found'
+		});
+
+		expect(store.restoreRescue()).toBe(true);
+		expect(store.levelSummary(1).seen).toBe(300);
+		expect(Object.keys(storage.words())).toHaveLength(300);
+		// Deleted only because those words are now in the live key.
+		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+		expect(new ProgressStore({ storage, now: () => T0 }).levelSummary(1).seen).toBe(300);
+	});
+
+	it('never prints a word count and an answer count from two different reads', () => {
+		// "It holds 300 words · 0 answers" over 300 records each carrying `seen: 6`. `words` came
+		// from a scan of the bytes and `answers` from a decode a reset counter had emptied; the
+		// button then honoured the second number.
+		const storage = new MemoryStorage();
+		storage.items.set(BACKUP_KEY, suppressedPayload(12));
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue?.words).toBe(12);
+		expect(store.rescue?.answers).toBe(72);
+	});
+
+	it('keeps the copy when the restore lands a write but puts nothing back', () => {
+		// The general defect: `restoreRescue` returned true because `flush()` returned true.
+		// A write landing says a write happened; it says nothing about what is in the key. The
+		// merge here is handed a bug on purpose — that is what the `merge` option is for.
+		const storage = new MemoryStorage();
+		storage.items.set(
+			BACKUP_KEY,
+			payloadOf((s) => {
+				s.recordAnswer('L1-0044', true);
+				s.recordAnswer('L1-0045', true);
+				s.recordAnswer('L1-0046', true);
+			})
+		);
+		storage.items.set(
+			STORAGE_KEY,
+			payloadOf((s) => s.recordAnswer('L1-0100', true))
+		);
+
+		const store = new ProgressStore({
+			storage,
+			now: () => T0,
+			merge: () => emptyStored()
+		});
+		// Another tab moves the key, so the merge actually runs rather than taking the fast path.
+		storage.items.set(
+			STORAGE_KEY,
+			payloadOf((s) => {
+				s.recordAnswer('L1-0100', true);
+				s.recordAnswer('L1-0101', true);
+			})
+		);
+
+		expect(store.restoreRescue()).toBe(false);
+		expect(store.restoreReport).toEqual({ promised: 3, landed: 0 });
+		// The only copy is still there, and still holds all three.
+		expect(store.rescue?.words).toBe(3);
+		expect(store.salvaged).toBe(true);
+		expect(JSON.parse(storage.items.get(BACKUP_KEY) ?? '{}').w).toHaveProperty('L1-0046');
+	});
+
+	it('restores a payload from a schema version this build has never seen', () => {
+		// A rollback from a future deploy. Its records are byte-identical to ours; refusing to
+		// *read* them only meant Discard was the single exit from every word the learner had.
+		const storage = new MemoryStorage();
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= 120; i += 1) w[`L3-${String(i).padStart(4, '0')}`] = [5, 4, 2, T0, 0];
+		storage.items.set(BACKUP_KEY, JSON.stringify({ v: 7, w }));
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue?.readable).toBe(true);
+		expect(store.rescue?.words).toBe(120);
+		expect(store.restoreRescue()).toBe(true);
+		expect(store.levelSummary(3).seen).toBe(120);
+	});
+
+	it('restores a word map that arrived as an array of objects', () => {
+		const storage = new MemoryStorage();
+		const w = [];
+		for (let i = 1; i <= 40; i += 1) {
+			w.push({
+				id: `L2-${String(i).padStart(4, '0')}`,
+				seen: 7,
+				correct: 5,
+				streak: 3,
+				lastSeen: T0,
+				lastMissed: T0 - MINUTE
+			});
+		}
+		storage.items.set(BACKUP_KEY, JSON.stringify({ v: 1, w }));
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue?.words).toBe(40);
+		expect(store.restoreRescue()).toBe(true);
+		expect(store.levelSummary(2).seen).toBe(40);
+		expect(store.levelSummary(2).mastered).toBe(40);
+	});
+
+	it('salvages the whole records out of a write that was cut off', () => {
+		const storage = new MemoryStorage();
+		const full = payloadOf((s) => {
+			for (let i = 1; i <= 60; i += 1) s.recordAnswer(`L1-${String(i).padStart(4, '0')}`, true);
+		});
+		storage.items.set(BACKUP_KEY, full.slice(0, Math.floor(full.length * 0.7)));
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue?.readable).toBe(true);
+		expect(store.rescue?.words).toBeGreaterThan(30);
+		expect(store.restoreRescue()).toBe(true);
+		expect(store.levelSummary(1).seen).toBeGreaterThan(30);
+	});
+
+	it('will not let bytes that merely mention word ids evict a real copy', () => {
+		// `{"v":99,"note":[400 id strings]}` weighed 400 words against a readable 50-word backup
+		// and replaced it, on a plain page load, with no user action anywhere. A list of names is
+		// not a list of records.
+		const storage = new MemoryStorage();
+		const real = payloadOf((s) => {
+			for (let i = 1; i <= 50; i += 1) {
+				s.recordAnswer(`L1-${String(i).padStart(4, '0')}`, true);
+				s.recordAnswer(`L1-${String(i).padStart(4, '0')}`, true);
+			}
+		});
+		storage.items.set(BACKUP_KEY, real);
+		const ids = [];
+		for (let i = 1; i <= 400; i += 1) ids.push(`L1-${String(i).padStart(4, '0')}`);
+		storage.items.set(STORAGE_KEY, JSON.stringify({ v: 99, note: ids }));
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(storage.items.get(BACKUP_KEY)).toBe(real);
+		expect(store.rescue?.words).toBe(50);
+		expect(store.rescue?.answers).toBe(100);
+	});
+
+	it('raises no notice over four bytes of junk, and keeps no copy of them', () => {
+		for (const junk of ['null', '[]', '"x"', '123', '{"v":1,"w":null}']) {
+			const storage = new MemoryStorage();
+			storage.items.set(STORAGE_KEY, junk);
+			const store = new ProgressStore({ storage, now: () => T0 });
+			expect(store.rescue, junk).toBeNull();
+			expect(storage.items.has(BACKUP_KEY), junk).toBe(false);
+		}
 	});
 });
 
@@ -913,7 +1168,13 @@ describe('no write may shrink the key without a copy kept aside', () => {
 
 		expect(storage.items.get(BACKUP_KEY)).toBe(arrayShaped);
 		expect(store.rescue?.words).toBe(200);
-		expect(store.rescue?.readable).toBe(false);
+		// Fully parseable — just not in the shape the live key is allowed to hold. Calling it
+		// unreadable left Discard as the only exit from the most machine-readable corruption
+		// there is, over two hundred of the learner's words.
+		expect(store.rescue?.readable).toBe(true);
+		expect(store.restoreRescue()).toBe(true);
+		// Two hundred back, plus the one answered while they were sitting in the copy.
+		expect(store.levelSummary(1).seen).toBe(201);
 	});
 
 	it('lets a reset shrink the key without crying about it', () => {
@@ -944,9 +1205,16 @@ describe('no write may shrink the key without a copy kept aside', () => {
 		expect(store.eraseFailed).toBe(true);
 		expect(storage.payload).toBe(payloadOfSize(3));
 
+		// Rolled back with it: the screen must not assert an erasure that did not happen. The
+		// retry goes too — a reset belongs to the tap that asked for it, not to a backoff landing
+		// minutes later under a notice that already said it did not happen.
+		expect(store.levelSummary(1).seen).toBe(3);
+
 		storage.failWrites = false;
+		store.recordAnswer('L1-0001', true);
 		expect(store.flush()).toBe(true);
 		expect(store.eraseFailed).toBe(false);
+		expect(store.levelSummary(1).seen).toBe(3);
 	});
 });
 

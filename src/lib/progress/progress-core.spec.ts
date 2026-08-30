@@ -21,6 +21,7 @@ import {
 	levelOfId,
 	mergeProgress,
 	readGeneration,
+	readRestorable,
 	recordGen,
 	restoreInto,
 	shrinks,
@@ -439,17 +440,19 @@ describe('decode', () => {
 		expect(decode(ancient, NOW)?.byWord['L1-0001']?.lastSeen).toBe(0);
 	});
 
-	it('pulls a timestamp from a bad clock back to now instead of "in 50y"', () => {
+	it('refuses a stamp no clock skew could explain, without inventing a fresh one', () => {
+		// It used to be pulled back to `now`, which reads tidily and is a lie the scheduler then
+		// acts on: a stamp we cannot believe became "seen just now". "Never" claims nothing.
 		const skewed = JSON.stringify({
 			v: 1,
-			w: { 'L1-0001': [1, 1, 1, NOW + 400 * 86_400_000, 0] },
-			l: { '1': [3, NOW + 400 * 86_400_000] }
+			w: { 'L1-0001': [1, 1, 1, NOW + 50 * 31_536_000_000, 0] },
+			l: { '1': [3, NOW + 50 * 31_536_000_000] }
 		});
 
 		const decoded = decode(skewed, NOW);
 
-		expect(decoded?.byWord['L1-0001']?.lastSeen).toBe(NOW);
-		expect(decoded?.levels[1]?.lastPlayed).toBe(NOW);
+		expect(decoded?.byWord['L1-0001']?.lastSeen).toBe(0);
+		expect(decoded?.levels[1]?.lastPlayed).toBe(0);
 	});
 
 	it('applies a reset generation it finds in the payload', () => {
@@ -571,14 +574,14 @@ describe('a clock that cannot be true does not get to judge timestamps', () => {
 		expect(payload?.state.byWord['L1-0002']?.lastSeen).toBe(b);
 	});
 
-	it('still pulls a stamp back when the clock is one we can believe', () => {
-		const text = JSON.stringify({
-			v: 1,
-			w: { 'L1-0001': [3, 3, 3, NOW + 40 * 3_600_000, 0] },
-			l: {}
-		});
+	it('believes a stamp a slow device clock would explain, and keeps it', () => {
+		// Forty hours ahead is a laptop whose battery died over the weekend, not corruption. It
+		// used to be flattened to `now` — and written back that way, so correcting the clock
+		// brought nothing back.
+		const ahead = NOW + 40 * 3_600_000;
+		const text = JSON.stringify({ v: 1, w: { 'L1-0001': [3, 3, 3, ahead, 0] }, l: {} });
 
-		expect(decodeStored(text, NOW)?.state.byWord['L1-0001']?.lastSeen).toBe(NOW);
+		expect(decodeStored(text, NOW)?.state.byWord['L1-0001']?.lastSeen).toBe(ahead);
 	});
 });
 
@@ -921,5 +924,109 @@ describe('levelOfId', () => {
 		expect(levelOfId('L9-0001')).toBeNull();
 		expect(levelOfId('0001')).toBeNull();
 		expect(levelOfId('')).toBeNull();
+	});
+});
+
+describe('reading a rescue copy', () => {
+	const pad = (i: number) => `L1-${String(i).padStart(4, '0')}`;
+
+	it('ignores the copy\u2019s own reset counter', () => {
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= 20; i += 1) w[pad(i)] = [6, 4, 1, NOW, 0];
+		const text = JSON.stringify({ v: 1, w, g: { 1: 3 } });
+
+		// The strict decoder, which guards the live key, honours the counter and yields nothing.
+		expect(Object.keys(decodeStored(text, NOW)?.state.byWord ?? {})).toHaveLength(0);
+		// The copy was set aside *because* of that counter, so reading it back is not a restore.
+		const restorable = readRestorable(text, NOW);
+		expect(restorable?.words).toBe(20);
+		expect(restorable?.answers).toBe(120);
+		expect(Object.values(restorable?.stored.state.byWord ?? {}).every((r) => !('gen' in r))).toBe(
+			true
+		);
+	});
+
+	it('reads a version this build has never seen, and both map shapes', () => {
+		expect(
+			readRestorable(JSON.stringify({ v: 7, w: { 'L1-0001': [3, 2, 1, NOW, 0] } }), NOW)?.words
+		).toBe(1);
+		const arrayShaped = JSON.stringify({
+			v: 1,
+			w: [{ id: 'L2-0004', seen: 5, correct: 4, streak: 2, lastSeen: NOW, lastMissed: 0 }]
+		});
+		expect(readRestorable(arrayShaped, NOW)?.words).toBe(1);
+	});
+
+	it('salvages the whole records out of a write that was cut off', () => {
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= 30; i += 1) w[pad(i)] = [4, 3, 1, NOW, 0];
+		const full = JSON.stringify({ v: 1, w });
+		const cut = full.slice(0, full.indexOf(`"${pad(21)}"`) + 20);
+
+		const salvaged = readRestorable(cut, NOW);
+		expect(salvaged?.words).toBe(20);
+		expect(salvaged?.answers).toBe(80);
+	});
+
+	it('finds nothing in bytes that hold nothing', () => {
+		for (const junk of ['null', '[]', '"x"', '123', '{"v":1,"w":null}', 'not json', '']) {
+			expect(readRestorable(junk, NOW), junk).toBeNull();
+		}
+		// A list of id-shaped strings is not a list of records.
+		const ids = [];
+		for (let i = 1; i <= 400; i += 1) ids.push(pad(i));
+		expect(readRestorable(JSON.stringify({ v: 99, note: ids }), NOW)).toBeNull();
+	});
+});
+
+describe('weighing bytes', () => {
+	it('counts records, not id-shaped strings', () => {
+		const ids = [];
+		for (let i = 1; i <= 400; i += 1) ids.push(`L1-${String(i).padStart(4, '0')}`);
+		expect(weigh(JSON.stringify({ v: 99, note: ids })).words).toBe(0);
+		expect(
+			weigh(JSON.stringify({ v: 1, w: { 'L1-0001': [1, 1, 1, NOW, 0] }, g: { 1: 2 } })).words
+		).toBe(1);
+	});
+});
+
+describe('a device clock that is merely slow', () => {
+	it('leaves real, distinct history exactly as it found it', () => {
+		// 36 hours of slack meant a laptop three days behind pulled every stamp in the payload
+		// back to the same instant *and wrote it back*, so five real events an hour apart became
+		// one, every one of them reading as "missed just now" \u2014 which is the input the
+		// miss-weighted scheduler runs on.
+		const stamps = [0, 1, 2, 3, 4].map((i) => NOW - i * 3_600_000);
+		const w: Record<string, number[]> = {};
+		stamps.forEach((ts, i) => (w[`L1-${String(i + 1).padStart(4, '0')}`] = [4, 3, 1, ts, ts]));
+
+		const slow = NOW - 3 * 86_400_000;
+		const decoded = decodeStored(JSON.stringify({ v: 1, w }), slow);
+		const seen = Object.values(decoded?.state.byWord ?? {}).map((r) => r.lastSeen);
+		expect(seen.slice().sort()).toEqual(stamps.slice().sort());
+		expect(new Set(seen).size).toBe(5);
+	});
+
+	it('still refuses a stamp no clock skew could explain', () => {
+		const text = JSON.stringify({
+			v: 1,
+			w: { 'L1-0001': [4, 3, 1, NOW + 50 * 31_536_000_000, 0] }
+		});
+		expect(decodeStored(text, NOW)?.state.byWord['L1-0001']?.lastSeen).toBe(0);
+	});
+});
+
+describe('one word, one key', () => {
+	it('accepts only the canonical four-digit id', () => {
+		expect(isShippableWordId('L1-0001')).toBe(true);
+		for (const id of ['L1-1', 'L1-01', 'L1-001', 'L1-00001', 'L1-000001', 'L1-0000001']) {
+			expect(isShippableWordId(id), id).toBe(false);
+		}
+		const w: Record<string, number[]> = {};
+		for (const id of ['L1-1', 'L1-01', 'L1-001', 'L1-0001', 'L1-00001', 'L1-000001'])
+			w[id] = [4, 4, 4, NOW, 0];
+		expect(Object.keys(decodeStored(JSON.stringify({ v: 1, w }), NOW)?.state.byWord ?? {})).toEqual(
+			['L1-0001']
+		);
 	});
 });
