@@ -15,6 +15,7 @@ import {
 	type ProgressWriter
 } from './index';
 import { sharesSense } from './distractors';
+import { taughtWordIds } from './index';
 import { HOUR, makeLevel, mastered, progressState, record, shaky } from './test-fixtures';
 
 const NOW = 1_700_000_000_000;
@@ -24,9 +25,10 @@ function build(
 	words: readonly Word[],
 	progress: Parameters<typeof buildSession>[2],
 	seed = 1,
-	size = SESSION_SIZE
+	size = SESSION_SIZE,
+	require?: readonly string[]
 ) {
-	return buildSession(words, 1, progress, size, { rng: mulberry32(seed), now: NOW });
+	return buildSession(words, 1, progress, size, { rng: mulberry32(seed), now: NOW, require });
 }
 
 function ids(session: Session): string[] {
@@ -186,6 +188,94 @@ describe('buildSession — explore / exploit', () => {
 			if (question.word.id in history.byWord) continue;
 			expect(cardKind(question)).toBe('introduce');
 		}
+	});
+});
+
+describe('buildSession — the app pays its own debt before taking on more', () => {
+	/** Shown once and never asked: `lastSeen` with no answers, which is what `noteSeen` writes. */
+	const taught = (wordId: string) =>
+		record(wordId, { seen: 0, correct: 0, streak: 0, lastSeen: NOW - HOUR });
+
+	const firstRun = LEVEL_1.slice(0, SESSION_SIZE);
+	const afterFirstLook = progressState(firstRun.map((w) => taught(w.id)));
+	const firstRunIds = new Set(firstRun.map((w) => w.id));
+
+	// The defect this closes: the summary's primary button says "Practise these 10" over the ten
+	// hanzi it just taught, and the session behind it used to be nine of them plus a stranger —
+	// `MIN_FRESH` forcing one new word in on top of a ten-word backlog.
+	it('drills a whole session of taught-but-untested words, not nine tenths of it', () => {
+		const session = build(LEVEL_1, afterFirstLook, 7);
+		expect(session.questions).toHaveLength(SESSION_SIZE);
+		expect(ids(session).filter((id) => firstRunIds.has(id))).toHaveLength(SESSION_SIZE);
+	});
+
+	it('holds across every seed, because a button that names ten words cannot be probabilistic', () => {
+		for (let seed = 0; seed < 25; seed++) {
+			const drawn = ids(build(LEVEL_1, afterFirstLook, seed));
+			expect(drawn.filter((id) => firstRunIds.has(id))).toHaveLength(SESSION_SIZE);
+		}
+	});
+
+	it('asks them rather than teaching them a second time', () => {
+		for (const question of build(LEVEL_1, afterFirstLook, 3).questions) {
+			expect(cardKind(question)).toBe('hanzi-to-meaning');
+		}
+	});
+
+	it('brings discovery straight back once the debt is under a session', () => {
+		const partial = progressState(LEVEL_1.slice(0, 7).map((w) => taught(w.id)));
+		const drawn = ids(build(LEVEL_1, partial, 5));
+		const seenIds = new Set(Object.keys(partial.byWord));
+		expect(drawn.filter((id) => !seenIds.has(id)).length).toBeGreaterThanOrEqual(1);
+	});
+});
+
+describe('buildSession — a caller may name the words', () => {
+	const named = LEVEL_1.slice(30, 40).map((w) => w.id);
+
+	it('asks exactly the words it was given', () => {
+		const session = build(LEVEL_1, null, 4, SESSION_SIZE, named);
+		expect(new Set(ids(session))).toEqual(new Set(named));
+	});
+
+	it('fills the rest of the session from the scheduler', () => {
+		const session = build(LEVEL_1, null, 4, SESSION_SIZE, named.slice(0, 3));
+		expect(session.questions).toHaveLength(SESSION_SIZE);
+		for (const id of named.slice(0, 3)) expect(ids(session)).toContain(id);
+	});
+
+	it('ignores ids this level does not carry, and never asks one word twice', () => {
+		const session = build(LEVEL_1, null, 4, SESSION_SIZE, [
+			named[0],
+			named[0],
+			'L9-9999',
+			'',
+			named[1]
+		]);
+		expect(session.questions).toHaveLength(SESSION_SIZE);
+		expect(new Set(ids(session)).size).toBe(SESSION_SIZE);
+		expect(ids(session)).toContain(named[0]);
+		expect(ids(session)).toContain(named[1]);
+	});
+
+	it('truncates a caller that names more words than the session holds', () => {
+		const session = build(
+			LEVEL_1,
+			null,
+			4,
+			4,
+			LEVEL_1.slice(0, 40).map((w) => w.id)
+		);
+		expect(session.questions).toHaveLength(4);
+	});
+
+	it('hands the summary the same set it displayed', () => {
+		const first = build(LEVEL_1, progressState([]), 9);
+		const shown = taughtWordIds(first);
+		expect(shown).toHaveLength(SESSION_SIZE);
+		const again = build(LEVEL_1, progressState([]), 12, SESSION_SIZE, shown);
+		expect(ids(again)).toEqual(expect.arrayContaining(shown));
+		expect(taughtWordIds(null)).toEqual([]);
 	});
 });
 

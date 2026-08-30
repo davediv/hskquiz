@@ -121,13 +121,36 @@ export interface DistractorPool {
 	readonly phrases: ReadonlyMap<string, string[][]>;
 }
 
+/**
+ * A word's senses as this file compares them: `senseSet`, with hyphens read as spaces.
+ *
+ * `senseSet` normalises five things and not the hyphen — its character class is `[^a-z0-9-]`,
+ * so `-` survives into the comparable form and `senseSet('快速') = {'high-speed','rapid'}` does
+ * not intersect `senseSet('高速') = {'high speed','expressway'}`. Both ship, at HSK 3, and both
+ * can land on one card: prompt "high-speed · rapid", with "high speed" on screen as a wrong
+ * answer that is not wrong. A hyphen is orthography, not sense — "high-speed" and "high speed"
+ * are the same English — so it is folded here before anything compares or splits.
+ *
+ * This is the card-side half of the fix and it is complete for the picker. The other half is
+ * `scripts/build-vocab.mjs`, which imports the same `senseSet` for its "no two shipped words
+ * share a sense" gate and inherits the same hole; folding it there belongs to whoever owns
+ * `src/lib/data/senses.ts`, and until it happens the corpus can still ship such a pair — which
+ * is precisely why the picker refuses it independently rather than trusting the gate.
+ */
+function comparableSenses(word: Word): Set<string> {
+	const out = new Set<string>();
+	for (const sense of senseSet(word))
+		out.add(sense.replace(/-+/g, ' ').replace(/\s+/g, ' ').trim());
+	return out;
+}
+
 /** Precompute the sense sets once per session instead of once per comparison. */
 export function makePool(words: readonly Word[]): DistractorPool {
 	const usable = words.filter(isUsable);
 	const senses = new Map<string, Set<string>>();
 	const phrases = new Map<string, string[][]>();
 	for (const word of usable) {
-		const set = senseSet(word);
+		const set = comparableSenses(word);
 		senses.set(word.id, set);
 		phrases.set(word.id, [...set].map(splitWords));
 	}
@@ -139,11 +162,11 @@ function splitWords(sense: string): string[] {
 }
 
 function sensesOf(pool: DistractorPool, word: Word): ReadonlySet<string> {
-	return pool.senses.get(word.id) ?? senseSet(word);
+	return pool.senses.get(word.id) ?? comparableSenses(word);
 }
 
 function phrasesOf(pool: DistractorPool, word: Word): readonly string[][] {
-	return pool.phrases.get(word.id) ?? [...senseSet(word)].map(splitWords);
+	return pool.phrases.get(word.id) ?? [...comparableSenses(word)].map(splitWords);
 }
 
 /** `['to','go']` opens `['to','go','out']`. Equal phrases are `sharesSense`'s business. */

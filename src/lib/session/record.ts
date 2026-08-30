@@ -152,3 +152,47 @@ export function readRecord(record: RecordLike): RecordFacts {
 		lastMissed
 	};
 }
+
+/**
+ * Has the learner met this word at all — answered it, or merely been taught it?
+ *
+ * The one predicate every screen that counts words needs, and the reason it is a named export
+ * rather than `readRecord(x).met` at each call site: **an exposure is currently legible only
+ * inside this directory.** Five modules import `met` / `taughtOnly` and all five are
+ * `src/lib/session/*`. Everywhere else still asks `record.seen > 0`, which is the number of
+ * *answers*, so a word the app taught reads as a word the app has never shown — the home
+ * screen says "0 words practised" one tap after a summary reading "10 new words", and browse
+ * says "500 New" over ten words it has just introduced.
+ *
+ * The four readers that need this, with the change each one wants (all outside this
+ * directory, so they are their owners' to make):
+ *
+ *   `progress.svelte.ts` `accumulate`   `if (record.seen === 0) return` → `if (!hasMet(record))
+ *                                       return`. `answers`/`correct` keep reading `seen`.
+ *   `stats.ts` `levelStats` / `overallSummary`  count `practised` on `hasMet`, and leave
+ *                                       `answered`, `accuracy` and `shaky` on `seen > 0` — an
+ *                                       exposure is not an answer and must never make a word
+ *                                       shaky.
+ *   `status.ts` `statusOf`              `!hasMet` → `'new'`, `isTaughtOnly` → its own bucket
+ *                                       ("Shown", "Shown, not yet tested"), rather than both
+ *                                       collapsing into `'new'`.
+ *   `SessionSummary.svelte`             the arc's "of N words met" / "met once" become true
+ *                                       once `accumulate` counts exposures.
+ *
+ * Total against `null`, a bare string and an object of `NaN`s, like everything else here.
+ */
+export function hasMet(record: RecordLike): boolean {
+	return readRecord(record).met;
+}
+
+/**
+ * Met, and never once answered: the app taught this word and still owes it a question.
+ *
+ * The state a browse chip should say "Shown" about and a stats row should count as practised
+ * but not as answered. It lasts one session for most words — `splitQuota`'s debt quota pays
+ * them off on the next run — but it is the state a first-time learner's whole vocabulary is in
+ * the first time they look at any screen other than the quiz.
+ */
+export function isTaughtOnly(record: RecordLike): boolean {
+	return readRecord(record).taughtOnly;
+}

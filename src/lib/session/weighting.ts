@@ -19,8 +19,8 @@ const DAY = 24 * 60 * MINUTE;
  *                           back-to-back sessions don't replay the same ten cards. A word
  *                           just *missed* is not held back — that is the one to drill.
  *   stale        1 → 3      untouched for a week or more, it climbs back up (forgetting curve).
- *   fatigue      1 → 0.02   the leech brake. Past `leechLapses` misses it divides the weight
- *                           down; see below.
+ *   fatigue      1 → 0.02   the leech brake. Past `leechLapses` *unforgiven* misses it damps
+ *                           the weight down, and a correct streak forgives them; see below.
  *
  * Worked example, the case the brief calls out. Missed 3 of 4, last missed an hour ago:
  * 4 × 1 × 4.96 × 1 × 1.01 × 1 ≈ 20. Answered correctly three times running, last seen an hour
@@ -39,7 +39,7 @@ const DAY = 24 * 60 * MINUTE;
  * right. A word that has been taught and not yet asked has no accuracy and no lapses: it
  * enters at 1.000, exactly where an unseen word sits, and climbs only on `stale`.
  *
- * ## Why `fatigue` exists
+ * ## Why `fatigue` exists, and why it lets go
  *
  * The first five signals are *saturating*: the error rate hits 1.0 on a word's very first
  * miss, so `missed 1 of 1` and `missed 20 of 20` two days ago both come out at 22.628, and the
@@ -53,13 +53,36 @@ const DAY = 24 * 60 * MINUTE;
  * not — it is the single most demoralising thing a practice app can do, and it spends a tenth
  * of every session on the four words the learner most needs a break from. Anki suspends a card
  * at 8 lapses and hands it to the human. There is nowhere in this app to hand it to, so
- * `fatigue` rests the word instead of suspending it: past `leechLapses` misses each further
- * miss divides the weight by a little more, down to a floor that still leaves it reachable.
- * A 20-miss leech lands at 0.056× — under an ordinary shaky word rather than above it — and the
- * brake stops tightening the moment the learner starts getting it right. Re-measured on the same
- * 60-session run: the three words appear in 7, 9 and 8 sessions rather than 19, 22 and 21, and
- * take 4.0% of the questions rather than 10.3% — at or under the hardest ordinary word, which
- * appears 8 times, and still ~4× the median word, which appears twice.
+ * `fatigue` rests the word instead of suspending it.
+ *
+ * ## The brake is on *current* difficulty, not on a permanent record
+ *
+ * It used to count lifetime misses and nothing else. `misses` is `answers - correct`: it only
+ * ever goes up, it has no decay, and it divided the weight forever — so the brake could bite
+ * but never release, and a word the learner had *fought back and won* stayed suppressed for
+ * the life of the profile. Measured on the shape the verdict called out — 30 days stale, three
+ * correct in a row — a word missed 10 times and then relearned came out at **0.1929** against
+ * **0.2734** for a word the learner had never once got wrong. The hardest word in the level was
+ * drawn **0.71×** as often as an easy one. That is the brief inverted: "weighted toward past
+ * misses" had become "weighted away from them".
+ *
+ * So the count the brake reads is misses *minus what the learner has since earned back*:
+ * every consecutive correct answer forgives `leechRelease` lapses. A word being failed keeps
+ * its streak at 0, so its lapses are unforgiven and the brake bites exactly as hard as before.
+ * A word being relearned climbs out of it at two lapses a correct answer, and the same 10-miss
+ * word above now sits at **1.1140** — **4.07×** the never-missed word rather than 0.71×, with
+ * the ordering the README asks for restored. Nothing else in the model changed.
+ *
+ * ## And it ramps rather than cliffs
+ *
+ * The old divisor was `1 / (1 + over × 1.2)`, which is smooth in `over` but `over` is an
+ * integer, so the first step off the threshold was a **2.20× drop** in one miss — 6 misses
+ * 1.0000, 7 misses 0.4545. A single wrong answer more than halved a word's urgency, which is
+ * both a surprise and, at exactly the wrong moment, a demotion. `fatigue` is a half-life on
+ * unforgiven lapses now: every `leechHalfLapses` of them halves the weight, so the worst
+ * single-miss step is **1.26×** and the curve is monotone all the way to the floor. The deep
+ * end is unchanged in spirit — 20 unforgiven misses lands at 0.0387× where the divisor gave
+ * 0.0562×, still reachable, still under an ordinary shaky word rather than above it.
  */
 export const WEIGHTS = {
 	/** Multiplier added at a 100% error rate. */
@@ -80,10 +103,12 @@ export const WEIGHTS = {
 	staleMs: 7 * DAY,
 	/** Cap on the staleness bonus. */
 	staleMax: 2,
-	/** Misses a word may accumulate before the scheduler starts resting it. */
+	/** Unforgiven misses a word may accumulate before the scheduler starts resting it. */
 	leechLapses: 6,
-	/** How hard each miss past that one divides the weight. */
-	leechDamp: 1.2,
+	/** Unforgiven misses past that threshold that halve the weight. A ramp, not a cliff. */
+	leechHalfLapses: 3,
+	/** Lapses each consecutive correct answer earns back, so the brake can release. */
+	leechRelease: 2,
 	/** Floor of the leech brake, so even a hopeless word is reachable. */
 	leechFloor: 0.02,
 	/** Nothing ever reaches zero. */
@@ -156,24 +181,35 @@ export function wordWeight(progress: RecordLike, now: number): number {
 	const rest = facts.streak > 0 ? clamp(sinceSeen / WEIGHTS.restMs, WEIGHTS.restFloor, 1) : 1;
 	const stale = 1 + Math.min(sinceSeen / WEIGHTS.staleMs, WEIGHTS.staleMax);
 
-	const fatigue = leechBrake(facts.misses);
+	// Streak, not just misses: the brake is about the word the learner *currently* cannot do.
+	// See "The brake is on current difficulty" above.
+	const fatigue = leechBrake(facts.misses, facts.streak);
 
 	const weight = accuracy * streak * missRecency * rest * stale * fatigue;
 	return Number.isFinite(weight) ? Math.max(WEIGHTS.floor, weight) : WEIGHTS.floor;
 }
 
 /**
- * How much a word's weight is divided by for being a leech.
+ * How much a word's weight is damped for being a leech the learner is still losing to.
  *
  * `WordProgress` carries no lapse counter, but `readRecord`'s `misses` — answers given minus
  * answers right, with introductions excluded from both — is exactly the number of times the
- * learner has got this word wrong, which is the same quantity Anki suspends on. Below the
- * threshold this is a flat 1 and the model is unchanged; above it the divisor grows linearly,
- * so the weight falls hyperbolically rather than off a cliff — 7 misses is 0.455×, 10 is 0.172×,
- * 20 is 0.056×, and past 41 the floor holds it at 0.02×.
+ * learner has got this word wrong, which is the same quantity Anki suspends on. `streak` is
+ * how many they have got right *since*, and it is the whole difference between "this word is
+ * beating me" and "this word beat me and I beat it back": each one forgives `leechRelease`
+ * lapses, so a word being relearned walks back out of the brake at the rate it was earned.
+ *
+ * At or below the threshold this is a flat 1 and the model is unchanged. Above it the weight
+ * halves every `leechHalfLapses` unforgiven lapses: 7 misses is 0.794×, 10 is 0.397×, 15 is
+ * 0.125×, 20 is 0.039×, and past 23 the floor holds it at 0.02×. Same three misses with a
+ * streak of 3 behind them — 6 lapses forgiven — and every one of those is a flat 1 again.
+ *
+ * @param misses lifetime wrong answers for the word
+ * @param streak consecutive correct answers since the last of them
  */
-export function leechBrake(misses: number): number {
-	const over = Math.max(0, finite(misses, 0) - WEIGHTS.leechLapses);
+export function leechBrake(misses: number, streak: number = 0): number {
+	const forgiven = Math.max(0, finite(streak, 0)) * WEIGHTS.leechRelease;
+	const over = finite(misses, 0) - WEIGHTS.leechLapses - forgiven;
 	if (over <= 0) return 1;
-	return Math.max(WEIGHTS.leechFloor, 1 / (1 + over * WEIGHTS.leechDamp));
+	return Math.max(WEIGHTS.leechFloor, halfLife(over, WEIGHTS.leechHalfLapses));
 }

@@ -154,6 +154,51 @@ describe('the leech brake', () => {
 		expect(brakes[0]).toBeLessThan(1);
 	});
 
+	it('ramps instead of cliffing: no single miss more than a third off the weight', () => {
+		// The old divisor dropped 2.20x in one miss, from 1.0000 at six to 0.4545 at seven.
+		for (let misses = WEIGHTS.leechLapses; misses < 40; misses++) {
+			const here = leechBrake(misses);
+			const next = leechBrake(misses + 1);
+			if (next <= WEIGHTS.leechFloor) break;
+			expect(here / next).toBeLessThan(1.35);
+		}
+	});
+
+	it('releases when the learner starts getting it right again', () => {
+		const lapses = 12;
+		expect(leechBrake(lapses)).toBeLessThan(0.3);
+		let last = leechBrake(lapses, 0);
+		// Two lapses forgiven per correct answer, so twelve are gone by the third and the brake
+		// is fully off. It climbs strictly until then and then stays off.
+		for (let streak = 1; streak <= 3; streak++) {
+			const now = leechBrake(lapses, streak);
+			expect(now).toBeGreaterThan(last);
+			last = now;
+		}
+		expect(leechBrake(lapses, 3)).toBe(1);
+		expect(leechBrake(lapses, 4)).toBe(1);
+	});
+
+	it('keeps biting a word the learner is still losing to', () => {
+		// A streak of zero is exactly "the last answer was wrong", so nothing is forgiven.
+		for (const misses of [7, 10, 20]) expect(leechBrake(misses, 0)).toBe(leechBrake(misses));
+	});
+
+	// The brief is "weighted toward past misses". A word fought back and won was coming out
+	// *below* one the learner had never got wrong, because the divisor never let go.
+	it('draws a relearned hard word more often than one that was never missed, not less', () => {
+		const stale = NOW - 30 * DAY;
+		const relearned = record('hard', {
+			seen: 13,
+			correct: 3,
+			streak: 3,
+			lastSeen: stale,
+			lastMissed: stale - 30 * DAY
+		});
+		const easy = record('easy', { seen: 3, correct: 3, streak: 3, lastSeen: stale });
+		expect(wordWeight(relearned, NOW)).toBeGreaterThan(wordWeight(easy, NOW) * 3);
+	});
+
 	it('never brakes all the way to unreachable', () => {
 		expect(leechBrake(1000)).toBe(WEIGHTS.leechFloor);
 		expect(leechBrake(Number.POSITIVE_INFINITY)).toBe(1);

@@ -24,7 +24,14 @@ import {
 import { mulberry32, orderWeighted, shuffle, type Rng } from './rng';
 
 export { CHOICE_COUNT, senseSet, sharesSense, isUsable } from './distractors';
-export { readRecord, UNMET, type RecordFacts, type RecordLike } from './record';
+export {
+	readRecord,
+	hasMet,
+	isTaughtOnly,
+	UNMET,
+	type RecordFacts,
+	type RecordLike
+} from './record';
 export { EXPLORE_SHARE, WEIGHTS, wordWeight, leechBrake } from './weighting';
 export {
 	PRODUCTION_STREAK,
@@ -49,6 +56,21 @@ export interface SessionOptions {
 	rng?: Rng;
 	/** Epoch ms used for every recency calculation. Defaults to `Date.now()`. */
 	now?: number;
+	/**
+	 * Word ids this session must ask, ahead of anything the scheduler would have chosen.
+	 *
+	 * For a caller that has already *named* a set of words to the learner. The summary's
+	 * primary button says "Practise these 10" over a list of ten hanzi; before this existed
+	 * the only thing behind it was `buildSession(level)` again, which is a scheduler being
+	 * asked a different question, and it answered with nine of the ten plus a stranger.
+	 *
+	 * Ids the level does not contain are ignored, duplicates collapse, and more ids than
+	 * `size` are truncated to the first `size` — so a caller can hand over whatever it just
+	 * displayed without pre-filtering. Anything left over after the required set is filled by
+	 * the ordinary review/explore split, so `require` narrows a session rather than replacing
+	 * the model. Passing an empty list is the same as passing nothing.
+	 */
+	require?: readonly string[];
 }
 
 /**
@@ -118,10 +140,28 @@ const MIN_FRESH = 1;
  * brake above takes off the explore side.
  */
 function splitQuota(size: number, reviewAvailable: number, freshAvailable: number, owed: number) {
+	// A caller that named a whole session's worth of words in `require` leaves nothing to split.
+	// Falling through would compute a negative review quota and then *backfill* it with a fresh
+	// word, handing back one more question than was asked for.
+	if (size <= 0) return { review: 0, fresh: 0 };
 	const exploreShare = size - Math.round(size * (1 - EXPLORE_SHARE));
 	const capacity = Math.max(1, OWED_SESSIONS * (size - exploreShare));
 	const brake = Math.max(0, 1 - Math.max(0, owed) / capacity);
-	const explore = Math.max(MIN_FRESH, Math.round(exploreShare * brake));
+	// The brake bends the explore quota; it does not close it. After a first run that taught ten
+	// words and asked nothing, owed = 10 and it still let one new word through — `round(4 ×
+	// 0.1667) = 1`, and `MIN_FRESH` would have insisted on the same thing anyway. So session 2
+	// drilled nine of the ten and introduced an eleventh, deterministically, in 25 of 25 seeds,
+	// and that is what stood behind a button reading "Practise these 10".
+	//
+	// One new word is discovery when the learner is keeping up. It is not discovery when every
+	// word they have ever met is still owed its first question — it is a bigger debt, sold as a
+	// feature. So when the backlog alone can fill the session, it does, and neither the brake's
+	// rounding nor the floor gets a say. The threshold is a whole session's worth precisely so
+	// this is rare and self-clearing: one run pays the debt off, `owed` drops under `size`, and
+	// the next run is back to the full 40%. Discovery is deferred by exactly one session and
+	// never switched off.
+	const explore =
+		Math.max(0, owed) >= size ? 0 : Math.max(MIN_FRESH, Math.round(exploreShare * brake));
 
 	const reviewQuota = size - explore;
 	let review = Math.min(reviewQuota, reviewAvailable);
@@ -164,11 +204,46 @@ function takeDistinct(
 		into.push(word);
 		taken++;
 	}
+	// The held list is the overflow, not a free pass: a candidate is only worth taking on the
+	// second pass because a *near*-duplicate beats a short session. An outright duplicate does
+	// not — `isAmbiguousWith` returns true for `candidate.id === answer.id`, so a pool carrying
+	// the same word twice put it in `held` and this loop pushed it straight back in. Driven on a
+	// duplicated list that produced a session asking four words twice. `loadLevel` cannot reach
+	// it (all 500 L1 ids are unique), which is exactly why the guard belongs here rather than in
+	// a caller that happens to be careful today.
 	for (const word of held) {
 		if (taken >= want) break;
+		if (into.some((other) => other.id === word.id)) continue;
 		into.push(word);
 		taken++;
 	}
+}
+
+/**
+ * The subset of `pool` a caller named in `options.require`, in the order they named it.
+ *
+ * Unknown ids, duplicates and a caller that named more words than the session holds are all
+ * ordinary — a summary hands over the list it just rendered, and it should not have to know
+ * which of those words this level actually carries. Every one of them narrows silently rather
+ * than throwing, because the fallback (the scheduler's own choice) is always a valid session.
+ */
+function requiredWords(
+	pool: DistractorPool,
+	ids: readonly string[] | undefined,
+	cap: number
+): Word[] {
+	if (!ids || ids.length === 0 || cap <= 0) return [];
+	const byId = new Map(pool.words.map((word) => [word.id, word] as const));
+	const out: Word[] = [];
+	const taken = new Set<string>();
+	for (const id of ids) {
+		if (out.length >= cap) break;
+		if (typeof id !== 'string' || taken.has(id)) continue;
+		taken.add(id);
+		const word = byId.get(id);
+		if (word) out.push(word);
+	}
+	return out;
 }
 
 /**
@@ -194,12 +269,18 @@ export function buildSession(
 	const pool = makePool(words.filter((word) => word.level === level));
 	const target = Math.min(requestedSize(size), pool.words.length);
 
+	// Named by the caller, so they are in before anything competes for a slot. See
+	// `SessionOptions.require`.
+	const demanded = requiredWords(pool, options.require, target);
+	const demandedIds = new Set(demanded.map((word) => word.id));
+
 	const fresh: Word[] = [];
 	/** Met, and still owed its first question — the app's own debt. */
 	const owed: Word[] = [];
 	/** Met and answered at least once: ordinary review, ordered by `wordWeight`. */
 	const due: Word[] = [];
 	for (const word of pool.words) {
+		if (demandedIds.has(word.id)) continue;
 		const read = readRecord(byWord[word.id]);
 		// `met`, not `seen > 0`: an introduction is a real meeting with a word even though it
 		// is not an answer, and this is the same reading `cardKindFor` and `wordWeight` use, so
@@ -210,16 +291,17 @@ export function buildSession(
 	}
 
 	const weightOf = (word: Word) => wordWeight(byWord[word.id], now);
-	const quota = splitQuota(target, owed.length + due.length, fresh.length, owed.length);
+	const rest = target - demanded.length;
+	const quota = splitQuota(rest, owed.length + due.length, fresh.length, owed.length);
 
 	// A word that was taught and never asked is worth 1.0 — deliberately no more, because
 	// inflating it is exactly the fabricated urgency this whole change exists to delete. So the
 	// debt is paid out of a *quota* rather than a weight, the same way `EXPLORE_SHARE` is: up to
 	// half the review slots go to first questions before anything competes on weight. Without
 	// it the two rules deadlock — `splitQuota`'s backlog brake throttles new words until the
-	// debt is paid, and the debt is never paid because a 1.0 word loses every draw to a 20.0
-	// one, so the
-	// session settles at 1.8 new words a session instead of 3.0 and discovery nearly halves.
+	// debt is paid, and the debt is never paid because a 1.0 word loses every draw to a 20.0 one,
+	// so the session settles at 1.8 new words a session instead of 3.0 and discovery nearly
+	// halves.
 	const owedOrder = orderWeighted(owed, weightOf, rng);
 	const debt = Math.min(owedOrder.length, Math.ceil(quota.review / 2));
 	const reviewOrder = [
@@ -227,7 +309,7 @@ export function buildSession(
 		...orderWeighted([...owedOrder.slice(debt), ...due], weightOf, rng)
 	];
 
-	const picked: Word[] = [];
+	const picked: Word[] = [...demanded];
 	takeDistinct(pool, picked, reviewOrder, quota.review);
 	// Nothing distinguishes one unseen word from another, so this is a plain shuffle.
 	takeDistinct(
@@ -290,6 +372,27 @@ export function isIntroduction(question: Question): boolean {
 }
 
 /**
+ * The ids of the words a finished run *taught* — introduced whole, asked nothing.
+ *
+ * The set a summary means when it says "10 new words" and offers to practise them. It is
+ * derived here rather than at the call site so the thing counted on the screen and the thing
+ * handed to `SessionOptions.require` can never be two different readings of `kind`:
+ *
+ * ```ts
+ * buildSession(words, level, progress, 10, { require: taughtWordIds(session) });
+ * ```
+ *
+ * Order is the order the learner met them in, and duplicates cannot occur because a session
+ * never asks one word twice.
+ */
+export function taughtWordIds(session: Session | null | undefined): string[] {
+	const questions = session?.questions ?? [];
+	return questions
+		.filter((question) => isIntroduction(question))
+		.map((question) => question.word.id);
+}
+
+/**
  * Whether an answer to this card belongs in the learner's record.
  *
  * `false` only for an introduction, and it means exactly one thing to the caller: do not call
@@ -336,8 +439,17 @@ export function isCorrect(question: Question, picked: Word | null): boolean {
  *   `dropped`      an introduction, and the store has no way to note an exposure. Nothing is
  *                  written *at all* — a fabricated miss and a fabricated success are the same
  *                  lie pointing in different directions, and the honest answer to "I cannot
- *                  record this" is to record nothing. The word is introduced again next time,
- *                  which is a repeat, not a wrong number.
+ *                  record this" is to record nothing.
+ *
+ * `dropped` is worse than it sounds and the caller should know it. Nothing written means
+ * `readRecord` still says `met: false` next session, so the word is introduced *again* — and
+ * again, forever. Driven for real against a writer with no `noteSeen`, five consecutive
+ * sessions produced 50 cards, all of them introductions, all dropped, with zero records
+ * written: the app teaches and never tests. It is not reachable through the shipped store,
+ * which always provides `noteSeen`; it is the shape a learner whose `localStorage` is
+ * unusable would get, and the honest name for it is a teach loop, not "a repeat". A caller
+ * seeing `dropped` should tell the learner their progress is not being saved (`StorageNotice`
+ * already exists for exactly that) rather than let the run look normal.
  */
 export type Outcome = 'answered' | 'introduced' | 'dropped';
 

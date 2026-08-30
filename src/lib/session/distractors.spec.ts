@@ -86,6 +86,19 @@ describe('isAmbiguousWith', () => {
 		expect(isAmbiguousWith(pool, answer, clean)).toBe(false);
 		expect(isAmbiguousWith(pool, answer, answer)).toBe(true);
 	});
+
+	// Real, at HSK 3: 高速 ships ["high speed","expressway"] and 快速 ["high-speed","rapid"].
+	// `senseSet` keeps the hyphen, so the two do not intersect and both could sit on one card —
+	// prompt "high-speed · rapid", with "high speed" among the wrong answers.
+	it('reads a hyphen as a space, so "high-speed" and "high speed" are one sense', () => {
+		const hyphened = word({ id: 'e', hanzi: '快速', meanings: ['high-speed', 'rapid'] });
+		const spaced = word({ id: 'f', hanzi: '高速', meanings: ['high speed', 'expressway'] });
+		const folded = makePool([hyphened, spaced]);
+		expect(isAmbiguousWith(folded, hyphened, spaced)).toBe(true);
+		expect(isAmbiguousWith(folded, spaced, hyphened)).toBe(true);
+		// The raw sense sets still differ — this is the picker fixing it, not the data.
+		expect(sharesSense(hyphened, spaced)).toBe(false);
+	});
 });
 
 describe('pickDistractors', () => {
