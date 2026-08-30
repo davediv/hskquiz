@@ -16,13 +16,19 @@
 	`readKey`, so 1–4 answer and ↵ advances exactly as they did in the run. Nothing here is a
 	parallel implementation of a quiz; it is the quiz pointed at three words.
 
-	SIZE
-	The headword is `headwordSize()` — a fixed step, deliberately smaller than the card behind
-	this one. `WordCard` measures its column and sets the headword at the quiz prompt's own
-	ceiling because it has the whole scroll to spend; this box is a stage between a heading and
-	four answer buttons, and it is reserved at its answered height on the first frame. A 119px
-	character in it would push the continue button off a 667px phone, which is exactly the
-	failure the reserved height exists to prevent.
+	SIZE — THE RE-TEST IS NEVER SMALLER THAN THE TEST
+	The character was `headwordSize()`, a fixed step, and it measured 82.5px on a 375×812 phone
+	against 119.38px on the review card directly behind the drill and 152.27px on the quiz
+	question that produced the miss. The one screen that actually re-tests the learner drew the
+	subject at 54% of the question that beat them, and it did it to protect a 667px phone that
+	a fixed step cannot tell apart from an 812px one — measured there, `scrollHeight` was 953
+	against 812 with the continue button at y=743. The room existed; the step could not see it.
+
+	So the size is measured, exactly the way `WordCard` measures it: `.subject` is a size
+	container and the glyph is `min(100cqw / cols / fit, --drill-hero-max)`, with the ceiling on
+	`svh` so the short phone the fixed step was protecting steps down on its own. 119.6px at
+	812, 100px at 667, 86.7px at 568 — and `headwordSize()` stays underneath as the class on the
+	element, so a browser without container queries still gets a sane step rather than nothing.
 
 	HEIGHT IS FIXED BEFORE THE TAP
 	The reveal is always in the box and merely `visibility: hidden` until the answer lands, so
@@ -205,12 +211,14 @@
 		<div class="stage">
 			<p class="ask">{promptLabel(card.direction)}</p>
 
-			<div class="subject">
+			<!-- `--cols` is the divisor the size below reads: the glyph count, floored at two so a
+			     single character is never blown up to the full width of the card. -->
+			<div class="subject" style:--cols={Math.max(2, [...card.word.hanzi].length)}>
 				{#if asksHanzi}
 					<p class="gloss-ask">{fullGloss(card.word)}</p>
 				{:else}
 					<p class="face">
-						<Hanzi word={card.word} size={headwordSize(card.word.hanzi)} display />
+						<Hanzi word={card.word} size={headwordSize(card.word.hanzi)} display class="hz" />
 					</p>
 				{/if}
 			</div>
@@ -358,7 +366,28 @@
 		color: var(--color-ink-subtle);
 	}
 
+	/*
+	 * The subject, sized against the column it actually has rather than against a step.
+	 *
+	 * `--drill-hero-max` is the same shape as `WordCard`'s `--card-hero-max`
+	 * (`clamp(6rem, 11.5svh + 26px, 8.5rem)`), pulled 6px down at the reference phone so the
+	 * drill lands a hair under the card it is quoting rather than over it, and steeper on `svh`
+	 * so the 667px phone this box used to be sized for gives back the height it cannot spare:
+	 * 119.6px at 812, 100px at 667, 86.7px at 568. `--drill-fit` is `WordCard`'s divisor — how
+	 * much wider than the glyphs the row has to be — so the two agree on what "as big as this
+	 * column allows" means.
+	 */
 	.subject {
+		--drill-hero-max: clamp(4.5rem, calc(13.5svh + 10px), 7.5rem);
+		--drill-fit: 1.07;
+		--cols: 2;
+
+		/* `.stage` is `justify-items: center`, so without this the box is shrink-to-fit — and a
+		   size container whose width depends on its own contents reports 0cqw, which is exactly
+		   what it did: the glyph computed to font-size 0. It fills the column and centres its
+		   own contents instead. */
+		inline-size: 100%;
+		container-type: inline-size;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -369,6 +398,13 @@
 
 	.face {
 		margin: 0;
+	}
+
+	/* Beats the step class from `headwordSize()` on specificity: the step is the fallback, the
+	   measured size is the rule. */
+	.face :global(.hz) {
+		font-size: min(calc(100cqw / var(--cols) / var(--drill-fit)), var(--drill-hero-max));
+		line-height: 1.04;
 	}
 
 	/* The English side of a production card, at the weight the answer deserves. */

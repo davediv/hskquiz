@@ -58,8 +58,10 @@
 	the system puts tone in exactly one place.
 -->
 <script lang="ts">
-	import { onMount, tick } from 'svelte';
+	import { onMount, tick, untrack } from 'svelte';
 	import { resolve } from '$app/paths';
+	import { pushState } from '$app/navigation';
+	import { page } from '$app/state';
 	import type { Session, Syllable, Word } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import { isCorrect, isScored } from '$lib/session';
@@ -338,6 +340,89 @@
 	const TRAIL_MAX = 8;
 	/** The control that opened the sheet, so closing hands focus back to the card it came from. */
 	let opener: HTMLElement | null = null;
+	/**
+	 * Where the results were scrolled to when the sheet opened.
+	 *
+	 * The sheet is `position: fixed` over this screen, so the screen behind it must not move —
+	 * and it did, all the way to the top: `WordSheet`'s open effect calls `panel.focus()`, and
+	 * focusing scrolls the focused box into view whether or not it is fixed, which took a page
+	 * scrolled to 500 back to 0 before the sheet had finished painting. Measured: open at
+	 * `scrollY` 500, one frame later 0. Closing then handed back a screen the learner had to
+	 * find their card in again. So the position is held for the life of the sheet and put back
+	 * when it goes — and while it is open the page under it is pinned, which is what a modal
+	 * over a scrolling list is supposed to do anyway.
+	 */
+	let restoreY = 0;
+
+	/*
+	 * AND THE SHEET IS A HISTORY ENTRY, SO THE PHONE'S OWN BACK GESTURE CLOSES IT.
+	 *
+	 * Loop 4 stopped the chip from navigating and the trap simply moved: the sheet was drawn
+	 * over a route it was not part of, so the one dismissal a phone user actually reaches for —
+	 * the edge swipe — went past the sheet and unloaded `/quiz/[level]`, and the run, the review
+	 * list and every drill result went with it. Escape closed the sheet, the grip closed the
+	 * sheet, and the gesture the sheet looks like it should answer to destroyed the session.
+	 *
+	 * So opening pushes a shallow-routing entry (`pushState`, same URL, `{ sheet: true }`), and
+	 * the entry is the thing that means "a sheet is open". Every way out now runs through the
+	 * same door:
+	 *
+	 *   · back gesture / browser back / the app bar's popping chevron → the entry comes off,
+	 *     `page.state.sheet` goes away, and the effect below closes the sheet and nothing else;
+	 *   · ✕, Escape, the grip drag, the backdrop → `closeSheet()` asks for that same pop, so
+	 *     the stack never keeps a stale entry that a later back press has to walk through;
+	 *   · a character drill-down deeper than one word → back unwinds ONE step of `trail` and
+	 *     re-arms, which is what a back gesture means everywhere else on a phone.
+	 *
+	 * Exactly one entry of ours is ever outstanding, which is why the re-arm above is safe.
+	 * `layered`/`closing` are plain `let`s on purpose: they are bookkeeping for the effect that
+	 * maintains them, and making them reactive would put that effect in its own dependency set.
+	 */
+	const layerOn = $derived((page.state as { sheet?: unknown }).sheet === true);
+	/** True while an entry we pushed is still on the stack. */
+	let layered = false;
+	/** Set when *we* asked for it to come off, so its pop is a close rather than a trail step. */
+	let closing = false;
+	/** Run once the entry is actually off — see `practiseHere`, which restarts after closing. */
+	let afterClose: (() => void) | null = null;
+
+	/** Put the results back where they were, without smooth-scrolling a fixed overlay around. */
+	function pinScroll() {
+		if (Math.abs(window.scrollY - restoreY) < 1) return;
+		window.scrollTo({ top: restoreY, left: 0, behavior: 'instant' });
+	}
+
+	function armLayer() {
+		try {
+			pushState('', { ...page.state, sheet: true } as App.PageState);
+			layered = true;
+		} catch {
+			// The router is not up (a cold frame, or `pushState` unavailable). The sheet still
+			// opens and still closes on ✕/Escape/grip — it is simply not a history entry, which
+			// is exactly the behaviour this replaced.
+			layered = false;
+		}
+	}
+
+	$effect(() => {
+		if (layerOn) return;
+		untrack(() => {
+			if (!layered) return;
+			layered = false;
+			if (closing) {
+				closing = false;
+				finishClose();
+				return;
+			}
+			// A back gesture out of a character drill-down means "up one word", not "away".
+			if (trail.length > 0) {
+				trail = trail.slice(0, -1);
+				armLayer();
+				return;
+			}
+			finishClose();
+		});
+	});
 
 	const openWord = $derived(sheetAt === null ? null : (sheetWords[sheetAt] ?? null));
 	const sheetWord = $derived(trail.length > 0 ? trail[trail.length - 1] : openWord);
@@ -345,23 +430,69 @@
 		trail.length > 1 ? trail[trail.length - 2] : trail.length === 1 ? openWord : null
 	);
 
+	// Held for as long as the sheet is up: the focus move that opens it is not the only thing
+	// that can scroll the page behind a fixed overlay — a wheel over the scrim does it too.
+	$effect(() => {
+		if (sheetWord === null) return;
+		pinScroll();
+		const frame = requestAnimationFrame(pinScroll);
+		window.addEventListener('scroll', pinScroll, { passive: true });
+		return () => {
+			cancelAnimationFrame(frame);
+			window.removeEventListener('scroll', pinScroll);
+		};
+	});
+
 	function openSheet(word: Word) {
 		const at = sheetWords.findIndex((candidate) => candidate.id === word.id);
 		if (at < 0) return;
 		const active = document.activeElement;
 		opener = active instanceof HTMLElement ? active : null;
+		restoreY = window.scrollY;
 		trail = [];
 		sheetAt = at;
+		armLayer();
 	}
 
-	function closeSheet() {
+	/**
+	 * Ask for the sheet to go away. Where an entry of ours is on the stack this is a `back()`
+	 * and the close happens when the pop lands, so ✕ and the system gesture take the same path
+	 * and neither leaves an entry behind for the other one to trip over.
+	 */
+	function closeSheet(then?: () => void) {
+		if (closing) return;
+		afterClose = then ?? null;
+		if (layered) {
+			closing = true;
+			history.back();
+			return;
+		}
+		finishClose();
+	}
+
+	/** The close itself, once the entry is off the stack (or there never was one). */
+	function finishClose() {
 		sheetAt = null;
 		trail = [];
 		// Nothing scrolled — the sheet is `position: fixed` over the results — so the only thing
 		// to put back is focus, on the chip that opened it.
 		const back = opener;
 		opener = null;
-		void tick().then(() => back?.focus());
+		const then = afterClose;
+		afterClose = null;
+		// A caller that asked to do something next is replacing this screen, so there is no chip
+		// left to hand focus back to.
+		if (then) {
+			then();
+			return;
+		}
+		void tick().then(() => {
+			// `preventScroll`, then put the page back by hand: the browser's own "scroll it into
+			// view" is what moved this screen in the first place, and the chip is already where
+			// the learner left it.
+			back?.focus({ preventScroll: true });
+			pinScroll();
+		});
 	}
 
 	function stepSheet(delta: number) {
@@ -381,6 +512,58 @@
 		if (trail.length === 0) return;
 		trail = trail.slice(0, -1);
 	}
+
+	/*
+	 * THE INDEX, AND ONLY WHEN THERE IS SOMETHING TO INDEX.
+	 *
+	 * Three misses is three cards and the screen is its own overview. Ten is a 5,247px document
+	 * — 6.5 screens of near-identical full-bleed cards with no way to see how many there are,
+	 * which one you are on, or how to get to the fourth one except with a thumb. A bad run is
+	 * exactly when the summary is least usable, which is exactly backwards.
+	 *
+	 * So from six words up the review list grows a row of the words themselves, pinned under
+	 * the app bar: how many there are, which ones are still red, which one you are standing in,
+	 * and one tap to any of them. It is the app's own dense row, borrowed for the one state
+	 * that needs it. Below six it does not exist and the screen is unchanged — an index over a
+	 * list you can already see whole is chrome.
+	 */
+	const WALL = 6;
+	const showIndex = $derived(!drilling && missed.length >= WALL);
+	/** The review list itself, so the index can scroll to the nth card without ids or refs. */
+	let reviewList: HTMLElement | null = $state(null);
+	/** Which review card the viewport is standing in, or -1 before anything has been seen. */
+	let here = $state(-1);
+	/**
+	 * The index's own height, measured rather than guessed: it is what a card jumped to has to
+	 * clear, and a hard-coded 4rem left the sixth card 29px underneath it.
+	 */
+	let indexH = $state(0);
+
+	function jumpTo(index: number) {
+		const node = reviewList?.children[index];
+		if (!(node instanceof HTMLElement)) return;
+		const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		node.scrollIntoView({ block: 'start', behavior: still ? 'auto' : 'smooth' });
+	}
+
+	// "Which card am I in" is the middle of the viewport, not the top of it: a card is 438px on
+	// a phone, so a top-edge test flickers between two of them on every scroll.
+	$effect(() => {
+		const list = showIndex ? reviewList : null;
+		if (!list) return;
+		const seen = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					const at = [...list.children].indexOf(entry.target);
+					if (at >= 0) here = at;
+				}
+			},
+			{ rootMargin: '-45% 0px -45% 0px' }
+		);
+		for (const child of list.children) seen.observe(child);
+		return () => seen.disconnect();
+	});
 
 	/** Where a link to "this level's quiz" points, for the one below. */
 	const quizPath = $derived(resolve('/quiz/[level]', { level: String(session.level) }));
@@ -407,12 +590,17 @@
 		const link = target.closest('a[href]');
 		if (!(link instanceof HTMLAnchorElement) || link.pathname !== quizPath) return;
 		event.preventDefault();
-		closeSheet();
-		onRestart();
+		closeSheet(onRestart);
 	}
 </script>
 
-<div class="summary" bind:this={panel} tabindex="-1">
+<div
+	class="summary"
+	class:has-index={showIndex}
+	style:--index-h="{indexH}px"
+	bind:this={panel}
+	tabindex="-1"
+>
 	<h1 class="sr-only">{headline}</h1>
 
 	{#if firstLook}
@@ -465,6 +653,9 @@
 				<strong class="tabular">{solved.length}</strong>
 				{scoreRest}
 			</p>
+			<!-- Colour is not the only thing carrying the result: a missed segment is drawn
+			     broken and a skipped one stays empty, so the strip still reads as three states
+			     in greyscale or with either red-green deficiency. -->
 			<div class="rail" aria-hidden="true">
 				{#each results as result, i (i)}
 					<span
@@ -498,10 +689,40 @@
 					</p>
 				{/if}
 
+				{#if showIndex}
+					<nav
+						class="index"
+						aria-label="The {missed.length} words in this list"
+						bind:clientHeight={indexH}
+					>
+						<ul class="chips">
+							{#each missed as result, i (result.word.id)}
+								{@const done = redone[result.word.id]?.right === true}
+								<li>
+									<button
+										type="button"
+										class="chip"
+										class:chip-fixed={done}
+										class:here={here === i}
+										aria-current={here === i ? 'true' : undefined}
+										onclick={() => jumpTo(i)}
+									>
+										<Hanzi text={result.word.hanzi} size="xs" />
+										{#if done}<span class="chip-mark" aria-hidden="true">✓</span>{/if}
+										<span class="sr-only">
+											{i + 1} of {missed.length}, {done ? 'fixed' : 'still to review'}
+										</span>
+									</button>
+								</li>
+							{/each}
+						</ul>
+					</nav>
+				{/if}
+
 				{#if drilling}
 					<ReviewDrill cards={deck} onfinish={closeDrill} oncancel={closeDrill} />
 				{:else}
-					<ul class="cards">
+					<ul class="cards" bind:this={reviewList}>
 						{#each missed as result, i (result.word.id)}
 							<WordCard
 								word={result.word}
@@ -665,11 +886,11 @@
 			the line beside it. So it is a sentence, and it is at the end of the page where a
 			cumulative figure belongs: the screen now opens on the words.
 		-->
-		{#if arc && arc.seen > 0}
+		{#if arc && arc.met > 0}
 			<p class="tally">
 				<span class="tally-k">HSK {session.level}</span>
 				<span
-					><strong class="tabular">{arc.seen.toLocaleString('en')}</strong> of
+					><strong class="tabular">{arc.met.toLocaleString('en')}</strong> of
 					<span class="tabular">{arc.total.toLocaleString('en')}</span> words met</span
 				>
 				<span aria-hidden="true">·</span>
@@ -707,7 +928,7 @@
 			total={sheetWords.length}
 			browseLevel={session.level}
 			from={sheetFrom}
-			onclose={closeSheet}
+			onclose={() => closeSheet()}
 			onback={backSheet}
 			onprev={() => stepSheet(-1)}
 			onnext={() => stepSheet(1)}
@@ -722,8 +943,10 @@
 	 * results list that runs to the edge of a phone reads as a crash rather than a design.
 	 */
 	.summary {
+		--summary-measure: var(--container-app);
+
 		inline-size: 100%;
-		max-inline-size: var(--container-app);
+		max-inline-size: var(--summary-measure);
 		margin-inline: auto;
 		padding-inline: var(--spacing-gutter);
 		padding-block-start: 1.25rem;
@@ -754,7 +977,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 0 0.5rem;
-		margin: 0.375rem 0 0;
+		margin: var(--spacing-2xs) 0 0;
 	}
 
 	.mark-gloss {
@@ -762,12 +985,15 @@
 		color: var(--color-ink-muted);
 	}
 
+	/* The top of the screen is one group, not four evenly spaced lines: eyebrow, mark, score and
+	   strip sit inside 0.25–0.625rem of each other and the air goes below them instead, where
+	   the review list begins. */
 	.score {
-		margin-block-start: 1rem;
+		margin-block-start: 0.625rem;
 	}
 
 	.score-line {
-		margin: 0 0 0.5rem;
+		margin: 0 0 var(--spacing-2xs);
 		text-align: center;
 		font-size: var(--text-sm);
 		color: var(--color-ink-muted);
@@ -796,8 +1022,19 @@
 		background-color: var(--color-correct);
 	}
 
+	/*
+	 * Broken, not just red. The strip encoded ten results in hue alone — the one channel a
+	 * red-green deficiency does not have — so a missed segment is now drawn as two halves with
+	 * a gap between them and a skipped one stays an empty track. Three states, three shapes.
+	 */
 	.seg.wrong {
 		background-color: var(--color-wrong);
+		background-image: linear-gradient(
+			to right,
+			transparent 0 40%,
+			var(--color-page) 40% 60%,
+			transparent 60% 100%
+		);
 	}
 
 	@media (prefers-contrast: more) {
@@ -835,7 +1072,7 @@
 	}
 
 	.section-title {
-		margin: 1.375rem 0 0.875rem;
+		margin: 1.75rem 0 0.875rem;
 		font-size: var(--text-xl);
 		text-wrap: balance;
 		outline: none;
@@ -857,13 +1094,16 @@
 	}
 
 	/*
-	 * ONE CARD PER ROW, AT EVERY WIDTH THIS SCREEN IS GIVEN.
+	 * ONE CARD PER ROW — AND ON A DESKTOP, A WIDER ONE.
 	 *
-	 * Two missed words side by side on a desktop is the right answer and it is not available
-	 * from here: `main.quiz` caps the whole route at `--container-app` (34rem), so a two-column
-	 * grid inside it produces two 250px cards whose head rows — a verdict label plus two 44px
-	 * pills that may not shrink — overflow into each other. Tried, measured, reverted. The grid
-	 * declaration stays because the fix is one number in the route, not a rewrite here.
+	 * Two missed words side by side is not the answer here: at 34rem of route a two-column grid
+	 * produces two 250px cards whose head rows — a verdict label plus two 44px pills that may
+	 * not shrink — overflow into each other. Tried, measured, reverted. What a desktop actually
+	 * has is *width for the entry itself*: at 464px of card the 119px headword left 313px of
+	 * nothing beside it, 67% of the card, and three cards made an 1,880px scroll in a 900px
+	 * window. `WordCard` lays each word out beside its own headword as soon as the card it is in
+	 * is wide enough for that particular word, and the widening at the end of this block is what
+	 * gives that layout a measure to work in.
 	 */
 	.cards {
 		display: grid;
@@ -873,6 +1113,115 @@
 		margin: 0;
 		padding: 0;
 		list-style: none;
+	}
+
+	/*
+	 * THE INDEX. Only rendered from six words up — see the note in the script.
+	 *
+	 * Pinned under the app bar rather than left at the top of a 5,247px document: an overview
+	 * that scrolls away on the first flick is a header, not an index. It bleeds to the page edge
+	 * so the row reads as scrollable, and every chip is a full `--spacing-tap` target with the
+	 * word itself on it, because "which one is the fourth" is a question about words.
+	 */
+	.index {
+		position: sticky;
+		inset-block-start: var(--app-sticky-top);
+		z-index: 5;
+		margin: -0.25rem calc(var(--spacing-gutter) * -1) 0.75rem;
+		padding: 0.25rem var(--spacing-gutter);
+		background-color: var(--color-page);
+	}
+
+	/* Cards dissolve under the index rather than being sliced by it — the same argument the
+	   fade above the sticky action row makes, at a quarter of the height. */
+	.index::after {
+		content: '';
+		position: absolute;
+		inset-inline: 0;
+		inset-block-start: 100%;
+		block-size: 0.75rem;
+		background: linear-gradient(
+			to bottom,
+			var(--color-page) 0%,
+			color-mix(in oklab, var(--color-page) 55%, transparent) 55%,
+			transparent 100%
+		);
+		pointer-events: none;
+	}
+
+	.chips {
+		display: flex;
+		gap: var(--spacing-2xs);
+		margin: 0;
+		margin-inline: calc(var(--spacing-gutter) * -1);
+		padding: var(--spacing-2xs) var(--spacing-gutter);
+		list-style: none;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scrollbar-width: none;
+		scroll-snap-type: x proximity;
+	}
+
+	.chips::-webkit-scrollbar {
+		display: none;
+	}
+
+	/*
+	 * Still red / fixed green rides the bottom rule, and a fixed chip also carries a ✓ — the
+	 * same refusal to let colour be the only copy of a state that the strip above it makes.
+	 */
+	.chip {
+		display: inline-flex;
+		flex: none;
+		align-items: center;
+		gap: var(--spacing-2xs);
+		block-size: var(--spacing-tap);
+		min-inline-size: var(--spacing-tap);
+		justify-content: center;
+		padding-inline: 0.5rem;
+		/* 女生 wrapped to two characters over two lines and took the row from 44px to 77px. A
+		   chip is one line of word, always. */
+		white-space: nowrap;
+		border: 1px solid var(--color-line);
+		border-block-end: 3px solid var(--color-wrong);
+		border-radius: var(--radius-sm);
+		background-color: var(--color-surface);
+		scroll-snap-align: center;
+		transition:
+			border-color 140ms var(--ease-out-soft),
+			background-color 140ms var(--ease-out-soft);
+	}
+
+	.chip-fixed {
+		border-block-end-color: var(--color-correct);
+	}
+
+	.chip-mark {
+		font-size: var(--text-2xs);
+		font-weight: 700;
+		color: var(--color-correct);
+	}
+
+	/* Where you are standing. Ink, not a hue: it is a position, not a result. */
+	.chip.here {
+		border-inline-color: var(--color-ink);
+		border-block-start-color: var(--color-ink);
+		background-color: var(--color-surface-sunken);
+	}
+
+	@media (hover: hover) {
+		.chip:hover {
+			background-color: var(--color-surface-sunken);
+		}
+	}
+
+	/* A card jumped to lands under the bar and under the index, not behind them. */
+	.cards :global(.card.word) {
+		scroll-margin-block-start: calc(var(--app-sticky-top) + 0.75rem);
+	}
+
+	.has-index .cards :global(.card.word) {
+		scroll-margin-block-start: calc(var(--app-sticky-top) + var(--index-h, 4rem) + 0.5rem);
 	}
 
 	.cards-solved {
@@ -1015,6 +1364,57 @@
 		.leave:hover {
 			color: var(--color-ink);
 			border-block-end-color: var(--color-line-strong);
+		}
+	}
+
+	/*
+	 * THE RESULTS ARE WIDER THAN THE RUN THAT PRODUCED THEM.
+	 *
+	 * `main.quiz` caps the route at 34rem because the quiz itself is a single column of four
+	 * answer buttons under one character and a wider one would be a worse question. The results
+	 * are a different document — a list of dictionary entries — and read side by side they want
+	 * about 46rem. This screen is the only thing in that route that does, so it takes the width
+	 * here rather than asking the route to widen the question as well: `inline-size` sets the
+	 * box and the negative margins recentre it inside the 504px column it is sitting in.
+	 * `100vw - 3rem` keeps it inside the viewport when the window is between the two.
+	 *
+	 * 40rem is where the widened column first gives a TWO-character headword its 255px and a
+	 * readable measure beside it — the point where `WordCard` starts laying every word out side
+	 * by side rather than only the single characters — so the list is one shape from here up.
+	 *
+	 * The one thing this cannot reach from here is the app bar, which aligns itself to the box
+	 * `#main` renders (`chrome.svelte.ts` measures `#main`'s first child — `main.quiz`, still
+	 * 34rem). Its chevron therefore sits inside this column rather than on its edge. The real
+	 * fix is one number in the route; see the note handed to the app-shell piece.
+	 */
+	@media (min-width: 40rem) {
+		.summary {
+			--summary-measure: min(46rem, 100vw - 3rem);
+
+			inline-size: var(--summary-measure);
+			max-inline-size: none;
+			margin-inline: calc((100% - var(--summary-measure)) / 2);
+		}
+
+		/* The head of the screen is a caption, not a column: it keeps a phone's measure and
+		   centres, so widening the list does not stretch a 10-segment rail to 660px. */
+		.crest,
+		.score,
+		.tally,
+		.way-out {
+			max-inline-size: 24rem;
+			margin-inline: auto;
+		}
+
+		/* The decision keeps its own measure too — a 620px black pill is a banner, not a
+		   button — but the row itself stays full-bleed so its background and the fade above it
+		   still cover the cards scrolling under them. */
+		.actions {
+			justify-content: center;
+		}
+
+		.actions .btn-primary {
+			flex: 0 1 22rem;
 		}
 	}
 </style>

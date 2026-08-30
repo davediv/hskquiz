@@ -116,6 +116,34 @@
 	 */
 	const cols = $derived(Math.max(2, [...word.hanzi].length));
 	/**
+	 * The real glyph count, which is what the SIDE-BY-SIDE layout measures its left column with:
+	 * `--cols` is floored at two so a single character is not blown up to the width of the card,
+	 * and using that floor as a width would leave 要 sitting in a 255px column with 127px of
+	 * nothing beside it.
+	 */
+	const glyphs = $derived([...word.hanzi].length);
+
+	/**
+	 * WHETHER THIS CARD READS ACROSS OR DOWN, DECIDED BY THIS CARD.
+	 *
+	 * A breakpoint cannot answer this, because the question is not how wide the window is — it
+	 * is whether *this word's* headword and a readable measure both fit in the column this card
+	 * was given. 要 needs 128px on the left; 地方 needs 255; 对不起 needs 383. A single
+	 * viewport threshold either splits 地方 into a 107px text column or leaves 要 in a 464px
+	 * card with 313px of nothing beside it, and both of those are the bug being fixed.
+	 *
+	 * So the card measures itself. `clientWidth` here costs nothing extra — the summary is a
+	 * client-only chunk, never server-rendered, so there is no hydration to mismatch — and the
+	 * card's width never depends on its own contents (the grid column sets it), so there is no
+	 * feedback loop to oscillate in.
+	 */
+	const HEAD_PER_CHAR = 128;
+	const MEASURE_MIN = 220;
+	const COLUMN_GAP = 20;
+	const CARD_PADDING = 36;
+	let cardW = $state(0);
+	const side = $derived(cardW >= CARD_PADDING + glyphs * HEAD_PER_CHAR + COLUMN_GAP + MEASURE_MIN);
+	/**
 	 * The bracketed traditional form is a footnote to the headword, never a second one, so it is
 	 * sized off the character count rather than off the headword: one or two characters leave
 	 * room for 36px beside a 119px hero, three or four do not and take 26px.
@@ -146,7 +174,14 @@
 	const delay = $derived(`${Math.min(index, 5) * 45}ms`);
 </script>
 
-<li class="card word" class:card-fixed={fixed} style:animation-delay={delay}>
+<li
+	class="card word"
+	class:card-fixed={fixed}
+	class:side
+	style:--glyphs={glyphs}
+	style:animation-delay={delay}
+	bind:clientWidth={cardW}
+>
 	<div class="head">
 		{#if verdict}
 			<p class="verdict" class:right={right || fixed} class:miss={!right && !fixed}>
@@ -223,7 +258,9 @@
 						class={part.hit ? 'sen-hz hit' : 'sen-hz'}
 					/>{/each}
 			</p>
-			<p class="sen-sound"><Pinyin pinyin={example.pinyin} size="sm" tones={false} /></p>
+			<p class="sen-sound">
+				<Pinyin pinyin={example.pinyin} size="sm" tones={false} sentence={example.hanzi} />
+			</p>
 			<p class="sen-english">{example.english}</p>
 		</section>
 	{/if}
@@ -252,7 +289,8 @@
 
 <style>
 	/* A size container, so the head row can drop its two labels on a card too narrow to hold
-	   them — see the query at the end of this block. */
+	   them — and so the card can lay itself out beside its own headword once it is wide enough
+	   to hold both. See the two queries at the end of this block. */
 	.word {
 		container-type: inline-size;
 		padding: 0.625rem 1.125rem 1rem;
@@ -312,9 +350,16 @@
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface);
-		color: var(--color-ink-muted);
+		/*
+		 * Quieter than the verdict beside it. Two 44px bordered pills at 650 outweighed a 10px
+		 * `✕ NOT QUITE` set at 2xs, so the head row led with its two utilities and the thing
+		 * the card is actually reporting came second. The pills keep their shape — that is the
+		 * affordance — and give up a weight step and an ink step to the sentence they sit next
+		 * to.
+		 */
+		color: var(--color-ink-subtle);
 		font-size: var(--text-xs);
-		font-weight: 650;
+		font-weight: 600;
 		letter-spacing: 0.02em;
 		text-decoration: none;
 		transition:
@@ -349,7 +394,8 @@
 		align-items: center;
 		gap: 0.3125rem;
 		margin: 0;
-		font-size: var(--text-2xs);
+		/* One step up, to lead the row it shares with two pills. */
+		font-size: var(--text-xs);
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
@@ -535,6 +581,81 @@
 	 * go to their icon alone — 44px targets, unchanged accessible names — which is 90px back.
 	 * `SpeakButton` carries the matching rule for its own half of the pair.
 	 */
+	/*
+	 * A WIDE CARD READS ACROSS, NOT DOWN.
+	 *
+	 * Every card on this screen is one column: 119px of character with the pinyin, the gloss,
+	 * the part of speech and the example sentence stacked underneath it. On a 375px phone that
+	 * is right — the character takes the width it is given and nothing else fits beside it. On
+	 * a desktop it is the same column with 313px of nothing to the right of the headword, 67%
+	 * of the card, and three cards make a 1,880px scroll in a 900px window.
+	 *
+	 * Once the card has the width for it, the entry lays out the way a dictionary entry does:
+	 * the headword on the left at exactly the size it had before, everything that reads as text
+	 * to the right of it. The verdict row still spans the top — it is about the card, not about
+	 * the word — and nothing changes size, so a card is the same card in both layouts and only
+	 * its shape moves.
+	 *
+	 * `.side` is set by the card itself once it has the width for this particular word — see
+	 * the note in the script. Nothing here is behind a breakpoint: the character never gives
+	 * width back, so the layout waits until there is enough for both halves of it.
+	 */
+	.word.side {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		column-gap: 1.25rem;
+		row-gap: 0;
+		align-items: start;
+	}
+
+	.side .head {
+		grid-column: 1 / -1;
+		grid-row: 1;
+	}
+
+	/*
+	 * Given the width its own ceiling asks for, rather than a share of the card: `.face` is
+	 * the size container the glyph measures itself against, so `100cqw / cols / fit` lands
+	 * exactly on `--card-hero-max` and the headword is the same 119.38px it is on a phone.
+	 * An `auto` column would have made that circular — the container sized by the glyph
+	 * sized by the container — which resolves to 0cqw and a font-size of nothing.
+	 */
+	.side .face {
+		grid-column: 1;
+		/* Spans past the end of the card on purpose: the right-hand column is between two
+		   and five blocks depending on what the word has (a part of speech, an example, a
+		   wrong answer to print), so there is no row count to name. `row-gap: 0` is what
+		   makes the surplus rows cost nothing. */
+		grid-row: 2 / span 20;
+		inline-size: calc(var(--card-hero-max) * var(--glyphs) * var(--card-fit));
+		align-self: start;
+		margin-block-start: 0;
+	}
+
+	/*
+	 * Divided by the real glyph count, not by `--cols`.
+	 *
+	 * `--cols` is floored at two so a single character in a stacked card is not blown up to
+	 * the full width of it. Here the column is exactly one headword wide by construction, so
+	 * that floor halves the character instead — measured 64.75px against a 129.5px ceiling —
+	 * and 要 came out smaller beside its own entry than the pinyin next to it.
+	 */
+	.side .face :global(.hz) {
+		font-size: min(calc(100cqw / var(--glyphs) / var(--card-fit)), var(--card-hero-max));
+	}
+
+	.side .sound,
+	.side .gloss,
+	.side .pos,
+	.side .sen,
+	.side .picked {
+		grid-column: 2;
+	}
+
+	.side .sound {
+		margin-block-start: 0;
+	}
+
 	@container (max-width: 15.5rem) {
 		.tool .label {
 			display: none;
