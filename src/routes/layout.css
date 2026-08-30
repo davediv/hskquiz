@@ -12,7 +12,7 @@
    HOW TO CONSUME THIS
    Every token below is a Tailwind v4 theme variable, so it generates a utility:
        --color-accent      -> bg-accent  text-accent  border-accent
-       --text-hanzi-2xl    -> text-hanzi-2xl
+       --text-hanzi-lg     -> text-hanzi-lg
        --font-hanzi        -> font-hanzi
        --radius-card       -> rounded-card
        --shadow-card       -> shadow-card
@@ -52,16 +52,26 @@
        WHAT IT MAY NOT BE — any colour another token already holds. Measured, not asserted:
        every tone hue is >= 12 ΔE00 (CIEDE2000) from every non-tone `--hq-*` colour in its
        own theme, and >= 10 from every other tone. `src/lib/design/palette.spec.ts` reads
-       this file and fails on either. Worst actual: 14.7 light (tone 0 vs ink-muted), 15.0
-       dark (tone 1 vs accent). That is why tone 1 is a vermilion and not the cinnabar
-       accent, tone 2 a leaf green and not the jade `--color-correct`, and tone 0 a cool
-       slate and not the warm `--color-ink-subtle` grey the UI de-emphasises text with.
+       this file and fails on either. Worst actual: 15.0 light (tone 1 vs accent), 16.6 dark
+       (tone 0 vs ink-muted). That is why tone 1 is a vermilion and not the cinnabar accent,
+       tone 2 a leaf green and not the jade `--color-correct`, and tone 0 a petrol and not
+       the warm `--color-ink-subtle` grey the UI de-emphasises text with.
 
    Tone 1 and tone 2 are the pair a deuteranope cannot separate, which is survivable because
    of where tone colour lands: the tone is already written in the diacritic (ā á ǎ à), so on
    pinyin the colour is a second copy of something the reader can also read. Hanzi carries no
    diacritic — which is the other reason tone colour stays off it. Same principle as the ✕ on
    a wrong answer: colour is never the only channel.
+
+   WHY TONE 0 IS THE ODD ONE. That escape hatch has exactly one hole, and it is tone 0: the
+   neutral tone is the unmarked one. ā á ǎ à each write their tone into the vowel; `ba` writes
+   nothing. So for four tones of five the colour is a second channel, and for the fifth it is
+   the ONLY channel — which is why tone 0 now takes the widest berth in the palette rather
+   than the narrowest. It used to be the narrowest: as a cool slate it sat 13.9 ΔE00 (light)
+   and 12.0 (dark) from the tone-3 blue, the minimum of all ten pairs, and 吧 `ba` five rows
+   under 百 `bǎi` read as one blue at 14px. As a petrol it is 26.0 / 26.2 from that blue, and
+   the palette's closest pair is now tone 3 vs tone 4 at 20.4 / 21.6 — two tones that both
+   carry a diacritic to fall back on.
 
    TYPE — three stacks, three scales, and they are not interchangeable:
        --font-hanzi   + --text-hanzi-*    for 汉字. Never set hanzi on the Latin scale;
@@ -86,27 +96,55 @@
    SPACE — there is a vertical scale and screens are expected to use it instead of improvising
    a gap per block. `--spacing` is 0.25rem, so the numeric utilities still work (p-4 = 16px),
    but the named steps are the rhythm:
-       2xs 4 · xs 8 · sm 12 · md 16 · lg 24 · xl 32 · 2xl 48 · 3xl 64
+       2xs 4 · xs 8 · sm 12 · md 16 · lg 24 · xl 32 · 2xl 48
    as `p-lg` / `gap-xl` / `var(--spacing-lg)`, plus three role aliases that say what a gap is
    for rather than how big it is: `--spacing-gutter` (20px page-edge inset), `--spacing-block`
    (24px, between siblings inside one block) and `--spacing-section` (48px, between the major
    blocks of a screen). `--spacing-tap` (44px) is the minimum touch target. `.stack` applies a
    step to every child gap at once — `class="stack stack-sm"`, both classes on the one column —
    so a column has one rhythm and not six hand-tuned margins, and it composes with `flex
-   flex-col` rather than fighting it. `.app-shell` applies the gutter plus the iOS safe-area
-   insets and caps the column at `--container-app`.
+   flex-col` rather than fighting it. `.app-shell` is the outermost version of that: gutters,
+   safe-area insets, `--container-app`, AND the section rhythm on its own children, so the big
+   gaps on a screen are one declared step and not a leftover from `justify-content: center`.
 
-   ACCESSIBILITY CONTRACT — do not regress these. The first three are executable: they are
-   computed off this stylesheet by `src/lib/design/palette.spec.ts`, so they fail loudly
-   rather than drifting back.
+   THE SCALE IS EXECUTABLE — this is the part that was prose for three loops. `.stack` was
+   documented and had zero callers; `--spacing-block`, `--spacing-section` and
+   `--text-hanzi-2xl` were declared and had zero consumers; ~130 hand-written rem literals
+   shipped alongside a sentence claiming every gap was on the ramp. Sentences do not fail a
+   test run. `src/lib/design/scale.spec.ts` now reads this file and every `.svelte`/`.css`
+   under `src/` and holds three lines:
+       · every gap/margin/padding literal resolves to a step on the ramp above (or 20px
+         gutter / 44px tap), including through `calc(var(--spacing) * n)` — a fractional n is
+         a half-step hiding behind a token and is counted as what it computes to
+       · every declared `--spacing-*` and `--text-*` step has a real consumer. A `--text-hanzi-*`
+         that only its own SIZE_CLASS lookup mentions does not count: something has to ask for
+         that size. This is why `--text-hanzi-xl`, `--text-hanzi-2xl`, `--text-hanzi-prompt`,
+         `--spacing-3xl` and `--shadow-inset` are gone rather than documented
+       · every `color-mix` used as a border resolves to a real ratio, and the ones under 3:1
+         belong only to states that are also carried by fill and text
+   The one thing it does not do yet is fail on the whole repo at once: 131 off-ramp literals in
+   20 screen and component files predate it, so the total is a ceiling that may only fall. It
+   is 0 for this file and for `src/lib/design/**`, and that half is a hard assertion.
+
+   ACCESSIBILITY CONTRACT — do not regress these. The first four are executable: they are
+   computed off this stylesheet by `src/lib/design/palette.spec.ts` and `scale.spec.ts`, so
+   they fail loudly rather than drifting back.
        · every text token is >= 4.5:1 on every surface it is allowed on (worst: 4.52 light,
          ink-subtle on sunken; 4.91 dark, tone 1 on sunken)
        · every tone hue is >= 12 ΔE00 from every non-tone colour token in its own theme, and
          >= 10 from every other tone — see THE FOURTH FAMILY above
        · `--color-line-strong` is the >= 3:1 border for interactive components, on all three
          surfaces in BOTH themes (worst: 3.06 light, 3.35 dark); `--color-line` is a
-         decorative hairline and must not be the only thing defining a control — and neither
-         may be diluted with `color-mix` to below 3:1 and still be called a control edge
+         decorative hairline and must not be the only thing defining a control
+       · a `color-mix` dilution of `--color-line-strong` is still a control edge only while it
+         measures >= 3:1 on the surface under it, and there is very little room: the token
+         sits ON the 3:1 floor, so the mix crosses it at 93% (light) and 83% (dark) against
+         the page — 17% of dilution is the most room there is anywhere. The familiar "70% of
+         the strong line" lands at 2.21 / 2.48 and is NOT a
+         control edge. Below the floor the thing had better not be a control any more — a
+         settled answer, a disabled button — and its state has to be carried by fill and text
+         as well, which is the same "never the only channel" rule the ✕ obeys. `scale.spec.ts`
+         resolves every such mix in `src/` and checks exactly that
        · `:focus-visible` gets a 3px accent ring at 3px offset, globally, in `@layer base`
        · every <button> gets min-block-size 44px via a `:where()` rule (zero specificity, so
          `min-h-0` overrides it when you really do need a tiny target)
@@ -152,17 +190,26 @@
 	--hq-primary-ink: #faf8f5;
 
 	/* Pleco's tone families, kept because learners already read them — 1 red, 2 green, 3 blue,
-	   4 purple, 0 neutral — but each one moved to a value nothing else in the system holds.
-	   Numbered the way the data is (`Syllable.tone`), so 0 is neutral.
+	   4 purple — but each one moved to a value nothing else in the system holds. Numbered the
+	   way the data is (`Syllable.tone`), so 0 is the neutral tone.
 
 	   Tone 1 is a VERMILION, not the cinnabar `--hq-accent`: those were the same #c8102e, so
 	   1,644 of 7,905 syllables printed in the exact red of ✕ NOT QUITE, and 20.8% of the
 	   corpus was arguing with the interface. Tone 2 is a LEAF green, well off the blue-green
-	   jade of `--hq-correct`. Tone 0 is a cool SLATE — every UI grey in this file is warm
-	   (h ≈ 85), so a cool one is legibly a colour and not the disabled-text grey it used to be
-	   byte-for-byte. Tones 3 and 4 were already clear of everything and did not move.
-	   Distances are measured in `palette.spec.ts`; see THE FOURTH FAMILY at the top. */
-	--hq-tone-0: #5a6674;
+	   jade of `--hq-correct`. Tones 3 and 4 were already clear of everything and did not move.
+
+	   Tone 0 is a PETROL, and it is the one tone that gets the widest berth in the palette —
+	   see WHY TONE 0 IS THE ODD ONE at the top of this file. It was a cool slate, #5a6674,
+	   which sat 13.9 ΔE00 from the tone-3 blue: the closest pair in the whole palette, in both
+	   themes, and the pair a beginner most needs told apart (bǎ / ba). At 14px in a list row
+	   吧 `ba` and 百 `bǎi` read as one blue. Moving it out of the blue family entirely takes
+	   that pair to 26.0 / 26.2 and the palette's weakest link from 13.9 to 20.4 (light) and
+	   12.0 to 21.6 (dark) — and the weakest link is now tone-3 vs tone-4, two tones that both
+	   carry a diacritic. Teal is the one hue slot the interface does not use: cinnabar, jade,
+	   the warm greys, the vermilion, the leaf, the blue and the purple leave it empty, and
+	   16.9 / 16.6 ΔE00 of clearance from the nearest role colour is the measurement that says
+	   so. Distances are computed in `palette.spec.ts`. */
+	--hq-tone-0: #2c6263;
 	--hq-tone-1: #b8440c;
 	--hq-tone-2: #356807;
 	--hq-tone-3: #1f5fbf;
@@ -201,9 +248,11 @@
 		--hq-primary-strong: #ffffff;
 		--hq-primary-ink: #100f0e;
 
-		/* Same four moves as light: vermilion off the accent, leaf off the jade, slate off the
-		   warm grey. Tones 3 and 4 unchanged. */
-		--hq-tone-0: #8fa0b4;
+		/* Same moves as light: vermilion off the accent, leaf off the jade, petrol out of the
+		   blue family. Tones 3 and 4 unchanged. Lighter and less saturated than the light-mode
+		   petrol because it has to read as quiet on near-black — 7.59:1 at its worst ground
+		   (correct-soft), against the 5.65 the old slate managed. */
+		--hq-tone-0: #9cbfb7;
 		/* Lifted from #ea6114, which cleared 4.5:1 on the three plain grounds but measured
 		   4.47:1 on --hq-correct-soft — the ground a correct answer's card paints, where the
 		   missed word's pinyin then sits. 4.58:1 on all five now; 0.6 dE00 from the old value,
@@ -286,8 +335,15 @@
 
 	/* --------------------------------------------------------------------- hanzi scale --
 	   Its own scale because hanzi needs roughly double the optical size of Latin. The
-	   smallest step is 20px; below that strokes collapse. `-prompt` and `-hero` are fluid,
-	   for the one headword a screen is built around. */
+	   smallest step is 20px; below that strokes collapse. `-hero` is fluid, for the one
+	   headword a screen is built around.
+
+	   Four fixed steps and one fluid one, and that is the whole scale. It used to have eight.
+	   `-xl` (68px) and `-2xl` (88px) sat inside the range the fluid step already covers and had
+	   had zero callers for three loops; `-prompt` (clamp 52–96px) was a second fluid display
+	   size that nothing ever asked for either — `-hero` is the one the quiz card uses.
+	   `scale.spec.ts` fails a step nobody steps on, and a name that appears only in its own
+	   SIZE_CLASS lookup does not count as asking for it. */
 	--text-hanzi-xs: 1.25rem;
 	--text-hanzi-xs--line-height: 1.35;
 	--text-hanzi-sm: 1.625rem;
@@ -296,13 +352,7 @@
 	--text-hanzi-md--line-height: 1.18;
 	--text-hanzi-lg: 3rem;
 	--text-hanzi-lg--line-height: 1.1;
-	--text-hanzi-xl: 4.25rem;
-	--text-hanzi-xl--line-height: 1.06;
-	--text-hanzi-2xl: 5.5rem;
-	--text-hanzi-2xl--line-height: 1.04;
 
-	--text-hanzi-prompt: clamp(3.25rem, 17vw, 6rem);
-	--text-hanzi-prompt--line-height: 1.06;
 	--text-hanzi-hero: clamp(4.5rem, 22vw, 9rem);
 	--text-hanzi-hero--line-height: 1.02;
 
@@ -366,8 +416,12 @@
 	/* --------------------------------------------------------- space, shape, elevation -- */
 	--spacing: 0.25rem;
 
-	/* The vertical rhythm. Every gap between blocks should be one of these, not a number
-	   somebody picked while looking at one screen. */
+	/* The vertical rhythm. Every gap, margin and padding in this repo is one of these values —
+	   not a number somebody picked while looking at one screen. That is no longer an
+	   aspiration in a comment: `src/lib/design/scale.spec.ts` walks every `.svelte` and `.css`
+	   under `src/` and fails on a literal that is off the ramp. `--spacing-3xl` (64px) was
+	   deleted with the same test's other half: it had no callers, and a step nothing steps on
+	   is decoration. */
 	--spacing-2xs: 0.25rem;
 	--spacing-xs: 0.5rem;
 	--spacing-sm: 0.75rem;
@@ -375,7 +429,6 @@
 	--spacing-lg: 1.5rem;
 	--spacing-xl: 2rem;
 	--spacing-2xl: 3rem;
-	--spacing-3xl: 4rem;
 
 	/* Role aliases: say what the gap is for, not how big it is. */
 	--spacing-gutter: 1.25rem;
@@ -396,7 +449,6 @@
 
 	--shadow-card: 0 1px 2px -1px var(--hq-shadow-near), 0 14px 34px -20px var(--hq-shadow-far);
 	--shadow-lift: 0 2px 4px -2px var(--hq-shadow-near), 0 22px 48px -24px var(--hq-shadow-far);
-	--shadow-inset: inset 0 1px 2px var(--hq-shadow-near);
 
 	/* ------------------------------------------------------------------------- motion -- */
 	--ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -608,13 +660,23 @@
    out of the system without re-deriving the same six declarations each time.
    ------------------------------------------------------------------------------------------ */
 @layer components {
-	/* The single-column phone-first shell: gutters, safe-area insets, capped measure. */
+	/* The single-column phone-first shell: gutters, safe-area insets, capped measure — and the
+	   section rhythm, because a screen's outermost column is the one place the big gaps go.
+	   `.app-shell` IS `.stack` at the section step, so the top-level blocks of a screen are
+	   48px apart by declaration and nobody hand-tunes a margin to find that number again. Step
+	   it with a `.stack-*` modifier on the same element if a screen genuinely reads tighter. */
 	.app-shell {
+		--stack-space: var(--spacing-section);
+
 		width: 100%;
 		max-width: var(--container-app);
 		margin-inline: auto;
 		padding-inline: max(var(--spacing-gutter), env(safe-area-inset-left));
 		padding-block-end: max(var(--spacing-gutter), env(safe-area-inset-bottom));
+	}
+
+	.app-shell > * + * {
+		margin-block-start: var(--stack-space);
 	}
 
 	/* One rhythm for a column, set once. `.stack` alone is the standard block gap; a modifier
@@ -670,10 +732,10 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: calc(var(--spacing) * 2);
+		gap: var(--spacing-xs);
 		min-block-size: var(--spacing-tap);
-		padding-inline: calc(var(--spacing) * 5);
-		padding-block: calc(var(--spacing) * 3);
+		padding-inline: var(--spacing-gutter);
+		padding-block: var(--spacing-sm);
 		border: 1px solid transparent;
 		border-radius: var(--radius-pill);
 		font-size: var(--text-base);
@@ -729,12 +791,15 @@
 		width: 100%;
 	}
 
+	/* The two off-ramp values in this file lived here — a 6px gap and a 10px inset, both
+	   `calc(var(--spacing) * n)` with a fractional n, which is how a half-step hides behind a
+	   token. `scale.spec.ts` resolves the calc and counts the pixels, so they are 8 and 12. */
 	.chip {
 		display: inline-flex;
 		align-items: center;
-		gap: calc(var(--spacing) * 1.5);
-		padding-inline: calc(var(--spacing) * 2.5);
-		padding-block: calc(var(--spacing) * 1);
+		gap: var(--spacing-xs);
+		padding-inline: var(--spacing-sm);
+		padding-block: var(--spacing-2xs);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface-sunken);
 		color: var(--color-ink-muted);

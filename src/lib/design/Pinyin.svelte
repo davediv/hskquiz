@@ -20,7 +20,11 @@
 	a surface that already owns its colour, such as an ink-filled button, where the tone hues
 	would fail contrast. It is NOT a way to set pinyin in a brand colour instead — flat accent
 	pinyin was loop 2's landing-page bug, and it reads as "these words are an error".
-	Turn `spaced` off to print the official list's own spacing instead of per-syllable spacing.
+	Turn `spaced` off to print the official list's own spacing instead of per-syllable spacing:
+	不客气 is `bú kèqì` in the data and 回来 is `huí lái`, so unspaced does NOT mean unbroken —
+	it means the gaps the list itself writes, and only those. (Joining every syllable printed
+	`búkèqì` and `huílái`, which is not how 汉语拼音正词法 writes either word. 135 of the 1,270
+	words at HSK 1–2 carry a word-internal space.)
 
 	ERHUA IS THE ONE EXCEPTION TO ONE-SPACE-PER-CHARACTER. 儿 in 那儿 / 面条儿 is a retroflex
 	ending on the syllable before it, not a syllable of its own: 汉语拼音正词法 writes nàr and
@@ -77,16 +81,43 @@
 		return i > 0 && py === 'r';
 	}
 
+	/**
+	 * Which syllables the source string itself writes a space in front of — the `spaced={false}`
+	 * answer to "where do the gaps go".
+	 *
+	 * The syllables are substrings of the source in order, so walking the source and looking at
+	 * what sits between two consecutive matches is exact. If a syllable cannot be found (a
+	 * hand-built `syllables` array that does not spell the string it was passed with), every gap
+	 * is dropped, which is the joined reading this used to print unconditionally: never worse
+	 * than before, and no invented spacing.
+	 */
+	function officialGaps(source: string, list: readonly Syllable[]): boolean[] {
+		const gaps = list.map(() => false);
+		let at = 0;
+		for (let i = 0; i < list.length; i += 1) {
+			const found = source.indexOf(list[i].py, at);
+			if (found < 0) return list.map(() => false);
+			gaps[i] = i > 0 && /\s/.test(source.slice(at, found));
+			at = found + list[i].py.length;
+		}
+		return gaps;
+	}
+
 	const parts = $derived.by(() => {
-		const list = resolveSyllables(word?.syllables ?? syllables, word?.pinyin ?? pinyin);
-		return list.map((syllable, i) => ({
-			// The separator lives inside the span so that copying the pinyin still yields real
-			// spaces — a CSS margin would look identical and paste as `zhōngguó`.
-			text: i === 0 || !spaced || isErhua(syllable.py, i) ? syllable.py : ` ${syllable.py}`,
-			color: tones
-				? toneColor(isErhua(syllable.py, i) ? list[i - 1].tone : syllable.tone)
-				: undefined
-		}));
+		const source = word?.pinyin ?? pinyin ?? '';
+		const list = resolveSyllables(word?.syllables ?? syllables, source);
+		const official = spaced ? null : officialGaps(source, list);
+		return list.map((syllable, i) => {
+			const gap = official ? official[i] : i > 0 && !isErhua(syllable.py, i);
+			return {
+				// The separator lives inside the span so that copying the pinyin still yields real
+				// spaces — a CSS margin would look identical and paste as `zhōngguó`.
+				text: gap ? ` ${syllable.py}` : syllable.py,
+				color: tones
+					? toneColor(isErhua(syllable.py, i) ? list[i - 1].tone : syllable.tone)
+					: undefined
+			};
+		});
 	});
 </script>
 

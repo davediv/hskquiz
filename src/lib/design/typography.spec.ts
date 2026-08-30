@@ -117,11 +117,11 @@ describe('the tone palette', () => {
 	 */
 	const SURFACES = {
 		light: {
-			tones: ['#5a6674', '#b8440c', '#356807', '#1f5fbf', '#7a3fa8'],
+			tones: ['#2c6263', '#b8440c', '#356807', '#1f5fbf', '#7a3fa8'],
 			grounds: ['#faf8f5', '#ffffff', '#f1ede6', '#fceaec', '#e4f2eb']
 		},
 		dark: {
-			tones: ['#8fa0b4', '#ec6316', '#63ad24', '#7faeff', '#c08feb'],
+			tones: ['#9cbfb7', '#ec6316', '#63ad24', '#7faeff', '#c08feb'],
 			grounds: ['#100f0e', '#191714', '#211e1a', '#351a15', '#102b22']
 		}
 	};

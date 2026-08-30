@@ -18,7 +18,7 @@
 	The practical consequence is that 爱 is the same ink in a list row and in the sheet that
 	row opens, instead of changing colour when you tap it.
 
-	  <Hanzi {word} size="prompt" display />        the headword a screen is built around
+	  <Hanzi {word} size="hero" display />          the headword a screen is built around
 	  <Hanzi {word} size="sm" />                    inline in a list row — ink
 	  <Hanzi text={w.hanzi} size="sm" />            no tone data needed; ink either way
 	  <Hanzi {word} size="lg" tones />              opt IN, for a screen that teaches tone
@@ -32,7 +32,7 @@
 	import type { Syllable, Word } from '$lib/types';
 	import { toneColor } from './tone';
 
-	type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'prompt' | 'hero';
+	type Size = 'xs' | 'sm' | 'md' | 'lg' | 'hero';
 
 	interface Props {
 		/** The word to read hanzi and syllables off. Wins over the two loose props. */
@@ -69,9 +69,6 @@
 		sm: 'text-hanzi-sm',
 		md: 'text-hanzi-md',
 		lg: 'text-hanzi-lg',
-		xl: 'text-hanzi-xl',
-		'2xl': 'text-hanzi-2xl',
-		prompt: 'text-hanzi-prompt',
 		hero: 'text-hanzi-hero'
 	};
 
