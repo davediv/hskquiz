@@ -1,0 +1,16 @@
+{
+	"loop": 5,
+	"piece": "vocab-browse",
+	"rule": "\"vocab-browse\" is 12 characters — EVEN — so ours is A and the reference is B",
+	"A": {
+		"which": "ours",
+		"source": "progress/shots/loop-5/vocab-browse-mobile.png",
+		"description": "hskquiz /browse/1 word list, 375x812 @2x mobile viewport"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"description": "Pleco iPhone search-results word list (pinyin query 'shouji'), 1242x2208 device shot"
+	},
+	"why_this_reference": "vocab-browse is a scrolling list of headword + pinyin + gloss rows; pleco-iphone-01 is the only reference frame that is the same screen type (a dictionary result list), so it is the fair head-to-head."
+}
