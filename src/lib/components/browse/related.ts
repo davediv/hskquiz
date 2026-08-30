@@ -137,6 +137,15 @@ export interface CharCard {
 	gloss: string | null;
 	/** The words to show, already trimmed to `limit`. */
 	rows: readonly Word[];
+	/**
+	 * Every word `rows` was trimmed from, in the same order.
+	 *
+	 * The card names what it left out — "41 more HSK words use 一" — and until this loop that
+	 * count was a full stop: 69 words named and unreachable on one sheet of 一路平安, with no
+	 * other route to them (`/browse/{1..5}?q=一` finds 5 of them). The count is now a button,
+	 * so the list it counts has to be here for the card to expand into.
+	 */
+	all: readonly Word[];
 	/** How many more contain it beyond `rows`. */
 	more: number;
 	/** How many contain it in total, `entry` and the open word excluded. */
@@ -157,7 +166,7 @@ export function charCard(
 	const entry = cell?.entry ?? null;
 	const gloss = entry?.meanings[0] ?? CHARACTER_GLOSS[char] ?? null;
 
-	if (!cell) return { char, entry, gloss, rows: [], more: 0, total: 0 };
+	if (!cell) return { char, entry, gloss, rows: [], all: [], more: 0, total: 0 };
 
 	const others = cell.words.filter((word) => word.id !== openWordId);
 	const rows = others.slice(0, Math.max(0, limit));
@@ -166,6 +175,7 @@ export function charCard(
 		entry: entry !== null && entry.id !== openWordId ? entry : null,
 		gloss,
 		rows,
+		all: others,
 		more: others.length - rows.length,
 		total: others.length
 	};

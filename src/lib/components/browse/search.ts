@@ -61,12 +61,29 @@ interface Entry {
 	starts: number[];
 	/** Offsets in `tight` where a syllable ends, including the end of the string. */
 	ends: Set<number>;
-	/** Lowercase meanings joined and padded with spaces, so ` word ` tests a whole word. */
+	/**
+	 * Lowercase meanings joined and padded with spaces, so ` word ` tests a whole word — with
+	 * every bracket, comma and terminator already folded to a space so the padding means what
+	 * it says. Sense qualifiers put words straight after a `(`: "shirt (general word)".
+	 */
 	meaning: string;
 }
 
 /** Separators the official pinyin uses: space, apostrophe, hyphen, variant slash, interpunct. */
 const SEPARATORS = /[\s'’·∥/-]+/gu;
+
+/**
+ * Punctuation that opens or closes a word inside a gloss rather than belonging to it.
+ *
+ * Apostrophes and hyphens are deliberately absent: "someone's" and "well-known" are single
+ * words a learner types whole, and splitting them would lose the query that spells them out.
+ */
+const MEANING_BREAKS = /[()[\]{},;:!?"“”/]+/gu;
+
+/** Fold a gloss (or an English query) so every word in it is delimited by a space. */
+function foldMeaning(text: string): string {
+	return text.toLowerCase().replace(MEANING_BREAKS, ' ').replace(/\s+/gu, ' ').trim();
+}
 
 /** Fold pinyin to the shape both sides of a comparison are held in. */
 function foldPinyin(text: string): string {
@@ -93,7 +110,7 @@ function buildEntry(word: Word, position: number): Entry {
 		tight,
 		starts,
 		ends,
-		meaning: ` ${word.meanings.join(' | ').toLowerCase()} `
+		meaning: ` ${foldMeaning(word.meanings.join(' | '))} `
 	};
 }
 
@@ -116,13 +133,15 @@ export interface Query {
 	pinyin: string;
 	/** The pinyin form with its separators removed — what syllables are compared against. */
 	tight: string;
+	/** The same text folded the way the gloss index is, so brackets line up on both sides. */
+	meaning: string;
 }
 
 /** Prepare a raw input string for `matchScore`. Cheap; safe to call per keystroke. */
 export function parseQuery(raw: string): Query {
 	const text = raw.trim().toLowerCase();
 	const pinyin = foldPinyin(text);
-	return { text, pinyin, tight: pinyin.replace(/ /gu, '') };
+	return { text, pinyin, tight: pinyin.replace(/ /gu, ''), meaning: foldMeaning(text) };
 }
 
 /* Score bands. Lower is better; `Infinity` is "no match". */
@@ -189,7 +208,10 @@ function pinyinScore(entry: Entry, tight: string): number {
  *
  * English matches must start a word. A meaning is two or three words long, so a match buried
  * inside one ("an" in "many") is never what was meant, and on a short query there are hundreds
- * of them.
+ * of them — which is why the index is padded with spaces and the test is ` word `. That test
+ * is also why a bracket has to become a space first: since the corpus started QUALIFYING
+ * colliding senses, 衬衣 is glossed "shirt (general word)" and the word `general` opens on a
+ * `(` rather than a space. `/browse/3?q=general` found nothing until the fold below existed.
  */
 function matchScore(entry: Entry, query: Query): number {
 	const { text, tight } = query;
@@ -201,9 +223,10 @@ function matchScore(entry: Entry, query: Query): number {
 
 	if (tight !== '') best = Math.min(best, pinyinScore(entry, tight));
 
-	if (!STOPWORDS.has(text)) {
-		if (entry.meaning.includes(` ${text} `)) best = Math.min(best, MEANING_WORD);
-		else if (entry.meaning.includes(` ${text}`)) best = Math.min(best, MEANING_PREFIX);
+	const english = query.meaning;
+	if (english !== '' && !STOPWORDS.has(english)) {
+		if (entry.meaning.includes(` ${english} `)) best = Math.min(best, MEANING_WORD);
+		else if (entry.meaning.includes(` ${english}`)) best = Math.min(best, MEANING_PREFIX);
 	}
 
 	return best;

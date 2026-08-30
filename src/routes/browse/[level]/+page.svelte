@@ -669,6 +669,7 @@
 			record={progress.forWord(sheetWord.id)}
 			position={openIndex + 1}
 			total={filtered.length}
+			browseLevel={level}
 			from={sheetFrom}
 			onclose={closeSheet}
 			onback={backSheet}

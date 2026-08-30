@@ -17,10 +17,13 @@
 	    treatment so a row reads the same here as it does on the screen behind. The level badge
 	    is the point of the ordering: a level-5 learner should see at a glance which of these
 	    are already behind them.
-	  · what is left over, counted rather than hidden, so the card never implies the character
-	    only appears six times.
+	  · what is left over, counted rather than hidden — and, since loop 4, REACHABLE: the count
+	    is a button that opens the rest in place. It used to be an inert paragraph, which meant
+	    one sheet of 一路平安 could name 69 words and offer a route to none of them; search does
+	    not answer it either, because search is one level at a time and `?q=一` finds 5 of the 47.
 -->
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import type { Syllable, Word } from '$lib/types';
 	import type { CharCard } from './related';
@@ -42,6 +45,26 @@
 	}
 
 	let { card, syllable, toneName, pending, head = true, onopen }: Props = $props();
+
+	/**
+	 * Opened out to the character's whole list. Collapsed again whenever the card changes
+	 * underneath: following 安 → 安排 reuses this component, and an expanded 排 inheriting 安's
+	 * open state would be the card answering a question nobody asked.
+	 */
+	let expanded = $state(false);
+
+	$effect(() => {
+		void card;
+		untrack(() => {
+			expanded = false;
+		});
+	});
+
+	const rows = $derived(expanded ? card.all : card.rows);
+
+	function toggle() {
+		expanded = !expanded;
+	}
 </script>
 
 <li class="card">
@@ -82,9 +105,9 @@
 		</div>
 	{/if}
 
-	{#if card.rows.length > 0}
+	{#if rows.length > 0}
 		<ul class="rows">
-			{#each card.rows as row (row.id)}
+			{#each rows as row (row.id)}
 				<li>
 					<button type="button" class="row" onclick={() => onopen(row)}>
 						<span class="row-head">
@@ -99,11 +122,35 @@
 			{/each}
 		</ul>
 		{#if card.more > 0}
-			<p class="more">
-				{card.more.toLocaleString('en')} more HSK
-				{card.more === 1 ? 'word uses' : 'words use'}
-				<span lang="zh-Hans" class="more-hz">{card.char}</span>
-			</p>
+			<!-- The count IS the control. Naming a number of words and then not letting the
+			     learner at them is the one thing this card exists to stop doing. -->
+			<button type="button" class="more open-more" aria-expanded={expanded} onclick={toggle}>
+				<span class="more-text">
+					{#if expanded}
+						Show fewer words with <span lang="zh-Hans" class="more-hz">{card.char}</span>
+					{:else}
+						{card.more.toLocaleString('en')} more HSK
+						{card.more === 1 ? 'word uses' : 'words use'}
+						<span lang="zh-Hans" class="more-hz">{card.char}</span>
+					{/if}
+				</span>
+				<svg
+					class="chev"
+					class:up={expanded}
+					viewBox="0 0 24 24"
+					aria-hidden="true"
+					focusable="false"
+				>
+					<path
+						d="m6 9 6 6 6-6"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</button>
 		{/if}
 	{:else if pending}
 		<p class="more">Looking through the other levels…</p>
@@ -284,6 +331,39 @@
 		font-size: var(--text-xs);
 	}
 
+	/* Full width and a full tap height, because it is now the busiest control on the card. */
+	.open-more {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+		inline-size: 100%;
+		min-block-size: var(--spacing-tap);
+		border-inline: 0;
+		border-block-end: 0;
+		background: none;
+		text-align: start;
+	}
+
+	.more-text {
+		min-inline-size: 0;
+	}
+
+	.chev {
+		flex: none;
+		inline-size: 1rem;
+		block-size: 1rem;
+		transition: transform 180ms var(--ease-out-soft);
+	}
+
+	.chev.up {
+		transform: rotate(180deg);
+	}
+
+	.open-more:active {
+		background-color: var(--color-surface-sunken);
+	}
+
 	.more-hz {
 		font-family: var(--font-hanzi);
 		color: var(--color-ink-muted);
@@ -295,8 +375,13 @@
 	}
 
 	@media (hover: hover) {
-		.row:hover {
+		.row:hover,
+		.open-more:hover {
 			background-color: var(--color-surface-sunken);
+		}
+
+		.open-more:hover {
+			color: var(--color-ink-muted);
 		}
 
 		.head.open:hover .go,

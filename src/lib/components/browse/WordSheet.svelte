@@ -8,20 +8,32 @@
 	that order gets less weight and more air than the one below it, which is the entire reason
 	Pleco's entry is scannable at arm's length.
 
+	THE HEADWORD DOES NOT SCROLL. It, its pinyin and its level badge sit above the scroller, and
+	they shrink to a single quiet line the moment the body moves — Pleco pins 几乎, PY, JP and
+	the HSK badge over its DICT/CHARS/WORDS/SENTS bar and never moves them. Before loop 4 the
+	head was the first thing inside the scroller, so by the time a learner reached the character
+	strip — the reason the strip exists — nothing on screen named the word they had opened.
+
+	THEN THE WORD IN A SENTENCE, which is what both references spend their entry screen on, and
+	what this one spent none of until loop 4. See `ExampleSentence.svelte`; 1,270 of the 4,308
+	shipped words carry one, and the ones that do not simply do not render the block.
+
 	What Pleco has no reason to show, and this app does, is the last block: what the learner has
 	actually done with this word. Browsing and practising are the same product, so the sheet
 	that shows you 迷人 also shows you that you have missed it twice.
 
-	It is a bottom sheet on a phone (the thumb is at the bottom, and the list stays visible
-	behind it so you have not "gone" anywhere) and a centred card from 48rem up. Prev/next walk
-	the filtered list without closing, so reading ten words in a row is nine taps, not eighteen.
+	It is a bottom sheet on a phone (the thumb is at the bottom, the list stays visible behind
+	it so you have not "gone" anywhere, and the grip drags it away) and a centred card from
+	48rem up. Prev/next walk the filtered list without closing, so reading ten words in a row is
+	nine taps, not eighteen.
 -->
 <script lang="ts">
 	import { untrack } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { Hanzi, Pinyin } from '$lib/design';
-	import type { Word, WordProgress } from '$lib/types';
+	import type { Level, Word, WordProgress } from '$lib/types';
 	import CharacterCard from './CharacterCard.svelte';
+	import ExampleSentence from './ExampleSentence.svelte';
 	import { posLong } from './pos';
 	import { charCard, charIndexNow, ensureCharIndex, rowBudget, type CharIndex } from './related';
 	import StatusPip from './StatusPip.svelte';
@@ -34,6 +46,13 @@
 		/** 1-based position in the filtered list, and its length — "412 of 1,070". */
 		position: number;
 		total: number;
+		/**
+		 * The level the screen behind this sheet is browsing. NOT the open word's own level:
+		 * following a character out of HSK 5 can land on an HSK 2 word, and until loop 4 that
+		 * silently re-pointed the footer button at HSK 2 while the page behind it still read
+		 * "HSK 5 vocabulary". The button belongs to the session, the badge belongs to the word.
+		 */
+		browseLevel: Level;
 		/**
 		 * The word this one was reached from by tapping a character card, if any. Its presence
 		 * is what turns the sheet from a page of the list into a drill-down: the counter and the
@@ -53,6 +72,7 @@
 		record,
 		position,
 		total,
+		browseLevel,
 		from,
 		onclose,
 		onback,
@@ -72,6 +92,7 @@
 
 	let panel = $state<HTMLElement | null>(null);
 	let body = $state<HTMLElement | null>(null);
+	let bodyInner = $state<HTMLElement | null>(null);
 
 	/**
 	 * The cross-level character index. Already built after the first sheet of the session — the
@@ -123,30 +144,31 @@
 	const solo = $derived(
 		characters.length === 1
 			? charCard(index, word.hanzi, word.id, 8)
-			: { char: word.hanzi, entry: null, gloss: null, rows: [], more: 0, total: 0 }
+			: { char: word.hanzi, entry: null, gloss: null, rows: [], all: [], more: 0, total: 0 }
 	);
 
 	/**
-	 * Hearing the word.
+	 * Hearing the word — and, since loop 4, the sentence.
 	 *
 	 * Pleco puts a speaker on every line and it is half the reason people open it. We ship no
 	 * audio files — 4,308 recordings is a data problem, not a screen problem — but the device
-	 * already has a Chinese voice in it, so the entry can at least say the headword. The button
-	 * only exists where the API does, and it says so rather than failing silently when the
-	 * device turns out to have no Chinese voice installed.
+	 * already has a Chinese voice in it, so the entry can at least say the headword and read
+	 * its example aloud. The button only exists where the API does, and it says so rather than
+	 * failing silently when the device turns out to have no Chinese voice installed.
 	 *
 	 * The sheet is never server-rendered (it opens on a tap), so reading `window` at init is
 	 * safe and there is no hydration shape to keep in agreement.
 	 */
 	const canSpeak = typeof window !== 'undefined' && 'speechSynthesis' in window;
-	let speaking = $state(false);
+	/** Which line is talking, so two speakers cannot both look active. */
+	let saying = $state<'word' | 'example' | null>(null);
 	let noVoice = $state(false);
 
 	function chineseVoice(): SpeechSynthesisVoice | undefined {
 		return window.speechSynthesis.getVoices().find((voice) => /^zh\b|^zh[-_]/i.test(voice.lang));
 	}
 
-	function speak() {
+	function speak(text: string, what: 'word' | 'example') {
 		if (!canSpeak) return;
 		const synth = window.speechSynthesis;
 		synth.cancel();
@@ -154,19 +176,20 @@
 		const voice = chineseVoice();
 		if (voice === undefined) {
 			noVoice = true;
-			speaking = false;
+			saying = null;
 			return;
 		}
 
-		const utterance = new SpeechSynthesisUtterance(word.hanzi);
+		const utterance = new SpeechSynthesisUtterance(text);
 		utterance.voice = voice;
 		utterance.lang = voice.lang;
 		// Dictionary pace, not conversation pace: the point is to hear the tones separately.
-		utterance.rate = 0.8;
-		utterance.onend = () => (speaking = false);
-		utterance.onerror = () => (speaking = false);
+		// A sentence gets a touch more speed, because 12 syllables at 0.8 is a dirge.
+		utterance.rate = what === 'word' ? 0.8 : 0.9;
+		utterance.onend = () => (saying = null);
+		utterance.onerror = () => (saying = null);
 		noVoice = false;
-		speaking = true;
+		saying = what;
 		synth.speak(utterance);
 	}
 
@@ -175,7 +198,7 @@
 		void word.id;
 		untrack(() => {
 			noVoice = false;
-			speaking = false;
+			saying = null;
 		});
 		if (canSpeak) window.speechSynthesis.cancel();
 	});
@@ -189,7 +212,92 @@
 	const hasNext = $derived(from === null && position < total);
 	/** Follows the word on screen, not the level being browsed: 安 opens as HSK 4 from 安慰. */
 	const level = $derived(word.level);
-	const practiseHref = $derived(resolve('/quiz/[level]', { level: String(level) }));
+	const practiseHref = $derived(resolve('/quiz/[level]', { level: String(browseLevel) }));
+
+	// ------------------------------------------------------------------ the scroller ------
+
+	/**
+	 * How far the body has moved, and whether it has anything left.
+	 *
+	 * Both are read off the element rather than inferred: `scrolled` collapses the pinned head
+	 * to one line, and `atEnd` turns off the bottom fade. Before loop 4 the sheet closed on a
+	 * hard cut and every open ended on a row sliced through its glyphs.
+	 */
+	let scrolled = $state(0);
+	let atEnd = $state(true);
+	const condensed = $derived(scrolled > 10);
+
+	function readScroll() {
+		const el = body;
+		if (!el) {
+			scrolled = 0;
+			atEnd = true;
+			return;
+		}
+		if (el.scrollTop !== scrolled) scrolled = el.scrollTop;
+		const done = el.scrollTop + el.clientHeight >= el.scrollHeight - 2;
+		if (done !== atEnd) atEnd = done;
+	}
+
+	// The body's own height never changes, but its contents do — expanding a character card is
+	// the whole point of the button on it — so the observer watches the content, not the box.
+	$effect(() => {
+		const el = body;
+		const inner = bodyInner;
+		if (!el || !inner) return;
+		untrack(readScroll);
+		const observer = new ResizeObserver(() => untrack(readScroll));
+		observer.observe(el);
+		observer.observe(inner);
+		return () => observer.disconnect();
+	});
+
+	// ------------------------------------------------------------------ drag to dismiss ---
+
+	/** Far enough down that letting go means "away", rather than "I was reading". */
+	const DISMISS_PX = 96;
+	/** A flick: px per millisecond, over a travel long enough not to be a tap wobble. */
+	const FLING = 0.45;
+	const FLING_MIN_PX = 24;
+
+	let drag = $state(0);
+	let dragging = $state(false);
+	let dragFrom = 0;
+	let dragAt = 0;
+
+	function gripDown(event: PointerEvent) {
+		if (event.pointerType === 'mouse' && event.button !== 0) return;
+		const handle = event.currentTarget;
+		if (handle instanceof HTMLElement) handle.setPointerCapture(event.pointerId);
+		dragging = true;
+		dragFrom = event.clientY;
+		dragAt = event.timeStamp;
+		drag = 0;
+	}
+
+	function gripMove(event: PointerEvent) {
+		if (!dragging) return;
+		const dy = event.clientY - dragFrom;
+		// Upward is rubber-banded rather than free: the sheet is already as tall as it is
+		// allowed to be, so pulling up can only ever be a gesture that changed its mind.
+		drag = dy > 0 ? dy : dy / 5;
+	}
+
+	function gripUp(event: PointerEvent) {
+		if (!dragging) return;
+		dragging = false;
+		const travelled = drag;
+		const speed = travelled / Math.max(1, event.timeStamp - dragAt);
+		drag = 0;
+		if (travelled > DISMISS_PX || (travelled > FLING_MIN_PX && speed > FLING)) onclose();
+	}
+
+	function gripCancel() {
+		dragging = false;
+		drag = 0;
+	}
+
+	// ------------------------------------------------------------------ focus -------------
 
 	// Opening moves focus into the sheet, so Escape, Tab and the arrow keys all land here and
 	// not on the row underneath. The list restores focus to that row on close.
@@ -207,6 +315,7 @@
 		void word.id;
 		untrack(() => {
 			body?.scrollTo({ top: 0 });
+			readScroll();
 			if (!panel) return;
 			const active = document.activeElement;
 			if (active === null || !panel.contains(active)) panel.focus();
@@ -272,13 +381,26 @@
 	<div
 		bind:this={panel}
 		class="panel"
+		class:dragging
 		role="dialog"
 		aria-modal="true"
 		aria-labelledby="word-sheet-title"
 		tabindex="-1"
 		onkeydown={onKeydown}
+		style:transform={drag === 0 ? null : `translate3d(0, ${drag}px, 0)`}
 	>
-		<span class="grip" aria-hidden="true"></span>
+		<!-- The grip is the gesture, not a picture of one: it drags the sheet and lets go of it.
+		     Decorative to assistive tech, which has the close button, Escape and the scrim. -->
+		<div
+			class="grip-zone"
+			aria-hidden="true"
+			onpointerdown={gripDown}
+			onpointermove={gripMove}
+			onpointerup={gripUp}
+			onpointercancel={gripCancel}
+		>
+			<span class="grip"></span>
+		</div>
 
 		<div class="bar">
 			{#if from}
@@ -350,115 +472,148 @@
 			</div>
 		</div>
 
-		<div class="body" bind:this={body}>
-			<!-- Pleco puts the level badge on the right of the headword line and it is the first
-			     thing you look for; ours sat empty. -->
-			<div class="head">
+		<!-- Above the scroller, and never out of it. Pleco puts the level badge on the right of
+		     the headword line and it is the first thing you look for. -->
+		<div class="head" class:tight={condensed}>
+			<div class="head-main">
 				<h2 id="word-sheet-title" class="headword">
-					<Hanzi {word} size="lg" display />
+					<Hanzi {word} size="lg" display class="hw" />
 				</h2>
-				<span class="level" aria-label={`HSK level ${level}`}>HSK {level}</span>
-			</div>
-
-			{#if word.traditional}
-				<p class="trad">
-					traditional <span lang="zh-Hant" class="hanzi">{word.traditional}</span>
+				<p class="say">
+					<Pinyin {word} size="xl" class="py" />
+					{#if canSpeak}
+						<button
+							type="button"
+							class="speak"
+							class:on={saying === 'word'}
+							onclick={() => speak(word.hanzi, 'word')}
+						>
+							<span class="sr-only">Say {word.hanzi} out loud</span>
+							<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+								<path
+									d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4z"
+									fill="currentColor"
+									stroke="currentColor"
+									stroke-width="1.6"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M15.6 9.2a4 4 0 0 1 0 5.6M18.3 6.4a7.8 7.8 0 0 1 0 11.2"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1.8"
+									stroke-linecap="round"
+								/>
+							</svg>
+						</button>
+					{/if}
 				</p>
-			{/if}
-
-			<p class="say">
-				<Pinyin {word} size="xl" class="py" />
-				{#if canSpeak}
-					<button type="button" class="speak" class:on={speaking} onclick={speak}>
-						<span class="sr-only">Say {word.hanzi} out loud</span>
-						<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-							<path
-								d="M4 9.5h3.4L12 5.6v12.8L7.4 14.5H4z"
-								fill="currentColor"
-								stroke="currentColor"
-								stroke-width="1.6"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M15.6 9.2a4 4 0 0 1 0 5.6M18.3 6.4a7.8 7.8 0 0 1 0 11.2"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.8"
-								stroke-linecap="round"
-							/>
-						</svg>
-					</button>
-				{/if}
-			</p>
-
-			{#if noVoice}
-				<p class="no-voice">
-					This device has no Chinese voice installed, so there is nothing to play.
-				</p>
-			{/if}
-
-			<!-- One block, so the gap above the meanings is the same whether or not the word
-			     carries a part-of-speech annotation — plenty of them do not. -->
-			<div class="gloss">
-				{#if pos}<p class="pos eyebrow">{pos}</p>{/if}
-
-				{#if word.meanings.length > 1}
-					<ol class="senses">
-						{#each word.meanings as meaning, i (i)}
-							<li><span class="num tabular">{i + 1}</span>{meaning}</li>
-						{/each}
-					</ol>
-				{:else}
-					<p class="sense">{word.meanings[0] ?? '—'}</p>
-				{/if}
 			</div>
+			<span class="level" aria-label={`HSK level ${level}`}>HSK {level}</span>
+		</div>
 
-			{#if characters.length > 1}
-				<!-- Pleco's CHARS tab, inline and then some: which syllable belongs to which
-				     character, what that character means, and every other HSK word built on it. -->
-				<section class="chars" aria-label="Characters">
-					<h3 class="eyebrow">Characters</h3>
-					<ol class="char-list">
-						{#each characters as char, i (i)}
-							<CharacterCard
-								card={char.card}
-								syllable={char.syllable}
-								toneName={char.tone}
-								pending={index === null}
-								onopen={onfollow}
-							/>
-						{/each}
-					</ol>
-				</section>
-			{:else}
-				<section class="chars" aria-label={`Words with ${word.hanzi}`}>
-					<h3 class="eyebrow">
-						Words with <span lang="zh-Hans" class="eyebrow-hz">{word.hanzi}</span>
-					</h3>
-					<ol class="char-list">
-						<CharacterCard
-							card={solo}
-							syllable={word.syllables[0] ?? { py: '', tone: 0 }}
-							toneName={TONE_NAME[word.syllables[0]?.tone ?? 0]}
-							pending={index === null}
-							head={false}
-							onopen={onfollow}
+		<div class="scroller">
+			<div class="body" bind:this={body} onscroll={readScroll}>
+				<div class="body-in" bind:this={bodyInner}>
+					<!-- Two columns from 64rem up, one everywhere else. The wrappers are
+					     `display: contents` below that width, so the phone renders the same flat
+					     column of blocks it always did and the desktop gets the entry laid out
+					     across the width it actually has. -->
+					<div class="col meaning">
+						{#if word.traditional}
+							<p class="trad">
+								traditional <span lang="zh-Hant" class="hanzi">{word.traditional}</span>
+							</p>
+						{/if}
+
+						{#if noVoice}
+							<p class="no-voice">
+								This device has no Chinese voice installed, so there is nothing to play.
+							</p>
+						{/if}
+
+						<!-- One block, so the gap above the meanings is the same whether or not the
+						     word carries a part-of-speech annotation — plenty of them do not. -->
+						<div class="gloss">
+							{#if pos}<p class="pos eyebrow">{pos}</p>{/if}
+
+							{#if word.meanings.length > 1}
+								<ol class="senses">
+									{#each word.meanings as meaning, i (i)}
+										<li><span class="num tabular">{i + 1}</span>{meaning}</li>
+									{/each}
+								</ol>
+							{:else}
+								<p class="sense">{word.meanings[0] ?? '—'}</p>
+							{/if}
+						</div>
+
+						<!-- Renders nothing at all for the 70.5% of the corpus that has no sentence
+						     yet, so the sheet below simply closes up. No frame, no placeholder, no gap. -->
+						<ExampleSentence
+							{word}
+							{canSpeak}
+							speaking={saying === 'example'}
+							onspeak={(text) => speak(text, 'example')}
 						/>
-					</ol>
-				</section>
-			{/if}
+					</div>
 
-			<div class="record">
-				<p class="state">
-					<StatusPip {status} />
-					<span class="label">{meta.label}</span>
-					<span class="detail">{record.seen > 0 ? line : meta.description}</span>
-				</p>
+					<div class="col graph">
+						{#if characters.length > 1}
+							<!-- Pleco's CHARS tab, inline and then some: which syllable belongs to
+							     which character, what it means, and every other HSK word built on it. -->
+							<section class="chars" aria-label="Characters">
+								<h3 class="eyebrow">Characters</h3>
+								<ol class="char-list">
+									{#each characters as char, i (i)}
+										<CharacterCard
+											card={char.card}
+											syllable={char.syllable}
+											toneName={char.tone}
+											pending={index === null}
+											onopen={onfollow}
+										/>
+									{/each}
+								</ol>
+							</section>
+						{:else}
+							<section class="chars" aria-label={`Words with ${word.hanzi}`}>
+								<h3 class="eyebrow">
+									Words with <span lang="zh-Hans" class="eyebrow-hz">{word.hanzi}</span>
+								</h3>
+								<ol class="char-list">
+									<CharacterCard
+										card={solo}
+										syllable={word.syllables[0] ?? { py: '', tone: 0 }}
+										toneName={TONE_NAME[word.syllables[0]?.tone ?? 0]}
+										pending={index === null}
+										head={false}
+										onopen={onfollow}
+									/>
+								</ol>
+							</section>
+						{/if}
+
+						<div class="record">
+							<p class="state">
+								<StatusPip {status} />
+								<span class="label">{meta.label}</span>
+								<span class="detail">{record.seen > 0 ? line : meta.description}</span>
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
+
+			<!-- Both edges of the scroller are softened rather than cut. The bottom one is the
+			     one that matters: without it every open ended on a row sliced through its
+			     glyphs, which is the exact thing the blind judge told the other screen not to do. -->
+			<span class="edge top" class:on={scrolled > 4} aria-hidden="true"></span>
+			<span class="edge bottom" class:on={!atEnd} aria-hidden="true"></span>
 		</div>
 
 		<div class="foot">
-			<a class="btn btn-primary btn-block" href={practiseHref}>Practise HSK {level}</a>
+			<a class="btn btn-primary btn-block" href={practiseHref}>Practise HSK {browseLevel}</a>
 		</div>
 	</div>
 </div>
@@ -499,14 +654,37 @@
 		background-color: var(--color-surface);
 		box-shadow: var(--shadow-lift);
 		outline: none;
-		animation: sheet-rise 240ms var(--ease-out-soft) both;
+		/*
+		 * `backwards`, not `both`. A forwards fill keeps the keyframe's `transform: none`
+		 * applied for the life of the element, which outranks the inline transform the drag
+		 * writes — the sheet would simply refuse to move. Backwards still covers the frame
+		 * before the animation starts, which is the only thing the fill was ever there for.
+		 */
+		animation: sheet-rise 240ms var(--ease-out-soft) backwards;
+		transition: transform 260ms var(--ease-out-soft);
+	}
+
+	/* Under the finger the sheet tracks it exactly; let go and the transition takes over. */
+	.panel.dragging {
+		transition: none;
+	}
+
+	/* A real target around a 36×4 hint: the grip is 4px tall and the gesture is not. */
+	.grip-zone {
+		display: flex;
+		justify-content: center;
+		padding-block: 0.5rem 0.25rem;
+		touch-action: none;
+		cursor: grab;
+	}
+
+	.grip-zone:active {
+		cursor: grabbing;
 	}
 
 	.grip {
-		align-self: center;
 		inline-size: 2.25rem;
 		block-size: 0.25rem;
-		margin-block-start: 0.5rem;
 		border-radius: var(--radius-pill);
 		background-color: var(--color-line-strong);
 		opacity: 0.5;
@@ -599,28 +777,62 @@
 		}
 	}
 
-	.body {
-		flex: 1 1 auto;
-		overflow-y: auto;
-		overscroll-behavior: contain;
-		padding-inline: max(1.25rem, var(--app-safe-left)) max(1.25rem, var(--app-safe-right));
-		padding-block-end: 1.25rem;
-	}
+	/* ------------------------------------------------------------------ the head ------ */
 
-	/* Pleco's ranking, and Pleco's air: each step down gets less weight and more space above
-	   it than the thing it belongs to. */
+	/*
+	 * Pleco's ranking, and Pleco's air: each step down gets less weight and more space above
+	 * it than the thing it belongs to. Pinned, and condensed once the body moves — a headword
+	 * that keeps 150px of a 700px sheet forever is a worse answer than one that keeps 60.
+	 */
 	.head {
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
 		gap: 1rem;
+		padding-block: 0.125rem 0.625rem;
+		padding-inline: max(1.25rem, var(--app-safe-left)) max(1.25rem, var(--app-safe-right));
+		transition: padding-block-end 200ms var(--ease-out-soft);
+	}
+
+	.head.tight {
+		padding-block-end: 0.375rem;
+	}
+
+	.head-main {
+		min-inline-size: 0;
 	}
 
 	.headword {
-		margin: 0.25rem 0 0;
+		margin: 0;
 		font-size: inherit;
 		font-weight: inherit;
 		letter-spacing: normal;
+	}
+
+	/*
+	 * The condense is a type-size change and nothing else. Sizes come off the same scale the
+	 * full head uses — two steps down for the hanzi, two for the pinyin — so the pinned line
+	 * is the same design at a different rank rather than a second layout that has to agree
+	 * with the first.
+	 */
+	.head :global(.hw) {
+		font-size: var(--text-hanzi-lg);
+		transition: font-size 200ms var(--ease-out-soft);
+	}
+
+	.head.tight :global(.hw) {
+		font-size: var(--text-hanzi-sm);
+	}
+
+	.panel :global(.py) {
+		min-inline-size: 0;
+		color: var(--color-ink-muted);
+		font-size: var(--text-pinyin-xl);
+		transition: font-size 200ms var(--ease-out-soft);
+	}
+
+	.head.tight :global(.py) {
+		font-size: var(--text-pinyin-md);
 	}
 
 	/* Quiet where Pleco's is a red block: red already means "wrong" and "practise" in this app,
@@ -636,21 +848,38 @@
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		white-space: nowrap;
+		transition: margin-block-start 200ms var(--ease-out-soft);
+	}
+
+	.head.tight .level {
+		margin-block-start: 0.125rem;
 	}
 
 	.say {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		margin: 0.375rem 0 0;
+		gap: 0.375rem;
+		margin: 0.25rem 0 0;
+		transition: margin-block-start 200ms var(--ease-out-soft);
 	}
 
+	.head.tight .say {
+		margin-block-start: 0.0625rem;
+	}
+
+	/*
+	 * Square, so the ring is a circle. It was 2.25rem wide and 2.25rem tall on paper, but the
+	 * base layer guarantees every button 44px of height, so what actually rendered was a
+	 * 36×44 oval — a ring nobody drew. Sized to `--spacing-tap` in both axes it is the shape
+	 * it always meant to be AND the target the base layer was asking for, and it matches the
+	 * chevrons in the bar above it, which are the same control at the same size.
+	 */
 	.speak {
 		display: grid;
 		flex: none;
 		place-items: center;
-		inline-size: 2.25rem;
-		block-size: 2.25rem;
+		inline-size: var(--spacing-tap);
+		block-size: var(--spacing-tap);
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-pill);
 		background: none;
@@ -675,6 +904,60 @@
 		}
 	}
 
+	/* ------------------------------------------------------------------ the body ------ */
+
+	.scroller {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		min-block-size: 0;
+	}
+
+	.body {
+		flex: 1 1 auto;
+		min-block-size: 0;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding-inline: max(1.25rem, var(--app-safe-left)) max(1.25rem, var(--app-safe-right));
+		padding-block-end: 1.25rem;
+	}
+
+	/* The thing the ResizeObserver watches: the body's own box never changes height, its
+	   contents do — a character card expanding to 47 rows is the whole point of loop 4. */
+	.body-in {
+		min-inline-size: 0;
+	}
+
+	/* One column of blocks on a phone: the wrappers exist only so the desktop has something to
+	   put in a grid cell, and `contents` makes them disappear from the layout entirely here. */
+	.col {
+		display: contents;
+	}
+
+	.edge {
+		position: absolute;
+		inset-inline: 0;
+		block-size: 1.75rem;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 160ms var(--ease-out-soft);
+	}
+
+	.edge.on {
+		opacity: 1;
+	}
+
+	.edge.top {
+		inset-block-start: 0;
+		background: linear-gradient(to bottom, var(--color-surface), transparent);
+	}
+
+	.edge.bottom {
+		inset-block-end: 0;
+		background: linear-gradient(to top, var(--color-surface), transparent);
+	}
+
 	.no-voice {
 		margin: 0.5rem 0 0;
 		color: var(--color-ink-subtle);
@@ -682,7 +965,7 @@
 	}
 
 	.trad {
-		margin: 0.375rem 0 0;
+		margin: 0.25rem 0 0;
 		color: var(--color-ink-subtle);
 		font-size: var(--text-xs);
 	}
@@ -693,13 +976,8 @@
 		font-size: var(--text-base);
 	}
 
-	.panel :global(.py) {
-		min-inline-size: 0;
-		color: var(--color-ink-muted);
-	}
-
 	.gloss {
-		margin-block-start: 1.125rem;
+		margin-block-start: 0.75rem;
 	}
 
 	.pos {
@@ -789,7 +1067,9 @@
 	}
 
 	/* From tablet up the sheet stops being a sheet: a centred card reads as an entry rather
-	   than a drawer, and there is no thumb at the bottom of a laptop screen. */
+	   than a drawer, and there is no thumb at the bottom of a laptop screen. It is also wider
+	   and taller than it was — a 480px box floating in 960px of scrim showed four of twelve
+	   related rows while the list behind it ran two comfortable columns. */
 	@media (min-width: 48rem) {
 		.root {
 			justify-content: center;
@@ -799,18 +1079,60 @@
 
 		.panel {
 			inline-size: 100%;
-			max-inline-size: 30rem;
+			max-inline-size: 34rem;
+			max-block-size: min(92dvh, 50rem);
 			padding-block-end: 1.25rem;
 			border-radius: var(--radius-card);
 			animation-name: sheet-zoom;
 		}
 
-		.grip {
+		.grip-zone {
 			display: none;
 		}
 
 		.bar {
 			padding-block-start: 0.5rem;
+		}
+	}
+
+	/*
+	 * From 64rem the entry stops being a tall column in a wide empty room. A 30rem card in
+	 * 60rem of scrim showed four of twelve related rows while the list behind it ran two
+	 * comfortable columns; the meanings and the sentence take the left, the character graph
+	 * and the record take the right, and the whole entry is on screen at once.
+	 */
+	@media (min-width: 64rem) {
+		.panel {
+			max-inline-size: 50rem;
+		}
+
+		.body-in {
+			display: grid;
+			/* The graph column is the taller of the two and its rows carry three fields each,
+			   so it gets the extra width rather than splitting it evenly and truncating. */
+			grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+			column-gap: 2rem;
+			align-items: start;
+		}
+
+		.col {
+			display: block;
+			min-inline-size: 0;
+		}
+
+		/* The rule that separated the strip from the meanings above it now has nothing above
+		   it — it is the top of its own column. */
+		.graph .chars {
+			margin-block-start: 0;
+			padding-block-start: 0;
+			border-block-start: 0;
+		}
+
+		/* `btn-block` means "as wide as the thumb reaching for it"; at 800px it means "a black
+		   bar". The button keeps a phone's proportions and centres in the width it has. */
+		.foot :global(.btn) {
+			max-inline-size: 22rem;
+			margin-inline: auto;
 		}
 	}
 

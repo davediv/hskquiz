@@ -333,6 +333,30 @@
 		}
 	}
 
+	/*
+	 * 320px, where the fifth chip was 51px off the right edge behind a 44px fade — "100
+	 * Mastered", the count a learner opens this screen for, unreadable without a gesture on
+	 * the phone least able to afford one. Nothing here changes what a chip IS: the two lines,
+	 * the 44px height and the whole scrolling apparatus survive. The chips simply stop
+	 * carrying 22px of inside air each on the one width that cannot spare 110px of it.
+	 *
+	 * The measurement below is unchanged and still runs, so a sixth state, a longer label or
+	 * a 1,070-wide count would bring the fade and the nudge back on their own.
+	 */
+	@media (max-width: 22.5rem) {
+		.chips {
+			gap: 0.25rem;
+		}
+
+		.chip-btn {
+			padding-inline: 0.3125rem;
+		}
+
+		.label {
+			letter-spacing: 0;
+		}
+	}
+
 	/* Sits over the faded edge it points at. Small on purpose — it is a hint that the strip
 	   continues, not a control the eye should land on before the chips do. It carries its own
 	   wash of the page colour so the chevron never lands on top of a half-faded letterform. */
