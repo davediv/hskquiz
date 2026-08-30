@@ -30,6 +30,14 @@ export interface Syllable {
 export interface Word {
 	/** Stable key, e.g. `L1-0001`. Progress is keyed on this. */
 	id: string;
+	/**
+	 * Every official id this one card answers for, when two rows of the standard merged into it.
+	 *
+	 * Eight same-pinyin homograph pairs ship as one card each (老, 省, 把 …), so `id` alone does
+	 * not account for the official row it absorbed. Present only on those eight; `id` is always
+	 * the first entry. Progress is still keyed on `id` — this is provenance, not a second key.
+	 */
+	ids?: string[];
 	/** Simplified hanzi, cleaned for display — never the raw `爸爸|爸` source notation. */
 	hanzi: string;
 	/** Traditional form, if it differs from `hanzi`. */
