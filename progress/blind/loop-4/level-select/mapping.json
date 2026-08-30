@@ -1,0 +1,16 @@
+{
+  "piece": "level-select",
+  "loop": 4,
+  "rule": "\"level-select\" is 12 characters — EVEN — so ours is A and the reference is B.",
+  "A": {
+    "which": "ours",
+    "source": "progress/shots/loop-4/level-select-mobile.png",
+    "state": "first-time visitor, localStorage cleared, 375x812 @2x, light",
+    "note": "hskquiz level-select, the emptiest state: every card at 0 practised."
+  },
+  "B": {
+    "which": "reference",
+    "source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+    "note": "Du Chinese Articles — a library of collections a learner picks one of to start. Chosen as the closest comparable: a list screen whose job is to make several startable things tell themselves apart."
+  }
+}
