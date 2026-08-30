@@ -11,9 +11,9 @@
  * progress.state.levels[3]?.sessions ?? 0;
  * ```
  *
- * A write is never a blind overwrite: `flush()` reads the key, rescues bytes it cannot decode
- * — or that a merge would drop without a reset to account for them — three-way merges what is
- * there with what this tab holds, and writes the union. Forgetting is a reset *generation*
+ * A write is never a blind overwrite: `flush()` reads the key, three-way merges what is there
+ * with what this tab holds, and refuses to write anything that would leave less history than
+ * the key already holds without copying the bigger side aside first. Forgetting is a reset *generation*
  * recorded in the payload, never a comparison against the device clock.
  *
  * `status` says where progress is actually going and `rescue` says whether history is sitting
@@ -38,10 +38,12 @@ export {
 	BACKUP_KEY,
 	EPOCH_FLOOR,
 	MASTERY_STREAK,
+	MAX_GENERATION,
 	PROBE_KEY,
 	SCHEMA_VERSION,
 	STORAGE_KEY,
 	type Generations,
+	type Heft,
 	type StoredLevel,
 	type StoredProgress,
 	type StoredWord,
@@ -55,20 +57,26 @@ export {
 	emptyState,
 	emptyStored,
 	encode,
+	encodeWeighed,
 	generationFor,
 	generationForWord,
+	hasHistory,
+	heavier,
 	isShippableWordId,
 	isUsableWordId,
 	levelEntryGen,
 	levelOfId,
 	mergeProgress,
 	ownRecord,
+	readGeneration,
 	recordGen,
 	recordUnderOwnKey,
 	restoreInto,
+	shrinks,
 	snapshot,
 	stampGen,
 	stampLevelGen,
 	tally,
-	unexplainedLosses
+	unexplainedLosses,
+	weigh
 } from './progress-core.ts';

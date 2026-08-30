@@ -50,11 +50,19 @@
 
 	const rescue = $derived(hydrated ? progress.rescue : null);
 
-	/** "40 words · 128 answers", or nothing when the copy cannot be read either. */
+	/**
+	 * "40 words · 128 answers" for a copy that reads, "about 300 words" for one that does not.
+	 *
+	 * A truncated payload will not parse, but its keys are still in the bytes and can still be
+	 * counted — and a learner deciding whether to keep a copy is far better served by a floor
+	 * on its size than by "we cannot tell". Nothing here is guessed: `words` is either the
+	 * decoded record count or the number of word ids literally present in the bytes.
+	 */
 	const rescueSize = $derived.by(() => {
 		const info = rescue;
-		if (!info || info.words === null) return null;
+		if (!info || info.words === 0) return null;
 		const words = `${info.words.toLocaleString('en')} ${info.words === 1 ? 'word' : 'words'}`;
+		if (!info.readable) return `about ${words}`;
 		return `${words} · ${info.answers.toLocaleString('en')} answers`;
 	});
 
@@ -70,6 +78,21 @@
 		if (!hydrated) return [];
 		const list: Notice[] = [];
 
+		// Ahead of the storage notices: an erase that did not land is a *different* thing from a
+		// saving failure, and saying "these answers live only in this tab" to someone who has
+		// just asked for those answers to be destroyed is the wrong sentence twice over.
+		if (progress.eraseFailed) {
+			list.push({
+				key: 'erase-failed',
+				tone: 'warn',
+				glyph: '!',
+				title: 'Progress was not reset',
+				detail:
+					'The browser refused to write, so nothing was erased — what is on this device is still ' +
+					'there and comes back when you reload. Still trying.'
+			});
+		}
+
 		if (progress.status === 'unavailable') {
 			list.push({
 				key: 'unavailable',
@@ -80,7 +103,11 @@
 					'This browser is not letting the app store anything — private browsing, or site data ' +
 					'turned off. Practise still works, but today’s answers go when the tab does.'
 			});
-		} else if (progress.status === 'failing') {
+		} else if (progress.status === 'failing' && !progress.eraseFailed) {
+			// The reset notice above already says the browser refused a write, and says the one
+			// thing that matters about it. Stacking a second red panel underneath that ends
+			// "these answers live only in this tab" would answer a question nobody asked, in
+			// the wrong tense, about answers the learner has just tried to destroy.
 			list.push({
 				key: 'failing',
 				tone: 'warn',
@@ -124,16 +151,22 @@
 					<p class="storage-notice-line">
 						<strong>Earlier progress was kept aside.</strong>
 						{#if rescue.reason === 'lost'}
-							A save would have dropped history that nothing here accounts for, so it was copied
-							somewhere safe instead of being written over.
-						{:else}
+							A save was about to leave less history than this device already held, so the larger
+							copy was kept instead of being written over.
+						{:else if rescue.reason === 'unreadable'}
 							What was saved before could not be read — a half-finished write, or a newer version of
 							this app. It was copied somewhere safe rather than overwritten.
-						{/if}
-						{#if rescueSize}
-							It holds <strong>{rescueSize}</strong>.
 						{:else}
-							It cannot be read from here either, so it is being kept rather than guessed at.
+							A copy from an earlier visit is still sitting here, waiting. Nothing has been thrown
+							away.
+						{/if}
+						{#if rescueSize && rescue.readable}
+							It holds <strong>{rescueSize}</strong>.
+						{:else if rescueSize}
+							It holds <strong>{rescueSize}</strong>, but cannot be read from here — it is being
+							kept rather than guessed at.
+						{:else}
+							It cannot be read from here, so it is being kept rather than guessed at.
 						{/if}
 					</p>
 					{#if restoreFailed}
@@ -143,7 +176,7 @@
 						</p>
 					{/if}
 					<p class="storage-notice-actions">
-						{#if rescue.words !== null && rescue.words > 0}
+						{#if rescue.readable && rescue.words > 0}
 							<button type="button" class="storage-notice-action" onclick={onRestore}>
 								Restore it
 							</button>

@@ -97,6 +97,39 @@ export const MASTERY_STREAK = 3;
  */
 export type Generations = Record<number, number>;
 
+/**
+ * The largest reset counter this app could ever have written, and the point past which a
+ * counter stops being data.
+ *
+ * A generation only ever moves by `+1`, and only when a person taps Reset. A million taps is
+ * already beyond a lifetime of them, so a counter beyond this did not come from here: it is a
+ * corrupt byte, a hand-edited key, or a number that arrived as a string and coerced to `1e22`.
+ *
+ * The number matters because *every* deletion in this store is decided by a generation
+ * comparison. Honouring a junk counter meant `{"g":{"0":1e22}}` deleted every record on load
+ * — the payload said "the learner has asked to be forgotten 10 sextillion times" and the
+ * store believed it — and `{"g":{"0":1e308,"3":1e308}}` was worse: the sum overflowed to
+ * `Infinity`, `stampGen` wrote `Infinity` into every fresh answer, and `count(Infinity)` read
+ * it back as 0, so `encode` dropped every record on the way *out* while `flush()` reported a
+ * clean save, forever.
+ *
+ * So a counter past this ceiling is not clamped, it is **ignored**. Clamping still deletes
+ * (every record predates the clamped value); ignoring cannot lose anything, because a reset
+ * that really happened already pruned the records from the bytes — the counter alone brings
+ * nothing back. Deletion needs a fact we are sure of; this is not one.
+ */
+export const MAX_GENERATION = 1_000_000;
+
+/**
+ * The ceiling for the generation stamped on a single record.
+ *
+ * A record answers to two counters at once (`generationFor` sums the global scope and its
+ * level's), so the largest generation a record can legitimately carry is twice the scope
+ * ceiling. Junk in a record's own `gen` slot is clamped *up* to that, never down to 0: a
+ * record whose generation we cannot read must not be deleted on the strength of it.
+ */
+const MAX_RECORD_GENERATION = 2 * MAX_GENERATION;
+
 /** Everything the key holds: the state the app reads, plus the resets it must respect. */
 export interface StoredProgress {
 	state: ProgressState;
@@ -180,9 +213,13 @@ export function hasHistory(record: WordProgress): boolean {
 	return record.seen > 0 || record.lastSeen > 0;
 }
 
-/** The generation a stored record was written under. Absent, junk or negative all read as 0. */
+/**
+ * The generation a stored record was written under. Absent or negative reads as 0; a value
+ * past what any generation could be is clamped to the ceiling, never down — see
+ * `MAX_RECORD_GENERATION`.
+ */
 export function recordGen(record: WordProgress): number {
-	return count((record as Partial<StoredWord>).gen);
+	return Math.min(count((record as Partial<StoredWord>).gen), MAX_RECORD_GENERATION);
 }
 
 /**
@@ -198,9 +235,9 @@ export function stampGen(record: WordProgress, gen: number): void {
 	if (gen > 0) (record as StoredWord).gen = gen;
 }
 
-/** The generation a stored level entry was written under. */
+/** The generation a stored level entry was written under. Clamped like `recordGen`. */
 export function levelEntryGen(entry: LevelEntry): number {
-	return count((entry as Partial<StoredLevel>).gen);
+	return Math.min(count((entry as Partial<StoredLevel>).gen), MAX_RECORD_GENERATION);
 }
 
 /** Stamp a level entry with the generation it is being written under. Zero is left off. */
@@ -216,8 +253,20 @@ export function stampLevelGen(entry: LevelEntry, gen: number): void {
  * on; reset HSK 3 and only HSK 3's does.
  */
 export function generationFor(gens: Generations, level: Level | null): number {
-	const global = count(gens[0]);
-	return level === null ? global : global + count(gens[level]);
+	const global = readGeneration(gens[0]);
+	return level === null ? global : global + readGeneration(gens[level]);
+}
+
+/**
+ * One stored reset counter, as a number this store is willing to delete records over.
+ *
+ * Anything past `MAX_GENERATION` is not a counter we wrote, so it is discarded rather than
+ * honoured or clamped. Every reader and writer of `gens` goes through here, which is what
+ * keeps `encode` and `decodeStored` agreeing about what a reset means.
+ */
+export function readGeneration(value: unknown): number {
+	const n = count(value);
+	return n > MAX_GENERATION ? 0 : n;
 }
 
 /** The generation in force for the scope a word id belongs to. */
@@ -230,8 +279,8 @@ export function generationForWord(gens: Generations, wordId: string): number {
  * has just read off the key, so a reset in a tab holding a stale payload still wins.
  */
 export function bumpGeneration(gens: Generations, scope: number, atLeast = 0): Generations {
-	const next = Math.max(count(gens[scope]), count(atLeast)) + 1;
-	return { ...gens, [scope]: next };
+	const from = Math.max(readGeneration(gens[scope]), readGeneration(atLeast));
+	return { ...gens, [scope]: Math.min(from + 1, MAX_GENERATION) };
 }
 
 /**
@@ -318,10 +367,26 @@ export function applySeen(record: WordProgress, at: number, gen: number): void {
  * Ids outside the `L{level}-{n}` shape entirely are left alone — the store is generic, and a
  * caller is allowed to key by something else — so this only ever refuses an id that is *claiming*
  * to be one of ours and cannot be.
+ *
+ * "Claiming" is decided by `levelOfId` and by nothing else, because `levelOfId` is what every
+ * *counter* in the app files an id under. The two used to disagree: this guard tested
+ * `/^L(\d+)-(\d+)$/` and waved through anything that failed to match, while `levelOfId`'s looser
+ * `/^L([1-9])-/` happily filed `L1-9000x`, `L1-0001 ` and `L1-+1` under HSK 1 — so forty seeded
+ * junk ids read as forty practised and forty mastered on every HSK 1 surface. A guard that
+ * disagrees with the thing it is guarding is not a guard.
+ *
+ * The upper bound is `LEVEL_SIZES`, the official row count, because that is what the build
+ * numbers against: eight same-level homographs merge, so a level's ids run `1 … LEVEL_SIZES`
+ * with eight holes in them rather than densely to `SHIPPED_SIZES` (verified — the top id at
+ * each level is exactly `LEVEL_SIZES`). The holes themselves are not checked here; naming them
+ * would need the word lists, which this module deliberately does not pull in.
  */
 export function isShippableWordId(wordId: string): boolean {
-	const match = /^L(\d+)-(\d+)$/.exec(wordId);
-	if (!match) return true;
+	// `L` followed by a digit is the whole claim: it is what `levelOfId` looks at, so it is the
+	// set this guard has to cover. Anything else is someone else's key and is left alone.
+	if (!/^L\d/.test(wordId)) return true;
+	const match = /^L([1-9])-(\d{1,7})$/.exec(wordId);
+	if (!match) return false;
 	const level = asLevel(match[1]);
 	if (level === null) return false;
 	const index = Number(match[2]);
@@ -343,6 +408,21 @@ export function levelOfId(wordId: string): Level | null {
  * round-tripped to zero words while `flush()` reported success.
  */
 export function encode(stored: StoredProgress): string {
+	return encodeWeighed(stored).text;
+}
+
+/**
+ * `encode`, plus the heft of what it just wrote, for the price of the one pass it was already
+ * making.
+ *
+ * The write path has to know how much history is going into the key — that is the whole
+ * shrink guard — and counting it separately meant a second walk of 4,316 records on every
+ * single answer. The encoder is already visiting exactly the records that end up in the
+ * bytes, under exactly the filter that decides it, so it is the honest place to count them.
+ */
+export function encodeWeighed(stored: StoredProgress): { text: string; heft: Heft } {
+	let words = 0;
+	let answers = 0;
 	const w: Record<string, number[]> = {};
 	// Sorted so two states holding the same data encode to the same bytes — `flush` compares
 	// encodings to decide whether a write is needed at all, and key order must not defeat it.
@@ -358,6 +438,8 @@ export function encode(stored: StoredProgress): string {
 		// reset has byte-for-byte the payload earlier builds wrote.
 		if (gen > 0) tuple.push(gen);
 		w[wordId] = tuple;
+		words += 1;
+		answers += record.seen;
 	}
 
 	const l: Record<string, number[]> = {};
@@ -373,7 +455,7 @@ export function encode(stored: StoredProgress): string {
 
 	const g: Record<string, number> = {};
 	for (const scope of Object.keys(stored.gens).sort()) {
-		const n = count(stored.gens[Number(scope)]);
+		const n = readGeneration(stored.gens[Number(scope)]);
 		if (n > 0) g[scope] = n;
 	}
 
@@ -381,7 +463,8 @@ export function encode(stored: StoredProgress): string {
 	// Omitted entirely when nothing has ever been reset, so the common payload is unchanged
 	// from what earlier builds wrote.
 	if (Object.keys(g).length > 0) payload.g = g;
-	return JSON.stringify(payload);
+	const text = JSON.stringify(payload);
+	return { text, heft: { words, answers, readable: true, size: text.length } };
 }
 
 /**
@@ -421,14 +504,22 @@ export function decodeStored(text: string | null, now: number = Date.now()): Sto
 		for (const [key, value] of Object.entries(rawGens)) {
 			const scope = readScope(key);
 			if (scope === null) continue;
-			const n = count(value);
-			if (n > 0) stored.gens[scope] = Math.max(count(stored.gens[scope]), n);
+			// `readGeneration`, not `count`: a counter past the ceiling is junk, and junk must
+			// not be allowed to delete anything. See `MAX_GENERATION`.
+			const n = readGeneration(value);
+			if (n > 0) stored.gens[scope] = Math.max(readGeneration(stored.gens[scope]), n);
 		}
 	}
 	// A payload from the timestamp era. Its cuts are honoured once, here, and never again.
 	const legacyCuts = isRecord(rawGens) ? {} : migrateLegacyCuts(raw, stored.gens);
 
+	// The map slots have to *be* maps. `{"v":1,"w":[…200 records…]}` is a payload whose word map
+	// arrived as an array — a shape no build here ever wrote, so something rewrote it — and
+	// reading it as "a valid payload holding zero words" was the quietest data loss in the
+	// store: nothing was rescued, no notice appeared, and the first answer overwrote all 200.
+	// Refusing it hands the bytes to the rescue path instead, which is what `null` means here.
 	const words = raw.w ?? raw.byWord;
+	if (('w' in raw || 'byWord' in raw) && !isRecord(words)) return null;
 	if (isRecord(words)) {
 		for (const [wordId, value] of Object.entries(words)) {
 			// The key is the one input this module does not control, so both id guards live here.
@@ -441,6 +532,7 @@ export function decodeStored(text: string | null, now: number = Date.now()): Sto
 	}
 
 	const levels = raw.l ?? raw.levels;
+	if (('l' in raw || 'levels' in raw) && !isRecord(levels)) return null;
 	if (isRecord(levels)) {
 		for (const [key, value] of Object.entries(levels)) {
 			const level = asLevel(key);
@@ -568,6 +660,19 @@ export function unexplainedLosses(disk: StoredProgress, merged: StoredProgress):
 		if (recordGen(record) < generationForWord(merged.gens, wordId)) continue;
 		lost.push(wordId);
 	}
+
+	// Level entries are history too — "12 sessions, last played Tuesday" is the only record
+	// the app keeps of a learner turning up. This used to look at `byWord` alone, so a merge
+	// that annihilated every session count and every `lastPlayed` was neither rescued nor
+	// reported. Reported as `level:3` so a caller can tell the two kinds apart.
+	for (const level of LEVELS) {
+		const entry = disk.state.levels[level];
+		if (!entry) continue;
+		if (merged.state.levels[level]) continue;
+		if (levelEntryGen(entry) < generationFor(merged.gens, level)) continue;
+		lost.push(`level:${level}`);
+	}
+
 	return lost;
 }
 
@@ -628,10 +733,114 @@ export function snapshot(stored: StoredProgress): StoredProgress {
 		if (entry) copy.state.levels[level] = { ...entry };
 	}
 	for (const scope of scopes(stored.gens)) {
-		const n = count(stored.gens[scope]);
+		const n = readGeneration(stored.gens[scope]);
 		if (n > 0) copy.gens[scope] = n;
 	}
 	return copy;
+}
+
+/**
+ * How much history a *string of bytes* holds — the one measure the rescue net compares.
+ *
+ * `tally` answers the same question about a decoded payload, and on its own it was not enough
+ * to protect anything, for two reasons the store hit in practice:
+ *
+ * - **Truncated bytes cannot be decoded at all.** A half-written 300-word payload tallies to
+ *   nothing, so a rescue that compared tallies would keep a one-word backup and throw the 300
+ *   away. Counting the word ids the bytes literally name works on a corpse.
+ * - **A decoded tally is post-generation.** `decodeStored` applies reset generations, so a
+ *   payload holding 300 records under a generation counter that outranks them tallies to
+ *   *zero* — exactly the shape that used to empty the key on load with nothing kept aside.
+ *   The bytes still name 300 words, and that is the number worth protecting.
+ *
+ * So `words` is the larger of the two views, `readable` says whether the bytes parsed, and
+ * `size` is the last-resort tie-break for two payloads that name no ids at all.
+ */
+export interface Heft {
+	/** Word records these bytes hold: the greater of what they decode to and what they name. */
+	words: number;
+	/** Answers those records add up to, or 0 when the bytes cannot be decoded. */
+	answers: number;
+	/** Whether the bytes decoded to a payload at all. */
+	readable: boolean;
+	/** Length in characters. Only ever consulted when neither side names a word. */
+	size: number;
+}
+
+/**
+ * A word id, quoted, anywhere in the bytes.
+ *
+ * Deliberately not anchored to the key position. The wire format only ever puts an id there,
+ * so on a healthy payload the two are the same set — but the bytes this is asked about are
+ * the *unhealthy* ones, and a payload whose word map arrived as an array carries its ids as
+ * `{"id":"L1-0001",…}` values. Matching the id itself measures both shapes, and the ids go
+ * into a `Set`, so one that appears twice is still one word.
+ */
+const ID_KEY_RE = /"(L[1-9]-\d{1,7})"/g;
+
+/**
+ * Weigh some bytes. `decoded` lets a caller that has already parsed them skip a second parse;
+ * pass `null` for "I tried and it did not parse", and leave it out for "parse it yourself".
+ */
+export function weigh(text: string | null, decoded?: StoredProgress | null): Heft {
+	if (typeof text !== 'string' || text.length === 0) {
+		return { words: 0, answers: 0, readable: true, size: 0 };
+	}
+
+	const stored = decoded === undefined ? decodeStored(text) : decoded;
+
+	// The scan is ~9 ms on a 194 KB payload, and it is only ever worth paying for when the
+	// decoded view could be understating the bytes: when they did not decode at all, or when a
+	// reset generation is in force and may have deleted records that are still sitting in the
+	// string. With neither in play — every payload this app writes for a learner who has never
+	// reset — the decode already saw every record there is, and cold start pays nothing.
+	if (stored !== null && Object.keys(stored.gens).length === 0) {
+		const clean = tally(stored);
+		return { words: clean.words, answers: clean.answers, readable: true, size: text.length };
+	}
+
+	const named = new Set<string>();
+	for (const match of text.matchAll(ID_KEY_RE)) {
+		// Filtered exactly as the decoder filters, so junk ids cannot inflate the count and make
+		// dropping them look like a loss.
+		if (isShippableWordId(match[1])) named.add(match[1]);
+	}
+
+	if (stored === null) return { words: named.size, answers: 0, readable: false, size: text.length };
+
+	const counts = tally(stored);
+	return {
+		words: Math.max(named.size, counts.words),
+		answers: counts.answers,
+		readable: true,
+		size: text.length
+	};
+}
+
+/**
+ * Whether writing `to` over `from` would leave the learner with less than they had.
+ *
+ * Deliberately narrower than `heavier`: only the two figures a person would recognise as
+ * their own history count, and a shorter encoding of the same history is not a loss. This is
+ * the test the write path gates on, so a false positive would put a scary notice on screen
+ * over nothing.
+ */
+export function shrinks(from: Heft, to: Heft): boolean {
+	if (to.words !== from.words) return to.words < from.words;
+	return to.answers < from.answers;
+}
+
+/**
+ * Whether `a` holds more of the learner's history than `b`.
+ *
+ * Words first, then answers, then readability, then sheer length. Ties go to `b` — the caller
+ * passes the incumbent copy as `b`, so an equal newcomer never displaces a copy already kept.
+ */
+export function heavier(a: Heft, b: Heft): boolean {
+	if (a.words !== b.words) return a.words > b.words;
+	if (a.answers !== b.answers) return a.answers > b.answers;
+	if (a.readable !== b.readable) return a.readable;
+	return a.size > b.size;
 }
 
 /** How many word records a payload holds, and how many answers they add up to. */
@@ -689,7 +898,7 @@ function migrateLegacyCuts(
 		const at = count(value);
 		if (at <= 0) continue;
 		cuts[scope] = Math.max(cuts[scope] ?? 0, at);
-		gens[scope] = Math.max(count(gens[scope]), 1);
+		gens[scope] = Math.max(readGeneration(gens[scope]), 1);
 	}
 	return cuts;
 }
@@ -852,11 +1061,19 @@ function asLevel(value: unknown): Level | null {
 	return LEVELS.includes(n as Level) ? (n as Level) : null;
 }
 
-/** Coerce anything at all to a non-negative integer. `NaN`, `-1`, `'x'`, `null` → `0`. */
+/**
+ * Coerce anything at all to a non-negative integer. `NaN`, `-1`, `'x'`, `null` → `0`.
+ *
+ * Capped at `Number.MAX_SAFE_INTEGER`, because past it a "number" stops behaving like one:
+ * `1e308` and `1e308 + 1` are equal, `Math.floor` is the identity, and two such values added
+ * together reach `Infinity`, which then coerces back to 0 and silently empties the payload.
+ * Nothing this app counts — answers, sessions, milliseconds since 2024 — comes within nine
+ * orders of magnitude of the cap, so it only ever bites junk.
+ */
 function count(value: unknown): number {
 	const n = typeof value === 'number' ? value : Number(value);
 	if (!Number.isFinite(n) || n <= 0) return 0;
-	return Math.floor(n);
+	return Math.min(Math.floor(n), Number.MAX_SAFE_INTEGER);
 }
 
 /**
@@ -866,12 +1083,20 @@ function count(value: unknown): number {
  * a day and a half it is a bad device clock and gets pulled back to now. Both used to render
  * as confident nonsense — "57y ago", "in 50y" — on the home screen.
  *
+ * The future test is skipped entirely when `now` is itself impossible. A device whose clock
+ * says 2001 is not a clock that can adjudicate the future, and treating it as one was worse
+ * than the symptom it was fixing: five records with five real 2026 dates, opened once on a
+ * slow phone, all came back stamped at the same instant, and correcting the clock could not
+ * undo it — the flattened stamps had already been written back. A stamp we cannot judge is
+ * left exactly as it was found.
+ *
  * This only ever affects how a date *reads*. Nothing is deleted on the strength of it.
  */
 function stamp(value: unknown, now: number): number {
 	const n = count(value);
 	if (n === 0) return 0;
 	if (n < EPOCH_FLOOR) return 0;
+	if (now < EPOCH_FLOOR) return n;
 	const ceiling = now + FUTURE_SLACK_MS;
 	return n > ceiling ? now : n;
 }

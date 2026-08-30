@@ -15,15 +15,19 @@ import {
 	encode,
 	generationFor,
 	generationForWord,
+	heavier,
 	isShippableWordId,
 	isUsableWordId,
 	levelOfId,
 	mergeProgress,
+	readGeneration,
 	recordGen,
 	restoreInto,
+	shrinks,
 	stampLevelGen,
 	tally,
-	unexplainedLosses
+	unexplainedLosses,
+	weigh
 } from './progress-core.ts';
 import type { WordProgress } from '$lib/types';
 
@@ -529,6 +533,55 @@ describe('decode', () => {
 	});
 });
 
+describe('a payload whose shape is wrong is not a payload', () => {
+	it('refuses a word map that is not a map', () => {
+		// It parses, so the rescue net used to wave it straight through, and it decodes to
+		// zero words, so the learner's next answer overwrote every record in it with no copy
+		// kept anywhere. `null` here means "not ours to read, and not ours to destroy".
+		expect(decodeStored('{"v":1,"w":[{"id":"L1-0001","seen":3}],"l":{}}', NOW)).toBeNull();
+		expect(decodeStored('{"v":1,"w":"nope","l":{}}', NOW)).toBeNull();
+		expect(decodeStored('{"v":1,"w":null,"l":{}}', NOW)).toBeNull();
+	});
+
+	it('refuses a level map that is not a map', () => {
+		expect(decodeStored('{"v":1,"w":{},"l":[1,2]}', NOW)).toBeNull();
+	});
+
+	it('still reads an ordinary empty payload', () => {
+		expect(decodeStored('{"v":1,"w":{},"l":{}}', NOW)).not.toBeNull();
+	});
+});
+
+describe('a clock that cannot be true does not get to judge timestamps', () => {
+	it('leaves real stamps alone when the device clock predates the app', () => {
+		// A phone on a 2001 clock used to flatten five distinct 2026 dates to one instant, and
+		// then write them back that way — correcting the clock could not undo it, and every
+		// recency comparison downstream saw a flat history.
+		const a = NOW - 5 * 86_400_000;
+		const b = NOW - 4 * 86_400_000;
+		const text = JSON.stringify({
+			v: 1,
+			w: { 'L1-0001': [3, 3, 3, a, 0], 'L1-0002': [3, 3, 3, b, 0] },
+			l: {}
+		});
+
+		const payload = decodeStored(text, Date.UTC(2001, 0, 1));
+
+		expect(payload?.state.byWord['L1-0001']?.lastSeen).toBe(a);
+		expect(payload?.state.byWord['L1-0002']?.lastSeen).toBe(b);
+	});
+
+	it('still pulls a stamp back when the clock is one we can believe', () => {
+		const text = JSON.stringify({
+			v: 1,
+			w: { 'L1-0001': [3, 3, 3, NOW + 40 * 3_600_000, 0] },
+			l: {}
+		});
+
+		expect(decodeStored(text, NOW)?.state.byWord['L1-0001']?.lastSeen).toBe(NOW);
+	});
+});
+
 describe('isUsableWordId', () => {
 	it('accepts real ids and refuses everything Object.prototype already owns', () => {
 		expect(isUsableWordId('L1-0001')).toBe(true);
@@ -745,6 +798,116 @@ describe('isShippableWordId', () => {
 	it('leaves ids that are not claiming to be ours alone', () => {
 		expect(isShippableWordId('custom-a')).toBe(true);
 		expect(isShippableWordId('anything')).toBe(true);
+	});
+
+	it('agrees with levelOfId about what is claiming to be ours', () => {
+		// The guard used to return true whenever its own regex failed to match, while
+		// `levelOfId`'s looser test still filed these under HSK 1 — so forty seeded ids read as
+		// forty practised words on every HSK 1 surface. A guard that disagrees with the thing
+		// it is guarding is not a guard.
+		for (const id of ['L1-9000x', 'L1-0001 ', 'L1-+1', 'L1-', 'L1-00001234567']) {
+			expect(isShippableWordId(id)).toBe(false);
+			if (levelOfId(id) !== null) expect(levelOfId(id)).toBe(1);
+		}
+	});
+});
+
+describe('readGeneration', () => {
+	it('takes a counter a reset could have produced', () => {
+		expect(readGeneration(0)).toBe(0);
+		expect(readGeneration(7)).toBe(7);
+		expect(readGeneration('3')).toBe(3);
+		expect(readGeneration(-1)).toBe(0);
+	});
+
+	it('ignores a counter no reset could have produced, rather than honouring it', () => {
+		// Honouring `1e22` deleted every record on load; clamping it would too, because every
+		// record predates the clamp. A counter we cannot believe deletes nothing.
+		expect(readGeneration('9999999999999999999999')).toBe(0);
+		expect(readGeneration(1e308)).toBe(0);
+		expect(readGeneration(Infinity)).toBe(0);
+		expect(readGeneration(Number.NaN)).toBe(0);
+	});
+
+	it('keeps a bogus counter out of every generation comparison', () => {
+		const payload = decodeStored(
+			`{"v":1,"w":{"L1-0001":[3,3,3,${NOW},0]},"g":{"0":1e308,"1":1e308}}`,
+			NOW
+		);
+
+		expect(payload?.state.byWord['L1-0001']?.seen).toBe(3);
+		expect(generationFor(payload?.gens ?? {}, 1)).toBe(0);
+		// And what it encodes must be what it reads back, or the store writes bytes its own
+		// reader treats as empty.
+		expect(
+			decodeStored(encode(payload as StoredProgress), NOW)?.state.byWord['L1-0001']
+		).toBeTruthy();
+	});
+});
+
+describe('weigh', () => {
+	it('counts what a readable payload holds', () => {
+		const text = encode(
+			stored({
+				'L1-0001': { seen: 3, correct: 2, lastSeen: NOW },
+				'L1-0002': { seen: 1, correct: 1, lastSeen: NOW }
+			})
+		);
+
+		expect(weigh(text)).toMatchObject({ words: 2, answers: 4, readable: true });
+	});
+
+	it('still counts the word ids in bytes that will not parse', () => {
+		// A truncated write is the commonest corruption there is, and its keys are all still
+		// in the string. Refusing to count them is what let a one-word backup outrank it.
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= 40; i += 1) w[`L1-${String(i).padStart(4, '0')}`] = [3, 2, 1, NOW, 0];
+		const truncated = JSON.stringify({ v: 1, w, l: {} }).slice(0, -30);
+
+		expect(weigh(truncated)).toMatchObject({ words: 40, readable: false });
+	});
+
+	it('does not let junk ids inflate the count', () => {
+		expect(weigh('{"v":1,"w":{"L1-9000":[1,1,1,1,1],"L9-0001":[1,1,1,1,1]},"l":{}}').words).toBe(0);
+	});
+
+	it('measures the bytes, not what a reset generation left of them', () => {
+		// The shape that emptied the key in silence: 40 records still in the string, all of
+		// them outranked by the counter, so the decoded view is nothing at all.
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= 40; i += 1) w[`L1-${String(i).padStart(4, '0')}`] = [3, 2, 1, NOW, 0];
+		const text = JSON.stringify({ v: 1, w, l: {}, g: { 0: 4 } });
+
+		expect(decodeStored(text, NOW)?.state.byWord).toEqual({});
+		expect(weigh(text).words).toBe(40);
+	});
+});
+
+describe('heavier and shrinks', () => {
+	const heft = (words: number, answers = 0, readable = true, size = 100) => ({
+		words,
+		answers,
+		readable,
+		size
+	});
+
+	it('prefers more words, then more answers, then bytes that read', () => {
+		expect(heavier(heft(5), heft(4))).toBe(true);
+		expect(heavier(heft(4), heft(5))).toBe(false);
+		expect(heavier(heft(4, 9), heft(4, 8))).toBe(true);
+		expect(heavier(heft(4, 8, true), heft(4, 8, false))).toBe(true);
+	});
+
+	it('gives a tie to the copy already kept', () => {
+		expect(heavier(heft(4, 8), heft(4, 8))).toBe(false);
+	});
+
+	it('calls a write a shrink only when history actually goes', () => {
+		expect(shrinks(heft(10, 30), heft(9, 30))).toBe(true);
+		expect(shrinks(heft(10, 30), heft(10, 29))).toBe(true);
+		expect(shrinks(heft(10, 30), heft(10, 31))).toBe(false);
+		// A shorter encoding of the same history is not a loss.
+		expect(shrinks(heft(10, 30, true, 900), heft(10, 30, true, 400))).toBe(false);
 	});
 });
 

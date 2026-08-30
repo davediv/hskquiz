@@ -232,7 +232,8 @@ describe('persistence', () => {
 		const storage = new MemoryStorage();
 		const store = new ProgressStore({ storage });
 
-		for (let i = 0; i < 10; i += 1) store.recordAnswer(`L1-000${i}`, true);
+		// Real ids: `L1-0000` is not a word, and the store now refuses to record one.
+		for (let i = 1; i <= 10; i += 1) store.recordAnswer(`L1-${String(i).padStart(4, '0')}`, true);
 		expect(storage.writes).toBe(0);
 
 		vi.advanceTimersByTime(500);
@@ -439,7 +440,9 @@ describe('hostile storage', () => {
 		// The rescue happens on load, before anything can overwrite the key.
 		expect(storage.items.get(BACKUP_KEY)).toBe(corrupt);
 		expect(store.salvaged).toBe(true);
-		expect(store.rescue).toEqual({ words: null, answers: 0, reason: 'unreadable' });
+		// One word id is still legible in the bytes even though they will not parse, and saying
+		// "about 1 word" is more use to a learner than "we cannot tell".
+		expect(store.rescue).toEqual({ words: 1, answers: 0, readable: false, reason: 'unreadable' });
 
 		store.recordAnswer('L1-0009', true);
 		store.flush();
@@ -472,15 +475,41 @@ describe('hostile storage', () => {
 		expect(storage.items.get(BACKUP_KEY)).toBe(future);
 	});
 
-	it('keeps the first rescue copy rather than overwriting it with later junk', () => {
+	it('keeps the rescue copy that holds the most, not the one that got there first', () => {
+		// "First casualty wins" was exactly backwards: history accumulates, so the oldest copy
+		// is the smallest one, and a one-word leftover from a previous session used to sit in
+		// the backup key refusing three hundred words that were about to be overwritten.
 		const storage = new MemoryStorage();
-		storage.items.set(BACKUP_KEY, 'the original');
-		storage.items.set(STORAGE_KEY, 'also broken');
+		const small = JSON.stringify({ v: 1, w: { 'L1-0001': [1, 1, 1, T0, 0] }, l: {} });
+		const big: Record<string, number[]> = {};
+		for (let i = 1; i <= 40; i += 1) big[`L1-${String(i).padStart(4, '0')}`] = [3, 2, 1, T0, 0];
+		const bigText = JSON.stringify({ v: 1, w: big, l: {} });
+
+		storage.items.set(BACKUP_KEY, small);
+		// Truncated, so it cannot be decoded — and it still has to win, because its bytes name
+		// forty words and the copy already kept names one.
+		storage.items.set(STORAGE_KEY, bigText.slice(0, -30));
 
 		const store = new ProgressStore({ storage, now: () => T0 });
 
 		expect(store.salvaged).toBe(true);
-		expect(storage.items.get(BACKUP_KEY)).toBe('the original');
+		expect(storage.items.get(BACKUP_KEY)).toBe(bigText.slice(0, -30));
+		expect(store.rescue).toEqual({ words: 40, answers: 0, readable: false, reason: 'unreadable' });
+	});
+
+	it('does not let a smaller copy displace the one already kept', () => {
+		const storage = new MemoryStorage();
+		const big: Record<string, number[]> = {};
+		for (let i = 1; i <= 40; i += 1) big[`L1-${String(i).padStart(4, '0')}`] = [3, 2, 1, T0, 0];
+		const bigText = JSON.stringify({ v: 1, w: big, l: {} });
+
+		storage.items.set(BACKUP_KEY, bigText);
+		storage.items.set(STORAGE_KEY, '{"v":1,"w":{"L1-0001":[1,1,');
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		expect(storage.items.get(BACKUP_KEY)).toBe(bigText);
+		expect(store.rescue).toEqual({ words: 40, answers: 120, readable: true, reason: 'found' });
 	});
 
 	it('keeps the bytes when a merge loses a record no reset accounts for', () => {
@@ -512,7 +541,7 @@ describe('hostile storage', () => {
 		store.flush();
 
 		expect(storage.items.get(BACKUP_KEY)).toBe(before);
-		expect(store.rescue).toEqual({ words: 3, answers: 3, reason: 'lost' });
+		expect(store.rescue).toEqual({ words: 3, answers: 3, readable: true, reason: 'lost' });
 		expect(store.salvaged).toBe(true);
 	});
 
@@ -760,7 +789,7 @@ describe('the rescue copy', () => {
 		);
 
 		const store = new ProgressStore({ storage, now: () => T0 });
-		expect(store.rescue).toEqual({ words: 1, answers: 2, reason: 'found' });
+		expect(store.rescue).toEqual({ words: 1, answers: 2, readable: true, reason: 'found' });
 
 		store.recordAnswer('L1-0001', true);
 		store.flush();
@@ -800,7 +829,8 @@ describe('the rescue copy', () => {
 		storage.items.set(BACKUP_KEY, 'not json');
 
 		const store = new ProgressStore({ storage, now: () => T0 });
-		expect(store.rescue).toEqual({ words: null, answers: 0, reason: 'found' });
+		// 'not json' names no word id at all, so there is genuinely nothing to say about it.
+		expect(store.rescue).toEqual({ words: 0, answers: 0, readable: false, reason: 'found' });
 
 		expect(store.restoreRescue()).toBe(false);
 		expect(storage.items.get(BACKUP_KEY)).toBe('not json');
@@ -819,6 +849,104 @@ describe('the rescue copy', () => {
 
 		expect(store.rescue).toBeNull();
 		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+	});
+});
+
+describe('no write may shrink the key without a copy kept aside', () => {
+	/** N word records, as bytes the store would recognise. */
+	function payloadOfSize(n: number, level = 1): string {
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= n; i += 1) w[`L${level}-${String(i).padStart(4, '0')}`] = [3, 2, 1, T0, 0];
+		return JSON.stringify({ v: 1, w, l: {} });
+	}
+
+	it('rescues the key when a corrupt generation counter would empty it', () => {
+		// `1e308 + 1e308` used to overflow to `Infinity`, which `count()` read back as 0, so
+		// `encode` dropped every record on the way out while `flush()` returned true and the
+		// home screen went on promising "Progress is kept on this device".
+		const storage = new MemoryStorage();
+		storage.items.set(
+			STORAGE_KEY,
+			`{"v":1,"w":{"L3-0001":[5,5,5,${T0},0]},"g":{"0":1e308,"3":1e308}}`
+		);
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		// The counter is junk, so it is ignored rather than honoured: nothing is deleted.
+		expect(store.forWord('L3-0001').seen).toBe(5);
+
+		for (let i = 2; i <= 6; i += 1) store.recordAnswer(`L3-000${i}`, true);
+		expect(store.flush()).toBe(true);
+
+		const reloaded = new ProgressStore({ storage, now: () => T0 });
+		for (let i = 2; i <= 6; i += 1) expect(reloaded.forWord(`L3-000${i}`).seen).toBe(1);
+		expect(reloaded.forWord('L3-0001').seen).toBe(5);
+	});
+
+	it('ignores a generation counter no reset could have produced', () => {
+		const storage = new MemoryStorage();
+		storage.items.set(
+			STORAGE_KEY,
+			`{"v":1,"w":{"L1-0001":[3,3,3,${T0},0],"L1-0002":[2,2,2,${T0},0]},"g":{"0":"9999999999999999999999"}}`
+		);
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		expect(store.levelSummary(1).seen).toBe(2);
+		expect(store.rescue).toBeNull();
+	});
+
+	it('rescues a payload whose word map is the wrong shape', () => {
+		// It parses, so the old net let it through; it decodes to zero words, so the first
+		// answer overwrote all two hundred with no copy anywhere.
+		const storage = new MemoryStorage();
+		const entries = Array.from(
+			{ length: 200 },
+			(_, i) => `{"id":"L1-${String(i + 1).padStart(4, '0')}","seen":3}`
+		);
+		const arrayShaped = `{"v":1,"w":[${entries.join(',')}],"l":{}}`;
+		storage.items.set(STORAGE_KEY, arrayShaped);
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		store.recordAnswer('L1-0401', true);
+		store.flush();
+
+		expect(storage.items.get(BACKUP_KEY)).toBe(arrayShaped);
+		expect(store.rescue?.words).toBe(200);
+		expect(store.rescue?.readable).toBe(false);
+	});
+
+	it('lets a reset shrink the key without crying about it', () => {
+		const storage = new MemoryStorage();
+		storage.items.set(STORAGE_KEY, payloadOfSize(120));
+
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.levelSummary(1).seen).toBe(120);
+
+		expect(store.resetAll()).toBe(true);
+
+		expect(store.rescue).toBeNull();
+		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+		expect(storage.words()).toEqual({});
+		expect(store.eraseFailed).toBe(false);
+	});
+
+	it('says a reset did not happen when the write was refused', () => {
+		// The erase empties memory first, so every screen goes blank — while the key still holds
+		// every record. "These answers live only in this tab" was the wrong sentence entirely.
+		const storage = new MemoryStorage();
+		storage.items.set(STORAGE_KEY, payloadOfSize(3));
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		storage.failWrites = true;
+		expect(store.resetAll()).toBe(false);
+
+		expect(store.eraseFailed).toBe(true);
+		expect(storage.payload).toBe(payloadOfSize(3));
+
+		storage.failWrites = false;
+		expect(store.flush()).toBe(true);
+		expect(store.eraseFailed).toBe(false);
 	});
 });
 
@@ -856,6 +984,7 @@ describe('summarize', () => {
 		expect(summary).toEqual({
 			total: 4,
 			seen: 2,
+			met: 2,
 			mastered: 1,
 			answers: 4,
 			correct: 3,
@@ -879,6 +1008,7 @@ describe('summarize', () => {
 		expect(store.levelSummary(1)).toEqual({
 			total: SHIPPED_SIZES[1],
 			seen: 2,
+			met: 2,
 			mastered: 1,
 			answers: 4,
 			correct: 3,
@@ -888,6 +1018,7 @@ describe('summarize', () => {
 		expect(store.levelSummary(3)).toEqual({
 			total: SHIPPED_SIZES[3],
 			seen: 0,
+			met: 0,
 			mastered: 0,
 			answers: 0,
 			correct: 0,
@@ -901,6 +1032,12 @@ describe('summarize', () => {
 		// HSK 1 stops at L1-0500. These pass the id *shape* but name no word.
 		for (let i = 0; i < 900; i += 1) w[`L1-9${String(i).padStart(3, '0')}`] = [3, 3, 3, T0, 0];
 		w['L9-0001'] = [3, 3, 3, T0, 0];
+		// Ids that fail the guard's own shape test but that `levelOfId` still files under HSK 1.
+		// The guard used to wave every one of these through — it returned true whenever its
+		// regex did *not* match — so forty of them read as forty practised and forty mastered.
+		w['L1-9000x'] = [3, 3, 3, T0, 0];
+		w['L1-0001 '] = [3, 3, 3, T0, 0];
+		w['L1-+1'] = [3, 3, 3, T0, 0];
 		w['L1-0007'] = [3, 3, 3, T0, 0];
 		storage.items.set(STORAGE_KEY, JSON.stringify({ v: 1, w, l: {} }));
 
@@ -937,6 +1074,7 @@ describe('summarize', () => {
 		expect(store.summarize(['L1-0001'])).toEqual({
 			total: 1,
 			seen: 0,
+			met: 0,
 			mastered: 0,
 			answers: 0,
 			correct: 0,

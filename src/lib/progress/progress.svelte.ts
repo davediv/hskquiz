@@ -8,12 +8,22 @@
  * things, in this order:
  *
  *   1. **read** the key's current bytes;
- *   2. **rescue** them to `hskquiz:progress:broken` if they cannot be decoded, *or* if
- *      merging them would drop records no reset accounts for — before anything else touches
- *      them;
- *   3. **merge** what is there with what we hold, three-way, against the bytes we last agreed
+ *   2. **merge** what is there with what we hold, three-way, against the bytes we last agreed
  *      on — so another tab's answers survive, and a reset survives another tab;
+ *   3. **rescue** the bytes to `hskquiz:progress:broken` if the write would leave the learner
+ *      with less history than the key already holds — before anything overwrites them;
  *   4. **write** the merge, adopt it into memory, and record it as the new common ancestor.
+ *
+ * Step 3 is one rule, at one place: *no write may reduce the stored history without first
+ * copying the larger side aside and saying so on screen.* It is deliberately stated about
+ * outcomes rather than causes, because every attempt to enumerate the causes missed some. It
+ * used to trigger only when the bytes failed to *decode*, and a payload that decoded to an
+ * empty one — a word map that arrived as an array, a reset counter of `1e22` that outranked
+ * every record, an encoder dropping everything on the way out — walked straight past it while
+ * `flush()` reported success. Counting words before and after catches all three the same way.
+ * A reset is the one write whose whole point is to shrink the key, and it says so.
+ *
+ * The rescue key holds the **biggest** copy it has ever been offered, not the first.
  *
  * Nothing else writes. `resetLevel` and `resetAll` go through the same path, differing only in
  * that they move a reset generation on (see `progress-core.ts`) rather than deleting and
@@ -57,7 +67,7 @@
  */
 
 import { LEVELS, type Level, type ProgressState, type WordProgress } from '$lib/types';
-import { SHIPPED_SIZES } from '$lib/data/sizes';
+import { SHIPPED_SIZES, SHIPPED_TOTAL } from '$lib/data/sizes';
 import {
 	BACKUP_KEY,
 	EPOCH_FLOOR,
@@ -65,6 +75,7 @@ import {
 	PROBE_KEY,
 	STORAGE_KEY,
 	type Generations,
+	type Heft,
 	type StoredProgress,
 	applyAnswer,
 	applySeen,
@@ -73,19 +84,23 @@ import {
 	decodeStored,
 	emptyState,
 	emptyStored,
-	encode,
+	encodeWeighed,
 	generationFor,
 	generationForWord,
+	hasHistory,
+	heavier,
+	isShippableWordId,
 	isUsableWordId,
 	levelOfId,
 	mergeProgress,
 	ownRecord,
 	recordUnderOwnKey,
 	restoreInto,
+	shrinks,
 	snapshot,
 	stampLevelGen,
-	tally,
-	unexplainedLosses
+	unexplainedLosses,
+	weigh
 } from './progress-core.ts';
 
 /** The slice of the `Storage` API this store needs. Lets tests hand in a fake. */
@@ -116,10 +131,16 @@ export type RescueReason =
 
 /** What can be said about a rescue copy without restoring it. */
 export interface RescueInfo {
-	/** Word records the copy holds, or `null` when the copy cannot be decoded either. */
-	words: number | null;
-	/** Answers those records add up to. */
+	/**
+	 * Word records the copy holds. When `readable` is false these are the word ids its bytes
+	 * still *name* — a truncated write is unparseable but its keys are all right there, and
+	 * "about 300 words" is a far more useful thing to tell a learner than "unknown".
+	 */
+	words: number;
+	/** Answers those records add up to. `0` when the copy cannot be decoded. */
 	answers: number;
+	/** False when the copy cannot be decoded, and so cannot be restored — only kept. */
+	readable: boolean;
 	reason: RescueReason;
 }
 
@@ -146,6 +167,13 @@ export interface ProgressSummary {
 	total: number;
 	/** Of those, how many have been answered at least once. Never more than `total`. */
 	seen: number;
+	/**
+	 * How many have been *met*: answered, or introduced by a teach card. The first session at a
+	 * level is all introductions, so `seen` is 0 for every one of them and a learner who has
+	 * just finished ten cards reads as having done nothing at all. This is the figure that says
+	 * they turned up. Never more than `total`.
+	 */
+	met: number;
 	/** Of those, how many are on a streak of `MASTERY_STREAK` or better. Never more than `seen`. */
 	mastered: number;
 	/** Total answers given across the list. */
@@ -179,9 +207,24 @@ export class ProgressStore {
 	 */
 	#settledText: string | null = null;
 
+	/**
+	 * How much history those bytes hold. Cached beside them so the write path can find out
+	 * whether it is about to shrink the key without re-reading or re-scanning ~200 KB.
+	 */
+	#settledHeft: Heft | null = null;
+
 	#status = $state<StorageStatus>('unavailable');
 	#rescued = $state<RescueInfo | null>(null);
-	#salvageAttempted = false;
+
+	/**
+	 * True while a reset is on its way to disk. The write path refuses to shrink the key
+	 * without keeping a copy; a reset is the one write whose entire purpose is to shrink it,
+	 * and the learner has already said so out loud.
+	 */
+	#forgetting = false;
+
+	/** Set when a Reset could not be written. The erase is in memory only, and undone by a reload. */
+	#eraseFailed = $state(false);
 
 	#storage: StorageLike | null;
 	#now: () => number;
@@ -246,6 +289,18 @@ export class ProgressStore {
 	}
 
 	/**
+	 * True when the last Reset could not be written to storage.
+	 *
+	 * The erase happened in memory, so every screen goes blank — but the key still holds every
+	 * record, and a reload brings all of it back. Reactive, and rendered by `StorageNotice`:
+	 * showing an erased app that is not erased, under a notice about *saving*, was the wrong
+	 * sentence at the worst possible moment.
+	 */
+	get eraseFailed(): boolean {
+		return this.#eraseFailed;
+	}
+
+	/**
 	 * The record for a word, as a **detached copy**. Never the live `$state` proxy: callers
 	 * hand this straight to components, and returning the proxy meant a stray assignment could
 	 * rewrite the learner's history without ever scheduling a write, then get persisted later
@@ -260,9 +315,15 @@ export class ProgressStore {
 		return record ? { ...record } : blankWord(wordId);
 	}
 
-	/** Fold one answer into the word's record. */
+	/**
+	 * Fold one answer into the word's record.
+	 *
+	 * Both id guards, not just the safe-key one: the decoder refuses an id that claims a level
+	 * it cannot belong to, so accepting one here meant memory and disk quietly disagreed — the
+	 * screen counted a word the next reload had never heard of, with no signal either way.
+	 */
 	recordAnswer(wordId: string, correct: boolean): void {
-		if (!isUsableWordId(wordId)) return;
+		if (!isUsableWordId(wordId) || !isShippableWordId(wordId)) return;
 
 		const existing = ownRecord(this.#state.byWord, wordId);
 		const record = existing ?? blankWord(wordId);
@@ -288,7 +349,7 @@ export class ProgressStore {
 	 * write. `applySeen` explains the field choice; `hasHistory` is what keeps it on disk.
 	 */
 	noteSeen(wordId: string): void {
-		if (!isUsableWordId(wordId)) return;
+		if (!isUsableWordId(wordId) || !isShippableWordId(wordId)) return;
 
 		const existing = ownRecord(this.#state.byWord, wordId);
 		const record = existing ?? blankWord(wordId);
@@ -324,8 +385,8 @@ export class ProgressStore {
 	 * Moves the level's reset generation on as well as deleting, so a second tab that is
 	 * mid-debounce cannot merge the level back in half a second later.
 	 */
-	resetLevel(level: Level): void {
-		if (!LEVELS.includes(level)) return;
+	resetLevel(level: Level): boolean {
+		if (!LEVELS.includes(level)) return false;
 
 		this.#bump(level);
 		delete this.#state.levels[level];
@@ -335,7 +396,9 @@ export class ProgressStore {
 
 		// Destructive and deliberate: write it now, not in 400 ms.
 		this.#dirty = true;
-		this.flush();
+		const landed = this.flush();
+		this.#eraseFailed = !landed;
+		return landed;
 	}
 
 	/**
@@ -348,18 +411,24 @@ export class ProgressStore {
 	 * except a counter saying how many times they have asked to be forgotten, which is the one
 	 * fact that makes forgetting stick.
 	 */
-	resetAll(): void {
+	resetAll(): boolean {
 		this.#bump(0);
 		this.#state = emptyState();
 		this.#failures = 0;
 		this.#dirty = true;
 		const landed = this.flush();
+		// Screens go blank the moment memory is emptied, so a write that never landed leaves an
+		// app that *looks* erased sitting on a key that still holds every record — and the only
+		// thing on screen said "these answers live only in this tab", which is the wrong
+		// sentence for a reset in every particular. `eraseFailed` is how that gets said properly.
+		this.#eraseFailed = !landed;
 
 		// "Everything" includes the rescue copy — but only once the erase itself has actually
 		// landed. Deleting the only backup while the key still holds every record is the exact
 		// inverse of what Reset promises, and a refresh used to bring all of it back.
-		if (!landed) return;
+		if (!landed) return false;
 		this.discardRescue();
+		return true;
 	}
 
 	/**
@@ -372,7 +441,7 @@ export class ProgressStore {
 	 */
 	restoreRescue(): boolean {
 		const storage = this.#storage;
-		if (!storage || this.#rescued === null) return false;
+		if (!storage || this.#rescued === null || !this.#rescued.readable) return false;
 
 		let text: string | null;
 		try {
@@ -381,14 +450,27 @@ export class ProgressStore {
 			return false;
 		}
 
-		const rescued = decodeStored(text, this.#at());
+		const rescued = decodeStored(text, this.#now());
 		if (rescued === null) return false;
+
+		// Rolled back on a rejected write. Assigning first and returning false without undoing
+		// it printed "That could not be put back" underneath a screen already showing every
+		// restored word — the failure notice and the numbers next to it disagreeing about what
+		// had just happened.
+		const wasState = this.#state;
+		const wasGens = this.#gens;
+		const wasDirty = this.#dirty;
 
 		const restored = restoreInto(snapshot(this.#mine()), rescued);
 		this.#state = restored.state;
 		this.#gens = restored.gens;
 		this.#dirty = true;
-		if (!this.flush()) return false;
+		if (!this.flush()) {
+			this.#state = wasState;
+			this.#gens = wasGens;
+			this.#dirty = wasDirty;
+			return false;
+		}
 
 		this.discardRescue();
 		return true;
@@ -397,7 +479,6 @@ export class ProgressStore {
 	/** Throw the rescue copy away. Safe when there is none. */
 	discardRescue(): void {
 		this.#rescued = null;
-		this.#salvageAttempted = false;
 		const storage = this.#storage;
 		if (!storage) return;
 		try {
@@ -419,11 +500,13 @@ export class ProgressStore {
 		this.#state = emptyState();
 		this.#gens = {};
 		this.#settledText = null;
+		this.#settledHeft = null;
 		this.#dirty = false;
 		this.#dirtySince = -1;
 		this.#failures = 0;
+		this.#forgetting = false;
+		this.#eraseFailed = false;
 		this.#rescued = null;
-		this.#salvageAttempted = false;
 	}
 
 	/**
@@ -435,6 +518,25 @@ export class ProgressStore {
 		const summary = blankSummary(total);
 		for (const wordId of Object.keys(this.#state.byWord)) {
 			if (levelOfId(wordId) !== level) continue;
+			const record = recordUnderOwnKey(this.#state.byWord, wordId);
+			if (record) accumulate(summary, record);
+		}
+		return finishSummary(summary);
+	}
+
+	/**
+	 * Every level's figures added up, for the one-line strip on the home screen.
+	 *
+	 * Counts only ids that name a level this app ships. A stored payload is the one input this
+	 * module does not control, and a home headline of "2 practised · 1 mastered" over five
+	 * level cards that all read 0 is the app contradicting itself in a single glance — which is
+	 * what happened the moment a key held `"hello"` or `"zz-1"`. `levelSummary` has always
+	 * filtered; the total had no filter at all because it was assembled somewhere else.
+	 */
+	overallSummary(total: number = SHIPPED_TOTAL): ProgressSummary {
+		const summary = blankSummary(total);
+		for (const wordId of Object.keys(this.#state.byWord)) {
+			if (levelOfId(wordId) === null) continue;
 			const record = recordUnderOwnKey(this.#state.byWord, wordId);
 			if (record) accumulate(summary, record);
 		}
@@ -470,13 +572,17 @@ export class ProgressStore {
 			return true;
 		}
 
-		const mineText = encode(this.#mine());
+		const mine = this.#mine();
+		// Encoded *and* weighed in one pass: the shrink guard below needs to know how much
+		// history is going into the key, and counting it separately was a second walk over
+		// 4,316 records on every answer.
+		const { text: mineText, heft: mineHeft } = encodeWeighed(mine);
 		const raw = this.#readText(storage);
 		if (raw === null) return false; // Reading threw; it has already stood the store down.
 
 		if (raw.text === mineText) {
 			// Someone already wrote exactly this. Nothing to do but agree with it.
-			this.#settle(mineText);
+			this.#settle(mineText, mineHeft);
 			return true;
 		}
 
@@ -486,12 +592,22 @@ export class ProgressStore {
 		// on every single answer.
 		let merged: StoredProgress | null = null;
 		let mergedText = mineText;
-		if (raw.text !== this.#settledText) {
+		let outgoing = mineHeft;
+		// What the key holds *now*. On the fast path that is the heft we cached when we settled
+		// on those very bytes, so the guard below costs nothing; otherwise we are decoding them
+		// anyway and can weigh what we decoded.
+		let onDisk = this.#settledHeft;
+		if (raw.text !== this.#settledText || onDisk === null) {
 			const disk = this.#decodeDisk(storage, raw.text);
 			merged = this.#merge(disk);
-			mergedText = encode(merged);
+			const encoded = encodeWeighed(merged);
+			mergedText = encoded.text;
+			outgoing = encoded.heft;
 			this.#guardLoss(storage, disk, merged);
+			onDisk = weigh(disk.text, disk.stored);
 		}
+
+		this.#guardShrink(storage, raw.text, onDisk, outgoing);
 
 		try {
 			storage.setItem(STORAGE_KEY, mergedText);
@@ -503,7 +619,7 @@ export class ProgressStore {
 		}
 
 		if (merged) this.#adopt(merged, mergedText !== mineText);
-		this.#settle(mergedText);
+		this.#settle(mergedText, outgoing);
 		return true;
 	}
 
@@ -519,8 +635,12 @@ export class ProgressStore {
 		this.#state = adopted.state;
 		this.#gens = adopted.gens;
 		// Unreadable bytes are now backed up but still sitting in the key; agreeing on them
-		// means the next mutation legitimately replaces them.
+		// means the next mutation legitimately replaces them. Weighed from the *bytes*, not
+		// from what they decoded to: a payload whose records a bogus generation counter just
+		// deleted decodes to nothing while its bytes still name every one of them, and it is
+		// that larger number the next write has to answer to.
 		this.#settledText = disk.text;
+		this.#settledHeft = weigh(disk.text, disk.stored);
 		this.#dirty = false;
 		this.#dirtySince = -1;
 		this.#noteExistingRescue(storage);
@@ -538,9 +658,10 @@ export class ProgressStore {
 		const raw = this.#readText(storage);
 		if (raw === null) return;
 
-		const mineText = encode(this.#mine());
+		const mine = this.#mine();
+		const { text: mineText, heft: mineHeft } = encodeWeighed(mine);
 		if (raw.text === mineText) {
-			this.#settle(mineText);
+			this.#settle(mineText, mineHeft);
 			return;
 		}
 		if (raw.text === this.#settledText) {
@@ -552,18 +673,19 @@ export class ProgressStore {
 
 		const disk = this.#decodeDisk(storage, raw.text);
 		const merged = this.#merge(disk);
-		const mergedText = encode(merged);
+		const { text: mergedText, heft: mergedHeft } = encodeWeighed(merged);
 		this.#guardLoss(storage, disk, merged);
 		this.#adopt(merged, mergedText !== mineText);
 
 		if (mergedText === disk.text) {
-			this.#settle(mergedText);
+			this.#settle(mergedText, mergedHeft);
 			return;
 		}
 
 		// The key does not yet hold everything we know, but we have absorbed everything it
 		// holds — so those bytes are the ancestor the next merge is against.
 		this.#settledText = disk.text;
+		this.#settledHeft = weigh(disk.text, disk.stored);
 		this.#dirty = true;
 		this.#schedule();
 	}
@@ -575,7 +697,7 @@ export class ProgressStore {
 
 	/** The last payload this tab and the key agreed on, decoded. Only a real merge needs it. */
 	#baseline(): StoredProgress {
-		return decodeStored(this.#settledText, this.#at()) ?? emptyStored();
+		return decodeStored(this.#settledText, this.#now()) ?? emptyStored();
 	}
 
 	#merge(disk: DiskRead): StoredProgress {
@@ -597,6 +719,32 @@ export class ProgressStore {
 		const lost = unexplainedLosses(disk.stored, merged);
 		if (lost.length === 0) return;
 		this.#keepAside(storage, disk.text, 'lost');
+	}
+
+	/**
+	 * The one rule the whole rescue net now hangs on: **no write may reduce the stored history
+	 * without first copying the larger side aside and saying so on screen.**
+	 *
+	 * `#guardLoss` above asks a narrower question — did the *merge* drop a record it could not
+	 * account for — and it only ever gets asked when the merge runs at all. That left three
+	 * ways to empty the key in perfect silence, all of them reproduced against the real store:
+	 *
+	 * - a payload whose word map decoded to nothing because it was the wrong *shape* (an array
+	 *   where the map should be), which the decoder used to accept as "a valid, empty payload";
+	 * - a generation counter of `1e22`, which deleted every record on load and left the key
+	 *   looking like it had always been empty;
+	 * - `encode` itself dropping every record on the way out, with `flush()` returning true.
+	 *
+	 * Every one of them ends the same way: bytes holding N words are replaced by bytes holding
+	 * fewer. So that — not the cause — is what is checked, at the single point where the
+	 * replacement actually happens. A reset is the one shrink that is not a loss, and it says
+	 * so through `#forgetting`.
+	 */
+	#guardShrink(storage: StorageLike, text: string | null, onDisk: Heft, outgoing: Heft): void {
+		if (text === null || text === '') return;
+		if (this.#forgetting) return;
+		if (!shrinks(onDisk, outgoing)) return;
+		this.#keepAside(storage, text, 'lost');
 	}
 
 	/**
@@ -626,7 +774,12 @@ export class ProgressStore {
 	#decodeDisk(storage: StorageLike, text: string | null): DiskRead {
 		if (text === null || text === '') return { text, stored: null };
 
-		const stored = decodeStored(text, this.#at());
+		// The *raw* clock, not `#at()`'s floored one. `#at()` floors to 2024 so that what this
+		// store writes can be read back; handing that floor to the decoder as "now" told it
+		// that every real 2026 timestamp was two years in the future, and it dutifully pulled
+		// all of them back to the same instant. A device clock that cannot be true cannot
+		// adjudicate the future either, and `stamp()` now knows to leave well alone.
+		const stored = decodeStored(text, this.#now());
 		// Corrupt, truncated, or from a schema we do not know. Those bytes are the learner's
 		// entire history and we are about to write over them, so keep a copy first.
 		if (stored === null) this.#keepAside(storage, text, 'unreadable');
@@ -639,18 +792,44 @@ export class ProgressStore {
 		return raw === null ? null : this.#decodeDisk(storage, raw.text);
 	}
 
-	/** Copy bytes aside, once, and never over an existing rescue copy. */
+	/**
+	 * Keep a copy of some bytes — and make sure the copy that survives is the **biggest** one.
+	 *
+	 * This used to be "first casualty wins", latched for the whole session, on the theory that
+	 * the oldest surviving copy held the most history. It is the other way round: history
+	 * accumulates, so the oldest copy is the *smallest* one, and the rule destroyed exactly
+	 * what it existed to protect. A one-word copy left over from a previous session would sit
+	 * in the backup key refusing three hundred words, and the notice on screen said "it was
+	 * copied somewhere safe" over a count belonging to the copy that had not been kept.
+	 *
+	 * So both sides are weighed and the heavier one stays. That comparison is also what makes
+	 * the session-long latch unnecessary — a copy can only be replaced by more history than it
+	 * holds, so there is no loop to guard against, and a rescue is no longer a one-shot chance
+	 * the first corrupt byte of the session uses up.
+	 *
+	 * `weigh` counts the word ids the *bytes* name, so a truncated payload that will not parse
+	 * is still measurable, and still wins against a one-word copy that parses perfectly.
+	 */
 	#keepAside(storage: StorageLike, text: string, reason: RescueReason): void {
-		if (this.#salvageAttempted) return;
-		this.#salvageAttempted = true;
 		try {
-			// First casualty wins: the oldest surviving copy is the one with the most history.
 			const existing = storage.getItem(BACKUP_KEY);
-			if (existing === null) storage.setItem(BACKUP_KEY, text);
-			this.#rescued = describeRescue(existing ?? text, existing === null ? reason : 'found');
+			const incoming = weigh(text);
+			const kept = existing === null || existing === '' ? null : weigh(existing);
+
+			// Ties go to the copy already there: it is equally good and already safe. When it is
+			// byte-for-byte what we came to keep, it is still *this* rescue and keeps this
+			// reason — calling it "a copy from an earlier visit" would misdate what just
+			// happened by a whole session.
+			if (kept !== null && !heavier(incoming, kept)) {
+				this.#rescued = describeRescue(kept, existing === text ? reason : 'found');
+				return;
+			}
+
+			storage.setItem(BACKUP_KEY, text);
+			// The reason describes the copy that actually ended up stored — this one.
+			this.#rescued = describeRescue(incoming, reason);
 		} catch {
 			// A full quota is exactly when this fails. Nothing better is available.
-			this.#salvageAttempted = false;
 		}
 	}
 
@@ -661,9 +840,7 @@ export class ProgressStore {
 		try {
 			const text = storage.getItem(BACKUP_KEY);
 			if (text === null || text === '') return;
-			// One copy already exists and `#keepAside` would refuse to replace it anyway.
-			this.#salvageAttempted = true;
-			this.#rescued = describeRescue(text, 'found');
+			this.#rescued = describeRescue(weigh(text), 'found');
 		} catch {
 			// No storage to ask; nothing to offer.
 		}
@@ -692,12 +869,15 @@ export class ProgressStore {
 		this.#status = 'saving';
 	}
 
-	/** The key now holds `text`. Agree on it and call the write clean. */
-	#settle(text: string | null): void {
+	/** The key now holds `text`, and this much history. Agree on it and call the write clean. */
+	#settle(text: string | null, heft: Heft): void {
 		this.#settledText = text;
+		this.#settledHeft = heft;
 		this.#dirty = false;
 		this.#dirtySince = -1;
 		this.#failures = 0;
+		this.#forgetting = false;
+		this.#eraseFailed = false;
 		this.#status = 'saving';
 	}
 
@@ -717,6 +897,9 @@ export class ProgressStore {
 	 * holding a stale payload would otherwise be absorbed and do nothing.
 	 */
 	#bump(scope: number): void {
+		// Every caller of this is a reset, and a reset is the one write allowed to make the key
+		// smaller without a copy kept aside. Cleared when the erase actually lands.
+		this.#forgetting = true;
 		let onDisk = 0;
 		const storage = this.#storage;
 		if (storage) {
@@ -798,20 +981,18 @@ export class ProgressStore {
 	}
 }
 
-function describeRescue(text: string, reason: RescueReason): RescueInfo {
-	// Deliberately not the store's clock: this is a summary of bytes, and if the copy is junk
-	// the honest answer is "we cannot tell", not a fabricated count.
-	const stored = decodeStored(text);
-	if (stored === null) return { words: null, answers: 0, reason };
-	const counts = tally(stored);
-	return { words: counts.words, answers: counts.answers, reason };
+/** Turn a weighed copy into something the notice can put in a sentence. */
+function describeRescue(heft: Heft, reason: RescueReason): RescueInfo {
+	return { words: heft.words, answers: heft.answers, readable: heft.readable, reason };
 }
 
 function blankSummary(total: number): ProgressSummary {
-	return { total, seen: 0, mastered: 0, answers: 0, correct: 0, accuracy: 0 };
+	return { total, seen: 0, met: 0, mastered: 0, answers: 0, correct: 0, accuracy: 0 };
 }
 
 function accumulate(summary: ProgressSummary, record: WordProgress): void {
+	// An introduction is not an answer, but it is not nothing either — see `met`.
+	if (hasHistory(record)) summary.met += 1;
 	if (record.seen === 0) return;
 	summary.seen += 1;
 	summary.answers += record.seen;
@@ -825,7 +1006,11 @@ function finishSummary(summary: ProgressSummary): ProgressSummary {
 	// sparse when homographs merged, a hand-edited key, a record from a future deploy. Counting
 	// them is fine; *reporting* more practised words than the level contains is not, and it used
 	// to render "900 practised" directly under "500 words".
-	if (summary.total > 0) summary.seen = Math.min(summary.seen, summary.total);
+	if (summary.total > 0) {
+		summary.seen = Math.min(summary.seen, summary.total);
+		summary.met = Math.min(summary.met, summary.total);
+	}
+	summary.met = Math.max(summary.met, summary.seen);
 	summary.mastered = Math.min(summary.mastered, summary.seen);
 	return summary;
 }
