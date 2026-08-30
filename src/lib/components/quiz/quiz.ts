@@ -93,22 +93,57 @@ export function headwordSize(hanzi: string): HeadwordSize {
 	return 'md';
 }
 
-/**
- * How many lines the English side of a production question will take, capped at three.
- *
- * The prompt sizes itself against the height the layout left it, and "how big can this be"
- * depends entirely on how many lines it wraps to: 34px is right for `many` and three lines
- * too tall for `makes a sentence a yes-no question` (the longest gloss shipped, 34
- * characters). The measure is 15ch, so ~13 characters land on a line once wrapping is
- * accounted for. 2,769 of the 4,308 shipped glosses are one line, 1,428 two, 111 three.
- */
-export function askLines(gloss: string): 1 | 2 | 3 {
-	const lines = Math.ceil(gloss.trim().length / 13);
-	return lines <= 1 ? 1 : lines === 2 ? 2 : 3;
+/** One run of an example sentence: the word being asked about, or everything around it. */
+export interface SentencePart {
+	text: string;
+	/** True for the run that IS the headword — bolded on a teach card, blanked on a question. */
+	hit: boolean;
+}
+
+/** An example sentence split around its own headword. */
+export interface SplitSentence {
+	/** The sentence's hanzi as before / headword / after, empty runs dropped. */
+	parts: SentencePart[];
+	/** Characters in the sentence, punctuation included: the divisor its type is set by. */
+	chars: number;
 }
 
 /**
- * How wide the revealed meaning line is, in ems of its own font size.
+ * An example sentence cut into the headword and its surroundings.
+ *
+ * This is what lets a teach card bold 早上 inside 早上我喝一杯牛奶。the way Pleco bolds 几乎 in
+ * its examples, and what lets a production question blank it out instead — which is the whole
+ * reason it returns runs rather than a string.
+ *
+ * The build guarantees every sentence contains its own word, and all 4,308 shipped ones do; a
+ * card that ever stopped clearing that gate comes back as a single un-hit run, so the caller
+ * prints a plain sentence rather than blanking the wrong half of it.
+ */
+export function splitExample(sentence: string, hanzi: string): SplitSentence {
+	const chars = [...sentence];
+	const target = [...hanzi];
+	const whole: SplitSentence = { parts: [{ text: sentence, hit: false }], chars: chars.length };
+	if (target.length === 0) return whole;
+
+	let at = -1;
+	for (let i = 0; i + target.length <= chars.length; i++) {
+		if (target.every((glyph, j) => chars[i + j] === glyph)) {
+			at = i;
+			break;
+		}
+	}
+	if (at < 0) return whole;
+
+	const parts = [
+		{ text: chars.slice(0, at).join(''), hit: false },
+		{ text: chars.slice(at, at + target.length).join(''), hit: true },
+		{ text: chars.slice(at + target.length).join(''), hit: false }
+	].filter((part) => part.text !== '');
+	return { parts, chars: chars.length };
+}
+
+/**
+ * How wide a line of English is, in ems of its own font size.
  *
  * WHY NOT `gloss.length`. The meaning used to step down a three-rung scale on character count
  * (>62 small, >42 base), and the count is not what decides whether it wraps — the rendered
@@ -118,15 +153,17 @@ export function askLines(gloss: string): 1 | 2 | 3 {
  * line and kept its character 25px bigger. The character was being sized by the length of its
  * English definition, and length is a bad proxy: `i` is 0.22em and `W` is 0.94em.
  *
- * So this returns a width, and the stylesheet divides the column by it (`96cqw / em`) to get
- * the largest size that fits on one line, clamped to the scale. The table is measured, not
- * guessed: every glyph in the 4,308 shipped glosses was rendered in the app's own
- * `--font-sans` at weight 550 and measured off the DOM, and the outliers below are those
- * numbers. (Not `canvas.measureText`: the canvas resolves the same font stack ~6% narrow at
- * this weight, and a narrow estimate is exactly the failure this function exists to prevent —
- * 想's gloss came out 20.3em against a real 21.1 and wrapped anyway.) The two defaults are
- * deliberately the wide end of their class, so the estimate lands over the truth rather than
- * under: checked against all 4,308 rendered strings, rendered/estimate tops out at 0.995.
+ * So this returns a width, and the stylesheet divides the column by it to get the largest size
+ * that fits on one line, clamped to the scale — for the revealed meaning (`96cqw / em`), for
+ * the English hero it is the question in the other direction, and for the clue's translation.
+ * The table is measured, not guessed: every glyph in the 4,308 shipped glosses was rendered in
+ * the app's own `--font-sans` at weight 550 and measured off the DOM, and the outliers below
+ * are those numbers. (Not `canvas.measureText`: the canvas resolves the same font stack ~6%
+ * narrow at this weight, and a narrow estimate is exactly the failure this function exists to
+ * prevent — 想's gloss came out 20.3em against a real 21.1 and wrapped anyway.) The two
+ * defaults are deliberately the wide end of their class, so the estimate lands over the truth
+ * rather than under: checked against all 4,308 rendered strings, rendered/estimate tops out at
+ * 0.995.
  */
 const GLOSS_EM: Record<string, number> = {
 	' ': 0.26,
@@ -153,7 +190,7 @@ const GLOSS_EM: Record<string, number> = {
 	W: 0.94
 };
 
-/** Estimated width of one gloss line, in ems. Never zero — it is used as a divisor. */
+/** Estimated width of one line of English, in ems. Never zero — it is used as a divisor. */
 export function glossEm(gloss: string): number {
 	let em = 0;
 	for (const ch of gloss.trim()) {
