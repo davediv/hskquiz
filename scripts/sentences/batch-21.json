@@ -5,9 +5,9 @@
 		"english": "I bought two books."
 	},
 	"L1-0048": {
-		"hanzi": "他从房间里出来了。",
-		"pinyin": "tā cóng fáng jiān lǐ chū lái le",
-		"english": "He came out of the room."
+		"hanzi": "爸爸出门去上班了。",
+		"pinyin": "bà ba chū mén qù shàng bān le",
+		"english": "Dad has gone out to work."
 	},
 	"L1-0074": {
 		"hanzi": "我弟弟今年八岁。",
@@ -15,14 +15,14 @@
 		"english": "My younger brother is eight this year."
 	},
 	"L1-0100": {
-		"hanzi": "这家饭店的菜很好吃。",
-		"pinyin": "zhè jiā fàn diàn de cài hěn hǎo chī",
-		"english": "The food at this restaurant is delicious."
+		"hanzi": "这家饭店有很多人。",
+		"pinyin": "zhè jiā fàn diàn yǒu hěn duō rén",
+		"english": "There are a lot of people in this restaurant."
 	},
 	"L1-0126": {
-		"hanzi": "走的时候请关上门。",
-		"pinyin": "zǒu de shí hou qǐng guān shang mén",
-		"english": "Please close the door when you leave."
+		"hanzi": "她关上门就走了。",
+		"pinyin": "tā guān shang mén jiù zǒu le",
+		"english": "She pulled the door shut and left."
 	},
 	"L1-0152": {
 		"hanzi": "他不是坏人。",
@@ -145,9 +145,9 @@
 		"english": "We keep a few chickens at home."
 	},
 	"L2-0276": {
-		"hanzi": "我的脚很疼。",
-		"pinyin": "wǒ de jiǎo hěn téng",
-		"english": "My foot really hurts."
+		"hanzi": "冬天我的脚很冷。",
+		"pinyin": "dōng tiān wǒ de jiǎo hěn lěng",
+		"english": "My feet get cold in winter."
 	},
 	"L2-0302": {
 		"hanzi": "我们住在这家酒店。",

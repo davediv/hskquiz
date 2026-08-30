@@ -12,8 +12,8 @@
 		"note": "Adj row; \"promptly\" was an adverb gloss"
 	},
 	"L3-0318": {
-		"meanings": ["to an extreme degree"],
-		"note": "Bound form …极了. Bare \"extremely\" collides with 非常 L1, and the gate bars a parenthetical."
+		"meanings": ["after an adjective: utterly"],
+		"note": "No POS. …极了 is a frame, not a word, and the notation stripper leaves the hero rendering only 极了 — so the gloss has to name the slot the learner fills. CC-CEDICT can only say \"extremely\"/\"exceedingly\", which is why L3-0318 stays in scripts/gloss-survival-allow.json."
 	},
 	"L3-0319": {
 		"meanings": ["a collective or group"],
@@ -60,8 +60,8 @@
 		"note": "N; second clause restored"
 	},
 	"L3-0337": {
-		"meanings": ["measure word: planes or machines", "a shelf or rack"],
-		"note": "POS lists M first; kept clear of 台 L3."
+		"meanings": ["measure word: planes or machines", "a shelf or rack", "to prop up"],
+		"note": "POS lists M first; kept clear of 台 L3. Gate (d) asks a card that declares V for a verb sense somewhere in its glosses; \"to prop up\" is it."
 	},
 	"L3-0338": {
 		"meanings": ["to persevere", "to insist on"],

@@ -8659,7 +8659,7 @@
 		"pinyin": "jià",
 		"level": 3,
 		"pos": ["M", "N", "V"],
-		"currentMeanings": ["measure word: planes or machines", "a shelf or rack"],
+		"currentMeanings": ["measure word: planes or machines", "a shelf or rack", "to prop up"],
 		"cedictDefs": [
 			"to support",
 			"frame",
@@ -9918,6 +9918,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L3-0637",
+		"hanzi": "胜利",
+		"pinyin": "shènglì",
+		"level": 3,
+		"pos": ["V", "N"],
+		"currentMeanings": ["victory", "to win"],
+		"cedictDefs": ["victory", "CL:個|个[ge4]"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
 		"id": "L3-0641",
 		"hanzi": "时",
 		"pinyin": "shí",
@@ -9953,7 +9963,7 @@
 		"pinyin": "shíyàn",
 		"level": 3,
 		"pos": ["V", "N"],
-		"currentMeanings": ["an experiment"],
+		"currentMeanings": ["an experiment", "to experiment"],
 		"cedictDefs": ["experiment", "test", "CL:個|个[ge4],次[ci4]", "experimental", "to experiment"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
@@ -10766,7 +10776,7 @@
 		"pos": ["V"],
 		"currentMeanings": ["to win"],
 		"cedictDefs": ["to beat", "to win", "to profit"],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
 		"id": "L3-0854",
@@ -10802,7 +10812,17 @@
 		"pos": ["V"],
 		"currentMeanings": ["to swim", "to roam about"],
 		"cedictDefs": ["to swim", "variant of 遊|游[you2]"],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L3-0861",
+		"hanzi": "游泳",
+		"pinyin": "yóuyǒng",
+		"level": 3,
+		"pos": ["N", "V"],
+		"currentMeanings": ["swimming", "to swim"],
+		"cedictDefs": ["swimming", "to swim"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L3-0869",
@@ -12074,7 +12094,7 @@
 		"pinyin": "dǐng",
 		"level": 4,
 		"pos": ["N", "V", "M"],
-		"currentMeanings": ["the top of something", "measure word for hats"],
+		"currentMeanings": ["the top of something", "measure word for hats", "to carry on the head"],
 		"cedictDefs": [
 			"apex",
 			"crown of the head",
@@ -13219,7 +13239,7 @@
 		"pinyin": "mèng",
 		"level": 4,
 		"pos": ["N", "V"],
-		"currentMeanings": ["a dream while asleep"],
+		"currentMeanings": ["a dream while asleep", "to dream"],
 		"cedictDefs": ["dream (CL:場|场[chang2])", "(bound form) to dream"],
 		"reasons": ["has-authored-override", "single-character"]
 	},
@@ -13833,7 +13853,7 @@
 		"pinyin": "tǐjiǎn",
 		"level": 4,
 		"pos": ["V"],
-		"currentMeanings": ["medical check-up"],
+		"currentMeanings": ["medical check-up", "to have a medical check-up"],
 		"cedictDefs": ["abbr. for 體格檢查|体格检查[ti3 ge2 jian3 cha2]"],
 		"reasons": ["has-authored-override", "no-usable-cedict-sense", "pos-and-gloss-disagree"]
 	},
@@ -15298,7 +15318,7 @@
 		"pinyin": "dāngqián",
 		"level": 5,
 		"pos": ["N", "V"],
-		"currentMeanings": ["the present", "current"],
+		"currentMeanings": ["the present", "current", "to be right in front of one"],
 		"cedictDefs": ["the present time", "to be faced with"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
@@ -15912,6 +15932,16 @@
 		"pos": ["V"],
 		"currentMeanings": ["to construct"],
 		"cedictDefs": ["to construct; to build"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L5-0385",
+		"hanzi": "建筑",
+		"pinyin": "jiànzhù",
+		"level": 5,
+		"pos": ["V", "N"],
+		"currentMeanings": ["architecture", "a building", "to build"],
+		"cedictDefs": ["to construct", "building", "CL:個|个[ge4]"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
@@ -17626,7 +17656,7 @@
 		"pinyin": "yījù",
 		"level": 5,
 		"pos": ["V", "N"],
-		"currentMeanings": ["on the basis of", "grounds"],
+		"currentMeanings": ["on the basis of", "grounds", "to go by"],
 		"cedictDefs": ["according to", "basis", "foundation"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},

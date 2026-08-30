@@ -1010,6 +1010,28 @@ function isNounWordGloss(text) {
 	return NOUN_SUFFIX.test(words[0]) && !/ing$/.test(words[0]);
 }
 
+/** A gloss that names an action: the corpus writes every verb sense as "to …". */
+const VERB_GLOSS = /^to\b/i;
+
+/** A gloss with its qualifier dropped, the way gate (d) reads one. */
+const unqualified = (text) =>
+	String(text || '')
+		.replace(/\([^)]*\)/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+
+/**
+ * True when a card declares V in company that leaves it no excuse for having no verb gloss.
+ *
+ * V alongside N or M only. `[Adj,V]` is a Chinese stative verb, `[V,Prep]` a coverb, `[V,Adv]`
+ * a formulaic phrase — none of the three has a natural "to …" reading in English, so this
+ * would be measuring the gloss language, not the card.
+ */
+const verbNeedsVerbSense = (word) =>
+	word.pos.length > 1 &&
+	word.pos.includes('V') &&
+	word.pos.every((code) => code === 'V' || code === 'N' || code === 'M');
+
 /**
  * The gloss as the part-of-speech gate reads it: qualifier dropped.
  *
@@ -1211,7 +1233,7 @@ function allowedCharacters(shipped) {
 const MAX_SENTENCE = 20;
 
 /**
- * The seven gates. Each one is a defect a previous loop shipped green, and each one is also a
+ * The eight gates. Each one is a defect a previous loop shipped green, and each one is also a
  * test in src/lib/data/vocab.spec.ts so that the shipped JSON is checked even when nobody
  * rebuilds.
  *
@@ -1300,6 +1322,16 @@ function gateProblems(shipped, refs) {
 		}
 		if (w.pos.every((p) => p === 'N' || p === 'Adj') && isAdverbGloss(lead)) {
 			problems.push(`gate:pos ${w.id} ${w.hanzi} ${pos}: leads with the adverb gloss "${lead}"`);
+		}
+		// The noun-lead test above only fires on a card whose *only* code is V, so a [V,N]
+		// card escaped it entirely: 游泳 shipped "swimming", 决赛 "finals", 胜利 "victory" —
+		// three cards that declare a verb and never gloss one. A noun lead is fine on a [V,N]
+		// card, which is why this asks a different question: is there a verb sense *anywhere*
+		// in the glosses? Scoped to V paired with N or M, because a stative verb ([Adj,V]:
+		// 饿 "hungry", 安静 "quiet") and a coverb ([V,Prep]: 离 "away from", 替 "on behalf of")
+		// both have no natural "to …" gloss, and demanding one would be an English artifact.
+		if (verbNeedsVerbSense(w) && !w.meanings.some((m) => VERB_GLOSS.test(unqualified(m)))) {
+			problems.push(`gate:pos ${w.id} ${w.hanzi} ${pos}: declares a verb and glosses none`);
 		}
 	}
 
@@ -1415,6 +1447,44 @@ function gateProblems(shipped, refs) {
 		if (chars.length > MAX_SENTENCE) {
 			problems.push(`${where}: "${ex.hanzi}" is ${chars.length} characters, over ${MAX_SENTENCE}`);
 		}
+	}
+
+	// (h) No two cards ship the same example sentence, or the same English for one.
+	//
+	//     Gate (b) already stops two cards answering to the same *gloss*; nothing stopped two
+	//     cards answering to the same *sentence*. Authoring a word's example around a
+	//     neighbouring word is the natural way to write one — 关 and 关上 both got
+	//     "走的时候请关上门。" — and it is exactly the pair the distractor picker is most likely
+	//     to put on one card, leaving the learner two buttons with the same sentence behind
+	//     them. A shared English is the same defect one layer down: the sentences differ, the
+	//     card still teaches nothing about which of the two words it is asking for.
+	//
+	//     Near-synonyms are the cases that most need separate sentences, not the cases that
+	//     excuse a shared one: 关 vs 关上 is the resultative-complement distinction, and the
+	//     example is where a learner can see it.
+	const byExample = new Map();
+	const byEnglish = new Map();
+	for (const w of shipped) {
+		if (!w.example?.hanzi) continue;
+		const hanzi = w.example.hanzi;
+		if (!byExample.has(hanzi)) byExample.set(hanzi, []);
+		byExample.get(hanzi).push(w);
+		const english = (w.example.english ?? '').trim().toLowerCase();
+		if (!english) continue;
+		if (!byEnglish.has(english)) byEnglish.set(english, []);
+		byEnglish.get(english).push(w);
+	}
+	for (const [hanzi, group] of byExample) {
+		if (group.length < 2) continue;
+		const who = group.map((w) => `${w.id} ${w.hanzi}`).join(' and ');
+		problems.push(`gate:example-shared ${who}: all ship the same sentence "${hanzi}"`);
+	}
+	for (const [english, group] of byEnglish) {
+		if (group.length < 2) continue;
+		// The same cards already reported above for sharing the sentence itself.
+		if (new Set(group.map((w) => w.example.hanzi)).size === 1) continue;
+		const who = group.map((w) => `${w.id} ${w.hanzi}`).join(' and ');
+		problems.push(`gate:example-shared ${who}: all ship the same translation "${english}"`);
 	}
 
 	return problems;
@@ -1637,6 +1707,7 @@ function auditEntries(shipped, refs) {
 		'gate:punctuation': 'unclosed-punctuation',
 		'gate:gloss-survival': 'reference-sense-not-on-card',
 		'gate:example-level': 'example-sentence-above-level',
+		'gate:example-shared': 'example-sentence-shared-with-another-card',
 		'gate:pos': 'pos-and-gloss-disagree'
 	};
 	for (const problem of gateProblems(shipped, refs)) {

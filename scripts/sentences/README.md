@@ -50,6 +50,18 @@ Every sentence has to clear all of this, or the build writes nothing:
 6. **Bookkeeping** — no duplicate id across files, and no sentence keyed to an id that is not a
    card. A merged homograph (老1/老2 are one card) takes one sentence, on the card's id.
 
+## Gate (h) `example-shared`
+
+7. **Uniqueness** — no two cards ship the same sentence, and no two ship the same English for
+   one. Writing a word's example around a neighbouring word is the natural way to write one —
+   关 and 关上 both got "走的时候请关上门。" — and it is exactly the pair the distractor picker
+   is most likely to put on one card, which leaves the learner two buttons with one sentence
+   behind them. A shared English is the same defect one layer down.
+
+   Near-synonyms are the cards that most _need_ separate sentences, not the ones that excuse a
+   shared one. 关 now shows the plain verb ("请关门，外面很冷。") and 关上 the resultative
+   ("她关上门就走了。"), which is the distinction a learner is actually there for.
+
 Every one of these is also a test in `src/lib/data/vocab.spec.ts`, so a sentence hand-edited into
 `src/lib/data/*.json` fails even if nobody re-runs the build.
 

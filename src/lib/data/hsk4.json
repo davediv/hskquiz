@@ -3232,7 +3232,7 @@
 		"traditional": "頂",
 		"pinyin": "dǐng",
 		"syllables": [{ "py": "dǐng", "tone": 3 }],
-		"meanings": ["the top of something", "measure word for hats"],
+		"meanings": ["the top of something", "measure word for hats", "to carry on the head"],
 		"example": {
 			"hanzi": "我们爬到了山顶，风很大。",
 			"pinyin": "wǒ men pá dào le shān dǐng fēng hěn dà",
@@ -8645,7 +8645,7 @@
 		"traditional": "夢",
 		"pinyin": "mèng",
 		"syllables": [{ "py": "mèng", "tone": 4 }],
-		"meanings": ["a dream while asleep"],
+		"meanings": ["a dream while asleep", "to dream"],
 		"example": {
 			"hanzi": "我昨天晚上做了一个奇怪的梦。",
 			"pinyin": "wǒ zuó tiān wǎn shang zuò le yí ge qí guài de mèng",
@@ -11963,7 +11963,7 @@
 			{ "py": "tǐ", "tone": 3 },
 			{ "py": "jiǎn", "tone": 3 }
 		],
-		"meanings": ["medical check-up"],
+		"meanings": ["medical check-up", "to have a medical check-up"],
 		"example": {
 			"hanzi": "公司每年安排员工做一次体检。",
 			"pinyin": "gōng sī měi nián ān pái yuán gōng zuò yí cì tǐ jiǎn",

@@ -1852,7 +1852,7 @@
 			{ "py": "chuán", "tone": 2 },
 			{ "py": "shuō", "tone": 1 }
 		],
-		"meanings": ["legend has it that", "a folk tale"],
+		"meanings": ["legend has it that", "a folk tale", "to pass on by word of mouth"],
 		"example": {
 			"hanzi": "传说这座桥有一千多年了。",
 			"pinyin": "chuán shuō zhè zuò qiáo yǒu yì qiān duō nián le",
@@ -5415,7 +5415,7 @@
 			{ "py": "jí", "tone": 2 },
 			{ "py": "le", "tone": 0 }
 		],
-		"meanings": ["to an extreme degree"],
+		"meanings": ["after an adjective: utterly"],
 		"example": {
 			"hanzi": "这个消息让大家高兴极了。",
 			"pinyin": "zhè ge xiāo xi ràng dà jiā gāo xìng jí le",
@@ -5749,7 +5749,7 @@
 		"hanzi": "架",
 		"pinyin": "jià",
 		"syllables": [{ "py": "jià", "tone": 4 }],
-		"meanings": ["measure word: planes or machines", "a shelf or rack"],
+		"meanings": ["measure word: planes or machines", "a shelf or rack", "to prop up"],
 		"example": {
 			"hanzi": "天上飞过一架飞机。",
 			"pinyin": "tiān shàng fēi guò yí jià fēi jī",
@@ -6867,7 +6867,7 @@
 			{ "py": "jué", "tone": 2 },
 			{ "py": "sài", "tone": 4 }
 		],
-		"meanings": ["finals"],
+		"meanings": ["finals", "to play the final"],
 		"example": {
 			"hanzi": "我们球队进入了决赛。",
 			"pinyin": "wǒ men qiú duì jìn rù le jué sài",
@@ -7822,7 +7822,7 @@
 			{ "py": "lǐng", "tone": 3 },
 			{ "py": "dǎo", "tone": 3 }
 		],
-		"meanings": ["a leader"],
+		"meanings": ["a leader", "to lead"],
 		"example": {
 			"hanzi": "我们的领导明天来开会。",
 			"pinyin": "wǒ men de lǐng dǎo míng tiān lái kāi huì",
@@ -10852,7 +10852,7 @@
 			{ "py": "shèng", "tone": 4 },
 			{ "py": "lì", "tone": 4 }
 		],
-		"meanings": ["victory"],
+		"meanings": ["victory", "to win"],
 		"example": {
 			"hanzi": "我们队最后取得了胜利。",
 			"pinyin": "wǒ men duì zuì hòu qǔ dé le shèng lì",
@@ -11028,7 +11028,7 @@
 			{ "py": "shí", "tone": 2 },
 			{ "py": "yàn", "tone": 4 }
 		],
-		"meanings": ["an experiment"],
+		"meanings": ["an experiment", "to experiment"],
 		"example": {
 			"hanzi": "这个实验的结果非常重要。",
 			"pinyin": "zhè ge shí yàn de jié guǒ fēi cháng zhòng yào",
@@ -14638,7 +14638,7 @@
 			{ "py": "yóu", "tone": 2 },
 			{ "py": "yǒng", "tone": 3 }
 		],
-		"meanings": ["swimming"],
+		"meanings": ["swimming", "to swim"],
 		"example": {
 			"hanzi": "他每天早上去游泳。",
 			"pinyin": "tā měi tiān zǎo shang qù yóu yǒng",

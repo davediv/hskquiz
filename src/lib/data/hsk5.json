@@ -429,7 +429,7 @@
 			{ "py": "bǐ", "tone": 3 },
 			{ "py": "fang", "tone": 0 }
 		],
-		"meanings": ["an example or analogy", "for instance"],
+		"meanings": ["an example or analogy", "for instance", "to liken one thing to another"],
 		"example": {
 			"hanzi": "他打了个比方来说明这个问题。",
 			"pinyin": "tā dǎ le ge bǐ fang lái shuō míng zhè ge wèn tí",
@@ -972,7 +972,7 @@
 			{ "py": "bǔ", "tone": 3 },
 			{ "py": "tiē", "tone": 1 }
 		],
-		"meanings": ["a subsidy"],
+		"meanings": ["a subsidy", "to subsidize"],
 		"example": {
 			"hanzi": "政府给农民发放了补贴。",
 			"pinyin": "zhèng fǔ gěi nóng mín fā fàng le bǔ tiē",
@@ -3148,7 +3148,7 @@
 			{ "py": "dāng", "tone": 1 },
 			{ "py": "qián", "tone": 2 }
 		],
-		"meanings": ["the present", "current"],
+		"meanings": ["the present", "current", "to be right in front of one"],
 		"example": {
 			"hanzi": "这是当前最重要的任务。",
 			"pinyin": "zhè shì dāng qián zuì zhòng yào de rèn wù",
@@ -3372,7 +3372,7 @@
 			{ "py": "dì", "tone": 4 },
 			{ "py": "zhèn", "tone": 4 }
 		],
-		"meanings": ["earthquake"],
+		"meanings": ["earthquake", "to have an earthquake"],
 		"example": {
 			"hanzi": "这次地震造成了很大损失。",
 			"pinyin": "zhè cì dì zhèn zào chéng le hěn dà sǔn shī",
@@ -5933,7 +5933,7 @@
 			{ "py": "huì", "tone": 4 },
 			{ "py": "tán", "tone": 2 }
 		],
-		"meanings": ["talks", "discussions"],
+		"meanings": ["talks", "discussions", "to hold talks"],
 		"example": {
 			"hanzi": "两国领导人今天举行了会谈。",
 			"pinyin": "liǎng guó lǐng dǎo rén jīn tiān jǔ xíng le huì tán",
@@ -6582,7 +6582,7 @@
 			{ "py": "jiàn", "tone": 4 },
 			{ "py": "zhù", "tone": 4 }
 		],
-		"meanings": ["architecture", "a building"],
+		"meanings": ["architecture", "a building", "to build"],
 		"example": {
 			"hanzi": "他对中国古代建筑很有研究。",
 			"pinyin": "tā duì Zhōng guó gǔ dài jiàn zhù hěn yǒu yán jiū",
@@ -8035,7 +8035,7 @@
 			{ "py": "lì", "tone": 4 },
 			{ "py": "wài", "tone": 4 }
 		],
-		"meanings": ["an exception"],
+		"meanings": ["an exception", "to be an exception"],
 		"example": {
 			"hanzi": "规定对所有人都一样，没有例外。",
 			"pinyin": "guī dìng duì suǒ yǒu rén dōu yí yàng méi yǒu lì wài",
@@ -8786,7 +8786,7 @@
 			{ "py": "mó", "tone": 2 },
 			{ "py": "cā", "tone": 1 }
 		],
-		"meanings": ["friction", "rubbing"],
+		"meanings": ["friction", "rubbing", "to rub against"],
 		"example": {
 			"hanzi": "两国之间的贸易摩擦越来越多。",
 			"pinyin": "liǎng guó zhī jiān de mào yì mó cā yuè lái yuè duō",
@@ -15091,7 +15091,7 @@
 			{ "py": "yī", "tone": 1 },
 			{ "py": "jù", "tone": 4 }
 		],
-		"meanings": ["on the basis of", "grounds"],
+		"meanings": ["on the basis of", "grounds", "to go by"],
 		"example": {
 			"hanzi": "公司依据市场情况调整了价格。",
 			"pinyin": "gōng sī yī jù shì chǎng qíng kuàng tiáo zhěng le jià gé",

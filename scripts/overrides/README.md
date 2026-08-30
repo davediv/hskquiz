@@ -30,7 +30,7 @@ not a last-writer-wins: one id, one owner.
 ordered by level then id, each with the official part of speech, the current glosses, the raw
 CC-CEDICT senses and the `reasons` it is listed.
 
-A gloss has to clear the first six of seven build-failing gates, all of them also tests in
+A gloss has to clear the first six of eight build-failing gates, all of them also tests in
 `src/lib/data/vocab.spec.ts`:
 
 1. **Register** — no slang, sexual, vulgar, dialect, figurative or variant-character content.
@@ -42,6 +42,12 @@ A gloss has to clear the first six of seven build-failing gates, all of them als
    Adj-only card may not lead with a noun (黑暗 "darkness", 长寿 "longevity"), and an N- or Adj-only
    card may not lead with an `-ly` adverb (最近 "recently", 一般 "generally", 原先 "originally").
    The qualifier is not read here — 该 "should (it is one's turn)" leads with `should`.
+   A fifth direction is not about the lead at all: a card whose POS is V beside N or M has to carry
+   a `to …` sense _somewhere_ in `meanings`, because those four tests only ever looked at
+   `meanings[0]` and a `[V,N]` card slipped past all of them — 游泳 shipped "swimming", 决赛
+   "finals", 胜利 "victory". It is scoped to V with N or M on purpose: `[Adj,V]` is a Chinese
+   stative verb (饿 "hungry", 安静 "quiet") and `[V,Prep]` a coverb (离 "away from", 替 "on behalf
+   of"), and neither has a natural `to …` reading in English.
 5. **Punctuation** — a gloss closes every quotation it opens (L3 老百姓 shipped
    `the "person in the street`) and every parenthesis: balanced, never nested, never empty, never
    the whole gloss.
@@ -56,6 +62,9 @@ A gloss has to clear the first six of seven build-failing gates, all of them als
    [`scripts/sentences/`](../sentences/README.md): an example sentence may only use characters at
    or below its own card's level, one pinyin syllable per character, and it has to contain the word
    it is an example of.
+8. **Example uniqueness** — also not a gloss gate, also fails the same build. No two cards may ship
+   the same example sentence or the same English for one; 关 and 关上 both shipped
+   "走的时候请关上门。", which is the pair a learner is most likely to meet on one quiz card.
 
 Two more, on top of the gates: within a level no two cards' **primary** glosses may _read_ the same,
 and no two cards may share a whole meaning _set_.

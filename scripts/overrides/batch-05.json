@@ -300,8 +300,8 @@
 		"note": "N row; 'affair' was CEDICT clause 1 and reads wrongly in English."
 	},
 	"L2-0496": {
-		"meanings": ["income", "earnings"],
-		"note": "V/N row; the noun is what 收入 means on its own, and CEDICT's CL: note cannot ship."
+		"meanings": ["income", "earnings", "to take in"],
+		"note": "V/N row; the noun is what 收入 means on its own, and CEDICT's CL: note cannot ship. Gate (d) asks a card that declares V for a verb sense somewhere in its glosses; \"to take in\" is it."
 	},
 	"L2-0500": {
 		"meanings": ["ripe", "cooked through", "familiar"],

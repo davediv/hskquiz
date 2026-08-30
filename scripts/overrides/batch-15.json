@@ -292,8 +292,8 @@
 		"note": "N row. CC-CEDICT keys nothing here; 'American' keeps it apart from 美元 'US dollar' at L3."
 	},
 	"L4-0509": {
-		"meanings": ["a dream while asleep"],
-		"note": "N/V row. 做梦 'to dream' normalises to the same answer as a bare 'a dream', so this card names the sleeping kind; 梦想 holds the ambition sense."
+		"meanings": ["a dream while asleep", "to dream"],
+		"note": "N/V row. 做梦 'to dream' normalises to the same answer as a bare 'a dream', so this card names the sleeping kind; 梦想 holds the ambition sense. Gate (d) asks a card that declares V for a verb sense somewhere in its glosses; \"to dream\" is it."
 	},
 	"L4-0510": {
 		"meanings": ["to dream about", "to see in a dream"],

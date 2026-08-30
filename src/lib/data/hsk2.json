@@ -3947,9 +3947,9 @@
 		],
 		"meanings": ["painter"],
 		"example": {
-			"hanzi": "他是一位有名的画家。",
-			"pinyin": "tā shì yí wèi yǒu míng de huà jiā",
-			"english": "He is a well-known painter."
+			"hanzi": "这位画家画了很多画。",
+			"pinyin": "zhè wèi huà jiā huà le hěn duō huà",
+			"english": "This painter has painted a lot of pictures."
 		},
 		"pos": ["N"],
 		"level": 2
@@ -4622,9 +4622,9 @@
 		"syllables": [{ "py": "jiǎo", "tone": 3 }],
 		"meanings": ["foot"],
 		"example": {
-			"hanzi": "我的脚很疼。",
-			"pinyin": "wǒ de jiǎo hěn téng",
-			"english": "My foot really hurts."
+			"hanzi": "冬天我的脚很冷。",
+			"pinyin": "dōng tiān wǒ de jiǎo hěn lěng",
+			"english": "My feet get cold in winter."
 		},
 		"pos": ["N"],
 		"level": 2
@@ -4973,9 +4973,9 @@
 		"syllables": [{ "py": "jìn", "tone": 4 }],
 		"meanings": ["near", "close to"],
 		"example": {
-			"hanzi": "我家离学校很近。",
-			"pinyin": "wǒ jiā lí xué xiào hěn jìn",
-			"english": "My home is very close to the school."
+			"hanzi": "从这里到车站很近。",
+			"pinyin": "cóng zhè lǐ dào chē zhàn hěn jìn",
+			"english": "It is not far from here to the bus stop."
 		},
 		"pos": ["Adj"],
 		"level": 2
@@ -5090,9 +5090,9 @@
 		"syllables": [{ "py": "jǔ", "tone": 3 }],
 		"meanings": ["to hold up", "to raise your hand"],
 		"example": {
-			"hanzi": "有问题的同学请举手。",
-			"pinyin": "yǒu wèn tí de tóng xué qǐng jǔ shǒu",
-			"english": "Students with a question, please raise your hand."
+			"hanzi": "他举起了手里的书。",
+			"pinyin": "tā jǔ qǐ le shǒu lǐ de shū",
+			"english": "He held up the book in his hand."
 		},
 		"pos": ["V"],
 		"level": 2
@@ -5157,9 +5157,9 @@
 		],
 		"meanings": ["sentence"],
 		"example": {
-			"hanzi": "这个句子我不懂。",
-			"pinyin": "zhè ge jù zi wǒ bù dǒng",
-			"english": "I don't understand this sentence."
+			"hanzi": "这个句子太长了。",
+			"pinyin": "zhè ge jù zi tài cháng le",
+			"english": "This sentence is too long."
 		},
 		"pos": ["N"],
 		"level": 2
@@ -6324,9 +6324,9 @@
 		"syllables": [{ "py": "míng", "tone": 2 }],
 		"meanings": ["name", "measure word: people"],
 		"example": {
-			"hanzi": "你的名字叫什么？",
-			"pinyin": "nǐ de míng zi jiào shén me",
-			"english": "What's your name?"
+			"hanzi": "那家医院有一百多名医生。",
+			"pinyin": "nà jiā yī yuàn yǒu yì bǎi duō míng yī shēng",
+			"english": "That hospital has more than a hundred doctors."
 		},
 		"pos": ["N", "M"],
 		"level": 2
@@ -8258,7 +8258,7 @@
 			{ "py": "shōu", "tone": 1 },
 			{ "py": "rù", "tone": 4 }
 		],
-		"meanings": ["income", "earnings"],
+		"meanings": ["income", "earnings", "to take in"],
 		"example": {
 			"hanzi": "他的收入不高，但很快乐。",
 			"pinyin": "tā de shōu rù bù gāo dàn hěn kuài lè",
@@ -8814,9 +8814,9 @@
 		"syllables": [{ "py": "tí", "tone": 2 }],
 		"meanings": ["a question on a test", "a topic"],
 		"example": {
-			"hanzi": "这道题我不会做。",
-			"pinyin": "zhè dào tí wǒ bú huì zuò",
-			"english": "I can't do this problem."
+			"hanzi": "这次考试的题很难。",
+			"pinyin": "zhè cì kǎo shì de tí hěn nán",
+			"english": "The questions on this test were hard."
 		},
 		"pos": ["N"],
 		"level": 2
@@ -9267,7 +9267,7 @@
 			{ "py": "wài", "tone": 4 },
 			{ "py": "mài", "tone": 4 }
 		],
-		"meanings": ["takeout food", "food delivery"],
+		"meanings": ["takeout food", "food delivery", "to sell food to take away"],
 		"example": {
 			"hanzi": "今天晚上我们叫外卖吧。",
 			"pinyin": "jīn tiān wǎn shang wǒ men jiào wài mài ba",
@@ -9578,9 +9578,9 @@
 		],
 		"meanings": ["temperature"],
 		"example": {
-			"hanzi": "今天的温度很高。",
-			"pinyin": "jīn tiān de wēn dù hěn gāo",
-			"english": "The temperature is high today."
+			"hanzi": "水的温度太高了。",
+			"pinyin": "shuǐ de wēn dù tài gāo le",
+			"english": "The water is too hot."
 		},
 		"pos": ["N"],
 		"level": 2
@@ -10290,9 +10290,9 @@
 		"syllables": [{ "py": "xìn", "tone": 4 }],
 		"meanings": ["letter", "mail"],
 		"example": {
-			"hanzi": "我给妈妈写了一封信。",
-			"pinyin": "wǒ gěi mā ma xiě le yì fēng xìn",
-			"english": "I wrote my mum a letter."
+			"hanzi": "这封信是给你的。",
+			"pinyin": "zhè fēng xìn shì gěi nǐ de",
+			"english": "This letter is for you."
 		},
 		"pos": ["N"],
 		"level": 2
@@ -11764,9 +11764,9 @@
 		"syllables": [{ "py": "zán", "tone": 2 }],
 		"meanings": ["you and I"],
 		"example": {
-			"hanzi": "咱们一起去吃饭吧。",
-			"pinyin": "zán men yì qǐ qù chī fàn ba",
-			"english": "Let's you and me go and eat together."
+			"hanzi": "明天咱一起去看电影。",
+			"pinyin": "míng tiān zán yì qǐ qù kàn diàn yǐng",
+			"english": "Tomorrow you and I are going to the cinema."
 		},
 		"pos": ["Pron"],
 		"level": 2
@@ -12820,9 +12820,9 @@
 		],
 		"meanings": ["a school composition"],
 		"example": {
-			"hanzi": "老师让我们写一篇作文。",
-			"pinyin": "lǎo shī ràng wǒ men xiě yì piān zuò wén",
-			"english": "The teacher asked us to write a composition."
+			"hanzi": "老师说我的作文写得很好。",
+			"pinyin": "lǎo shī shuō wǒ de zuò wén xiě de hěn hǎo",
+			"english": "The teacher said my composition was well written."
 		},
 		"pos": ["N"],
 		"level": 2

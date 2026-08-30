@@ -294,6 +294,22 @@ function isNounWordGloss(text: string): boolean {
 	return words.length === 1 && NOUN_SUFFIX.test(words[0]) && !/ing$/.test(words[0]);
 }
 
+/** A gloss with its qualifier dropped, the way the part-of-speech gate reads one. */
+const unqualified = (text: string) =>
+	text
+		.replace(/\([^)]*\)/g, ' ')
+		.replace(/\s+/g, ' ')
+		.trim();
+
+/**
+ * True when a card declares V in company that leaves it no excuse for having no verb gloss:
+ * V alongside N or M only, never beside Adj, Prep or Adv.
+ */
+const verbNeedsVerbSense = (word: ShippedWord) =>
+	word.pos.length > 1 &&
+	word.pos.includes('V') &&
+	word.pos.every((code) => code === 'V' || code === 'N' || code === 'M');
+
 /** The gloss the part-of-speech gate reads: the qualifier describes, it does not lead. */
 const leadOf = (word: ShippedWord) =>
 	(word.meanings[0] ?? '')
@@ -403,6 +419,14 @@ describe('gloss gates', () => {
 			}
 			if (word.pos.every((code) => code === 'N' || code === 'Adj') && isAdverbGloss(lead)) {
 				bad.push(`${label(word)} [${word.pos.join('/')}]: adverb gloss "${lead}"`);
+			}
+			// The noun-lead test above only fires when V is a card's *only* code, so a [V,N]
+			// card slipped past it: 游泳 shipped "swimming", 决赛 "finals", 胜利 "victory". A
+			// noun lead is fine there; having no verb sense anywhere is not. Scoped to V with
+			// N or M, because [Adj,V] stative verbs (饿 "hungry") and [V,Prep] coverbs
+			// (离 "away from") have no natural "to …" gloss in English.
+			if (verbNeedsVerbSense(word) && !word.meanings.some((m) => /^to\b/i.test(unqualified(m)))) {
+				bad.push(`${label(word)} [${word.pos.join('/')}]: declares a verb, glosses none`);
 			}
 		}
 		expect(bad).toEqual([]);
@@ -677,6 +701,28 @@ describe('example sentences', () => {
 			.map((word) => ({ word, length: sentenceChars(word.example!.hanzi).length }))
 			.filter(({ length }) => length > 20);
 		expect(bad.map(({ word, length }) => `${label(word)}: ${length}`)).toEqual([]);
+	});
+
+	it('(h) never gives two cards the same sentence, or the same translation for one', () => {
+		// Gate (b) stops two cards answering to the same gloss; nothing used to stop two cards
+		// answering to the same sentence. 关 and 关上 both shipped "走的时候请关上门。", and that
+		// pair is exactly what the distractor picker likes to put on one card — two buttons
+		// with one sentence behind them. Near-synonyms are the cards that most need their own
+		// example, because the example is where the difference between them is visible.
+		const byHanzi = new Map<string, ShippedWord[]>();
+		const byEnglish = new Map<string, ShippedWord[]>();
+		for (const word of withExample) {
+			const hanzi = word.example!.hanzi;
+			byHanzi.set(hanzi, [...(byHanzi.get(hanzi) ?? []), word]);
+			const english = word.example!.english.trim().toLowerCase();
+			byEnglish.set(english, [...(byEnglish.get(english) ?? []), word]);
+		}
+		const shared = (groups: Map<string, ShippedWord[]>) =>
+			[...groups]
+				.filter(([, group]) => group.length > 1)
+				.map(([key, group]) => `${key}: ${group.map(label).join(' | ')}`);
+		expect(shared(byHanzi)).toEqual([]);
+		expect(shared(byEnglish)).toEqual([]);
 	});
 
 	it('never lets two files author the same card, or author a card that does not exist', () => {

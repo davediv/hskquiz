@@ -20,9 +20,9 @@
 		"english": "My room is very clean."
 	},
 	"L1-0127": {
-		"hanzi": "这本书太贵了。",
-		"pinyin": "zhè běn shū tài guì le",
-		"english": "This book is too expensive."
+		"hanzi": "这个手机很贵。",
+		"pinyin": "zhè ge shǒu jī hěn guì",
+		"english": "This phone is expensive."
 	},
 	"L1-0153": {
 		"hanzi": "我明天还你钱。",
@@ -45,14 +45,14 @@
 		"english": "This egg costs fifty cents."
 	},
 	"L1-0257": {
-		"hanzi": "我的书在那儿。",
-		"pinyin": "wǒ de shū zài nà r",
-		"english": "My book is over there."
+		"hanzi": "我们在那儿见面吧。",
+		"pinyin": "wǒ men zài nà r jiàn miàn ba",
+		"english": "Let's meet over there."
 	},
 	"L1-0283": {
-		"hanzi": "他跑得很快。",
-		"pinyin": "tā pǎo de hěn kuài",
-		"english": "He runs very fast."
+		"hanzi": "孩子们在外面跑。",
+		"pinyin": "hái zi men zài wài miàn pǎo",
+		"english": "The children are running around outside."
 	},
 	"L1-0309": {
 		"hanzi": "你知道考试的日期吗？",
@@ -210,9 +210,9 @@
 		"english": "I'm going to Beijing next week."
 	},
 	"L2-0617": {
-		"hanzi": "我给妈妈写了一封信。",
-		"pinyin": "wǒ gěi mā ma xiě le yì fēng xìn",
-		"english": "I wrote my mum a letter."
+		"hanzi": "这封信是给你的。",
+		"pinyin": "zhè fēng xìn shì gěi nǐ de",
+		"english": "This letter is for you."
 	},
 	"L2-0643": {
 		"hanzi": "他也许不知道这件事。",

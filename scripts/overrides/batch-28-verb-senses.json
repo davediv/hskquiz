@@ -1,0 +1,18 @@
+{
+	"L3-0402": {
+		"meanings": ["finals", "to play the final"],
+		"note": "V/N. The reference declares V and the card said only \"finals\"; gate (d) asks a card that declares V for a verb sense somewhere in its glosses."
+	},
+	"L3-0637": {
+		"meanings": ["victory", "to win"],
+		"note": "V/N. The reference declares V and the card said only \"victory\"; gate (d) asks a card that declares V for a verb sense somewhere in its glosses."
+	},
+	"L5-0197": {
+		"meanings": ["earthquake", "to have an earthquake"],
+		"note": "V/N. 地震了 is the verb use the reference's V records; the card carried the noun alone."
+	},
+	"L5-0347": {
+		"meanings": ["talks", "discussions", "to hold talks"],
+		"note": "V/N. The reference declares V and the card named only the event; gate (d) asks a card that declares V for a verb sense somewhere in its glosses."
+	}
+}

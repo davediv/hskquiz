@@ -80,14 +80,14 @@
 		"english": "You go ahead and eat first."
 	},
 	"L1-0423": {
-		"hanzi": "我要一杯水。",
-		"pinyin": "wǒ yào yì bēi shuǐ",
-		"english": "I'd like a glass of water."
+		"hanzi": "明天我要去看医生。",
+		"pinyin": "míng tiān wǒ yào qù kàn yī shēng",
+		"english": "I have to go to the doctor tomorrow."
 	},
 	"L1-0449": {
-		"hanzi": "外面在下雨。",
-		"pinyin": "wài miàn zài xià yǔ",
-		"english": "It's raining outside."
+		"hanzi": "今天的雨很大。",
+		"pinyin": "jīn tiān de yǔ hěn dà",
+		"english": "The rain is heavy today."
 	},
 	"L1-0475": {
 		"hanzi": "书里有很多知识。",
@@ -140,9 +140,9 @@
 		"english": "The teacher is over there — go on over."
 	},
 	"L2-0235": {
-		"hanzi": "他是一位有名的画家。",
-		"pinyin": "tā shì yí wèi yǒu míng de huà jiā",
-		"english": "He is a well-known painter."
+		"hanzi": "这位画家画了很多画。",
+		"pinyin": "zhè wèi huà jiā huà le hěn duō huà",
+		"english": "This painter has painted a lot of pictures."
 	},
 	"L2-0261": {
 		"hanzi": "假期我想去旅游。",
@@ -205,9 +205,9 @@
 		"english": "My head really hurts."
 	},
 	"L2-0575": {
-		"hanzi": "今天的温度很高。",
-		"pinyin": "jīn tiān de wēn dù hěn gāo",
-		"english": "The temperature is high today."
+		"hanzi": "水的温度太高了。",
+		"pinyin": "shuǐ de wēn dù tài gāo le",
+		"english": "The water is too hot."
 	},
 	"L2-0601": {
 		"hanzi": "妹妹长得像妈妈。",
