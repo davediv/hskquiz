@@ -4,8 +4,9 @@ Hand-authored example sentences, read by `scripts/build-vocab.mjs` and shipped a
 `example` field on `Word` (`src/lib/types.ts`).
 
 A gloss says what a word means; a sentence shows how it is used, which is what both reference apps
-spend their entry screen on. Nothing in the app may assume the field is there — HSK 3–5 have no
-sentences yet, and those cards ship with **no `example` key at all** rather than an empty one.
+spend their entry screen on. Every one of the 4,308 cards now carries one, but the field stays
+optional on `Word`: nothing in the app may assume it is there, and a card without a sentence ships
+with **no `example` key at all** rather than an empty one.
 
 ## The contract
 
@@ -58,9 +59,10 @@ Every one of these is also a test in `src/lib/data/vocab.spec.ts`, so a sentence
 | ----- | ----- | --------- |
 | HSK 1 | 500   | 500       |
 | HSK 2 | 770   | 770       |
-| HSK 3 | 969   | —         |
-| HSK 4 | 999   | —         |
-| HSK 5 | 1,070 | —         |
+| HSK 3 | 969   | 969       |
+| HSK 4 | 999   | 999       |
+| HSK 5 | 1,070 | 1,070     |
 
-Levels 3–5 are the open work. Note that the level gate gets easier as the level rises: an HSK 5
-sentence may draw on all 1,500 characters.
+Complete. Note that the level gate gets easier as the level rises: an HSK 5 sentence may draw on
+all 1,500 characters, so a sentence for an abstract HSK 5 word has no excuse to be written in a
+beginner frame — write it in the register the word actually belongs to.

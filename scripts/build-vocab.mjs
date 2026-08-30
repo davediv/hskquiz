@@ -703,10 +703,11 @@ const pinyinSyllables = (pinyin) => (pinyin ? sentencePinyin(pinyin).split(' ') 
  *
  *   { "L1-0001": { "hanzi": "我爱我的爸爸妈妈。", "pinyin": "wǒ ài …", "english": "I love …" } }
  *
- * Read order carries no meaning — 26 authors wrote these in parallel — so, exactly as with
+ * Read order carries no meaning — 82 files, authored in parallel — so, exactly as with
  * scripts/overrides/, the merge is order-independent and one id appearing in two files is a
- * build failure rather than a last-writer-wins. `example` is optional on `Word`: levels 3–5
- * have no sentences yet, and those cards ship without the field rather than with an empty one.
+ * build failure rather than a last-writer-wins. `example` stays optional on `Word` even now
+ * that all five levels are covered: a card with no sentence ships without the field rather
+ * than with an empty one, and nothing in the app may assume the field is there.
  */
 function readSentences() {
 	let files;
@@ -1738,8 +1739,8 @@ function toShipped(entries, level) {
 			pinyin: w.pinyin,
 			syllables: w.syllables,
 			meanings: w.meanings,
-			// Optional, and absent rather than empty where no sentence has been authored:
-			// HSK 3–5 have none yet, and nothing in the app may assume the field is there.
+			// Optional, and absent rather than empty where no sentence has been authored.
+			// All 4,308 cards carry one today; nothing in the app may assume the field is there.
 			...(w.example ? { example: w.example } : {}),
 			pos: w.pos,
 			level: w.level,

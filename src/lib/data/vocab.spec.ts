@@ -569,8 +569,9 @@ describe('gloss survival', () => {
 describe('example sentences', () => {
 	// Gate (g) in scripts/build-vocab.mjs. Duplicated here for the same reason as the gloss
 	// gates: the build gate stops a bad sentence being written, this one stops a bad sentence
-	// being checked in by hand or surviving a build nobody re-ran. `example` is optional —
-	// HSK 3–5 have none authored yet — so every assertion here is about the ones that exist.
+	// being checked in by hand or surviving a build nobody re-ran. `example` stays optional on
+	// `Word` even now that every card carries one, so the per-sentence assertions below still
+	// run over the ones that exist and coverage is asserted separately.
 	const SENTENCE_PUNCT = /[，。！？]/;
 	const SENTENCE_HAN = /[㐀-鿿豈-﫿]/;
 	const sentenceChars = (hanzi: string) =>
@@ -592,11 +593,12 @@ describe('example sentences', () => {
 
 	const withExample = shipped.filter((word) => word.example);
 
-	it('ships a sentence for every HSK 1 and HSK 2 card, and none above', () => {
+	it('ships a sentence for every card at every level', () => {
 		const perLevel = Object.fromEntries(
 			LEVELS.map((level) => [level, withExample.filter((word) => word.level === level).length])
 		);
-		expect(perLevel).toEqual({ 1: 500, 2: 770, 3: 0, 4: 0, 5: 0 });
+		expect(perLevel).toEqual({ 1: 500, 2: 770, 3: 969, 4: 999, 5: 1070 });
+		expect(withExample.length).toBe(shipped.length);
 	});
 
 	it('leaves the field off entirely where no sentence was authored', () => {
