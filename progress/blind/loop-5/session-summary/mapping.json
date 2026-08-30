@@ -1,0 +1,15 @@
+{
+	"piece": "session-summary",
+	"loop": 5,
+	"parity": "odd (15 characters in \"session-summary\")",
+	"A": {
+		"which": "reference",
+		"path": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"note": "Pleco headword entry for 几乎 — hanzi + PY line + HSK badge + POS + gloss + example sentences stacked hanzi/pinyin/English. The closest content analogue to a summary review card."
+	},
+	"B": {
+		"which": "ours",
+		"path": "progress/shots/loop-5/session-summary-mobile.png",
+		"note": "hskquiz session summary at 7/10, 375x812 @2x, taken 2026-08-30 from the running dev server."
+	}
+}
