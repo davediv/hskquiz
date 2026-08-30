@@ -14,10 +14,10 @@
  */
 
 import { MASTERY_STREAK } from '$lib/progress';
-import { hasMet } from '$lib/session';
+import { hasMet, isTaughtOnly } from '$lib/session';
 import type { Level, ProgressState, Word, WordProgress } from '$lib/types';
 
-export type WordStatus = 'new' | 'learning' | 'shaky' | 'mastered';
+export type WordStatus = 'new' | 'seen' | 'learning' | 'shaky' | 'mastered';
 
 /** Filter buckets in the order the chips appear. `all` is not a status, it is the absence of one. */
 export type StatusFilter = 'all' | WordStatus;
@@ -25,6 +25,7 @@ export type StatusFilter = 'all' | WordStatus;
 export const STATUS_FILTERS: readonly StatusFilter[] = [
 	'all',
 	'new',
+	'seen',
 	'learning',
 	'shaky',
 	'mastered'
@@ -40,14 +41,22 @@ export interface StatusMeta {
 export const STATUS_META: Record<StatusFilter, StatusMeta> = {
 	all: { label: 'All', description: 'Every word in this level' },
 	new: { label: 'New', description: 'Not practised yet' },
+	seen: { label: 'Shown', description: 'Shown by a teach card, not yet tested' },
 	learning: { label: 'Learning', description: 'Practised, not yet mastered' },
 	shaky: { label: 'Shaky', description: 'Missed last time' },
 	mastered: { label: 'Mastered', description: `${MASTERY_STREAK} correct in a row` }
 };
 
-/** Which bucket a record falls in. A missing record is a word never answered. */
+/**
+ * Which bucket a record falls in. A missing record is a word never met.
+ *
+ * `seen` counts answers, so a word a teach card introduced has `seen === 0` and used to land in
+ * `new` — ten cards just taught read as "500 New". A first exposure is not nothing and it is not
+ * an answer either, so it gets its own bucket between the two.
+ */
 export function statusOf(record: WordProgress | undefined | null): WordStatus {
-	if (!record || record.seen <= 0) return 'new';
+	if (!record) return 'new';
+	if (record.seen <= 0) return isTaughtOnly(record) ? 'seen' : 'new';
 	if (record.streak >= MASTERY_STREAK) return 'mastered';
 	if (record.streak === 0) return 'shaky';
 	return 'learning';
@@ -114,9 +123,9 @@ export type StatusCounts = Record<StatusFilter, number>;
 
 /** Chip counts. `new` is whatever the map does not account for. */
 export function statusCounts(map: ReadonlyMap<string, WordStatus>, total: number): StatusCounts {
-	const counts: StatusCounts = { all: total, new: 0, learning: 0, shaky: 0, mastered: 0 };
+	const counts: StatusCounts = { all: total, new: 0, seen: 0, learning: 0, shaky: 0, mastered: 0 };
 	for (const status of map.values()) counts[status] += 1;
-	counts.new = Math.max(0, total - counts.learning - counts.shaky - counts.mastered);
+	counts.new = Math.max(0, total - counts.seen - counts.learning - counts.shaky - counts.mastered);
 	return counts;
 }
 

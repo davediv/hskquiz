@@ -3,7 +3,8 @@
 
 	The design system's colour contract says a state may never be signalled by colour alone, so
 	each state is a different *shape* first and a different colour second: an empty ring, a ring
-	with a centre, a cross, a tick. At 18px a tick and a cross are still unmistakable, and the
+	with a centre, a cross, a tick. A word a teach card has shown but never tested is an unbroken
+	ring: outlined, not yet filled in. At 18px a tick and a cross are still unmistakable, and the
 	three coloured states use the two colours that already mean what they mean everywhere else
 	in the app — jade confirms, red alerts.
 
@@ -38,6 +39,10 @@
 				stroke-width="2"
 				stroke-linecap="round"
 			/>
+		</svg>
+	{:else if status === 'seen'}
+		<svg viewBox="0 0 18 18" focusable="false">
+			<circle cx="9" cy="9" r="7" fill="none" stroke="currentColor" stroke-width="2" />
 		</svg>
 	{:else if status === 'learning'}
 		<svg viewBox="0 0 18 18" focusable="false">
@@ -75,6 +80,10 @@
 
 	.new {
 		color: var(--color-line-strong);
+	}
+
+	.seen {
+		color: var(--color-ink-subtle);
 	}
 
 	.learning {

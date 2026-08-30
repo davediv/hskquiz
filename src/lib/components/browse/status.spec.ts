@@ -40,7 +40,11 @@ function store(...records: WordProgress[]): ProgressState {
 describe('statusOf', () => {
 	it('reads a record the way the level screen does', () => {
 		expect(statusOf(undefined)).toBe('new');
-		expect(statusOf(record('L5-0001', { seen: 0 }))).toBe('new');
+		// Never met at all — no record was ever written for this word.
+		expect(statusOf(record('L5-0001', { seen: 0, lastSeen: 0, lastMissed: 0 }))).toBe('new');
+		// Met by a teach card and never answered. `seen` counts answers, so this used to read as
+		// `new`, and ten words just taught showed as "500 New" on the browse chips.
+		expect(statusOf(record('L5-0001', { seen: 0, lastMissed: 0 }))).toBe('seen');
 		expect(statusOf(record('L5-0001'))).toBe('shaky');
 		expect(statusOf(record('L5-0001', { correct: 1, streak: 1, lastMissed: 0 }))).toBe('learning');
 		expect(statusOf(record('L5-0001', { seen: 9, correct: 9, streak: 9, lastMissed: 0 }))).toBe(
