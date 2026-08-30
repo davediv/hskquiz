@@ -1,0 +1,17 @@
+{
+	"piece": "design-system",
+	"loop": 4,
+	"rule": "\"design-system\" is 13 characters — ODD — so the reference is A and ours is B.",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"what": "Pleco iPhone word-list / search-results screen: hanzi with per-character tone colour, black joined pinyin (shǒujī, shōují), one-line gloss per row."
+	},
+	"B": {
+		"which": "ours",
+		"source": "progress/shots/loop-4/design-system-browse-mobile.png",
+		"what": "hskquiz /browse/3 at 375x812 @2x, light theme: level switch, search field, status filter, then the vocabulary list — hanzi in ink, pinyin per-syllable in tone colour, POS + gloss beneath."
+	},
+	"why_this_pair": "Both are a scrolling list of headwords where each row is hanzi + tone-marked pinyin + a short English gloss. It is the surface where this design system's two central decisions are visible side by side against the app it has to beat: which element carries tone colour (Pleco paints the hanzi, we paint the pinyin) and how a multi-syllable word's pinyin is spelled (Pleco joins it, we split it).",
+	"note_for_judge": "Do not open this file before judging."
+}
