@@ -1,0 +1,17 @@
+{
+	"piece": "quiz-card",
+	"loop": 4,
+	"rule": "\"quiz-card\" is 9 characters (odd) -> reference is A.png, ours is B.png",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"what": "Pleco headword/detail screen for 几乎〔幾-〕, iPhone 1242x2208 device screenshot"
+	},
+	"B": {
+		"which": "ours",
+		"source": "progress/shots/loop-4/quiz-card-mobile.png",
+		"what": "hskquiz teach card for 早上 at /quiz/1, 375x812 @2x, first card of a fresh session"
+	},
+	"whyThisPair": "Both are the whole-word screen: headword, tone-marked pinyin, meaning, part of speech, and example context. Pleco's detail view is the closest thing the reference has to our teach card, which is the state loop 4 rebuilt.",
+	"notForTheJudge": "Do not open this file before judging."
+}
