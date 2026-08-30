@@ -1,8 +1,128 @@
 {
  "loops": [
   {
+   "loop": 4,
+   "note": "Collisions re-resolved by QUALIFYING the shared sense on both sides — 听见 \"to hear (and catch it)\" / 听到 \"to hear (as a result)\" — so the collision stays visible to every guard while the buttons read differently. A sixth build gate now fails if a card’s own dictionary meaning does not survive its rewrite. And the thing both reference apps do that this one did not: 1,270 example sentences, HSK 1 and 2 at 100%, every character build-gated to be at or below the card’s own level.",
+   "verdicts": [
+    {
+     "piece": "vocab-data",
+     "kind": "data",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "progress-store",
+     "kind": "logic",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "session-engine",
+     "kind": "logic",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "design-system",
+     "kind": "visual",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "app-shell",
+     "kind": "visual",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "level-select",
+     "kind": "visual",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "quiz-card",
+     "kind": "visual",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "session-summary",
+     "kind": "visual",
+     "pass": null,
+     "biggestGap": ""
+    },
+    {
+     "piece": "vocab-browse",
+     "kind": "visual",
+     "pass": null,
+     "biggestGap": ""
+    }
+   ]
+  },
+  {
+   "loop": 3,
+   "note": "The \"or\" splitter landed and the 38 grade-a-right-answer-wrong collisions went to zero — but the critic caught the cure being worse than the disease. They had been fixed by moving BOTH cards off the shared word, which hides the collision from the gate, from the distractor guard, and from the app’s own search: 听见 shipped \"to catch a sound\" and /browse?q=hear could no longer find it.",
+   "verdicts": [
+    {
+     "piece": "vocab-data",
+     "kind": "data",
+     "pass": false,
+     "biggestGap": "Add a gloss-survival gate to scripts/build-vocab.mjs, then re-resolve every card it flags by QUALIFYING the shared sense instead of replacing it."
+    },
+    {
+     "piece": "progress-store",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Move the rescue from \"the decoder failed\" to \"this write shrinks the learner's history\", and make hskquiz:progress:broken hold the biggest copy it has ever seen. One rule, at one chokepoint: *no write may reduce the stored…"
+    },
+    {
+     "piece": "session-engine",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Make a taught word visible to every screen that counts words — and make the summary's own \"Practise these N\" actually practise those N. Both are the same hole: the session's taught set exists only inside src/lib/session/.…"
+    },
+    {
+     "piece": "design-system",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": ""
+    },
+    {
+     "piece": "app-shell",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make / come back to where the learner left it, the way /browse/1 already does. Record window.scrollY per history entry in +layout.svelte — capture it in beforeNavigate against page.url.href, keyed so a forward push and a pop…"
+    },
+    {
+     "piece": "level-select",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make the learner's own three words render exactly as well as the hand-picked three, in src/lib/components/levels/LevelCard.svelte. One root cause produces both majors: the preview row is grid-template-columns: repeat(3,…"
+    },
+    {
+     "piece": "quiz-card",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Fill the teach card. Stop capping its hero, and put the two things it has no answer to — a speaker and the traditional form — into the band that frees up, using the components that already exist in src/lib/components/summary/."
+    },
+    {
+     "piece": "session-summary",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Stop navigating away from the results. Make the card's \"Entry\" chip open the existing WordSheet as a dialog over the summary instead of linking to /browse/[level]?q=…."
+    },
+    {
+     "piece": "vocab-browse",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Put the word in a sentence. This is the one thing both references spend their entry screen on and this piece spends none of. Add an example-sentence block to src/lib/components/browse/WordSheet.svelte, above CHARACTERS,…"
+    }
+   ]
+  },
+  {
    "loop": 2,
-   "note": "Vocabulary rebuilt from the ground up: 4,316 of 4,316 official entries now traceable, all four slang senses gone, 3,475 glosses hand-authored against the official part of speech, and tone colour moved from a render-time guess to build-time data — every one of 7,907 syllables is painted, where loop 1 coloured only the 29% of words that were monosyllabic. Every piece still fails, but on second-order problems now. The sharpest finding: the sense splitter does not know the word \"or\", so 47 same-level pairs share a primary gloss and the app can mark a right answer wrong.",
+   "note": "Vocabulary rebuilt: 4,316 of 4,316 official entries traceable, all four slang senses gone, 3,475 glosses hand-authored against the official part of speech. Tone colour moved from a render-time guess to build-time data — every one of 7,907 syllables painted, where loop 1 coloured only the 29% of words that were monosyllabic. The sharpest finding: the sense splitter does not know the word \"or\", so 47 same-level pairs share a primary gloss and the app can mark a right answer wrong.",
    "verdicts": [
     {
      "piece": "vocab-data",

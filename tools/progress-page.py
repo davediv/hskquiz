@@ -22,8 +22,15 @@ SHOTS = ROOT / "progress" / "shots"
 OUT = ROOT / "progress" / "index.html"
 STATUS = ROOT / "progress" / "status.json"
 
-THUMB_W = 460          # rendered at ~230 CSS px on a 2x phone
+THUMB_W = 430          # rendered at ~215 CSS px on a 2x phone
 QUALITY = 74
+
+
+# A --full shot of a 1,070-row list runs to ~111 megapixels, past Pillow's bomb guard and past
+# JPEG's 65,500px dimension limit. Those are legitimate evidence, so raise the guard and crop
+# rather than dropping the frame.
+Image.MAX_IMAGE_PIXELS = None
+MAX_ASPECT = 6  # taller than this and only the top is worth showing in a contact sheet
 
 
 def data_uri(path, width=THUMB_W, quality=QUALITY):
@@ -31,10 +38,15 @@ def data_uri(path, width=THUMB_W, quality=QUALITY):
         im = Image.open(path).convert("RGB")
     except Exception:
         return None
+    if im.height > im.width * MAX_ASPECT:
+        im = im.crop((0, 0, im.width, im.width * MAX_ASPECT))
     if im.width > width:
         im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
     buf = io.BytesIO()
-    im.save(buf, "JPEG", quality=quality, optimize=True, progressive=True)
+    try:
+        im.save(buf, "JPEG", quality=quality, optimize=True, progressive=True)
+    except Exception:
+        return None
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
 
 
@@ -50,6 +62,10 @@ def esc(s):
 
 status = json.loads(STATUS.read_text()) if STATUS.exists() else {"loops": []}
 loops = sorted(status.get("loops", []), key=lambda x: -int(x["loop"]))
+# Every loop keeps its nine main screens — that comparison over time is the point of the page.
+# The extra states critics capture run to hundreds and would blow the 16 MB artifact ceiling, so
+# only the newest loop carries its strip; the rest stay in git.
+NEWEST = int(loops[0]["loop"]) if loops else None
 
 # ---------------------------------------------------------------- assemble frames
 total_bytes = 0
@@ -70,7 +86,9 @@ for lp in loops:
         # modest image used for both the thumbnail and the lightbox. Two encodes each would put
         # the page over the 16 MB artifact ceiling.
         primary = piece == base
-        uri = data_uri(f) if primary else data_uri(f, 400, 64)
+        if not primary and int(lp["loop"]) != NEWEST:
+            continue
+        uri = data_uri(f, 430, 71) if primary else data_uri(f, 360, 60)
         if not uri:
             continue
         total_bytes += len(uri)
@@ -80,7 +98,7 @@ for lp in loops:
                 "piece": piece,
                 "base": base,
                 "shot": uri,
-                "desktop": (data_uri(desk, 700, 66) if desk.exists() else None) if primary else None,
+                "desktop": (data_uri(desk, 660, 64) if desk.exists() else None) if primary else None,
                 "pass": v.get("pass"),
                 "gap": v.get("biggestGap", ""),
                 "kind": v.get("kind", ""),
