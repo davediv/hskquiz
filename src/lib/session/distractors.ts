@@ -44,6 +44,42 @@ function isVerbal(word: Word): boolean {
 }
 
 /**
+ * Glosses that describe what a word *does* to a sentence instead of translating it.
+ *
+ * 第 ships as "makes 'one' into 'first'", 吗 as "makes a sentence a yes-no question", 瓶 as
+ * "measure word: bottles". These are the right glosses — there is no English word for 第 — but
+ * they are written in a different register from every other entry in the list, and register is
+ * visible from across the room. Put 第 on a card against "it is raining", "half a year" and
+ * "please come in" and the learner does not need to know a character: exactly one button is
+ * talking about grammar. Measured over 600 sessions of L1–L3, **51.0% of hanzi→meaning cards
+ * with a metalinguistic answer drew three ordinary-phrase distractors**, and every one of those
+ * cards was free.
+ *
+ * Nothing else in `plausibility` can see it. `pos` is no help — 第 is the only `Prefix` in HSK 1
+ * — and gloss length and the `to `-verb test are satisfied by any four-word phrase.
+ *
+ * Judged on `meanings[0]` alone, because `primaryGloss` is what goes on the button. The list is
+ * the verbs the shipped glosses actually use to describe a function, plus the two shapes that
+ * are metalinguistic by punctuation: "measure word: …" and a gloss with a "…" slot in it
+ * ("don't ...!", "the more ... the more"). It matches 14/500 L1 words, 25/770 L2, 15/969 L3,
+ * 10/999 L4, 9/1070 L5 — always more than the three distractors a card needs.
+ */
+const METALINGUISTIC =
+	/^(?:makes|marks|shows|indicates|softens|expresses|denotes|introduces|links|connects|turns|used)\b|^(?:measure word|classifier|particle|prefix|suffix)\b/i;
+
+/** Memoised on the gloss string: `plausibility` asks this once per candidate per question. */
+const REGISTERS = new Map<string, boolean>();
+
+function isMetalinguistic(word: Word): boolean {
+	const gloss = word.meanings[0] ?? '';
+	const cached = REGISTERS.get(gloss);
+	if (cached !== undefined) return cached;
+	const made = METALINGUISTIC.test(gloss.trim()) || gloss.includes('...') || gloss.includes('…');
+	REGISTERS.set(gloss, made);
+	return made;
+}
+
+/**
  * Characters of a word, memoised.
  *
  * `sharesCharacter` runs once per candidate per question in `plausibility` and again in the
@@ -75,10 +111,17 @@ function sharesCharacter(a: Word, b: Word): boolean {
  */
 const SIGNALS: Record<
 	Direction,
-	{ pos: number; verbal: number; gloss: [number, number]; hanzi: [number, number]; share: number }
+	{
+		pos: number;
+		verbal: number;
+		gloss: [number, number];
+		hanzi: [number, number];
+		share: number;
+		register: number;
+	}
 > = {
-	'hanzi-to-meaning': { pos: 6, verbal: 4, gloss: [4, 2], hanzi: [2, 1], share: 0 },
-	'meaning-to-hanzi': { pos: 6, verbal: 2, gloss: [1, 0], hanzi: [6, 3], share: 3 }
+	'hanzi-to-meaning': { pos: 6, verbal: 4, gloss: [4, 2], hanzi: [2, 1], share: 0, register: 20 },
+	'meaning-to-hanzi': { pos: 6, verbal: 2, gloss: [1, 0], hanzi: [6, 3], share: 3, register: 0 }
 };
 
 /** At most one distractor per question may share a character with the answer. */
@@ -110,6 +153,21 @@ function plausibility(answer: Word, candidate: Word, direction: Direction): numb
 	// when the characters are on screen; meaningless when they aren't.
 	if (signal.share > 0 && sharesCharacter(answer, candidate)) score += signal.share;
 
+	// Register is a partition, not a nudge: 20 is deliberately larger than every other signal in
+	// this function added together (6 + 4 + 4 + 2 = 16), so when the answer's gloss describes a
+	// grammatical function, *every* candidate that also describes one outranks *every* candidate
+	// that does not, and the buttons stop announcing the answer. It costs ordinary cards nothing
+	// — ~97% of the list is ordinary, so for an ordinary answer this is a constant added to
+	// almost every candidate, which changes no ranking among them. It degrades rather than
+	// fails: a level too small to spare three same-register candidates simply falls through to
+	// the next bucket, the same way every other signal does.
+	//
+	// Only in hanzi→meaning. In the other direction the glosses are the *prompt* and the buttons
+	// hold characters, so the register of a candidate's gloss is not on screen to leak anything.
+	if (signal.register > 0 && isMetalinguistic(answer) === isMetalinguistic(candidate)) {
+		score += signal.register;
+	}
+
 	return score;
 }
 
@@ -137,10 +195,43 @@ export interface DistractorPool {
  * `src/lib/data/senses.ts`, and until it happens the corpus can still ship such a pair — which
  * is precisely why the picker refuses it independently rather than trusting the gate.
  */
+/**
+ * The modal auxiliaries, whose English glosses are one sense written several ways.
+ *
+ * `senses.ts` is right to refuse to be a thesaurus — "shore" and "coast" must stay two senses,
+ * and a general synonym table is how a picker starts refusing candidates it has no business
+ * refusing. The modals are the one place that argument does not hold, because they are a closed
+ * grammatical class of about a dozen words whose glosses the list itself writes interchangeably:
+ * 会 ships "to know how to", 能 ships "to be able to", 能够 ships "to be capable of", 可以 ships
+ * "to be allowed to". All four are *can*. Loop 4 put 能's "to be able to" on a 会 card as a wrong
+ * answer, and it was not wrong.
+ *
+ * Every phrase here was read off the shipped glosses; the whole table reaches 13 words across
+ * the five levels, and the pairs it newly separates are 会/能 at HSK 1, 懂得/可以/能够 at HSK 2,
+ * 得/应 at HSK 4 and 必/不能不 at HSK 5. It matches a *whole* normalised sense and never a word
+ * inside one, so it cannot reach into an ordinary gloss that happens to contain "can".
+ *
+ * Bare "may" is deliberately absent even though 可以 ships it: it would fold the month onto a
+ * modal the day a list ships 五月 as "May". 可以 lands in the family through "to be allowed to"
+ * anyway, so the risky key buys nothing.
+ */
+const MODAL_FAMILIES: readonly (readonly string[])[] = [
+	['can', 'be able to', 'know how to', 'be allowed to', 'be capable of', 'manage to'],
+	['must', 'have to', 'need to', 'should', 'ought to']
+];
+
+/** Every phrase above, pointing at the first member of its family. Built once at load. */
+const MODAL_KEY = new Map<string, string>();
+for (const family of MODAL_FAMILIES) {
+	for (const phrase of family) MODAL_KEY.set(phrase, family[0]);
+}
+
 function comparableSenses(word: Word): Set<string> {
 	const out = new Set<string>();
-	for (const sense of senseSet(word))
-		out.add(sense.replace(/-+/g, ' ').replace(/\s+/g, ' ').trim());
+	for (const sense of senseSet(word)) {
+		const flat = sense.replace(/-+/g, ' ').replace(/\s+/g, ' ').trim();
+		out.add(MODAL_KEY.get(flat) ?? flat);
+	}
 	return out;
 }
 
@@ -169,37 +260,56 @@ function phrasesOf(pool: DistractorPool, word: Word): readonly string[][] {
 	return pool.phrases.get(word.id) ?? [...comparableSenses(word)].map(splitWords);
 }
 
-/** `['to','go']` opens `['to','go','out']`. Equal phrases are `sharesSense`'s business. */
-function opens(short: readonly string[], long: readonly string[]): boolean {
+/**
+ * Is `short` a whole run of words inside `long`? Equal phrases are `sharesSense`'s business.
+ *
+ * This used to compare from index 0 only, which is where a nested gloss happens to sit about a
+ * third of the time and nowhere else. 去 "to go" does open 出去 "to go out" — but 半 "half" ends
+ * 一半 "one half", 年 "year" ends 半年 "half a year", 人 "person" ends 别人 "other people", and
+ * every one of those sailed through onto a card next to the word that contains it. Counted over
+ * the five shipped lists, restricted (as `nestsWith` restricts itself) to same-level pairs that
+ * also share a character: **the prefix test found 227 pairs and containment finds 525**, so the
+ * guard was missing more traps than it caught, in exactly the ratio the loop-4 audit measured.
+ *
+ * Word-aligned rather than substring: `['ear']` must not match inside `['early','morning']`,
+ * and comparing raw strings would say it does.
+ */
+function sitsInside(short: readonly string[], long: readonly string[]): boolean {
 	if (short.length === 0 || short.length >= long.length) return false;
-	for (let i = 0; i < short.length; i++) if (short[i] !== long[i]) return false;
-	return true;
+	const last = long.length - short.length;
+	outer: for (let start = 0; start <= last; start++) {
+		for (let i = 0; i < short.length; i++) {
+			if (short[i] !== long[start + i]) continue outer;
+		}
+		return true;
+	}
+	return false;
 }
 
 /**
- * True when one word's gloss is the opening of the other's *and* the two share a character.
+ * True when one word's gloss sits whole inside the other's *and* the two share a character.
  *
- * Neither half is enough on its own. Nested glosses alone catch 827 same-level pairs, most of
- * them unrelated words that happen to start the same way ("not" inside "not very much"), and
- * throwing that many candidates out of the picker costs more than it buys. A shared character
- * alone is a *feature*: producing 开机 "to switch on a machine" when asked for 开学 "to start
- * school" is the mistake a real learner makes, and `SIGNALS.share` deliberately rewards it.
+ * Neither half is enough on its own. Nested glosses alone catch thousands of same-level pairs,
+ * most of them unrelated words that merely overlap ("not" inside "not very much"), and throwing
+ * that many candidates out of the picker costs more than it buys. A shared character alone is a
+ * *feature*: producing 开机 "to switch on a machine" when asked for 开学 "to start school" is the
+ * mistake a real learner makes, and `SIGNALS.share` deliberately rewards it.
  *
- * Together they are the trap. 出去 "to go out" beside 去 "to go", 回来 "to come back" beside 来
- * "to come", 唱歌 "to sing a song" beside 唱 "to sing", 大学生 "university student" beside 大学
- * "university" — same character, and a gloss the learner cannot tell apart from the prompt
- * they were given. The learner picks the shorter one, is told they are wrong, and is right.
- * 243 such pairs across the five shipped levels; each one loses one candidate out of hundreds.
+ * Together they are the trap. 半 "half" beside 一半 "one half", 年 "year" beside 半年 "half a
+ * year", 去 "to go" beside 出去 "to go out", 大学 "university" beside 大学生 "university student"
+ * — same character, and a gloss the learner cannot tell apart from the prompt they were given.
+ * The learner picks the shorter one, is told they are wrong, and is right. 525 such pairs across
+ * the five shipped levels; each one loses one candidate out of hundreds.
  *
  * What this cannot see is a synonym that shares no spelling: 没关系 "it does not matter" beside
  * 没事儿 "it is all right", or 记住 "memorize" beside 记得 "remember". Those need a thesaurus,
- * not a string compare, and pretending otherwise is how the 827-pair version happened.
+ * not a string compare, and pretending otherwise is how the thousand-pair version happened.
  */
 function nestsWith(pool: DistractorPool, a: Word, b: Word): boolean {
 	if (!sharesCharacter(a, b)) return false;
 	for (const x of phrasesOf(pool, a)) {
 		for (const y of phrasesOf(pool, b)) {
-			if (opens(x, y) || opens(y, x)) return true;
+			if (sitsInside(x, y) || sitsInside(y, x)) return true;
 		}
 	}
 	return false;

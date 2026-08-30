@@ -15,7 +15,6 @@ import {
 	type ProgressWriter
 } from './index';
 import { sharesSense } from './distractors';
-import { taughtWordIds } from './index';
 import { HOUR, makeLevel, mastered, progressState, record, shaky } from './test-fixtures';
 
 const NOW = 1_700_000_000_000;
@@ -25,10 +24,9 @@ function build(
 	words: readonly Word[],
 	progress: Parameters<typeof buildSession>[2],
 	seed = 1,
-	size = SESSION_SIZE,
-	require?: readonly string[]
+	size = SESSION_SIZE
 ) {
-	return buildSession(words, 1, progress, size, { rng: mulberry32(seed), now: NOW, require });
+	return buildSession(words, 1, progress, size, { rng: mulberry32(seed), now: NOW });
 }
 
 function ids(session: Session): string[] {
@@ -228,54 +226,22 @@ describe('buildSession — the app pays its own debt before taking on more', () 
 		const seenIds = new Set(Object.keys(partial.byWord));
 		expect(drawn.filter((id) => !seenIds.has(id)).length).toBeGreaterThanOrEqual(1);
 	});
-});
 
-describe('buildSession — a caller may name the words', () => {
-	const named = LEVEL_1.slice(30, 40).map((w) => w.id);
-
-	it('asks exactly the words it was given', () => {
-		const session = build(LEVEL_1, null, 4, SESSION_SIZE, named);
-		expect(new Set(ids(session))).toEqual(new Set(named));
-	});
-
-	it('fills the rest of the session from the scheduler', () => {
-		const session = build(LEVEL_1, null, 4, SESSION_SIZE, named.slice(0, 3));
-		expect(session.questions).toHaveLength(SESSION_SIZE);
-		for (const id of named.slice(0, 3)) expect(ids(session)).toContain(id);
-	});
-
-	it('ignores ids this level does not carry, and never asks one word twice', () => {
-		const session = build(LEVEL_1, null, 4, SESSION_SIZE, [
-			named[0],
-			named[0],
-			'L9-9999',
-			'',
-			named[1]
-		]);
-		expect(session.questions).toHaveLength(SESSION_SIZE);
-		expect(new Set(ids(session)).size).toBe(SESSION_SIZE);
-		expect(ids(session)).toContain(named[0]);
-		expect(ids(session)).toContain(named[1]);
-	});
-
-	it('truncates a caller that names more words than the session holds', () => {
-		const session = build(
-			LEVEL_1,
-			null,
-			4,
-			4,
-			LEVEL_1.slice(0, 40).map((w) => w.id)
-		);
-		expect(session.questions).toHaveLength(4);
-	});
-
-	it('hands the summary the same set it displayed', () => {
-		const first = build(LEVEL_1, progressState([]), 9);
-		const shown = taughtWordIds(first);
-		expect(shown).toHaveLength(SESSION_SIZE);
-		const again = build(LEVEL_1, progressState([]), 12, SESSION_SIZE, shown);
-		expect(ids(again)).toEqual(expect.arrayContaining(shown));
-		expect(taughtWordIds(null)).toEqual([]);
+	// `buildSession` used to take a `require: string[]` so the summary could name its ten words
+	// to the next run. Nothing imported it, it bypassed `takeDistinct`, and it was deleted. This
+	// is the guarantee that replaces it, stated the way a summary sees it: derive the taught set
+	// off `isIntroduction` — exactly what the button renders — run the ordinary scheduler with no
+	// options at all, and get that set back.
+	it('needs no `require`: the ordinary scheduler asks back the set the summary displayed', () => {
+		for (let seed = 0; seed < 50; seed++) {
+			const first = build(LEVEL_1, progressState([]), seed);
+			const displayed = first.questions
+				.filter((question) => isIntroduction(question))
+				.map((question) => question.word.id);
+			expect(displayed).toHaveLength(SESSION_SIZE);
+			const saved = progressState(displayed.map((id) => taught(id)));
+			expect(new Set(ids(build(LEVEL_1, saved, seed + 500)))).toEqual(new Set(displayed));
+		}
 	});
 });
 

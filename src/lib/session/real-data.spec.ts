@@ -84,20 +84,26 @@ describe.skipIf(!available)('buildSession against the shipped HSK list', () => {
 		}
 	});
 
-	it('never offers a shorter form of the answer as a wrong answer', () => {
-		// 出去 "to go out" beside 去 "to go": same character, and a gloss the learner cannot
-		// tell apart from the prompt they were given. 243 such pairs exist inside the five
-		// shipped levels; none of them may share a card. Re-derived here rather than imported,
-		// so the property is checked and not merely the implementation restated.
-		const opens = (a: string, b: string) => {
+	it('never offers a contained form of the answer as a wrong answer', () => {
+		// 去 "to go" beside 出去 "to go out", and — the half the prefix-only guard used to miss —
+		// 半 "half" beside 一半 "one half", 年 "year" beside 半年 "half a year". Same character,
+		// and a gloss the learner cannot tell apart from the prompt they were given. 525 such
+		// pairs exist inside the five shipped levels; none of them may share a card. Re-derived
+		// here rather than imported, so the property is checked and not the implementation
+		// restated — and word-aligned, so "ear" inside "early morning" is not a hit.
+		const inside = (a: string, b: string) => {
 			const [s, l] =
 				a.length <= b.length ? [a.split(' '), b.split(' ')] : [b.split(' '), a.split(' ')];
-			return s.length > 0 && s.length < l.length && s.every((t, i) => l[i] === t);
+			if (s.length === 0 || s.length >= l.length) return false;
+			for (let start = 0; start + s.length <= l.length; start++) {
+				if (s.every((token, i) => l[start + i] === token)) return true;
+			}
+			return false;
 		};
 		const nested = (a: Word, b: Word) => {
 			const chars = new Set([...a.hanzi]);
 			if (![...b.hanzi].some((c) => chars.has(c))) return false;
-			for (const x of senseSet(a)) for (const y of senseSet(b)) if (opens(x, y)) return true;
+			for (const x of senseSet(a)) for (const y of senseSet(b)) if (inside(x, y)) return true;
 			return false;
 		};
 		let checked = 0;

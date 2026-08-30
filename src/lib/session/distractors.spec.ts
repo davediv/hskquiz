@@ -206,3 +206,110 @@ describe('pickDistractors', () => {
 		expect(pickDistractors(tiny, tiny.words[0], 'hanzi-to-meaning', 3, rng)).toHaveLength(1);
 	});
 });
+
+describe('pickDistractors — register', () => {
+	// 第 "makes 'one' into 'first'" against "it is raining", "half a year", "please come in":
+	// the answer is the only button describing a grammatical function, so the card is free
+	// without reading the hanzi. Nothing else in `plausibility` can see it — 第 is the only
+	// `Prefix` in HSK 1, so the part-of-speech signal has nothing to match on.
+	const grammar = [
+		word({ id: 'g0', hanzi: '第', meanings: ["makes 'one' into 'first'"], pos: ['Prefix'] }),
+		word({ id: 'g1', hanzi: '吗', meanings: ['makes a sentence a yes-no question'], pos: ['Aux'] }),
+		word({ id: 'g2', hanzi: '本', meanings: ['measure word: books'], pos: ['M'] }),
+		word({ id: 'g3', hanzi: '别', meanings: ["don't ...!"], pos: ['Adv'] }),
+		word({ id: 'g4', hanzi: '着', meanings: ['shows a continuing state'], pos: ['Aux'] })
+	];
+	const ordinary = [
+		word({ id: 'o0', hanzi: '下雨', meanings: ['it is raining'], pos: ['V'] }),
+		word({ id: 'o1', hanzi: '半年', meanings: ['half a year'], pos: ['N'] }),
+		word({ id: 'o2', hanzi: '请进', meanings: ['please come in'], pos: ['V'] }),
+		word({ id: 'o3', hanzi: '天气', meanings: ['weather'], pos: ['N'] }),
+		word({ id: 'o4', hanzi: '苹果', meanings: ['apple'], pos: ['N'] })
+	];
+	const pool = makePool([...grammar, ...ordinary]);
+	const isGrammar = (w: Word) => w.id.startsWith('g');
+
+	it('answers a grammar gloss with grammar glosses, on every seed', () => {
+		for (let seed = 0; seed < 30; seed++) {
+			const picks = pickDistractors(pool, grammar[0], 'hanzi-to-meaning', 3, mulberry32(seed));
+			expect(picks).toHaveLength(3);
+			expect(picks.every(isGrammar)).toBe(true);
+		}
+	});
+
+	it('keeps a grammar gloss off an ordinary card, where it is an obvious throwaway', () => {
+		for (let seed = 0; seed < 30; seed++) {
+			const picks = pickDistractors(pool, ordinary[0], 'hanzi-to-meaning', 3, mulberry32(seed));
+			expect(picks.some(isGrammar)).toBe(false);
+		}
+	});
+
+	it('does not apply in meaning-to-hanzi, where the buttons hold characters', () => {
+		// A pool built so register is the *only* thing separating the candidates: one hanzi
+		// each, one part of speech, five-word non-verbal glosses throughout. In hanzi-to-meaning
+		// that makes the three grammar glosses win outright; in meaning-to-hanzi the glosses are
+		// the prompt rather than the buttons, nothing distinguishes the five, and the shuffle
+		// reaches the ordinary ones. Asserted as "not always the grammar three", which is what
+		// the absence of a partition looks like.
+		const flat = makePool([
+			word({ id: 'f0', hanzi: '甲', meanings: ['marks the first of two'], pos: ['Adv'] }),
+			word({ id: 'g5', hanzi: '乙', meanings: ['shows a continuing state of'], pos: ['Adv'] }),
+			word({ id: 'g6', hanzi: '丙', meanings: ['makes a sentence a question'], pos: ['Adv'] }),
+			word({ id: 'g7', hanzi: '丁', meanings: ['marks a change of situation'], pos: ['Adv'] }),
+			word({ id: 'f1', hanzi: '戊', meanings: ['very early in the morning'], pos: ['Adv'] }),
+			word({ id: 'f2', hanzi: '己', meanings: ['the road outside my house'], pos: ['Adv'] })
+		]);
+		const answer = flat.words[0];
+		let allGrammar = 0;
+		let mixed = 0;
+		for (let seed = 0; seed < 30; seed++) {
+			const picks = pickDistractors(flat, answer, 'hanzi-to-meaning', 3, mulberry32(seed));
+			if (picks.every(isGrammar)) allGrammar++;
+			if (!pickDistractors(flat, answer, 'meaning-to-hanzi', 3, mulberry32(seed)).every(isGrammar))
+				mixed++;
+		}
+		expect(allGrammar).toBe(30);
+		expect(mixed).toBeGreaterThan(0);
+	});
+
+	it('degrades to ordinary candidates rather than shortening the card', () => {
+		const thin = makePool([grammar[0], grammar[1], ...ordinary]);
+		const picks = pickDistractors(thin, grammar[0], 'hanzi-to-meaning', 3, mulberry32(9));
+		expect(picks).toHaveLength(3);
+	});
+});
+
+describe('isAmbiguousWith — the modal auxiliaries', () => {
+	// 会 "to know how to" and 能 "to be able to" are both *can*; loop 4 put 能's gloss on a 会
+	// card as a wrong answer that was not wrong. `sharesSense` cannot see it — the two strings
+	// have no word in common — so `comparableSenses` folds the closed modal class onto one key.
+	const hui = word({ id: 'h', hanzi: '会', meanings: ['to know how to', 'will or is likely to'] });
+	const neng = word({ id: 'n', hanzi: '能', meanings: ['to be able to', 'to be allowed to'] });
+	const keyi = word({ id: 'k', hanzi: '可以', meanings: ['may', 'to be allowed to'] });
+	const bixu = word({ id: 'b', hanzi: '必须', meanings: ['must', 'have to'] });
+	const yinggai = word({ id: 'y', hanzi: '应该', meanings: ['should'] });
+	const cat = word({ id: 'c', hanzi: '猫', meanings: ['cat'] });
+	const pool = makePool([hui, neng, keyi, bixu, yinggai, cat]);
+
+	it('will not put two spellings of "can" on one card', () => {
+		expect(isAmbiguousWith(pool, hui, neng)).toBe(true);
+		expect(isAmbiguousWith(pool, neng, keyi)).toBe(true);
+	});
+
+	it('will not put two spellings of "must" on one card', () => {
+		expect(isAmbiguousWith(pool, bixu, yinggai)).toBe(true);
+	});
+
+	it('keeps the two families apart, and leaves ordinary words alone', () => {
+		expect(isAmbiguousWith(pool, neng, bixu)).toBe(false);
+		expect(isAmbiguousWith(pool, hui, cat)).toBe(false);
+		expect(isAmbiguousWith(pool, bixu, cat)).toBe(false);
+	});
+
+	it('folds a whole sense only, never a word inside a longer gloss', () => {
+		const tin = word({ id: 't', hanzi: '罐头', meanings: ['a tin or can'] });
+		const carry = word({ id: 'r', hanzi: '搬', meanings: ['to move something you can lift'] });
+		const wide = makePool([tin, carry, neng]);
+		expect(isAmbiguousWith(wide, carry, neng)).toBe(false);
+	});
+});

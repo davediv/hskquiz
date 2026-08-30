@@ -56,22 +56,28 @@ export interface SessionOptions {
 	rng?: Rng;
 	/** Epoch ms used for every recency calculation. Defaults to `Date.now()`. */
 	now?: number;
-	/**
-	 * Word ids this session must ask, ahead of anything the scheduler would have chosen.
-	 *
-	 * For a caller that has already *named* a set of words to the learner. The summary's
-	 * primary button says "Practise these 10" over a list of ten hanzi; before this existed
-	 * the only thing behind it was `buildSession(level)` again, which is a scheduler being
-	 * asked a different question, and it answered with nine of the ten plus a stranger.
-	 *
-	 * Ids the level does not contain are ignored, duplicates collapse, and more ids than
-	 * `size` are truncated to the first `size` — so a caller can hand over whatever it just
-	 * displayed without pre-filtering. Anything left over after the required set is filled by
-	 * the ordinary review/explore split, so `require` narrows a session rather than replacing
-	 * the model. Passing an empty list is the same as passing nothing.
-	 */
-	require?: readonly string[];
 }
+
+/*
+ * There is deliberately no `require: string[]` here, and there was one.
+ *
+ * It existed so the summary's "Practise these 10" button could name its ten words to the next
+ * session instead of asking the scheduler a different question and getting nine of them plus a
+ * stranger. It shipped, no screen ever imported it, and driving it directly showed why leaving
+ * it in the tree was worse than not having it:
+ *
+ *   - it wrote its words straight into the picked list, ahead of `takeDistinct`, so
+ *     `require: ['L1-0066','L1-0069']` produced one session with two cards whose prompt is the
+ *     identical hanzi 地 and different answers marked correct — the exact collision
+ *     `takeDistinct` exists to close;
+ *   - it never read the record, so ten never-met ids came back as ten `introduce` cards: a
+ *     "Practise these 10" that teaches ten and asks nothing.
+ *
+ * The button does not need it. A finished run has already stamped `lastSeen` on every word it
+ * taught, so those ten are `taughtOnly`, and `splitQuota`'s backlog branch (`owed >= size`)
+ * hands the whole next session to them — measured at ten of ten, in 50 of 50 seeds. The
+ * scheduler asks them because it owes them, which is a reason the model actually holds.
+ */
 
 /**
  * A question plus the kind of card it is.
@@ -140,9 +146,9 @@ const MIN_FRESH = 1;
  * brake above takes off the explore side.
  */
 function splitQuota(size: number, reviewAvailable: number, freshAvailable: number, owed: number) {
-	// A caller that named a whole session's worth of words in `require` leaves nothing to split.
-	// Falling through would compute a negative review quota and then *backfill* it with a fresh
-	// word, handing back one more question than was asked for.
+	// A level with no usable words leaves nothing to split. Falling through would compute a
+	// negative review quota and then *backfill* it with a fresh word, handing back a question
+	// from a pool the caller was told was empty.
 	if (size <= 0) return { review: 0, fresh: 0 };
 	const exploreShare = size - Math.round(size * (1 - EXPLORE_SHARE));
 	const capacity = Math.max(1, OWED_SESSIONS * (size - exploreShare));
@@ -220,33 +226,6 @@ function takeDistinct(
 }
 
 /**
- * The subset of `pool` a caller named in `options.require`, in the order they named it.
- *
- * Unknown ids, duplicates and a caller that named more words than the session holds are all
- * ordinary — a summary hands over the list it just rendered, and it should not have to know
- * which of those words this level actually carries. Every one of them narrows silently rather
- * than throwing, because the fallback (the scheduler's own choice) is always a valid session.
- */
-function requiredWords(
-	pool: DistractorPool,
-	ids: readonly string[] | undefined,
-	cap: number
-): Word[] {
-	if (!ids || ids.length === 0 || cap <= 0) return [];
-	const byId = new Map(pool.words.map((word) => [word.id, word] as const));
-	const out: Word[] = [];
-	const taken = new Set<string>();
-	for (const id of ids) {
-		if (out.length >= cap) break;
-		if (typeof id !== 'string' || taken.has(id)) continue;
-		taken.add(id);
-		const word = byId.get(id);
-		if (word) out.push(word);
-	}
-	return out;
-}
-
-/**
  * Build a practice session for `level`.
  *
  * @param words    the level's vocabulary — entries from other levels are ignored, so a
@@ -269,18 +248,12 @@ export function buildSession(
 	const pool = makePool(words.filter((word) => word.level === level));
 	const target = Math.min(requestedSize(size), pool.words.length);
 
-	// Named by the caller, so they are in before anything competes for a slot. See
-	// `SessionOptions.require`.
-	const demanded = requiredWords(pool, options.require, target);
-	const demandedIds = new Set(demanded.map((word) => word.id));
-
 	const fresh: Word[] = [];
 	/** Met, and still owed its first question — the app's own debt. */
 	const owed: Word[] = [];
 	/** Met and answered at least once: ordinary review, ordered by `wordWeight`. */
 	const due: Word[] = [];
 	for (const word of pool.words) {
-		if (demandedIds.has(word.id)) continue;
 		const read = readRecord(byWord[word.id]);
 		// `met`, not `seen > 0`: an introduction is a real meeting with a word even though it
 		// is not an answer, and this is the same reading `cardKindFor` and `wordWeight` use, so
@@ -291,8 +264,7 @@ export function buildSession(
 	}
 
 	const weightOf = (word: Word) => wordWeight(byWord[word.id], now);
-	const rest = target - demanded.length;
-	const quota = splitQuota(rest, owed.length + due.length, fresh.length, owed.length);
+	const quota = splitQuota(target, owed.length + due.length, fresh.length, owed.length);
 
 	// A word that was taught and never asked is worth 1.0 — deliberately no more, because
 	// inflating it is exactly the fabricated urgency this whole change exists to delete. So the
@@ -309,7 +281,9 @@ export function buildSession(
 		...orderWeighted([...owedOrder.slice(debt), ...due], weightOf, rng)
 	];
 
-	const picked: Word[] = [...demanded];
+	// Every word in a session goes through `takeDistinct`, with no side door: the one thing that
+	// used to bypass it (`options.require`) put two 地 cards in one run. See the note above.
+	const picked: Word[] = [];
 	takeDistinct(pool, picked, reviewOrder, quota.review);
 	// Nothing distinguishes one unseen word from another, so this is a plain shuffle.
 	takeDistinct(
@@ -369,27 +343,6 @@ export function cardKind(question: Question): CardKind {
  */
 export function isIntroduction(question: Question): boolean {
 	return cardKind(question) === 'introduce';
-}
-
-/**
- * The ids of the words a finished run *taught* — introduced whole, asked nothing.
- *
- * The set a summary means when it says "10 new words" and offers to practise them. It is
- * derived here rather than at the call site so the thing counted on the screen and the thing
- * handed to `SessionOptions.require` can never be two different readings of `kind`:
- *
- * ```ts
- * buildSession(words, level, progress, 10, { require: taughtWordIds(session) });
- * ```
- *
- * Order is the order the learner met them in, and duplicates cannot occur because a session
- * never asks one word twice.
- */
-export function taughtWordIds(session: Session | null | undefined): string[] {
-	const questions = session?.questions ?? [];
-	return questions
-		.filter((question) => isIntroduction(question))
-		.map((question) => question.word.id);
 }
 
 /**
