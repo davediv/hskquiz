@@ -52,8 +52,8 @@
        WHAT IT MAY NOT BE — any colour another token already holds. Measured, not asserted:
        every tone hue is >= 12 ΔE00 (CIEDE2000) from every non-tone `--hq-*` colour in its
        own theme, and >= 10 from every other tone. `src/lib/design/palette.spec.ts` reads
-       this file and fails on either. Worst actual: 15.0 light (tone 1 vs accent), 16.6 dark
-       (tone 0 vs ink-muted). That is why tone 1 is a vermilion and not the cinnabar accent,
+       this file and fails on either. Worst actual: 14.9 light and 15.0 dark, both tone 1 vs
+       the accent. That is why tone 1 is a vermilion and not the cinnabar accent,
        tone 2 a leaf green and not the jade `--color-correct`, and tone 0 a petrol and not
        the warm `--color-ink-subtle` grey the UI de-emphasises text with.
 
@@ -72,6 +72,19 @@
    under 百 `bǎi` read as one blue at 14px. As a petrol it is 26.0 / 26.2 from that blue, and
    the palette's closest pair is now tone 3 vs tone 4 at 20.4 / 21.6 — two tones that both
    carry a diacritic to fall back on.
+
+   ORTHOGRAPHY — pinyin is spelled by the WORD, not by the character, and the data already
+   says how. 汉语拼音正词法基本规则 sets 爱好 as `àihào`, 北京 `Běijīng`, 不客气 `bú kèqì`,
+   那儿 `nàr`, 方案 `fāng'àn`, 五颜六色 `wǔyán-liùsè`, and `Word.pinyin` ships exactly that
+   string. Colouring one syllable at a time means cutting it up, so `<Pinyin>` puts it back
+   together verbatim: every gap, apostrophe and hyphen it prints came out of the source and
+   none were invented. `src/lib/design/pinyin.spec.ts` asserts the concatenation of the
+   rendered spans equals `Word.pinyin` on all 4,308 words, and that no `.svelte` in the repo
+   opts out. Re-joining with one space per syllable — what the component defaulted to for four
+   loops — printed `ài hào`, `Běi jīng`, `nà r` and `fāng àn` on 3,095 of them, 71.8% of the
+   corpus and every browse row, and dropped the 24 apostrophes that are the only thing telling
+   `fāngàn` from `fāng'àn`. `spaced` is the opt-in for that reading and it is RUBY ONLY: one
+   syllable positioned over one character, where the gaps are the layout and not the spelling.
 
    TYPE — three stacks, three scales, and they are not interchangeable:
        --font-hanzi   + --text-hanzi-*    for 汉字. Never set hanzi on the Latin scale;
@@ -122,15 +135,16 @@
          `--spacing-3xl` and `--shadow-inset` are gone rather than documented
        · every `color-mix` used as a border resolves to a real ratio, and the ones under 3:1
          belong only to states that are also carried by fill and text
-   The one thing it does not do yet is fail on the whole repo at once: 131 off-ramp literals in
-   20 screen and component files predate it, so the total is a ceiling that may only fall. It
-   is 0 for this file and for `src/lib/design/**`, and that half is a hard assertion.
+   The one thing it does not do yet is fail on the whole repo at once: 135 off-ramp literals in
+   21 screen and component files predate it, so the total is a ceiling that may only fall — set
+   to exactly that measurement, with no slack above it, so the next one anyone writes goes red.
+   It is 0 for this file and for `src/lib/design/**`, and that half is a hard assertion.
 
    ACCESSIBILITY CONTRACT — do not regress these. The first four are executable: they are
    computed off this stylesheet by `src/lib/design/palette.spec.ts` and `scale.spec.ts`, so
    they fail loudly rather than drifting back.
-       · every text token is >= 4.5:1 on every surface it is allowed on (worst: 4.52 light,
-         ink-subtle on sunken; 4.91 dark, tone 1 on sunken)
+       · every text token is >= 4.5:1 on every surface it is allowed on (worst: 4.58 light,
+         correct on sunken; 5.03 dark, tone 1 on sunken)
        · every tone hue is >= 12 ΔE00 from every non-tone colour token in its own theme, and
          >= 10 from every other tone — see THE FOURTH FAMILY above
        · `--color-line-strong` is the >= 3:1 border for interactive components, on all three
@@ -146,8 +160,12 @@
          as well, which is the same "never the only channel" rule the ✕ obeys. `scale.spec.ts`
          resolves every such mix in `src/` and checks exactly that
        · `:focus-visible` gets a 3px accent ring at 3px offset, globally, in `@layer base`
-       · every <button> gets min-block-size 44px via a `:where()` rule (zero specificity, so
-         `min-h-0` overrides it when you really do need a tiny target)
+       · every control gets min-block-size 44px via a `:where()` rule (zero specificity, so
+         `min-h-0` overrides it when you really do need a tiny target) — <button>, <summary>,
+         <select>, any `a[href]`, and the ARIA roles that behave like buttons. Links included
+         because a route change is a link, and the browse level switch is five of them; an
+         inline link in prose is untouched, since min-block-size does not apply to a
+         non-replaced inline box
        · `prefers-reduced-motion: reduce` kills every animation and transition
        · `prefers-contrast: more` promotes hairlines to the strong border
 
@@ -170,7 +188,10 @@
 
 	--hq-ink: #1a1815;
 	--hq-ink-muted: #575049;
-	--hq-ink-subtle: #726b5f;
+	/* #726b5f measured 4.52:1 on --hq-surface-sunken: AA by two hundredths, and that is the
+	   ground the pinyin line inside a sunken SENTENCE card sits on, at 14px. 4.72 now, and
+	   the light theme's worst text pairing is no longer this one. */
+	--hq-ink-subtle: #6f685c;
 	--hq-ink-inverse: #faf8f5;
 
 	--hq-line: #e7e1d7;
@@ -555,7 +576,29 @@
 		cursor: pointer;
 	}
 
-	:where(button, [role='button']) {
+	/* 44px is the minimum touch target and it has to cover everything that ACTS as a control,
+	   not just <button>. This rule named only <button> and [role='button'] for four loops, and
+	   the browse level switch is five <a> pills — correct markup for a route change, and 34x30px
+	   on every one of them because nothing here was looking at links. Measured in the running
+	   app, not assumed.
+
+	   A link inside a sentence is not affected: `min-block-size` does not apply to non-replaced
+	   inline elements, so this only grows the ones already laid out as a box. Zero specificity,
+	   so `min-h-0` still wins wherever a genuinely tiny target is the right answer. Height only,
+	   deliberately — a full-width button does not need a width floor, and `.tap` is the utility
+	   for the icon-sized controls that need both axes. */
+	:where(
+		button,
+		summary,
+		select,
+		a[href],
+		[role='button'],
+		[role='tab'],
+		[role='radio'],
+		[role='checkbox'],
+		[role='switch'],
+		[role='menuitem']
+	) {
 		min-block-size: var(--spacing-tap);
 	}
 

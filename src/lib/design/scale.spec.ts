@@ -125,15 +125,15 @@ function offRamp(): OffRamp[] {
 }
 
 /**
- * What the screens carried the day this test landed: 131 literals in 20 files, measured, not
- * estimated. Recorded at the next ten, because eight builders were editing those files while
- * this was being written and the count moved by two in the hour it took — a ceiling that goes
- * red for a sibling's in-flight edit teaches nobody anything. The slack is not a budget: the
- * number drops to the real measurement at the top of the next loop, and it may only fall from
- * there. If this goes red, someone wrote a gap that is not on the ramp — the failure message
- * names the file and the count, and the fix is a `--spacing-*` step, not a bigger number here.
+ * What the screens carry, measured: 135 literals in 21 files. EXACTLY the measurement, with no
+ * slack over it — a ceiling with room in it is a budget, not a ratchet, and the loop-4 verdict
+ * was right that nobody was required to pay the debt down while six spare units sat above it.
+ * Zero slack means the next off-ramp gap anyone writes goes red on the change that writes it.
+ * When it does: the failure message names the file and the count, and the fix is a
+ * `--spacing-*` step, not a bigger number here. Lowering it as a file is cleaned up is the only
+ * edit this line should ever get.
  */
-const OFF_RAMP_CEILING = 140;
+const OFF_RAMP_CEILING = 135;
 
 describe('space is on the ramp', () => {
 	const violations = offRamp();

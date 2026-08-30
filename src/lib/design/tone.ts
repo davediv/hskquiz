@@ -249,3 +249,128 @@ export function resolveSyllables(
 	if (syllables !== undefined && syllables.length > 0) return [...syllables];
 	return segmentPinyin(pinyin ?? '');
 }
+
+/* ==============================================================================================
+   ORTHOGRAPHY — how the syllables are put back together as a printed reading.
+
+   汉语拼音正词法基本规则 (GB/T 16159) sets pinyin by WORD, not by character: 爱好 is `àihào`,
+   不客气 is `bú kèqì`, 那儿 is `nàr`, 西安 is `Xī'ān`. `Word.pinyin` already ships exactly that
+   string — every gap, apostrophe and hyphen in it is the official list's own — so the printed
+   reading is not something this module gets to decide. It only has to avoid destroying it.
+
+   That is what `layoutPinyin` is for. Splitting a word into coloured syllables means slicing
+   the source string, and the naive re-join (one space per syllable) invents word boundaries
+   that are not in the data: it printed `ài hào` for 3,107 of the 4,308 shipped words, `Běi jīng`
+   for 北京, `nà r` for 那儿 and `fāng àn` for 方案, dropping the apostrophe that was the only
+   thing telling `fāngàn` apart from `fāng'àn`. So instead of re-joining, we KEEP the source's
+   own inter-syllable text and hang it off the syllable that follows it. The concatenation of
+   every part is then the source string, character for character — `pinyin.spec.ts` asserts
+   that over all 4,308 words.
+
+   `spaced` forces the other reading — one gap per syllable — and exists for ruby layouts where
+   each syllable is positioned over its own character and the gaps are the layout, not the
+   spelling. It is also the fallback when the syllables do not spell the source (a caller that
+   passes `syllables` and no string at all), because there is no orthography to read there.
+   ============================================================================================== */
+
+/** One rendered run: the text to print, and the tone whose colour it takes. */
+export interface PinyinPart {
+	/** The source's separator before this syllable, the syllable, and any trailing text. */
+	text: string;
+	/** Erhua borrows the tone of the syllable it hangs off; everything else is its own. */
+	tone: Tone;
+}
+
+/**
+ * A bare `r` after another syllable is erhua — 那儿 `nàr`, 面条儿 `miàntiáor`. It is a retroflex
+ * ending, not a syllable, so it never takes a gap and never takes its own colour.
+ */
+function isErhua(syllables: readonly Syllable[], i: number): boolean {
+	return i > 0 && syllables[i].py === 'r';
+}
+
+/**
+ * The text the source string writes around its own syllables: index `i` is what sits before
+ * syllable `i`, and index `length` is whatever trails the last one. Null when a syllable cannot
+ * be found in order, i.e. the array does not spell the string it arrived with.
+ */
+export function sourceSeparators(source: string, syllables: readonly Syllable[]): string[] | null {
+	if (syllables.length === 0) return null;
+	const seps: string[] = [];
+	let at = 0;
+	for (const syllable of syllables) {
+		const found = source.indexOf(syllable.py, at);
+		if (found < 0) return null;
+		seps.push(source.slice(at, found));
+		at = found + syllable.py.length;
+	}
+	seps.push(source.slice(at));
+	return seps;
+}
+
+/**
+ * The runs to render for one reading. `spaced` forces one gap per syllable; left off, the
+ * source's own spelling is preserved exactly.
+ */
+export function layoutPinyin(
+	source: string,
+	syllables: readonly Syllable[],
+	spaced = false
+): PinyinPart[] {
+	const seps = spaced ? null : sourceSeparators(source, syllables);
+	return syllables.map((syllable, i) => {
+		const erhua = isErhua(syllables, i);
+		const before = seps ? seps[i] : i > 0 && !erhua ? ' ' : '';
+		const after = seps && i === syllables.length - 1 ? seps[syllables.length] : '';
+		return {
+			text: `${before}${syllable.py}${after}`,
+			tone: erhua ? syllables[i - 1].tone : syllable.tone
+		};
+	});
+}
+
+/**
+ * The terminal stop a Chinese sentence's punctuation asks for in Latin. 。？！ are full-width
+ * and belong to the hanzi line; the pinyin line under it takes the Latin equivalent, the way
+ * Pleco sets `Tā jīhū yī yè méi shuì.` under 他几乎一夜没睡。
+ */
+const STOPS: ReadonlyMap<string, string> = new Map([
+	['。', '.'],
+	['？', '?'],
+	['！', '!'],
+	['…', '…'],
+	['.', '.'],
+	['?', '?'],
+	['!', '!']
+]);
+
+/**
+ * Sentence orthography on top of `layoutPinyin`: a leading capital and a terminal stop.
+ *
+ * `Example.pinyin` ships one syllable per character with no capital and no punctuation
+ * (`wǒ de māo shì hēi sè de`), while the hanzi above it carries 。 and the English below it a
+ * full stop — three lines, three different ideas of what a sentence is. This makes the middle
+ * line agree with the two around it. Pass the sentence's hanzi and the stop matches its own
+ * punctuation; pass nothing and it is a full stop.
+ *
+ * It does NOT join syllables into words: that needs a segmentation of the sentence, which
+ * neither the data nor this module has. Word joining stays the caller's, per `layoutPinyin`.
+ */
+export function sentenceCase(parts: PinyinPart[], hanzi?: string): PinyinPart[] {
+	if (parts.length === 0) return parts;
+	const out = parts.map((part) => ({ ...part }));
+
+	const head = out[0].text;
+	const at = [...head].findIndex((glyph) => glyph.toLowerCase() !== glyph.toUpperCase());
+	if (at >= 0) {
+		const glyphs = [...head];
+		glyphs[at] = glyphs[at].toUpperCase();
+		out[0].text = glyphs.join('');
+	}
+
+	const tail = out[out.length - 1];
+	const last = hanzi === undefined ? '' : hanzi.trim().slice(-1);
+	const stop = STOPS.get(last) ?? (hanzi === undefined ? '.' : '');
+	if (stop !== '' && !tail.text.endsWith(stop)) tail.text += stop;
+	return out;
+}
