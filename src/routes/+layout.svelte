@@ -41,6 +41,15 @@
 	users — at top -46 on every page. A screen that wants the old behaviour subtracts its own
 	number now: `top: var(--app-sticky-top)`.
 
+	THE SHELL ALSO OWNS "WHERE WAS I"
+	The app's most-repeated motion is level select → a session → back to level select, and
+	level select is a 2,054px document on a phone: an HSK 4 or 5 learner leaves it at ~900px
+	every time. One `scrollTo` on the frame the router commits is not enough to bring them
+	back, because it is clamped against a document that has not finished growing — measured on
+	`/browse/1`, leaving at 6000 and reloading landed at 362. `scroll.ts` holds the recorded
+	offset until the document can actually hold it, and lets go the instant the learner
+	touches anything. See that file for the whole argument.
+
 	WHAT THIS SHELL DOES NOT DO
 	It sets no measure and no horizontal gutter on the content. Every screen owns its own
 	column — the level screen alone runs 34rem on a phone and widens to a 60rem two-column
@@ -53,7 +62,7 @@
 <script lang="ts">
 	import './layout.css';
 	import '$lib/components/shell/shell.css';
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { base } from '$app/paths';
 	import AppBar from '$lib/components/shell/AppBar.svelte';
@@ -61,20 +70,62 @@
 	import { readRoute } from '$lib/components/shell/route';
 	import { createChrome } from '$lib/components/shell/chrome.svelte';
 	import { createBackTarget } from '$lib/components/shell/back.svelte';
+	import { createScrollMemory } from '$lib/components/shell/scroll';
 
 	let { children } = $props();
 
 	const route = $derived(readRoute(page.url.pathname, base));
 	const chrome = createChrome();
 	const backTarget = createBackTarget(base);
+	const scroll = createScrollMemory();
 
 	$effect(() => chrome.listen());
+	$effect(() => scroll.listen());
+
+	// Where this entry was left. Captured here rather than read back later because on a pop
+	// `history.state` has already moved on by the time the navigation resolves.
+	beforeNavigate(() => scroll.capture());
 
 	// A new screen always starts with its chrome intact, however the last one left it — and
 	// its column may be a different width from the one we just left.
-	afterNavigate(() => {
+	afterNavigate((nav) => {
 		chrome.reveal(true);
 		chrome.sync();
+		// After `reveal`, so the bar is at a known end state before the restore scrolls under
+		// it: landing 900px down should look exactly like the moment the learner left.
+		scroll.settle(nav.type);
+	});
+
+	/**
+	 * Does the screen already render an `<h1>` of its own? If it does, the bar must not be one
+	 * too — see the note in AppBar.svelte. The answer changes without the URL changing (a quiz
+	 * swaps to its summary in place), so it is watched rather than derived: a
+	 * `MutationObserver` on `#main` wakes a check that is itself O(1), because
+	 * `getElementsByTagName` returns a LIVE collection and browse renders a window of rows
+	 * rather than all 500.
+	 */
+	let contentEl = $state<HTMLElement | null>(null);
+	let pageOwnsHeading = $state(false);
+
+	$effect(() => {
+		const main = contentEl;
+		if (!main) return;
+		const own = main.getElementsByTagName('h1');
+		let frame = 0;
+		const check = () => {
+			frame = 0;
+			pageOwnsHeading = own.length > 0;
+		};
+		const schedule = () => {
+			if (!frame) frame = requestAnimationFrame(check);
+		};
+		check();
+		const watcher = new MutationObserver(schedule);
+		watcher.observe(main, { childList: true, subtree: true });
+		return () => {
+			watcher.disconnect();
+			if (frame) cancelAnimationFrame(frame);
+		};
 	});
 
 	/**
@@ -118,9 +169,9 @@
 >
 	<a class="skip" href="#main">Skip to content</a>
 
-	<AppBar {route} {chrome} {backTarget} />
+	<AppBar {route} {chrome} {backTarget} {pageOwnsHeading} />
 
-	<div id="main" class="content" tabindex="-1">
+	<div id="main" class="content" tabindex="-1" bind:this={contentEl}>
 		{@render children()}
 	</div>
 
@@ -165,11 +216,19 @@
 	 * During a quiz the footer is gone, so the shell is what keeps flow content off the
 	 * home indicator. A sticky answer bar has to clear it itself — `--app-safe-bottom`.
 	 *
-	 * The column here is what lets the run be exactly one viewport tall. `.content` grows to
-	 * fill the 100dvh shell, but its height stays *indefinite* — it comes from flexing, not
-	 * from a length — so a child asking for `block-size: 100%` gets `auto` and the answer
-	 * buttons end up stranded mid-screen. As a flex column it hands its used height to the
-	 * screen instead, and `.quiz` claims it with `flex: 1`.
+	 * The column here is what lets the run TAKE the viewport's height as a definite number.
+	 * `.content` grows to fill the 100dvh shell, but its height stays *indefinite* — it comes
+	 * from flexing, not from a length — so a child asking for `block-size: 100%` gets `auto`
+	 * and the answer buttons end up stranded mid-screen. As a flex column it hands its used
+	 * height to the screen instead, and `.quiz` claims it with `flex: 1`.
+	 *
+	 * It does NOT on its own make the run one viewport tall, and the comment here used to
+	 * claim it did. `min-block-size: 100dvh` is a floor, not a ceiling: if the screen's own
+	 * content has a taller intrinsic minimum, the shell grows and the last control goes below
+	 * the fold. Measured at 812x375: `.run` is 368px whatever the viewport height is, so on
+	 * every landscape phone the shell is ~40px over and "Got it" is half cut off. The floor
+	 * that has to come down is the run's, not this one — the shell cannot shrink a child that
+	 * refuses to be shrunk.
 	 */
 	.shell.focus .content {
 		display: flex;

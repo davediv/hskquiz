@@ -25,12 +25,12 @@
  *                    JS as the bar compacts under a downward scroll. Anything that sticks
  *                    below the bar offsets against THIS, which is what the whole app already
  *                    did — so browse's search + filters, the quiz progress rail and the level
- *                    screen's desktop rail all rise with the bar for free. ON `.shell` IT IS
- *                    NEVER ZERO AND NEVER NEGATIVE: the bar shrinks, it does not leave. (One
- *                    transitional exception, spelled out and dated in `+layout.svelte`: inside
- *                    `#main` it currently resolves to `--app-sticky-top`, so the one screen
- *                    that has not moved to that name yet keeps its fold. `--app-chrome-h` is
- *                    not overridden there and keeps the floor.)
+ *                    screen's desktop rail all rise with the bar for free. IT IS NEVER ZERO
+ *                    AND NEVER NEGATIVE, ANYWHERE: the bar shrinks, it does not leave, and
+ *                    there is no override of it in the tree — `.shell` writes it live and
+ *                    `:root` holds the pre-measurement default, and that is the whole list.
+ *                    A screen that wants less than the full chrome subtracts its own fold
+ *                    with `--app-sticky-top`; it does not get a smaller `--app-header-h`.
  *   --app-chrome-h   The live total the shell occupies: safe-area inset plus the above. This
  *                    is the one number that answers "how much of the viewport is not mine",
  *                    and it has a floor for the same reason.

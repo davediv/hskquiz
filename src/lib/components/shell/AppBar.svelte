@@ -24,10 +24,15 @@
 	sticky-in-flow element must not do: it shortens the document, scroll anchoring compensates,
 	the controller reads that compensation as a scroll, and the bar oscillates.
 
-	THE HEADING IS AN <h1>. It used to be a <span>, which left `/quiz/[level]` and
-	`/browse/[level]` with literally zero headings in their normal state while `/` had a full
-	outline — the app was inconsistent with itself, and a screen-reader user landing on browse
-	had nothing to navigate by.
+	THE HEADING IS AN <h1> ONLY WHEN THE SCREEN HAS NOT WRITTEN ONE. It used to be a <span>,
+	which left `/quiz/[level]` and `/browse/[level]` with literally zero headings in their
+	normal state while `/` had a full outline — a screen-reader user landing on browse had
+	nothing to navigate by. Then it was an unconditional <h1>, which is the opposite fault: on
+	`/browse/9` the page's own "hskquiz covers HSK 1 to 5" is an <h1> too, so the document had
+	two, and on any view where the screen has something more specific to say than "HSK 1" the
+	bar was taking the rank off it. So the shell FILLS THE GAP AND NEVER COMPETES: the layout
+	watches `#main` for an <h1>, and when there is one this drops to a plain <span> — same
+	glyphs, same box, no rank. Nothing else has to be told.
 -->
 <script lang="ts">
 	import { goto } from '$app/navigation';
@@ -40,8 +45,15 @@
 	let {
 		route,
 		chrome,
-		backTarget
-	}: { route: ShellRoute; chrome: ChromeController; backTarget: BackTarget } = $props();
+		backTarget,
+		pageOwnsHeading = false
+	}: {
+		route: ShellRoute;
+		chrome: ChromeController;
+		backTarget: BackTarget;
+		/** The screen already renders an `<h1>`; this one steps down to a plain label. */
+		pageOwnsHeading?: boolean;
+	} = $props();
 
 	/**
 	 * The header's own border box, measured — hairline included, which the old `.inner`
@@ -120,7 +132,13 @@
 			</span>
 
 			<span class="slot mid">
-				{#if route.heading}<h1 class="heading">{route.heading}</h1>{/if}
+				{#if route.heading}
+					{#if pageOwnsHeading}
+						<span class="heading">{route.heading}</span>
+					{:else}
+						<h1 class="heading">{route.heading}</h1>
+					{/if}
+				{/if}
 			</span>
 
 			<span class="slot end">
@@ -142,6 +160,13 @@
 		 * height the row's contents actually have. 56px expanded, 40px docked.
 		 */
 		--bar-row-h: calc(var(--app-header-h) - var(--app-bar-line));
+		/*
+		 * How far a 44px tap target has to overhang the live row. 0 while the row is 44px or
+		 * taller, 2px once it has docked to 40. Both the chevron and the lateral action carry
+		 * it as a transparent border, so their hit areas keep the 44px minimum while what they
+		 * paint stays inside the row.
+		 */
+		--bar-tap-inset: calc((var(--spacing-tap) - min(var(--spacing-tap), var(--bar-row-h))) / 2);
 
 		position: sticky;
 		top: 0;
@@ -259,11 +284,26 @@
 	.icon {
 		display: grid;
 		place-items: center;
+		/*
+		 * 44x44 IN EVERY STATE, INCLUDING DOCKED. This used to be
+		 * `block-size: min(var(--spacing-tap), var(--bar-row-h))`, which is 44x56 expanded and
+		 * 44x40 docked — under the 44px minimum in exactly the state the docked row exists to
+		 * protect, because that is where the back control is the only navigation left on a
+		 * 38,402px document.
+		 *
+		 * The row cannot grow to fit it: `.inner`'s block-size is fixed so the bar's border box
+		 * never changes size (see the note at the top of this file). So the TARGET is 44 and
+		 * the PAINT is the row: `--bar-tap-inset` of transparent border takes up the
+		 * difference and `background-clip: padding-box` keeps the pill inside it, so a 44px
+		 * finger area never lights up 2px past the bar's own hairline. Overflowing a 40px flex
+		 * line changes no layout — `.inner` is a fixed height and the slots only centre what
+		 * is inside them.
+		 */
 		inline-size: var(--spacing-tap);
-		/* Keeps its 44px width, and takes the whole row's height whatever the row is doing:
-		   44x56 expanded, 44x40 docked, and every row of the bar is tappable either way. */
-		block-size: min(var(--spacing-tap), var(--bar-row-h));
+		block-size: var(--spacing-tap);
+		border-block: var(--bar-tap-inset) solid transparent;
 		border-radius: var(--radius-pill);
+		background-clip: padding-box;
 		color: var(--color-ink);
 		text-decoration: none;
 		transition: background-color 120ms var(--ease-out-soft);
@@ -299,9 +339,13 @@
 	.action {
 		display: inline-flex;
 		align-items: center;
-		min-block-size: min(var(--spacing-tap), var(--bar-row-h));
+		/* Same rule as `.icon`: a 44px target whatever the row is doing, with the lit surface
+		   clipped back to the row so it never bleeds past the hairline. */
+		min-block-size: var(--spacing-tap);
 		padding-inline: 0.75rem;
+		border-block: var(--bar-tap-inset) solid transparent;
 		border-radius: var(--radius-sm);
+		background-clip: padding-box;
 		color: var(--color-accent);
 		font-size: var(--text-sm);
 		font-weight: 600;
