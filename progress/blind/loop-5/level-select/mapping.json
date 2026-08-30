@@ -1,0 +1,16 @@
+{
+  "piece": "level-select",
+  "loop": 5,
+  "parity": "\"level-select\" is 12 characters — EVEN, so A = ours, B = the reference",
+  "A": {
+    "which": "ours",
+    "source": "progress/shots/loop-5/level-select-mobile.png",
+    "what": "hskquiz level-select, first-time visitor with zero progress, 375x812 @2x"
+  },
+  "B": {
+    "which": "reference",
+    "source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+    "what": "Du Chinese, Articles — a collection listing with items to start, real mobile UI"
+  },
+  "whyThisReference": "level-select is a library of things a learner can start; Du Chinese's Articles collection is its closest analogue in the reference set — a titled list of startable items with a level marker, a progress-ish count and a primary CTA."
+}
