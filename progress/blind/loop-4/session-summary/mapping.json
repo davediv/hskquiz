@@ -1,0 +1,18 @@
+{
+	"piece": "session-summary",
+	"loop": 4,
+	"nameLength": 15,
+	"parity": "odd",
+	"rule": "odd -> reference is A.png, ours is B.png",
+	"A": {
+		"which": "reference",
+		"path": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"why": "Pleco's 几乎 entry — a raw device screenshot (no marketing chrome) of a word laid out as study material: headword, tone-marked pinyin, HSK badge, part of speech, sense, then example sentences stacked hanzi + pinyin + English. The closest reference to what the summary's review card claims to be."
+	},
+	"B": {
+		"which": "ours",
+		"path": "progress/shots/loop-4/session-summary-mobile.png",
+		"url": "http://127.0.0.1:5177/quiz/1?state=summary",
+		"viewport": "375x812 @2x"
+	}
+}
