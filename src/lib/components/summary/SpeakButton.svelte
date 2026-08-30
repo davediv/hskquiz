@@ -43,7 +43,7 @@
 				stroke-linecap="round"
 			/>
 		</svg>
-		<span aria-hidden="true">Listen</span>
+		<span class="label" aria-hidden="true">Listen</span>
 		<span class="sr-only">Listen to {text}, {pinyin}</span>
 	</button>
 {/if}
@@ -52,9 +52,9 @@
 	.say {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: 0.3125rem;
 		min-block-size: var(--spacing-tap);
-		padding-inline: 0.6875rem;
+		padding-inline: 0.5rem;
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface);
@@ -71,6 +71,22 @@
 	.say svg {
 		inline-size: 1rem;
 		block-size: 1rem;
+	}
+
+	/*
+	 * On a 320px screen the card is 240px wide and `✕ NOT QUITE` + `Entry` + `Listen` measures
+	 * 323 — the row ran off the card. The word beside the icon is the first thing to go: the
+	 * accessible name is the whole sentence either way, and a 44px speaker is still a 44px
+	 * speaker. The container is the card itself, declared in `WordCard`.
+	 */
+	@container (max-width: 15.5rem) {
+		.say .label {
+			display: none;
+		}
+
+		.say {
+			padding-inline: 0.4375rem;
+		}
 	}
 
 	.say:active {

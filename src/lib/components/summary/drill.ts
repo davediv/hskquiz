@@ -133,6 +133,20 @@ export function buildDrill(
 	});
 }
 
+/**
+ * What one drilled word left behind.
+ *
+ * Not a bare boolean, because the summary card under the drill prints *what was chosen* — and a
+ * word missed a second time with a different distractor was printing the distractor from the
+ * original run, which is a mistake the learner did not just make. The pick travels with the
+ * verdict so the card can never disagree with the answer that produced it.
+ */
+export interface DrillOutcome {
+	right: boolean;
+	/** The choice that produced `right`. A card is only ever recorded once it is answered. */
+	picked: Word;
+}
+
 /** How a finished drill reads in one line: `2 of 3 right`, and whether it cleared the list. */
 export interface DrillTally {
 	right: number;
@@ -140,8 +154,12 @@ export interface DrillTally {
 	cleared: boolean;
 }
 
-export function tallyDrill(outcomes: ReadonlyMap<string, boolean>): DrillTally {
-	let right = 0;
-	for (const correct of outcomes.values()) if (correct) right++;
-	return { right, total: outcomes.size, cleared: outcomes.size > 0 && right === outcomes.size };
+export function tallyDrill(outcomes: Readonly<Record<string, DrillOutcome>>): DrillTally {
+	const answered = Object.values(outcomes);
+	const right = answered.filter((outcome) => outcome.right).length;
+	return {
+		right,
+		total: answered.length,
+		cleared: answered.length > 0 && right === answered.length
+	};
 }

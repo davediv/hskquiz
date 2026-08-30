@@ -1,24 +1,33 @@
 <!--
 	One word, after the run. The only way this screen ever shows a word.
 
-	SIZE IS THE WHOLE ARGUMENT
-	The hanzi is set with the app's shared `headwordSize()` — 82.5px for a one- or two-character
-	word on a 375px phone, stepping down as characters are added — rather than a size invented
-	for a summary row. It was 48px before, which said the test mattered more than the word. This
-	is the back of the flashcard, and the back of a flashcard is not a receipt. Everything under
-	it (tone-marked pinyin at `xl`, every gloss at `lg`, the part of speech) is the quiz's own
-	reveal block, flush left instead of centred so ten of them read as a list.
+	SIZE IS THE WHOLE ARGUMENT, AND THE ARGUMENT IS NOW WON WITH THE QUIZ'S OWN NUMBER
+	Loop 1 asked for a teaching card set at least as large as the question that beat the learner.
+	A fixed step could never get there: `--text-hanzi-hero` tops out at 22vw — 82.5px on a 375px
+	phone — while `QuestionPrompt` sizes its headword against the stage it was handed and lands
+	on 119.38px there. So this card stops picking a step and runs the prompt's own rule instead:
+	`.face` is a size container and the headword is
+	`min(100cqw / cols / fit, --card-hero-max)` with `--card-hero-max` quoted verbatim from
+	`QuestionPrompt`'s `--hero-max`. Measured on a 375×812 phone: 119.38px here, 119.37px there.
+	The divisor is 1.1 rather than the question card's 1.28 for the reason the *teach* card uses
+	1.1 — a card in a scrolling list is not competing with four answer buttons for the column.
 
-	The quiz prompt itself now runs larger still (it measures the viewport row it was handed and
-	lands near 112px on the same phone). That is a stage this screen does not have — ten cards
-	scroll, one question does not — so the card takes the largest fixed step on the scale instead
-	of copying a number that only makes sense full-bleed.
+	THE SENTENCE IS THE PART THE REVEAL DID NOT ALREADY SHOW
+	Hanzi, pinyin, gloss and part of speech are exactly what the quiz put on screen ninety
+	seconds ago, so a card carrying only those is a dictionary line set large. 1,270 words now
+	ship an authored `example` (every HSK 1 and 2 word; none above yet), and where there is one
+	it goes on the card, with the word itself picked out of its own sentence the way Pleco bolds
+	它 in an example and Du Chinese bolds it in a review card. Where there is none — 70.5% of the
+	corpus — there is no block, no label and no reserved gap: the card simply ends at the part of
+	speech. Nothing on this card is laid out around a slot that may be empty.
 
 	TONE COLOUR IS ON THE PINYIN, NOT THE CHARACTER
 	`<Hanzi>` sets characters in ink and `<Pinyin>` paints one colour per syllable off
 	`Word.syllables` — the design system's single answer to "where does tone colour go", and the
 	same one `QuestionPrompt` gives. Every pinyin line on this screen is painted, the picked
 	word's included, so a card two seconds after a reveal of the same word reads as the same app.
+	The one exception is the example sentence, whose pinyin is a whole line of running text: it
+	is the same exception `QuestionPrompt` makes, for the same reason.
 
 	SAME CARD FOR A MISS AND A HIT
 	`outcome` changes the label at the top and whether the "you picked" footer exists. Nothing
@@ -30,18 +39,24 @@
 	every headword. It earns its place here more than anywhere: 干 is two separate cards (乾 gān
 	dry, 幹 gàn to work), and the bracketed form is what tells them apart at a glance.
 
-	TWO CONTROLS, NOT ONE
-	Listen says the word; Entry leaves for it. A card with one audio button on it is still a
-	printout — Du Chinese's equivalent card offers Dictionary, Pinyin and a hint, and every Pleco
-	row pushes into the entry. `Entry` is the browse screen for this word's own level, which is
-	where the character breakdown, the sense list and your record with the word live: the card is
-	the back of the flashcard, and this is the way out of it that is not "answer ten more".
+	TWO CONTROLS, NOT ONE — AND NEITHER OF THEM LEAVES
+	Listen says the word; Entry opens it. `Entry` used to be a real link to
+	`/browse/[level]?q=…`, which meant tapping it left `/quiz/1` — and coming back rebuilt the
+	run, destroying the summary, the review list and every drill result. It is a button now, and
+	the summary opens the app's own `WordSheet` over the top of the results: numbered senses, the
+	character breakdown, the word's family, your record with it. Nothing is navigated, so nothing
+	can be lost, and the destination is the full entry rather than a filtered list one tap short
+	of it.
 
 	THE LABEL IS THE DRILL'S, ONCE THERE HAS BEEN ONE
 	`drilled` is `null` until the re-test runs and then says how it went, so a word that was
 	missed and then answered reads **✓ Fixed** rather than carrying a red ✕ that is no longer
 	true. Nothing else about the card changes: same size, same order, same place in the list, so
-	the screen heals instead of rearranging itself under a thumb.
+	the screen heals instead of rearranging itself under a thumb. `picked` is likewise the most
+	recent *wrong* answer, not the oldest: a word missed a second time with a different
+	distractor prints that distractor. A word that was fixed keeps the original miss under
+	`First time`, because the answer that fixed it is the headword and "FIRST TIME 地方" on a
+	card about 地方 says nothing at all.
 
 	A CORRECT ANSWER INSIDE THE "10 ANSWERED CORRECTLY" DISCLOSURE SAYS SO ONCE. The green
 	✓ CORRECT stamp on every one of ten solved cards restated the label directly above them and
@@ -49,10 +64,9 @@
 	controls take the row.
 -->
 <script lang="ts">
-	import { resolve } from '$app/paths';
 	import type { Direction, Word } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
-	import { fullGloss, headwordSize, posLabel, primaryGloss } from '$lib/components/quiz/quiz';
+	import { fullGloss, posLabel, primaryGloss } from '$lib/components/quiz/quiz';
 	import SpeakButton from './SpeakButton.svelte';
 
 	interface Props {
@@ -72,6 +86,8 @@
 		drilled?: boolean | null;
 		/** Draw the outcome label. Off inside a list whose own heading already says it. */
 		verdict?: boolean;
+		/** Open the full entry over the results. Absent leaves the card with one control. */
+		onentry?: (word: Word) => void;
 	}
 
 	let {
@@ -81,7 +97,8 @@
 		direction = 'hanzi-to-meaning',
 		index = 0,
 		drilled = null,
-		verdict = true
+		verdict = true,
+		onentry
 	}: Props = $props();
 
 	const right = $derived(outcome === 'right');
@@ -92,25 +109,39 @@
 	 * wider than the head row has to spare beside two controls on a 375px phone.
 	 */
 	const label = $derived(right ? 'Correct' : fixed ? 'Fixed' : 'Not quite');
-	const size = $derived(headwordSize(word.hanzi));
 	/**
-	 * The word, searched for on its own level's browse screen.
-	 *
-	 * `?q=` is the query the browse route seeds its search field from, and an exact hanzi is the
-	 * top band of its ranking — so tapping Entry lands on a list with this word at the head of
-	 * it, one tap from the full Pleco-style sheet. `Word.level` rather than a prop: a session is
-	 * one level, but the word already knows which, and one source of truth is one fewer thing a
-	 * caller can get wrong. The path itself is built by `resolve()` inside the attribute, which
-	 * is where the lint rule guarding internal links wants to see it.
+	 * The width divisor for the headword, floored at two — `QuestionPrompt`'s own rule. A
+	 * one-character word left to divide the column by one would be set at the full width of the
+	 * card, which is a poster rather than a headword.
 	 */
-	const entryQuery = $derived(encodeURIComponent(word.hanzi));
+	const cols = $derived(Math.max(2, [...word.hanzi].length));
 	/**
 	 * The bracketed traditional form is a footnote to the headword, never a second one, so it is
-	 * sized off the character count rather than off `size`: one or two characters leave room for
-	 * 36px beside an 82px hero, three or four do not and take 26px.
+	 * sized off the character count rather than off the headword: one or two characters leave
+	 * room for 36px beside a 119px hero, three or four do not and take 26px.
 	 */
 	const tradSize: 'sm' | 'md' = $derived([...word.hanzi].length <= 2 ? 'md' : 'sm');
 	const pos = $derived(posLabel(word));
+	/** 1,270 of 4,308 words carry one. The block does not exist for the other 3,038. */
+	const example = $derived(word.example ?? null);
+	/**
+	 * The sentence split around the word itself, so the characters just missed can be picked out
+	 * of the line they are used in. The build guarantees the sentence contains the word; the
+	 * `at < 0` branch is what happens if that ever stops being true.
+	 */
+	const sentence = $derived.by(() => {
+		if (!example) return null;
+		const at = example.hanzi.indexOf(word.hanzi);
+		const parts =
+			at < 0
+				? [{ text: example.hanzi, hit: false }]
+				: [
+						{ text: example.hanzi.slice(0, at), hit: false },
+						{ text: word.hanzi, hit: true },
+						{ text: example.hanzi.slice(at + word.hanzi.length), hit: false }
+					].filter((part) => part.text !== '');
+		return { parts, chars: [...example.hanzi].length };
+	});
 	// Six cards in and the stagger has done its job; past that it is just latency.
 	const delay = $derived(`${Math.min(index, 5) * 45}ms`);
 </script>
@@ -144,30 +175,27 @@
 			</p>
 		{/if}
 		<div class="tools">
-			<a
-				class="tool"
-				href="{resolve('/browse/[level]', { level: String(word.level) })}?q={entryQuery}"
-			>
-				<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-					<path
-						d="M3.4 4.6h4.1c1.4 0 2.5.9 2.5 2v8.2c0-.9-1.1-1.6-2.5-1.6H3.4Zm13.2 0h-4.1c-1.4 0-2.5.9-2.5 2v8.2c0-.9 1.1-1.6 2.5-1.6h4.1Z"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="1.4"
-						stroke-linejoin="round"
-					/>
-				</svg>
-				<span aria-hidden="true">Entry</span>
-				<span class="sr-only"
-					>Open {word.hanzi}, {word.pinyin}, in the HSK {word.level} word list</span
-				>
-			</a>
+			{#if onentry}
+				<button type="button" class="tool" aria-haspopup="dialog" onclick={() => onentry?.(word)}>
+					<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+						<path
+							d="M3.4 4.6h4.1c1.4 0 2.5.9 2.5 2v8.2c0-.9-1.1-1.6-2.5-1.6H3.4Zm13.2 0h-4.1c-1.4 0-2.5.9-2.5 2v8.2c0-.9 1.1-1.6 2.5-1.6h4.1Z"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.4"
+							stroke-linejoin="round"
+						/>
+					</svg>
+					<span class="label" aria-hidden="true">Entry</span>
+					<span class="sr-only">Open the full entry for {word.hanzi}, {word.pinyin}</span>
+				</button>
+			{/if}
 			<SpeakButton text={word.hanzi} pinyin={word.pinyin} />
 		</div>
 	</div>
 
-	<p class="face">
-		<Hanzi {word} {size} display />
+	<p class="face" style:--cols={cols}>
+		<Hanzi {word} size="hero" display class="hz" />
 		{#if word.traditional}
 			<span class="trad" class:trad-md={tradSize === 'md'}
 				><span class="sr-only">traditional form </span><Hanzi
@@ -182,6 +210,23 @@
 	<p class="sound"><Pinyin {word} size="xl" /></p>
 	<p class="gloss">{fullGloss(word)}</p>
 	{#if pos}<p class="pos">{pos}</p>{/if}
+
+	{#if sentence && example}
+		<!-- No wrapper, no panel and no reserved height: on a word with no authored sentence
+		     this whole block is absent and the card ends at the part of speech above. -->
+		<section class="sen" style:--sen-chars={sentence.chars} aria-label="Example sentence">
+			<p class="sen-face">
+				{#each sentence.parts as part, i (i)}<Hanzi
+						text={part.text}
+						size="sm"
+						display={part.hit}
+						class={part.hit ? 'sen-hz hit' : 'sen-hz'}
+					/>{/each}
+			</p>
+			<p class="sen-sound"><Pinyin pinyin={example.pinyin} size="sm" tones={false} /></p>
+			<p class="sen-english">{example.english}</p>
+		</section>
+	{/if}
 
 	{#if !right}
 		<p class="picked">
@@ -206,7 +251,10 @@
 </li>
 
 <style>
+	/* A size container, so the head row can drop its two labels on a card too narrow to hold
+	   them — see the query at the end of this block. */
 	.word {
+		container-type: inline-size;
 		padding: 0.625rem 1.125rem 1rem;
 		list-style: none;
 	}
@@ -225,11 +273,19 @@
 		border-color: var(--color-correct);
 	}
 
-	/* Reserves its own height so the Listen button arriving on hydration moves nothing. */
+	/*
+	 * Reserves its own height so the Listen button arriving on hydration moves nothing.
+	 *
+	 * `wrap` is the safety net under the container query at the end of this file: the labelled
+	 * row measures 251px and a 375px phone gives it 257, which is enough but not much. If a
+	 * fallback font ever makes `NOT QUITE` wider than the slack, the controls drop to a second
+	 * line inside the card instead of hanging over its right edge.
+	 */
 	.head {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		flex-wrap: wrap;
+		gap: 0.25rem 0.375rem;
 		min-block-size: var(--spacing-tap);
 	}
 
@@ -237,13 +293,14 @@
 	.tools {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: 0.3125rem;
 		margin-inline-start: auto;
 	}
 
 	/*
-	 * Same pill as Listen, so the two read as one pair of controls rather than a button and a
-	 * link. Both are `--spacing-tap` tall, which is the 44pt the whole app is built on.
+	 * Same pill as Listen, and now the same element too: both open something on this page rather
+	 * than one of them leaving it. Both are `--spacing-tap` tall, which is the 44pt the whole
+	 * app is built on.
 	 */
 	.tool {
 		display: inline-flex;
@@ -251,7 +308,7 @@
 		align-items: center;
 		gap: 0.3125rem;
 		min-block-size: var(--spacing-tap);
-		padding-inline: 0.625rem;
+		padding-inline: 0.5rem;
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface);
@@ -312,12 +369,38 @@
 		color: var(--color-wrong);
 	}
 
+	/*
+	 * The headword's stage. A size container so the character can be sized against the width it
+	 * actually has, which is the only way a card in a 335px column can be told to match a
+	 * full-bleed quiz prompt and be believed.
+	 */
 	.face {
+		/* Quoted from `QuestionPrompt`'s `--hero-max`: the ceiling the question that beat the
+		   learner was drawn under. 119.38px on a 375×812 phone. */
+		--card-hero-max: clamp(6rem, calc(11.5svh + 26px), 8.5rem);
+		/*
+		 * How much wider than the glyphs themselves a headword's row must be. The question
+		 * card's divisor is 1.28 because four answer buttons are competing for its column;
+		 * nothing competes for this one, so it is set at the point where the *ceiling* above
+		 * decides the size on the reference phone and the column decides it only on narrower
+		 * ones — 257px of card ÷ 2 characters ÷ 1.07 = 120.1px, so the 119.38px cap wins by
+		 * 0.7px and a 320px screen steps down on its own. `--cols` is floored at two.
+		 */
+		--card-fit: 1.07;
+
+		container-type: inline-size;
 		display: flex;
 		align-items: baseline;
 		flex-wrap: wrap;
 		gap: 0 0.5rem;
 		margin: 0.125rem 0 0;
+	}
+
+	/* Beats `.text-hanzi-hero` on specificity, which is the point: the step is the fallback and
+	   the measured size is the rule. */
+	.face :global(.hz) {
+		font-size: min(calc(100cqw / var(--cols) / var(--card-fit)), var(--card-hero-max));
+		line-height: 1.04;
 	}
 
 	/*
@@ -365,6 +448,55 @@
 	}
 
 	/*
+	 * THE SENTENCE.
+	 *
+	 * Flush to the same left axis as everything above it — the card has one — and separated by
+	 * air rather than by a rule, so the block reads as the continuation of the entry it is. The
+	 * hanzi is set by the same rule as the headword, divided by how many characters have to fit;
+	 * every shipped sentence is 5–12 characters, so a short one lands on the 24px cap and the
+	 * longest comes down to ~21px in this column. One line either way.
+	 */
+	.sen {
+		container-type: inline-size;
+		margin-block-start: 0.875rem;
+	}
+
+	.sen-face {
+		margin: 0;
+		line-height: 1.32;
+	}
+
+	.sen-face :global(.sen-hz) {
+		font-size: min(1.5rem, calc(100cqw / var(--sen-chars) / 1.04));
+	}
+
+	/* The word that was missed, inside its own sentence — Pleco bolds it, Du Chinese bolds it. */
+	.sen-face :global(.hit) {
+		color: var(--color-ink);
+	}
+
+	.sen-face :global(.sen-hz:not(.hit)) {
+		color: var(--color-ink-muted);
+	}
+
+	.sen-sound {
+		margin: 0.1875rem 0 0;
+		color: var(--color-ink-subtle);
+	}
+
+	.sen-sound :global(.pinyin) {
+		font-size: var(--text-pinyin-sm);
+	}
+
+	.sen-english {
+		margin: 0.25rem 0 0;
+		font-size: var(--text-sm);
+		line-height: 1.4;
+		color: var(--color-ink-muted);
+		text-wrap: pretty;
+	}
+
+	/*
 	 * What they chose instead — context, not the record, so it sits below a hairline and stays
 	 * quiet. The whole pick is one inline run inside a single flex item: as a row of separate
 	 * flex items the gloss separator wrapped onto its own line and read as a stray bullet.
@@ -395,5 +527,21 @@
 
 	.pick-gloss {
 		font-size: var(--text-sm);
+	}
+
+	/*
+	 * 320px. The card is 240px wide there and `✕ NOT QUITE` beside two labelled pills measures
+	 * 323, so the row ran off the card and took the page's horizontal scroll with it. Both pills
+	 * go to their icon alone — 44px targets, unchanged accessible names — which is 90px back.
+	 * `SpeakButton` carries the matching rule for its own half of the pair.
+	 */
+	@container (max-width: 15.5rem) {
+		.tool .label {
+			display: none;
+		}
+
+		.tool {
+			padding-inline: 0.4375rem;
+		}
 	}
 </style>

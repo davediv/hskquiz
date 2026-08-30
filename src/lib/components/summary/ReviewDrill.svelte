@@ -17,10 +17,12 @@
 	parallel implementation of a quiz; it is the quiz pointed at three words.
 
 	SIZE
-	The headword is `headwordSize()` — the same step `WordCard` uses, so the word does not change
-	size between being read and being asked. The quiz prompt is bigger because it owns a whole
-	viewport; this owns a column between a heading and a button, and matching the card it sits
-	among is worth more here than matching the run.
+	The headword is `headwordSize()` — a fixed step, deliberately smaller than the card behind
+	this one. `WordCard` measures its column and sets the headword at the quiz prompt's own
+	ceiling because it has the whole scroll to spend; this box is a stage between a heading and
+	four answer buttons, and it is reserved at its answered height on the first frame. A 119px
+	character in it would push the continue button off a 667px phone, which is exactly the
+	failure the reserved height exists to prevent.
 
 	HEIGHT IS FIXED BEFORE THE TAP
 	The reveal is always in the box and merely `visibility: hidden` until the answer lands, so
@@ -49,18 +51,22 @@
 		promptLabel,
 		verdictAnnouncement
 	} from '$lib/components/quiz/quiz';
-	import type { DrillCard } from './drill';
+	import type { DrillCard, DrillOutcome } from './drill';
 
 	interface Props {
 		/** The cards to run, in the order they are stacked on the screen behind this. */
 		cards: readonly DrillCard[];
-		/** Every card answered: word id to whether it was right this time. */
-		onfinish: (outcomes: Record<string, boolean>) => void;
+		/**
+		 * Every card answered: word id to how it went AND what was chosen. The card behind this
+		 * prints the pick, so a word missed a second time has to hand back the distractor that
+		 * did it rather than leaving the one from the original run on screen.
+		 */
+		onfinish: (outcomes: Record<string, DrillOutcome>) => void;
 		/**
 		 * Left early, carrying whatever was answered before the exit — those answers are already
 		 * in the learner's record, so dropping them here would make the screen disagree with it.
 		 */
-		oncancel: (outcomes: Record<string, boolean>) => void;
+		oncancel: (outcomes: Record<string, DrillOutcome>) => void;
 	}
 
 	let { cards, onfinish, oncancel }: Props = $props();
@@ -69,10 +75,10 @@
 	let picked = $state<Word | null>(null);
 	/**
 	 * One slot per card, filled in as they are answered — a hole is a card not yet reached.
-	 * Deliberately not pre-sized from `cards`: every reader below already tests for a boolean,
-	 * and seeding from a prop would capture only its initial value.
+	 * Deliberately not pre-sized from `cards`: every reader below already tests for a filled
+	 * slot, and seeding from a prop would capture only its initial value.
 	 */
-	let hits = $state<(boolean | undefined)[]>([]);
+	let hits = $state<(DrillOutcome | undefined)[]>([]);
 	let panel = $state<HTMLElement | null>(null);
 
 	const card = $derived(cards[at] ?? null);
@@ -86,7 +92,7 @@
 		if (!card || picked !== null) return;
 		picked = choice;
 		const correct = isCorrect(card, choice);
-		hits[at] = correct;
+		hits[at] = { right: correct, picked: choice };
 		// Every word in a drill has been asked before — that is how it got here — so there is no
 		// introduction to hold back from the record. This is a real answer to a real question,
 		// and it counts exactly as much as the one that got it wrong two minutes ago.
@@ -94,11 +100,11 @@
 	}
 
 	/** What was answered, in a plain object so the caller can spread it over what it already had. */
-	function collect(): Record<string, boolean> {
-		const outcomes: Record<string, boolean> = {};
+	function collect(): Record<string, DrillOutcome> {
+		const outcomes: Record<string, DrillOutcome> = {};
 		cards.forEach((one, i) => {
 			const hit = hits[i];
-			if (typeof hit === 'boolean') outcomes[one.word.id] = hit;
+			if (hit !== undefined) outcomes[one.word.id] = hit;
 		});
 		return outcomes;
 	}
@@ -190,7 +196,8 @@
 	<!-- The run's own rail, three segments long. Same language, same colours, shorter. -->
 	<div class="rail" aria-hidden="true">
 		{#each cards as one, i (one.word.id)}
-			<span class="seg" class:hit={hits[i] === true} class:miss={hits[i] === false}></span>
+			<span class="seg" class:hit={hits[i]?.right === true} class:miss={hits[i]?.right === false}
+			></span>
 		{/each}
 	</div>
 

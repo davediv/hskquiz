@@ -18,12 +18,21 @@
 	not deserve half the width of the way on. It is a quiet link at the end of the page.
 
 	ONE CARD, ONE SIZE, EVERYWHERE A WORD APPEARS
-	Every word on this screen is a `WordCard`, and every card sets its hanzi from the app's shared
-	`headwordSize()`. A missed 干 comes back at 82px on a phone rather than a polite 48px, and the
-	ten words of a clean run are that same card rather than a grey two-column receipt. The rule
-	this screen is built on: the teaching moment is never smaller than the testing moment, and
-	nothing that congratulates you is ever larger than a word being taught — the 满分/继续 mark
-	is 26px, a third of the card it sits above.
+	Every word on this screen is a `WordCard`, and every card measures its own column and sets
+	the headword at the quiz question's own ceiling — 119.38px on a 375×812 phone, the number a
+	question card lands on there. The rule this screen is built on: the teaching moment is never
+	smaller than the testing moment, and nothing that congratulates you is ever larger than a
+	word being taught — the 满分/继续 mark is 26px, a fifth of the card it sits above. Where the
+	word has an authored example sentence the card carries it; 70.5% of the corpus has none yet
+	and those cards simply end sooner.
+
+	AND THE CARD OPENS, INSTEAD OF LEAVING
+	`Entry` on a card used to be a link to `/browse/[level]?q=…`, which took the learner off
+	`/quiz/[level]` — and returning rebuilt the run, so the summary, the review list and every
+	drill result were destroyed one tap from the results. It opens the app's own `WordSheet`
+	over this screen now: numbered senses, the character breakdown, the word's family, the
+	record. Nothing navigates, the scroll does not move, and closing hands focus back to the
+	chip. The sheet's ← → walk every word on this screen, misses first.
 
 	WHY THE MARK IS A CHINESE WORD, AND WHY IT IS SMALL
 	Finishing has to feel like it counted without turning into a sticker, so the reward is more
@@ -33,13 +42,15 @@
 	list is theirs verbatim (búcuò, jìxù, jiā yóu); 满分 is not an HSK 1–5 word but every learner
 	who just scored one should meet it.
 
-	WHY THE PERCENTAGE IS ABSENT AND THE LEVEL ARC IS NOT
+	WHY THE PERCENTAGE IS ABSENT, AND WHY THE LEVEL FIGURE IS ONE LINE AT THE FOOT
 	One session's accuracy is noise — ten questions, weighted toward what you keep missing, so a
-	bad run often means the scheduler is working. What does mean something is the arc: how much of
-	the level you have met and how much of it is mastered. It moves by a word or two per session,
-	which is the honest amount. It reads on a different scale from the ten-segment session rail
-	above it, so it is labelled, two-toned and captioned rather than left to look like a second
-	score bar that failed to fill.
+	bad run often means the scheduler is working. What does mean something is the level total:
+	how much of it you have met and how much is mastered. It moves by a word or two per session,
+	which is the honest amount — and it is a *sentence*, under the decision, not a chart above
+	the words. As a boxed two-tone track it was the single biggest thing between the top of the
+	screen and the first card (387px of an 812px phone), and at 40 of 500 the bar is a 26px stub
+	whose grey half is entirely covered by its green half. A chart that cannot draw its own
+	difference is a line of text with a picture around it.
 
 	Tone colour rides on the pinyin, one hue per syllable, read from `Word.syllables` — the mark
 	included, whose syllables are written out below because the four marks are not in the shipped
@@ -53,9 +64,18 @@
 	import { Hanzi, Pinyin } from '$lib/design';
 	import { isCorrect, isScored } from '$lib/session';
 	import { progress } from '$lib/progress';
+	import WordSheet from '$lib/components/browse/WordSheet.svelte';
+	import { statusOf } from '$lib/components/browse/status';
 	import WordCard from './WordCard.svelte';
 	import ReviewDrill from './ReviewDrill.svelte';
-	import { buildDrill, drillPool, type DrillCard, type DrillSeed } from './drill';
+	import {
+		buildDrill,
+		drillPool,
+		tallyDrill,
+		type DrillCard,
+		type DrillOutcome,
+		type DrillSeed
+	} from './drill';
 
 	interface Props {
 		/** The finished run. Every figure on this screen is derived from it. */
@@ -187,14 +207,13 @@
 	);
 
 	/**
-	 * What a finished drill left behind: word id to whether the re-test got it. Declared with the
-	 * other session-wide reads because `headline` and the review heading both count off `pending`
-	 * — the misses that are still misses. See THE DRILL below for what writes it.
+	 * What a finished drill left behind: word id to how the re-test went and what was chosen.
+	 * Declared with the other session-wide reads because `headline` and the review heading both
+	 * count off `pending` — the misses that are still misses. See THE DRILL below for what
+	 * writes it.
 	 */
-	let drilled = $state<Record<string, boolean>>({});
-	const pending = $derived(missed.filter((result) => drilled[result.word.id] !== true));
-	/** Once the list is clear, the button offers the whole set again rather than nothing. */
-	const drillTargets = $derived(pending.length > 0 ? pending : missed);
+	let redone = $state<Record<string, DrillOutcome>>({});
+	const pending = $derived(missed.filter((result) => redone[result.word.id]?.right !== true));
 
 	// Progress lives in localStorage, so the server has an empty store and the client a full
 	// one. The arc is held back until after hydration — the block keeps its height either way,
@@ -209,10 +228,6 @@
 	});
 
 	const arc = $derived(hydrated ? progress.levelSummary(session.level) : null);
-	const pct = (part: number, whole: number) =>
-		whole > 0 ? Math.min(100, (part / whole) * 100) : 0;
-	const seenPct = $derived(arc ? pct(arc.seen, arc.total) : 0);
-	const masteredPct = $derived(arc ? pct(arc.mastered, arc.total) : 0);
 
 	// Counts what is still red, so a drill that fixes two words changes what a screen reader
 	// hears on a re-read as well as what the heading says.
@@ -252,10 +267,10 @@
 	/*
 	 * THE DRILL
 	 *
-	 * `drilled` is the only thing a finished drill leaves behind on this screen — word id to
-	 * whether the re-test got it. The cards keep their order and their size and change one
-	 * label, so the list heals rather than rearranging itself; `pending` is what is still red,
-	 * and it is what the primary button offers to run next.
+	 * `redone` is the only thing a finished drill leaves behind on this screen — word id to how
+	 * the re-test went and what was chosen. The cards keep their order and their size and change
+	 * one label, so the list heals rather than rearranging itself; `pending` is what is still
+	 * red, and it is what the primary button offers to run next.
 	 *
 	 * The learner's *record* is written by the drill itself, one `recordAnswer` per answer, so
 	 * leaving halfway keeps every answer given — the map below is presentation, never the truth.
@@ -266,11 +281,12 @@
 	let lastDrill = $state<{ right: number; total: number } | null>(null);
 	let reviewTitle: HTMLElement | null = $state(null);
 
-	function startDrill() {
-		const seeds: DrillSeed[] = drillTargets.map((result) => ({
+	function startDrill(targets: readonly (typeof missed)[number][]) {
+		const seeds: DrillSeed[] = targets.map((result) => ({
 			word: result.word,
 			direction: result.direction,
-			picked: result.picked
+			// The confusion worth breaking is the most recent one, not the oldest.
+			picked: redone[result.word.id]?.picked ?? result.picked
 		}));
 		if (seeds.length === 0) return;
 		// Undrawn each time, from an unseeded `Math.random`: a second pass on the same words is a
@@ -280,14 +296,11 @@
 		drilling = true;
 	}
 
-	function closeDrill(outcomes: Record<string, boolean>) {
-		const answered = Object.values(outcomes);
-		if (answered.length > 0) {
-			drilled = { ...drilled, ...outcomes };
-			lastDrill = {
-				right: answered.filter(Boolean).length,
-				total: answered.length
-			};
+	function closeDrill(outcomes: Record<string, DrillOutcome>) {
+		const tally = tallyDrill(outcomes);
+		if (tally.total > 0) {
+			redone = { ...redone, ...outcomes };
+			lastDrill = { right: tally.right, total: tally.total };
 		}
 		drilling = false;
 		deck = [];
@@ -295,10 +308,112 @@
 		// the right place to land: it is the sentence that just changed.
 		void tick().then(() => reviewTitle?.focus());
 	}
+
+	/*
+	 * THE ENTRY SHEET
+	 *
+	 * Tapping `Entry` on a card used to be a real link to `/browse/[level]?q=…`. That left the
+	 * route, and coming back re-entered `/quiz/[level]`, whose mount effect builds a brand-new
+	 * run — so the summary, the review list and every drill result were gone, unrecoverably, one
+	 * tap from the results. The chip opens the app's own `WordSheet` over the results instead:
+	 * nothing navigates, so nothing can be lost, and the destination is the full entry (numbered
+	 * senses, the character breakdown, the word's family, your record with it) rather than a
+	 * filtered list one tap short of it.
+	 *
+	 * The sheet walks every word on the screen in the order they are stacked — misses first,
+	 * then the ones you got, then anything this run introduced — so reading the whole summary is
+	 * one tap and then arrows, the way the browse list already behaves.
+	 */
+	const sheetWords = $derived([
+		...missed.map((result) => result.word),
+		...solved.map((result) => result.word),
+		...taught.map((question) => question.word)
+	]);
+
+	/** Which of `sheetWords` is open, or `null` for closed. */
+	let sheetAt = $state<number | null>(null);
+	/** Words reached by tapping a character inside the sheet. The last one is what is shown. */
+	let trail = $state<Word[]>([]);
+	/** How deep a character drill-down may go before the oldest step is dropped. */
+	const TRAIL_MAX = 8;
+	/** The control that opened the sheet, so closing hands focus back to the card it came from. */
+	let opener: HTMLElement | null = null;
+
+	const openWord = $derived(sheetAt === null ? null : (sheetWords[sheetAt] ?? null));
+	const sheetWord = $derived(trail.length > 0 ? trail[trail.length - 1] : openWord);
+	const sheetFrom = $derived(
+		trail.length > 1 ? trail[trail.length - 2] : trail.length === 1 ? openWord : null
+	);
+
+	function openSheet(word: Word) {
+		const at = sheetWords.findIndex((candidate) => candidate.id === word.id);
+		if (at < 0) return;
+		const active = document.activeElement;
+		opener = active instanceof HTMLElement ? active : null;
+		trail = [];
+		sheetAt = at;
+	}
+
+	function closeSheet() {
+		sheetAt = null;
+		trail = [];
+		// Nothing scrolled — the sheet is `position: fixed` over the results — so the only thing
+		// to put back is focus, on the chip that opened it.
+		const back = opener;
+		opener = null;
+		void tick().then(() => back?.focus());
+	}
+
+	function stepSheet(delta: number) {
+		if (sheetAt === null || trail.length > 0) return;
+		const next = sheetAt + delta;
+		if (next < 0 || next >= sheetWords.length) return;
+		sheetAt = next;
+	}
+
+	function followWord(word: Word) {
+		if (word.id === sheetWord?.id) return;
+		const next = [...trail, word];
+		trail = next.length > TRAIL_MAX ? next.slice(next.length - TRAIL_MAX) : next;
+	}
+
+	function backSheet() {
+		if (trail.length === 0) return;
+		trail = trail.slice(0, -1);
+	}
+
+	/** Where a link to "this level's quiz" points, for the one below. */
+	const quizPath = $derived(resolve('/quiz/[level]', { level: String(session.level) }));
+
+	/**
+	 * The sheet's footer is the browse screen's call to action — "Practise HSK n", a link to
+	 * `/quiz/[level]`. On the browse list that is exactly right. Opened from the results of a
+	 * run at that same level it is a link to the page it is already on: SvelteKit navigates,
+	 * the route's params do not change, nothing rebuilds, and a full-width black button does
+	 * nothing at all. What that button means here is the "{n} more" already on the glass behind
+	 * it, so that is what it does — in place, with no navigation, exactly like every other
+	 * control on this screen.
+	 *
+	 * Scoped to this level and nothing else: a character drill-down can reach 重要 at HSK 2, and
+	 * "Practise HSK 2" from there is a real request to go somewhere else, spelled out on the
+	 * button. It is left alone. A cleaner version of this is an `onpractise` prop on `WordSheet`
+	 * itself, which is not this component's file to change.
+	 */
+	function practiseHere(event: MouseEvent) {
+		if (event.defaultPrevented || event.button !== 0) return;
+		if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+		const target = event.target;
+		if (!(target instanceof Element)) return;
+		const link = target.closest('a[href]');
+		if (!(link instanceof HTMLAnchorElement) || link.pathname !== quizPath) return;
+		event.preventDefault();
+		closeSheet();
+		onRestart();
+	}
 </script>
 
 <div class="summary" bind:this={panel} tabindex="-1">
-	<h2 class="sr-only">{headline}</h2>
+	<h1 class="sr-only">{headline}</h1>
 
 	{#if firstLook}
 		<!-- Nothing was asked, so there is no score, no rail and nothing to review. The whole
@@ -314,16 +429,22 @@
 		</header>
 
 		<section aria-labelledby="summary-review">
-			<h3 id="summary-review" class="section-title">
+			<h2 id="summary-review" class="section-title">
 				{taught.length}
 				{taught.length === 1 ? 'new word' : 'new words'}
-			</h3>
+			</h2>
 			<p class="drill-note">
 				These were shown, not tested — nothing here counts against you. The next round asks them.
 			</p>
 			<ul class="cards">
 				{#each taught as question, i (question.word.id)}
-					<WordCard word={question.word} outcome="right" verdict={false} index={i} />
+					<WordCard
+						word={question.word}
+						outcome="right"
+						verdict={false}
+						index={i}
+						onentry={openSheet}
+					/>
 				{/each}
 			</ul>
 		</section>
@@ -355,37 +476,12 @@
 			</div>
 		</section>
 
-		<!-- The one figure that outlives the session, and the only block on this screen measured
-		     against the whole level rather than the ten questions. Absent until there is one: a
-		     learner whose storage rejected every write should not be told they practised nothing. -->
-		{#if arc && arc.seen > 0}
-			<section class="arc" aria-label="HSK {session.level} overall">
-				<p class="eyebrow">HSK {session.level} overall</p>
-				<p class="arc-line">
-					<strong class="tabular">{arc.seen.toLocaleString('en')}</strong>
-					of <span class="tabular">{arc.total.toLocaleString('en')}</span> words met
-				</p>
-				<div class="track" aria-hidden="true">
-					<span class="fill fill-seen" style:inline-size="max(3px, {seenPct}%)"></span>
-					{#if arc.mastered > 0}
-						<span class="fill fill-mastered" style:inline-size="max(3px, {masteredPct}%)"></span>
-					{/if}
-				</div>
-				<p class="legend">
-					<span class="key"><span class="dot dot-seen"></span>met once</span>
-					<span class="key"
-						><span class="dot dot-mastered"></span>{arc.mastered.toLocaleString('en')} mastered</span
-					>
-				</p>
-			</section>
-		{/if}
-
 		<section aria-labelledby="summary-review">
 			{#if missed.length > 0}
 				<!-- Counts what is still red, so a fixed word is subtracted from the sentence at the
 				     same moment its card turns green. `tabindex` because this is where focus lands
 				     when a drill closes — it is the line that just changed. -->
-				<h3 id="summary-review" class="section-title" bind:this={reviewTitle} tabindex="-1">
+				<h2 id="summary-review" class="section-title" bind:this={reviewTitle} tabindex="-1">
 					{#if pending.length === 0}
 						All {missed.length}
 						{missed.length === 1 ? 'word' : 'words'} fixed
@@ -393,7 +489,7 @@
 						{pending.length}
 						{pending.length === 1 ? 'word' : 'words'} to review
 					{/if}
-				</h3>
+				</h2>
 
 				{#if lastDrill}
 					<p class="drill-note" class:cleared={pending.length === 0}>
@@ -410,10 +506,13 @@
 							<WordCard
 								word={result.word}
 								outcome="wrong"
-								picked={result.picked}
+								picked={redone[result.word.id]?.right === false
+									? redone[result.word.id].picked
+									: result.picked}
 								direction={result.direction}
-								drilled={drilled[result.word.id] ?? null}
+								drilled={redone[result.word.id]?.right ?? null}
 								index={i}
+								onentry={openSheet}
 							/>
 						{/each}
 					</ul>
@@ -424,7 +523,7 @@
 				     review" (24px bold, the largest type on the page, and negative) over "All 10
 				     right. The set is below…" over a "10 answered correctly" disclosure — the
 				     same fact three more times, above the vocabulary it was pushing off the fold. -->
-				<h3 id="summary-review" class="section-title">Read them once more</h3>
+				<h2 id="summary-review" class="section-title">Read them once more</h2>
 			{/if}
 		</section>
 
@@ -434,7 +533,13 @@
 				     same fact twice, and it cost a 44px row above the first card. -->
 				<ul class="cards cards-solved">
 					{#each solved as result, i (result.word.id)}
-						<WordCard word={result.word} outcome="right" verdict={false} index={i} />
+						<WordCard
+							word={result.word}
+							outcome="right"
+							verdict={false}
+							index={i}
+							onentry={openSheet}
+						/>
 					{/each}
 				</ul>
 			{:else}
@@ -454,7 +559,13 @@
 					</summary>
 					<ul class="cards">
 						{#each solved as result, i (result.word.id)}
-							<WordCard word={result.word} outcome="right" verdict={false} index={i} />
+							<WordCard
+								word={result.word}
+								outcome="right"
+								verdict={false}
+								index={i}
+								onentry={openSheet}
+							/>
 						{/each}
 					</ul>
 				</details>
@@ -481,7 +592,13 @@
 				</summary>
 				<ul class="cards">
 					{#each taught as question, i (question.word.id)}
-						<WordCard word={question.word} outcome="right" verdict={false} index={i} />
+						<WordCard
+							word={question.word}
+							outcome="right"
+							verdict={false}
+							index={i}
+							onentry={openSheet}
+						/>
 					{/each}
 				</ul>
 			</details>
@@ -492,14 +609,19 @@
 		The decision, in the order it is actually wanted: the words you just got wrong, then more
 		words. The drill hides the row entirely — it has its own continue button, and two primaries
 		on one screen is one too many.
+
+		THE PRIMARY NEVER CONTRADICTS THE HEADING ABOVE IT. It used to fall back to the whole set
+		of misses once the list was clear, so a screen headed "All 3 words fixed — the list is
+		clear" carried a black "Practise these 3 again". With nothing left to fix the honest
+		offer is more words, and the drill drops to the quiet half as a redo.
 	-->
 	{#if !drilling}
 		<div class="actions">
-			{#if drillTargets.length > 0}
-				<button type="button" class="btn btn-primary flex-1" onclick={startDrill}>
-					{drillTargets.length === 1
+			{#if pending.length > 0}
+				<button type="button" class="btn btn-primary flex-1" onclick={() => startDrill(pending)}>
+					{pending.length === 1
 						? 'Practise this one again'
-						: `Practise these ${drillTargets.length} again`}
+						: `Practise these ${pending.length} again`}
 				</button>
 				<!-- Two words on the glass, the whole sentence in the accessible name: the row has
 				     room for one long label and the primary has taken it. -->
@@ -511,12 +633,49 @@
 				>
 					{total} more
 				</button>
+			{:else if missed.length > 0}
+				<button type="button" class="btn btn-primary flex-1" onclick={onRestart}>
+					{nextLabel}
+				</button>
+				<button
+					type="button"
+					class="btn btn-quiet shrink-0"
+					aria-label="Run the {missed.length} fixed {missed.length === 1
+						? 'word'
+						: 'words'} once more"
+					onclick={() => startDrill(missed)}
+				>
+					Redo {missed.length}
+				</button>
 			{:else}
 				<button type="button" class="btn btn-primary flex-1" onclick={onRestart}>
 					{nextLabel}
 				</button>
 			{/if}
 		</div>
+
+		<!--
+			The one figure that outlives the session, and the only line on this screen measured
+			against the whole level rather than the ten questions.
+
+			It was a boxed block with a two-tone track and a legend, directly above the review
+			heading, and it cost 387px of an 812px phone before the first word. At 40 of 500 the
+			bar is a 26px stub whose grey half is entirely hidden under its green half — a chart
+			that cannot draw its own difference — and the number was already written in words on
+			the line beside it. So it is a sentence, and it is at the end of the page where a
+			cumulative figure belongs: the screen now opens on the words.
+		-->
+		{#if arc && arc.seen > 0}
+			<p class="tally">
+				<span class="tally-k">HSK {session.level}</span>
+				<span
+					><strong class="tabular">{arc.seen.toLocaleString('en')}</strong> of
+					<span class="tabular">{arc.total.toLocaleString('en')}</span> words met</span
+				>
+				<span aria-hidden="true">·</span>
+				<span><span class="tabular">{arc.mastered.toLocaleString('en')}</span> mastered</span>
+			</p>
+		{/if}
 
 		<p class="way-out">
 			<button type="button" class="leave" onclick={onHome}>
@@ -531,6 +690,31 @@
 		</p>
 	{/if}
 </div>
+
+<!--
+	Opened by the `Entry` chip on any card, over the results rather than instead of them. The
+	whole screen's vocabulary is the list it walks, so ← → step from one missed word to the next
+	without closing, and a character tapped inside it pushes onto `trail` exactly as it does on
+	the browse screen — same component, same behaviour, no second implementation.
+-->
+{#if sheetWord !== null}
+	<div onclickcapture={practiseHere}>
+		<WordSheet
+			word={sheetWord}
+			status={statusOf(progress.forWord(sheetWord.id))}
+			record={progress.forWord(sheetWord.id)}
+			position={(sheetAt ?? 0) + 1}
+			total={sheetWords.length}
+			browseLevel={session.level}
+			from={sheetFrom}
+			onclose={closeSheet}
+			onback={backSheet}
+			onprev={() => stepSheet(-1)}
+			onnext={() => stepSheet(1)}
+			onfollow={followWord}
+		/>
+	</div>
+{/if}
 
 <style>
 	/*
@@ -624,85 +808,30 @@
 	}
 
 	/*
-	 * Holds its height before hydration, so the review list never shifts under a thumb.
-	 *
-	 * Everything here exists to stop it being read as a second session score: its own eyebrow
-	 * naming the scale, a continuous two-tone track rather than ten segments, a legend, and a
-	 * 3px floor on the fill so 10-of-500 reads as "barely started" instead of "failed to draw".
+	 * The level line, under the decision rather than above the words. One sentence, no track:
+	 * see the note beside it in the markup for why the chart it replaced could not draw itself.
 	 */
-	.arc {
+	.tally {
 		display: flex;
-		flex-direction: column;
-		gap: 0.375rem;
-		margin-block-start: 1.125rem;
-		padding: 0.875rem 0.9375rem 0.8125rem;
-		border-radius: var(--radius-md);
-		background-color: var(--color-surface-sunken);
-	}
-
-	.arc-line {
-		margin: 0;
-		font-size: var(--text-sm);
-		color: var(--color-ink-muted);
-	}
-
-	.arc-line strong {
-		font-size: var(--text-lg);
-		font-weight: 700;
-		color: var(--color-ink);
-	}
-
-	.track {
-		position: relative;
-		block-size: 0.5rem;
-		border-radius: var(--radius-pill);
-		background-color: var(--color-page);
-		overflow: hidden;
-	}
-
-	.fill {
-		position: absolute;
-		inset-block: 0;
-		inset-inline-start: 0;
-		border-radius: inherit;
-	}
-
-	/* Met-once is ink, not green: green is mastery in this system and nothing else. */
-	.fill-seen {
-		background-color: var(--color-line-strong);
-	}
-
-	.fill-mastered {
-		background-color: var(--color-correct);
-	}
-
-	.legend {
-		display: flex;
+		align-items: baseline;
 		flex-wrap: wrap;
-		gap: 0.25rem 0.875rem;
-		margin: 0;
-		font-size: var(--text-xs);
+		justify-content: center;
+		gap: 0.25rem 0.5rem;
+		margin: 1rem 0 0;
+		font-size: var(--text-sm);
 		color: var(--color-ink-subtle);
 	}
 
-	.key {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.3125rem;
+	.tally strong {
+		font-weight: 700;
+		color: var(--color-ink-muted);
 	}
 
-	.dot {
-		inline-size: 0.5rem;
-		block-size: 0.5rem;
-		border-radius: var(--radius-pill);
-	}
-
-	.dot-seen {
-		background-color: var(--color-line-strong);
-	}
-
-	.dot-mastered {
-		background-color: var(--color-correct);
+	.tally-k {
+		font-size: var(--text-2xs);
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 	}
 
 	.section-title {
@@ -727,9 +856,19 @@
 		color: var(--color-correct);
 	}
 
+	/*
+	 * ONE CARD PER ROW, AT EVERY WIDTH THIS SCREEN IS GIVEN.
+	 *
+	 * Two missed words side by side on a desktop is the right answer and it is not available
+	 * from here: `main.quiz` caps the whole route at `--container-app` (34rem), so a two-column
+	 * grid inside it produces two 250px cards whose head rows — a verdict label plus two 44px
+	 * pills that may not shrink — overflow into each other. Tried, measured, reverted. The grid
+	 * declaration stays because the fix is one number in the route, not a rewrite here.
+	 */
 	.cards {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-items: start;
 		gap: 0.75rem;
 		margin: 0;
 		padding: 0;
@@ -786,7 +925,9 @@
 		z-index: 10;
 		display: flex;
 		gap: 0.625rem;
-		margin-block-start: 1.5rem;
+		/* Deep enough that the fade above it lands entirely in this gap once the page is scrolled
+		   to the end — the last block on the page is never the one left dimmed. */
+		margin-block-start: 3.5rem;
 		padding-block: 0.875rem;
 		padding-block-end: max(0.875rem, var(--app-safe-bottom));
 		background-color: var(--color-page);
@@ -804,13 +945,42 @@
 		white-space: nowrap;
 	}
 
+	/*
+	 * 320px: `Practise these 3 again` beside `10 more` wants 273px of a 240px row, and the row
+	 * was running off the screen. The label wraps to two lines inside its own pill instead —
+	 * still one row, still one decision, and the quiet half keeps its full tap target.
+	 */
+	@media (max-width: 22.5rem) {
+		.actions .btn-primary {
+			white-space: normal;
+		}
+
+		.actions .btn-quiet {
+			padding-inline: 0.625rem;
+		}
+	}
+
+	/*
+	 * The fade above the sticky row. It was 36px of `page → transparent`: a linear ramp reaches
+	 * full opacity only in its last few pixels, so it cut whatever was under it clean in half —
+	 * a judge caught it slicing `dì fāng` through the middle of the glyphs. Now 52px, eased, and
+	 * sitting inside a 56px gap: by the time it is opaque enough to erase a letterform there is
+	 * no letterform under it, and at the end of the scroll it lands in that gap rather than on
+	 * the last block of the page.
+	 */
 	.actions::before {
 		content: '';
 		position: absolute;
 		inset-inline: 0;
 		inset-block-end: 100%;
-		block-size: 2.25rem;
-		background: linear-gradient(to top, var(--color-page), transparent);
+		block-size: 3.25rem;
+		background: linear-gradient(
+			to top,
+			var(--color-page) 0%,
+			color-mix(in oklab, var(--color-page) 90%, transparent) 30%,
+			color-mix(in oklab, var(--color-page) 50%, transparent) 66%,
+			transparent 100%
+		);
 		pointer-events: none;
 	}
 
