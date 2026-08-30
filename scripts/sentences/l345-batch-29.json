@@ -1,0 +1,272 @@
+{
+	"L3-0031": {
+		"hanzi": "学校背后有一个小花园。",
+		"pinyin": "xué xiào bèi hòu yǒu yí ge xiǎo huā yuán",
+		"english": "There is a small garden behind the school."
+	},
+	"L3-0087": {
+		"hanzi": "这件衬衣要用冷水洗。",
+		"pinyin": "zhè jiàn chèn yī yào yòng lěng shuǐ xǐ",
+		"english": "This shirt should be washed in cold water."
+	},
+	"L3-0144": {
+		"hanzi": "我们到底还是找到了那家饭馆。",
+		"pinyin": "wǒ men dào dǐ hái shì zhǎo dào le nà jiā fàn guǎn",
+		"english": "In the end we did manage to find that restaurant."
+	},
+	"L3-0200": {
+		"hanzi": "这个办法风险太大，我们不能用。",
+		"pinyin": "zhè ge bàn fǎ fēng xiǎn tài dà wǒ men bù néng yòng",
+		"english": "This approach carries too much risk; we can't use it."
+	},
+	"L3-0256": {
+		"hanzi": "这本书写的是古时候的故事。",
+		"pinyin": "zhè běn shū xiě de shì gǔ shí hou de gù shi",
+		"english": "This book tells stories from ancient times."
+	},
+	"L3-0312": {
+		"hanzi": "这台新机器每天工作十个小时。",
+		"pinyin": "zhè tái xīn jī qì měi tiān gōng zuò shí ge xiǎo shí",
+		"english": "This new machine runs for ten hours a day."
+	},
+	"L3-0368": {
+		"hanzi": "这块表是金做的，非常贵。",
+		"pinyin": "zhè kuài biǎo shì jīn zuò de fēi cháng guì",
+		"english": "This watch is made of gold and very expensive."
+	},
+	"L3-0424": {
+		"hanzi": "这条裤子有点儿短，我想换一条。",
+		"pinyin": "zhè tiáo kù zi yǒu diǎn r duǎn wǒ xiǎng huàn yì tiáo",
+		"english": "These trousers are a bit short; I'd like to swap them."
+	},
+	"L3-0480": {
+		"hanzi": "这里的风景真美，我想多住几天。",
+		"pinyin": "zhè lǐ de fēng jǐng zhēn měi wǒ xiǎng duō zhù jǐ tiān",
+		"english": "The scenery here is beautiful; I want to stay a few more days."
+	},
+	"L3-0536": {
+		"hanzi": "我要一杯啤酒，你们喝什么？",
+		"pinyin": "wǒ yào yì bēi pí jiǔ nǐ men hē shén me",
+		"english": "I'll have a beer — what are you all having?"
+	},
+	"L3-0592": {
+		"hanzi": "广场上的人群越来越多了。",
+		"pinyin": "guǎng chǎng shàng de rén qún yuè lái yuè duō le",
+		"english": "The crowd in the square kept getting bigger."
+	},
+	"L3-0649": {
+		"hanzi": "我在商店买了一些食品和水果。",
+		"pinyin": "wǒ zài shāng diàn mǎi le yì xiē shí pǐn hé shuǐ guǒ",
+		"english": "I bought some food and fruit at the shop."
+	},
+	"L3-0705": {
+		"hanzi": "他想去南方体验不同的生活。",
+		"pinyin": "tā xiǎng qù nán fāng tǐ yàn bù tóng de shēng huó",
+		"english": "He wants to go south and experience a different kind of life."
+	},
+	"L3-0762": {
+		"hanzi": "她大学学的是中国文学。",
+		"pinyin": "tā dà xué xué de shì zhōng guó wén xué",
+		"english": "She studied Chinese literature at university."
+	},
+	"L3-0818": {
+		"hanzi": "学校正在宣传这次活动。",
+		"pinyin": "xué xiào zhèng zài xuān chuán zhè cì huó dòng",
+		"english": "The school is publicizing this event."
+	},
+	"L3-0874": {
+		"hanzi": "这些东西要用火车运输到南方。",
+		"pinyin": "zhè xiē dōng xi yào yòng huǒ chē yùn shū dào nán fāng",
+		"english": "These goods have to be shipped south by train."
+	},
+	"L3-0930": {
+		"hanzi": "这个钟不走了，可能是坏了。",
+		"pinyin": "zhè ge zhōng bù zǒu le kě néng shì huài le",
+		"english": "This clock has stopped — it's probably broken."
+	},
+	"L4-0013": {
+		"hanzi": "这家百货商店周末人特别多。",
+		"pinyin": "zhè jiā bǎi huò shāng diàn zhōu mò rén tè bié duō",
+		"english": "This department store gets especially busy at weekends."
+	},
+	"L4-0069": {
+		"hanzi": "工作人员正在测量这块地的面积。",
+		"pinyin": "gōng zuò rén yuán zhèng zài cè liáng zhè kuài dì de miàn jī",
+		"english": "Staff are surveying the area of this plot of land."
+	},
+	"L4-0125": {
+		"hanzi": "他不小心刺到了自己的手。",
+		"pinyin": "tā bù xiǎo xīn cì dào le zì jǐ de shǒu",
+		"english": "He accidentally pricked his own hand."
+	},
+	"L4-0181": {
+		"hanzi": "这项工作由地方政府负责。",
+		"pinyin": "zhè xiàng gōng zuò yóu dì fāng zhèng fǔ fù zé",
+		"english": "This work is the responsibility of local government."
+	},
+	"L4-0237": {
+		"hanzi": "这块肉太肥了，我不太想吃。",
+		"pinyin": "zhè kuài ròu tài féi le wǒ bú tài xiǎng chī",
+		"english": "This piece of meat is too fatty; I don't really want it."
+	},
+	"L4-0293": {
+		"hanzi": "感谢各位光临今天的活动。",
+		"pinyin": "gǎn xiè gè wèi guāng lín jīn tiān de huó dòng",
+		"english": "Thank you all for attending today's event."
+	},
+	"L4-0349": {
+		"hanzi": "会议开了三个小时，几乎没有结果。",
+		"pinyin": "huì yì kāi le sān ge xiǎo shí jī hū méi yǒu jié guǒ",
+		"english": "The meeting ran for three hours and produced almost nothing."
+	},
+	"L4-0405": {
+		"hanzi": "她们姐妹三个都在北京工作。",
+		"pinyin": "tā men jiě mèi sān ge dōu zài běi jīng gōng zuò",
+		"english": "The three sisters all work in Beijing."
+	},
+	"L4-0461": {
+		"hanzi": "他每天下班都给老婆打电话。",
+		"pinyin": "tā měi tiān xià bān dōu gěi lǎo po dǎ diàn huà",
+		"english": "He phones his wife every day after work."
+	},
+	"L4-0517": {
+		"hanzi": "这次活动对所有学生免费。",
+		"pinyin": "zhè cì huó dòng duì suǒ yǒu xué shēng miǎn fèi",
+		"english": "The event is free for all students."
+	},
+	"L4-0574": {
+		"hanzi": "天太热了，孩子们都想喝汽水。",
+		"pinyin": "tiān tài rè le hái zi men dōu xiǎng hē qì shuǐ",
+		"english": "It's so hot that the children all want a fizzy drink."
+	},
+	"L4-0630": {
+		"hanzi": "医生记下了每个孩子的身高。",
+		"pinyin": "yī shēng jì xià le měi ge hái zi de shēn gāo",
+		"english": "The doctor recorded each child's height."
+	},
+	"L4-0686": {
+		"hanzi": "商店已经不再免费提供塑料袋。",
+		"pinyin": "shāng diàn yǐ jīng bú zài miǎn fèi tí gōng sù liào dài",
+		"english": "Shops no longer hand out plastic bags for free."
+	},
+	"L4-0742": {
+		"hanzi": "这条山路很弯，开车一定要小心。",
+		"pinyin": "zhè tiáo shān lù hěn wān kāi chē yí dìng yào xiǎo xīn",
+		"english": "This mountain road is very winding, so drive carefully."
+	},
+	"L4-0798": {
+		"hanzi": "他的看法和我的完全相反。",
+		"pinyin": "tā de kàn fǎ hé wǒ de wán quán xiāng fǎn",
+		"english": "His view is the exact opposite of mine."
+	},
+	"L4-0854": {
+		"hanzi": "校长明天要在会上演讲。",
+		"pinyin": "xiào zhǎng míng tiān yào zài huì shàng yǎn jiǎng",
+		"english": "The principal is giving a talk at tomorrow's meeting."
+	},
+	"L4-0910": {
+		"hanzi": "我在机场遇见了一位老同学。",
+		"pinyin": "wǒ zài jī chǎng yù jiàn le yí wèi lǎo tóng xué",
+		"english": "I ran into an old classmate at the airport."
+	},
+	"L4-0966": {
+		"hanzi": "这个箱子的重量超过了二十公斤。",
+		"pinyin": "zhè ge xiāng zi de zhòng liàng chāo guò le èr shí gōng jīn",
+		"english": "This box weighs more than twenty kilos."
+	},
+	"L5-0022": {
+		"hanzi": "这样下去，我们会越来越被动。",
+		"pinyin": "zhè yàng xià qù wǒ men huì yuè lái yuè bèi dòng",
+		"english": "If this goes on, we will only lose more and more of the initiative."
+	},
+	"L5-0078": {
+		"hanzi": "这片草原每年吸引大量游客。",
+		"pinyin": "zhè piàn cǎo yuán měi nián xī yǐn dà liàng yóu kè",
+		"english": "This grassland draws large numbers of visitors every year."
+	},
+	"L5-0134": {
+		"hanzi": "这份文件需要在各部门之间传递。",
+		"pinyin": "zhè fèn wén jiàn xū yào zài gè bù mén zhī jiān chuán dì",
+		"english": "This document has to be passed along between the departments."
+	},
+	"L5-0190": {
+		"hanzi": "得了，这件事就别再提了。",
+		"pinyin": "dé le zhè jiàn shì jiù bié zài tí le",
+		"english": "That's enough — let's not bring this up again."
+	},
+	"L5-0246": {
+		"hanzi": "请把这个箱子封好再寄出去。",
+		"pinyin": "qǐng bǎ zhè ge xiāng zi fēng hǎo zài jì chū qù",
+		"english": "Please seal the box up before sending it."
+	},
+	"L5-0302": {
+		"hanzi": "这项技术在工业上应用得非常广泛。",
+		"pinyin": "zhè xiàng jì shù zài gōng yè shàng yìng yòng de fēi cháng guǎng fàn",
+		"english": "This technology is very widely applied in industry."
+	},
+	"L5-0358": {
+		"hanzi": "这家公司成立了一个教育基金。",
+		"pinyin": "zhè jiā gōng sī chéng lì le yí ge jiào yù jī jīn",
+		"english": "The company has set up an education fund."
+	},
+	"L5-0414": {
+		"hanzi": "他从早喝到晚，大家都叫他酒鬼。",
+		"pinyin": "tā cóng zǎo hē dào wǎn dà jiā dōu jiào tā jiǔ guǐ",
+		"english": "He drinks from morning till night; everyone calls him a drunk."
+	},
+	"L5-0470": {
+		"hanzi": "规定对所有人都一样，没有例外。",
+		"pinyin": "guī dìng duì suǒ yǒu rén dōu yí yàng méi yǒu lì wài",
+		"english": "The rule applies to everyone alike; there are no exceptions."
+	},
+	"L5-0526": {
+		"hanzi": "这种食物能为身体提供大量能量。",
+		"pinyin": "zhè zhǒng shí wù néng wèi shēn tǐ tí gōng dà liàng néng liàng",
+		"english": "This food supplies the body with a great deal of energy."
+	},
+	"L5-0583": {
+		"hanzi": "他的签证下个月就要到期了。",
+		"pinyin": "tā de qiān zhèng xià ge yuè jiù yào dào qī le",
+		"english": "His visa expires next month."
+	},
+	"L5-0639": {
+		"hanzi": "小说里的那个人物最后被杀了。",
+		"pinyin": "xiǎo shuō lǐ de nà ge rén wù zuì hòu bèi shā le",
+		"english": "The character in the novel is killed at the end."
+	},
+	"L5-0695": {
+		"hanzi": "政府每年从农民手里收购粮食。",
+		"pinyin": "zhèng fǔ měi nián cóng nóng mín shǒu lǐ shōu gòu liáng shi",
+		"english": "The government buys up grain from farmers every year."
+	},
+	"L5-0751": {
+		"hanzi": "这条规定只在特定情况下有效。",
+		"pinyin": "zhè tiáo guī dìng zhǐ zài tè dìng qíng kuàng xià yǒu xiào",
+		"english": "This rule applies only under specific circumstances."
+	},
+	"L5-0807": {
+		"hanzi": "他的话很容易被人误解。",
+		"pinyin": "tā de huà hěn róng yì bèi rén wù jiě",
+		"english": "What he says is easily misunderstood."
+	},
+	"L5-0863": {
+		"hanzi": "心理学是一门很年轻的学科。",
+		"pinyin": "xīn lǐ xué shì yì mén hěn nián qīng de xué kē",
+		"english": "Psychology is a very young academic discipline."
+	},
+	"L5-0919": {
+		"hanzi": "这位作家的语言十分幽默。",
+		"pinyin": "zhè wèi zuò jiā de yǔ yán shí fēn yōu mò",
+		"english": "This writer's language is remarkably humorous."
+	},
+	"L5-0975": {
+		"hanzi": "农业在这个国家的经济中占有重要地位。",
+		"pinyin": "nóng yè zài zhè ge guó jiā de jīng jì zhōng zhàn yǒu zhòng yào dì wèi",
+		"english": "Agriculture holds an important place in this country's economy."
+	},
+	"L5-1031": {
+		"hanzi": "这种产品的生产周期是三个月。",
+		"pinyin": "zhè zhǒng chǎn pǐn de shēng chǎn zhōu qī shì sān ge yuè",
+		"english": "The production cycle for this product is three months."
+	}
+}
