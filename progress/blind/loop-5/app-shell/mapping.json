@@ -1,0 +1,16 @@
+{
+  "piece": "app-shell",
+  "loop": 5,
+  "rule": "\"app-shell\" is 9 characters (ODD) -> reference is A.png, ours is B.png",
+  "A": {
+    "which": "reference",
+    "source": "reference/screenshots/duchinese/ui/duchinese-iphone-07-ui.png",
+    "note": "Du Chinese, Articles list screen: back+title top bar, scrolling list content, persistent 3-item bottom tab bar. Chosen as the most comparable frame — a list screen whose whole app chrome (top bar + bottom nav) is visible around the content."
+  },
+  "B": {
+    "which": "ours",
+    "source": "progress/shots/loop-5/app-shell-mobile.png",
+    "note": "hskquiz level select at 375x812 @2x, light scheme, the app shell's default route."
+  },
+  "instruction_to_judge": "Do not open this file before judging."
+}
