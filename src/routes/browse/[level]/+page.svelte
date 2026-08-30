@@ -443,19 +443,68 @@
 		return n === 1 ? '1 word' : `${shown} words`;
 	});
 
+	/** This level's own list has nothing for what was typed — the one state the offer serves. */
+	const stranded = $derived(phase === 'ready' && query.trim() !== '' && searched.length === 0);
+
+	/**
+	 * The other four levels' word lists, mirrored into reactive state.
+	 *
+	 * `related.ts` caches them as a module binding and hands them out through `levelLists()`;
+	 * that is a snapshot, so it has to be *pulled* into `$state` at the moment it becomes true,
+	 * exactly as `WordSheet` mirrors `charIndexNow()`. Nothing else on this screen may read the
+	 * function directly.
+	 */
+	let crossLists = $state<ReadonlyMap<Level, readonly Word[]> | null>(null);
+	let crossPhase = $state<'idle' | 'loading' | 'failed'>('idle');
+
+	/**
+	 * Fetch them the moment the learner is stranded, rather than on the idle warm-up.
+	 *
+	 * The warm-up exists for the sheet's character cards and is deliberately lazy — up to two
+	 * seconds of `requestIdleCallback` timeout. That is the right budget for something nobody is
+	 * waiting on and the wrong one for the answer to the question on screen, so an empty search
+	 * asks for the lists itself. `ensureCharIndex` de-duplicates: if the warm-up is already in
+	 * flight this joins it rather than pulling the four chunks twice.
+	 */
+	$effect(() => {
+		if (!stranded) return;
+		untrack(() => {
+			if (crossLists !== null || crossPhase === 'loading') return;
+			crossPhase = 'loading';
+			void ensureCharIndex()
+				.then(() => {
+					crossLists = levelLists();
+					crossPhase = 'idle';
+				})
+				.catch(() => {
+					crossPhase = 'failed';
+				});
+		});
+	});
+
 	/**
 	 * The same query run against the other four levels, and only when this one found nothing.
 	 *
-	 * Search is level-scoped — one index per level, built lazily — and until this loop the empty
+	 * Search is level-scoped — one index per level, built lazily — and until loop 4 the empty
 	 * screen dealt with that by suggesting “aihao”, a query that returns nothing anywhere except
 	 * HSK 1. Being level-scoped is a defensible design; stranding the learner inside it twice is
 	 * not. The word lists are already in memory (the character index pulled them down), so the
 	 * screen can say exactly where the word they typed actually lives.
+	 *
+	 * IT READS `crossLists`, NEVER `levelLists()`. That function returns a plain module-level
+	 * binding — not `$state` — so a `$derived` that called it had no dependency on it and never
+	 * re-ran when the lists landed. The offer therefore appeared for a query the learner *typed*
+	 * (some later keystroke re-ran the derivation by accident) and never for one that arrived in
+	 * the URL: `/browse/1?q=安慰` said “Nothing in HSK 1 matches 安慰” and stopped there, for a
+	 * word the app ships. A shared link, a back-navigation and this screen's own `?q=` hop all
+	 * took that dead path. `crossLists` below is the same map mirrored into reactive state.
 	 */
 	const elsewhere = $derived.by(() => {
 		if (level === null || phase !== 'ready') return [];
-		if (query.trim() === '' || filtered.length > 0) return [];
-		const lists = levelLists();
+		// `searched`, not `filtered`: if the level has the word and a status chip is hiding it,
+		// the answer is that chip, not another level.
+		if (query.trim() === '' || searched.length > 0) return [];
+		const lists = crossLists;
 		if (lists === null) return [];
 
 		const found: { level: Level; count: number; first: Word }[] = [];
@@ -469,21 +518,52 @@
 		return found;
 	});
 
+	/** True while the other four levels are still on their way. */
+	const crossPending = $derived(stranded && crossLists === null && crossPhase !== 'failed');
+
 	/** The query, escaped once, for the `?q=` the offers above carry to the level they name. */
 	const carried = $derived(encodeURIComponent(query.trim()));
 
-	/** Why the list is empty, and what to do about it. Never a bare "no results". */
+	/** The search manual, which is only worth reading once the app has run out of answers. */
+	const SEARCH_HELP =
+		'Pinyin needs no tone marks and is matched whole syllables at a time; you can also search a character, or an English word from the meaning.';
+
+	/**
+	 * Why the list is empty, and what to do about it. Never a bare "no results".
+	 *
+	 * THE COPY WAITS FOR THE LOOKUP. Until this loop the query branch printed four lines about
+	 * how search works and the rescue card appeared *underneath* them — the learner read a
+	 * manual and only then met the answer. The body is now one line while the other levels are
+	 * checked, one line handing off to the card when there is one, and the manual only in the
+	 * case it was written for: the word is nowhere in HSK 1–5.
+	 */
 	const emptyCopy = $derived.by(() => {
 		if (query.trim() !== '') {
+			// A status chip, not the query, is what emptied a list that has matches in it.
+			if (filter !== 'all' && searched.length > 0) {
+				const label = STATUS_META[filter].label.toLowerCase();
+				return {
+					mark: '无',
+					pinyin: 'wú',
+					title: `No ${label} words match “${query.trim()}”`,
+					body: `HSK ${level} has ${searched.length === 1 ? '1 match' : `${searched.length} matches`} for it — none of them ${label}.`,
+					action: 'clear-filter'
+				} as const;
+			}
 			return {
 				mark: '无',
 				pinyin: 'wú',
 				title: `Nothing in HSK ${level} matches “${query.trim()}”`,
-				body:
-					filter === 'all'
-						? 'Search covers one level at a time. Pinyin needs no tone marks and is matched whole syllables at a time; you can also search a character, or an English word from the meaning.'
-						: `Nothing here is filed under ${STATUS_META[filter].label.toLowerCase()}. Search across every word in the level instead.`,
-				action: filter === 'all' ? 'clear-query' : 'clear-filter'
+				body: crossPending
+					? 'Search covers one level at a time. Checking the other four…'
+					: elsewhere.length === 1
+						? 'Search covers one level at a time. Here is where it is:'
+						: elsewhere.length > 1
+							? `Search covers one level at a time. It turns up on ${elsewhere.length} of the others:`
+							: crossPhase === 'failed'
+								? `Search covers one level at a time. ${SEARCH_HELP}`
+								: `Nothing in HSK 1–5 matches it either. ${SEARCH_HELP}`,
+				action: 'clear-query'
 			} as const;
 		}
 		if (filter === 'new') {
@@ -584,7 +664,10 @@
 
 				{#if elsewhere.length > 0}
 					<!-- The one thing a stranded learner actually wants: the level the word is on,
-					     with the query carried across so it is still typed when they land. -->
+					     with the query carried across so it is still typed when they land. It is
+					     shaped like a list row rather than a chip — hanzi and pinyin on the first
+					     line, the meaning under it — because the meaning is what tells them this
+					     is the word they were looking for before they spend a tap on it. -->
 					<ul class="elsewhere">
 						{#each elsewhere as hit (hit.level)}
 							<li>
@@ -592,18 +675,35 @@
 									class="hop"
 									href={resolve(`/browse/[level]?q=${carried}`, { level: String(hit.level) })}
 								>
-									<span class="hop-level">HSK {hit.level}</span>
 									<span class="hop-word">
 										<Hanzi word={hit.first} size="xs" class="hop-hz" />
 										<Pinyin word={hit.first} size="sm" class="hop-py" />
 									</span>
+									<span class="hop-level">HSK {hit.level}</span>
+									<span class="hop-gloss">{hit.first.meanings.join(', ')}</span>
 									<span class="hop-count tabular">
 										{hit.count === 1 ? '1 match' : `${hit.count.toLocaleString('en')} matches`}
+									</span>
+									<span class="hop-go" aria-hidden="true">
+										<svg viewBox="0 0 24 24" focusable="false">
+											<path
+												d="M9 5.5 16 12l-7 6.5"
+												fill="none"
+												stroke="currentColor"
+												stroke-width="2"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+											/>
+										</svg>
 									</span>
 								</a>
 							</li>
 						{/each}
 					</ul>
+				{:else if crossPending}
+					<!-- The card's own footprint while the four chunks land, so the answer does not
+					     shove the button it arrives above. -->
+					<p class="hop-wait" aria-hidden="true"></p>
 				{/if}
 
 				{#if emptyCopy.action === 'clear-query'}
@@ -901,11 +1001,14 @@
 
 	.hop {
 		display: grid;
-		grid-template-columns: auto minmax(0, 1fr) auto;
+		grid-template-columns: minmax(0, 1fr) auto auto;
+		grid-template-areas:
+			'word level go'
+			'gloss count go';
 		align-items: center;
-		gap: 0.625rem;
+		gap: 0.125rem 0.625rem;
 		min-block-size: var(--spacing-tap);
-		padding: 0.375rem 0.75rem;
+		padding: 0.5rem 0.5rem 0.5rem 0.75rem;
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-md);
 		color: inherit;
@@ -913,6 +1016,7 @@
 	}
 
 	.hop-level {
+		grid-area: level;
 		color: var(--color-ink-subtle);
 		font-size: var(--text-2xs);
 		font-weight: 700;
@@ -922,10 +1026,57 @@
 
 	.hop-word {
 		display: flex;
+		grid-area: word;
 		align-items: baseline;
 		gap: 0.375rem;
 		min-inline-size: 0;
 		overflow: hidden;
+	}
+
+	/* The line that confirms it is the word they meant. One line, clipped — a rescue offer is
+	   a signpost, not an entry. */
+	.hop-gloss {
+		grid-area: gloss;
+		min-inline-size: 0;
+		overflow: hidden;
+		color: var(--color-ink-muted);
+		font-size: var(--text-sm);
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	/* The row is a destination, so it says so the way every other row in this app does. */
+	.hop-go {
+		display: grid;
+		grid-area: go;
+		place-items: center;
+		inline-size: 1.5rem;
+		color: var(--color-ink-subtle);
+	}
+
+	.hop-go svg {
+		inline-size: 1.125rem;
+		block-size: 1.125rem;
+	}
+
+	/* The space the offer is about to occupy. Holding it open costs one empty box and saves the
+	   button below from jumping under a thumb already on its way to it. The outline fades in a
+	   quarter-second late, so the usual sub-300ms lookup never flashes a frame of it and only a
+	   wait long enough to notice gets something to look at. */
+	.hop-wait {
+		inline-size: 100%;
+		block-size: 3.9375rem;
+		margin: -0.5rem 0 1.5rem;
+		border: 1px dashed var(--color-line);
+		border-radius: var(--radius-md);
+		opacity: 0;
+		animation: hop-wait-in 240ms var(--ease-out-soft) 260ms forwards;
+	}
+
+	@keyframes hop-wait-in {
+		to {
+			opacity: 1;
+		}
 	}
 
 	.hop :global(.hop-hz) {
@@ -941,8 +1092,10 @@
 	}
 
 	.hop-count {
+		grid-area: count;
 		color: var(--color-ink-subtle);
 		font-size: var(--text-xs);
+		text-align: end;
 		white-space: nowrap;
 	}
 

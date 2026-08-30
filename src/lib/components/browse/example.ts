@@ -15,7 +15,8 @@
  *
  * THE PINYIN IS ALIGNED, NOT SEGMENTED
  * `Example.pinyin` ships one space-separated syllable per hanzi character of the sentence, and
- * the build gates that (verified here over all 1,270 shipped sentences: 0 misalignments). So
+ * the build gates that (verified over all 4,308 shipped sentences: 0 misalignments, and every
+ * one of them contains its own headword verbatim, so every sheet gets a mark). So
  * the two are zipped rather than re-derived — punctuation carries no syllable and is simply
  * skipped, which is why 他很累，但还在工作。 lines up with `tā hěn lèi dàn hái zài gōng zuò`.
  * If a future sentence ever fails that zip, `pinyin` comes back null and the caller prints the
@@ -23,12 +24,17 @@
  *
  * ERHUA IS THE ONE PLACE A RUN BOUNDARY IS IGNORED. 儿 in 哪儿 is `r` attached to the syllable
  * before it, and `<Pinyin>` only knows to write `nǎr` when both syllables sit in the same call.
- * 26 of the 1,270 sentences carry a bare `r`; a headword that ends before it (那 in 我的书在那儿)
+ * 63 of the 4,308 sentences carry a bare `r`; a headword that ends before it (那 in 我的书在那儿)
  * would otherwise cut between them and print `nà r`. So a bare `r` always joins the run in
  * front of it, whatever the mark says.
+ *
+ * AND THE LINE IS SET AS A SENTENCE, not as a list of syllables: a leading capital and the stop
+ * the hanzi writes, which is how Pleco sets `Tā jīhū yī yè méi shuì.` under 他几乎一夜没睡。
+ * `sentenceCase` in the design system owns both rules; `capitalise` and `terminalStop` below are
+ * how they reach a reading that has already been cut into marked and unmarked runs.
  */
 
-import { toneOf } from '$lib/design';
+import { sentenceCase, toneOf } from '$lib/design';
 import type { Example, Syllable } from '$lib/types';
 
 /** One stretch of the sentence's characters, all inside the headword or all outside it. */
@@ -48,6 +54,8 @@ export interface SentenceParts {
 	hanzi: HanziRun[];
 	/** Null when the sentence's syllable count and character count disagree. */
 	pinyin: PinyinRun[] | null;
+	/** The stop the pinyin line ends on, printed after the last run. `''` when there is none. */
+	stop: string;
 }
 
 /** A character that carries a syllable. Punctuation does not. */
@@ -72,6 +80,36 @@ export function markHeadword(chars: readonly string[], target: readonly string[]
 	return marks;
 }
 
+/**
+ * The leading capital, written into the first syllable of the first run.
+ *
+ * `Example.pinyin` ships bare syllables — `dà jiā dōu zài ān wèi shī qù gōng zuò de tóng shì` —
+ * while the hanzi above it ends in 。 and the English below it in a full stop. Three lines,
+ * three different ideas of what a sentence is. `sentenceCase` owns both rules, but it works on
+ * one finished reading and the headword mark has already cut this one into runs, so the rules
+ * are applied through it a piece at a time: the capital here, the stop by `terminalStop`.
+ * Passing `''` as the hanzi is what asks it for the capital alone.
+ */
+function capitalise(runs: PinyinRun[]): void {
+	const head = runs[0]?.syllables[0];
+	if (head === undefined) return;
+	head.py = sentenceCase([{ text: head.py, tone: head.tone }], '')[0].text;
+}
+
+/**
+ * The Latin stop the sentence's own punctuation asks for — 。→ `.`, ？→ `?` — read out of
+ * `sentenceCase` rather than restated here, so there is one table of them in the app.
+ *
+ * It is deliberately NOT appended to the last syllable. Two things break when it is: a run that
+ * ends in erhua stops being erhua (`<Pinyin>` recognises the retroflex ending by the syllable
+ * being exactly `r`, so `r.` printed 好玩儿 as `hǎo wán r.`), and a headword sitting at the end
+ * of its own sentence — 1,151 of the 4,308 do — drags the full stop inside its mark's ground
+ * and accent rule. The caller prints it after the last run instead.
+ */
+function terminalStop(hanzi: string): string {
+	return sentenceCase([{ text: '', tone: 0 }], hanzi)[0].text;
+}
+
 /** Cut one sentence into hanzi runs and, when the two align, syllable runs. */
 export function splitSentence(example: Example, headword: string): SentenceParts {
 	const chars = [...example.hanzi];
@@ -92,7 +130,10 @@ export function splitSentence(example: Example, headword: string): SentenceParts
 	for (let i = 0; i < chars.length; i += 1) {
 		if (HAN.test(chars[i])) carriers.push(i);
 	}
-	if (carriers.length !== tokens.length || tokens.length === 0) return { hanzi, pinyin: null };
+	const stop = terminalStop(example.hanzi);
+	if (carriers.length !== tokens.length || tokens.length === 0) {
+		return { hanzi, pinyin: null, stop: '' };
+	}
 
 	const pinyin: PinyinRun[] = [];
 	for (let n = 0; n < tokens.length; n += 1) {
@@ -107,5 +148,6 @@ export function splitSentence(example: Example, headword: string): SentenceParts
 		}
 	}
 
-	return { hanzi, pinyin };
+	capitalise(pinyin);
+	return { hanzi, pinyin, stop };
 }

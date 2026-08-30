@@ -14,16 +14,27 @@
 
 	AND THE HEADWORD IS MARKED INSIDE IT. A 12-character sentence is a wall if you have to hunt
 	for the word you opened, so every occurrence of it carries the sunken ground and the accent
-	rule under it, in the hanzi line and again in the pinyin. `example.ts` does the cutting;
-	the mark is a ground and a rule rather than a colour precisely because the pinyin's colour
-	is already spoken for — it is the tone, and nothing may overwrite that.
+	rule under it, in the hanzi line and again in the pinyin. `example.ts` does the cutting.
 
-	ABSENCE IS NOT A STATE. 3,038 of the 4,308 shipped words carry no sentence yet (HSK 3–5
-	have none), so this component renders NOTHING at all for them — no frame, no placeholder,
-	no reserved height. The sheet's sections each own their own top margin, so a word without a
-	sentence gets the sheet it had before, with CHARACTERS following the meanings exactly as it
-	always did. A machine-written sentence would be worse than no sentence; so would an empty
-	box announcing one is missing.
+	THE SENTENCE'S PINYIN IS THE ONE PLACE THE APP SETS PINYIN WITHOUT TONE COLOUR.
+	Tone colour is a per-syllable signal, and it is legible at the length it was designed for:
+	one word, one or two syllables, beside the characters it belongs to. 安慰's sentence is
+	thirteen syllables in eight hues across two wrapped lines, and on that scale the hues stop
+	reading as tone and start reading as decoration — a rainbow that is louder than the hanzi
+	above it and louder than the headword's own pinyin, which is the reading a learner is
+	actually here to memorise. Neither reference does it: Pleco sets example pinyin bold black,
+	Du Chinese sets its ruby small and grey. So the sentence's pinyin is plain ink with the
+	marked headword bold on top of it — the same two-tier move the hanzi line makes, and one
+	less thing competing with the entry above it. The only tone colour left on the sheet is the
+	headword's own pinyin and the character cards, which is precisely where a learner is meant
+	to be reading it.
+
+	ABSENCE IS NOT A STATE. Every one of the 4,308 shipped words now carries a sentence, but
+	`example` is optional in the contract and the build gate can reject a future card, so this
+	component still renders NOTHING at all when there is none — no frame, no placeholder, no
+	reserved height. The sheet's sections each own their own top margin, so such a word gets the
+	sheet it had before, with CHARACTERS following the meanings. A machine-written sentence
+	would be worse than no sentence; so would an empty box announcing one is missing.
 -->
 <script lang="ts">
 	import { Hanzi, Pinyin } from '$lib/design';
@@ -98,12 +109,15 @@
 			{#if parts.pinyin === null}<Pinyin
 					pinyin={example.pinyin}
 					size="md"
+					tones={false}
+					sentence={example.hanzi}
 					class="ex-run"
 				/>{:else}{#each parts.pinyin as run, i (i)}{#if i > 0}{GAP}{/if}<Pinyin
 						syllables={run.syllables}
 						size="md"
+						tones={false}
 						class={run.mark ? 'ex-run on' : 'ex-run'}
-					/>{/each}{/if}
+					/>{/each}{parts.stop}{/if}
 		</p>
 
 		<p class="ex-en">{example.english}</p>
@@ -144,9 +158,13 @@
 		line-height: 1.55;
 	}
 
+	/* Ink, not muted. With the hues gone the three lines have to separate on size and weight
+	   alone, and a grey pinyin line directly above a grey English one collapses the sound and
+	   the meaning into one block of grey. This is the sound — the thing a learner reads the
+	   sentence out loud from — so it keeps full ink and hands the step down to the English. */
 	.ex-py {
 		margin: 0.4375rem 0 0;
-		color: var(--color-ink-muted);
+		color: var(--color-ink);
 		line-height: 1.55;
 	}
 
@@ -160,11 +178,10 @@
 	 * THE MARK. A ground plus a rule, never a hue.
 	 *
 	 * `--color-surface-sunken` is one of the three grounds the palette guarantees Chinese text
-	 * against (see palette.spec.ts), which the tinted state colours are not — so tone-coloured
-	 * pinyin can sit on it and keep every contrast number the system has measured. The accent
-	 * underneath is this app's one identity colour doing the job it is for: saying which word
-	 * this entry is about. The marked hanzi also steps up to the display weight, so the mark
-	 * survives a screenshot in greyscale.
+	 * against (see palette.spec.ts). The accent underneath is this app's one identity colour
+	 * doing the job it is for: saying which word this entry is about. The marked hanzi also
+	 * steps up to the display weight and the marked pinyin to full ink and bold, so the mark
+	 * survives a screenshot in greyscale — and so the sentence has exactly one emphasis in it.
 	 */
 	.example :global(.ex-run.on) {
 		border-block-end: 2px solid var(--color-accent);

@@ -14,6 +14,7 @@
  */
 
 import { MASTERY_STREAK } from '$lib/progress';
+import { hasMet } from '$lib/session';
 import type { Level, ProgressState, Word, WordProgress } from '$lib/types';
 
 export type WordStatus = 'new' | 'learning' | 'shaky' | 'mastered';
@@ -119,9 +120,16 @@ export function statusCounts(map: ReadonlyMap<string, WordStatus>, total: number
 	return counts;
 }
 
-/** A one-line account of a word's record, for the detail sheet. */
+/**
+ * A one-line account of a word's record, for the detail sheet.
+ *
+ * `seen` is answers, and a teach card shows a word without asking about it, so a word the app
+ * introduced ten minutes ago used to read "Not practised yet" here. The bucket it falls in is
+ * still `new` — that bucket means "never answered" and the chip row is counted on it — but the
+ * line beside the chip says what actually happened.
+ */
 export function progressLine(record: WordProgress): string {
-	if (record.seen <= 0) return 'Not practised yet';
+	if (record.seen <= 0) return hasMet(record) ? 'Shown, not yet tested' : 'Not practised yet';
 	const parts = [`Answered ${record.seen} ${record.seen === 1 ? 'time' : 'times'}`];
 	parts.push(`${record.correct} correct`);
 	if (record.streak > 0) parts.push(`${record.streak} in a row`);

@@ -38,6 +38,7 @@
 	import { charCard, charIndexNow, ensureCharIndex, rowBudget, type CharIndex } from './related';
 	import StatusPip from './StatusPip.svelte';
 	import { STATUS_META, progressLine, type WordStatus } from './status';
+	import { hasMet } from '$lib/session';
 
 	interface Props {
 		word: Word;
@@ -302,7 +303,9 @@
 	// Opening moves focus into the sheet, so Escape, Tab and the arrow keys all land here and
 	// not on the row underneath. The list restores focus to that row on close.
 	$effect(() => {
-		panel?.focus();
+		// `preventScroll`: the panel is `position: fixed`, and focusing it without this scrolls
+		// the list behind the scrim to the top (measured: scrollY 500 -> 0 in one frame).
+		panel?.focus({ preventScroll: true });
 	});
 
 	/**
@@ -318,7 +321,7 @@
 			readScroll();
 			if (!panel) return;
 			const active = document.activeElement;
-			if (active === null || !panel.contains(active)) panel.focus();
+			if (active === null || !panel.contains(active)) panel.focus({ preventScroll: true });
 		});
 	});
 
@@ -556,6 +559,26 @@
 							speaking={saying === 'example'}
 							onspeak={(text) => speak(text, 'example')}
 						/>
+
+						<!--
+							WHAT YOU HAVE DONE WITH THIS WORD, under the word rather than under the
+							character graph.
+
+							It reads in the right order on both layouts for the same reason: the
+							entry is the word, the graph is a digression from it, and a learner's
+							own record belongs to the first of those. On a phone that puts the
+							status line directly under the sentence and leaves CHARACTERS to close
+							the sheet; on desktop it is what the left column says after the
+							sentence, where the bottom third used to be blank paper while the
+							right column ran past the fold.
+						-->
+						<div class="record">
+							<p class="state">
+								<StatusPip {status} />
+								<span class="label">{meta.label}</span>
+								<span class="detail">{hasMet(record) ? line : meta.description}</span>
+							</p>
+						</div>
 					</div>
 
 					<div class="col graph">
@@ -593,14 +616,6 @@
 								</ol>
 							</section>
 						{/if}
-
-						<div class="record">
-							<p class="state">
-								<StatusPip {status} />
-								<span class="label">{meta.label}</span>
-								<span class="detail">{record.seen > 0 ? line : meta.description}</span>
-							</p>
-						</div>
 					</div>
 				</div>
 			</div>

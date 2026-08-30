@@ -5,8 +5,8 @@
  * A dictionary entry that ends is a leaf, and a leaf is why you close the app and open Pleco.
  * The thing a paper dictionary cannot do and a phone can is let you walk sideways: you looked up
  * 安慰, so 安 is now a character you half-know, and the six other HSK words built on it are the
- * cheapest vocabulary you will ever learn. Pleco spends its entry screen on example sentences we
- * do not ship; this spends it on the 4,308 words we already do.
+ * cheapest vocabulary you will ever learn. Pleco spends its entry screen on example sentences;
+ * the sheet now ships one of those per word and spends the rest of itself on this.
  *
  * WHAT IT COSTS
  * One pass over every level, built once per session and cached — ~7k pushes over 4,308 words,
@@ -87,6 +87,12 @@ let lists: ReadonlyMap<Level, readonly Word[]> | null = null;
  * not a copy. This is what lets the screen answer "nothing here matches, but HSK 1 has one"
  * without a second round of dynamic imports, and it is null until something has asked for the
  * index, so nothing here forces the other four chunks down the wire.
+ *
+ * IT IS A SNAPSHOT, NOT REACTIVE STATE. `lists` is a plain module binding, so a `$derived` that
+ * calls this has no dependency on it and will never re-run when the lists land. Callers mirror
+ * the value into their own `$state` when the promise resolves (see the browse screen's
+ * `crossLists` and `WordSheet`'s `index`). Reading it straight from a derivation is the bug
+ * that made the cross-level rescue offer render for a typed query and never for a `?q=` one.
  */
 export function levelLists(): ReadonlyMap<Level, readonly Word[]> | null {
 	return lists;
