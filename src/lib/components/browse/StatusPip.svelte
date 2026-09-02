@@ -50,6 +50,12 @@
 			<circle cx="9" cy="9" r="3" fill="currentColor" />
 		</svg>
 	{:else}
+		<!--
+			Ten dashes of 2 on a 2.4 gap, which is exactly the r=7 circumference (43.98) divided
+			ten ways — so the ring closes on itself instead of butting a dash against a gap at
+			the seam. At 1.5px on a 2.6/2.6 guess it did neither: the seam showed and the whole
+			ring read as a rendering artifact rather than the quietest state in a set of five.
+		-->
 		<svg viewBox="0 0 18 18" focusable="false">
 			<circle
 				cx="9"
@@ -57,8 +63,8 @@
 				r="7"
 				fill="none"
 				stroke="currentColor"
-				stroke-width="1.5"
-				stroke-dasharray="2.6 2.6"
+				stroke-width="1.9"
+				stroke-dasharray="2 2.4"
 			/>
 		</svg>
 	{/if}

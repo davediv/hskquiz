@@ -5,43 +5,43 @@
 	list next to a game: "show me the 14 I keep missing" is the reason to open this screen at
 	all, and it is one tap.
 
-	Chips for states nobody has reached yet stay hidden — on a first visit every word is new, so
-	four buttons reading 0 would be four buttons of noise. They appear as the states do.
+	WHICH CHIPS EXIST IS `visibleFilters` IN status.ts, NOT THIS FILE.
+	There is no `All` chip and there is no chip for a state nobody has reached. The count that
+	`All` carried is the level's own size, which the level screen, the colophon and the list
+	itself already give; what it cost was 54px of a 320px strip, which is why "40 Mastered" —
+	the number a returning learner opens this screen for — used to sit 51px off the right edge.
+	Clearing a filter is the selected chip toggling, the way a filter chip behaves everywhere
+	else; `aria-pressed` already described it, and the empty state still offers a button.
 
 	WHY THE COUNT SITS ABOVE THE LABEL
-	Laid out as one line — `Shaky 14` — the five chips measured 513px against a 375px phone, so
-	`Mastered 50` was 118px off the right edge and `Shaky`'s number sat under the fade that was
-	meant to advertise the overflow. Scroll affordances were the answer to the wrong question:
-	the count is the payload, and a strip whose payload is offscreen has failed whatever it does
-	to announce the fact.
+	Laid out as one line — `Shaky 14` — five chips measured 513px against a 375px phone. The
+	count is the payload, and a strip whose payload is offscreen has failed whatever it does to
+	announce the fact. Stacking the number over the label makes each chip as wide as its widest
+	line instead of the sum of both.
 
-	Stacking the number over the label makes each chip as wide as its widest line instead of the
-	sum of both, which is what brings all five inside 375px with room to spare. It costs 12px of
-	sticky height and buys back three things: every count readable without a gesture, the number
-	first in the reading order — which is what the chip is consulted for — and a 44px-tall tap
-	target, which the 32px one-line pill was not.
-
-	The scrolling machinery below stays, because 320px phones and a future sixth state still
-	exist: it scrolls edge to edge so a clipped chip reads as "continues offscreen" rather than
-	"broken layout", the overflowing edge is masked to a fade, and a nudge button sits on it.
-	None of it fires at 375px any more. Selecting a chip still scrolls it fully into view.
+	WHAT IS MEASURED, AND WHAT IS NOT
+	The strip fits at 320/375/414 with all five chips — measured in the running app at 303px of
+	scroll width against 320px of client width, seeded with every bucket populated. That is a
+	fact about five chips at today's labels and it is checked by `status.spec.ts`, not asserted
+	here: the previous version of this comment promised the same thing about five chips, a
+	sixth arrived, and the promise shipped as a guarantee for eight loops. So the scrolling
+	machinery below stays and stays measured — the fade and the nudge appear from a real
+	measurement of the last chip's edge, not from a count of chips, and a longer label or a
+	sixth bucket brings them back on their own.
 -->
 <script lang="ts">
 	import { untrack } from 'svelte';
-	import { STATUS_FILTERS, STATUS_META, type StatusCounts, type StatusFilter } from './status';
+	import { STATUS_META, type StatusCounts, type StatusFilter, type WordStatus } from './status';
 
 	interface Props {
 		value: StatusFilter;
+		/** What each chip says. Search-scoped: tapping one can never produce fewer rows. */
 		counts: StatusCounts;
+		/** Which chips exist, from the level's own buckets. See `visibleFilters`. */
+		chips: readonly WordStatus[];
 	}
 
-	let { value = $bindable('all'), counts }: Props = $props();
-
-	const shown = $derived(
-		STATUS_FILTERS.filter(
-			(filter) => filter === 'all' || filter === 'new' || counts[filter] > 0 || filter === value
-		)
-	);
+	let { value = $bindable('all'), counts, chips }: Props = $props();
 
 	/** Breathing room left beside a chip that has just been scrolled into view. */
 	const EDGE_GAP = 12;
@@ -56,10 +56,10 @@
 	 *
 	 * `scrollWidth - clientWidth` is the obvious test and the wrong one here: the strip carries
 	 * the screen's gutter as its own inline padding so the first chip lines up with the text
-	 * column, and that trailing 20px counts as scrollable width. With all five chips fitting
-	 * inside 375px it still reported an overflow, so the fade landed on `Mastered` and greyed
-	 * out a chip that was entirely on screen. Comparing the end chip's own right edge against
-	 * the strip's says what the learner can actually see.
+	 * column, and that trailing 20px counts as scrollable width. With every chip fitting inside
+	 * 375px it still reported an overflow, so the fade landed on `Mastered` and greyed out a
+	 * chip that was entirely on screen. Comparing the end chip's own right edge against the
+	 * strip's says what the learner can actually see.
 	 */
 	function measure() {
 		if (!strip) return;
@@ -94,6 +94,11 @@
 		}
 	}
 
+	/** Tapping the chip that is already on is how the filter comes off. */
+	function toggle(filter: WordStatus) {
+		value = value === filter ? 'all' : filter;
+	}
+
 	// The strip changes width when a chip appears (a first miss creates "Shaky"), so the fades
 	// are driven by a measurement rather than by a count of chips.
 	$effect(() => {
@@ -107,7 +112,7 @@
 	});
 
 	$effect(() => {
-		void shown.length;
+		void chips.length;
 		void value;
 		untrack(() => {
 			measure();
@@ -124,15 +129,17 @@
 		bind:this={strip}
 		onscroll={measure}
 	>
-		{#each shown as filter (filter)}
+		{#each chips as filter (filter)}
 			<button
 				type="button"
 				class="chip-btn {filter}"
 				class:on={filter === value}
 				data-filter={filter}
 				aria-pressed={filter === value}
-				aria-label={`${STATUS_META[filter].label}, ${counts[filter].toLocaleString('en')} words`}
-				onclick={() => (value = filter)}
+				aria-label={filter === value
+					? `${STATUS_META[filter].label}, ${counts[filter].toLocaleString('en')} words, showing — tap to show all`
+					: `${STATUS_META[filter].label}, ${counts[filter].toLocaleString('en')} words`}
+				onclick={() => toggle(filter)}
 			>
 				<!-- Number first, label under it. Announced the other way round by `aria-label`
 				     above, because "Shaky, 14 words" is the sentence and "14 Shaky" is not. -->
@@ -202,7 +209,14 @@
 		   appear — the virtual list measures its own offset and a wrapping row would move it. */
 		overflow-x: auto;
 		scrollbar-width: none;
-		padding-block: 0.125rem;
+		/*
+		 * `overflow-x: auto` computes `overflow-y` to `auto` as well, so this padding is the
+		 * only thing between a focused chip and a focus ring sliced off top and bottom — the
+		 * app's ring is 3px at 3px offset, and at 0.125rem all that survived was the two side
+		 * arcs. The screen's own `--browse-pad-end` went to zero to pay for it, so the header
+		 * is the same height it was.
+		 */
+		padding-block: 0.375rem;
 		padding-inline: var(--browse-bleed-start, 0px) var(--browse-bleed-end, 0px);
 		scroll-padding-inline: var(--browse-bleed-start, 0px) var(--browse-bleed-end, 0px);
 		scroll-snap-type: x proximity;
@@ -245,9 +259,17 @@
 		);
 	}
 
-	/* Two lines, so the chip is as wide as its widest line rather than as wide as both — that
-	   is the whole reason five of them fit a 375px phone. `--spacing-tap` tall, so it is also
-	   the first version of this control a thumb can hit reliably. */
+	/*
+	 * Two lines, so the chip is as wide as its widest line rather than as wide as both — that
+	 * is the whole reason five of them fit a 320px phone.
+	 *
+	 * 36px tall rather than 44: this row and the search field above it are now the screen's
+	 * entire chrome, and 44 + 44 + the padding between them put the first Chinese character
+	 * past the fifth of the viewport this screen is allowed. WCAG 2.2's 24x24 minimum is
+	 * cleared twice over on both axes, the chips are 6px apart, and the rows below are 76px
+	 * targets. `min-block-size` says it out loud because layout.css sets a 44px floor on every
+	 * button at zero specificity.
+	 */
 	.chip-btn {
 		display: inline-flex;
 		flex: none;
@@ -255,8 +277,8 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.0625rem;
-		min-block-size: var(--spacing-tap);
-		padding-inline: 0.6875rem;
+		min-block-size: 2.25rem;
+		padding-inline: 0.5625rem;
 		border: 1px solid var(--color-line);
 		border-radius: var(--radius-pill);
 		background-color: transparent;
@@ -273,7 +295,7 @@
 		color: var(--color-ink);
 		font-size: var(--text-sm);
 		font-weight: 700;
-		line-height: 1.1;
+		line-height: 1.05;
 	}
 
 	.label {
@@ -281,7 +303,7 @@
 		font-size: var(--text-2xs);
 		font-weight: 600;
 		letter-spacing: 0.02em;
-		line-height: 1.2;
+		line-height: 1.15;
 	}
 
 	.chip-btn.on {
@@ -334,14 +356,10 @@
 	}
 
 	/*
-	 * 320px, where the fifth chip was 51px off the right edge behind a 44px fade — "100
-	 * Mastered", the count a learner opens this screen for, unreadable without a gesture on
-	 * the phone least able to afford one. Nothing here changes what a chip IS: the two lines,
-	 * the 44px height and the whole scrolling apparatus survive. The chips simply stop
-	 * carrying 22px of inside air each on the one width that cannot spare 110px of it.
-	 *
-	 * The measurement below is unchanged and still runs, so a sixth state, a longer label or
-	 * a 1,070-wide count would bring the fade and the nudge back on their own.
+	 * 320px. The chips stop carrying 22px of inside air each on the one width that cannot
+	 * spare 110px of it. Nothing here changes what a chip IS: the two lines, the height and
+	 * the whole scrolling apparatus survive, and the measurement above still runs — a longer
+	 * label or a sixth bucket brings the fade and the nudge back on their own.
 	 */
 	@media (max-width: 22.5rem) {
 		.chips {
@@ -366,6 +384,7 @@
 		display: grid;
 		place-items: center;
 		inline-size: 2rem;
+		min-block-size: 0;
 		padding: 0;
 		border: 0;
 		color: var(--color-ink-subtle);
@@ -389,6 +408,14 @@
 	@media (hover: hover) {
 		.nudge:hover {
 			color: var(--color-ink);
+		}
+	}
+
+	/* One control row with room to spare. */
+	@media (min-width: 60rem) {
+		.chip-btn {
+			min-block-size: 2.625rem;
+			padding-inline: 0.6875rem;
 		}
 	}
 </style>

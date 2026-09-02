@@ -13,7 +13,15 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import type { ProgressState, Word, WordProgress } from '$lib/types';
-import { statusCounts, statusFor, statusMap, statusOf } from './status';
+import {
+	hasChips,
+	statusCounts,
+	statusFor,
+	statusMap,
+	statusOf,
+	visibleFilters,
+	type StatusCounts
+} from './status';
 
 const words = JSON.parse(readFileSync('src/lib/data/hsk5.json', 'utf8')) as Word[];
 
@@ -96,5 +104,63 @@ describe('statusMap against the shipped list', () => {
 	it('costs nothing when there is no store yet', () => {
 		expect(statusMap(null, 5, words).size).toBe(0);
 		expect(statusMap(undefined, 5, words).size).toBe(0);
+	});
+});
+
+/**
+ * WHICH CHIPS EXIST, WHICH IS A LAYOUT FACT AS MUCH AS A LOGIC ONE.
+ *
+ * Six two-line chips measured 371px of scroll width against a 320px phone and put "40
+ * Mastered" — the number a returning learner opens the screen for — 51px past the right edge,
+ * while the strip's own header comment asserted that five fitted "with room to spare". The
+ * comment was written when there were five and was never re-measured when a sixth arrived. So
+ * the count of chips is asserted here, where it fails a run rather than reassuring a reader.
+ */
+describe('visibleFilters', () => {
+	const counts = (over: Partial<StatusCounts> = {}): StatusCounts => ({
+		all: 500,
+		new: 500,
+		seen: 0,
+		learning: 0,
+		shaky: 0,
+		mastered: 0,
+		...over
+	});
+
+	it('never offers an `all` chip — the strip has five slots at 320px and it was the widest', () => {
+		const every = visibleFilters(counts({ seen: 1, learning: 1, shaky: 1, mastered: 1 }), 'all');
+		expect(every).toEqual(['new', 'seen', 'learning', 'shaky', 'mastered']);
+		expect(every.map(String)).not.toContain('all');
+		expect(every.length).toBeLessThanOrEqual(5);
+	});
+
+	it('offers one chip on a level nobody has touched, so the row does not render', () => {
+		const fresh = visibleFilters(counts(), 'all');
+		expect(fresh).toEqual(['new']);
+		expect(hasChips(fresh)).toBe(false);
+	});
+
+	it('renders the row as soon as a second bucket exists', () => {
+		const started = visibleFilters(counts({ new: 499, learning: 1 }), 'all');
+		expect(started).toEqual(['new', 'learning']);
+		expect(hasChips(started)).toBe(true);
+	});
+
+	it('keeps the selected chip even once its bucket has emptied under it', () => {
+		// The last shaky word was answered right: the bucket is 0, but a chip you are standing
+		// on may not vanish — the empty state has to be able to name what it filtered by.
+		expect(visibleFilters(counts({ new: 499, mastered: 1 }), 'shaky')).toEqual([
+			'new',
+			'shaky',
+			'mastered'
+		]);
+	});
+
+	it('orders chips the way progress runs, not the way the buckets filled', () => {
+		expect(visibleFilters(counts({ mastered: 3, seen: 2 }), 'all')).toEqual([
+			'new',
+			'seen',
+			'mastered'
+		]);
 	});
 });

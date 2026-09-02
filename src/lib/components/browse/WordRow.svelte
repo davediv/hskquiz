@@ -86,7 +86,15 @@
 		column-gap: 0.75rem;
 		inline-size: 100%;
 		block-size: var(--browse-row-h);
-		padding-inline: 0.25rem;
+		/*
+		 * No inline padding, so the hanzi starts on the screen's spine rather than 4px inside
+		 * it. The 4px cost twice over: the hairline is the row's own bottom border, so it ran
+		 * from the gutter while the character above it started at gutter + 4, and the chips and
+		 * the search field a row up start at the gutter exactly. A divider that overhangs the
+		 * column it divides reads as a rule laid across the list instead of a line between two
+		 * of its rows.
+		 */
+		padding-inline: 0;
 		border: 0;
 		border-block-end: 1px solid var(--color-line);
 		background: none;

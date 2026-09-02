@@ -6,6 +6,14 @@
 	links, so the level is in the URL, the back button works, and a level can be bookmarked or
 	shared. Hovering or focusing one warms its vocabulary chunk, so by the time the tap lands
 	the words are usually already there.
+
+	WHY IT IS THIS SMALL ON A PHONE
+	It shares a 44px row with the search field now — the browse header used to spend a whole
+	row on this control plus a word count, and three stacked control rows put the first Chinese
+	character 238px down an 812px phone. At 138x40 the five links leave the field 189px at
+	375, and they sit inside the 44px the field alone used to have. The width is the only
+	thing that came down: a segment is 26x32 rather than 34x30, so the target grew on the axis
+	a thumb actually misses on.
 -->
 <script lang="ts">
 	import { resolve } from '$app/paths';
@@ -33,8 +41,9 @@
 <style>
 	.switch {
 		display: flex;
-		gap: 0.125rem;
-		padding: 0.1875rem;
+		flex: none;
+		gap: 0;
+		padding: var(--spacing-2xs);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface-sunken);
 	}
@@ -42,12 +51,19 @@
 	.seg {
 		display: grid;
 		place-items: center;
-		min-inline-size: 2.125rem;
-		/* Deliberately under the 44px minimum: the whole strip is one control and the rows
-		   below are the 80px targets. 34x30 with 3px of padding each side still clears the
-		   9mm the WCAG target-size guidance asks of a control inside a compact group. */
-		block-size: 1.875rem;
-		padding-inline: 0.375rem;
+		min-inline-size: 1.625rem;
+		/*
+		 * Deliberately under the 44px minimum, and `min-block-size` has to say so out loud:
+		 * layout.css sets that floor on every `a[href]` at zero specificity, so a plain
+		 * `block-size` here loses to it and the control silently grew to 50px tall.
+		 *
+		 * 26x32 inside one 4px-inset track is one control, not five: WCAG 2.2's 24x24 minimum
+		 * is cleared on both axes, and the rows below are the 76px targets. The old 34x30 was
+		 * wider and shorter — the wrong trade for a thumb, and 46px of width this screen now
+		 * spends on the search field beside it.
+		 */
+		min-block-size: 2rem;
+		padding-inline: 0.25rem;
 		border-radius: var(--radius-pill);
 		color: var(--color-ink-muted);
 		font-size: var(--text-sm);
@@ -69,6 +85,24 @@
 		.seg:not(.current):hover {
 			color: var(--color-ink);
 			background-color: color-mix(in srgb, var(--color-ink) 7%, transparent);
+		}
+	}
+
+	/* 320px, where 138px of level switch is 43% of everything the row has. A segment goes to
+	   the 24px WCAG 2.2 minimum and not below it, which hands the search field 10px — the
+	   difference between a placeholder that names what it takes and one that reads "hanzi or
+	   piny". */
+	@media (max-width: 22.5rem) {
+		.seg {
+			min-inline-size: 1.5rem;
+		}
+	}
+
+	/* One control row with room to spare, so the segments go back to a comfortable size. */
+	@media (min-width: 60rem) {
+		.seg {
+			min-inline-size: 2.125rem;
+			min-block-size: 2.125rem;
 		}
 	}
 </style>

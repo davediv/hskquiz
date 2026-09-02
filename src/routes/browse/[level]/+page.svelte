@@ -25,6 +25,7 @@
 -->
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import { MediaQuery } from 'svelte/reactivity';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { Hanzi, Pinyin } from '$lib/design';
@@ -42,10 +43,12 @@
 	import { scrollToShow, windowFor } from '$lib/components/browse/virtual';
 	import {
 		STATUS_META,
+		hasChips,
 		statusCounts,
 		statusFor,
 		statusMap,
 		statusOf,
+		visibleFilters,
 		type StatusFilter,
 		type WordStatus
 	} from '$lib/components/browse/status';
@@ -164,11 +167,15 @@
 		filter === 'all' ? searched : searched.filter((word) => statusFor(statuses, word.id) === filter)
 	);
 
+	/** The level's own buckets. What a chip says is scoped to the search; whether it exists is
+	    not — see `visibleFilters`. */
+	const levelCounts = $derived(statusCounts(statuses, words.length));
+
 	// Chip counts describe the current *search*, so tapping a chip can never produce fewer
 	// results than its own number. With no query that is the whole level, and `statusMap` has
 	// already done the walk; with a query the result set is small enough to bucket directly.
 	const counts = $derived.by(() => {
-		if (query.trim() === '') return statusCounts(statuses, words.length);
+		if (query.trim() === '') return levelCounts;
 		const scoped: [string, WordStatus][] = [];
 		for (const word of searched) {
 			const status = statuses.get(word.id);
@@ -176,6 +183,38 @@
 		}
 		return statusCounts(new Map(scoped), searched.length);
 	});
+
+	const chipList = $derived(visibleFilters(levelCounts, filter));
+
+	/**
+	 * Does the store hold anything at all for this level?
+	 *
+	 * Answerable before the word list arrives, which the chip list is not: `statusMap` checks
+	 * every record against the shipped ids, so until the chunk lands every bucket reads 0. A
+	 * record for this level means a second bucket exists — `new` is always offered and a record
+	 * is by definition not `new` — so this is exactly the question "will there be a chip row",
+	 * asked early enough to reserve its height instead of dropping the list 45px when the
+	 * chunk lands. Prefix only, because it decides a row's existence and not a number.
+	 */
+	const hasLevelHistory = $derived.by(() => {
+		const byWord = snapshot?.byWord;
+		if (!byWord || level === null) return false;
+		const prefix = `L${level}-`;
+		for (const wordId of Object.keys(byWord)) {
+			if (wordId.startsWith(prefix)) return true;
+		}
+		return false;
+	});
+
+	/**
+	 * Whether the chip row is worth a row.
+	 *
+	 * On a level nobody has practised there is exactly one bucket, and a lone "500 New" chip
+	 * under a header that has just said 500 was the third printing of one number. Below two
+	 * chips the row does not render at all and this screen's whole chrome is one 44px control
+	 * row — 118px to the first Chinese character, which is what a first open should cost.
+	 */
+	const showChips = $derived(phase === 'ready' ? hasChips(chipList) : hasLevelHistory);
 
 	// ---------------------------------------------------------------- geometry ---------
 
@@ -524,6 +563,24 @@
 	/** The query, escaped once, for the `?q=` the offers above carry to the level they name. */
 	const carried = $derived(encodeURIComponent(query.trim()));
 
+	/**
+	 * What the field can be told, in as many words as the field is wide.
+	 *
+	 * The level switch shares its row now, so the field is 189px at 375 and the sentence it
+	 * carried does not fit — it rendered as "hanzi, pinyin or me", which teaches nothing and
+	 * looks broken. Below 480px the two inputs a learner reaches for first are named and the
+	 * third is left to `aria-label` and the empty screen's own manual, both of which still say
+	 * meanings are searchable; below 360px the conjunction goes too. Measured, not guessed:
+	 * 180 / 108 / 92px of text against 141px of field at 375 and 98px at 320. CSS cannot set an
+	 * attribute, which is the one case `MediaQuery` is for; `roomy` falls back to true so the
+	 * server renders the 375px answer and the common phone never changes text on hydrate.
+	 */
+	const wide = new MediaQuery('min-width: 30rem', false);
+	const roomy = new MediaQuery('min-width: 22.5rem', true);
+	const searchHint = $derived(
+		wide.current ? 'hanzi, pinyin or meaning' : roomy.current ? 'hanzi or pinyin' : 'hanzi, pinyin'
+	);
+
 	/** The search manual, which is only worth reading once the app has run out of answers. */
 	const SEARCH_HELP =
 		'Pinyin needs no tone marks and is matched whole syllables at a time; you can also search a character, or an English word from the meaning.';
@@ -590,7 +647,11 @@
 
 <svelte:window onkeydown={onWindowKeydown} />
 
-<main class="browse" style:--browse-sticky-h={stickyH > 0 ? `${stickyH}px` : null}>
+<main
+	class="browse"
+	data-rows={showChips ? 'two' : 'one'}
+	style:--browse-sticky-h={stickyH > 0 ? `${stickyH}px` : null}
+>
 	{#if phase === 'no-level'}
 		<section class="panel">
 			<p class="eyebrow">Not a level</p>
@@ -629,20 +690,44 @@
 			<a class="btn btn-quiet btn-block mt-2.5" href={resolve('/')}>Back to levels</a>
 		</section>
 	{:else}
+		<!--
+			ONE ROW OF CONTROLS, AND A SECOND ONLY WHEN IT HAS SOMETHING TO SAY.
+
+			This was three stacked rows — level switch and word count, search field, chip strip —
+			which put the first Chinese character 238px down an 812px phone: 29% of the viewport
+			spent before the thing the screen is for. Pleco puts its first headword at ~8% with a
+			keyboard up. The level switch and the field now share a single 44px row, the count
+			row is gone (it printed the level's size a third time, after the chips and the
+			colophon), and the chip strip only exists once there is more than one bucket to
+			choose between.
+
+			`.controls-inner` HOLDS EXACTLY THE ROWS AND NOTHING ELSE. The shell reads its
+			children as the fold's snap points (chrome.svelte.ts, `foldStops`), descending
+			through any single-child wrapper on the way — so a stray element in here becomes a
+			legal place to cut the header in half. The live region below is inside `.bar`, where
+			it is one of three and absolutely positioned, for exactly that reason.
+		-->
 		<div class="controls" bind:this={controlsEl}>
 			<div class="controls-inner">
-				<div class="top">
+				<div class="bar">
 					{#if level !== null}<LevelSwitch {level} />{/if}
-					<p id="browse-count" class="count tabular" role="status" aria-live="polite">
+					<SearchField bind:value={query} placeholder={searchHint} describedBy="browse-count" />
+					<!-- The count still exists, it just no longer costs a row: it is the field's
+					     description and the live region that tells a screen reader the list has
+					     narrowed. On screen the chips carry the same numbers. -->
+					<p id="browse-count" class="sr-only" role="status" aria-live="polite">
 						{countLabel}
 					</p>
 				</div>
-				<SearchField
-					bind:value={query}
-					placeholder="hanzi, pinyin or meaning"
-					describedBy="browse-count"
-				/>
-				<StatusChips bind:value={filter} {counts} />
+				{#if showChips}
+					{#if phase === 'ready'}
+						<StatusChips bind:value={filter} {counts} chips={chipList} />
+					{:else}
+						<!-- The strip's own footprint while the level's chunk is in flight, so the
+						     list does not drop 45px the moment the counts become knowable. -->
+						<div class="chips-hold" aria-hidden="true"></div>
+					{/if}
+				{/if}
 			</div>
 		</div>
 
@@ -796,14 +881,34 @@
 		--browse-bleed-end: var(--browse-gutter-end);
 
 		/*
-		 * Volunteered to the shell (see chrome.svelte.ts): once the app bar has retracted, it
-		 * may take this much more off our top edge. 3.375rem is exactly the level-pills-and-
-		 * count row — 0.625rem of `.controls` padding-block-start + the 2.25rem `.top` row +
-		 * the 0.5rem gap beneath it — so the search field and the status chips are what stay,
-		 * and the pills come back the instant the user scrolls up. `.controls` sticks to
-		 * `--app-sticky-top`, which is the shell's chrome total already minus this fold.
+		 * The header's own geometry, in one place, because two other numbers are derived from it
+		 * and a hand-written third is how this screen shipped a fold that cut a control in half.
+		 * The budget is hard and it is arithmetic, not taste: the shell's bar is 57px at rest,
+		 * this screen may not put its first row past 160px of an 812px phone, and a 44px field
+		 * over a 36px chip row leaves 23px for every pad, gap, hairline and focus ring between
+		 * them. Measured at 158px, at 320 / 360 / 375 / 390 / 414 / 430.
 		 */
-		--app-chrome-fold: 3.375rem;
+		--browse-pad-top: 0.375rem;
+		/* Zero, because the chip strip below carries its own 0.375rem — it has to, or its
+		   `overflow-x` clips the 6px focus ring off the top and bottom of every chip, which is
+		   what it was doing. Paying for that padding twice is 6px this header does not have. */
+		--browse-pad-end: 0rem;
+		--browse-row-gap: 0.125rem;
+		/* `--spacing-tap`. The search field is the one control on this screen that must be a
+		   full-size target, and the row is exactly as tall as it. */
+		--browse-bar-h: 2.75rem;
+
+		/*
+		 * Volunteered to the shell (see chrome.svelte.ts): once the app bar has docked, it may
+		 * take this much more off our top edge. It is the control row plus everything above it,
+		 * computed from the same three tokens the row is laid out from — so it lands exactly on
+		 * the chip strip's own snap point and the fold is binary: the row is whole or it is
+		 * gone — measured at 52px against a chip strip whose own top is 52px below the block's,
+		 * which is the snap point the shell would pick anyway. A hand-written 3.375rem against a
+		 * row that had grown to 50px is what left 14px of beige track and the top arc of the
+		 * level pill wedged under the app bar at every scroll depth for two loops.
+		 */
+		--app-chrome-fold: calc(var(--browse-pad-top) + var(--browse-bar-h) + var(--browse-row-gap));
 
 		inline-size: 100%;
 		max-inline-size: var(--container-app);
@@ -825,7 +930,7 @@
 		   controls themselves stay on the text column. */
 		margin-inline: calc(-1 * var(--browse-gutter-start)) calc(-1 * var(--browse-gutter-end));
 		padding-inline: var(--browse-gutter-start) var(--browse-gutter-end);
-		padding-block: 0.625rem 0.5rem;
+		padding-block: var(--browse-pad-top) var(--browse-pad-end);
 		border-block-end: 1px solid var(--color-line);
 		/*
 		 * Opaque, not glass. A translucent bar over a list of 14px Latin glosses does not read
@@ -836,25 +941,34 @@
 		background-color: var(--color-page);
 	}
 
+	/* Nothing but rows may live here — the shell cuts the fold on its children. See the note
+	   on the markup above. */
 	.controls-inner {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: var(--browse-row-gap);
 	}
 
-	.top {
+	/* Level switch and search field, one row, the field taking whatever the switch leaves. */
+	.bar {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 0.75rem;
-		min-block-size: 2.25rem;
+		gap: 0.5rem;
+		min-block-size: var(--browse-bar-h);
 	}
 
-	.count {
-		margin: 0;
-		color: var(--color-ink-subtle);
-		font-size: var(--text-xs);
-		white-space: nowrap;
+	/* Exactly the strip's height: a 2.25rem chip plus the 0.375rem the scroller pads its own
+	   block with at each end, so nothing moves when the real one replaces it. */
+	.chips-hold {
+		block-size: 3rem;
+	}
+
+	/* No chip strip: nothing below to pad against the hairline, and no second row to fold —
+	   the shell would otherwise descend into the one row that is left and cut it at the
+	   field's own top edge, shaving the header's padding off under the bar for no reason. */
+	.browse[data-rows='one'] {
+		--browse-pad-end: 0.4375rem;
+		--app-chrome-fold: 0px;
 	}
 
 	/* ---------------------------------------------------------------------- list ------ */
@@ -864,7 +978,10 @@
 		   padding is where the rendered slice starts, the height holds the scrollbar open for
 		   the rows that do not exist. */
 		box-sizing: border-box;
-		margin-block-start: 0.25rem;
+		/* Flush under the controls' hairline, which is what separates them — the 4px that used
+		   to sit here is 4px of the 15px this header has left to spend, and both references
+		   run their list straight off the bottom of the search bar. */
+		margin-block-start: 0;
 	}
 
 	.list.windowed {
@@ -885,10 +1002,9 @@
 			--browse-bleed-start: 0px;
 			--browse-bleed-end: 0px;
 			/*
-			 * Nothing to fold from here up. `.controls` collapses to a single 67px row at this
-			 * width, so the 3.375rem the phone stack volunteers would eat all but 13px of it.
-			 * The shell refuses a fold a screen cannot afford whole, so the rendering is right
-			 * either way — but the screen should state its own number rather than lean on that.
+			 * Nothing to fold from here up: `.controls` is a single row at this width, so there
+			 * is no second row to hide and the shell has no snap point to cut on. Stated rather
+			 * than left to the shell's own refusal, because a screen should know its own shape.
 			 */
 			--app-chrome-fold: 0px;
 
@@ -900,12 +1016,18 @@
 		}
 
 		/* One row on a desktop: there is width for the level, the field and the chips side by
-		   side, and the list gets the height back. */
+		   side, and the list gets the height back. `.bar` dissolves into the same grid rather
+		   than nesting inside one cell, so the field still flexes against the chip strip and
+		   not against the switch alone. */
 		.controls-inner {
 			display: grid;
 			grid-template-columns: auto minmax(14rem, 1fr) auto;
 			align-items: center;
 			gap: 1rem;
+		}
+
+		.bar {
+			display: contents;
 		}
 	}
 
