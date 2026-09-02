@@ -86,6 +86,20 @@
    `fāngàn` from `fāng'àn`. `spaced` is the opt-in for that reading and it is RUBY ONLY: one
    syllable positioned over one character, where the gaps are the layout and not the spelling.
 
+   A SENTENCE IS THE OPPOSITE PROBLEM, and it cost this system a loop. `Example.pinyin` has no
+   spelling to preserve: it is one bare syllable per character with no punctuation, so the
+   faithful renderer that was right for a headword printed `Xià tiān dào le tiān qì yuè lái yuè
+   rè` under 夏天到了，天气越来越热。 — the same word set two ways, `xiàtiān` on the headword line
+   and `Xià tiān` 25px below it, on every one of the 4,308 sentences, with the comma gone from
+   all 479 that have one. So the sentence reading is BUILT rather than preserved:
+   `src/lib/design/orthography.ts` keeps every join the build writes, closes the ones it left
+   open against `lexicon.ts` (the corpus's own hanzi/pinyin pairs — no second opinion about
+   Chinese enters this app through the design system), and maps the hanzi's own 。，？！ onto the
+   Latin line at the syllable they follow. `Xiàtiān dào le, tiānqì yuè lái yuè rè.` The spec
+   holds it to properties the misspelling could not satisfy: fewer tokens than characters,
+   every comma the hanzi writes, and every word spelled in its sentence the way its own
+   headword line spells it — 3,372 of 3,372.
+
    TYPE — three stacks, three scales, and they are not interchangeable:
        --font-hanzi   + --text-hanzi-*    for 汉字. Never set hanzi on the Latin scale;
                                           16px hanzi is unreadable. Smallest is 20px.
@@ -119,6 +133,8 @@
    flex-col` rather than fighting it. `.app-shell` is the outermost version of that: gutters,
    safe-area insets, `--container-app`, AND the section rhythm on its own children, so the big
    gaps on a screen are one declared step and not a leftover from `justify-content: center`.
+   Neither has a caller yet; both are kept because `.stack-*` is the only consumer the middle
+   of the spacing ramp has, and deleting it would orphan four steps to un-orphan one class.
 
    THE SCALE IS EXECUTABLE — this is the part that was prose for three loops. `.stack` was
    documented and had zero callers; `--spacing-block`, `--spacing-section` and
@@ -705,9 +721,9 @@
 @layer components {
 	/* The single-column phone-first shell: gutters, safe-area insets, capped measure — and the
 	   section rhythm, because a screen's outermost column is the one place the big gaps go.
-	   `.app-shell` IS `.stack` at the section step, so the top-level blocks of a screen are
-	   48px apart by declaration and nobody hand-tunes a margin to find that number again. Step
-	   it with a `.stack-*` modifier on the same element if a screen genuinely reads tighter. */
+	   The top-level blocks of a screen are 48px apart by declaration and nobody hand-tunes a
+	   margin to find that number again. Step it with a `.stack-*` modifier on the same element
+	   if a screen genuinely reads tighter. */
 	.app-shell {
 		--stack-space: var(--spacing-section);
 
@@ -726,6 +742,11 @@
 	   goes on THE SAME element to step it up or down the scale — `class="stack stack-sm"`,
 	   never `.stack > .stack-sm`. Use it instead of hanging a margin off every child; that is
 	   how a screen ends up with a 250px void nobody chose.
+
+	   It is also what keeps the ramp honest: `--spacing-2xs` through `--spacing-2xl` have no
+	   other caller in the repo, so deleting this family for having no screen behind it — which
+	   loop 5 asked for — trades one unused class for four unused steps and fails rule 2 of
+	   `scale.spec.ts`. The fix is a screen adopting it, not this going away.
 
 	   The `display` is wrapped in `:where()` so it carries no specificity: `class="flex
 	   flex-col stack"` is a flex column that still gets the rhythm, because the utility wins

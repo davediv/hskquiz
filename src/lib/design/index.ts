@@ -25,12 +25,21 @@
  * few callers that assemble a reading themselves; `sentenceCase` adds the capital and the
  * terminal stop an example sentence's pinyin line needs. See ORTHOGRAPHY in `layout.css`.
  *
+ * An EXAMPLE SENTENCE has no such source spelling to print — `Example.pinyin` ships one bare
+ * syllable per character and no punctuation — so `orthography.ts` puts the word boundaries
+ * back, off `lexicon.ts`, which is the shipped corpus's own hanzi/pinyin pairs. That is what
+ * makes a card able to print `xiàtiān` on its headword line and `Xiàtiān` in the sentence
+ * below it rather than `Xià tiān`. `spellSentence` is the character-exact path (the caller
+ * holds the hanzi); `joinBySound` is for a caller holding syllables alone.
+ *
  * `color.ts` is not exported: it is measurement for `palette.spec.ts`, which holds the
  * stylesheet to its own contrast and tone-separation numbers. Nothing renders from it.
  */
 
 export { default as Hanzi } from './Hanzi.svelte';
 export { default as Pinyin } from './Pinyin.svelte';
+export { LONGEST_WORD, lexiconSize, wordLike, wordOf, type LexWord } from './lexicon';
+export { joinBySound, spellSentence } from './orthography';
 export {
 	layoutPinyin,
 	resolveSyllables,

@@ -36,13 +36,31 @@
 	spelling. It is also what happens automatically when a caller passes `syllables` with no
 	string to read them out of, because then there is no orthography to preserve.
 
-	`sentence` is the third reading: a leading capital and the terminal stop the hanzi writes,
-	for the pinyin line under an example sentence. Pleco sets `Tā jīhū yī yè méi shuì.` under
-	他几乎一夜没睡。 — a sentence, not a list of syllables.
+	`sentence` is the third reading, and it is a different job from the other two. `Word.pinyin`
+	arrives already spelled; `Example.pinyin` arrives NOT spelled — one bare syllable per
+	character, no capital, no punctuation (`xià tiān dào le tiān qì yuè lái yuè rè`) under a
+	hanzi line reading 夏天到了，天气越来越热。 So there is nothing to preserve and everything to
+	set: pass the sentence's hanzi and `orthography.ts` spells it by word off the shipped word
+	list and maps the hanzi's own 。，？！ onto the line — `Xiàtiān dào le, tiānqì yuè lái yuè rè.`
+	Pass `true` instead and it gets the capital and a full stop only, because without the
+	characters there is no way to know where the words are.
+
+	The same lack of a source is what a caller passing `syllables` and no string has, and it is
+	not always ruby: the browse sheet cuts a sentence into headword runs and hands over one run
+	at a time. That case used to print one gap per syllable — `ài hào` directly under a headword
+	line reading `àihào` — and now goes through the word list too, by sound.
 -->
 <script lang="ts">
 	import type { Syllable, Word } from '$lib/types';
-	import { layoutPinyin, resolveSyllables, sentenceCase, toneColor } from './tone';
+	import { joinBySound, spellSentence } from './orthography';
+	import {
+		layoutPinyin,
+		resolveSyllables,
+		sentenceCase,
+		sourceSeparators,
+		toneColor,
+		type PinyinPart
+	} from './tone';
 
 	type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -94,15 +112,37 @@
 		xl: 'text-pinyin-xl'
 	};
 
+	/** The capital and terminal stop a sentence reading needs, once the words are laid out. */
+	function asSentence(run: PinyinPart[]): PinyinPart[] {
+		if (sentence === false) return run;
+		return sentenceCase(run, sentence === true ? undefined : sentence);
+	}
+
+	/**
+	 * The four readings, in the order they claim a call. Ruby first, because there the gaps are
+	 * the layout; then a sentence whose characters we hold, which is the only case where word
+	 * boundaries can be recovered exactly; then syllables with no string to read them out of,
+	 * where the word list is all there is; then the ordinary word, whose source string already
+	 * carries the official spelling and is printed unchanged.
+	 */
+	function spell(source: string, list: Syllable[]): PinyinPart[] {
+		if (spaced) return asSentence(layoutPinyin(source, list, true));
+		if (typeof sentence === 'string') {
+			const spelled = spellSentence(sentence, source);
+			if (spelled !== null) return spelled;
+		}
+		if (list.length > 1 && sourceSeparators(source, list) === null) {
+			return asSentence(joinBySound(list));
+		}
+		return asSentence(layoutPinyin(source, list, false));
+	}
+
 	const parts = $derived.by(() => {
 		const source = word?.pinyin ?? pinyin ?? '';
 		const list = resolveSyllables(word?.syllables ?? syllables, source);
 		// The separator lives inside the span so that copying the pinyin still yields the real
 		// string — a CSS margin would look identical and paste as `zhōngguó` either way.
-		const run = layoutPinyin(source, list, spaced);
-		const set =
-			sentence === false ? run : sentenceCase(run, sentence === true ? undefined : sentence);
-		return set.map((part) => ({
+		return spell(source, list).map((part) => ({
 			text: part.text,
 			color: tones ? toneColor(part.tone) : undefined
 		}));
