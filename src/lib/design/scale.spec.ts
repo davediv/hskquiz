@@ -369,10 +369,14 @@ describe('a diluted border is not a control edge', () => {
 
 /**
  * Declared and never called on the day this test landed. The set may only shrink: adopting one
- * of these in a screen is the fix, and adding a new orphan is the failure. `.app-shell` and
- * `.stack` are the expensive two — between them they are the whole documented rhythm, and no
- * screen has taken them yet, which is why the quiz column's 206px void is still an accident of
- * `justify-content: center` rather than `--spacing-section` said out loud.
+ * of these in a screen is the fix, and adding a new orphan is the failure.
+ *
+ * `.stack` and its seven modifiers were deleted in loop 6 to close the "dead token, fifth loop"
+ * finding, and the deletion was reverted the same hour: `.stack-2xs` … `.stack-2xl` are the only
+ * callers `--spacing-2xs` … `--spacing-2xl` have, so removing the family traded one orphan class
+ * for four orphan STEPS and broke rule 2 above. The right fix is a screen adopting the rhythm —
+ * which is why `.app-shell`, the version a screen is most likely to want, stays documented here
+ * rather than being quietly dropped.
  */
 const UNADOPTED: readonly string[] = [
 	'app-shell',
