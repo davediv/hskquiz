@@ -216,8 +216,8 @@
 		"note": "Measure word — the classifier reading is the one the learner is tested on."
 	},
 	"L2-0377": {
-		"meanings": ["side", "surface", "measure word: flat things"],
-		"note": "面1 — the face/surface/classifier word. 面2 (noodles) is L2-0378, a separate card."
+		"meanings": ["side", "face", "measure word: flat things"],
+		"note": "面1 — the face/side/classifier word. \"face\" is the reference's own leading sense and it is carried rather than deleted: dropping it hid the 面/脸 overlap from the distractor guard, which reads meanings and nothing else, so the two stayed eligible for one card. 面2 (noodles) is L2-0378, a separate card."
 	},
 	"L2-0378": {
 		"meanings": ["noodles", "flour"],

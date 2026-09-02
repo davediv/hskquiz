@@ -10,6 +10,14 @@
  *   node scripts/build-vocab.mjs --verify   verify the checked-in JSON without rewriting it
  *   node scripts/build-vocab.mjs --report   also dump gloss diagnostics to stderr
  *
+ * PINYIN IS SPELLED BY WORD, on the headword line and in the sentence under it — 汉语拼音正
+ * 词法基本规则, and what Pleco prints. `displayPinyin` deletes the official list's notation
+ * rather than spacing it (`bāng∥máng` is bāngmáng, not `bāng máng`), the CC-CEDICT tone digit
+ * settles the neutral tone the diacritic cannot show (`[xue2 sheng5]` is xuésheng), and
+ * `sentenceWordUnits` writes every example sentence in words rather than one token per
+ * character — joining only spans the corpus itself ships as a card, and spelling them the way
+ * that card spells them. `Example.spans` keeps the 1:1 alignment to the characters.
+ *
  * Three things this build refuses to do, because loop 1 shipped all three:
  *
  *   1. Guess at syllable boundaries. `syllables` is parsed out of each reference row's
@@ -116,14 +124,27 @@ function traditionalOf(row, hanzi) {
  * Official pinyin, minus notation:
  *   bāng∥máng      separable-verb marker
  *   nǎ·lǐ          neutral-tone dot
+ *   yǒu(yì)xiē     optional syllable
  *   lǎo (Lǎo Wáng) the example that goes with a bound form
  *   bàba|bà        variant spellings
+ *
+ * EVERY ONE OF THOSE MARKS IS DELETED, NOT SPACED. Loop 0 turned `∥` and the optional-syllable
+ * parenthetical into a space, which put a word boundary in 192 headwords that exists in no
+ * source: 帮忙 printed `bāng máng`, 睡觉 `shuì jiào`, 值得 `zhí dé`, 出来 `chū lái`. `∥` marks
+ * where a separable verb may be *split by something else* (帮了他的忙); it is not how the word
+ * is written. The reference refutes the space on the same row — each entry carries a second,
+ * already-clean `pinyin` column, and it reads bāngmáng, shuìjiào, zhíde, chūlái. Deleting
+ * instead of spacing reproduces that column on all 189 `∥` rows, and 有些/有点儿/差点儿 lose the
+ * optional syllable the same way the hanzi does (`displayHanzi` already drops 有（一）些 → 有些).
+ *
+ * The 113 spaces that remain are the official list's own — 岸上 `àn shang`, 不客气 `bú kèqì`,
+ * 看起来 `kàn qǐlai` — and every one of them is in the reference's clean column too.
  */
 function displayPinyin(official, fallback) {
 	return (official || fallback || '')
 		.split('|')[0]
-		.replace(/[（(][^）)]*[）)]/g, ' ')
-		.replace(/∥/g, ' ')
+		.replace(/[（(][^）)]*[）)]/g, '')
+		.replace(/∥/g, '')
 		.replace(/·/g, '')
 		.replace(/…/g, '')
 		.replace(/\s+/g, ' ')
@@ -166,37 +187,93 @@ function toneOfMarked(syllable) {
 	return 0;
 }
 
+/** Anything the printed pinyin may put between two syllables, and never inside one. */
+const PINYIN_SEP = /[\s'’\-·]/;
+
 /**
- * Split a CC-CEDICT key's bracketed pinyin into one entry per character.
+ * One bracketed reading of a CC-CEDICT key, as written: `[ba4 ba5]` gives `ba`/4 and `ba`/5.
  *
- * `愛|爱[ai4]` gives one syllable; `爸爸|爸爸[ba4 ba5]` gives two, the second neutral.
- * CC-CEDICT writes ü as `u:` (and, in a few entries, `v`); tone 5 is the neutral tone.
- * Returns null when the key has no parseable bracket, which the caller turns into a failure.
+ * The tone stays the RAW digit here — 5 is CC-CEDICT's neutral tone and 0 never occurs — so a
+ * caller can tell "neutral" from "no tone recorded". CC-CEDICT writes ü as `u:` (and, in a few
+ * entries, `v`). Returns null when the bracket does not parse.
  */
-function keySyllables(cedictKey) {
-	const bracket = /\[([^\]]*)\]\s*$/.exec(cedictKey || '');
-	if (!bracket) return null;
+function parseReading(text) {
 	const out = [];
-	for (const part of bracket[1].trim().split(/\s+/).filter(Boolean)) {
+	for (const part of text.trim().split(/\s+/).filter(Boolean)) {
 		const parsed = /^([a-zA-Zü:]+)([0-5])$/.exec(part);
 		if (!parsed) return null;
 		out.push({
 			base: parsed[1].toLowerCase().replace(/u:/g, 'ü').replace(/v/g, 'ü'),
-			tone: Number(parsed[2]) % 5
+			tone: Number(parsed[2])
 		});
 	}
 	return out.length ? out : null;
 }
 
 /**
- * Cut the official pinyin into the syllables the CC-CEDICT key says are there.
+ * Split a CC-CEDICT key's bracketed pinyin into one entry per character.
+ *
+ * `愛|爱[ai4]` gives one syllable; `爸爸|爸爸[ba4 ba5]` gives two, the second neutral (5 comes
+ * back as 0, the app's neutral tone). A key that lists two readings — `起來|起来[qi3 lai5]/起來|
+ * 起来[qi5 lai5]` — is cut by the LAST one, which is the reading `alignSyllables` has always
+ * used; `neutralSyllables` is the function that looks at all of them.
+ * Returns null when the key has no parseable bracket, which the caller turns into a failure.
+ */
+function keySyllables(cedictKey) {
+	const bracket = /\[([^\]]*)\]\s*$/.exec(cedictKey || '');
+	if (!bracket) return null;
+	const parsed = parseReading(bracket[1]);
+	return parsed ? parsed.map((s) => ({ base: s.base, tone: s.tone % 5 })) : null;
+}
+
+/**
+ * Which syllables of a key EVERY reading it lists writes with CC-CEDICT's neutral tone.
+ *
+ * This is the digit the build used to throw away. `keySyllables` parses `[xue2 sheng5]` to
+ * segment 学生, and the shipped card then read its tones off the printed diacritic instead and
+ * shipped `xuéshēng` — a full first tone on the syllable its own segmentation key calls
+ * neutral. 42 cards did that (学生, 太阳, 关系, 值得, 小姐, 位置, 合同 …), 29 of them dotted
+ * `xué·shēng` in the official list as well, so the card contradicted both authorities at once —
+ * and `speak()` says the neutral form, so one card said two things.
+ *
+ * Two guards, because the digit is evidence and not a licence:
+ *   - EVERY reading in the key has to agree. 起来 is `[qi3 lai5]/[qi5 lai5]`; 起 is neutral in
+ *     one reading and third tone in the other, so only 来 is demoted and the card stays `qǐlai`.
+ *   - The first syllable of a word is never demoted. A neutral syllable is an unstressed one,
+ *     which is a thing a syllable can only be relative to the syllable in front of it — so the
+ *     caller applies the same rule after a printed space (看上去 stays `kàn shàngqu`, never
+ *     `kàn shangqu`, which would leave a written word with no stress in it at all).
+ *
+ * Demotion only, never promotion: the standard prints 27 cards neutral where CC-CEDICT gives a
+ * full tone (岸上 `àn shang`, 学问 `xuéwen`), and those stay as the standard prints them.
+ */
+function neutralSyllables(cedictKey, count) {
+	const out = new Array(count).fill(false);
+	const readings = [];
+	for (const bracket of String(cedictKey || '').matchAll(/\[([^\]]*)\]/g)) {
+		const parsed = parseReading(bracket[1]);
+		if (parsed && parsed.length === count) readings.push(parsed);
+	}
+	if (!readings.length) return out;
+	for (let i = 1; i < count; i += 1) out[i] = readings.every((r) => r[i].tone === 5);
+	return out;
+}
+
+/**
+ * Cut the official pinyin into the syllables the CC-CEDICT key says are there, keeping the
+ * text the source writes between them.
  *
  * The key supplies the boundaries — it is the only field in the corpus that segments an
  * unspaced compound like `xuéshēng` reliably — and the official string supplies the letters,
- * so `syllables.map(s => s.py).join(' ')` is always the pinyin the standard prints. The tone
- * is read off the printed diacritic rather than the key's digit: the standard applies tone
- * sandhi to 不 and 一 (`bú kèqì`, `yìqǐ`) and prints some syllables neutral where CC-CEDICT
- * gives them a full tone, and `py` and `tone` render together, so they must never disagree.
+ * so the syllables always spell the pinyin the standard prints. `seps[i]` is whatever sits in
+ * front of syllable `i` and `seps[length]` whatever trails the last, which is what lets the
+ * caller rewrite a syllable (see `neutralSyllables`) and put the string back together with the
+ * spaces, apostrophes and hyphens the official list wrote — `kàn qǐlai`, `Xī'ān`, `wǔyán-liùsè`.
+ *
+ * The tone is read off the printed diacritic, not the key's digit: the standard applies tone
+ * sandhi to 不 and 一 (`bú kèqì`, `yìqǐ`), and `py` and `tone` render together so they must
+ * never disagree. The one place the digit wins is a syllable the key marks neutral, which is
+ * applied to `py` and `tone` together, above.
  *
  * Returns null when the two do not describe the same string of letters — three rows corpus
  * wide, all of which are in HAND_SYLLABLES.
@@ -204,17 +281,28 @@ function keySyllables(cedictKey) {
 function alignSyllables(pinyin, cedictKey) {
 	const key = keySyllables(cedictKey);
 	if (!key) return null;
-	const raw = pinyin.replace(/[\s'’\-·]/g, '');
-	const lower = raw.toLowerCase();
+	const chars = [...pinyin];
 	const out = [];
+	const seps = [];
 	let at = 0;
+	let sep = '';
 	for (const syllable of key) {
-		const chunk = raw.slice(at, at + syllable.base.length);
-		if (stripTone(lower.slice(at, at + syllable.base.length)) !== syllable.base) return null;
+		while (at < chars.length && PINYIN_SEP.test(chars[at])) sep += chars[at++];
+		const chunk = chars.slice(at, at + syllable.base.length).join('');
+		if (stripTone(chunk.toLowerCase()) !== syllable.base) return null;
 		at += syllable.base.length;
+		seps.push(sep);
+		sep = '';
 		out.push({ py: chunk, tone: toneOfMarked(chunk) });
 	}
-	return at === raw.length ? out : null;
+	while (at < chars.length && PINYIN_SEP.test(chars[at])) sep += chars[at++];
+	seps.push(sep);
+	return at === chars.length ? { syllables: out, seps } : null;
+}
+
+/** A cut reading, put back together: the syllables with the source's own text between them. */
+function joinSyllables(syllables, seps) {
+	return syllables.map((s, i) => `${seps[i]}${s.py}`).join('') + seps[syllables.length];
 }
 
 /**
@@ -282,8 +370,17 @@ const HAND_SYLLABLES = {
 	'L3-0798': [['xiě', 3]] // 血 — xiě on the HSK list, xue4 in CC-CEDICT
 };
 
-/** `syllables` for one row, or a thrown error. There is no silent fallback here on purpose. */
-function syllablesFor(row, hanzi, pinyin) {
+/**
+ * The reading one row ships: the printed pinyin and its syllables, settled together.
+ *
+ * They are one decision, not two. The syllables have to spell the printed string — the card,
+ * the search index and the tone colours all read the pair — so the only way to correct a tone
+ * is to correct the letters with it, and the only place that can happen is here.
+ *
+ * Returns `{ pinyin, syllables }`, or throws. There is no silent fallback on purpose.
+ */
+function reading(row, hanzi) {
+	const printed = displayPinyin(row.officialPinyin, row.pinyin);
 	const characters = [...hanzi];
 	const hand = HAND_SYLLABLES[row.id];
 	if (hand) {
@@ -292,7 +389,7 @@ function syllablesFor(row, hanzi, pinyin) {
 				`${row.id} ${hanzi}: HAND_SYLLABLES has ${hand.length} syllables for ${characters.length} characters`
 			);
 		}
-		return hand.map(([py, tone]) => ({ py, tone }));
+		return { pinyin: printed, syllables: hand.map(([py, tone]) => ({ py, tone })) };
 	}
 	if (!row.cedictKey) {
 		throw new Error(
@@ -308,13 +405,17 @@ function syllablesFor(row, hanzi, pinyin) {
 			`${row.id} ${hanzi}: ${characters.length} character(s) but ${key.length} syllable(s) in "${row.cedictKey}"`
 		);
 	}
-	const aligned = alignSyllables(pinyin, row.cedictKey);
+	const aligned = alignSyllables(printed, row.cedictKey);
 	if (!aligned) {
 		throw new Error(
-			`${row.id} ${hanzi}: official pinyin "${pinyin}" does not align with "${row.cedictKey}" — add it to HAND_SYLLABLES`
+			`${row.id} ${hanzi}: official pinyin "${printed}" does not align with "${row.cedictKey}" — add it to HAND_SYLLABLES`
 		);
 	}
-	return aligned;
+	const neutral = neutralSyllables(row.cedictKey, characters.length);
+	const syllables = aligned.syllables.map((s, i) =>
+		neutral[i] && s.tone !== 0 && !/\s/.test(aligned.seps[i]) ? { py: stripTone(s.py), tone: 0 } : s
+	);
+	return { pinyin: joinSyllables(syllables, aligned.seps), syllables };
 }
 
 /* --------------------------------------------------------------- register */
@@ -683,9 +784,10 @@ function sentenceChars(hanzi) {
  * the same way `displayPinyin` settles the notation on a headword: strip it. What is left is
  * countable against `sentenceChars` with no special cases.
  *
- * Erhua is one token per character, `wán r` and not `wánr`, because that is what the card's
- * own `syllables` array already says 玩儿 is — 28 of the 29 authored erhua sentences were
- * written that way and the twenty-ninth is now too.
+ * Erhua is one token per character HERE, `wán r` and not `wánr`, because that is what the
+ * card's own `syllables` array already says 玩儿 is — 28 of the 29 authored erhua sentences
+ * were written that way and the twenty-ninth is now too. What SHIPS is the word-unit reading
+ * `sentenceWordUnits` builds out of this one, where 玩儿 is `wánr`.
  */
 function sentencePinyin(pinyin) {
 	return String(pinyin)
@@ -695,6 +797,233 @@ function sentencePinyin(pinyin) {
 }
 
 const pinyinSyllables = (pinyin) => (pinyin ? sentencePinyin(pinyin).split(' ') : []);
+
+/* ------------------------------------------------------ sentence word units */
+
+/**
+ * PINYIN IS WRITTEN IN WORDS, AND A SENTENCE IS NOT AN EXCEPTION.
+ *
+ * 汉语拼音正词法基本规则 sets pinyin by word: Pleco prints "Wǒ zài wùlǐxué fāngmiàn de zhīshi,
+ * jīhū děngyú líng." and Du Chinese sets its ruby the same way. This app printed
+ * "Qǐng dà jiā bǎo chí ān jìng." — one token per character, on all 4,308 sentences and all
+ * 42,112 of their syllables, with the headword the sheet underlines split down the middle.
+ *
+ * The authored field stays one token per character, because that is the alignment the sheet
+ * needs and the only thing 82 authors could be asked to get right. The build is what turns it
+ * into words, and it does that by asking the corpus rather than by guessing:
+ *
+ *   - A span of characters may be joined only when THE CORPUS ITSELF ships it as one card.
+ *     No dictionary of "common words", no statistics, no heuristics about particles.
+ *   - And only when the sentence's own reading of that span spells the card's, letter for
+ *     letter, once the tone marks are off. That is what keeps 睡着 `shuì zhe` (the aspect
+ *     marker) from being joined into the card 睡着 `shuìzháo`, and 长 zhǎng out of 长期.
+ *   - A join then prints THE CARD'S OWN STRING, so the sentence and the headword above it
+ *     spell the word identically — 中国 was `Zhōngguó` on its card and `zhōng guó` in all 40
+ *     sentences that used it, 汉语 `Hànyǔ` against `hàn yǔ` 28 times, 关上 `guānshang` against
+ *     `guān shàng`. Nothing gated that before; the join is the gate.
+ *   - Except that a card may not ADD a tone the sentence writes as neutral. An author writing
+ *     `zhè ge rén` is saying 个 is unstressed there, so the card 个人 `gèrén` is not the word
+ *     they wrote and 这个人 stays three tokens. This is what stops the segmenter turning
+ *     一个人 into `yí gèrén`.
+ *
+ * The 1:1 syllable-to-character alignment is NOT lost — `Example.spans` carries it, one entry
+ * per printed token saying how many characters that token covers. Every token is wholly inside
+ * the headword or wholly outside it, so the sheet's underline still lands exactly on the word.
+ */
+
+/** Which characters of `chars` fall inside any occurrence of `target`. */
+function headwordMarks(chars, target) {
+	const marks = new Array(chars.length).fill(false);
+	if (!target.length || target.length > chars.length) return marks;
+	for (let i = 0; i + target.length <= chars.length; i += 1) {
+		if (target.some((c, k) => chars[i + k] !== c)) continue;
+		for (let k = 0; k < target.length; k += 1) marks[i + k] = true;
+	}
+	return marks;
+}
+
+/**
+ * One card's printed reading, cut into the tokens it actually prints.
+ *
+ * `pinyin` is not always one token — 岸上 is `àn shang`, 中秋节 is `Zhōngqiū Jié`, 看起来 is
+ * `kàn qǐlai` — so a word contributes as many tokens as the official list gives it, and each
+ * one carries the number of characters it covers. Apostrophes and hyphens are inside a token
+ * (`Xī'ān`, `wǔyán-liùsè`); only whitespace starts a new one.
+ */
+function readingTokens(pinyin, syllables) {
+	const tokens = [];
+	let at = 0;
+	for (const syllable of syllables) {
+		const found = pinyin.indexOf(syllable.py, at);
+		if (found < 0) return null;
+		const gap = pinyin.slice(at, found);
+		at = found + syllable.py.length;
+		const last = tokens[tokens.length - 1];
+		if (!last || /\s/.test(gap)) tokens.push({ text: syllable.py, chars: 1 });
+		else {
+			last.text += gap + syllable.py;
+			last.chars += 1;
+		}
+	}
+	return at === pinyin.length && tokens.length ? tokens : null;
+}
+
+/** Letters alone: tone marks off, case folded. Two readings of one word share these exactly. */
+const bareLetters = (text) => stripTone(text.toLowerCase());
+
+/**
+ * The card a span of a sentence is spelling, or null when the corpus cannot say it is one.
+ *
+ * Exact first — a card whose syllables are the sentence's syllables, mark for mark, is the
+ * word beyond argument, and it is how 编辑 biānjí (the noun) and 编辑 biānji (the verb) are
+ * told apart. Then the readings that differ only in ways the CARD is the authority on: case
+ * (`zhōng` → `Zhōng`) and a syllable the card writes neutral (`shàng` → `shang`).
+ */
+function matchCard(cards, sentence) {
+	for (const card of cards) {
+		if (card.syllables.every((s, i) => s.py === sentence[i])) return card;
+	}
+	for (const card of cards) {
+		const fits = card.syllables.every((s, i) => {
+			if (s.py === sentence[i]) return true;
+			if (bareLetters(s.py) !== bareLetters(sentence[i])) return false;
+			return !(toneOfMarked(sentence[i]) === 0 && s.tone !== 0);
+		});
+		if (fits) return card;
+	}
+	return null;
+}
+
+/** The longest span the corpus recognises as one word: 四字成语 are four characters. */
+const MAX_WORD = 4;
+
+/** What one HSK level of rarity is worth. Small enough that it only ever breaks a tie. */
+const LEVEL_COST = 0.01;
+
+/**
+ * Cut one clause into words, cheapest reading first.
+ *
+ * Fewest words wins; a character the corpus does not ship as a word of its own costs extra,
+ * which is what makes 不同意 come out 不 + 同意 rather than 不同 + 意; and between two readings
+ * of the same length the one built from lower-HSK words wins, because the levels ARE a
+ * frequency order — that is what makes 很多年轻观众 come out 多 + 年轻 (L1 + L2) rather than
+ * 多年 + 轻 (L5 + L3). Ties after all that go to the longer word at the earlier position, which
+ * is what makes 晚上去 come out 晚上 + 去 rather than 晚 + 上去.
+ */
+function cutClause(chars, sentence, marks, lo, hi, lexicon, singles) {
+	const best = new Array(hi - lo + 1).fill(null);
+	best[hi - lo] = { cost: 0, groups: [] };
+	for (let i = hi - lo - 1; i >= 0; i -= 1) {
+		const at = lo + i;
+		let pick = null;
+		for (let len = Math.min(MAX_WORD, hi - at); len >= 1; len -= 1) {
+			const rest = best[i + len];
+			if (!rest) continue;
+			let cost;
+			let card = null;
+			if (len === 1) {
+				const level = singles.get(chars[at]);
+				cost = (level === undefined ? 1.4 : 1) + LEVEL_COST * (level ?? LEVELS.length);
+			} else {
+				// A word may never straddle the headword's edge: the sheet underlines the
+				// headword inside the sentence, and a token half in and half out cannot be drawn.
+				let uniform = true;
+				for (let k = 1; k < len; k += 1) if (marks[at + k] !== marks[at]) uniform = false;
+				if (!uniform) continue;
+				const cards = lexicon.get(chars.slice(at, at + len).join(''));
+				if (!cards) continue;
+				card = matchCard(cards, sentence.slice(at, at + len));
+				if (!card) continue;
+				cost = 1 + LEVEL_COST * card.level;
+			}
+			const total = cost + rest.cost;
+			if (pick === null || total < pick.cost) {
+				pick = { cost: total, groups: [{ len, card }, ...rest.groups] };
+			}
+		}
+		best[i] = pick;
+	}
+	return best[0]?.groups ?? null;
+}
+
+/**
+ * One authored sentence, rewritten in words: `{ pinyin, spans }`, or null when its pinyin and
+ * its characters do not line up 1:1 (gate (g) is what reports that).
+ *
+ * Clauses are cut separately, because a comma is a word boundary the corpus cannot see:
+ * 很好，看 would otherwise join 好看 across it.
+ */
+function sentenceWordUnits(example, headword, lexicon, singles) {
+	const chars = [];
+	const clauses = new Set([0]);
+	for (const c of [...String(example.hanzi)]) {
+		if (SENTENCE_HAN.test(c)) chars.push(c);
+		else clauses.add(chars.length);
+	}
+	const sentence = pinyinSyllables(example.pinyin);
+	if (!chars.length || sentence.length !== chars.length) return null;
+	clauses.add(chars.length);
+
+	const marks = headwordMarks(chars, [...headword]);
+	const edges = [...clauses].filter((n) => n <= chars.length).sort((a, b) => a - b);
+	const groups = [];
+	for (let n = 0; n < edges.length - 1; n += 1) {
+		if (edges[n] === edges[n + 1]) continue;
+		const cut = cutClause(chars, sentence, marks, edges[n], edges[n + 1], lexicon, singles);
+		if (!cut) return null;
+		groups.push(...cut);
+	}
+
+	const tokens = [];
+	let at = 0;
+	for (const group of groups) {
+		if (group.card) {
+			for (const token of group.card.tokens) tokens.push({ ...token });
+		} else {
+			for (let k = 0; k < group.len; k += 1) tokens.push({ text: sentence[at + k], chars: 1 });
+		}
+		at += group.len;
+	}
+
+	// Erhua is a retroflex ending, not a syllable: 那儿 is `nàr`, never `nà r`. The card's own
+	// syllables say so (`[nà, r]`) and `<Pinyin>` reads it off exactly this shape, so a bare `r`
+	// that a word did not already absorb joins the token in front of it — the one place a token
+	// may cover both sides of the headword's edge, which is the rule the sheet already follows.
+	const joined = [];
+	for (const token of tokens) {
+		const last = joined[joined.length - 1];
+		if (token.text === 'r' && last) {
+			last.text += 'r';
+			last.chars += 1;
+		} else joined.push(token);
+	}
+
+	return { pinyin: joined.map((t) => t.text).join(' '), spans: joined.map((t) => t.chars) };
+}
+
+/**
+ * Every card the segmenter may join a span into: the multi-character words by their hanzi, and
+ * the levels of the single characters, which are what tells 多 (HSK 1) from 轻 (HSK 3).
+ */
+function wordLexicon(entries) {
+	const lexicon = new Map();
+	const singles = new Map();
+	for (const e of entries) {
+		const characters = [...e.hanzi];
+		if (characters.length < 2) {
+			singles.set(e.hanzi, Math.min(e.level, singles.get(e.hanzi) ?? e.level));
+			continue;
+		}
+		const tokens = readingTokens(e.pinyin, e.syllables);
+		if (!tokens) {
+			throw new Error(`${e.id} ${e.hanzi}: syllables do not spell "${e.pinyin}" token for token`);
+		}
+		const list = lexicon.get(e.hanzi) ?? [];
+		list.push({ id: e.id, level: e.level, syllables: e.syllables, tokens });
+		lexicon.set(e.hanzi, list);
+	}
+	return { lexicon, singles };
+}
 
 /**
  * Hand-authored example sentences, read from every .json file in scripts/sentences/.
@@ -777,7 +1106,7 @@ function readOfficial() {
 function build(official, overrides, sentences) {
 	const entries = official.map((r) => {
 		const hanzi = displayHanzi(r.simplified);
-		const pinyin = displayPinyin(r.officialPinyin, r.pinyin);
+		const { pinyin, syllables } = reading(r, hanzi);
 		const pos = (r.pos || '').split('/').filter(Boolean);
 		const traditional = traditionalOf(r, hanzi);
 		const override = overrides.get(r.id);
@@ -788,7 +1117,7 @@ function build(official, overrides, sentences) {
 			hanzi,
 			traditional: traditional || undefined,
 			pinyin,
-			syllables: syllablesFor(r, hanzi, pinyin),
+			syllables,
 			meanings: override ? override.meanings : picked.meanings,
 			pos,
 			level: r.level,
@@ -846,10 +1175,21 @@ function build(official, overrides, sentences) {
 	// Example sentences are attached after the merge, because they are keyed on the card a
 	// learner sees, not on an official row: 老1 and 老2 are one card and get one sentence.
 	// An id with no card is not silently ignored — gate (g) reports it.
+	// …and the pinyin is written in words here, not by the author: the lexicon it is segmented
+	// against is these cards, so it cannot exist until they do. See `sentenceWordUnits`.
+	const { lexicon, singles } = wordLexicon(entriesOut);
 	for (const e of entriesOut) {
 		const example = sentences?.get(e.id);
-		if (example)
-			e.example = { hanzi: example.hanzi, pinyin: example.pinyin, english: example.english };
+		if (!example) continue;
+		const units = sentenceWordUnits(example, e.hanzi, lexicon, singles);
+		e.example = {
+			hanzi: example.hanzi,
+			// The authored string, untouched, when it does not line up 1:1 with the characters —
+			// so gate (g) reports that rather than this function papering over it.
+			pinyin: units ? units.pinyin : example.pinyin,
+			...(units ? { spans: units.spans } : {}),
+			english: example.english
+		};
 	}
 
 	return entriesOut;
@@ -1435,11 +1775,40 @@ function gateProblems(shipped, refs) {
 		if (above.length) {
 			problems.push(`${where}: "${ex.hanzi}" uses "${above.join(' ')}" — above HSK ${w.level}`);
 		}
-		const syllables = pinyinSyllables(ex.pinyin);
-		if (syllables.length !== chars.length) {
+		// The pinyin is written in WORDS (see `sentenceWordUnits`) and `spans` is what keeps it
+		// aligned to the characters anyway: one entry per printed token, saying how many
+		// characters that token covers. Both halves are gated — the sum, so the reading still
+		// accounts for every character exactly once, and the shape of every token — because the
+		// sheet underlines the headword inside the sentence by walking this array.
+		const tokens = pinyinSyllables(ex.pinyin);
+		const spans = ex.spans;
+		if (!Array.isArray(spans) || spans.length !== tokens.length) {
 			problems.push(
-				`${where}: "${ex.hanzi}" is ${chars.length} character(s) but "${ex.pinyin}" is ${syllables.length} syllable(s)`
+				`${where}: "${ex.pinyin}" is ${tokens.length} token(s) but spans is ${spans?.length ?? 'absent'}`
 			);
+		} else if (spans.some((n) => !Number.isInteger(n) || n < 1)) {
+			problems.push(`${where}: spans [${spans.join(' ')}] is not one positive count per token`);
+		} else if (spans.reduce((sum, n) => sum + n, 0) !== chars.length) {
+			const covered = spans.reduce((sum, n) => sum + n, 0);
+			problems.push(
+				`${where}: "${ex.hanzi}" is ${chars.length} character(s) but "${ex.pinyin}" covers ${covered}`
+			);
+		} else {
+			const marks = headwordMarks(chars, [...w.hanzi]);
+			let at = 0;
+			for (let n = 0; n < spans.length; n += 1) {
+				const erhua = spans[n] === 2 && tokens[n].endsWith('r') && chars[at + 1] === '儿';
+				for (let k = 1; k < spans[n]; k += 1) {
+					if (marks[at + k] === marks[at] || erhua) continue;
+					problems.push(
+						`${where}: "${tokens[n]}" is half inside the headword — the sheet cannot mark it`
+					);
+				}
+				at += spans[n];
+			}
+			if (tokens.some((token, n) => n > 0 && token === 'r')) {
+				problems.push(`${where}: "${ex.pinyin}" prints a bare "r" — erhua is not a syllable`);
+			}
 		}
 		if (!ex.hanzi.includes(w.hanzi)) {
 			problems.push(`${where}: "${ex.hanzi}" never uses the word it is an example of`);
@@ -1625,7 +1994,7 @@ function verify(official, shipped, refs) {
 		if (w.hanzi !== displayHanzi(r.simplified)) {
 			problems.push(`${r.id}: hanzi "${w.hanzi}" != "${displayHanzi(r.simplified)}"`);
 		}
-		const expectPinyin = displayPinyin(r.officialPinyin, r.pinyin);
+		const expectPinyin = reading(r, displayHanzi(r.simplified)).pinyin;
 		if (w.pinyin.toLowerCase() !== expectPinyin.toLowerCase()) {
 			problems.push(`${r.id}: pinyin "${w.pinyin}" != "${expectPinyin}"`);
 		}
@@ -1841,7 +2210,7 @@ function readCheckedIn() {
 
 /* ------------------------------------------------------------------- main */
 
-/** Anything thrown out of readOverrides() or syllablesFor() is a build failure, not a stack. */
+/** Anything thrown out of readOverrides() or reading() is a build failure, not a stack. */
 function fatal(err) {
 	console.error(`\nbuild-vocab: ${err.message}`);
 	process.exit(1);
