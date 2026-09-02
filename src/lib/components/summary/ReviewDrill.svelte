@@ -165,10 +165,34 @@
 	// The drill replaces the results list in place, so without this the viewport stays wherever
 	// the learner had scrolled the cards to and the first question opens off screen. Focusing a
 	// `tabindex="-1"` panel is also what puts a screen reader at the top of the drill.
+	//
+	// The scroll is asked for explicitly rather than left to `focus()`, which scrolls by the
+	// *least* it can: a drill taller than the space under the app bar was brought into view by
+	// its bottom edge, landing on scrollY 84 and slicing "0 of 10 correct" in half across the
+	// bar's lower edge — an offset the app chose for itself, that reads as a rendering fault.
+	// The drill's top goes under the bar instead, at the offset this panel already declares a
+	// `scroll-margin` for, and the results scroll away whole above it.
+	//
+	// Measured with `offsetTop` rather than `scrollIntoView`: this panel opens on a `rise-in`
+	// transform, and `scrollIntoView` reads the transformed rect — mid-animation it aimed 77px
+	// short and left the score line straddling the bar again. `offsetTop` is where the box was
+	// laid out, which is where it will be when the animation ends.
 	$effect(() => {
 		const node = panel;
 		if (!node) return;
-		void tick().then(() => node.focus());
+		void tick().then(() => {
+			node.focus({ preventScroll: true });
+			let top = 0;
+			for (let box: HTMLElement | null = node; box;) {
+				top += box.offsetTop;
+				// Annotated because `box` is reassigned from this, and without it TypeScript
+				// infers `up` circularly through the loop variable and falls back to `any`.
+				const up: Element | null = box.offsetParent;
+				box = up instanceof HTMLElement ? up : null;
+			}
+			const clear = parseFloat(getComputedStyle(node).scrollMarginBlockStart) || 0;
+			window.scrollTo({ top: Math.max(0, top - clear), left: 0, behavior: 'instant' });
+		});
 	});
 </script>
 
