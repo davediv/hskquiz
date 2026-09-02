@@ -56,37 +56,40 @@ describe('level card previews', () => {
 		expect(new Set(ids).size).toBe(ids.length);
 	});
 
-	it('keeps previews short enough for three columns on a phone', () => {
+	/**
+	 * Each preview word is one full-width entry now, so what has to fit is one word's own first
+	 * line — its characters, the gap, and its pinyin — against the narrowest card this layout
+	 * builds: 246px, at 320px viewport width. The fifteen static words are the ones a
+	 * first-time visitor meets on five cards at once, so none of them may be the word that
+	 * pushes its pinyin onto a second line.
+	 */
+	it('sets every static word on one line at 320px', () => {
 		for (const level of LEVELS) {
 			for (const preview of LEVEL_PREVIEW[level]) {
-				// Three 36px hanzi cells share ~93px each inside a 375px card, so a third
-				// character would either overflow or force the hanzi below the scale's floor.
-				expect([...preview.hanzi].length, `${preview.hanzi} is too wide`).toBeLessThanOrEqual(2);
+				expect(previewWidth(preview), `${preview.hanzi} ${preview.pinyin}`).toBeLessThanOrEqual(
+					246
+				);
 			}
 		}
 	});
 
 	/**
-	 * The three glosses share one wrapped line under the row now, not a column each, so what
-	 * has to fit is the *joined* string — `thank you · mother · to like`. Measured in the app,
-	 * a card's gloss line is 220px at 375 and 206px at 1440 three abreast once `Browse →` has
-	 * taken its end of the row, and 12px type sets ~6.1px a character there: 36 characters is
-	 * the ceiling that keeps all five on one line, and the widest of the five is 33.
+	 * Each gloss belongs to one word and sits on that word's own entry — beside its pinyin
+	 * where it fits, on a line of its own directly beneath its characters where it does not.
+	 * Both readings are correct and neither can ever cut, so this is not a safety rule: it is
+	 * what keeps five untouched cards the same height. 12px type sets ~6.1px a character, so a
+	 * gloss stays on the first line while `previewWidth + gap + gloss` clears the 246px card,
+	 * and every one of the fifteen static ones does.
 	 *
-	 * One line each is what makes five cards read as one list, and these fifteen words are the
-	 * ones a first-time visitor meets. A learner's own weak words are not held to this — they
-	 * wrap to as many as three lines and are never cut, which is the whole point of moving the
-	 * English out of the columns — but the cards nobody has touched yet must not.
+	 * A learner's own weak words are held to no such rule — `measure word: general purpose` is
+	 * 29 characters and takes a second line at 320px, whole — but the cards nobody has touched
+	 * yet must all read alike.
 	 */
-	it('keeps the three glosses of a card on one line together', () => {
+	it('keeps every static gloss beside its own word at 320px', () => {
 		for (const level of LEVELS) {
-			const joined = LEVEL_PREVIEW[level].map((preview) => preview.gloss).join(' · ');
-			expect(joined.length, `HSK ${level}: "${joined}"`).toBeLessThanOrEqual(36);
 			for (const preview of LEVEL_PREVIEW[level]) {
-				// No single gloss may eat the line on its own.
-				expect(preview.gloss.length, `${preview.hanzi}: "${preview.gloss}"`).toBeLessThanOrEqual(
-					12
-				);
+				const line = previewWidth(preview) + PREVIEW_GAP + preview.gloss.length * 6.1;
+				expect(line, `${preview.hanzi} "${preview.gloss}"`).toBeLessThanOrEqual(246);
 			}
 		}
 	});
@@ -232,15 +235,16 @@ describe('toPreview', () => {
 });
 
 /**
- * The row a learner's own words land in.
+ * The entry a learner's own words land in.
  *
  * Loop 3 fed arbitrary words into a layout built for three short ones and cut what did not
- * fit — `dàxuéshē…`, `have no cho…`. Nothing is cut now, so the selection has to do the
- * absorbing, and these are the cases that decide whether it does.
+ * fit — `dàxuéshē…`, `have no cho…`. Nothing is cut now, and since loop 6 nothing is even
+ * three-abreast: each word is its own full-width entry, so the only width question is whether
+ * ONE word's characters and pinyin share a line.
  *
- * Widths are the ones the app measures: 36.55px per hanzi at `--text-hanzi-md`, and a pinyin
- * ceiling of 8.8px per character at `--text-pinyin-sm`. The budgets below are real rows —
- * 287px at 1440 (three cards abreast), 301px at 375, 246px at 320.
+ * Widths are the ones the app measures: 36.55px per hanzi at `--text-hanzi-md`, 8px of gap,
+ * and a pinyin ceiling of 8.8px per character at `--text-pinyin-sm`. The budgets below are
+ * real entry widths — 287px at 1440 (three cards abreast), 301px at 375, 246px at 320.
  */
 describe('fitPreview', () => {
 	const word = (hanzi: string, pinyin: string): PreviewWord => ({
@@ -257,47 +261,54 @@ describe('fitPreview', () => {
 	const beihou = word('背后', 'bèihòu');
 	const budebu = word('不得不', 'bùdébù');
 	const chengshu = word('成熟', 'chéngshú');
+	// The widest first line in the shipped list: four characters and fifteen of pinyin.
+	const suantiankula = word('酸甜苦辣', 'suān-tián-kǔ-là');
 
-	it('charges a column the wider of its hanzi and its pinyin', () => {
-		expect(previewWidth(dian)).toBeCloseTo(36.55, 2);
-		expect(previewWidth(didian)).toBeCloseTo(73.1, 2);
-		expect(previewWidth(daxuesheng)).toBeCloseTo(109.65, 2);
-		// 谁 is one character and nine of pinyin, so the hanzi is not the binding side.
-		expect(previewWidth(word('谁', 'shéi/shuí'))).toBeCloseTo(79.2, 2);
+	it('charges a word its characters, its gap and its pinyin', () => {
+		expect(previewWidth(dian)).toBeCloseTo(36.55 + PREVIEW_GAP + 4 * 8.8, 2);
+		expect(previewWidth(didian)).toBeCloseTo(2 * 36.55 + PREVIEW_GAP + 6 * 8.8, 2);
+		expect(previewWidth(daxuesheng)).toBeCloseTo(3 * 36.55 + PREVIEW_GAP + 10 * 8.8, 2);
+		// 谁 is one character and nine of pinyin, so the pinyin is the bigger half.
+		expect(previewWidth(word('谁', 'shéi/shuí'))).toBeCloseTo(36.55 + PREVIEW_GAP + 9 * 8.8, 2);
 	});
 
-	it('keeps a three-character word at the width the desktop card actually has', () => {
-		expect(fitPreview([daxuesheng, didian, dian], 287)).toEqual([daxuesheng, didian, dian]);
-		expect(fitPreview([beihou, budebu, chengshu], 287)).toEqual([beihou, budebu, chengshu]);
-	});
-
-	it('skips a word too wide rather than dropping the row', () => {
+	/**
+	 * The finding this shape exists to end: 大学生 / 教学楼 / 图书馆 needed 346px side by side
+	 * against a 301px card, so loop 5 dropped the list to two words and left the third of the
+	 * card empty. Stacked they are 205.65px each and all three fit at every width this layout
+	 * builds, 320px included.
+	 */
+	it('keeps three long words that could never have shared a row', () => {
 		const jiaoxuelou = word('教学楼', 'jiàoxuélóu');
 		const tushuguan = word('图书馆', 'túshūguǎn');
-		// Three of these at 109.65 cannot share a 287px row; the third column takes 电.
-		expect(fitPreview([daxuesheng, jiaoxuelou, tushuguan, didian, dian], 287)).toEqual([
+		const three = [daxuesheng, jiaoxuelou, tushuguan];
+		expect(fitPreview(three, 246)).toEqual(three);
+		expect(fitPreview(three, 287)).toEqual(three);
+		expect(fitPreview([daxuesheng, didian, dian], 287)).toEqual([daxuesheng, didian, dian]);
+		expect(fitPreview([beihou, budebu, chengshu], 246)).toEqual([beihou, budebu, chengshu]);
+	});
+
+	it('skips the one word that will not set on a line and takes the next', () => {
+		expect(fitPreview([suantiankula, daxuesheng, didian, dian], 246)).toEqual([
 			daxuesheng,
-			jiaoxuelou,
+			didian,
 			dian
+		]);
+		// 286.2px fits a 301px card, so at 375 the same word is kept.
+		expect(fitPreview([suantiankula, daxuesheng, didian, dian], 301)).toEqual([
+			suantiankula,
+			daxuesheng,
+			didian
 		]);
 	});
 
-	it('gives up rather than showing a clipped row', () => {
-		// 320px: 7 characters plus two gaps is 271.85 against a 246px row.
-		expect(fitPreview([beihou, budebu, chengshu], 246)).toBeNull();
-		expect(fitPreview([daxuesheng, didian], 287)).toBeNull();
+	it('gives up rather than short-changing the list, and the card shows the worst three anyway', () => {
+		expect(fitPreview([suantiankula, daxuesheng], 246)).toBeNull();
+		expect(fitPreview([suantiankula, suantiankula, suantiankula], 246)).toBeNull();
 		expect(fitPreview([daxuesheng, didian, dian], 0)).toBeNull();
 	});
 
-	it('charges itself for the gaps between the columns', () => {
-		const three = [didian, didian, didian];
-		const glyphs = 3 * previewWidth(didian);
-		// Exactly wide enough for the glyphs alone is one gap short of a row.
-		expect(fitPreview(three, glyphs)).toBeNull();
-		expect(fitPreview(three, glyphs + 2 * PREVIEW_GAP + 0.5)).toHaveLength(PREVIEW_COUNT);
-	});
-
-	it('never returns a row the card cannot fill', () => {
+	it('never returns a list the card cannot fill', () => {
 		const row = fitPreview([daxuesheng, didian, dian], 301);
 		expect(row).toHaveLength(PREVIEW_COUNT);
 	});

@@ -9,7 +9,7 @@
 	The layout is a single 34rem column on a phone and a two-column split from 64rem, where the
 	standing information (what this is, where you are overall) parks in a sticky rail and the five
 	levels get the reading column. From 80rem that column goes three abreast, which is one row per
-	band and therefore the whole list on one screen at 1440x900.
+	band and therefore all five cards on one 900px screen — measured, last card bottom 806.
 -->
 <script lang="ts">
 	import { LEVELS, LEVEL_SIZES, type Level } from '$lib/types';
@@ -44,9 +44,10 @@
 			total: SHIPPED_SIZES[level],
 			stats: levelStats(snapshot, level),
 			// Whose three words this level's card shows. Empty until there are enough misses
-			// here to fill the row, and the card falls back to the static three. Twice as many
-			// candidates as columns: the card spends the spares on words that were merged out
-			// of the shipped list, and on ones too wide to render whole at its width.
+			// here to fill the list, and the card falls back to the static three. Twice as many
+			// candidates as entries: the card spends the spares on words that were merged out
+			// of the shipped list, and on ones whose hanzi and pinyin will not share a line at
+			// its width.
 			weakIds: weakestIds(snapshot, level, PREVIEW_COUNT, PREVIEW_COUNT * 2)
 		}))
 	);
@@ -303,10 +304,11 @@
 	}
 
 	/* `minmax(0, 1fr)` even at one column. A grid's implicit track is `auto`, so it is sized by
-	   its content's min-content — and the preview row's min-content is three whole hanzi words,
-	   which must never be cut. Left implicit, a card that could not fit its own row widened
-	   *itself*, and the page picked up a horizontal scroll instead of the card telling the row
-	   it had overflowed. Zero floor: the card is the width the column gives it, always. */
+	   its content's min-content, and a card carries hanzi and pinyin that are both `nowrap` —
+	   left implicit, a card that could not fit widened *itself* and the page picked up a
+	   horizontal scroll instead. Zero floor: the card is the width the column gives it, always.
+	   Since loop 6 the preview is a column of full-width entries rather than three words
+	   abreast, so the min-content the floor is holding back is one word, not three. */
 	.hskq-grid {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr);
@@ -337,10 +339,10 @@
 
 	   The rail is 14rem, not the 18rem of loop 3, and the two columns are 2.5rem apart rather
 	   than 3rem. Both of those went to the cards, because at three abreast the card is the
-	   narrowest column on any device this app runs on and the preview row is 36px hanzi three
-	   times over: every 8px the rail gives back is 8px of a word that no longer has to be
-	   swapped out for a shorter one. It also gives the rail less blank to leave under itself.
-	   14rem holds 词汇练习 at 48px (196px) with room to spare, which is the constraint. */
+	   narrowest column on any device this app runs on — 287px against a 375px phone's 301 — and
+	   what a card sets on one line is a whole word plus its pinyin plus its English. It also
+	   gives the rail less blank to leave under itself. 14rem holds 词汇练习 at 48px (196px)
+	   with room to spare, which is the constraint. */
 	@media (min-width: 64rem) {
 		.hskq-page {
 			display: grid;
@@ -376,8 +378,9 @@
 
 	/* Wide enough for a whole band on one line: 初等 is three levels, so at two abreast HSK 3
 	   sat alone on its own row and pushed HSK 4–5 under the 900px fold. Three abreast puts the
-	   list back to one row per band — every level on one screen — and 80rem is the width at
-	   which a card is still wide enough for three 36px hanzi side by side. */
+	   list back to one row per band — every level on one screen, last card bottom 806 at
+	   1440x900 — and 80rem is the width at which a 287px card still sets 大学生 dàxuéshēng on
+	   one line. */
 	@media (min-width: 80rem) {
 		.hskq-page {
 			/* Capped above what is ever available, so the reading column takes everything the
@@ -406,10 +409,15 @@
 			grid-column: 2;
 		}
 
+		/* `end`, not `start`. Hung under the tagline the colophon left 414px of the rail blank
+		   below itself at 1440x900 — a fragment with a void under it rather than a column. On
+		   the row's far end it is the foot of the page: masthead at the top of the rail, the
+		   lexicography note level with the bottom of the last card, and the empty middle reads
+		   as air between two anchors instead of a hole. */
 		.hskq-colophon {
 			grid-row: 2;
 			grid-column: 1;
-			align-self: start;
+			align-self: end;
 			margin-block-start: 2rem;
 		}
 	}
