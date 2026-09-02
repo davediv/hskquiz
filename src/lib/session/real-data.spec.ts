@@ -67,7 +67,14 @@ describe.skipIf(!available)('buildSession against the shipped HSK list', () => {
 					rng: mulberry32(seed),
 					now: NOW
 				});
-				expect(new Set(session.questions.map((q) => q.word.id)).size).toBe(10);
+				// Five words, ten cards: an unmet word brings the card that teaches it and the
+				// card that asks it, and nothing appears more often than that.
+				const shown = new Map<string, number>();
+				for (const question of session.questions) {
+					shown.set(question.word.id, (shown.get(question.word.id) ?? 0) + 1);
+				}
+				expect(shown.size).toBe(5);
+				for (const count of shown.values()) expect(count).toBe(2);
 				for (const question of session.questions) {
 					expect(question.choices).toHaveLength(4);
 					expect(isCorrect(question, question.word)).toBe(true);

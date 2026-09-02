@@ -196,7 +196,11 @@ describe('the leech brake', () => {
 			lastMissed: stale - 30 * DAY
 		});
 		const easy = record('easy', { seen: 3, correct: 3, streak: 3, lastSeen: stale });
-		expect(wordWeight(relearned, NOW)).toBeGreaterThan(wordWeight(easy, NOW) * 3);
+		// 1.83× as of the confirmation rule, which lifts the spotless record from 0.2734 to
+		// 0.6075 and leaves the relearned one at 1.1140 (its streak of 3 is not spotless). It
+		// was 4.07× before that and 0.71× before the brake learned to let go — the ordering is
+		// what the brief asks for; the margin is not what it is measuring.
+		expect(wordWeight(relearned, NOW)).toBeGreaterThan(wordWeight(easy, NOW) * 1.5);
 	});
 
 	it('never brakes all the way to unreachable', () => {

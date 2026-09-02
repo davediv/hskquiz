@@ -10,7 +10,13 @@ describe('readRecord — an exposure is not an answer', () => {
 	it('reads a word nothing has touched as never met', () => {
 		expect(readRecord(undefined)).toEqual(UNMET);
 		expect(readRecord(null)).toEqual(UNMET);
-		expect(readRecord(record('w', { seen: 0, correct: 0, streak: 0 }))).toEqual(UNMET);
+		// `wordId` is the one fact a record carries even when nothing has happened to it: the
+		// ladder's refresh phase is keyed on it, and it used to be read off the raw field.
+		expect(readRecord(record('w', { seen: 0, correct: 0, streak: 0 }))).toEqual({
+			...UNMET,
+			wordId: 'w'
+		});
+		expect(readRecord({ seen: 0, correct: 0, streak: 0 }).wordId).toBe('');
 	});
 
 	it('reads the `exposures` counter when the store writes one', () => {

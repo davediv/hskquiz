@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Direction, Question, Session, Word } from '../types';
 import {
 	CHOICE_COUNT,
+	INTRO_GAP,
 	SESSION_SIZE,
 	buildSession,
 	cardKind,
@@ -12,6 +13,7 @@ import {
 	mulberry32,
 	readRecord,
 	recordOutcome,
+	type CardKind,
 	type ProgressWriter
 } from './index';
 import { sharesSense } from './distractors';
@@ -61,8 +63,35 @@ describe('buildSession — shape', () => {
 		expect(slots.size).toBeGreaterThan(1);
 	});
 
-	it('never repeats a word inside one session', () => {
-		expect(new Set(ids(session)).size).toBe(session.questions.length);
+	// A word appears twice on purpose now, and only in one shape: the card that teaches it and
+	// the card that asks it. Anything else is the collision `takeDistinct` exists to close.
+	it('shows a word at most twice, as an introduction and then its own first question', () => {
+		const cards = new Map<string, CardKind[]>();
+		for (const question of session.questions) {
+			const kinds = cards.get(question.word.id) ?? [];
+			kinds.push(cardKind(question));
+			cards.set(question.word.id, kinds);
+		}
+		for (const kinds of cards.values()) {
+			expect(kinds.length).toBeLessThanOrEqual(2);
+			if (kinds.length === 2) expect(kinds).toEqual(['introduce', 'hanzi-to-meaning']);
+		}
+	});
+
+	it('puts a first question at least INTRO_GAP cards after the card that taught it', () => {
+		for (let seed = 0; seed < 60; seed++) {
+			const questions = build(LEVEL_1, null, seed).questions;
+			const taughtAt = new Map<string, number>();
+			questions.forEach((question, i) => {
+				if (isIntroduction(question)) {
+					taughtAt.set(question.word.id, i);
+					return;
+				}
+				const at = taughtAt.get(question.word.id);
+				if (at === undefined) return;
+				expect(i - at).toBeGreaterThanOrEqual(INTRO_GAP);
+			});
+		}
 	});
 
 	it("never reuses a session answer as another question's wrong answer", () => {
@@ -93,6 +122,8 @@ describe('buildSession — shape', () => {
 			const questions = build(LEVEL_1, null, seed).questions;
 			for (let i = 0; i < questions.length; i++) {
 				for (let j = i + 1; j < questions.length; j++) {
+					// A word answers its own first question; that pair is the point, not a clash.
+					if (questions[i].word.id === questions[j].word.id) continue;
 					expect(questions[i].word.hanzi).not.toBe(questions[j].word.hanzi);
 					expect(sharesSense(questions[i].word, questions[j].word)).toBe(false);
 				}
@@ -153,24 +184,36 @@ describe('buildSession — explore / exploit', () => {
 	const seen = LEVEL_1.slice(0, 120);
 	const history = progressState(seen.map((w) => mastered(w.id, NOW, 5 * HOUR)));
 
+	// 40% of the session's *questions*, held as a quota rather than left to chance — and a new
+	// word costs two cards, so three of them take six of the ten and leave four for review.
 	it('keeps introducing new words to a learner with plenty of history', () => {
 		const session = build(LEVEL_1, history, 5);
 		const fresh = ids(session).filter((id) => !(id in history.byWord));
-		// 40% of ten, held as a quota rather than left to chance.
-		expect(fresh).toHaveLength(4);
+		expect(fresh).toHaveLength(6);
+		expect(new Set(fresh).size).toBe(3);
 	});
 
 	it('holds that split across many seeds', () => {
 		for (let seed = 0; seed < 40; seed++) {
 			const session = build(LEVEL_1, history, seed);
 			const fresh = ids(session).filter((id) => !(id in history.byWord));
-			expect(fresh).toHaveLength(4);
+			expect(fresh).toHaveLength(6);
+			expect(new Set(fresh).size).toBe(3);
 		}
 	});
 
-	it('fills a first session entirely with new words', () => {
-		const session = build(LEVEL_1, progressState([]), 3);
-		expect(session.questions).toHaveLength(SESSION_SIZE);
+	it('fills a first session with five words taught and the same five asked', () => {
+		for (let seed = 0; seed < 40; seed++) {
+			const session = build(LEVEL_1, progressState([]), seed);
+			expect(session.questions).toHaveLength(SESSION_SIZE);
+			const taught = session.questions.filter((question) => isIntroduction(question));
+			const asked = session.questions.filter((question) => !isIntroduction(question));
+			expect(taught).toHaveLength(SESSION_SIZE / 2);
+			expect(asked).toHaveLength(SESSION_SIZE / 2);
+			expect(new Set(asked.map((question) => question.word.id))).toEqual(
+				new Set(taught.map((question) => question.word.id))
+			);
+		}
 	});
 
 	it('falls back to pure review once the level is exhausted', () => {
@@ -180,67 +223,84 @@ describe('buildSession — explore / exploit', () => {
 		expect(ids(session).every((id) => id in everything.byWord)).toBe(true);
 	});
 
-	it('introduces new words rather than testing them cold', () => {
-		const session = build(LEVEL_1, history, 11);
-		for (const question of session.questions) {
-			if (question.word.id in history.byWord) continue;
-			expect(cardKind(question)).toBe('introduce');
+	it('introduces a new word before it tests it, never the other way round', () => {
+		for (let seed = 0; seed < 40; seed++) {
+			const taught = new Set<string>();
+			for (const question of build(LEVEL_1, history, seed).questions) {
+				if (question.word.id in history.byWord) continue;
+				if (isIntroduction(question)) taught.add(question.word.id);
+				else expect(taught.has(question.word.id)).toBe(true);
+			}
 		}
 	});
 });
 
-describe('buildSession — the app pays its own debt before taking on more', () => {
+describe('buildSession — a word is taught and asked in the same run', () => {
 	/** Shown once and never asked: `lastSeen` with no answers, which is what `noteSeen` writes. */
 	const taught = (wordId: string) =>
 		record(wordId, { seen: 0, correct: 0, streak: 0, lastSeen: NOW - HOUR });
 
-	const firstRun = LEVEL_1.slice(0, SESSION_SIZE);
-	const afterFirstLook = progressState(firstRun.map((w) => taught(w.id)));
-	const firstRunIds = new Set(firstRun.map((w) => w.id));
-
-	// The defect this closes: the summary's primary button says "Practise these 10" over the ten
-	// hanzi it just taught, and the session behind it used to be nine of them plus a stranger —
-	// `MIN_FRESH` forcing one new word in on top of a ten-word backlog.
-	it('drills a whole session of taught-but-untested words, not nine tenths of it', () => {
-		const session = build(LEVEL_1, afterFirstLook, 7);
-		expect(session.questions).toHaveLength(SESSION_SIZE);
-		expect(ids(session).filter((id) => firstRunIds.has(id))).toHaveLength(SESSION_SIZE);
-	});
-
-	it('holds across every seed, because a button that names ten words cannot be probabilistic', () => {
-		for (let seed = 0; seed < 25; seed++) {
-			const drawn = ids(build(LEVEL_1, afterFirstLook, seed));
-			expect(drawn.filter((id) => firstRunIds.has(id))).toHaveLength(SESSION_SIZE);
+	// The defect this closes was the first screen a new learner saw: `buildSession` returned ten
+	// `introduce` cards, the rail called them "Question 1/10", and the first thing the app ever
+	// asked came a session later — if the debt quota happened to pay it. Sixty simulated daily
+	// sessions left three words taught and never asked at all.
+	it('asks every word it teaches, in the run that taught it', () => {
+		for (let seed = 0; seed < 50; seed++) {
+			for (const saved of [
+				progressState([]),
+				progressState(LEVEL_1.slice(0, 120).map((w) => mastered(w.id, NOW, 5 * HOUR)))
+			]) {
+				const questions = build(LEVEL_1, saved, seed).questions;
+				const taughtHere = questions.filter((q) => isIntroduction(q)).map((q) => q.word.id);
+				const askedHere = questions.filter((q) => !isIntroduction(q)).map((q) => q.word.id);
+				for (const id of taughtHere) expect(askedHere).toContain(id);
+			}
 		}
 	});
 
-	it('asks them rather than teaching them a second time', () => {
-		for (const question of build(LEVEL_1, afterFirstLook, 3).questions) {
-			expect(cardKind(question)).toBe('hanzi-to-meaning');
+	it('leaves nothing owed once a run is finished', () => {
+		for (let seed = 0; seed < 50; seed++) {
+			const questions = build(LEVEL_1, progressState([]), seed).questions;
+			const answers = new Map<string, number>();
+			for (const question of questions) {
+				if (!isScored(question)) continue;
+				answers.set(question.word.id, (answers.get(question.word.id) ?? 0) + 1);
+			}
+			for (const question of questions) {
+				expect(answers.get(question.word.id)).toBe(1);
+			}
 		}
 	});
 
-	it('brings discovery straight back once the debt is under a session', () => {
-		const partial = progressState(LEVEL_1.slice(0, 7).map((w) => taught(w.id)));
-		const drawn = ids(build(LEVEL_1, partial, 5));
-		const seenIds = new Set(Object.keys(partial.byWord));
-		expect(drawn.filter((id) => !seenIds.has(id)).length).toBeGreaterThanOrEqual(1);
+	// A learner who walks out between the teach card and its question still leaves a word owed —
+	// the one shape this model does not manufacture and does still have to handle. There is no
+	// debt quota any more, so it rejoins the review pool and is asked on its own weight.
+	it('asks a word left over from an abandoned run rather than teaching it again', () => {
+		const abandoned = progressState(LEVEL_1.slice(0, 4).map((w) => taught(w.id)));
+		const owedIds = new Set(Object.keys(abandoned.byWord));
+		let asked = 0;
+		for (let seed = 0; seed < 40; seed++) {
+			for (const question of build(LEVEL_1, abandoned, seed).questions) {
+				if (!owedIds.has(question.word.id)) continue;
+				expect(cardKind(question)).toBe('hanzi-to-meaning');
+				asked++;
+			}
+		}
+		expect(asked).toBeGreaterThan(0);
 	});
 
 	// `buildSession` used to take a `require: string[]` so the summary could name its ten words
-	// to the next run. Nothing imported it, it bypassed `takeDistinct`, and it was deleted. This
-	// is the guarantee that replaces it, stated the way a summary sees it: derive the taught set
-	// off `isIntroduction` — exactly what the button renders — run the ordinary scheduler with no
-	// options at all, and get that set back.
-	it('needs no `require`: the ordinary scheduler asks back the set the summary displayed', () => {
+	// to the next run. Nothing imported it, it bypassed `takeDistinct`, and it was deleted. It
+	// has nothing left to do either: the run that teaches a word is the run that asks it, so a
+	// finished session leaves ten words the learner has already answered once.
+	it('needs no `require`: a finished run has already answered everything it showed', () => {
 		for (let seed = 0; seed < 50; seed++) {
 			const first = build(LEVEL_1, progressState([]), seed);
-			const displayed = first.questions
-				.filter((question) => isIntroduction(question))
-				.map((question) => question.word.id);
-			expect(displayed).toHaveLength(SESSION_SIZE);
-			const saved = progressState(displayed.map((id) => taught(id)));
-			expect(new Set(ids(build(LEVEL_1, saved, seed + 500)))).toEqual(new Set(displayed));
+			const shown = new Set(first.questions.map((question) => question.word.id));
+			const scored = new Set(
+				first.questions.filter((question) => isScored(question)).map((q) => q.word.id)
+			);
+			expect(scored).toEqual(shown);
 		}
 	});
 });
@@ -268,21 +328,22 @@ describe('buildSession — the card a word gets comes from that word', () => {
 	// The bug this replaces: `assignDirections` sorted the ten drawn words by familiarity and
 	// gave recognition to the better half, so on a first session — where every word is equally
 	// unknown — half the run came out as cold production. 1000 of 2000, measured.
-	it('never scores a word the app has not taught: a first session is all introductions', () => {
+	it('never asks a new word in the harder direction: a first session is halves', () => {
 		const counts = kinds(progressState([]), 200);
 		expect(counts.total).toBe(200 * SESSION_SIZE);
-		expect(counts.introduce).toBe(counts.total);
+		expect(counts.introduce).toBe(counts.total / 2);
+		expect(counts['hanzi-to-meaning']).toBe(counts.total / 2);
 		expect(counts['meaning-to-hanzi']).toBe(0);
 	});
 
-	it('scores nothing on a first session, so no miss is manufactured about a new word', () => {
-		let scored = 0;
+	it('scores only what it has already taught, so no miss is manufactured about a new word', () => {
 		for (let seed = 0; seed < 200; seed++) {
+			const shown = new Set<string>();
 			for (const question of build(LEVEL_1, progressState([]), seed).questions) {
-				if (isScored(question)) scored++;
+				if (isScored(question)) expect(shown.has(question.word.id)).toBe(true);
+				else shown.add(question.word.id);
 			}
 		}
-		expect(scored).toBe(0);
 	});
 
 	it('keeps a word the learner keeps missing out of the harder direction', () => {
@@ -302,12 +363,15 @@ describe('buildSession — the card a word gets comes from that word', () => {
 		expect(counts['meaning-to-hanzi'] / counts.total).toBeGreaterThan(0.5);
 	});
 
-	it('gives a word the same card however the rest of the draw came out', () => {
-		const saveds = [progressState([]), midway, progressState(LEVEL_1.map((w) => shaky(w.id, NOW)))];
+	it('gives a word the learner has met the card its own record earned', () => {
+		const saveds = [midway, progressState(LEVEL_1.map((w) => shaky(w.id, NOW)))];
 		for (const saved of saveds) {
 			for (let seed = 0; seed < 25; seed++) {
 				for (const question of build(LEVEL_1, saved, seed).questions) {
-					expect(cardKind(question)).toBe(cardKindFor(saved.byWord[question.word.id]));
+					const saved_ = saved.byWord[question.word.id];
+					// A word met *in* this run is the pair above, not a record lookup.
+					if (!saved_) continue;
+					expect(cardKind(question)).toBe(cardKindFor(saved_, question.word.id));
 				}
 			}
 		}
@@ -389,16 +453,30 @@ describe('buildSession — inputs it has to survive', () => {
 		expect(build(LEVEL_1, undefined).questions).toHaveLength(SESSION_SIZE);
 	});
 
-	it('clamps a session larger than the level', () => {
+	it('clamps a session to what the level can fill', () => {
 		const small = makeLevel(1, 6).filter((w) => w.meanings.length > 0);
 		const session = build(small, null, 1, 50);
-		expect(session.questions).toHaveLength(small.length);
+		// Six unmet words are twelve cards: one to teach each, one to ask it.
+		expect(session.questions).toHaveLength(small.length * 2);
 		expect(new Set(ids(session)).size).toBe(small.length);
 		// Too small to spare its own answers, so the picker reuses them rather than
 		// serving a card with one button on it.
 		for (const question of session.questions) {
 			expect(question.choices.length).toBeGreaterThan(1);
 		}
+	});
+
+	// A pair needs two cards, so an odd size with a dry review pool leaves one card over. It
+	// gets a teach card rather than being dropped: a nine-card run asked for at ten is a short
+	// session, and this is the one place a word is still left owed its question — until the
+	// next run, where it is an ordinary review candidate.
+	it('fills an odd-sized run rather than leaving a card empty', () => {
+		for (const size of [1, 2, 3, 7, 9]) {
+			const session = build(LEVEL_1, null, 5, size);
+			expect(session.questions).toHaveLength(size);
+		}
+		// One card and one unmet word: teaching it is the whole of what fits.
+		expect(build(LEVEL_1, null, 5, 1).questions.map((q) => cardKind(q))).toEqual(['introduce']);
 	});
 
 	it('returns an empty session for a level with nothing in it', () => {
@@ -430,10 +508,17 @@ describe('cardKind, isIntroduction, isScored', () => {
 	const session = build(LEVEL_1, null, 31);
 
 	it('reads the kind off a built question', () => {
-		for (const question of session.questions) {
+		const taught = session.questions.filter((question) => isIntroduction(question));
+		const asked = session.questions.filter((question) => !isIntroduction(question));
+		expect(taught).toHaveLength(SESSION_SIZE / 2);
+		expect(asked).toHaveLength(SESSION_SIZE / 2);
+		for (const question of taught) {
 			expect(cardKind(question)).toBe('introduce');
-			expect(isIntroduction(question)).toBe(true);
 			expect(isScored(question)).toBe(false);
+		}
+		for (const question of asked) {
+			expect(cardKind(question)).toBe('hanzi-to-meaning');
+			expect(isScored(question)).toBe(true);
 		}
 	});
 
@@ -562,14 +647,17 @@ describe('a learner, over sessions', () => {
 		return { byWord, kinds, drawn, outcomes };
 	}
 
-	it('teaches the first session and asks about it in the second', () => {
+	it('teaches five words in the first session and asks all five, in that session', () => {
 		const run = play(2, 11);
-		expect(run.kinds[0].introduce).toBe(SESSION_SIZE);
-		expect(run.kinds[1].introduce).toBeLessThanOrEqual(2);
-		// Session 2 is mostly the words session 1 taught. That is not a repeat, it is the
-		// question the introduction was setting up.
+		expect(run.kinds[0].introduce).toBe(SESSION_SIZE / 2);
+		expect(run.kinds[0]['hanzi-to-meaning']).toBe(SESSION_SIZE / 2);
+		expect(run.kinds[0]['meaning-to-hanzi']).toBe(0);
+		// Session 2 settles on the steady state: three new words, six cards, four for review.
+		expect(run.kinds[1].introduce).toBe(3);
+		// And it is not a re-run of session 1. The five words it taught have all been answered,
+		// so they compete on weight like anything else rather than filling the next session.
 		const taught = new Set(run.drawn[0]);
-		expect(run.drawn[1].filter((id) => taught.has(id)).length).toBeGreaterThanOrEqual(8);
+		expect(run.drawn[1].filter((id) => taught.has(id)).length).toBeLessThanOrEqual(4);
 	});
 
 	it('never writes a miss about a word it only ever showed', () => {
@@ -602,19 +690,22 @@ describe('a learner, over sessions', () => {
 		expect(production / (production + recognition)).toBeLessThan(0.5);
 	});
 
-	it('finishes what it starts: the backlog of untested words stays bounded', () => {
-		// The explore quota bends around it, and half the review slots are reserved for it.
+	it('finishes what it starts: nothing is ever left taught and never asked', () => {
+		// It used to be a bounded *backlog* — the explore quota bent around it and half the
+		// review slots were reserved to pay it off. There is no backlog now: the run that
+		// teaches a word asks it, so 24 sessions of play leave exactly zero owed.
 		for (const seed of [31, 32, 33]) {
 			const run = play(24, seed);
 			const owed = Object.values(run.byWord).filter((r) => readRecord(r as never).taughtOnly);
-			expect(owed.length).toBeLessThanOrEqual(SESSION_SIZE);
+			expect(owed).toHaveLength(0);
 		}
 	});
 
-	it('keeps meeting new words while it clears the backlog', () => {
+	it('keeps meeting new words at a steady rate', () => {
+		// Five in the first session, three in each of the nine after it. The old model settled
+		// on a fixed point of 3.08 a session *and* left three of them never asked.
 		const run = play(10, 41);
-		const met = new Set(Object.keys(run.byWord));
-		expect(met.size).toBeGreaterThan(25);
+		expect(new Set(Object.keys(run.byWord)).size).toBe(32);
 	});
 
 	it('records nothing at all rather than a lie, when the store cannot note an exposure', () => {
@@ -624,7 +715,9 @@ describe('a learner, over sessions', () => {
 		const seen: string[] = [];
 		const legacy: ProgressWriter = { recordAnswer: (id) => seen.push(id) };
 		const built = build(LEVEL_1, null);
-		const results = built.questions.map((q) => recordOutcome(legacy, q, null));
+		const taught = built.questions.filter((question) => isIntroduction(question));
+		expect(taught).toHaveLength(SESSION_SIZE / 2);
+		const results = taught.map((question) => recordOutcome(legacy, question, null));
 		expect(new Set(results)).toEqual(new Set(['dropped']));
 		expect(seen).toEqual([]);
 	});

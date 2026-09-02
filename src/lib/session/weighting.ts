@@ -13,7 +13,8 @@ const DAY = 24 * 60 * MINUTE;
  *   weight = accuracy × streak × missRecency × rest × stale × fatigue
  *
  *   accuracy     1 → 5      lifetime error rate. Never right ⇒ 5×.
- *   streak       1 → 0.04   each consecutive correct answer multiplies by 0.45, capped at 4.
+ *   streak       1 → 0.04   each correct answer *after the first* multiplies by 0.45, capped
+ *                           at 4. See "a data point, not a pattern" below.
  *   missRecency  1 → 5      a miss adds up to 4×, halving every 3 days.
  *   rest         0.2 → 1    a word answered *correctly* in the last 30 min is held back, so
  *                           back-to-back sessions don't replay the same ten cards. A word
@@ -23,10 +24,10 @@ const DAY = 24 * 60 * MINUTE;
  *                           the weight down, and a correct streak forgives them; see below.
  *
  * Worked example, the case the brief calls out. Missed 3 of 4, last missed an hour ago:
- * 4 × 1 × 4.96 × 1 × 1.01 × 1 ≈ 20. Answered correctly three times running, last seen an hour
- * ago: 1 × 0.091 × 1 × 1 × 1.01 × 1 ≈ 0.09. The shaky word is ~215× likelier. An unseen word
- * sits at 1.0 — but unseen words are drawn from their own quota (see EXPLORE_SHARE) rather
- * than competing on weight, so a first session is not a coin flip.
+ * 4 × 1 × 4.96 × 1 × 1.01 × 1 ≈ **19.96**. Answered correctly three times running, last seen an
+ * hour ago: 1 × 0.2025 × 1 × 1 × 1.01 × 1 ≈ **0.204**. The shaky word is **98×** likelier. An
+ * unseen word sits at 1.0 — but unseen words are drawn from their own quota (see EXPLORE_SHARE)
+ * rather than competing on weight, so a first session is not a coin flip.
  *
  * ## Every signal is read off answers, and an introduction is not an answer
  *
@@ -38,6 +39,30 @@ const DAY = 24 * 60 * MINUTE;
  * the *only* input to `accuracy` and `fatigue` here is `misses` — answers given minus answers
  * right. A word that has been taught and not yet asked has no accuracy and no lapses: it
  * enters at 1.000, exactly where an unseen word sits, and climbs only on `stale`.
+ *
+ * ## The first correct answer is a data point, not a pattern
+ *
+ * `streak` counts consecutive correct answers, and the decay used to read it raw — so a word
+ * answered right *once, ever* was already discounted to 0.45, level with a word answered right
+ * three times out of twenty. One right answer to a four-way multiple choice is the only
+ * evidence that word has, and a quarter of it is luck; it is not consolidation.
+ *
+ * The decay therefore counts **confirmations** — correct answers that confirmed an earlier
+ * correct answer — which is `min(streak, answers - 1)`. The clamp only binds on a spotless
+ * record (`streak === answers`), so in effect a word's very first right answer no longer
+ * retires it: it enters review at 1.000 × stale, exactly where an introduction leaves it, and
+ * starts decaying from its second.
+ *
+ * This is the fix for the loop-5 verdict's third finding, and it is a large one. Driving 120
+ * real daily sessions through `buildSession` + `applyAnswer` on HSK 1 at 75% accuracy, words
+ * answered exactly once and never again fell from **160 of 362 (44.2%) to 130 of 362 (35.9%)**;
+ * at 60 sessions and 75% accuracy, from **51.1% to 37.4%**; at 90% accuracy, from 39.6% to
+ * 31.3%. Production rose with it — a word cannot reach the harder direction until it has been
+ * answered twice — from **14.2% to 17.6%** of all cards at 120 sessions, and from 13.8% to
+ * 18.0% at 60. The share of questions spent on words the learner has already missed fell from
+ * 41.1% to 31.0%, which is the cost, and it is the right one: 31% of the questions for the 31%
+ * of words that have been missed is proportionate, where 41% was the same over-concentration
+ * `fatigue` exists to relieve.
  *
  * ## Why `fatigue` exists, and why it lets go
  *
@@ -66,6 +91,12 @@ const DAY = 24 * 60 * MINUTE;
  * drawn **0.71×** as often as an easy one. That is the brief inverted: "weighted toward past
  * misses" had become "weighted away from them".
  *
+ * (Those two figures move with the confirmation rule above, which lifts every spotless record
+ * by one decay step: the relearned word is unchanged at **1.1140** — its streak of 3 is not
+ * spotless — and the never-missed word rises from 0.2734 to **0.6075**, so the ratio is
+ * **1.83×** rather than 4.07×. Still the direction the brief asks for, and still the opposite
+ * of the 0.71× that was shipped.)
+ *
  * So the count the brake reads is misses *minus what the learner has since earned back*:
  * every consecutive correct answer forgives `leechRelease` lapses. A word being failed keeps
  * its streak at 0, so its lapses are unforgiven and the brake bites exactly as hard as before.
@@ -87,9 +118,9 @@ const DAY = 24 * 60 * MINUTE;
 export const WEIGHTS = {
 	/** Multiplier added at a 100% error rate. */
 	errorGain: 4,
-	/** Per-consecutive-correct decay. */
+	/** Per-confirmation decay — a *second* correct answer and every one after it. */
 	streakDecay: 0.45,
-	/** Beyond this many correct in a row, further decay stops (a word is never unreachable). */
+	/** Beyond this many confirmations, further decay stops (a word is never unreachable). */
 	streakCap: 4,
 	/** Multiplier added by a miss that just happened. */
 	missBoost: 4,
@@ -118,11 +149,14 @@ export const WEIGHTS = {
 /**
  * Fraction of a session spent on words the learner has never seen.
  *
- * 40/60 explore/exploit, enforced as a quota rather than left to the weights. A learner with
- * 40 of 500 words behind them meets 4 new words every session no matter how much revision is
- * outstanding, and a learner on their very first session — zero misses, nothing to weight —
- * still gets a full session. Either pool backfills the other when it runs dry, so an
- * exhausted level degrades to pure review and a fresh one to pure discovery.
+ * 40/60 explore/exploit, enforced as a quota rather than left to the weights — but a new word
+ * costs *two* cards, one to teach it and one to ask it, so `index.ts` spends this share on the
+ * session's **questions** rather than on its cards. At the default ten that is three new words
+ * and six cards, leaving four for review; a learner on their very first session — zero misses,
+ * nothing to weight — meets five words and answers five questions about them. Either pool
+ * backfills the other when it runs dry, so an exhausted level degrades to pure review and a
+ * fresh one to pure discovery. Measured over 60 and 120 daily sessions: **3.03 and 3.02** new
+ * words a session, with **zero** words left taught and never asked.
  */
 export const EXPLORE_SHARE = 0.4;
 
@@ -169,7 +203,10 @@ export function wordWeight(progress: RecordLike, now: number): number {
 	const errorRate = facts.answers > 0 ? facts.misses / facts.answers : 0;
 	const accuracy = 1 + WEIGHTS.errorGain * errorRate;
 
-	const streak = Math.pow(WEIGHTS.streakDecay, clamp(facts.streak, 0, WEIGHTS.streakCap));
+	// Confirmations, not the raw streak: the first right answer of a word's life confirms
+	// nothing. See "a data point, not a pattern" above. Binds only on a spotless record.
+	const confirmations = Math.min(facts.streak, Math.max(0, facts.answers - 1));
+	const streak = Math.pow(WEIGHTS.streakDecay, clamp(confirmations, 0, WEIGHTS.streakCap));
 
 	const missRecency =
 		facts.lastMissed > 0
