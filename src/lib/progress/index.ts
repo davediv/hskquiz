@@ -26,6 +26,7 @@ export {
 	ProgressStore,
 	progress,
 	progress as default,
+	type EraseBlock,
 	type ProgressStoreOptions,
 	type ProgressSummary,
 	type RescueInfo,

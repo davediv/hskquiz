@@ -24,6 +24,7 @@ import {
 	readRestorable,
 	recordGen,
 	restoreInto,
+	restoredTotals,
 	shrinks,
 	stampLevelGen,
 	tally,
@@ -1028,5 +1029,88 @@ describe('one word, one key', () => {
 		expect(Object.keys(decodeStored(JSON.stringify({ v: 1, w }), NOW)?.state.byWord ?? {})).toEqual(
 			['L1-0001']
 		);
+	});
+});
+
+describe('an answer counter has to be believable', () => {
+	it('discards a hostile tally rather than clamping it to MAX_SAFE_INTEGER', () => {
+		// Clamped, this round-tripped unchanged and would have printed "1 word ·
+		// 9,007,199,254,740,991 answers" in the rescue notice and folded into the level card's
+		// accuracy. Every other field in the file has a plausibility test; these had none.
+		const payload = decodeStored(`{"v":1,"w":{"L1-0001":[1e308,1e308,1e308,${NOW},0]}}`, NOW);
+		const record = payload?.state.byWord['L1-0001'];
+
+		// The timestamp is plausible on its own, so the word is still one the learner met.
+		expect(record?.lastSeen).toBe(NOW);
+		expect(record?.seen).toBe(0);
+		expect(record?.correct).toBe(0);
+		expect(record?.streak).toBe(0);
+	});
+
+	it('keeps every count a real learner could ever reach', () => {
+		const payload = decodeStored(`{"v":1,"w":{"L1-0001":[999999,900000,7,${NOW},0]}}`, NOW);
+		expect(payload?.state.byWord['L1-0001']?.seen).toBe(999999);
+	});
+
+	it('discards an impossible session count too', () => {
+		const payload = decodeStored(`{"v":1,"w":{},"l":{"1":[1e308,${NOW}]}}`, NOW);
+		expect(payload?.state.levels[1]?.sessions).toBe(0);
+		expect(payload?.state.levels[1]?.lastPlayed).toBe(NOW);
+	});
+});
+
+describe('restoredTotals — the post-condition a copy is deleted on', () => {
+	function stored(records: Record<string, WordFields>): StoredProgress {
+		const out = emptyStored();
+		for (const [wordId, fields] of Object.entries(records)) {
+			out.state.byWord[wordId] = { ...blankWord(wordId), ...fields };
+		}
+		return out;
+	}
+
+	it('does not count a record whose history never came back', () => {
+		// The old test was "a live record with any history exists under this id", which cannot
+		// tell a restore that put the ids back from one that put the *content* back — and it is
+		// the check that authorises deleting the only copy.
+		const rescued = stored({ 'L1-0001': { seen: 40, correct: 30, lastSeen: NOW } });
+		const live = stored({ 'L1-0001': { seen: 9, correct: 5, lastSeen: EARLIER } });
+
+		expect(restoredTotals(rescued, live.state)).toEqual({ words: 0, levels: 0 });
+	});
+
+	it('counts a record the merge really did fold in', () => {
+		const rescued = stored({ 'L1-0001': { seen: 40, correct: 30, lastSeen: EARLIER } });
+		const merged = restoreInto(
+			stored({ 'L1-0001': { seen: 9, correct: 5, lastSeen: NOW } }),
+			rescued
+		);
+
+		expect(restoredTotals(rescued, merged.state)).toEqual({ words: 1, levels: 0 });
+	});
+
+	it('does not hold a shorter streak against a correct merge', () => {
+		// `betterOf` takes the *newer* record's streak, so a word answered since the copy was
+		// made legitimately carries a shorter one. Demanding otherwise would report a complete
+		// restore as partial and keep a copy that is fully redundant.
+		const rescued = stored({ 'L1-0001': { seen: 4, correct: 4, streak: 4, lastSeen: EARLIER } });
+		const merged = restoreInto(
+			stored({ 'L1-0001': { seen: 5, correct: 4, streak: 0, lastSeen: NOW } }),
+			rescued
+		);
+
+		expect(merged.state.byWord['L1-0001']?.streak).toBe(0);
+		expect(restoredTotals(rescued, merged.state)).toEqual({ words: 1, levels: 0 });
+	});
+
+	it('does not count a level whose sessions never came back', () => {
+		const rescued = emptyStored();
+		rescued.state.levels[1] = { sessions: 12, lastPlayed: NOW };
+		const live = emptyState();
+		live.levels[1] = { sessions: 1, lastPlayed: EARLIER };
+
+		expect(restoredTotals(rescued, live)).toEqual({ words: 0, levels: 0 });
+
+		live.levels[1] = { sessions: 12, lastPlayed: NOW };
+		expect(restoredTotals(rescued, live)).toEqual({ words: 0, levels: 1 });
 	});
 });

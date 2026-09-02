@@ -31,6 +31,12 @@ class MemoryStorage implements StorageLike {
 	probes = 0;
 	failReads = false;
 	failWrites = false;
+	/**
+	 * Refuse writes to *some* keys only — the shape a full quota actually has. A quota that is
+	 * out of room for a 10 KB copy still accepts a 33-byte payload over an existing one, and
+	 * `failWrites` (all-or-nothing) could not express the case that destroyed 1,800 answers.
+	 */
+	refuse: ((key: string) => boolean) | null = null;
 
 	getItem(key: string): string | null {
 		if (this.failReads) throw new Error('SecurityError: access denied');
@@ -40,7 +46,7 @@ class MemoryStorage implements StorageLike {
 	setItem(key: string, value: string): void {
 		if (key === STORAGE_KEY) this.attempts += 1;
 		if (key === PROBE_KEY) this.probes += 1;
-		if (this.failWrites) {
+		if (this.failWrites || this.refuse?.(key)) {
 			const error = new Error('The quota has been exceeded.');
 			error.name = 'QuotaExceededError';
 			throw error;
@@ -816,7 +822,12 @@ describe('resetting', () => {
 		expect(storage.words()).toEqual({});
 	});
 
-	it('resetAll takes the rescue copy with it', () => {
+	it('resetAll leaves the rescue copy alone', () => {
+		// This used to assert the opposite — that Reset deleted the backup — and the assertion
+		// was the bug. A corrupt byte earned a copy and a Restore button; two taps on a 126x44
+		// target then destroyed that copy silently, along with everything else. "Forget
+		// everything" is a promise about the learner's history in the live key, never about the
+		// safety net underneath it.
 		const storage = new MemoryStorage();
 		// Bytes that will not parse but do hold records. Bytes holding *nothing* are not copied
 		// aside at all any more — a panel over four bytes of junk was a fright with no cause.
@@ -826,10 +837,33 @@ describe('resetting', () => {
 		const store = new ProgressStore({ storage, now: () => T0 });
 		expect(storage.items.get(BACKUP_KEY)).toBe(broken);
 
-		store.resetAll();
+		expect(store.resetAll()).toBe(true);
 
-		expect(storage.items.get(BACKUP_KEY)).toBeUndefined();
-		expect(store.salvaged).toBe(false);
+		expect(storage.items.get(BACKUP_KEY)).toBe(broken);
+		expect(store.salvaged).toBe(true);
+		expect(storage.words()).toEqual({});
+	});
+
+	it('refuses the erase outright when the copy cannot be written', () => {
+		// The invariant, at the most destructive door: no path may reduce stored history unless
+		// a readable copy demonstrably survives. A quota that refuses the 10 KB copy and accepts
+		// the 33-byte erase is exactly the case that used to destroy everything in silence.
+		const storage = new MemoryStorage();
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= 120; i += 1) w[`L1-${String(i).padStart(4, '0')}`] = [3, 2, 1, T0, 0];
+		const before = JSON.stringify({ v: 1, w, l: {} });
+		storage.items.set(STORAGE_KEY, before);
+		const store = new ProgressStore({ storage, now: () => T0 });
+		storage.refuse = (key) => key === BACKUP_KEY;
+
+		expect(store.resetAll()).toBe(false);
+
+		expect(store.eraseFailed).toBe(true);
+		expect(store.eraseBlockedBy).toBe('copy');
+		// Not touched, in memory or on disk: the refusal happens before anything is cleared.
+		expect(store.levelSummary(1).seen).toBe(120);
+		expect(storage.items.get(STORAGE_KEY)).toBe(before);
+		expect(storage.items.has(BACKUP_KEY)).toBe(false);
 	});
 
 	it('keeps the rescue copy when the erase itself could not be written', () => {
@@ -1115,6 +1149,18 @@ describe('no write may shrink the key without a copy kept aside', () => {
 		return JSON.stringify({ v: 1, w, l: {} });
 	}
 
+	/**
+	 * The same N records under a reset counter that outranks every one of them.
+	 *
+	 * The bytes name N words; the decode yields nothing. That gap is the whole reason the guard
+	 * weighs *bytes* rather than what they parsed to, and it is what makes the next write tiny.
+	 */
+	function emptied(n: number, level = 1): string {
+		const w: Record<string, number[]> = {};
+		for (let i = 1; i <= n; i += 1) w[`L${level}-${String(i).padStart(4, '0')}`] = [3, 2, 1, T0, 0];
+		return JSON.stringify({ v: 1, w, l: {}, g: { [level]: 3 } });
+	}
+
 	it('rescues the key when a corrupt generation counter would empty it', () => {
 		// `1e308 + 1e308` used to overflow to `Infinity`, which `count()` read back as 0, so
 		// `encode` dropped every record on the way out while `flush()` returned true and the
@@ -1177,19 +1223,106 @@ describe('no write may shrink the key without a copy kept aside', () => {
 		expect(store.levelSummary(1).seen).toBe(201);
 	});
 
-	it('lets a reset shrink the key without crying about it', () => {
+	it('refuses the shrinking write outright when the copy cannot be made', () => {
+		// The measured failure this whole guard exists for, and the one condition it used to do
+		// nothing in: a full quota refuses the 10 KB copy and *accepts* the smaller write,
+		// precisely because it is smaller. 300 words and 1,800 answers went to 176 bytes with no
+		// copy, no notice, and the storage warning switching itself off as the loss landed.
 		const storage = new MemoryStorage();
-		storage.items.set(STORAGE_KEY, payloadOfSize(120));
+		// The verdict's seed: 300 records the bytes plainly name, under a reset counter that
+		// outranks every one of them, so they decode to nothing and the next write is tiny.
+		const before = emptied(300);
+		storage.items.set(STORAGE_KEY, before);
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.levelSummary(1).seen).toBe(0);
+		storage.refuse = (key) => key === BACKUP_KEY;
+
+		store.recordAnswer('L1-0001', true);
+		expect(store.flush()).toBe(false);
+
+		// Nothing was written, and the app says so rather than reporting a save.
+		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+		expect(storage.payload).toBe(before);
+		expect(store.status).toBe('failing');
+		expect(store.persistent).toBe(false);
+		expect(store.pending).toBe(true);
+	});
+
+	it('will not call a copy kept when the bytes are not in the key afterwards', () => {
+		// `setItem` returning without throwing is not the same fact as bytes being in the key.
+		// A storage that accepts and drops — an evicting quota, a shim — used to satisfy the
+		// guard completely, so the read-back is the evidence and not the call.
+		const storage = new MemoryStorage();
+		const before = emptied(300);
+		storage.items.set(STORAGE_KEY, before);
+		const store = new ProgressStore({ storage, now: () => T0 });
+		const realSet = storage.setItem.bind(storage);
+		storage.setItem = (key: string, value: string) => {
+			if (key === BACKUP_KEY) return; // swallowed, silently
+			realSet(key, value);
+		};
+
+		store.recordAnswer('L1-0001', true);
+		expect(store.flush()).toBe(false);
+
+		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+		expect(storage.payload).toBe(before);
+		expect(store.status).toBe('failing');
+	});
+
+	it('clears a rescue panel another tab discarded', () => {
+		// The panel is a claim about what is in a shared key right now. A tab that never watched
+		// that key went on offering a copy another tab had deleted — naming a count, promising
+		// "nothing has been thrown away", with a Restore button that could not work.
+		const storage = new MemoryStorage();
+		storage.items.set(STORAGE_KEY, payloadOfSize(2));
+		storage.items.set(BACKUP_KEY, payloadOfSize(300));
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue?.words).toBe(300);
+
+		storage.items.delete(BACKUP_KEY);
+		store.noteRescueChanged();
+
+		expect(store.rescue).toBeNull();
+		expect(store.salvaged).toBe(false);
+	});
+
+	it('re-measures a rescue panel another tab replaced', () => {
+		const storage = new MemoryStorage();
+		storage.items.set(STORAGE_KEY, payloadOfSize(2));
+		storage.items.set(BACKUP_KEY, payloadOfSize(40));
+		const store = new ProgressStore({ storage, now: () => T0 });
+		expect(store.rescue?.words).toBe(40);
+
+		storage.items.set(BACKUP_KEY, payloadOfSize(300));
+		store.noteRescueChanged();
+
+		expect(store.rescue?.words).toBe(300);
+	});
+
+	it('lets a reset shrink the key, and keeps what it erased', () => {
+		const storage = new MemoryStorage();
+		const before = payloadOfSize(120);
+		storage.items.set(STORAGE_KEY, before);
 
 		const store = new ProgressStore({ storage, now: () => T0 });
 		expect(store.levelSummary(1).seen).toBe(120);
 
 		expect(store.resetAll()).toBe(true);
 
-		expect(store.rescue).toBeNull();
-		expect(storage.items.has(BACKUP_KEY)).toBe(false);
+		// A reset is the one shrink that is not a loss, so there is no scary 'lost' notice — but
+		// it is still 120 words and 360 answers going away on two taps, and the copy is what
+		// makes a mis-tap survivable. The panel says which of the two happened.
+		expect(store.rescue?.reason).toBe('erased');
+		expect(store.rescue?.words).toBe(120);
+		expect(store.rescue?.answers).toBe(360);
+		expect(storage.items.get(BACKUP_KEY)).toBe(before);
 		expect(storage.words()).toEqual({});
 		expect(store.eraseFailed).toBe(false);
+
+		// And it is a real way back, not just a reassuring sentence.
+		expect(store.restoreRescue()).toBe(true);
+		expect(store.levelSummary(1).seen).toBe(120);
 	});
 
 	it('says a reset did not happen when the write was refused', () => {

@@ -794,7 +794,23 @@ export function readRestorable(text: string | null, now: number = Date.now()): R
 	return { stored, words: counts.words, answers: counts.answers, levels };
 }
 
-/** Word records and level entries from `rescued` that are now live in `state`. */
+/**
+ * Word records and level entries from `rescued` whose **history is now live** in `state`.
+ *
+ * This is the post-condition `restoreRescue` deletes the only copy on, so the proposition it
+ * tests has to be the right one. It used to be "a live record with any history exists under
+ * this id", which is satisfied by records that were already there and cannot tell a restore
+ * that put the ids back from one that put the content back: a copy of 300 records at `seen:40`
+ * landing on 300 live records at `seen:9` would have counted 300 out of 300 and thrown the
+ * copy away, with 1,800 answers still only in the copy.
+ *
+ * So each field is checked against the copy's. `restoreInto` merges with `betterOf`, which
+ * takes the maxima of `seen`, `correct`, `lastSeen` and `lastMissed` — so a genuine restore
+ * dominates the copy on every one of them and this costs nothing. `streak` is deliberately not
+ * checked: `betterOf` takes the *newer* record's streak, so a live record answered since the
+ * copy was made legitimately carries a shorter one, and demanding otherwise would report a
+ * correct restore as a partial and keep a copy that is fully redundant.
+ */
 export function restoredTotals(
 	rescued: StoredProgress,
 	state: ProgressState
@@ -804,14 +820,31 @@ export function restoredTotals(
 		const wanted = recordUnderOwnKey(rescued.state.byWord, wordId);
 		if (!wanted || !hasHistory(wanted)) continue;
 		const live = ownRecord(state.byWord, wordId);
-		if (live && hasHistory(live)) words += 1;
+		if (live && hasHistory(live) && holdsAtLeast(live, wanted)) words += 1;
 	}
 
 	let levels = 0;
 	for (const level of LEVELS) {
-		if (rescued.state.levels[level] && state.levels[level]) levels += 1;
+		const wanted = rescued.state.levels[level];
+		const live = state.levels[level];
+		if (!wanted) continue;
+		if (live && live.sessions >= wanted.sessions && live.lastPlayed >= wanted.lastPlayed) {
+			levels += 1;
+		}
 	}
 	return { words, levels };
+}
+
+/** Whether `live` holds every answer, every correct and every date the copy `wanted` holds. */
+function holdsAtLeast(live: WordProgress, wanted: WordProgress): boolean {
+	return (
+		live.seen >= wanted.seen &&
+		// A copy claiming more correct answers than it has answers is junk the merge would cap
+		// at `seen` anyway, so the bar is what a correct merge would actually produce.
+		live.correct >= Math.min(live.seen, wanted.correct) &&
+		live.lastSeen >= wanted.lastSeen &&
+		live.lastMissed >= wanted.lastMissed
+	);
 }
 
 /**
@@ -1188,13 +1221,13 @@ function decodeWord(wordId: string, value: unknown, now: number): WordProgress |
 		return null;
 	}
 
-	const seen = count(fields[0]);
-	const correct = Math.min(seen, count(fields[1]));
+	const seen = tallied(fields[0]);
+	const correct = Math.min(seen, tallied(fields[1]));
 	const record: WordProgress = {
 		wordId,
 		seen,
 		correct,
-		streak: Math.min(correct, count(fields[2])),
+		streak: Math.min(correct, tallied(fields[2])),
 		lastSeen: stamp(fields[3], now),
 		lastMissed: stamp(fields[4], now)
 	};
@@ -1216,7 +1249,7 @@ function decodeLevel(value: unknown, now: number): LevelEntry | null {
 		return null;
 	}
 
-	const entry: LevelEntry = { sessions: count(fields[0]), lastPlayed: stamp(fields[1], now) };
+	const entry: LevelEntry = { sessions: tallied(fields[0]), lastPlayed: stamp(fields[1], now) };
 	stampLevelGen(entry, count(fields[2]));
 	if (entry.sessions === 0 && entry.lastPlayed === 0) return null;
 	return entry;
@@ -1267,6 +1300,35 @@ function count(value: unknown): number {
 	const n = typeof value === 'number' ? value : Number(value);
 	if (!Number.isFinite(n) || n <= 0) return 0;
 	return Math.min(Math.floor(n), Number.MAX_SAFE_INTEGER);
+}
+
+/**
+ * The most times this app will believe one word was answered, or one level was played.
+ *
+ * A learner answering a single card once a second, without pause, reaches a million in eleven
+ * and a half days. Nothing real gets near it; only a hostile or corrupt payload does.
+ */
+export const MAX_TALLY = 1_000_000;
+
+/**
+ * A counter of things the learner actually did — answers, corrects, streak, sessions.
+ *
+ * `count()` *clamps*, which is right for a generation (a merge takes maxima and an overflow
+ * must not read back as zero) and wrong here. `[1e308,1e308,1e308,…]` clamped to
+ * `MAX_SAFE_INTEGER` on all three, survived an encode/decode round-trip unchanged, and would
+ * have printed "1 word · 9,007,199,254,740,991 answers" in the rescue notice and folded that
+ * into the level card's accuracy. Every other field in this file is bounded by a plausibility
+ * test — `stamp()` has an epoch floor and a future ceiling, `readGeneration` *discards* past
+ * `MAX_GENERATION` — and these had none.
+ *
+ * Discarded rather than clamped, for the same reason `stamp()` refuses a corrupt date as 0
+ * rather than as `now`: a number we cannot believe is not evidence of a smaller number. The
+ * record's timestamps are judged separately and survive on their own merits, so a payload with
+ * junk counters and a real `lastSeen` still reads as a word the learner has met.
+ */
+function tallied(value: unknown): number {
+	const n = count(value);
+	return n > MAX_TALLY ? 0 : n;
 }
 
 /**
