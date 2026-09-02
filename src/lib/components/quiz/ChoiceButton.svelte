@@ -102,20 +102,22 @@
 
 <style>
 	/*
-	 * The height comes from the viewport, not the width: 568px is the phone this has to fit
-	 * and 932px the one it should fill. It is a `clamp` on `svh` rather than a step at a
-	 * breakpoint because the stage above is whatever is left over — 46px pills at 592px of
-	 * viewport and 64px pills at 593px meant the headword had 40px of room on one side of
-	 * that line and 110px on the other. The floor is 46px, over the 44px tap minimum; the
-	 * ceiling is 72px, past which a pill holding one word is just a slab.
+	 * THE HEIGHT AND THE GLYPH ARE THE RUN'S, NOT THIS BUTTON'S. `--choice-h` and
+	 * `--choice-face` are declared on `.run` in `quiz/[level]/+page.svelte`, beside the five
+	 * other lines of the same vertical rhythm, and inherited here.
+	 *
+	 * They used to be declared right here, and being declared here is what broke them: they
+	 * come from the viewport, not the width — 568px is the phone this has to fit and 932px the
+	 * one it should fill — and on a desktop window the run they are subtracted from stops
+	 * growing at 46rem while `svh` does not. Half the rhythm was capped at that ceiling and
+	 * this half was not, so at 1440x900 four buttons took 324.4px out of a 736px run and left
+	 * the stage 57px shorter than the same stage on a 375x812 phone. One rhythm, one place,
+	 * one cap.
 	 *
 	 * `block-size: 100%` lets the `.answers` grid equalise all four when one gloss wraps, so
 	 * the stack stays a stack.
 	 */
 	.choice {
-		--choice-h: clamp(2.875rem, calc(7.38svh + 4.1px), 4.5rem);
-		--choice-face: clamp(1.625rem, calc(4.1svh + 2.7px), 2.5rem);
-
 		position: relative;
 		display: grid;
 		place-items: center;
