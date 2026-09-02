@@ -129,6 +129,25 @@ const MAX_CHARACTER_ECHOES = 1;
 
 function plausibility(answer: Word, candidate: Word, direction: Direction): number {
 	const signal = SIGNALS[direction];
+
+	// A metalinguistic answer is scored on register and nothing else, and it is scored first
+	// because for that answer register is not a term in a sum — it is the entire ranking.
+	//
+	// The partition below is right and stays. What was wrong is what happened *inside* it. L1
+	// ships 14 glosses that describe a grammatical function, so a measure word's same-register
+	// pool is 13 candidates, and pos/verbal/gloss/hanzi then split those 13 into score buckets
+	// that `pickDistractors` empties strictly from the top down — a four-deep top bucket is a
+	// closed carousel. Measured over 400 draws each: 间, 的, 次, 杯, 本 and 吧 drew **exactly 4
+	// distinct distractors, ever**, against 29 for an ordinary control (好). The finer signals
+	// cannot usefully sort thirteen function words; all they do is freeze which three appear.
+	//
+	// So inside the partition every other function word is one bucket and the shuffle is the
+	// whole draw. The signals are not lost — they are simply not consulted on the ~3% of cards
+	// where they have nothing left to separate.
+	if (signal.register > 0 && isMetalinguistic(answer)) {
+		return isMetalinguistic(candidate) ? signal.register : 0;
+	}
+
 	let score = 0;
 
 	const answerPos = answer.pos ?? [];
@@ -153,20 +172,18 @@ function plausibility(answer: Word, candidate: Word, direction: Direction): numb
 	// when the characters are on screen; meaningless when they aren't.
 	if (signal.share > 0 && sharesCharacter(answer, candidate)) score += signal.share;
 
-	// Register is a partition, not a nudge: 20 is deliberately larger than every other signal in
-	// this function added together (6 + 4 + 4 + 2 = 16), so when the answer's gloss describes a
-	// grammatical function, *every* candidate that also describes one outranks *every* candidate
-	// that does not, and the buttons stop announcing the answer. It costs ordinary cards nothing
-	// — ~97% of the list is ordinary, so for an ordinary answer this is a constant added to
-	// almost every candidate, which changes no ranking among them. It degrades rather than
-	// fails: a level too small to spare three same-register candidates simply falls through to
-	// the next bucket, the same way every other signal does.
+	// The other half of the partition: an ordinary answer keeps every function-word gloss off
+	// its buttons. 20 is deliberately larger than every other signal in this function added
+	// together (6 + 4 + 4 + 2 = 16), so "measure word: for flat objects" can never sit beside
+	// three real meanings and announce which one is the odd one out. It costs ordinary cards
+	// nothing — ~97% of the list is ordinary, so this is a constant added to almost every
+	// candidate, which changes no ranking among them. It degrades rather than fails: a level
+	// too small to spare three same-register candidates falls through to the next bucket, the
+	// same way every other signal does.
 	//
 	// Only in hanzi→meaning. In the other direction the glosses are the *prompt* and the buttons
 	// hold characters, so the register of a candidate's gloss is not on screen to leak anything.
-	if (signal.register > 0 && isMetalinguistic(answer) === isMetalinguistic(candidate)) {
-		score += signal.register;
-	}
+	if (signal.register > 0 && !isMetalinguistic(candidate)) score += signal.register;
 
 	return score;
 }

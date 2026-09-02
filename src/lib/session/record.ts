@@ -61,6 +61,8 @@ export type RecordLike =
 
 /** What the scheduler is allowed to know about a word. Nothing else reads `WordProgress`. */
 export interface RecordFacts {
+	/** The id the record claims to be for, or `''` when it does not carry one. */
+	readonly wordId: string;
 	/** Scored answers given. Never includes an introduction. */
 	readonly answers: number;
 	/** Of those answers, how many were right. `0 ≤ correct ≤ answers`. */
@@ -83,6 +85,7 @@ export interface RecordFacts {
 
 /** The facts about a word nothing has ever touched. */
 export const UNMET: RecordFacts = {
+	wordId: '',
 	answers: 0,
 	correct: 0,
 	misses: 0,
@@ -141,6 +144,7 @@ export function readRecord(record: RecordLike): RecordFacts {
 	const met = answers > 0 || exposures > 0;
 
 	return {
+		wordId: typeof record.wordId === 'string' ? record.wordId : '',
 		answers,
 		correct,
 		misses: answers - correct,

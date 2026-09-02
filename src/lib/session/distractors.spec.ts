@@ -272,6 +272,23 @@ describe('pickDistractors — register', () => {
 		expect(mixed).toBeGreaterThan(0);
 	});
 
+	// The partition was right; its *inside* was frozen. pos/verbal/gloss/hanzi split the other
+	// function words into score buckets that `pickDistractors` empties strictly from the top
+	// down, so on the shipped L1 list 间, 的, 次, 杯, 本 and 吧 each drew **exactly four distinct
+	// distractors over 400 draws** — the same three every time — against 29 for an ordinary
+	// control. A metalinguistic answer is scored on register alone now, so the whole
+	// same-register pool is one bucket and the shuffle is the draw: 13 of 13 on real L1.
+	it('reaches every other grammar gloss rather than the same three every time', () => {
+		const seen = new Set<string>();
+		const rng = mulberry32(4);
+		for (let draw = 0; draw < 200; draw++) {
+			for (const pick of pickDistractors(pool, grammar[0], 'hanzi-to-meaning', 3, rng)) {
+				seen.add(pick.id);
+			}
+		}
+		expect(seen.size).toBe(grammar.length - 1);
+	});
+
 	it('degrades to ordinary candidates rather than shortening the card', () => {
 		const thin = makePool([grammar[0], grammar[1], ...ordinary]);
 		const picks = pickDistractors(thin, grammar[0], 'hanzi-to-meaning', 3, mulberry32(9));

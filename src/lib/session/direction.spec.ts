@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { PRODUCTION_STREAK, REFRESH_EVERY, cardKindFor, directionOf } from './direction';
+import {
+	PRODUCTION_STREAK,
+	REFRESH_EVERY,
+	cardKindFor,
+	directionOf,
+	kindAfterIntroduction
+} from './direction';
 import { makeLevel, mastered, record, shaky } from './test-fixtures';
 
 const NOW = 1_700_000_000_000;
@@ -83,6 +89,26 @@ describe('cardKindFor', () => {
 			for (const seen of [0, 1, 2, 3, 4, 5, 9, 40]) {
 				expect(legal).toContain(cardKindFor(afterCorrect(word.id, seen)));
 			}
+		}
+	});
+});
+
+describe('kindAfterIntroduction', () => {
+	const NOW_ = 1_700_000_000_000;
+
+	// The second half of a pair is built from a record that does not exist yet — the one the
+	// introduction three cards back is about to write. This runs the ladder against exactly
+	// that record rather than hard-coding "recognition" at the call site.
+	it('is the rung a word reaches the instant its introduction is recorded', () => {
+		expect(kindAfterIntroduction('L1-0001', NOW_)).toBe('hanzi-to-meaning');
+		expect(kindAfterIntroduction('L1-0001', NOW_)).toBe(
+			cardKindFor(record('L1-0001', { seen: 0, correct: 0, streak: 0, lastSeen: NOW_ }), 'L1-0001')
+		);
+	});
+
+	it('is never an introduction — that is the card it follows', () => {
+		for (const id of ['L1-0001', 'L1-0250', 'L5-1071', '']) {
+			expect(kindAfterIntroduction(id, NOW_)).not.toBe('introduce');
 		}
 	});
 });

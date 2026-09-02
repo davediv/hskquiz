@@ -98,17 +98,36 @@ function phase(wordId: string): number {
  * distinction existed: 9,600 of 9,600 cards over 40 learners x 24 sessions were introductions
  * and not one question was ever asked.)
  */
-export function cardKindFor(record: RecordLike): CardKind {
+export function cardKindFor(record: RecordLike, wordId?: string): CardKind {
 	const facts = readRecord(record);
 	if (!facts.met) return 'introduce';
 	// Taught, never asked: it is owed its first question, and recognition is that question.
 	if (facts.answers <= 0) return 'hanzi-to-meaning';
 	if (facts.streak < PRODUCTION_STREAK) return 'hanzi-to-meaning';
 
-	const wordId = typeof record?.wordId === 'string' ? record.wordId : '';
-	return (facts.answers + phase(wordId)) % REFRESH_EVERY === 0
+	// The id comes from the caller when it has one, and off the sanitised facts otherwise. It
+	// used to be read straight off `record.wordId`, which this function's own docstring says it
+	// does not do: a record that had lost that field — reachable through `readRecord`, which
+	// never required it — fell back to `phase('') = 1` and put every such word on one refresh
+	// phase together. `buildSession` always knows the id, so it passes it.
+	return (facts.answers + phase(wordId ?? facts.wordId)) % REFRESH_EVERY === 0
 		? 'hanzi-to-meaning'
 		: 'meaning-to-hanzi';
+}
+
+/**
+ * The card a word has earned the instant its introduction is recorded.
+ *
+ * A session teaches a word and then asks it three cards later, so the second card's kind is a
+ * function of a record that does not exist yet — the one `noteSeen` is about to write. Rather
+ * than hard-coding "recognition" at the call site and letting the two drift, this runs the
+ * ladder above against exactly that record: shown, never answered, which is the second rung.
+ */
+export function kindAfterIntroduction(wordId: string, at: number): CardKind {
+	return cardKindFor(
+		{ wordId, seen: 0, correct: 0, streak: 0, lastSeen: at, lastMissed: 0 },
+		wordId
+	);
 }
 
 /**
