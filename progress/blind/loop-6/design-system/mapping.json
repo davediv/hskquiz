@@ -1,0 +1,16 @@
+{
+  "piece": "design-system",
+  "loop": 6,
+  "rule": "\"design-system\" is 13 characters — ODD — so the reference is A and ours is B.",
+  "A": {
+    "which": "reference",
+    "source": "reference/screenshots/pleco/pleco-iphone-02.png",
+    "note": "Pleco headword/detail screen: 几乎 with pinyin, POS, numbered senses and hanzi+pinyin+English example sentences."
+  },
+  "B": {
+    "which": "ours",
+    "source": "progress/shots/loop-6/design-system-quiz-mobile.png",
+    "note": "hskquiz /quiz/2 new-word card at 375x812 @2x, light theme: hero hanzi, tone-coloured pinyin, gloss, POS, SENTENCE card, primary action."
+  },
+  "sameAsLoop5": "Same pairing as loop 5 so the two blind judgements are comparable."
+}
