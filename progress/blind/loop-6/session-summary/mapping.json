@@ -1,0 +1,16 @@
+{
+	"piece": "session-summary",
+	"loop": 6,
+	"rule": "\"session-summary\" has 15 characters — ODD — so the reference is A and ours is B.",
+	"A": {
+		"what": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"note": "Pleco iPhone dictionary entry for 几乎 jīhū — headword, pinyin, part of speech, gloss, four example sentences with pinyin and English."
+	},
+	"B": {
+		"what": "ours",
+		"source": "progress/shots/loop-6/session-summary-mobile.png",
+		"note": "hskquiz /quiz/1?state=summary at 375x812 @2x — end-of-session results with the first missed word's review card."
+	},
+	"why_this_reference": "Our first viewport is a results header over one full word entry card (hanzi, tone-coloured pinyin, glosses, part of speech, one example sentence with pinyin and English). Pleco's entry screen is the same object at the same size on the same phone, and is the app a learner would open instead."
+}
