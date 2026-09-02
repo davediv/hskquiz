@@ -1,0 +1,16 @@
+{
+	"loop": 6,
+	"piece": "vocab-browse",
+	"rule": "\"vocab-browse\" is 12 characters — EVEN — so ours is A.png and the reference is B.png.",
+	"A": {
+		"which": "ours",
+		"source": "progress/shots/loop-6/vocab-browse-search-mobile.png",
+		"state": "/browse/1 at 375x812 @2x, progress seeded (40 mastered / 30 shaky / 40 learning / 20 shown), pinyin query \"hao\" typed, 8 results"
+	},
+	"B": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-01.png",
+		"state": "Pleco iPhone, pinyin query \"shouji\" typed, results list with the keyboard up"
+	},
+	"whyThisReference": "Pleco's only list screen in the reference set, and it is the same task in the same state: a pinyin query typed into a search field above a scrolling list of headword + pinyin + gloss rows. The keyboard occupying Pleco's lower half is inherent to the capture and is the only structural difference."
+}
