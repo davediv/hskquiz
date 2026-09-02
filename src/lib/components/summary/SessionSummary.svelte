@@ -528,9 +528,21 @@
 	 * list you can already see whole is chrome.
 	 */
 	const WALL = 6;
-	const showIndex = $derived(!drilling && missed.length >= WALL);
+	/**
+	 * What the index covers: the misses if there are any, and otherwise the clean run's own ten.
+	 *
+	 * It used to be gated on the *miss* count, which handed the overview to everyone except the
+	 * learner with the longest page. A 10/10 run is ten full-size cards under "Read them once
+	 * more" — a 4,566px document on an 812px phone, 5.6 screens — and it was the one state with
+	 * no index at all, because it had nothing red in it. The wall is about how much page there
+	 * is, not about how badly it went.
+	 */
+	const indexed = $derived(missed.length > 0 ? missed : solved);
+	const showIndex = $derived(!drilling && indexed.length >= WALL);
 	/** The review list itself, so the index can scroll to the nth card without ids or refs. */
 	let reviewList: HTMLElement | null = $state(null);
+	/** The strip itself, so the marker can be scrolled to without scrolling the page. */
+	let chipStrip: HTMLElement | null = $state(null);
 	/** Which review card the viewport is standing in, or -1 before anything has been seen. */
 	let here = $state(-1);
 	/**
@@ -563,6 +575,39 @@
 		);
 		for (const child of list.children) seen.observe(child);
 		return () => seen.disconnect();
+	});
+
+	/*
+	 * AND THE MARKER FOLLOWS THE READER.
+	 *
+	 * Ten chips are 650px of row in a 335px strip, so six of them are off screen at any moment.
+	 * Marking the current one without moving the strip meant that past the fifth word the index
+	 * answered its own question — "which one am I standing in" — with a chip nobody could see:
+	 * scrolled to the eighth card, the strip still read 吃饭 呢 儿子 那儿 电视机 with the mark on
+	 * none of them.
+	 *
+	 * `scrollLeft` on the strip, not `scrollIntoView` on the chip: the chip's nearest scrollport
+	 * after the strip is the page, and `scrollIntoView` walks all of them — it would drag the
+	 * document under the thumb that is scrolling it, and fight `jumpTo`'s own smooth scroll every
+	 * time a tapped card came into view. This moves one element on one axis and can fight
+	 * nothing. Centred because that is where `scroll-snap-align` puts a chip anyway, so a
+	 * proximity snap agrees with the destination instead of correcting it.
+	 */
+	$effect(() => {
+		const strip = chipStrip;
+		const at = here;
+		if (!strip || at < 0) return;
+		const chip = strip.children[at];
+		if (!(chip instanceof HTMLElement)) return;
+		const room = strip.scrollWidth - strip.clientWidth;
+		if (room <= 0) return;
+		const track = strip.getBoundingClientRect();
+		const box = chip.getBoundingClientRect();
+		const middle = strip.scrollLeft + (box.left - track.left) - (track.width - box.width) / 2;
+		const want = Math.max(0, Math.min(room, middle));
+		if (Math.abs(want - strip.scrollLeft) < 1) return;
+		const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		strip.scrollTo({ left: want, behavior: still ? 'auto' : 'smooth' });
 	});
 
 	/** Where a link to "this level's quiz" points, for the one below. */
@@ -639,33 +684,46 @@
 	{:else if total === 0}
 		<p class="empty">This session had no questions in it. Pick a level and start another one.</p>
 	{:else}
-		<header class="crest">
-			<p class="eyebrow">Session complete</p>
-			<p class="mark">
-				<Hanzi text={mark.hanzi} syllables={mark.syllables} size="sm" display />
-				<Pinyin pinyin={mark.pinyin} syllables={mark.syllables} size="sm" />
-				<span class="mark-gloss">{mark.gloss}</span>
-			</p>
-		</header>
+		<!--
+			THE RECEIPT STANDS DOWN WHILE THE DRILL IS RUNNING.
 
-		<section class="score" aria-label="Score">
-			<p class="score-line">
-				<strong class="tabular">{solved.length}</strong>
-				{scoreRest}
-			</p>
-			<!-- Colour is not the only thing carrying the result: a missed segment is drawn
-			     broken and a skipped one stays empty, so the strip still reads as three states
-			     in greyscale or with either red-green deficiency. -->
-			<div class="rail" aria-hidden="true">
-				{#each results as result, i (i)}
-					<span
-						class="seg"
-						class:right={result.right}
-						class:wrong={!result.right && result.picked !== null}
-					></span>
-				{/each}
-			</div>
-		</section>
+			The mark and the score belong to the run that just ended; the drill is the next thing,
+			and it is a takeover — its own heading, its own rail, its own count. Kept on screen
+			they cost 190px above a panel that is 667px tall, which put the whole page 106px past
+			the bottom of the phone: the drill's own continue button hung below the fold, the page
+			was pinned at its maximum scroll, and "0 of 10 correct" came to rest straddling the
+			app bar's lower edge with nowhere left to scroll it clear. Standing them down leaves
+			the drill and the line naming it, in 728px — no scroll at all, nothing under the bar.
+		-->
+		{#if !drilling}
+			<header class="crest">
+				<p class="eyebrow">Session complete</p>
+				<p class="mark">
+					<Hanzi text={mark.hanzi} syllables={mark.syllables} size="sm" display />
+					<Pinyin pinyin={mark.pinyin} syllables={mark.syllables} size="sm" />
+					<span class="mark-gloss">{mark.gloss}</span>
+				</p>
+			</header>
+
+			<section class="score" aria-label="Score">
+				<p class="score-line">
+					<strong class="tabular">{solved.length}</strong>
+					{scoreRest}
+				</p>
+				<!-- Colour is not the only thing carrying the result: a missed segment is drawn
+				     broken and a skipped one stays empty, so the strip still reads as three states
+				     in greyscale or with either red-green deficiency. -->
+				<div class="rail" aria-hidden="true">
+					{#each results as result, i (i)}
+						<span
+							class="seg"
+							class:right={result.right}
+							class:wrong={!result.right && result.picked !== null}
+						></span>
+					{/each}
+				</div>
+			</section>
+		{/if}
 
 		<section aria-labelledby="summary-review">
 			{#if missed.length > 0}
@@ -689,35 +747,7 @@
 					</p>
 				{/if}
 
-				{#if showIndex}
-					<nav
-						class="index"
-						aria-label="The {missed.length} words in this list"
-						bind:clientHeight={indexH}
-					>
-						<ul class="chips">
-							{#each missed as result, i (result.word.id)}
-								{@const done = redone[result.word.id]?.right === true}
-								<li>
-									<button
-										type="button"
-										class="chip"
-										class:chip-fixed={done}
-										class:here={here === i}
-										aria-current={here === i ? 'true' : undefined}
-										onclick={() => jumpTo(i)}
-									>
-										<Hanzi text={result.word.hanzi} size="xs" />
-										{#if done}<span class="chip-mark" aria-hidden="true">✓</span>{/if}
-										<span class="sr-only">
-											{i + 1} of {missed.length}, {done ? 'fixed' : 'still to review'}
-										</span>
-									</button>
-								</li>
-							{/each}
-						</ul>
-					</nav>
-				{/if}
+				{@render indexStrip()}
 
 				{#if drilling}
 					<ReviewDrill cards={deck} onfinish={closeDrill} oncancel={closeDrill} />
@@ -745,14 +775,18 @@
 				     right. The set is below…" over a "10 answered correctly" disclosure — the
 				     same fact three more times, above the vocabulary it was pushing off the fold. -->
 				<h2 id="summary-review" class="section-title">Read them once more</h2>
-			{/if}
-		</section>
+				{@render indexStrip()}
 
-		{#if solved.length > 0}
-			{#if missed.length === 0}
-				<!-- No disclosure on a clean run: `10 answered correctly` under `All 10 right` is the
-				     same fact twice, and it cost a 44px row above the first card. -->
-				<ul class="cards cards-solved">
+				<!--
+					No disclosure on a clean run: `10 answered correctly` under `All 10 right` is the
+					same fact twice, and it cost a 44px row above the first card.
+
+					Inside this section rather than after it, which is what makes the index above it
+					stick. A sticky box cannot leave its own parent: with the list a sibling of the
+					section, the section ended one line below the strip and the strip scrolled away
+					with it, so the clean run got an index that was gone by the second card.
+				-->
+				<ul class="cards cards-solved" bind:this={reviewList}>
 					{#each solved as result, i (result.word.id)}
 						<WordCard
 							word={result.word}
@@ -763,34 +797,36 @@
 						/>
 					{/each}
 				</ul>
-			{:else}
-				<details class="solved">
-					<summary>
-						<svg class="chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-							<path
-								d="m4 6 4 4 4-4"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="1.8"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-						{solved.length} answered correctly
-					</summary>
-					<ul class="cards">
-						{#each solved as result, i (result.word.id)}
-							<WordCard
-								word={result.word}
-								outcome="right"
-								verdict={false}
-								index={i}
-								onentry={openSheet}
-							/>
-						{/each}
-					</ul>
-				</details>
 			{/if}
+		</section>
+
+		{#if solved.length > 0 && missed.length > 0}
+			<details class="solved">
+				<summary>
+					<svg class="chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+						<path
+							d="m4 6 4 4 4-4"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.8"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+					{solved.length} answered correctly
+				</summary>
+				<ul class="cards">
+					{#each solved as result, i (result.word.id)}
+						<WordCard
+							word={result.word}
+							outcome="right"
+							verdict={false}
+							index={i}
+							onentry={openSheet}
+						/>
+					{/each}
+				</ul>
+			</details>
 		{/if}
 
 		<!-- A mixed run: some words were asked, some were met for the first time. The new ones
@@ -913,6 +949,51 @@
 </div>
 
 <!--
+	THE INDEX ITSELF. One definition, rendered above whichever list is on screen — the misses on
+	a scored run, the clean ten on a perfect one. See the note beside `indexed` in the script.
+
+	A chip is green only where green *changed*: a word the drill fixed carries the rule and the
+	✓ against its still-red neighbours. On a clean run every word was right, so a green tick on
+	all ten would be ten copies of the score line and no distinction at all — the chips there are
+	quiet, and the strip's only job is position.
+-->
+{#snippet indexStrip()}
+	{#if showIndex}
+		<nav
+			class="index"
+			aria-label="The {indexed.length} words in this list"
+			bind:clientHeight={indexH}
+		>
+			<ul class="chips" bind:this={chipStrip}>
+				{#each indexed as result, i (result.word.id)}
+					{@const fixed = redone[result.word.id]?.right === true}
+					<li>
+						<button
+							type="button"
+							class="chip"
+							class:chip-fixed={result.right || fixed}
+							class:here={here === i}
+							aria-current={here === i ? 'true' : undefined}
+							onclick={() => jumpTo(i)}
+						>
+							<Hanzi text={result.word.hanzi} size="xs" />
+							{#if fixed}<span class="chip-mark" aria-hidden="true">✓</span>{/if}
+							<span class="sr-only">
+								{i + 1} of {indexed.length}, {result.right
+									? 'correct'
+									: fixed
+										? 'fixed'
+										: 'still to review'}
+							</span>
+						</button>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	{/if}
+{/snippet}
+
+<!--
 	Opened by the `Entry` chip on any card, over the results rather than instead of them. The
 	whole screen's vocabulary is the list it walks, so ← → step from one missed word to the next
 	without closing, and a character tapped inside it pushes onto `trail` exactly as it does on
@@ -1005,10 +1086,18 @@
 		color: var(--color-ink);
 	}
 
-	/* The rail from the quiz screen, finished. Same language, no counters. */
+	/*
+	 * The rail from the quiz screen, finished. Same language, no counters.
+	 *
+	 * The gap between two segments has to stay wider than the notch inside one, or the strip
+	 * stops counting. At 3px between and a notch cut at 40–60% of a 30.8px segment — 6.2px — a
+	 * 0/10 run drew twenty dashes with the *wider* space inside each result: ten segments read as
+	 * twenty, and the only thing on the screen that still said ten was the numeral. 4px between,
+	 * 2px within.
+	 */
 	.rail {
 		display: flex;
-		gap: 0.1875rem;
+		gap: 0.25rem;
 	}
 
 	.seg {
@@ -1031,9 +1120,9 @@
 		background-color: var(--color-wrong);
 		background-image: linear-gradient(
 			to right,
-			transparent 0 40%,
-			var(--color-page) 40% 60%,
-			transparent 60% 100%
+			transparent 0 calc(50% - 1px),
+			var(--color-page) calc(50% - 1px) calc(50% + 1px),
+			transparent calc(50% + 1px) 100%
 		);
 	}
 
@@ -1160,6 +1249,11 @@
 		overscroll-behavior-x: contain;
 		scrollbar-width: none;
 		scroll-snap-type: x proximity;
+		/* And the standing guarantee behind it: whatever ends up inside this row, none of it is
+		   allowed to size the page. `position: relative` on `.chip` fixes today's escape; this
+		   closes the class of it, because the next absolutely positioned thing anyone adds in
+		   here would reopen the hole silently and only on a ten-miss run. */
+		contain: layout paint;
 	}
 
 	.chips::-webkit-scrollbar {
@@ -1173,6 +1267,22 @@
 	.chip {
 		display: inline-flex;
 		flex: none;
+		/*
+		 * THE ONE LINE THAT KEEPS A BAD RUN INSIDE THE PHONE. Do not delete it.
+		 *
+		 * Every chip carries an `.sr-only` span, and `.sr-only` is `position: absolute`. With a
+		 * static chip its containing block was the nearest positioned ancestor — `.index`, which
+		 * is `sticky` — not the scroller. An absolutely positioned box whose containing block sits
+		 * *outside* a scroll container is not clipped by it and its overflow is the document's:
+		 * ten 1px labels parked at the chips' natural offsets, the last of them near x=650, made
+		 * the layout viewport 624px wide on a 375px phone. Everything measured in viewport units
+		 * then measured the wrong viewport, and the sticky action row — "Practise these 10 again"
+		 * — settled 361px below the visible edge, at every scroll position, on the exact run that
+		 * most needs it. `overflow-x: hidden` and `overflow-x: clip` on the row both leave it,
+		 * because the box was never inside the row to clip. Relative chips put each label back
+		 * inside its own chip, where the scroller can hold it.
+		 */
+		position: relative;
 		align-items: center;
 		gap: var(--spacing-2xs);
 		block-size: var(--spacing-tap);
