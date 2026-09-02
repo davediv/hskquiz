@@ -1,8 +1,8 @@
 {
  "loops": [
   {
-   "loop": 4,
-   "note": "Collisions re-resolved by QUALIFYING the shared sense on both sides — 听见 \"to hear (and catch it)\" / 听到 \"to hear (as a result)\" — so the collision stays visible to every guard while the buttons read differently. A sixth build gate now fails if a card’s own dictionary meaning does not survive its rewrite. And the thing both reference apps do that this one did not: 1,270 example sentences, HSK 1 and 2 at 100%, every character build-gated to be at or below the card’s own level.",
+   "loop": 6,
+   "note": "The orthography loop. Loop 5's critics found the corpus right and its SPELLING wrong, so the fix went to the source: `∥` and the optional-syllable marks are deleted rather than turned into spaces (帮忙 is bāngmáng, not bāng máng — 192 headwords fixed), CC-CEDICT's neutral-tone digit is honoured (学生 xuésheng), and all 4,308 example sentences are now set as sentences — word boundaries off the shipped corpus, a capital, a terminal stop, and the 479 commas that used to be thrown away. Alongside it: Discard is armed like Reset so one tap on the quiet control cannot erase the only copy, a new word is asked its first question inside the session that introduced it, the app bar docks to the run's column instead of the window, and the mobile browse header is two rows instead of three.",
    "verdicts": [
     {
      "piece": "vocab-data",
@@ -61,6 +61,126 @@
    ]
   },
   {
+   "loop": 5,
+   "note": "Nine critics, nine FAILs — the loop the app stopped being judged on whether the feature exists and started being judged on whether it is right. Two were data losses under a finger: Restore now proves it restored before deleting the only copy, and a build gate forbids two cards sharing a sentence or a translation. The rest were spelling and layout: pinyin set as words rather than spaced syllables at all 16 call sites, a production prompt rebuilt like the teach card, preview glosses set as one wrapped line, and a focus shell with a definite height so the quiz control is never below the fold.",
+   "verdicts": [
+    {
+     "piece": "vocab-data",
+     "kind": "data",
+     "pass": false,
+     "biggestGap": "Re-emit every pinyin string in word units instead of one syllable per token — in the 4,308 example sentences and in the 192 headwords the `∥` marker wrongly split — and honour neutral tone from the CEDICT key while you are in that function.** Concretely, in…"
+    },
+    {
+     "piece": "progress-store",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Make the copy a precondition of the destruction."
+    },
+    {
+     "piece": "session-engine",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Ask a new word its first question in the session that introduced it, and stop counting the teach card as a question.** One change, in `src/lib/session/index.ts` and `QuizProgress.svelte`: 1."
+    },
+    {
+     "piece": "design-system",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Fix the sentence orthography at the SOURCE, in `scripts/build-vocab.mjs`, so all 4,308 `example.pinyin` strings carry the same word-level spelling and punctuation their hanzi already carries.** `夏天到了，天气越来越热。` must build to `Xiàtiān dào le, tiānqì yuè lái yuè…"
+    },
+    {
+     "piece": "app-shell",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make the chrome budget a ceiling the shell enforces on viewport HEIGHT, instead of a number screens volunteer on width.** Concretely, in one pass: 1."
+    },
+    {
+     "piece": "level-select",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Bind every preview gloss to its own word and get `Browse →` out from under the third hanzi."
+    },
+    {
+     "piece": "quiz-card",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Draw the sentence on the recognition card too.** In `src/lib/components/quiz/QuestionPrompt.svelte:288`, change `const clue = $derived(production && !answered ?"
+    },
+    {
+     "piece": "session-summary",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make the miss index cost the page zero horizontal width, so the sticky action bar survives a bad run — and while inside that element, make the marker follow the reader.** In `src/lib/components/summary/SessionSummary.svelte`: 1."
+    },
+    {
+     "piece": "vocab-browse",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Collapse the mobile browse header from three stacked control rows into two, and make its scrolled state binary — fully shown or fully gone.** Put the level control and the search field on a single 44px row (search flexing, level as a compact control at its…"
+    }
+   ]
+  },
+  {
+   "loop": 4,
+   "note": "Collisions re-resolved by QUALIFYING the shared sense on both sides — 听见 \"to hear (and catch it)\" / 听到 \"to hear (as a result)\" — so the collision stays visible to every guard while the buttons read differently. A sixth build gate now fails if a card’s own dictionary meaning does not survive its rewrite. And the thing both reference apps do that this one did not: 1,270 example sentences, HSK 1 and 2 at 100%, every character build-gated to be at or below the card’s own level.",
+   "verdicts": [
+    {
+     "piece": "vocab-data",
+     "kind": "data",
+     "pass": false,
+     "biggestGap": "Write the 969 HSK 3 example sentences and ship them, closing L3 end to end.** Not a spread across L3/L4/L5 — finish one level so the app has a level where every card teaches."
+    },
+    {
+     "piece": "progress-store",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Make `restoreRescue()` prove it restored something before it deletes the only copy — and measure the backup exactly once, the same way, for both the notice and the restore.** In `src/lib/progress/progress.svelte.ts:441-480`: 1."
+    },
+    {
+     "piece": "session-engine",
+     "kind": "logic",
+     "pass": false,
+     "biggestGap": "Stop adding capability to `src/lib/session/` and change the four screen-side readers so an exposure counts as an exposure.** The plumbing you need already landed this loop — `hasHistory(record)` at `progress-core.ts:213` and `ProgressSummary.met` at…"
+    },
+    {
+     "piece": "design-system",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Flip `spaced` to default `false` in `src/lib/design/Pinyin.svelte:66` and audit all 16 call sites, so the component prints the orthography the data already ships.** Per-syllable spacing must survive at exactly the two ruby-aligned sites where pinyin sits…"
+    },
+    {
+     "piece": "app-shell",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Give `.shell.focus` a definite height and make the run fit inside it, so the quiz's only control is never below the fold.** Change `.shell.focus` from `min-block-size: 100dvh` to `block-size: 100dvh` with `overflow: hidden`."
+    },
+    {
+     "piece": "level-select",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Take the English out of the three preview columns in `src/lib/components/levels/LevelCard.svelte` and set the three glosses as one wrapped line across the full card width beneath the row.** Keep hanzi + pinyin in the existing `grid-template-columns: repeat(3,…"
+    },
+    {
+     "piece": "quiz-card",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Rebuild the production card's prompt the way you just rebuilt the teach card — one gloss block in the hero, and the freed band spent on a masked example sentence.** It is the emptiest screen in the app at 22% ink, and `cardKindFor` serves it two questions in…"
+    },
+    {
+     "piece": "session-summary",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Make dismissing the sheet, by any means including the phone's back gesture, close the sheet and nothing else — and make returning to `/quiz/[level]` never silently rebuild the run.** Two edits, one behaviour: 1."
+    },
+    {
+     "piece": "vocab-browse",
+     "kind": "visual",
+     "pass": false,
+     "biggestGap": "Author and ship an example sentence for every HSK 3, 4 and 5 word — all 3,038 of them — through the pipeline that already produces the good L1–2 block.** Extend `scripts/build-vocab.mjs`'s level gate; ~18 characters for L3–5; the headword present verbatim…"
+    }
+   ]
+  },
+  {
    "loop": 3,
    "note": "The \"or\" splitter landed and the 38 grade-a-right-answer-wrong collisions went to zero — but the critic caught the cure being worse than the disease. They had been fixed by moving BOTH cards off the shared word, which hides the collision from the gate, from the distractor guard, and from the app’s own search: 听见 shipped \"to catch a sound\" and /browse?q=hear could no longer find it.",
    "verdicts": [
@@ -86,7 +206,7 @@
      "piece": "design-system",
      "kind": "visual",
      "pass": false,
-     "biggestGap": ""
+     "biggestGap": "Make the spacing and type scales executable, the way the colour contract already is — then obey what the test says.** Add `src/lib/design/scale.spec.ts` alongside `palette.spec.ts`, parsing the same source it does, with three assertions: (a) every…"
     },
     {
      "piece": "app-shell",
@@ -158,7 +278,7 @@
      "piece": "level-select",
      "kind": "visual",
      "pass": false,
-     "biggestGap": ""
+     "biggestGap": "Stop letting the progress meter evict the preview words in `src/lib/components/levels/LevelCard.svelte`.** Delete the `{#if started}` / `{:else}` swap."
     },
     {
      "piece": "quiz-card",
@@ -170,7 +290,7 @@
      "piece": "session-summary",
      "kind": "visual",
      "pass": false,
-     "biggestGap": ""
+     "biggestGap": "Make the primary action drill exactly the words this screen just named, and make each card a door into its word.** In `SessionSummary.svelte`, when `missed.length > 0` the sticky primary becomes **\"Practise these 3 again\"** and hands the missed word ids…"
     },
     {
      "piece": "vocab-browse",
@@ -224,13 +344,13 @@
      "piece": "quiz-card",
      "kind": "visual",
      "pass": false,
-     "biggestGap": ""
+     "biggestGap": "Make the run fit 375×667 by reserving the answered state's height up front instead of letting it grow.** In `src/routes/quiz/[level]/+page.svelte`: stop centring an intrinsically-sized `.prompt` inside a `flex: 1 1 auto` `.stage` — give `.stage` a flex-basis…"
     },
     {
      "piece": "session-summary",
      "kind": "visual",
      "pass": false,
-     "biggestGap": ""
+     "biggestGap": "Make the missed word the biggest thing on the screen, and make that card the only way this screen shows a word.** In `SessionSummary.svelte`, delete `reviewSize()` and call `headwordSize()` from `$lib/components/quiz/quiz` — the same function the prompt uses…"
     },
     {
      "piece": "vocab-browse",
