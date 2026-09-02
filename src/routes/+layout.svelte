@@ -32,7 +32,28 @@
 	  --app-bar-measure the width of the column the current screen actually rendered, so the
 	                    bar can sit over it on a desktop instead of stretching past it
 	  --app-bar-pad     that column's own inline padding
+	  --app-chrome-room how much sticky block the CEILING leaves this screen at this viewport
+	                    height — see below
+	  --app-chrome-over how far past that the screen's block currently is, 0 when it fits
 	  data-chrome       "expanded" | "condensed", for screens that want to restructure
+	  data-chrome-fit   "within" | "over", the same fact as a selector
+
+	AND THE CEILING IS A CEILING, NOT A COLLECTION TIN
+	The paragraph above is the shell watching a total. It was not enforcing one. Browse
+	volunteered 3.375rem of its own block, kept the other 123px, and that counted as complying:
+	`/browse/1` still spent 234px of a 812px portrait frame and 224px of a 375px landscape one —
+	60% of the screen — before the first of 500 words. The reason it survived three loops is
+	that every rule in the app which shrinks chrome is keyed on WIDTH (browse's controls
+	collapse to one row at 60rem = 960px, which no landscape phone reaches) while the thing
+	being spent is HEIGHT.
+
+	So the shell now takes its own number. Total sticky chrome at rest may hold 22% of
+	`innerHeight`; whatever a screen's sticky block overruns that by, `chrome.svelte.ts` folds,
+	snapped up to one of the block's own row boundaries and capped so its last row always
+	survives — with or without a declaration. `--app-chrome-room` / `data-chrome-fit` are
+	published in the same pass, because a screen that restructures to fit beats a screen that
+	gets folded: folding only gives the space back once the finger moves, and the ceiling is
+	about what is on screen when it has not.
 
 	Because the whole app already offset against `--app-header-h`, publishing it live is what
 	makes browse's search field, the quiz progress rail and the level screen's desktop rail
@@ -132,6 +153,21 @@
 	});
 
 	/**
+	 * A class on the shell can change the bar's own BOX, so the controller has to re-measure
+	 * when one flips. `.owns-heading` is the case that bit: in a landscape run the bar is
+	 * lifted out of flow, and the summary — which owns a heading — puts it back, but the
+	 * summary's numbers were taken on the frame the run's <h1> handover had not happened in
+	 * yet, so it published the run's chrome room (83px) for a screen with a 47px bar in flow
+	 * (36px). Nothing scrolls on that screen, so nothing ever corrected it.
+	 */
+	$effect(() => {
+		void pageOwnsHeading;
+		void route.focus;
+		void route.mode;
+		chrome.sync();
+	});
+
+	/**
 	 * Canonical without the query string: `?state=summary` is a view of `/quiz/1`, not a
 	 * separate document, and a shared link should resolve to one address either way.
 	 */
@@ -151,6 +187,17 @@
 		page.url.searchParams.get('state') === 'summary' || (route.focus && pageOwnsHeading)
 	);
 	const title = $derived(finished && route.resultsTitle ? route.resultsTitle : route.title);
+
+	/**
+	 * And the same for the BAR, which is the only chrome a finished run still has. The title
+	 * fix put the two states apart in the tab, the history entry and the bookmark — everywhere
+	 * except the frame the learner is actually looking at, where the bar went on saying
+	 * `HSK 1` over both. It is one word, and it is the only word on screen that says which of
+	 * the two this is without reading the content.
+	 */
+	const shown = $derived(
+		finished && route.resultsHeading ? { ...route, heading: route.resultsHeading } : route
+	);
 
 	/**
 	 * Absolute, because a crawler reads `og:image` out of the document with no page context to
@@ -186,10 +233,13 @@
 	style:--app-fold-h={chrome.measured ? `${chrome.foldY}px` : null}
 	style:--app-bar-measure={chrome.columnWidth > 0 ? `${chrome.columnWidth}px` : null}
 	style:--app-bar-pad={chrome.columnPad > 0 ? `${chrome.columnPad}px` : null}
+	style:--app-chrome-room={chrome.measured ? `${Math.round(chrome.room)}px` : null}
+	style:--app-chrome-over={chrome.measured ? `${Math.round(chrome.over)}px` : null}
+	data-chrome-fit={chrome.over > 0.5 ? 'over' : 'within'}
 >
 	<a class="skip" href="#main">Skip to content</a>
 
-	<AppBar {route} {chrome} {backTarget} {pageOwnsHeading} />
+	<AppBar route={shown} {chrome} {backTarget} {pageOwnsHeading} />
 
 	<div id="main" class="content" tabindex="-1" bind:this={contentEl}>
 		{@render children()}
@@ -210,6 +260,11 @@
 		 */
 		--app-chrome-h: calc(var(--app-safe-top) + var(--app-header-h));
 		--app-sticky-top: calc(var(--app-chrome-h) - var(--app-fold-h));
+		/* The ceiling's room, before JS has measured anything — and redeclared here for the
+		   same substitution reason as the two above, so the landscape run's zeroed chrome
+		   total is reflected rather than the intrinsic one. 22dvh is CHROME_CEILING; the two
+		   have to move together. */
+		--app-chrome-room: max(0px, calc(22dvh - var(--app-chrome-h)));
 
 		display: flex;
 		flex-direction: column;

@@ -52,6 +52,23 @@
  * real `<length>` in shell.css so the computed value arrives in px and no unit maths is needed
  * here. Nobody declares it and the fold is simply 0.
  *
+ * BUT THE CEILING IS THE SHELL'S, AND IT IS NOT A REQUEST
+ * Volunteering is not a budget. `/browse/1` declared 3.375rem, kept the other 123px, and the
+ * shell called that compliance: 234px of a 812px portrait frame (28.8%) and 224px of a 375px
+ * landscape one (60%) before the first of 500 words — the same defect the paragraph above
+ * says this controller exists to prevent, moved one screen sideways and left there for three
+ * loops. The reason it survived is that every rule which shrinks chrome is keyed on WIDTH
+ * while the thing being spent is HEIGHT.
+ *
+ * So there is now a ceiling the screen has no vote in: total sticky chrome may hold
+ * `CHROME_CEILING` of `innerHeight`, and whatever a screen's block overruns it by, the shell
+ * folds — snapped up to one of the block's own row boundaries, capped so the last row always
+ * survives, declaration or no declaration. See `measureChrome`. The room and the overrun are
+ * published too (`--app-chrome-room`, `--app-chrome-over`, `data-chrome-fit`), because a
+ * screen that restructures to fit is strictly better than a screen that gets folded — folding
+ * only recovers the space once the finger moves, and the ceiling is about what is on screen
+ * when it has not.
+ *
  * IT ALSO MEASURES THE SCREEN'S COLUMN
  * On a phone every route runs edge to edge and a full-bleed bar is right. On a desktop every
  * route pulls into a centred column of its own width — 34rem for a quiz, 64rem for browse,
@@ -86,6 +103,37 @@ const REVEAL_GAIN = 3;
  * bearings.
  */
 const MIN_RUNWAY = 3;
+/**
+ * THE CEILING. Total sticky chrome at rest — the safe inset, the bar, and whatever the screen
+ * pins under it — may hold at most this fraction of the viewport's HEIGHT. 22% is 179px of a
+ * 812px portrait phone and 82px of a 375px landscape one.
+ *
+ * A fraction of the height, and not a px constant, because height is the axis the old budget
+ * was blind on. Every rule in the system that shrinks chrome keyed off WIDTH: the bar comes
+ * down at `(max-height: 30rem)`, but browse's three stacked control rows only collapse to one
+ * at `(min-width: 60rem)` = 960px, which no landscape phone reaches. So the identical 224px
+ * block that costs 28% of a portrait frame costs 60% of a landscape one, and nothing noticed,
+ * because 224 is less than 234.
+ */
+const CHROME_CEILING = 0.22;
+/**
+ * A chrome band spans the screen's column; a sticky rail beside the content does not. 0.8
+ * because the real bands measure 89% (the run's progress rail, inside the run's own padding)
+ * to 100% (browse's full-bleed controls), and the landing screen's sidebar — the thing this
+ * exists to exclude — is 17%.
+ */
+const BAND_SPAN = 0.8;
+/** How far into a screen the scan for that band looks, per level. Chrome is the first thing a
+    screen renders; anything further in is the screen's content. */
+const SCAN_CHILDREN = 3;
+/**
+ * Two row tops this close together are ONE row. A row of a grid does not hand its children an
+ * identical top — browse's desktop control row measures 12 / 15 / 13px from the block's edge
+ * as the level pills, the field and the chip strip settle on their own baselines — and three
+ * stops 1px apart would be three legal cuts through the middle of one row. Nothing real is
+ * merged by this: a stacked row is a tap target plus a gap, never under 44px from the next.
+ */
+const ROW_EPSILON = 16;
 /** The typed custom property a screen uses to volunteer part of its own sticky block. */
 const FOLD_PROPERTY = '--app-chrome-fold';
 /** Body height of the docked row, and the hairline under it. Both typed `<length>`. */
@@ -123,14 +171,27 @@ export interface ChromeController {
 	readonly condensed: boolean;
 	/** True as soon as anything has scrolled under the bar — drives its hairline. */
 	readonly scrolled: boolean;
+	/**
+	 * How much sticky block the ceiling leaves the current screen at this viewport height:
+	 * `CHROME_CEILING * innerHeight` minus the shell's own chrome. Published as
+	 * `--app-chrome-room` so a screen can size its toolbar to the frame it is actually in.
+	 */
+	readonly room: number;
+	/**
+	 * How far the screen's sticky block overruns that, px — 0 when it fits. Published as
+	 * `--app-chrome-over`, and as `data-chrome-fit="over"`. Whatever the screen does about it,
+	 * the shell folds this much itself.
+	 */
+	readonly over: number;
 	/** Border-box width of the column the current screen rendered, px. 0 until measured. */
 	readonly columnWidth: number;
 	/** That column's own inline padding, px, so the bar's glyphs land on its text edge. */
 	readonly columnPad: number;
 	/** Re-measure the screen's column. Call after a navigation. */
 	sync(): void;
-	/** The bar reports its own border-box height here, safe inset excluded. */
-	report(height: number): void;
+	/** The bar reports its own border-box height here, safe inset excluded — and the inset it
+	    measured, which the ceiling has to charge for even though the bar does not. */
+	report(height: number, inset?: number): void;
 	/** Put the bar back: focus moved into it, or the route changed. */
 	reveal(instant?: boolean): void;
 	/** Attach the scroll listener. Returns a teardown — call it from an `$effect`. */
@@ -148,10 +209,21 @@ export function createChrome(): ChromeController {
 	let minBarH = $state(MIN_BAR_FALLBACK);
 	let hidden = $state(0);
 	let scrolled = $state(false);
-	/** Extra px the current screen has volunteered. Re-read on every scroll — it is one
-	    `getComputedStyle` on an element that is already in the style cache, and it means a
-	    screen that changes its mind between routes or breakpoints is picked up for free. */
+	/** Px of the current screen's sticky block the chrome will absorb — the larger of what the
+	    screen volunteered and what the ceiling takes. Re-derived on every scroll; the reads it
+	    needs are on elements already in the style cache, so a screen that changes its mind
+	    between routes or breakpoints is picked up for free. */
 	let fold = 0;
+	/** Sticky block the ceiling leaves this screen at this viewport height, px. Published. */
+	let room = $state(0);
+	/** How far the screen's block currently overruns that, px. 0 when it fits. Published. */
+	let over = $state(0);
+	/** The safe-area inset the bar sits under, as the bar itself measured it. */
+	let safeTop = 0;
+	/** Row-boundary cache for `foldStops`, keyed on the block and its height. */
+	let stopsOf: HTMLElement | null = null;
+	let stopsAt = -1;
+	let stops: number[] = [];
 	let columnWidth = $state(0);
 	let columnPad = $state(0);
 
@@ -175,41 +247,159 @@ export function createChrome(): ChromeController {
 	}
 
 	/**
-	 * The screen's own sticky block — the thing a fold takes rows off the top of. Only the
-	 * screen root's direct children are considered: a fold is a statement about the block the
-	 * screen pins under the bar, not about some sticky affordance nested inside a list row.
-	 * 0 when the screen has no sticky block at all.
+	 * The band the screen pins under the bar: what the ceiling is measured against, and what a
+	 * fold takes rows off the top of. `null` when the screen pins nothing.
+	 *
+	 * THREE TESTS, AND EACH ONE IS THERE BECAUSE SOMETHING REAL FAILED IT:
+	 *
+	 *   at the top of the screen   Only the first few children of the screen, and one level
+	 *                              inside them, are looked at. Chrome is the first thing a
+	 *                              screen renders; a sticky row 6,000px down a word list is a
+	 *                              list affordance, and folding it would be nonsense. The one
+	 *                              level of descent is what it takes to see the run's progress
+	 *                              rail, which is `.run > .wrap` and not a direct child — the
+	 *                              old direct-children-only rule could not see it at all.
+	 *   a band, not a rail         It has to span (nearly) the screen's own column. The landing
+	 *                              screen's desktop sidebar is `position: sticky` and 144px
+	 *                              tall, so a height-only test read it as 32px of chrome
+	 *                              overrun and would have folded a column that sits BESIDE the
+	 *                              content rather than over it. It is 224px of a 1,312px
+	 *                              column; the real bands measure 89–100%.
+	 *   anchored to the top        `top: auto` is a sticky element pinned to the bottom or to
+	 *                              nothing, which is not chrome the shell is paying for.
 	 */
-	function stickyBlockHeight(screen: HTMLElement): number {
-		for (const child of screen.children) {
-			if (!(child instanceof HTMLElement)) continue;
-			if (getComputedStyle(child).position !== 'sticky') continue;
-			return child.getBoundingClientRect().height;
+	function stickyBlock(screen: HTMLElement): HTMLElement | null {
+		const span = screen.getBoundingClientRect().width;
+		if (span <= 0) return null;
+		const band = (el: HTMLElement): boolean => {
+			const box = el.getBoundingClientRect();
+			if (box.height <= 0 || box.width < span * BAND_SPAN) return false;
+			const style = getComputedStyle(el);
+			return style.position === 'sticky' && style.top !== 'auto';
+		};
+		const head = (el: Element): HTMLElement[] => {
+			const kids: HTMLElement[] = [];
+			for (const kid of el.children) {
+				if (kid instanceof HTMLElement) kids.push(kid);
+				if (kids.length === SCAN_CHILDREN) break;
+			}
+			return kids;
+		};
+		for (const child of head(screen)) {
+			if (band(child)) return child;
+			for (const grand of head(child)) {
+				if (band(grand)) return grand;
+			}
 		}
-		return 0;
+		return null;
 	}
 
-	function readFold(): number {
-		const screen = screenRoot();
-		if (!screen) return 0;
-		// Registered as `<length>`, so the computed value is always resolved px.
-		const px = Number.parseFloat(getComputedStyle(screen).getPropertyValue(FOLD_PROPERTY));
-		const declared = Number.isFinite(px) && px > 0 ? px : 0;
-		if (declared <= 0) return 0;
+	/**
+	 * Is the bar taking height off the viewport right now? During a run in landscape the shell
+	 * lifts it out of flow so the card can have the whole frame (see +layout.svelte), and
+	 * `--app-chrome-h` drops to the safe inset to match. The ceiling has to agree: charging a
+	 * fixed bar against the budget read the run's 51px progress rail as 3px over at 932x430
+	 * and would have folded a rail that was costing the screen nothing.
+	 */
+	function barInFlow(): boolean {
+		const bar = shellEl().querySelector(':scope > header');
+		return bar instanceof HTMLElement ? getComputedStyle(bar).position !== 'fixed' : true;
+	}
 
-		/*
-		 * A fold is refused outright unless the screen can afford the whole of it — the block
-		 * has to still be at least a docked bar tall once the fold is taken. Browse volunteers
-		 * 3.375rem for its level-pills row, which is right for the phone stack (151px of
-		 * controls) and wrong from 60rem up, where the same controls collapse to a single 67px
-		 * row: taking 54px off that leaves a 13px sliver of a search field under the bar, which
-		 * reads as a rendering fault rather than as a toolbar that got smaller. All or nothing
-		 * is the only rule the shell can apply honestly, because only the screen knows where
-		 * its rows are. A screen with no sticky block of its own is taken at its word.
-		 */
-		const block = stickyBlockHeight(screen);
-		if (block <= 0) return declared;
-		return declared <= block - minBarH ? declared : 0;
+	/** What the screen itself volunteered, px. Registered `<length>`, so already resolved. */
+	function declaredFold(screen: HTMLElement): number {
+		const px = Number.parseFloat(getComputedStyle(screen).getPropertyValue(FOLD_PROPERTY));
+		return Number.isFinite(px) && px > 0 ? px : 0;
+	}
+
+	/**
+	 * Where the screen's sticky block MAY be cut, as offsets from its own top edge.
+	 *
+	 * A fold has to land on a row boundary. The shell does not know what browse's toolbar
+	 * contains, but it can see the boxes: walk past wrappers that hold a single child
+	 * (`.controls > .controls-inner` is one block, not two rows) and the first element with
+	 * siblings is the row list. Cutting at `row.top - block.top` therefore always takes a
+	 * whole number of rows and never 40px of a 44px search field — which is the failure the
+	 * old all-or-nothing rule existed to avoid, generalised so the shell can choose its own
+	 * number instead of only vetoing the screen's. Two stops are excluded: 0, which is not a
+	 * fold, and anything at or past the bottom edge, which would take the last row — something
+	 * of the screen's own toolbar always stays on screen.
+	 *
+	 * Cached per block height: under a fold the block MOVES but does not resize, and these are
+	 * offsets inside it, so one measurement stands for the whole travel. `sync()` and a resize
+	 * drop the cache; a block that changes height invalidates it by itself.
+	 */
+	function foldStops(block: HTMLElement, blockH: number): number[] {
+		if (stopsOf === block && Math.abs(stopsAt - blockH) < 0.5) return stops;
+		let rows: HTMLElement = block;
+		while (rows.childElementCount === 1 && rows.firstElementChild instanceof HTMLElement) {
+			rows = rows.firstElementChild;
+		}
+		const top = block.getBoundingClientRect().top;
+		const found: number[] = [];
+		for (const child of rows.children) {
+			if (!(child instanceof HTMLElement)) continue;
+			const box = child.getBoundingClientRect();
+			if (box.height <= 0) continue;
+			const stop = box.top - top;
+			if (stop <= 0.5 || stop >= blockH - 1) continue;
+			if (found.some((seen) => Math.abs(seen - stop) < ROW_EPSILON)) continue;
+			found.push(stop);
+		}
+		found.sort((a, b) => a - b);
+		stopsOf = block;
+		stopsAt = blockH;
+		stops = found;
+		return stops;
+	}
+
+	/**
+	 * THE CEILING, APPLIED — the shell taking its own number rather than waiting to be offered
+	 * one.
+	 *
+	 * `--app-chrome-fold` is a screen volunteering; this is the part it has no say in. The
+	 * shell measures the sticky block the screen actually rendered, works out how far the
+	 * total overruns `CHROME_CEILING`, and folds the overrun whether or not the screen ever
+	 * declared anything. The larger of the two wins, snapped UP to the next row boundary so
+	 * the cut is legible, and capped at the last row so a control always survives.
+	 *
+	 * It publishes both halves as well, because a screen can do better than being folded if it
+	 * knows the number: `--app-chrome-room` is how much sticky block the ceiling leaves it at
+	 * this viewport height, `--app-chrome-over` is how far past that it currently is, and
+	 * `data-chrome-fit="over"` is the same fact as a selector. A screen that restructures on
+	 * those never gets folded, because there is nothing left to fold.
+	 */
+	function measureChrome(): void {
+		const screen = screenRoot();
+		if (!screen) {
+			fold = 0;
+			return;
+		}
+		const block = stickyBlock(screen);
+		const blockH = block ? block.getBoundingClientRect().height : 0;
+		const shellH = safeTop + (barInFlow() ? barH : 0);
+		const allowance = Math.max(0, window.innerHeight * CHROME_CEILING - shellH);
+		const overrun = Math.max(0, blockH - allowance);
+		if (Math.abs(allowance - room) > 0.5) room = allowance;
+		if (Math.abs(overrun - over) > 0.5) over = overrun;
+
+		const want = Math.max(declaredFold(screen), overrun);
+		if (want <= 0.5) {
+			fold = 0;
+			return;
+		}
+		// No sticky block: no rows to snap to and nothing to measure instead, so a screen that
+		// volunteered a number is taken at its word.
+		if (!block) {
+			fold = want;
+			return;
+		}
+		const cuts = foldStops(block, blockH);
+		if (cuts.length === 0) {
+			fold = 0;
+			return;
+		}
+		fold = cuts.find((cut) => cut >= want - 0.5) ?? cuts[cuts.length - 1];
 	}
 
 	/**
@@ -314,7 +504,7 @@ export function createChrome(): ChromeController {
 			if (Math.abs(delta) < 1 && frame) return;
 			stopGlide();
 
-			fold = readFold();
+			measureChrome();
 			const max = budget();
 			const runway = document.documentElement.scrollHeight - window.innerHeight;
 			if (max <= 0 || y <= barH || runway < max * MIN_RUNWAY) {
@@ -333,9 +523,12 @@ export function createChrome(): ChromeController {
 		const onResize = () => {
 			last = Math.max(0, window.scrollY);
 			// A landscape breakpoint moves both ends of the bar, so re-read the floor before
-			// the bar re-reports its expanded height.
+			// the bar re-reports its expanded height. The ceiling is a fraction of the height
+			// that just changed, and the block's rows may have reflowed under it.
 			minBarH = readFloor();
+			stopsOf = null;
 			measureColumn();
+			measureChrome();
 			glide(0, true);
 		};
 
@@ -384,6 +577,12 @@ export function createChrome(): ChromeController {
 		get scrolled() {
 			return scrolled;
 		},
+		get room() {
+			return room;
+		},
+		get over() {
+			return over;
+		},
 		get columnWidth() {
 			return columnWidth;
 		},
@@ -393,19 +592,28 @@ export function createChrome(): ChromeController {
 		sync() {
 			// A route swap replaces the screen element, and the new one may not have laid out
 			// yet on the frame `afterNavigate` runs in. The floor comes with it: it is a
-			// property of the screen now, not of the document.
+			// property of the screen now, not of the document. So are the fold's row stops.
 			minBarH = readFloor();
+			stopsOf = null;
 			measureColumn();
+			measureChrome();
 			requestAnimationFrame(() => {
 				minBarH = readFloor();
+				stopsOf = null;
 				measureColumn();
+				measureChrome();
 			});
 		},
-		report(height: number) {
+		report(height: number, inset = 0) {
 			// Safe to take at any point in the travel: the bar's border box is the same size
 			// docked as expanded, so this is its intrinsic height and never an echo of what
 			// the controller just published.
-			if (height > 0 && Math.abs(height - barH) > 0.5) barH = height;
+			const moved = height > 0 && Math.abs(height - barH) > 0.5;
+			if (Number.isFinite(inset) && Math.abs(inset - safeTop) > 0.5) safeTop = inset;
+			if (moved) barH = height;
+			// The ceiling is measured against the bar, so it cannot be right until the bar has
+			// said how tall it is.
+			if (moved) measureChrome();
 		},
 		reveal(instant = false) {
 			if (idle) clearTimeout(idle);
