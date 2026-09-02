@@ -12,7 +12,7 @@
  *     three, most recently missed first. The card then says "here is what you keep missing in
  *     HSK 4" instead of showing 效率 / 学术 / 传统 forever, which is what the screen's own
  *     tagline promises a session will do.
- * The row is never given up for the progress meter: the level a learner is actually studying
+ * The list is never given up for the progress meter: the level a learner is actually studying
  * is the last one that should be the card with no Chinese on it.
  *
  * The static three are written out rather than loaded. `src/lib/data/index.ts` deliberately
@@ -27,14 +27,12 @@
  * `meanings`, never a paraphrase.
  *
  * Choosing the static three: one word per clause of `LEVEL_META.blurb`, in the same order, so
- * the row is the evidence for the sentence above it — HSK 1 is "greetings, family, everyday
- * verbs" and shows 谢谢 / 妈妈 / 喜欢. Kept to one or two characters so three columns fit a
- * 375px card without the hanzi shrinking below the scale's floor; kept short enough that the
- * three glosses *joined* — `thank you · mother · to like` — set on one line under the row at
- * every width this layout builds, which is what makes five untouched cards read as one list
- * (a learner's own weak words are held to no such rule: they wrap, and are never cut); and kept
- * off the numerals: 八 is two strokes glossed "eight", so a third of the first card's Chinese
- * taught nothing.
+ * the list is the evidence for the sentence above it — HSK 1 is "greetings, family, everyday
+ * verbs" and shows 谢谢 / 妈妈 / 喜欢. Kept short enough that hanzi and pinyin share one line
+ * on the narrowest card this layout builds, and glossed in a phrase that sets on one line under
+ * them there too, which is what makes five untouched cards read as one list; and kept off the
+ * numerals: 八 is two strokes glossed "eight", so a third of the first card's Chinese taught
+ * nothing.
  */
 import type { Level, ProgressState, Syllable, Word, WordProgress } from '$lib/types';
 
@@ -55,25 +53,24 @@ export interface PreviewWord {
 	syllables?: readonly Syllable[];
 }
 
-/** Three columns of hanzi is what a 375px card holds; every source has to produce exactly this. */
+/** Three words is what a card shows; every source has to produce exactly this. */
 export const PREVIEW_COUNT = 3;
 
 /**
- * ------------------------------------------------------------------ fitting the row --
+ * ---------------------------------------------------------------- fitting an entry --
  *
- * The static three above were *chosen* to fit three columns. A learner's weak words are not:
- * they are whatever they keep getting wrong, and 213 of the 4,308 shipped words are three or
- * four characters (201 and 12). Loop 3 handled that by shrinking the whole row's hanzi one
- * step and putting `truncate` on the pinyin, which produced `dàxuéshē…` — pinyin is one of
- * the three things this app teaches, and half a syllable teaches the wrong sound.
+ * Each preview word is one full-width entry: its hanzi and its pinyin on the first line, its
+ * own gloss on the second. So the only width question left is whether *one* word's hanzi and
+ * pinyin sit beside each other at this card's width — not whether three of them share a row,
+ * which is what this file measured for three loops and what kept dropping 大学生 / 教学楼 /
+ * 图书馆 (346px abreast, 130px stacked) down to two columns.
  *
- * So nothing is ever cut. The hanzi is held at one size on every card in every state, the
- * pinyin is `nowrap`, and the *selection* absorbs the variance instead: the card asks
- * `weakestIds` for more candidates than it has columns and takes the worst ones that
- * genuinely fit the width it has been given. A word this learner can read in full is worth
- * more than a slightly weaker one they can only see the front half of.
+ * Nothing is ever cut either way. The hanzi is held at one size on every card in every state,
+ * the pinyin is `nowrap`, and a word too wide for one line wraps its pinyin under its own
+ * characters. What this fit buys is uniformity, not safety: it prefers the worst words that
+ * keep every entry to two lines, so a card with history is the same height as one without.
  *
- * The widths below are advances, measured in the app at the sizes the row actually uses —
+ * The widths below are advances, measured in the app at the sizes the list actually uses —
  * they are not guesses:
  *
  *   hanzi   `--text-hanzi-md` 36px + `.hanzi` tracking 0.015em = 36.55px, *exactly*, for
@@ -82,56 +79,42 @@ export const PREVIEW_COUNT = 3;
  *           across the shipped list. 8.8 is taken as the ceiling, so the estimate is never
  *           under the truth by more than a rounding error.
  *
- * A one-character word can still be pinyin-bound (谁 is `shéi/shuí`), so a column costs the
- * larger of the two, never the hanzi alone. `LevelCard` measures the real row width and
- * re-checks the rendered row for overflow afterwards, so this is the fast path rather than
- * the only line of defence.
+ * `LevelCard` measures the real list width and feeds it in, so the budget is the card's, not
+ * a constant. 10 of the 4,308 shipped words exceed 246px on their first line — all of them
+ * four-character idioms, and only on a 320px phone.
  */
 const HANZI_ADVANCE = 36.55;
 const PINYIN_ADVANCE = 8.8;
 
-/** Column gap of `.hskq-preview`, in px. Kept next to the widths it is added to. */
+/** Gap between the hanzi and its pinyin, in px. Kept next to the widths it is added to. */
 export const PREVIEW_GAP = 8;
 
-/** How wide a preview column has to be for this word to render whole. */
+/** How wide this word's first line is: its characters, the gap, and its pinyin. */
 export function previewWidth(word: PreviewWord): number {
 	const glyphs = [...word.hanzi].length * HANZI_ADVANCE;
 	// `<Pinyin spaced={false}>` prints the source's own word-internal spaces (回来 is `huí lái`)
 	// and adds none of its own, so the printed string is the string — runs of whitespace are
 	// collapsed to the single space the line will actually set.
 	const latin = word.pinyin.trim().replace(/\s+/g, ' ').length * PINYIN_ADVANCE;
-	return Math.max(glyphs, latin);
+	return glyphs + PREVIEW_GAP + latin;
 }
 
 /**
- * The worst `count` words from `words` that fit `budget` side by side, in the order given.
+ * The worst `count` words from `words` whose first line fits `budget`, in the order given.
  *
- * Greedy, worst-first, and it will skip a word rather than lose one: given 大学生 / 教学楼 /
- * 图书馆 / 地点 / 电 in a row that holds two long words and a short one, it takes the first
- * two and jumps to 电. Only if no starting point yields a full row does it give up and return
- * null, and the card then shows the static three — a short honest row beats a clipped one.
+ * It skips rather than stops: given 酸甜苦辣 / 地点 / 电 at 246px it drops the idiom and takes
+ * the two short ones plus whatever comes next. Null when fewer than `count` of them fit, and
+ * the caller then shows the worst `count` regardless — a two-line entry is a smaller loss than
+ * showing somebody a word they have never got wrong.
  */
 export function fitPreview(
 	words: readonly PreviewWord[],
 	budget: number,
-	count: number = PREVIEW_COUNT,
-	gap: number = PREVIEW_GAP
+	count: number = PREVIEW_COUNT
 ): PreviewWord[] | null {
 	if (words.length < count || budget <= 0) return null;
-
-	const widths = words.map(previewWidth);
-	for (let start = 0; start <= words.length - count; start += 1) {
-		if (widths[start] > budget) continue;
-		const chosen = [words[start]];
-		let used = widths[start];
-		for (let i = start + 1; i < words.length && chosen.length < count; i += 1) {
-			if (used + gap + widths[i] > budget) continue;
-			used += gap + widths[i];
-			chosen.push(words[i]);
-		}
-		if (chosen.length === count) return chosen;
-	}
-	return null;
+	const chosen = words.filter((word) => previewWidth(word) <= budget).slice(0, count);
+	return chosen.length === count ? chosen : null;
 }
 
 export const LEVEL_PREVIEW: Record<Level, readonly PreviewWord[]> = {
@@ -204,9 +187,9 @@ function weakerFirst(a: WordProgress, b: WordProgress): number {
  * would be a sentence the data does not support.
  *
  * `depth` extra ids are handed back on top of `wanted` so the caller has spares: a record can
- * survive for an official row that ships merged into another card, and — since loop 4 —
- * `fitPreview` also skips a word too wide to render whole at the card's width. Both drop
- * candidates, and the row still has to end up with three, so the caller asks for double.
+ * survive for an official row that ships merged into another card, and `fitPreview` skips a
+ * word whose hanzi and pinyin will not share a line at the card's width. Both drop candidates,
+ * and the list still has to end up with three, so the caller asks for double.
  */
 export function weakestIds(
 	state: ProgressState | null | undefined,
