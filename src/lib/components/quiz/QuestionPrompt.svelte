@@ -47,17 +47,36 @@
 	    in this direction, so the four buttons almost always agree about it and it gives nothing
 	    away; `the verb meaning to love` is simply a better question than `to love`.
 
+	AND THE RECOGNITION CARD GETS THE SAME THING, MIRRORED. The clue above was gated on
+	`production` for one loop, which left the card the learner sees MOST — every word passes
+	recognition between its introduction and its first correct answer, and one card in
+	`REFRESH_EVERY` forever after — as the emptiest screen in the app: 68.3 of the 106.3px
+	reserve blank at 375x812, 82.4px of dead column between the last ink and the first answer
+	button, 88px at 1440x900, and 53.3% stage ink against the 66-72% of the production cards
+	beside it. The two directions withhold opposite halves of the same sentence, so each spends
+	the half the other keeps:
+
+	  · production spends the CHINESE with the word cut out of it, and keeps the English;
+	  · recognition spends the CHINESE with the word BOLDED in it — the character is already the
+	    largest thing on the screen, so a hole in the line would give away nothing except the
+	    line — and keeps the English, which names the answer.
+
+	Measured after: recognition ink 53.3% -> 64.9-67.5% at 375x812 and 51.8% -> 63.8-72.2% at
+	1440x900, dead column 82.4px -> 21.6-25.8px and 88px -> 25.4px, on the four viewports the
+	card is checked at. The choice bands did not move by a pixel at any of them.
+
 	Ink in the stage, measured over real sessions at three viewports: 375x812 22% -> 57-69%,
 	375x667 26-33% -> 51-69%, 320x568 33-42% -> 58-72%. The character on the reveal is
 	untouched at every one of them — 119.38 / 94.69 / 61.60 — because none of this is spent out
 	of the hero row.
 
-	THE SENTENCE'S OWN PINYIN IS THE ONE THING THE CLUE DOES NOT SHOW. It is syllable-aligned
-	with the sentence, so the syllables under the blank could be blanked with it — but the line
-	either spells out the answer's sound or acquires a second hole in it, and a card that has
-	already cut the word out of its own sentence does not need to cut it out twice. The
-	translation carries the meaning of the line instead, which is what a learner who cannot yet
-	read it actually needs.
+	THE SENTENCE'S OWN PINYIN IS WHAT THE HINT NOW BUYS — on the recognition card, and only
+	there. On a production card it stays off: it is syllable-aligned with the sentence, so it
+	either spells out the answer's sound under the blank or acquires a second hole in it, and a
+	card that has already cut the word out of its own sentence does not need to cut it out
+	twice. On a recognition card the sound is not the answer, it is the thing the learner may
+	ask for — so "Show pinyin" now uncovers the whole line's reading instead of one word's,
+	which contains the word's own syllables and eight more of context around them.
 
 	THE TEACH CARD IS A DIFFERENT CARD, AND IT USED TO BE THE SAME ONE MINUS THE BUTTONS. On a
 	fresh device every one of a run's ten cards is an introduction, so this is the screen a new
@@ -74,7 +93,8 @@
 	    at the end of the sound row so the pinyin stays centred under its own character and so
 	    its arrival at hydration costs no layout;
 	  · the TRADITIONAL form, bracketed the way Pleco brackets it beside the headword
-	    (几乎〔幾-〕). 251 of 500 HSK 1 words and 545 of 969 HSK 3 words carry one;
+	    (几乎〔幾-〕). 251 of 500 HSK 1 words and 545 of 969 HSK 3 words carry one. It has since
+	    moved out of this card's own row and into the tail, with the part of speech — see below;
 	  · a SECOND BLOCK, which is the sentence where there is one and the character-by-character
 	    breakdown where there is not. Both references spend this slot on context: Du Chinese's
 	    card is a `word` section over a `sentence` section, Pleco's entry is the headword over
@@ -84,12 +104,19 @@
 	than a first meeting: `<SpeakButton>` and the bracketed form were gated on `teaching` and
 	appeared nowhere else, so the screen that printed tone-coloured pinyin was still the one
 	word surface in the app that could not say it. Neither costs the reveal any height. The
-	speaker is absolutely placed at the end of the sound row, as it always was; the traditional
-	form is tucked into the same row at the other end rather than given a row of its own,
-	because a row here would be reserved before the tap as well as after and would take 24px
-	off the character on exactly the half of the list that has a traditional form — the "the
-	word decides the headword's size" bug in a new hat. On a teach card, which has 620px of
-	stage and no answer buttons, it keeps its own line under the sound.
+	speaker is absolutely placed at the end of the sound row, as it always was.
+
+	THE TRADITIONAL FORM IS DRAWN ONCE, IN THE TAIL, WITH THE PART OF SPEECH. It used to be
+	drawn twice: a centred `sm` row of its own on a teach card, and an `xs` line pinned to the
+	inline start of the reveal's sound row — two sizes, two axes, one component, and the tucked
+	copy turned a row built to centre one line of pinyin under its own character into three
+	objects with two of them on the margins. It is now one centred `〔幾-〕` at one step in the
+	row the tail was already reserving for the `.chose` chip, on every card that shows the whole
+	word and on none that does not (never on a production question, where those characters ARE
+	the answer). It costs no height anywhere, it takes the pinyin's two ends back — `soundEnds`
+	used to double the wider of speaker and bracket, up to 184px of a 335px row — and between
+	the two facts the tail is left blank for 155 of the 4,308 shipped words (3.6%) instead of
+	the 386 (9.0%) that carry no part of speech at all.
 
 	THE SECOND BLOCK IS OPTIONAL AND ITS ABSENCE COSTS NOTHING. Every shipped word now carries
 	a sentence, but `Word.example` stays optional and nothing here reserves room for one: the
@@ -98,12 +125,15 @@
 	production question without one falls back to the blank reserve it had before. There is no
 	empty panel, no reserved gap and no jump.
 
-	THE HINT LIVES IN THE PINYIN'S OWN SLOT. "Show pinyin" is the first row of `.under`, which
-	is exactly where the revealed pinyin appears — so tapping it swaps a button for the sound
-	in place, and the tap that answers the question changes nothing about that line's position.
-	It also takes the hint's slot out of the hero row, which is where the character got most of
-	the size back that the reserve cost it — 320x568 went from a 40px answered headword to
-	64px, and 375x667 from 72px to 95px, while reserving the whole reveal.
+	THE HINT LIVES IN THE PINYIN'S OWN SLOT — whichever row that is. "Show pinyin" sits exactly
+	where the sound it uncovers will appear, so tapping it swaps a button for a reading in
+	place and the tap that answers the question changes nothing about that line's position.
+	On a card with no sentence that row is the sound slot, the first row of `.under`; on a
+	recognition card, whose sound slot is holding the sentence, it is the gloss slot one row
+	down, where the sentence's own reading lands. Either way it is out of the hero row, which
+	is where the character got most of the size back that the reserve cost it — 320x568 went
+	from a 40px answered headword to 64px, and 375x667 from 72px to 95px, while reserving the
+	whole reveal.
 
 	THE CHARACTER IS SIZED BY THE SPACE, NOT BY A GUESS. `.hero` is a size container, so the
 	headword is `min(100cqw / columns / fit, 92cqh, --hero-max)` — "n characters take this much
@@ -200,8 +230,6 @@
 	const meaning = $derived(fullGloss(word));
 	/** The hanzi is the face of the card in one direction and the answer in the other. */
 	const showHanzi = $derived(shown || question.direction === 'hanzi-to-meaning');
-	/** The sound is on screen because it was asked for, or because there is nothing to hide. */
-	const showSound = $derived(shown || hinted);
 	/**
 	 * Whether "Show pinyin" may be offered at all.
 	 *
@@ -221,28 +249,31 @@
 	 */
 	const production = $derived(!teaching && question.direction === 'meaning-to-hanzi');
 	/**
-	 * The traditional form, when the word actually has a different one. Shown wherever the
-	 * whole word is — a teach card and both directions' reveals — never while it is still the
-	 * answer to something. 251 of 500 HSK 1 words and 545 of 969 HSK 3 words carry one.
+	 * The traditional form, when the word actually has a different one. 251 of 500 HSK 1 words
+	 * and 545 of 969 HSK 3 words carry one.
 	 */
 	const traditional = $derived(
 		word.traditional && word.traditional !== word.hanzi ? word.traditional : null
 	);
 	/**
+	 * Whether to print it. Wherever the characters are already on screen and nowhere else: a
+	 * teach card, both directions' reveals, and the recognition question — where the hanzi IS
+	 * the prompt, so its variant spelling can give away nothing the headword has not. Never on
+	 * a production question, where those same characters are the answer.
+	 */
+	const showTrad = $derived(traditional !== null && showHanzi);
+	/**
 	 * How much of the sound row its two ends take, both of them together.
 	 *
 	 * The pinyin is centred under its own character, so it grows into BOTH ends at once and the
 	 * binding end is whichever is wider — hence twice the larger, not the sum. Without it
-	 * `Zhōnghuá Mínzú` set 230px wide in a 335px row runs 24px under the speaker and 43px under
-	 * 〔中華民族〕; with it the sound comes down the scale instead, exactly the way it already
-	 * comes down when the row gets shorter.
-	 *
-	 * A teach card reserves only the speaker: its traditional form has a row of its own, and
-	 * its speaker keeps the word `Listen` because there is room for it there.
+	 * `Zhōnghuá Mínzú` set 230px wide in a 335px row runs 24px under the speaker; with it the
+	 * sound comes down the scale instead, exactly the way it already comes down when the row
+	 * gets shorter. One end, doubled: the speaker is the only thing in this row that is not the
+	 * pinyin now that the traditional form has moved to the tail. A teach card reserves more of
+	 * it because its speaker keeps the word `Listen`.
 	 */
-	const soundEnds = $derived(
-		teaching ? 170 : 2 * Math.max(46, traditional ? [...traditional].length * 17 + 24 : 0)
-	);
+	const soundEnds = $derived(teaching ? 170 : 92);
 
 	/**
 	 * The senses, one per line, for the English hero.
@@ -253,28 +284,64 @@
 	 * not the subject of the screen.
 	 */
 	const senses = $derived(word.meanings.length > 0 ? word.meanings : [meaning]);
-	/** The widest sense, in ems: the term that decides how large the stack can be set. */
-	const senseEm = $derived(Math.max(...senses.map(glossEm)));
+	/** Every sense measured in ems, widest first: the terms the hero's size is solved from. */
+	const senseEms = $derived(senses.map(glossEm).sort((a, b) => b - a));
+	/** The widest sense. The one that decides whether the block can be set on `rows` lines. */
+	const senseEm = $derived(Math.max(...senseEms, 1));
+	/**
+	 * The SECOND widest, and why the hero needs it.
+	 *
+	 * `.ask` used to solve its size over one variable — "every sense wraps to j lines" — which
+	 * is only ever right when the senses are the same length. 正在 is `in the process of doing`
+	 * (10.5em) and `currently` (4.6em): j=1 sets the block at 28px because the long one has to
+	 * fit a line, and j=2 sets it at 32px because it then charges the SHORT one a second line it
+	 * does not need. Neither is the answer, which is "the long one takes two lines and the short
+	 * one takes one" — three lines, 43px, the size the band actually affords. Solving for that
+	 * needs to know that everything except the widest still fits on its own line, and this is
+	 * that term. A word with one sense has no second one; 0.01 makes the term it appears in
+	 * unbounded so `min()` ignores it, and the rung collapses onto the `j = 2` rung it duplicates.
+	 */
+	const senseEm2 = $derived(Math.max(...senseEms.slice(1), 0.01));
 
 	/*
 	 * ------------------------------------------------------------- the clue ----------------
 	 *
-	 * THE PRODUCTION CARD'S RESERVE NOW CARRIES THE QUESTION'S OWN CONTEXT. Every row of the
-	 * reveal is laid out before the tap so the character cannot resize when the answer lands
-	 * (see the top of this file) — which on a production card left 106 of the stage's 328px
-	 * drawn, reserved and completely blank. Two of those rows can hold something that is not
-	 * the answer, and a cloze of the word in its own sentence is exactly that:
+	 * EVERY QUESTION CARD'S RESERVE CARRIES THE QUESTION'S OWN CONTEXT. Every row of the reveal
+	 * is laid out before the tap so the character cannot resize when the answer lands (see the
+	 * top of this file), which left 106 of the stage's 328px drawn, reserved and completely
+	 * blank on a question card. Two of those rows can hold the word's own sentence, and which
+	 * halves of the sentence they may hold is decided by which half of the word is the answer.
 	 *
-	 *   · the sound slot holds the sentence with the word cut out of it. It is the slot the
-	 *     pinyin lands in, and the pinyin is precisely what this direction withholds, so the
-	 *     two never want it at the same moment;
-	 *   · the gloss slot holds that sentence's translation, laid over the same box the revealed
-	 *     meaning is measured by — so it costs no height at all.
+	 * THE CLUE IS THE HALF THE LEARNER IS NOT BEING ASKED FOR. Loop 4 built this for the
+	 * production card and gated it on `production`, which left the card the learner sees MOST —
+	 * every word passes recognition between its introduction and its first correct answer, and
+	 * one card in `REFRESH_EVERY` forever after — as the emptiest screen in the app: 68.3 of
+	 * its 106.3px of reserve blank, 82.4px of dead column above the first answer button, 53.3%
+	 * stage ink against the production card's 66-72% right beside it.
 	 *
-	 * A tap turns the card over: clue out, word in. Nothing moves, and the blank is never
-	 * filled in front of the learner — the answer replaces the question rather than annotating
-	 * it, which is also why the sentence's own pinyin is not shown. That line would spell out
-	 * the answer's sound under a blank the card is asking the learner to fill.
+	 *   · PRODUCTION (the English is the prompt, the character is the answer). The sound slot
+	 *     holds the sentence with the word CUT OUT of it — it is the slot the pinyin lands in,
+	 *     and the pinyin is precisely what this direction withholds — and the gloss slot holds
+	 *     that sentence's English translation. Both Chinese halves are the answer, so the one
+	 *     that stays is the English one.
+	 *   · RECOGNITION (the character is the prompt, the English is the answer). Exactly the
+	 *     other way round: the sentence hanzi is spent and its English is not. The word is
+	 *     BOLDED inside the line rather than blanked — the way `.aside` already renders it, and
+	 *     the way Pleco and Du Chinese both bold a headword in its own example — because the
+	 *     character is already the largest thing on the screen and a hole cut in it would give
+	 *     nothing away except the line the learner is being handed to read. The sentence's
+	 *     English is the one thing withheld: it names the answer.
+	 *
+	 * AND THE HINT NOW BUYS THE WHOLE LINE'S SOUND. "Show pinyin" has always lived in the slot
+	 * the sound it reveals lands in. On a recognition card that slot is now holding the
+	 * sentence, so the hint moves one row down to the gloss slot and reveals the SENTENCE's
+	 * pinyin there — which contains the word's own syllables, so it answers everything the old
+	 * hint answered and eight syllables more. It is laid over the reserved box, not placed in
+	 * it, so the swap costs the character nothing and moves nothing below it.
+	 *
+	 * A tap turns the card over: clue out, word in. Nothing moves, and on a production card the
+	 * blank is never filled in front of the learner — the answer replaces the question rather
+	 * than annotating it.
 	 */
 
 	/** The word's sentence. Every shipped word carries one; the type keeps it optional. */
@@ -284,11 +351,22 @@
 	 * same split is what lets a question blank it instead. See `splitExample`.
 	 */
 	const sentence = $derived(example ? splitExample(example.hanzi, word.hanzi) : null);
-	/** The sentence as a clue: production only, and only while the question is still open. */
-	const clue = $derived(production && !answered ? sentence : null);
+	/** The sentence as a clue: on either question card, while the question is still open. */
+	const clue = $derived(!teaching && !answered ? sentence : null);
 	/**
-	 * The word taken apart, one character to one syllable — the second block for the 3,038
-	 * words that have no sentence yet. It answers the question a joined `lǎoshī` leaves open
+	 * The sound is on screen because the whole word is, or because it was asked for.
+	 *
+	 * `!clue` on the second term: where a clue is in the sound slot the hint is one row down
+	 * and reveals the sentence's pinyin instead, so the word's own sound stays behind the
+	 * answer. (`hinted` can only ever be true in the recognition direction — see `canHint`.)
+	 */
+	const showSound = $derived(shown || (hinted && !clue));
+	/**
+	 * The word taken apart, one character to one syllable — the second block for a word with no
+	 * sentence. All 4,308 shipped words carry one (500/770/969/999/1070, build-gated), so this
+	 * is the fallback for a corpus that stops clearing that gate rather than a case the app
+	 * meets today; `Word.example` is optional and nothing here reserves room for either block.
+	 * It answers the question a joined `lǎoshī` leaves open
 	 * for a learner meeting 老师: which sound belongs to which character. A one-character word
 	 * has nothing to take apart, so it gets no block at all rather than a restatement of its
 	 * own headword.
@@ -311,6 +389,7 @@
 	style:--gloss-em={glossEm(meaning)}
 	style:--ask-rows={senses.length}
 	style:--ask-em={senseEm}
+	style:--ask-em2={senseEm2}
 	style:--py-em={glossEm(word.pinyin)}
 	style:--sound-ends="{soundEnds}px"
 >
@@ -361,45 +440,31 @@
 	-->
 	<div class="under">
 		<div class="sound-slot">
-			{#if traditional && !teaching && shown}
-				<!-- Tucked into the sound row's own box rather than given a row: a row here is
-				     24px off the character, on the half of the list that has a traditional
-				     form and not the other half. -->
-				<p class="trad tucked">{@render tradMark('xs')}</p>
-			{/if}
 			{#if showSound}
 				<p class="sound" class:arrive={answered && !hinted}><Pinyin {word} size="xl" /></p>
 				<span class="say-slot" class:icon={!teaching}
 					><SpeakButton text={word.hanzi} pinyin={word.pinyin} /></span
 				>
 			{:else if clue}
-				<!-- The question's own context, in the slot the answer's sound will land in. -->
+				<!-- The question's own context, in the slot the answer's sound will land in. The
+				     word is cut out of it where the character is the answer and bolded in it
+				     where the character is the question. -->
 				<p class="clue-face" style:--sen-chars={clue.chars}>
-					{#each clue.parts as part, i (i)}{#if part.hit}<span class="sr-only">(blank)</span><span
-								class="blank"
-								aria-hidden="true"
+					{#each clue.parts as part, i (i)}{#if part.hit && production}<span class="sr-only"
+								>(blank)</span
+							><span class="blank" aria-hidden="true"
 								><Hanzi text={part.text} size="sm" display class="clue-hanzi" /></span
-							>{:else}<Hanzi text={part.text} size="sm" class="clue-hanzi" />{/if}{/each}
+							>{:else}<Hanzi
+								text={part.text}
+								size="sm"
+								display={part.hit}
+								class={part.hit ? 'clue-hanzi hit' : 'clue-hanzi'}
+							/>{/if}{/each}
 				</p>
 			{:else if canHint}
-				<button type="button" class="hint" onclick={onhint}>
-					<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
-						<path
-							d="M1.8 10S4.9 4.7 10 4.7 18.2 10 18.2 10 15.1 15.3 10 15.3 1.8 10 1.8 10Z"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="1.6"
-						/>
-						<circle cx="10" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6" />
-					</svg>
-					Show pinyin
-				</button>
+				{@render pinyinHint(false)}
 			{/if}
 		</div>
-
-		{#if traditional && teaching}
-			<p class="trad">{@render tradMark('sm')}</p>
-		{/if}
 
 		<!--
 			The gloss slot is measured by the revealed meaning in both states, so a question
@@ -408,10 +473,18 @@
 		<div class="gloss-slot">
 			<p class="meaning" class:veiled={!shown}>{meaning}</p>
 			{#if clue && example}
-				<!-- Laid over the reserved box rather than placed in it, so what the sentence
-				     says costs the character nothing — the same trick the extra glosses used,
-				     spent on something that is not half of a phrase printed elsewhere. -->
-				<p class="clue-en" style:--clue-em={glossEm(example.english)}>{example.english}</p>
+				<!-- Laid over the reserved box rather than placed in it, so what this row says
+				     costs the character nothing — the same trick the extra glosses used, spent
+				     on something that is not half of a phrase printed elsewhere. -->
+				{#if production}
+					<p class="clue-en" style:--clue-em={glossEm(example.english)}>{example.english}</p>
+				{:else if hinted}
+					<p class="clue-py" style:--clue-em={glossEm(example.pinyin)}>
+						<Pinyin pinyin={example.pinyin} size="sm" tones={false} sentence={example.hanzi} />
+					</p>
+				{:else if canHint}
+					{@render pinyinHint(true)}
+				{/if}
 			{/if}
 		</div>
 
@@ -427,16 +500,27 @@
 						<span class="chose-gloss">{primaryGloss(picked)}</span>
 					{/if}
 				</p>
-			{:else if pos && (shown || production)}
+			{:else if pos || showTrad}
 				<!--
-					Visible before the tap on a production card, because it is part of the
-					question and not part of the answer: the distractor picker weights a shared
-					part of speech above every other signal in this direction, so the four
-					buttons almost always agree about it. "the verb meaning to love" is a better
-					question than "to love", and it is one more line the reserve does not have
-					to spend on nothing.
+					ONE LINE OF FACTS ABOUT THE WORD, centred, in the box a miss would have taken.
+
+					The part of speech is visible before the tap in BOTH directions, because it is
+					part of the question and not part of the answer: `SIGNALS` in `distractors.ts`
+					gives a shared part of speech weight 6 either way — the top term among
+					ordinary candidates in both — so the four buttons almost always agree about
+					it. Measured over 80 recognition cards drawn from HSK 1: 71 carried a part of
+					speech, and on 70 of those (98.6%) ALL FOUR choices shared one with the
+					answer; on none of them did it single a choice out. "The verb meaning to love"
+					is a better question than "to love".
+
+					The traditional form joins it here rather than being drawn twice elsewhere —
+					see `.meta` below — and between them they leave this row blank for 155 of the
+					4,308 shipped words (3.6%) instead of the 386 (9.0%) the part of speech alone
+					left empty.
 				-->
-				<p class="pos">{pos}</p>
+				<p class="meta">
+					{#if pos}<span class="pos">{pos}</span>{/if}{#if showTrad}{@render tradMark()}{/if}
+				</p>
 			{/if}
 		</div>
 	</div>
@@ -472,11 +556,41 @@
 	{/if}
 </div>
 
-<!-- Pleco brackets the traditional form beside the headword (几乎〔幾-〕). Same mark either
-     side of the tap and on either card; only the step it is set at changes with the room. -->
-{#snippet tradMark(size: 'xs' | 'sm')}
-	<span class="sr-only">traditional form </span><span class="bracket" aria-hidden="true">〔</span
-	><Hanzi text={traditional ?? ''} {size} /><span class="bracket" aria-hidden="true">〕</span>
+<!--
+	"Show pinyin", in whichever of the two reserved rows the sound it reveals will land in. In
+	the sound slot it reveals the word's own pinyin, in the gloss slot the whole sentence's —
+	one control, one rule, two rows, because the rule was never "the first row of `.under`", it
+	was "exactly where the thing it uncovers appears".
+-->
+{#snippet pinyinHint(inGloss: boolean)}
+	<button type="button" class="hint" class:in-gloss={inGloss} onclick={onhint}>
+		<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+			<path
+				d="M1.8 10S4.9 4.7 10 4.7 18.2 10 18.2 10 15.1 15.3 10 15.3 1.8 10 1.8 10Z"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="1.6"
+			/>
+			<circle cx="10" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.6" />
+		</svg>
+		Show pinyin
+	</button>
+{/snippet}
+
+<!-- Pleco brackets the traditional form beside the headword (几乎〔幾-〕). ONE mark, one size,
+     one place: the same element in the same row of the same grid on a teach card, on either
+     direction's reveal and on the recognition question. It used to be drawn twice — a centred
+     `sm` row of its own on a teach card, an `xs` line flush to the left frame edge inside the
+     reveal's sound row, which turned a centred axis into a three-object row with two objects on
+     the margins. -->
+{#snippet tradMark()}
+	<span class="trad"
+		><span class="sr-only">traditional form </span><span class="bracket open" aria-hidden="true"
+			>〔</span
+		><Hanzi text={traditional ?? ''} size="xs" /><span class="bracket close" aria-hidden="true"
+			>〕</span
+		></span
+	>
 {/snippet}
 
 <style>
@@ -744,15 +858,30 @@
 	 * character reaches 152. They are the same presence, not the same number.
 	 */
 	.ask {
+		--ask-col: 88cqw;
 		--ask-h: calc(94cqh / var(--ask-rows) / 1.16);
-		--ask-w: calc(88cqw / var(--ask-em));
+		--ask-w: calc(var(--ask-col) / var(--ask-em));
+		/* The two uneven rungs: the widest sense takes 1+k lines and every other sense still
+		   takes one, so the block is `rows + k` lines rather than `rows x j`. Both width terms
+		   are needed and neither is slack — the first is the long sense fitting in its lines,
+		   the second is the rest of them fitting in theirs. */
+		--ask-u1: min(calc(var(--ask-w) * 2), calc(var(--ask-col) / var(--ask-em2)));
+		--ask-u2: min(calc(var(--ask-w) * 3), calc(var(--ask-col) / var(--ask-em2)));
 
 		margin: 0;
+		/*
+		 * The largest size at which the block still fits, solved over five line budgets rather
+		 * than three. The height term falls as lines are added and every width term rises, so
+		 * the `max()` of the `min()`s IS the crossing — and adding a rung can only ever move it
+		 * up, because each rung is a size the block is proven to fit at.
+		 */
 		font-size: clamp(
 			var(--text-lg),
 			max(
 				min(var(--ask-h), var(--ask-w)),
+				min(calc(94cqh / (var(--ask-rows) + 1) / 1.16), var(--ask-u1)),
 				min(calc(var(--ask-h) / 2), calc(var(--ask-w) * 2)),
+				min(calc(94cqh / (var(--ask-rows) + 2) / 1.16), var(--ask-u2)),
 				min(calc(var(--ask-h) / 3), calc(var(--ask-w) * 3))
 			),
 			var(--ask-max)
@@ -811,54 +940,74 @@
 		inset-inline-end: 0;
 	}
 
-	/* The word `Listen` costs 40px of a row that is already lending its ends to a bracketed
-	   traditional form; the icon is a 44px speaker either way and the accessible name is the
-	   whole sentence regardless. The teach card, which has the room, keeps the label. */
+	/* The word `Listen` costs 40px of a row whose whole job is to hold a line of pinyin centred
+	   under its own character; the icon is a 44px speaker either way and the accessible name is
+	   the whole sentence regardless. The teach card, which has the room, keeps the label. */
 	.say-slot.icon :global(.label) {
 		display: none;
 	}
 
-	/* At 152px the headword has no room beside it, so on a teach card the bracketed form goes
-	   under the sound instead — a footnote to the word, never a second headword. */
-	.trad {
+	/*
+	 * ONE ROW OF FACTS ABOUT THE WORD — part of speech, traditional form — in the box that was
+	 * already reserved for a miss.
+	 *
+	 * The traditional form used to be drawn twice: a centred `sm` row of its own on a teach
+	 * card, and an `xs` line pinned to the inline start of the reveal's sound row. Two sizes,
+	 * two axes, one component. The tucked copy also cost the pinyin beside it up to 92px of its
+	 * own row (`soundEnds` doubled the wider end), and it read as a third object on a row built
+	 * to centre one thing under the character above it.
+	 *
+	 * Here it is one centred line at one step, on every card that shows the whole word — and it
+	 * costs nothing anywhere, because this row is reserved in both states regardless: the tail
+	 * has to be tall enough for the `.chose` chip whatever else is in it. It also gives the row
+	 * something to hold on the 386 shipped words that carry no part of speech at all — 半年,
+	 * 帮忙, 唱歌 — of which 231 have a traditional form.
+	 */
+	.meta {
 		display: flex;
 		align-items: baseline;
-		gap: 0.05em;
-		margin: 0.25rem 0 0;
-		color: var(--color-ink-subtle);
-	}
-
-	/*
-	 * A QUESTION CARD CANNOT AFFORD A ROW FOR IT. The reveal is laid out in both states, so a
-	 * `.trad` row would be reserved before the tap as well as after — 24px off the character,
-	 * on the half of the list that has a traditional form and not on the other half, which is
-	 * the "the word decides the headword's size" bug in a new hat. Tucked into the sound row's
-	 * own fixed box instead, at the inline start, it costs the layout nothing and balances the
-	 * speaker sitting at the other end. The pinyin between them stays centred under its own
-	 * character, which is the alignment this screen is built on.
-	 */
-	.trad.tucked {
-		position: absolute;
-		inset-inline-start: 0;
-		max-inline-size: 34%;
+		justify-content: center;
+		gap: 0.375rem;
+		max-inline-size: 100%;
 		margin: 0;
+		font-size: var(--text-xs);
+		color: var(--color-ink-subtle);
+		/* One line, always: a second one here would overflow a box the buttons are measured
+		   against. 不好意思〔不好意思〕 is the widest this gets and it is 118px at 375. */
+		white-space: nowrap;
 		overflow: hidden;
 	}
 
-	/* A step below the smallest hanzi rung, because every pixel this end takes is two pixels
-	   off the pinyin in the middle (the sound is centred, so it grows into both ends at once)
-	   and `soundEnds` above is derived from exactly these numbers. Pleco sets its bracketed
-	   form small for the same reason: it is an aside about the word, not a second headword. */
-	.trad.tucked :global(.hanzi) {
-		font-size: 1rem;
+	/* One flex item, not four: the mark's own parts must not pick up `.meta`'s gap between
+	   them, or `〔 漢語 〕` comes out 21px wider than the word it is bracketing. */
+	.trad {
+		display: inline-flex;
+		align-items: baseline;
 	}
 
-	.trad.tucked .bracket {
-		font-size: var(--text-2xs);
+	/*
+	 * 14px against the row's 12px of Latin — CJK needs ~1.15x to read as the same size, and no
+	 * more than that. The `xs` rung of the hanzi scale is 20px, which is where this mark was
+	 * set: two thirds larger than the part of speech beside it and, on a teach card, larger
+	 * than the English gloss that is the actual answer. It is a footnote about the spelling of
+	 * a word whose characters are already on the screen at up to 152px.
+	 */
+	.trad :global(.hanzi) {
+		font-size: 0.875rem;
 	}
 
+	/* A full-width CJK bracket carries ~0.3em of built-in side bearing, so it needs pulling in
+	   to sit against its own characters the way Pleco's does (几乎〔幾-〕). */
 	.bracket {
-		font-size: var(--text-sm);
+		font-size: 0.75rem;
+	}
+
+	.bracket.open {
+		margin-inline-end: -0.06em;
+	}
+
+	.bracket.close {
+		margin-inline-start: -0.06em;
 	}
 
 	.gloss-slot {
@@ -907,6 +1056,30 @@
 	}
 
 	/*
+	 * A wide window's sound slot is 44px against a 375x812 phone's 38, and 1.5rem above is a
+	 * cap the phone's slot decided. 28px still clears 44px at 1.3 leading, and the sentence
+	 * stops being a 24px line under a 129.5px character in a 504px column. Guarded on height
+	 * as well as width, because the slot is only 44px once there is room for it to be.
+	 */
+	@media (min-width: 48rem) and (min-height: 44rem) {
+		.prompt .clue-face :global(.clue-hanzi) {
+			font-size: min(1.75rem, calc(100cqw / var(--sen-chars) / 1.04));
+		}
+	}
+
+	/*
+	 * BOLDED, NOT BLANKED — the recognition half of the clue. Here the character is the
+	 * question and the English is the answer, so the sentence is handed over whole with the
+	 * word marked in it exactly as `.sen-face` marks it on a teach card and as both references
+	 * mark it (Pleco bolds 几乎 in its examples, Du Chinese bolds the word in its sentence
+	 * block). A blank would be cutting a hole in the one thing this card is giving away for
+	 * free: the word is 119px tall directly above this line.
+	 */
+	.clue-face :global(.hit) {
+		color: var(--color-ink);
+	}
+
+	/*
 	 * THE BLANK IS THE WORD'S OWN WIDTH. The distractor picker weights a matching character
 	 * count above every other signal in this direction, so the four buttons are almost always
 	 * the same length as each other and a width-true blank gives away nothing they do not.
@@ -949,6 +1122,27 @@
 	}
 
 	/*
+	 * THE SENTENCE'S OWN SOUND, on the card whose sound slot is holding the sentence. One tap
+	 * used to buy `wǎn`; it now buys the line that `wǎn` is standing in, which contains those
+	 * same syllables and eight more of context. Over the same reserved box as `.clue-en` and
+	 * by the same rule — divided by its own measured width so a long reading steps down the
+	 * scale instead of taking a second line out of the character above it.
+	 */
+	.clue-py {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-content: center;
+		margin: 0;
+		color: var(--color-ink-subtle);
+	}
+
+	.clue-py :global(.pinyin) {
+		font-size: min(var(--text-pinyin-sm), calc(96cqw / var(--clue-em)));
+		line-height: 1.2;
+	}
+
+	/*
 	 * One line, and a miss owns it: part of speech when the answer was right, what the learner
 	 * actually picked when it was not. Fixed height so the two never differ.
 	 */
@@ -987,9 +1181,36 @@
 		inset-inline: -0.5rem;
 	}
 
+	/*
+	 * The gloss-slot copy, for the recognition card whose sound slot is holding the sentence.
+	 * Laid over the reserved box exactly like `.clue-py`, which is what replaces it on the tap
+	 * — same row, same centre line, so the hint does not so much disappear as become the thing
+	 * it promised. Centred on the box rather than stretched across it, so the pill it lights up
+	 * under a finger is still the size of the words in it.
+	 */
+	.hint.in-gloss {
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 50%;
+		block-size: auto;
+		padding-inline: 0.75rem;
+		translate: -50% 0;
+	}
+
+	/* 100% is this button's own box — the gloss slot's ~24px — so the target is 44px here for
+	   the same reason and by the same arithmetic as above. */
+	.hint.in-gloss::after {
+		inset-block: calc((100% - var(--spacing-tap)) / 2);
+	}
+
 	.hint svg {
 		inline-size: 1.0625rem;
 		block-size: 1.0625rem;
+	}
+
+	.hint.in-gloss svg {
+		inline-size: 0.9375rem;
+		block-size: 0.9375rem;
 	}
 
 	.hint:active {
@@ -1073,9 +1294,8 @@
 	}
 
 	.pos {
-		margin: 0;
-		font-size: var(--text-xs);
-		color: var(--color-ink-subtle);
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	/*

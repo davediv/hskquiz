@@ -449,6 +449,16 @@
 		--stage-pad-t: clamp(0.25rem, calc(4.92svh - 23.9px), 1.375rem);
 		--stage-pad-b: clamp(0.5rem, calc(4.92svh - 19.9px), 1.625rem);
 		--run-pad-b: clamp(0.5rem, calc(3.28svh - 10.6px), 1.25rem);
+		/*
+		 * The answer pill's own two measures live here rather than in `ChoiceButton`, because
+		 * they are two more lines of this rhythm and not a property of a button: they are
+		 * `svh`-driven for the same reason as the five above, they are subtracted from the same
+		 * stage, and — see the desktop block below — they have to stop growing at the same
+		 * height the rest of them do. Split across two files, one half of the rhythm was capped
+		 * and the other half was not, which is exactly the bug that block fixes.
+		 */
+		--choice-h: clamp(2.875rem, calc(7.38svh + 4.1px), 4.5rem);
+		--choice-face: clamp(1.625rem, calc(4.1svh + 2.7px), 2.5rem);
 
 		display: flex;
 		flex-direction: column;
@@ -458,14 +468,40 @@
 		padding-block-end: var(--run-pad-b);
 	}
 
-	/* On anything bigger than a phone a full-height column strands the buttons at the far edge
-	   of the window; capped and centred, the run reads as one object again. */
+	/*
+	 * On anything bigger than a phone a full-height column strands the buttons at the far edge
+	 * of the window; capped and centred, the run reads as one object again.
+	 *
+	 * AND EVERY MEASURE INSIDE IT STOPS GROWING WHERE THE RUN DOES. This is the second half of
+	 * that cap and it was missing. The seven lines above are `svh` because the stage is
+	 * whatever the rhythm leaves behind — but on a wide window the run stops at 46rem while
+	 * `svh` keeps climbing, so the answer stack, the gaps and the padding went on taking room
+	 * out of a column that could not get any bigger. Measured at 1440x900 before this block:
+	 * the run was 736px and the four answer buttons alone were 324.4px of it (70.5px each,
+	 * against 64px on a 375x812 phone), which left the stage 271.1px against the phone's 328.3
+	 * — a SHORTER stage on a window 332px taller. The hero row came out at 90.4px and the
+	 * headword at 83.2px, 30% smaller than the same word on a phone and, at 5.8% of screen
+	 * width per glyph, below Pleco's ~6.9% at the one viewport with the most room to spare.
+	 *
+	 * The run hits 46rem at ~793px of viewport (736 + the app bar), so each ceiling below is
+	 * simply the value its own clamp already takes at that height — the same curve, stopped
+	 * where the column it is measured against stops. Nothing changes on any phone: every one
+	 * of these is above the value its clamp reaches at 375x932, so the cap never binds there.
+	 */
 	@media (min-width: 48rem) {
 		.quiz {
 			justify-content: center;
 		}
 
 		.run {
+			--choice-gap: clamp(0.375rem, calc(2.46svh - 8px), 0.71875rem);
+			--action-gap: clamp(0.375rem, calc(3.28svh - 12.6px), 0.8125rem);
+			--stage-pad-t: clamp(0.25rem, calc(4.92svh - 23.9px), 0.9375rem);
+			--stage-pad-b: clamp(0.5rem, calc(4.92svh - 19.9px), 1.1875rem);
+			--run-pad-b: clamp(0.5rem, calc(3.28svh - 10.6px), 0.9375rem);
+			--choice-h: clamp(2.875rem, calc(7.38svh + 4.1px), 3.875rem);
+			--choice-face: clamp(1.625rem, calc(4.1svh + 2.7px), 2.1875rem);
+
 			max-block-size: 46rem;
 		}
 	}
