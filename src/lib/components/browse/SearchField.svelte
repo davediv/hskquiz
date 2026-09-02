@@ -50,7 +50,7 @@
 	});
 </script>
 
-<div class="field">
+<div class="field" class:filled={value !== ''}>
 	<svg class="glass" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
 		<circle cx="8.75" cy="8.75" r="5.25" fill="none" stroke="currentColor" stroke-width="1.9" />
 		<path
@@ -99,14 +99,19 @@
 	.field {
 		position: relative;
 		display: flex;
+		flex: 1 1 auto;
 		align-items: center;
+		/* It shares its row with the level switch now, and a flex item's default
+		   `min-inline-size: auto` is the intrinsic width of a 24-character placeholder — which
+		   pushed the switch off the leading edge instead of shrinking. */
+		min-inline-size: 0;
 	}
 
 	.glass {
 		position: absolute;
-		inset-inline-start: 0.75rem;
-		inline-size: 1.125rem;
-		block-size: 1.125rem;
+		inset-inline-start: 0.6875rem;
+		inline-size: 1.0625rem;
+		block-size: 1.0625rem;
 		color: var(--color-ink-subtle);
 		pointer-events: none;
 	}
@@ -115,7 +120,10 @@
 		inline-size: 100%;
 		min-block-size: var(--spacing-tap);
 		padding-block: 0.5rem;
-		padding-inline: 2.375rem 2.5rem;
+		/* The trailing well is the clear button's, and it only exists while there is something to
+		   clear. Empty, that is 26px of the narrowest field on the screen handed back to the
+		   placeholder: 141px of text room at 375 rather than 115. */
+		padding-inline: 2.125rem 0.875rem;
 		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface);
@@ -125,6 +133,15 @@
 		line-height: 1.4;
 		box-shadow: none;
 		appearance: none;
+		/* Belt to the placeholder's braces: the strings are chosen to fit the width they are
+		   shown at (see `searchHint` on the browse screen), but a wider system font or a
+		   translated label should trail off rather than be sliced through a letterform. It goes
+		   on the input, not on `::placeholder`, where it does nothing. */
+		text-overflow: ellipsis;
+	}
+
+	.field.filled .input {
+		padding-inline-end: 2.5rem;
 	}
 
 	.input::placeholder {
@@ -157,6 +174,18 @@
 	@media (hover: hover) {
 		.clear:hover {
 			color: var(--color-ink-muted);
+		}
+	}
+
+	/* 320px. Four more px of text room, taken from the glass's own inset rather than from the
+	   placeholder. */
+	@media (max-width: 22.5rem) {
+		.glass {
+			inset-inline-start: 0.5rem;
+		}
+
+		.input {
+			padding-inline-start: 1.875rem;
 		}
 	}
 </style>

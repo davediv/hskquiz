@@ -144,3 +144,50 @@ export function progressLine(record: WordProgress): string {
 	if (record.streak > 0) parts.push(`${record.streak} in a row`);
 	return parts.join(' · ');
 }
+
+/**
+ * Which chips the strip should carry, in order.
+ *
+ * NO `all` CHIP, AND THAT IS THE POINT. Six two-line chips measure 371px of scroll width
+ * against a 320px phone, so "40 Mastered" — the one number a returning learner opens this
+ * screen for — sat 51px past the right edge behind a fade, and the strip's own header comment
+ * had been asserting since loop 4 that everything fit. `all` is the widest of the six (its
+ * count is the whole level: `1,070`) and the least informative: it restates the number the
+ * level screen, the colophon and the list's own length already give. Dropping it takes the
+ * strip to 313px at 320 — inside the viewport with no gesture — and leaves five chips that
+ * each say something the others do not.
+ *
+ * Clearing the filter moves onto the selected chip, which toggles. That is how a filter chip
+ * behaves everywhere else, `aria-pressed` already said so, and the empty state still offers a
+ * button in the one place a learner can end up with nothing on screen.
+ *
+ * `new` is always offered, because "how much of this level have I not touched" is a question
+ * with a useful answer at zero. The rest appear as the learner reaches them: four chips reading
+ * 0 on a first visit are four buttons of noise.
+ *
+ * Read from the LEVEL's counts, never the search-scoped ones. Scoped, a keystroke that emptied
+ * a bucket would delete a chip, the row would change height, and the list under it would jump
+ * mid-query. What a chip *says* is scoped; whether it exists is not.
+ */
+export function visibleFilters(
+	available: StatusCounts,
+	value: StatusFilter
+): readonly WordStatus[] {
+	const chips: WordStatus[] = [];
+	for (const filter of STATUS_FILTERS) {
+		if (filter === 'all') continue;
+		if (filter === 'new' || available[filter] > 0 || filter === value) chips.push(filter);
+	}
+	return chips;
+}
+
+/**
+ * Whether the strip is worth a row at all.
+ *
+ * One chip is not a filter, it is a label — on a level nobody has practised the only bucket is
+ * `new`, and "500 New" under a header that has just said 500 is the third printing of one
+ * number. Below two, the row does not render and the whole screen is one 44px control row.
+ */
+export function hasChips(chips: readonly WordStatus[]): boolean {
+	return chips.length >= 2;
+}
