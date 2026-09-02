@@ -1,0 +1,19 @@
+{
+	"piece": "quiz-card",
+	"loop": 6,
+	"rule": "\"quiz-card\" is 9 characters — ODD — so the reference is A and ours is B.",
+	"A": {
+		"which": "reference",
+		"source": "reference/screenshots/pleco/pleco-iphone-02.png",
+		"what": "Pleco, iPhone, the 几乎 headword/detail screen: headword + traditional, PY and JP readings, DICT/CHARS/WORDS/SENTS tabs, ADVERB, the gloss, then five worked example sentences (hanzi with the headword bolded, bold pinyin, English).",
+		"device": "1242x2208 (414pt @3x)"
+	},
+	"B": {
+		"which": "ours",
+		"source": "progress/shots/loop-6/tmobile-s2c9-recog-right.png",
+		"what": "hskquiz, the quiz card's REVEAL state after a correct recognition answer on 车站 — headword, tone-coloured pinyin, gloss, part of speech + traditional form, the four answer pills marked, and the 'See results' action.",
+		"device": "375x812 @2x",
+		"note": "Deliberately NOT the teach card that won loop 5's blind test. The reveal is the state this verdict criticises, and the headword/detail screen is what Pleco's shot is."
+	},
+	"instruction_to_judge": "Do not open this file before judging."
+}
