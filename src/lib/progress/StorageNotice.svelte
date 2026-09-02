@@ -22,7 +22,7 @@
 	that the node test project can import without a Svelte compiler.
 -->
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { progress } from './progress.svelte.ts';
 
 	interface Props {
@@ -86,6 +86,38 @@
 	/** Whether there is anything here the Restore button could actually put back. */
 	const restorable = $derived(!!rescue?.readable && (rescue.words > 0 || rescue.levels > 0));
 
+	/**
+	 * Discard is armed by its first tap and only destroys on the second, exactly like Reset.
+	 *
+	 * It was one unconfirmed tap on the *quiet* control — 71×28 px, transparent border,
+	 * underlined, the standard "dismiss this message" affordance — and it deleted the only
+	 * surviving copy of 300 words and 1,800 answers, unmounting the panel byte-identically to
+	 * the way a successful Restore does. Its sibling button had a post-condition, a rollback and
+	 * a partial-restore report; the destructive twin had nothing between the finger and
+	 * `removeItem`. So it costs a second tap, and the armed label names exactly what goes.
+	 */
+	let confirmingDiscard = $state(false);
+	let discardTimer: ReturnType<typeof setTimeout> | undefined;
+
+	/** "300 words · 1,800 answers" — the stakes, spelled out on the armed label. */
+	const discardStakes = $derived(rescueSize ?? 'this copy');
+
+	/**
+	 * Disarm whenever the copy underneath changes. A tap aimed at discarding a 2-word leftover
+	 * must not land on a 300-word copy another tab wrote a moment later.
+	 */
+	$effect(() => {
+		void rescueSize;
+		disarmDiscard();
+	});
+
+	function disarmDiscard() {
+		clearTimeout(discardTimer);
+		confirmingDiscard = false;
+	}
+
+	onDestroy(() => clearTimeout(discardTimer));
+
 	interface Notice {
 		key: string;
 		tone: 'warn' | 'info';
@@ -101,15 +133,22 @@
 		// Ahead of the storage notices: an erase that did not land is a *different* thing from a
 		// saving failure, and saying "these answers live only in this tab" to someone who has
 		// just asked for those answers to be destroyed is the wrong sentence twice over.
-		if (progress.eraseFailed) {
+		if (progress.eraseBlockedBy !== null) {
 			list.push({
 				key: 'erase-failed',
 				tone: 'warn',
 				glyph: '!',
 				title: 'Progress was not reset',
 				detail:
-					'The browser refused to write, so nothing was erased and nothing was changed — every ' +
-					'answer below is still exactly where it was. Try again in a moment.'
+					progress.eraseBlockedBy === 'copy'
+						? // A different fact from a refused write, and worth its own sentence: nothing was
+							// attempted, because a reset keeps a copy of what it erases and the browser had
+							// no room for one. "The button is broken" is what a learner concludes otherwise.
+							'A reset keeps a copy of what it erases, and the browser had no room to store ' +
+							'one — so nothing was erased and nothing was changed. Free some space and try ' +
+							'again.'
+						: 'The browser refused to write, so nothing was erased and nothing was changed — ' +
+							'every answer below is still exactly where it was. Try again in a moment.'
 			});
 		}
 
@@ -143,10 +182,20 @@
 	});
 
 	function onRestore() {
+		disarmDiscard();
 		restoreFailed = !progress.restoreRescue();
 	}
 
 	function onDiscard() {
+		clearTimeout(discardTimer);
+		if (!confirmingDiscard) {
+			// Two taps, no modal — the same gesture Reset uses, so the app has one grammar for
+			// "this destroys something". Four seconds, then it forgets it was asked.
+			confirmingDiscard = true;
+			discardTimer = setTimeout(() => (confirmingDiscard = false), 4000);
+			return;
+		}
+		confirmingDiscard = false;
 		restoreFailed = false;
 		progress.discardRescue();
 	}
@@ -170,7 +219,10 @@
 				<div class="storage-notice-body">
 					<p class="storage-notice-line">
 						<strong>Earlier progress was kept aside.</strong>
-						{#if rescue.reason === 'lost'}
+						{#if rescue.reason === 'erased'}
+							Reset erased what was here, and this is the copy it kept first — so a tap that was not
+							meant is not the end of it.
+						{:else if rescue.reason === 'lost'}
 							A save was about to leave less history than this device already held, so the larger
 							copy was kept instead of being written over.
 						{:else if rescue.reason === 'unreadable'}
@@ -210,9 +262,10 @@
 						<button
 							type="button"
 							class="storage-notice-action storage-notice-action-quiet"
+							class:storage-notice-action-armed={confirmingDiscard}
 							onclick={onDiscard}
 						>
-							Discard
+							{confirmingDiscard ? `Tap again to delete ${discardStakes}` : 'Discard'}
 						</button>
 					</p>
 				</div>
@@ -306,8 +359,12 @@
 		margin: var(--spacing-2xs) 0 0;
 	}
 
+	/* No `min-block-size: 0`. It was here as a "this is only a text button" opt-out and it cost
+	   both controls their tap target: measured at 84×28 and 71×28 px, one of them destructive,
+	   both of them sitting mid-quiz whenever a rescue lands during a session. The global
+	   `:where()` floor of `--spacing-tap` is exactly right here — the padding still sets the
+	   visual weight, and the floor only grows the hit area. */
 	.storage-notice-action {
-		min-block-size: 0;
 		padding: calc(var(--spacing) * 1.5) var(--spacing-sm);
 		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-sm);
@@ -327,6 +384,19 @@
 		text-underline-offset: 0.2em;
 	}
 
+	/* Armed: the quiet dismiss link stops looking like one the moment it is one tap from
+	   deleting the learner's only copy. The same tint Reset's armed state uses, so the app has
+	   one visual grammar for "this destroys something" — and colour is never the only channel,
+	   since the label itself changes to name exactly what goes. */
+	.storage-notice-action-armed {
+		border-color: var(--color-accent);
+		background-color: var(--color-accent-soft);
+		color: var(--color-accent);
+		font-weight: 650;
+		text-decoration: none;
+		text-wrap: balance;
+	}
+
 	@media (hover: hover) {
 		.storage-notice-action:hover {
 			border-color: var(--color-ink);
@@ -335,6 +405,11 @@
 		.storage-notice-action-quiet:hover {
 			border-color: transparent;
 			color: var(--color-ink);
+		}
+
+		.storage-notice-action-armed:hover {
+			border-color: var(--color-accent);
+			color: var(--color-accent);
 		}
 	}
 </style>

@@ -21,13 +21,26 @@
  * empty one — a word map that arrived as an array, a reset counter of `1e22` that outranked
  * every record, an encoder dropping everything on the way out — walked straight past it while
  * `flush()` reported success. Counting words before and after catches all three the same way.
- * A reset is the one write whose whole point is to shrink the key, and it says so.
+ *
+ * **Step 3 is a precondition of step 4, not an attempt before it.** For four loops it was an
+ * attempt: the copy's failure was swallowed and the shrinking write went ahead anyway. A full
+ * quota refuses the copy and *accepts* the smaller write — so the one condition the rescue net
+ * exists for was the one condition in which it did nothing at all. Measured, with storage
+ * genuinely full: a key naming 300 words and 1,800 answers went to 176 bytes after four
+ * answers, with no copy, no notice, and the "not being saved" warning switching itself off as
+ * the loss landed. Now `#keepAside` returns whether the copy is readable in the backup key —
+ * verified by reading it back, not inferred from a `setItem` that did not throw — and a
+ * `false` cancels the write entirely, through the same `#failWrite` path a refused main-key
+ * write takes. The answers stay in memory, the warning stays up, the backoff keeps trying.
  *
  * The rescue key holds the **biggest** copy it has ever been offered, not the first.
  *
  * Nothing else writes. `resetLevel` and `resetAll` go through the same path, differing only in
  * that they move a reset generation on (see `progress-core.ts`) rather than deleting and
- * hoping.
+ * hoping — and they are gated on the same precondition. A reset is the one write allowed to
+ * shrink the key, but "erase my history" was never a licence to leave no copy of it, and never
+ * a licence to delete a rescue copy belonging to some other incident. `#keepErased` copies the
+ * outgoing payload first, and an erase that cannot be copied does not happen.
  *
  * When the key still reads back as exactly the bytes we last agreed on — the normal
  * single-tab case — steps 2 and 3 are skipped, and the key is never even decoded, because a
@@ -127,8 +140,20 @@ export type RescueReason =
 	| 'unreadable'
 	/** Merging them would have dropped records no reset accounts for. */
 	| 'lost'
+	/**
+	 * A Reset erased it. The learner asked for this, so it is the one rescue that is not a
+	 * failure — but "erase" and "destroy the only copy" are different promises, and this app
+	 * only ever made the first one. The copy is what makes a mis-tap survivable.
+	 */
+	| 'erased'
 	/** A copy from an earlier session was already there when this one started. */
 	| 'found';
+
+/**
+ * Why a Reset did not happen. `'write'` — the browser refused the erasing write itself.
+ * `'copy'` — it refused the copy the erase is conditional on, so nothing was touched.
+ */
+export type EraseBlock = 'write' | 'copy';
 
 /**
  * What can be said about a rescue copy without restoring it.
@@ -227,6 +252,13 @@ const DEFAULT_RETRY_DELAYS_MS = [1000, 5000, 30_000] as const;
 interface DiskRead {
 	text: string | null;
 	stored: StoredProgress | null;
+	/**
+	 * Whether these bytes are safe to overwrite. `false` only when they could not be decoded
+	 * *and* the copy of them could not be written — in which case the one readable trace of the
+	 * learner's history is the key itself, and nothing may replace it. A write path must obey
+	 * this; a read path has nothing to obey.
+	 */
+	copied: boolean;
 }
 
 export class ProgressStore {
@@ -258,8 +290,15 @@ export class ProgressStore {
 	 */
 	#forgetting = false;
 
-	/** Set when a Reset could not be written. The erase is in memory only, and undone by a reload. */
-	#eraseFailed = $state(false);
+	/**
+	 * Why the last Reset did not happen, or `null` when none has failed.
+	 *
+	 * `'write'` — the erasing write was refused, so the erase is in memory only and a reload
+	 * brings it all back. `'copy'` — the copy the erase is conditional on could not be made, so
+	 * nothing was touched at all. Two different sentences on screen, because they are two
+	 * different facts about the learner's data.
+	 */
+	#eraseFailed = $state<EraseBlock | null>(null);
 
 	#storage: StorageLike | null;
 	#now: () => number;
@@ -341,6 +380,20 @@ export class ProgressStore {
 	 * sentence at the worst possible moment.
 	 */
 	get eraseFailed(): boolean {
+		return this.#eraseFailed !== null;
+	}
+
+	/**
+	 * Which half of a Reset was refused: the erasing write, or the copy it is conditional on.
+	 * Reactive. `null` when the last Reset succeeded or none has been attempted.
+	 *
+	 * A reset that was called off because the copy could not be written is *not* "the browser
+	 * refused to write and nothing was erased" — nothing was even attempted, and the reason is
+	 * that this app will not erase history it cannot first put somewhere. Saying that out loud
+	 * is the difference between a learner who tries again in a moment and one who thinks the
+	 * button is broken.
+	 */
+	get eraseBlockedBy(): EraseBlock | null {
 		return this.#eraseFailed;
 	}
 
@@ -433,6 +486,8 @@ export class ProgressStore {
 		if (!LEVELS.includes(level)) return false;
 
 		const was = this.#before();
+		// The copy comes first and the erase is conditional on it — see `#keepErased`.
+		if (!this.#keepErased()) return this.#eraseRefused(was, 'copy');
 		this.#bump(level);
 		delete this.#state.levels[level];
 		for (const wordId of Object.keys(this.#state.byWord)) {
@@ -441,8 +496,8 @@ export class ProgressStore {
 
 		// Destructive and deliberate: write it now, not in 400 ms.
 		this.#dirty = true;
-		if (!this.flush()) return this.#eraseRefused(was);
-		this.#eraseFailed = false;
+		if (!this.flush()) return this.#eraseRefused(was, 'write');
+		this.#eraseFailed = null;
 		return true;
 	}
 
@@ -455,9 +510,27 @@ export class ProgressStore {
 	 * `{"v":1,"w":{},"l":{},"g":{"0":1}}` — no words, no sessions, nothing about the learner
 	 * except a counter saying how many times they have asked to be forgotten, which is the one
 	 * fact that makes forgetting stick.
+	 *
+	 * ## It keeps a copy, and it no longer deletes the one that was there
+	 *
+	 * Reset is the biggest destructive surface in the app and it is two taps on a 126×44 px
+	 * target on a phone. It used to leave nothing behind — 500 words and 3,000 answers gone with
+	 * no offer to restore — and, worse, to call `discardRescue()` afterwards, so a mis-tap also
+	 * destroyed the rescue copy of a *different* incident that was on screen at the time. A
+	 * corrupt byte earned a copy and a Restore button; a mis-tap got nothing and took the
+	 * corrupt byte's copy with it.
+	 *
+	 * Both halves are now the other way round. The outgoing history is copied aside *before*
+	 * anything is cleared, the erase does not happen at all if that copy cannot be made, and the
+	 * copy is left in place afterwards — so the screen a reset lands on offers "Restore it".
+	 * "Everything" in "forget everything" means the learner's history in the live key; it never
+	 * meant the safety net underneath it.
 	 */
 	resetAll(): boolean {
 		const was = this.#before();
+		// The copy is the precondition. Nothing below this line has touched state yet, so a
+		// refusal here costs the learner nothing at all.
+		if (!this.#keepErased()) return this.#eraseRefused(was, 'copy');
 		this.#bump(0);
 		this.#state = emptyState();
 		this.#failures = 0;
@@ -467,14 +540,46 @@ export class ProgressStore {
 		// thing on screen said "these answers live only in this tab", which is the wrong
 		// sentence for a reset in every particular. `#eraseRefused` is how that gets said
 		// properly, and how the screen stops asserting an erasure that did not happen.
-		if (!this.flush()) return this.#eraseRefused(was);
-		this.#eraseFailed = false;
-
-		// "Everything" includes the rescue copy — but only once the erase itself has actually
-		// landed. Deleting the only backup while the key still holds every record is the exact
-		// inverse of what Reset promises, and a refresh used to bring all of it back.
-		this.discardRescue();
+		if (!this.flush()) return this.#eraseRefused(was, 'write');
+		this.#eraseFailed = null;
+		// No `discardRescue()` here. The copy `#keepErased` just made is the whole point, and
+		// the one that was already there belonged to an incident this tap said nothing about.
 		return true;
+	}
+
+	/**
+	 * Copy the history a reset is about to erase, and say whether the copy is really there.
+	 *
+	 * Two candidates, because the erase destroys both: the bytes in the key (which may hold a
+	 * second tab's answers this tab has never seen) and this tab's live payload (which may hold
+	 * answers not yet written). `#keepAside` keeps whichever is richer, and it compares against
+	 * any copy already in the backup key too, so an older, larger rescue is never displaced by
+	 * this one.
+	 *
+	 * `true` when there is a readable copy of the outgoing history in `BACKUP_KEY` — or when
+	 * there was no history to copy, which is a fresh app's Reset and must not be blocked.
+	 */
+	#keepErased(): boolean {
+		const storage = this.#storage;
+		// Memory-only: there is nothing in storage for the erase to destroy, and no storage to
+		// keep a copy in either. `flush()` below will report the truth about persistence.
+		if (!storage) return true;
+
+		const raw = this.#readText(storage);
+		// Reading threw; storage is gone for this session and the store has stood itself down.
+		if (raw === null) return true;
+
+		const mineText = encodeWeighed(this.#mine()).text;
+		let outgoing = mineText;
+		if (raw.text !== null && raw.text !== '' && raw.text !== mineText) {
+			// One `setItem`, not two. Under the quota pressure that makes this method matter at
+			// all, a second write is a second chance to fail after the first already succeeded —
+			// which would refuse an erase whose history is, in fact, safely copied.
+			if (richer(this.#describe(raw.text, 'erased'), this.#describe(mineText, 'erased'))) {
+				outgoing = raw.text;
+			}
+		}
+		return this.#keepAside(storage, outgoing, 'erased');
 	}
 
 	/**
@@ -575,6 +680,50 @@ export class ProgressStore {
 	}
 
 	/**
+	 * The rescue copy changed in another tab. Re-read it and say what is actually there.
+	 *
+	 * The `storage` listener used to return early on every key that was not `STORAGE_KEY`, so
+	 * `BACKUP_KEY` moving was never observed at all. Measured: two tabs both showing "It holds
+	 * 300 words · 1,800 answers", Tab A taps Discard, and Tab B keeps the panel indefinitely —
+	 * still naming a count, still promising "Nothing has been thrown away", with a Restore
+	 * button that appends "Nothing could be put back". Four false statements on screen about a
+	 * key that no longer exists.
+	 *
+	 * Re-measured rather than merely cleared, because the other tab may equally have *replaced*
+	 * the copy with a bigger one, and a panel quoting the old figures is the same lie in the
+	 * other direction. A restore report belongs to a copy that is gone, so it goes with it.
+	 */
+	noteRescueChanged(): void {
+		const storage = this.#storage;
+		if (!storage) return;
+		let text: string | null;
+		try {
+			text = storage.getItem(BACKUP_KEY);
+		} catch {
+			return;
+		}
+		if (text === null || text === '') {
+			this.#rescued = null;
+			this.#restoreReport = null;
+			return;
+		}
+		const found = this.#describe(text, 'found');
+		if (!holdsHistory(found)) {
+			this.#rescued = null;
+			this.#restoreReport = null;
+			return;
+		}
+		const mine = this.#rescued;
+		// Same copy, untouched: another tab reading it does not turn this session's own rescue
+		// into "a copy from an earlier visit", which would misdate what just happened here by a
+		// whole session. Anything else is a copy this tab knows nothing about, and 'found' is
+		// the only honest thing to call it.
+		if (mine && sameCopy(found, mine)) return;
+		this.#rescued = found;
+		this.#restoreReport = null;
+	}
+
+	/**
 	 * Storage was emptied from outside this tab — `localStorage.clear()`, or the browser's
 	 * "clear site data". That is the learner asking to be forgotten, so adopt it and write
 	 * *nothing* back. Routing this through `sync()` used to merge the cleared key against our
@@ -591,7 +740,7 @@ export class ProgressStore {
 		this.#dirtySince = -1;
 		this.#failures = 0;
 		this.#forgetting = false;
-		this.#eraseFailed = false;
+		this.#eraseFailed = null;
 		this.#rescued = null;
 		this.#restoreReport = null;
 	}
@@ -684,17 +833,33 @@ export class ProgressStore {
 		// on those very bytes, so the guard below costs nothing; otherwise we are decoding them
 		// anyway and can weigh what we decoded.
 		let onDisk = this.#settledHeft;
+		// Whether every guard that fired got its copy into the key. A `false` here is not an
+		// error to report and move past: it is the write being called off.
+		let copied = true;
 		if (raw.text !== this.#settledText || onDisk === null) {
 			const disk = this.#decodeDisk(storage, raw.text);
 			merged = this.#merge(disk);
 			const encoded = encodeWeighed(merged);
 			mergedText = encoded.text;
 			outgoing = encoded.heft;
-			this.#guardLoss(storage, disk, merged);
+			// Both, and in this order — `#guardLoss` must run even when the bytes were already
+			// unsalvageable, or a merge that drops records goes unreported.
+			copied = this.#guardLoss(storage, disk, merged) && disk.copied;
 			onDisk = weigh(disk.text, disk.stored);
 		}
 
-		this.#guardShrink(storage, raw.text, onDisk, outgoing);
+		if (!this.#guardShrink(storage, raw.text, onDisk, outgoing)) copied = false;
+
+		// The invariant, enforced rather than documented: a write that reduces the stored
+		// history does not happen at all unless the larger side is demonstrably readable in the
+		// backup key. Refusing takes the identical path a refused main-key write takes — the
+		// answers stay in memory, `status` goes to 'failing' out loud, and a backoff retries —
+		// because that is the honest description of the situation, and because the alternative
+		// measured out at 300 words and 1,800 answers destroyed in silence.
+		if (!copied) {
+			this.#failWrite();
+			return false;
+		}
 
 		try {
 			storage.setItem(STORAGE_KEY, mergedText);
@@ -803,13 +968,16 @@ export class ProgressStore {
 	 * later, under a notice that had already said it did not happen, with the learner long since
 	 * back in a session — a reset is a deliberate act and belongs to the tap that asked for it.
 	 */
-	#eraseRefused(was: { state: ProgressState; gens: Generations; dirty: boolean }): boolean {
+	#eraseRefused(
+		was: { state: ProgressState; gens: Generations; dirty: boolean },
+		why: EraseBlock
+	): boolean {
 		this.#state = was.state;
 		this.#gens = was.gens;
 		this.#dirty = was.dirty;
 		this.#forgetting = false;
 		this.#cancelTimer();
-		this.#eraseFailed = true;
+		this.#eraseFailed = why;
 		return false;
 	}
 
@@ -836,12 +1004,15 @@ export class ProgressStore {
 	 * A merge is only allowed to drop a record that a reset generation accounts for. If it
 	 * dropped anything else, the bytes we are about to overwrite are history nothing else
 	 * holds — so keep a copy and say so, rather than writing the loss and reporting success.
+	 *
+	 * Returns whether the write may proceed: `true` when there was nothing to keep or the copy
+	 * is demonstrably in the key, `false` when the copy could not be made. See `#keepAside`.
 	 */
-	#guardLoss(storage: StorageLike, disk: DiskRead, merged: StoredProgress): void {
-		if (!disk.stored || !disk.text) return;
+	#guardLoss(storage: StorageLike, disk: DiskRead, merged: StoredProgress): boolean {
+		if (!disk.stored || !disk.text) return true;
 		const lost = unexplainedLosses(disk.stored, merged);
-		if (lost.length === 0) return;
-		this.#keepAside(storage, disk.text, 'lost');
+		if (lost.length === 0) return true;
+		return this.#keepAside(storage, disk.text, 'lost');
 	}
 
 	/**
@@ -861,13 +1032,23 @@ export class ProgressStore {
 	 * Every one of them ends the same way: bytes holding N words are replaced by bytes holding
 	 * fewer. So that — not the cause — is what is checked, at the single point where the
 	 * replacement actually happens. A reset is the one shrink that is not a loss, and it says
-	 * so through `#forgetting`.
+	 * so through `#forgetting` — and it now keeps its own copy first, so even that shrink is
+	 * only allowed once the outgoing history is safe.
+	 *
+	 * ## The copy is a precondition, not an attempt
+	 *
+	 * For four loops this was documentation rather than code: the copy was attempted, its
+	 * failure was swallowed, and `flush()` wrote the smaller payload regardless. Returning the
+	 * verdict — and having `flush()` refuse the `setItem` on `false` — is what turns the
+	 * sentence above into an invariant. The answer stays safe in memory, the session carries
+	 * on, the retry backoff keeps trying, and "Progress is not being saved" stays on screen
+	 * instead of being cleared by `#settle` on a write that just destroyed 1,800 answers.
 	 */
-	#guardShrink(storage: StorageLike, text: string | null, onDisk: Heft, outgoing: Heft): void {
-		if (text === null || text === '') return;
-		if (this.#forgetting) return;
-		if (!shrinks(onDisk, outgoing)) return;
-		this.#keepAside(storage, text, 'lost');
+	#guardShrink(storage: StorageLike, text: string | null, onDisk: Heft, outgoing: Heft): boolean {
+		if (text === null || text === '') return true;
+		if (this.#forgetting) return true;
+		if (!shrinks(onDisk, outgoing)) return true;
+		return this.#keepAside(storage, text, 'lost');
 	}
 
 	/**
@@ -895,7 +1076,7 @@ export class ProgressStore {
 
 	/** Decode bytes we are about to merge against, rescuing them if they cannot be read. */
 	#decodeDisk(storage: StorageLike, text: string | null): DiskRead {
-		if (text === null || text === '') return { text, stored: null };
+		if (text === null || text === '') return { text, stored: null, copied: true };
 
 		// The *raw* clock, not `#at()`'s floored one. `#at()` floors to 2024 so that what this
 		// store writes can be read back; handing that floor to the decoder as "now" told it
@@ -904,9 +1085,11 @@ export class ProgressStore {
 		// adjudicate the future either, and `stamp()` now knows to leave well alone.
 		const stored = decodeStored(text, this.#now());
 		// Corrupt, truncated, or from a schema we do not know. Those bytes are the learner's
-		// entire history and we are about to write over them, so keep a copy first.
-		if (stored === null) this.#keepAside(storage, text, 'unreadable');
-		return { text, stored };
+		// entire history and we are about to write over them, so keep a copy first — and if the
+		// copy cannot be made, say so, because then the key is the only place that history
+		// exists and overwriting it is unrecoverable.
+		const copied = stored === null ? this.#keepAside(storage, text, 'unreadable') : true;
+		return { text, stored, copied };
 	}
 
 	/** Read the key and decode it. For the callers that always need the contents. */
@@ -961,8 +1144,24 @@ export class ProgressStore {
 	 * `{"v":99,"note":["L1-0001", … 400 of them]}` — bytes holding no record at all — weighed
 	 * 400 words and evicted a real 50-word backup on a plain page load, with no user action
 	 * anywhere. See `namedWordIds`.
+	 *
+	 * ## Why this returns a boolean, and why every caller has to look at it
+	 *
+	 * It used to return `void` and swallow its own failure, with a comment saying "a full quota
+	 * is exactly when this fails; nothing better is available". Something better was available:
+	 * *not doing the destruction*. A full quota refuses the copy and then happily accepts the
+	 * shrinking write, precisely because it is smaller — so the one condition this whole
+	 * apparatus exists for was the one condition in which it did nothing. Measured: a key
+	 * holding 300 words / 1,800 answers went to 176 bytes after four answers, with no copy, no
+	 * notice, and the storage warning switching itself off as the loss landed.
+	 *
+	 * So the copy is now a **precondition**. `true` means the learner's history is readable in
+	 * `BACKUP_KEY` *right now* — either these bytes are (read back and compared, not assumed
+	 * from a `setItem` that did not throw), or an equal-or-richer copy already was, or there was
+	 * no history in these bytes to lose. `false` means it is not, and every caller must then
+	 * refuse whatever it was about to do.
 	 */
-	#keepAside(storage: StorageLike, text: string, reason: RescueReason): void {
+	#keepAside(storage: StorageLike, text: string, reason: RescueReason): boolean {
 		try {
 			const incoming = this.#describe(text, reason);
 			// Nothing in these bytes is anybody's history. `null`, `[]`, `"x"`, `123` and
@@ -971,7 +1170,7 @@ export class ProgressStore {
 			// Discard as its only control, on every load until something overwrote the key —
 			// a frightening notice over four bytes of junk. They stay in the key; the next write
 			// replaces them, and there is nothing to lose by it.
-			if (!holdsHistory(incoming)) return;
+			if (!holdsHistory(incoming)) return true;
 
 			const existing = storage.getItem(BACKUP_KEY);
 			const kept = existing === null || existing === '' ? null : this.#describe(existing, 'found');
@@ -982,15 +1181,29 @@ export class ProgressStore {
 			// happened by a whole session.
 			if (kept !== null && holdsHistory(kept) && !richer(incoming, kept)) {
 				this.#rescued = existing === text ? { ...kept, reason } : kept;
-				return;
+				return true;
 			}
 
 			storage.setItem(BACKUP_KEY, text);
+			// Read back, because a `setItem` that did not throw is not the same fact as bytes
+			// that are in the key. A quota that evicted this write a millisecond later, a
+			// storage shim that accepted and dropped it, a partial write — all of them return
+			// from `setItem` cleanly, and every one of them is about to be the learner's only
+			// copy. The whole point of the return value is that it is evidence, so it is read.
+			if (storage.getItem(BACKUP_KEY) !== text) {
+				// Whatever is there now is what the notice must describe; it may still be the
+				// older, poorer copy, and that is a truth worth keeping on screen.
+				this.#rescued = kept !== null && holdsHistory(kept) ? kept : null;
+				return false;
+			}
 			// The reason describes the copy that actually ended up stored — this one.
 			this.#rescued = incoming;
 			this.#restoreReport = null;
+			return true;
 		} catch {
-			// A full quota is exactly when this fails. Nothing better is available.
+			// A full quota is exactly when this fails, and it is exactly when the caller must
+			// not proceed. Saying so is the whole job.
+			return false;
 		}
 	}
 
@@ -1046,7 +1259,7 @@ export class ProgressStore {
 		this.#dirtySince = -1;
 		this.#failures = 0;
 		this.#forgetting = false;
-		this.#eraseFailed = false;
+		this.#eraseFailed = null;
 		this.#status = 'saving';
 	}
 
@@ -1162,6 +1375,16 @@ function holdsHistory(info: RescueInfo): boolean {
  * actually be put back. Ties go to `b` — the caller passes the incumbent copy as `b`, so an
  * equal newcomer never displaces a copy already kept.
  */
+/** Whether two measurements describe the same copy, ignoring why it was kept. */
+function sameCopy(a: RescueInfo, b: RescueInfo): boolean {
+	return (
+		a.words === b.words &&
+		a.answers === b.answers &&
+		a.levels === b.levels &&
+		a.readable === b.readable
+	);
+}
+
 function richer(a: RescueInfo, b: RescueInfo): boolean {
 	if (a.words !== b.words) return a.words > b.words;
 	if (a.answers !== b.answers) return a.answers > b.answers;
@@ -1237,6 +1460,14 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 		// learner asked for, not a write to merge against.
 		if (event.key === null) {
 			progress.noteStorageCleared();
+			return;
+		}
+		// The rescue copy is a *shared* key too, and the panel offering it is a claim about what
+		// is in that key right now. A tab that never watches it goes on offering a copy another
+		// tab discarded, with a Restore button that cannot work and a sentence promising nothing
+		// was thrown away.
+		if (event.key === BACKUP_KEY) {
+			progress.noteRescueChanged();
 			return;
 		}
 		if (event.key !== STORAGE_KEY) return;
