@@ -78,7 +78,9 @@
 		// wants the bar itself, because the inset is added back as part of --app-chrome-h.
 		// The box is the same size docked as expanded, so this never changes under a scroll.
 		const inset = Number.parseFloat(getComputedStyle(el).paddingBlockStart) || 0;
-		chrome.report(measured - inset);
+		// The inset goes along too: the bar does not count it as its own height, but the
+		// chrome ceiling has to charge for it, because the user loses the pixels either way.
+		chrome.report(measured - inset, inset);
 	});
 
 	function onBack(event: MouseEvent) {
@@ -249,7 +251,20 @@
 		padding-inline-end: max(var(--spacing-gutter), var(--app-safe-right));
 	}
 
-	@media (min-width: 64rem) {
+	/*
+	 * ON THE COLUMN, NOT ON THE WINDOW.
+	 *
+	 * Two conditions, and the second one is the whole fix. From 64rem the routes pull into a
+	 * centred column and a full-bleed bar reads as a phone app stretched. But a landscape phone
+	 * does the same thing at 812px wide — the run's column is 544px, centred, so the chevron sat
+	 * at x=8 with the card it belongs to starting at 134 (126px adrift; 186px at 932x430) — and
+	 * `min-width: 64rem` is 1024px, so it switched OFF at exactly the widths where the shell had
+	 * just finished fighting a media query for 10px of header. `(max-height: 30rem)` is the same
+	 * breakpoint shell.css uses to bring the bar down and the run uses to take the frame: if the
+	 * viewport is short enough that the screen is running as a landscape phone, its column is
+	 * centred, and the bar belongs over it.
+	 */
+	@media (min-width: 64rem), (max-height: 30rem) {
 		.inner {
 			inline-size: 100%;
 			/* Both measured off the screen the router just rendered — see chrome.svelte.ts.
@@ -458,6 +473,22 @@
 			backdrop-filter: saturate(1.6) blur(12px);
 			-webkit-backdrop-filter: saturate(1.6) blur(12px);
 			pointer-events: auto;
+		}
+
+		/*
+		 * AND IT KEEPS THE FRAME'S CORNER, NOT THE COLUMN.
+		 *
+		 * The rule above puts the bar on the screen's column at every short viewport, which is
+		 * right everywhere the bar is a bar. Here it is not: it is a single floating control
+		 * over a card that owns the whole frame, and the run's OWN progress rail starts at that
+		 * column's left edge — so aligning the chevron to it printed the 44px pill straight
+		 * through "1/10" at 812x375. A full-frame exit belongs in the frame's corner; the
+		 * column belongs to the run.
+		 */
+		:global(.shell.focus:not(.owns-heading)) .inner {
+			max-inline-size: none;
+			padding-inline-start: max(calc(var(--spacing-gutter) - 0.75rem), var(--app-safe-left));
+			padding-inline-end: max(calc(var(--spacing-gutter) - 0.75rem), var(--app-safe-right));
 		}
 
 		:global(.shell.focus:not(.owns-heading)) .heading {

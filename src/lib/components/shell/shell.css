@@ -65,6 +65,21 @@
  *                      the whole point: `--app-header-h` used to be driven to -54px to get this
  *                      effect, taking `--app-chrome-h` and the skip link that rides it off
  *                      screen with it.
+ *
+ * AND THE PAIR THE SHELL PUBLISHES BACK — THE CEILING
+ * Volunteering is not a budget: browse declared 3.375rem, kept the other 123px, and still held
+ * 60% of a landscape frame before the first word. So total sticky chrome now has a hard ceiling
+ * of 22% of `innerHeight` that the screen has no vote in — the shell folds the overrun itself,
+ * snapped to the block's own rows (chrome.svelte.ts, `measureChrome`). These say what the
+ * ceiling currently is, so a screen can fit instead of being folded:
+ *
+ *   --app-chrome-room  px of sticky block this screen may hold at this viewport HEIGHT, after
+ *                      the bar and the safe inset are paid for. `max-block-size` on a toolbar,
+ *                      or the switch between a stacked and a single-row control block, is what
+ *                      this is for — it is the number `@media (min-width: 60rem)` was standing
+ *                      in for, on the axis that was actually running out.
+ *   --app-chrome-over  how far past it the screen's block is right now, px. 0 when it fits.
+ *   data-chrome-fit    "within" | "over" on `.shell`, for a rule that cannot do arithmetic.
  */
 
 /*
@@ -112,6 +127,19 @@
 
 		/* Live px of the current screen's volunteered fold that are spent. Overridden inline. */
 		--app-fold-h: 0px;
+
+		/*
+		 * The ceiling's two answers. Both are overwritten inline once the shell has measured
+		 * the screen's block, but the room is written out in CSS rather than left at 0 so a
+		 * screen sizing itself from it is right in server-rendered HTML too — 22% of the
+		 * viewport, less the shell's own chrome, is exactly what the controller computes.
+		 * `dvh`, not `vh`, so a phone's collapsing address bar moves it the way it moves
+		 * everything else the run measures. 22dvh is `CHROME_CEILING` in chrome.svelte.ts;
+		 * the two have to move together. `.shell` redeclares it for the substitution reason
+		 * spelled out under `--app-chrome-h`.
+		 */
+		--app-chrome-room: max(0px, calc(22dvh - var(--app-chrome-h)));
+		--app-chrome-over: 0px;
 
 		/* Device insets, resolved once. `env()` is only valid in a property value, so a route
 		   that needs one — a sticky answer bar clearing the home indicator, say — reads these. */

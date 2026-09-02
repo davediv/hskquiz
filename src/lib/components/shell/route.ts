@@ -15,6 +15,14 @@ export interface ShellRoute {
 	back: boolean;
 	/** Header label. Empty on home, where the wordmark takes the slot instead. */
 	heading: string;
+	/**
+	 * The label for the same address once the run on it has FINISHED, or null where that state
+	 * does not exist. The bar is the only permanent chrome in the app, so if it says the same
+	 * five glyphs during a run and after one, the frame carries no evidence of which you are
+	 * looking at — a learner who leaves the tab on the summary and comes back sees "HSK 1" over
+	 * a screen they have to re-read to place. Same signal as `resultsTitle`.
+	 */
+	resultsHeading: string | null;
 	/** Document title. */
 	title: string;
 	/**
@@ -57,6 +65,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 			level: null,
 			back: false,
 			heading: '',
+			resultsHeading: null,
 			title: `${APP_NAME} — ${APP_TAGLINE}`,
 			resultsTitle: null,
 			focus: false
@@ -71,6 +80,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 			level,
 			back: true,
 			heading: `HSK ${level}`,
+			resultsHeading: `HSK ${level} results`,
 			title: `HSK ${level} practice · ${APP_NAME}`,
 			resultsTitle: `HSK ${level} results · ${APP_NAME}`,
 			focus: true
@@ -83,6 +93,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 			level,
 			back: true,
 			heading: `HSK ${level} vocabulary`,
+			resultsHeading: null,
 			title: `HSK ${level} vocabulary · ${APP_NAME}`,
 			resultsTitle: null,
 			focus: false
@@ -94,6 +105,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 		level: null,
 		back: true,
 		heading: '',
+		resultsHeading: null,
 		title: APP_NAME,
 		resultsTitle: null,
 		focus: false
