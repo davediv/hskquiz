@@ -374,7 +374,7 @@
 	{
 		"id": "L1-0050",
 		"hanzi": "出去",
-		"pinyin": "chū qù",
+		"pinyin": "chūqù",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to go out"],
@@ -715,7 +715,7 @@
 	{
 		"id": "L1-0091",
 		"hanzi": "读书",
-		"pinyin": "dú shū",
+		"pinyin": "dúshū",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to read a book", "to attend school"],
@@ -839,7 +839,7 @@
 	{
 		"id": "L1-0105",
 		"hanzi": "放学",
-		"pinyin": "fàng xué",
+		"pinyin": "fàngxué",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to finish school for the day"],
@@ -1282,7 +1282,7 @@
 	{
 		"id": "L1-0159",
 		"hanzi": "回去",
-		"pinyin": "huí qù",
+		"pinyin": "huíqu",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to go back"],
@@ -1536,7 +1536,7 @@
 	{
 		"id": "L1-0195",
 		"hanzi": "看见",
-		"pinyin": "kàn jiàn",
+		"pinyin": "kànjiàn",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to see (and catch sight of)", "to notice"],
@@ -2013,7 +2013,7 @@
 	{
 		"id": "L1-0256",
 		"hanzi": "那里",
-		"pinyin": "nàlǐ",
+		"pinyin": "nàli",
 		"level": 1,
 		"pos": ["Pron"],
 		"currentMeanings": ["there", "that place"],
@@ -2222,7 +2222,7 @@
 	{
 		"id": "L1-0289",
 		"hanzi": "起来",
-		"pinyin": "qǐ lái",
+		"pinyin": "qǐlai",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to stand up", "to get up"],
@@ -2442,7 +2442,7 @@
 	{
 		"id": "L1-0323",
 		"hanzi": "上学",
-		"pinyin": "shàng xué",
+		"pinyin": "shàngxué",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to go to school", "to attend school"],
@@ -2600,7 +2600,7 @@
 	{
 		"id": "L1-0348",
 		"hanzi": "睡觉",
-		"pinyin": "shuì jiào",
+		"pinyin": "shuìjiào",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to go to bed", "to sleep"],
@@ -2730,7 +2730,7 @@
 	{
 		"id": "L1-0363",
 		"hanzi": "听见",
-		"pinyin": "tīng jiàn",
+		"pinyin": "tīngjiàn",
 		"level": 1,
 		"pos": [],
 		"currentMeanings": ["to hear (and catch it)"],
@@ -2995,7 +2995,7 @@
 	{
 		"id": "L1-0419",
 		"hanzi": "学生",
-		"pinyin": "xuéshēng",
+		"pinyin": "xuésheng",
 		"level": 1,
 		"pos": ["N"],
 		"currentMeanings": ["student", "schoolchild"],
@@ -4090,7 +4090,7 @@
 	{
 		"id": "L2-0113",
 		"hanzi": "道理",
-		"pinyin": "dàolǐ",
+		"pinyin": "dàoli",
 		"level": 2,
 		"pos": ["N"],
 		"currentMeanings": ["sense or logic", "a principle"],
@@ -4508,7 +4508,7 @@
 	{
 		"id": "L2-0180",
 		"hanzi": "干活儿",
-		"pinyin": "gàn huór",
+		"pinyin": "gànhuór",
 		"level": 2,
 		"pos": [],
 		"currentMeanings": ["to do manual work"],
@@ -5598,7 +5598,7 @@
 		"pinyin": "miàn",
 		"level": 2,
 		"pos": ["N", "M"],
-		"currentMeanings": ["side", "surface", "measure word: flat things"],
+		"currentMeanings": ["side", "face", "measure word: flat things"],
 		"cedictDefs": [
 			"face",
 			"side",
@@ -6193,7 +6193,7 @@
 	{
 		"id": "L2-0519",
 		"hanzi": "态度",
-		"pinyin": "tàidù",
+		"pinyin": "tàidu",
 		"level": 2,
 		"pos": ["N"],
 		"currentMeanings": ["an attitude", "a manner"],
@@ -6269,7 +6269,7 @@
 	{
 		"id": "L2-0528",
 		"hanzi": "提高",
-		"pinyin": "tí gāo",
+		"pinyin": "tígāo",
 		"level": 2,
 		"pos": [],
 		"currentMeanings": ["to improve", "to raise"],
@@ -6487,7 +6487,7 @@
 	{
 		"id": "L2-0558",
 		"hanzi": "完成",
-		"pinyin": "wán chéng",
+		"pinyin": "wánchéng",
 		"level": 2,
 		"pos": [],
 		"currentMeanings": ["to complete a task", "to accomplish"],
@@ -6582,7 +6582,7 @@
 	{
 		"id": "L2-0573",
 		"hanzi": "味道",
-		"pinyin": "wèidào",
+		"pinyin": "wèidao",
 		"level": 2,
 		"pos": ["N"],
 		"currentMeanings": ["flavor", "smell"],
@@ -7971,7 +7971,7 @@
 	{
 		"id": "L3-0125",
 		"hanzi": "打破",
-		"pinyin": "dǎ pò",
+		"pinyin": "dǎpò",
 		"level": 3,
 		"pos": [],
 		"currentMeanings": ["to break", "to smash"],
@@ -8646,7 +8646,7 @@
 	{
 		"id": "L3-0328",
 		"hanzi": "加工",
-		"pinyin": "jiā gōng",
+		"pinyin": "jiāgōng",
 		"level": 3,
 		"pos": [],
 		"currentMeanings": ["to process materials", "to refine or finish"],
@@ -10891,7 +10891,7 @@
 	{
 		"id": "L3-0882",
 		"hanzi": "展开",
-		"pinyin": "zhǎn kāi",
+		"pinyin": "zhǎnkāi",
 		"level": 3,
 		"pos": [],
 		"currentMeanings": ["to spread out", "to launch an activity"],
@@ -14052,7 +14052,7 @@
 	{
 		"id": "L4-0758",
 		"hanzi": "位置",
-		"pinyin": "wèizhì",
+		"pinyin": "wèizhi",
 		"level": 4,
 		"pos": ["N"],
 		"currentMeanings": ["position", "place"],
@@ -14453,7 +14453,7 @@
 	{
 		"id": "L4-0897",
 		"hanzi": "有劲儿",
-		"pinyin": "yǒu jìnr",
+		"pinyin": "yǒujìnr",
 		"level": 4,
 		"pos": [],
 		"currentMeanings": ["full of energy"],
@@ -15029,7 +15029,7 @@
 	{
 		"id": "L5-0087",
 		"hanzi": "差点儿",
-		"pinyin": "chà diǎnr",
+		"pinyin": "chàdiǎnr",
 		"level": 5,
 		"pos": ["Adv"],
 		"currentMeanings": ["almost but not quite", "nearly"],
@@ -15178,7 +15178,7 @@
 	{
 		"id": "L5-0123",
 		"hanzi": "出差",
-		"pinyin": "chū chāi",
+		"pinyin": "chūchāi",
 		"level": 5,
 		"pos": [],
 		"currentMeanings": ["to go on a business trip", "to travel for work"],

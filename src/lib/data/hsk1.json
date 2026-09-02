@@ -8,7 +8,8 @@
 		"meanings": ["to love"],
 		"example": {
 			"hanzi": "我爱我的爸爸妈妈。",
-			"pinyin": "wǒ ài wǒ de bà ba mā ma",
+			"pinyin": "wǒ ài wǒ de bàba māma",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "I love my mum and dad."
 		},
 		"pos": ["V"],
@@ -26,7 +27,8 @@
 		"meanings": ["hobby", "to be fond of"],
 		"example": {
 			"hanzi": "我的爱好是看书。",
-			"pinyin": "wǒ de ài hào shì kàn shū",
+			"pinyin": "wǒ de àihào shì kàn shū",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "My hobby is reading."
 		},
 		"pos": ["V", "N"],
@@ -41,6 +43,7 @@
 		"example": {
 			"hanzi": "我家有八口人。",
 			"pinyin": "wǒ jiā yǒu bā kǒu rén",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "There are eight people in my family."
 		},
 		"pos": ["Num"],
@@ -57,7 +60,8 @@
 		"meanings": ["father", "dad"],
 		"example": {
 			"hanzi": "我爸爸是老师。",
-			"pinyin": "wǒ bà ba shì lǎo shī",
+			"pinyin": "wǒ bàba shì lǎoshī",
+			"spans": [1, 2, 1, 2],
 			"english": "My dad is a teacher."
 		},
 		"pos": ["N"],
@@ -71,7 +75,8 @@
 		"meanings": ["softens a suggestion or guess", "...right?"],
 		"example": {
 			"hanzi": "我们一起去吧。",
-			"pinyin": "wǒ men yì qǐ qù ba",
+			"pinyin": "wǒmen yìqǐ qù ba",
+			"spans": [2, 2, 1, 1],
 			"english": "Let's go together, shall we?"
 		},
 		"pos": ["Aux"],
@@ -85,7 +90,8 @@
 		"meanings": ["white"],
 		"example": {
 			"hanzi": "我的衣服是白的。",
-			"pinyin": "wǒ de yī fu shì bái de",
+			"pinyin": "wǒ de yīfu shì bái de",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "My clothes are white."
 		},
 		"pos": ["Adj"],
@@ -102,7 +108,8 @@
 		"meanings": ["daytime"],
 		"example": {
 			"hanzi": "白天我在学校学习。",
-			"pinyin": "bái tiān wǒ zài xué xiào xué xí",
+			"pinyin": "báitiān wǒ zài xuéxiào xuéxí",
+			"spans": [2, 1, 1, 2, 2],
 			"english": "During the day I study at school."
 		},
 		"pos": ["N"],
@@ -116,7 +123,8 @@
 		"meanings": ["hundred"],
 		"example": {
 			"hanzi": "学校里有一百个学生。",
-			"pinyin": "xué xiào lǐ yǒu yì bǎi ge xué shēng",
+			"pinyin": "xuéxiào lǐ yǒu yì bǎi ge xuésheng",
+			"spans": [2, 1, 1, 1, 1, 1, 2],
 			"english": "There are a hundred students at the school."
 		},
 		"pos": ["Num"],
@@ -130,7 +138,8 @@
 		"meanings": ["class of students", "work shift"],
 		"example": {
 			"hanzi": "我们班有二十个学生。",
-			"pinyin": "wǒ men bān yǒu èr shí ge xué shēng",
+			"pinyin": "wǒmen bān yǒu èr shí ge xuésheng",
+			"spans": [2, 1, 1, 1, 1, 1, 2],
 			"english": "There are twenty students in our class."
 		},
 		"pos": ["N", "M"],
@@ -144,7 +153,8 @@
 		"meanings": ["half"],
 		"example": {
 			"hanzi": "我等了半个小时。",
-			"pinyin": "wǒ děng le bàn ge xiǎo shí",
+			"pinyin": "wǒ děng le bàn ge xiǎoshí",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I waited for half an hour."
 		},
 		"pos": ["Num"],
@@ -161,7 +171,8 @@
 		"meanings": ["half a year"],
 		"example": {
 			"hanzi": "我学了半年中文。",
-			"pinyin": "wǒ xué le bàn nián zhōng wén",
+			"pinyin": "wǒ xué le bàn nián Zhōngwén",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I've been studying Chinese for half a year."
 		},
 		"pos": [],
@@ -178,7 +189,8 @@
 		"meanings": ["half a day", "quite a while"],
 		"example": {
 			"hanzi": "我在家学了半天。",
-			"pinyin": "wǒ zài jiā xué le bàn tiān",
+			"pinyin": "wǒ zàijiā xué le bàntiān",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "I studied at home for half a day."
 		},
 		"pos": [],
@@ -193,7 +205,8 @@
 		"meanings": ["to help"],
 		"example": {
 			"hanzi": "我帮妈妈做饭。",
-			"pinyin": "wǒ bāng mā ma zuò fàn",
+			"pinyin": "wǒ bāng māma zuòfàn",
+			"spans": [1, 1, 2, 2],
 			"english": "I help my mum cook."
 		},
 		"pos": ["V"],
@@ -203,7 +216,7 @@
 		"id": "L1-0014",
 		"hanzi": "帮忙",
 		"traditional": "幫忙",
-		"pinyin": "bāng máng",
+		"pinyin": "bāngmáng",
 		"syllables": [
 			{ "py": "bāng", "tone": 1 },
 			{ "py": "máng", "tone": 2 }
@@ -211,7 +224,8 @@
 		"meanings": ["to lend a hand", "to do a favor"],
 		"example": {
 			"hanzi": "你能来帮忙吗？",
-			"pinyin": "nǐ néng lái bāng máng ma",
+			"pinyin": "nǐ néng lái bāngmáng ma",
+			"spans": [1, 1, 1, 2, 1],
 			"english": "Can you come and lend a hand?"
 		},
 		"pos": [],
@@ -225,7 +239,8 @@
 		"meanings": ["bag", "to wrap"],
 		"example": {
 			"hanzi": "我的包在桌子上。",
-			"pinyin": "wǒ de bāo zài zhuō zi shang",
+			"pinyin": "wǒ de bāo zài zhuōzi shang",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "My bag is on the table."
 		},
 		"pos": ["N", "M", "V"],
@@ -242,7 +257,8 @@
 		"meanings": ["steamed bun with filling"],
 		"example": {
 			"hanzi": "我早上吃了两个包子。",
-			"pinyin": "wǒ zǎo shang chī le liǎng ge bāo zi",
+			"pinyin": "wǒ zǎoshang chī le liǎng ge bāozi",
+			"spans": [1, 2, 1, 1, 1, 1, 2],
 			"english": "I ate two steamed buns this morning."
 		},
 		"pos": ["N"],
@@ -257,6 +273,7 @@
 		"example": {
 			"hanzi": "我想喝一杯水。",
 			"pinyin": "wǒ xiǎng hē yì bēi shuǐ",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I'd like a glass of water."
 		},
 		"pos": ["M"],
@@ -273,7 +290,8 @@
 		"meanings": ["cup", "glass"],
 		"example": {
 			"hanzi": "我买了一个新杯子。",
-			"pinyin": "wǒ mǎi le yí ge xīn bēi zi",
+			"pinyin": "wǒ mǎi le yí ge xīn bēizi",
+			"spans": [1, 1, 1, 1, 1, 1, 2],
 			"english": "I bought a new cup."
 		},
 		"pos": ["N"],
@@ -288,6 +306,7 @@
 		"example": {
 			"hanzi": "我家在北边。",
 			"pinyin": "wǒ jiā zài běi biān",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "My house is on the north side."
 		},
 		"pos": ["N"],
@@ -305,7 +324,8 @@
 		"meanings": ["the north side"],
 		"example": {
 			"hanzi": "学校在我家的北边。",
-			"pinyin": "xué xiào zài wǒ jiā de běi bian",
+			"pinyin": "xuéxiào zài wǒ jiā de běibian",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "The school is on the north side of my house."
 		},
 		"pos": ["N"],
@@ -322,7 +342,8 @@
 		"meanings": ["capital city of China"],
 		"example": {
 			"hanzi": "我家在北京。",
-			"pinyin": "wǒ jiā zài Běi jīng",
+			"pinyin": "wǒ jiā zài Běijīng",
+			"spans": [1, 1, 1, 2],
 			"english": "My family lives in Beijing."
 		},
 		"pos": ["N"],
@@ -337,6 +358,7 @@
 		"example": {
 			"hanzi": "我买了两本书。",
 			"pinyin": "wǒ mǎi le liǎng běn shū",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I bought two books."
 		},
 		"pos": ["M"],
@@ -353,7 +375,8 @@
 		"meanings": ["notebook"],
 		"example": {
 			"hanzi": "这个本子是我的。",
-			"pinyin": "zhè ge běn zi shì wǒ de",
+			"pinyin": "zhè ge běnzi shì wǒ de",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "This notebook is mine."
 		},
 		"pos": ["N"],
@@ -367,7 +390,8 @@
 		"meanings": ["than", "to compare"],
 		"example": {
 			"hanzi": "我比我弟弟高。",
-			"pinyin": "wǒ bǐ wǒ dì di gāo",
+			"pinyin": "wǒ bǐ wǒ dìdi gāo",
+			"spans": [1, 1, 1, 2, 1],
 			"english": "I'm taller than my little brother."
 		},
 		"pos": ["Prep", "V"],
@@ -382,7 +406,8 @@
 		"meanings": ["don't ...!"],
 		"example": {
 			"hanzi": "别忘了明天的考试。",
-			"pinyin": "bié wàng le míng tiān de kǎo shì",
+			"pinyin": "bié wàng le míngtiān de kǎoshì",
+			"spans": [1, 1, 1, 2, 1, 2],
 			"english": "Don't forget tomorrow's test."
 		},
 		"pos": ["Adv"],
@@ -400,7 +425,8 @@
 		"meanings": ["other", "another"],
 		"example": {
 			"hanzi": "我不要这个，我要别的。",
-			"pinyin": "wǒ bú yào zhè ge wǒ yào bié de",
+			"pinyin": "wǒ búyào zhè ge wǒ yào biéde",
+			"spans": [1, 2, 1, 1, 1, 1, 2],
 			"english": "I don't want this one, I want a different one."
 		},
 		"pos": ["Pron"],
@@ -410,15 +436,16 @@
 		"id": "L1-0027",
 		"hanzi": "别人",
 		"traditional": "別人",
-		"pinyin": "biérén",
+		"pinyin": "biéren",
 		"syllables": [
 			{ "py": "bié", "tone": 2 },
-			{ "py": "rén", "tone": 2 }
+			{ "py": "ren", "tone": 0 }
 		],
 		"meanings": ["other people", "somebody else"],
 		"example": {
 			"hanzi": "别人的东西不能拿。",
-			"pinyin": "bié rén de dōng xi bù néng ná",
+			"pinyin": "biéren de dōngxi bù néng ná",
+			"spans": [2, 1, 2, 1, 1, 1],
 			"english": "You mustn't take other people's things."
 		},
 		"pos": ["Pron"],
@@ -432,7 +459,8 @@
 		"meanings": ["illness", "to fall ill"],
 		"example": {
 			"hanzi": "妈妈的病好了。",
-			"pinyin": "mā ma de bìng hǎo le",
+			"pinyin": "māma de bìng hǎo le",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "Mom's illness has cleared up."
 		},
 		"pos": ["N", "V"],
@@ -449,7 +477,8 @@
 		"meanings": ["patient", "sick person"],
 		"example": {
 			"hanzi": "医院里有很多病人。",
-			"pinyin": "yī yuàn lǐ yǒu hěn duō bìng rén",
+			"pinyin": "yīyuàn lǐ yǒu hěn duō bìngrén",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "There are a lot of patients in the hospital."
 		},
 		"pos": ["N"],
@@ -466,7 +495,8 @@
 		"meanings": ["not very", "not often"],
 		"example": {
 			"hanzi": "这个房间不大。",
-			"pinyin": "zhè ge fáng jiān bú dà",
+			"pinyin": "zhè ge fángjiān bú dà",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "This room isn't very big."
 		},
 		"pos": [],
@@ -484,7 +514,8 @@
 		"meanings": ["not right", "incorrect"],
 		"example": {
 			"hanzi": "你说的不对。",
-			"pinyin": "nǐ shuō de bú duì",
+			"pinyin": "nǐ shuō de búduì",
+			"spans": [1, 1, 1, 2],
 			"english": "What you said isn't right."
 		},
 		"pos": ["Adj"],
@@ -494,16 +525,17 @@
 		"id": "L1-0032",
 		"hanzi": "不客气",
 		"traditional": "不客氣",
-		"pinyin": "bú kèqì",
+		"pinyin": "bú kèqi",
 		"syllables": [
 			{ "py": "bú", "tone": 2 },
 			{ "py": "kè", "tone": 4 },
-			{ "py": "qì", "tone": 4 }
+			{ "py": "qi", "tone": 0 }
 		],
 		"meanings": ["you're welcome", "don't mention it"],
 		"example": {
 			"hanzi": "谢谢你！不客气。",
-			"pinyin": "xiè xie nǐ bú kè qì",
+			"pinyin": "xièxie nǐ bú kèqi",
+			"spans": [2, 1, 1, 2],
 			"english": "Thank you! — You're welcome."
 		},
 		"pos": [],
@@ -520,7 +552,8 @@
 		"meanings": ["need not", "there is no need"],
 		"example": {
 			"hanzi": "你不用等我了。",
-			"pinyin": "nǐ bú yòng děng wǒ le",
+			"pinyin": "nǐ búyòng děng wǒ le",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "You don't have to wait for me."
 		},
 		"pos": ["Adv"],
@@ -534,7 +567,8 @@
 		"meanings": ["not", "no"],
 		"example": {
 			"hanzi": "我今天不想去。",
-			"pinyin": "wǒ jīn tiān bù xiǎng qù",
+			"pinyin": "wǒ jīntiān bù xiǎng qù",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "I don't feel like going today."
 		},
 		"pos": ["Adv"],
@@ -548,7 +582,8 @@
 		"meanings": ["vegetable", "a dish of food"],
 		"example": {
 			"hanzi": "我买了一些菜。",
-			"pinyin": "wǒ mǎi le yì xiē cài",
+			"pinyin": "wǒ mǎi le yìxiē cài",
+			"spans": [1, 1, 1, 2, 1],
 			"english": "I bought some vegetables."
 		},
 		"pos": ["N"],
@@ -562,7 +597,8 @@
 		"meanings": ["tea"],
 		"example": {
 			"hanzi": "我妈妈喜欢喝茶。",
-			"pinyin": "wǒ mā ma xǐ huan hē chá",
+			"pinyin": "wǒ māma xǐhuan hē chá",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "My mum loves drinking tea."
 		},
 		"pos": ["N"],
@@ -576,7 +612,8 @@
 		"meanings": ["to be short of", "poor or inferior"],
 		"example": {
 			"hanzi": "我们还差一个人。",
-			"pinyin": "wǒ men hái chà yí gè rén",
+			"pinyin": "wǒmen hái chà yí gèrén",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "We're still one person short."
 		},
 		"pos": ["V", "Adj"],
@@ -591,6 +628,7 @@
 		"example": {
 			"hanzi": "他常来我家。",
 			"pinyin": "tā cháng lái wǒ jiā",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "He often comes over to my place."
 		},
 		"pos": ["Adv"],
@@ -607,7 +645,8 @@
 		"meanings": ["frequently"],
 		"example": {
 			"hanzi": "我常常在家看书。",
-			"pinyin": "wǒ cháng cháng zài jiā kàn shū",
+			"pinyin": "wǒ chángcháng zàijiā kàn shū",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "I often read at home."
 		},
 		"pos": ["Adv"],
@@ -621,7 +660,8 @@
 		"meanings": ["to sing"],
 		"example": {
 			"hanzi": "她唱得很好听。",
-			"pinyin": "tā chàng de hěn hǎo tīng",
+			"pinyin": "tā chàng de hěn hǎotīng",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "She sings beautifully."
 		},
 		"pos": ["V"],
@@ -630,7 +670,7 @@
 	{
 		"id": "L1-0041",
 		"hanzi": "唱歌",
-		"pinyin": "chàng gē",
+		"pinyin": "chànggē",
 		"syllables": [
 			{ "py": "chàng", "tone": 4 },
 			{ "py": "gē", "tone": 1 }
@@ -638,7 +678,8 @@
 		"meanings": ["to sing a song"],
 		"example": {
 			"hanzi": "我妹妹很喜欢唱歌。",
-			"pinyin": "wǒ mèi mei hěn xǐ huan chàng gē",
+			"pinyin": "wǒ mèimei hěn xǐhuan chànggē",
+			"spans": [1, 2, 1, 2, 2],
 			"english": "My little sister loves to sing."
 		},
 		"pos": [],
@@ -654,6 +695,7 @@
 		"example": {
 			"hanzi": "这是我家的新车。",
 			"pinyin": "zhè shì wǒ jiā de xīn chē",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "This is our family's new car."
 		},
 		"pos": ["N"],
@@ -671,7 +713,8 @@
 		"meanings": ["travel ticket"],
 		"example": {
 			"hanzi": "我在车站买了车票。",
-			"pinyin": "wǒ zài chē zhàn mǎi le chē piào",
+			"pinyin": "wǒ zài chēzhàn mǎi le chēpiào",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "I bought a ticket at the station."
 		},
 		"pos": ["N"],
@@ -690,6 +733,7 @@
 		"example": {
 			"hanzi": "车上的人很多。",
 			"pinyin": "chē shang de rén hěn duō",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "There are a lot of people on the bus."
 		},
 		"pos": [],
@@ -707,7 +751,8 @@
 		"meanings": ["rail station", "bus stop"],
 		"example": {
 			"hanzi": "车站在学校旁边。",
-			"pinyin": "chē zhàn zài xué xiào páng biān",
+			"pinyin": "chēzhàn zài xuéxiào pángbiān",
+			"spans": [2, 1, 2, 2],
 			"english": "The bus stop is next to the school."
 		},
 		"pos": ["N"],
@@ -721,7 +766,8 @@
 		"meanings": ["to eat"],
 		"example": {
 			"hanzi": "我想吃中国菜。",
-			"pinyin": "wǒ xiǎng chī zhōng guó cài",
+			"pinyin": "wǒ xiǎng chī Zhōngguó cài",
+			"spans": [1, 1, 1, 2, 1],
 			"english": "I'd like to eat Chinese food."
 		},
 		"pos": ["V"],
@@ -731,7 +777,7 @@
 		"id": "L1-0047",
 		"hanzi": "吃饭",
 		"traditional": "吃飯",
-		"pinyin": "chī fàn",
+		"pinyin": "chīfàn",
 		"syllables": [
 			{ "py": "chī", "tone": 1 },
 			{ "py": "fàn", "tone": 4 }
@@ -739,7 +785,8 @@
 		"meanings": ["to have a meal"],
 		"example": {
 			"hanzi": "我们六点吃饭。",
-			"pinyin": "wǒ men liù diǎn chī fàn",
+			"pinyin": "wǒmen liù diǎn chīfàn",
+			"spans": [2, 1, 1, 2],
 			"english": "We eat at six."
 		},
 		"pos": [],
@@ -753,7 +800,8 @@
 		"meanings": ["to exit", "to come or go out"],
 		"example": {
 			"hanzi": "爸爸出门去上班了。",
-			"pinyin": "bà ba chū mén qù shàng bān le",
+			"pinyin": "bàba chū mén qù shàngbān le",
+			"spans": [2, 1, 1, 1, 2, 1],
 			"english": "Dad has gone out to work."
 		},
 		"pos": ["V"],
@@ -763,7 +811,7 @@
 		"id": "L1-0049",
 		"hanzi": "出来",
 		"traditional": "出來",
-		"pinyin": "chū lái",
+		"pinyin": "chūlái",
 		"syllables": [
 			{ "py": "chū", "tone": 1 },
 			{ "py": "lái", "tone": 2 }
@@ -771,7 +819,8 @@
 		"meanings": ["to come out"],
 		"example": {
 			"hanzi": "他从房间里出来了。",
-			"pinyin": "tā cóng fáng jiān lǐ chū lái le",
+			"pinyin": "tā cóng fángjiān lǐ chūlái le",
+			"spans": [1, 1, 2, 1, 2, 1],
 			"english": "He came out of the room."
 		},
 		"pos": [],
@@ -780,7 +829,7 @@
 	{
 		"id": "L1-0050",
 		"hanzi": "出去",
-		"pinyin": "chū qù",
+		"pinyin": "chūqù",
 		"syllables": [
 			{ "py": "chū", "tone": 1 },
 			{ "py": "qù", "tone": 4 }
@@ -788,7 +837,8 @@
 		"meanings": ["to go out"],
 		"example": {
 			"hanzi": "我们出去玩吧。",
-			"pinyin": "wǒ men chū qù wán ba",
+			"pinyin": "wǒmen chūqù wán ba",
+			"spans": [2, 2, 1, 1],
 			"english": "Let's go out and play."
 		},
 		"pos": [],
@@ -802,7 +852,8 @@
 		"meanings": ["to wear", "to put on clothes"],
 		"example": {
 			"hanzi": "他今天穿了新衣服。",
-			"pinyin": "tā jīn tiān chuān le xīn yī fu",
+			"pinyin": "tā jīntiān chuān le xīn yīfu",
+			"spans": [1, 2, 1, 1, 1, 2],
 			"english": "He's wearing new clothes today."
 		},
 		"pos": ["V"],
@@ -816,7 +867,8 @@
 		"meanings": ["bed"],
 		"example": {
 			"hanzi": "我想在床上睡觉。",
-			"pinyin": "wǒ xiǎng zài chuáng shàng shuì jiào",
+			"pinyin": "wǒ xiǎng zài chuáng shàng shuìjiào",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I want to lie down in bed and sleep."
 		},
 		"pos": ["N"],
@@ -831,6 +883,7 @@
 		"example": {
 			"hanzi": "我一天喝三次水。",
 			"pinyin": "wǒ yì tiān hē sān cì shuǐ",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "I drink water three times a day."
 		},
 		"pos": ["M"],
@@ -845,7 +898,8 @@
 		"meanings": ["from", "starting from"],
 		"example": {
 			"hanzi": "我从学校回家。",
-			"pinyin": "wǒ cóng xué xiào huí jiā",
+			"pinyin": "wǒ cóng xuéxiào huí jiā",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "I go home from school."
 		},
 		"pos": ["Prep"],
@@ -861,6 +915,7 @@
 		"example": {
 			"hanzi": "这个字写错了。",
 			"pinyin": "zhè ge zì xiě cuò le",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "This character is written wrong."
 		},
 		"pos": ["Adj", "N"],
@@ -874,7 +929,8 @@
 		"meanings": ["to hit", "to strike"],
 		"example": {
 			"hanzi": "请不要打人。",
-			"pinyin": "qǐng bú yào dǎ rén",
+			"pinyin": "qǐng búyào dǎ rén",
+			"spans": [1, 2, 1, 1],
 			"english": "Please don't hit people."
 		},
 		"pos": ["V"],
@@ -884,7 +940,7 @@
 		"id": "L1-0057",
 		"hanzi": "打车",
 		"traditional": "打車",
-		"pinyin": "dǎ chē",
+		"pinyin": "dǎchē",
 		"syllables": [
 			{ "py": "dǎ", "tone": 3 },
 			{ "py": "chē", "tone": 1 }
@@ -892,7 +948,8 @@
 		"meanings": ["to take a taxi"],
 		"example": {
 			"hanzi": "我们打车去学校吧。",
-			"pinyin": "wǒ men dǎ chē qù xué xiào ba",
+			"pinyin": "wǒmen dǎchē qù xuéxiào ba",
+			"spans": [2, 2, 1, 2, 1],
 			"english": "Let's take a taxi to school."
 		},
 		"pos": [],
@@ -911,7 +968,8 @@
 		"meanings": ["to make a phone call"],
 		"example": {
 			"hanzi": "我给妈妈打电话。",
-			"pinyin": "wǒ gěi mā ma dǎ diàn huà",
+			"pinyin": "wǒ gěi māma dǎ diànhuà",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "I'm calling my mom."
 		},
 		"pos": [],
@@ -921,7 +979,7 @@
 		"id": "L1-0059",
 		"hanzi": "打开",
 		"traditional": "打開",
-		"pinyin": "dǎ kāi",
+		"pinyin": "dǎkāi",
 		"syllables": [
 			{ "py": "dǎ", "tone": 3 },
 			{ "py": "kāi", "tone": 1 }
@@ -929,7 +987,8 @@
 		"meanings": ["to open up", "to switch on"],
 		"example": {
 			"hanzi": "请打开门。",
-			"pinyin": "qǐng dǎ kāi mén",
+			"pinyin": "qǐng dǎkāi mén",
+			"spans": [1, 2, 1],
 			"english": "Please open the door."
 		},
 		"pos": [],
@@ -946,7 +1005,8 @@
 		"meanings": ["to play a ball game"],
 		"example": {
 			"hanzi": "弟弟很喜欢打球。",
-			"pinyin": "dì di hěn xǐ huan dǎ qiú",
+			"pinyin": "dìdi hěn xǐhuan dǎ qiú",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "My little brother loves playing ball."
 		},
 		"pos": [],
@@ -960,7 +1020,8 @@
 		"meanings": ["big", "large"],
 		"example": {
 			"hanzi": "学校的图书馆很大。",
-			"pinyin": "xué xiào de tú shū guǎn hěn dà",
+			"pinyin": "xuéxiào de túshūguǎn hěn dà",
+			"spans": [2, 1, 3, 1, 1],
 			"english": "The school library is big."
 		},
 		"pos": ["Adj"],
@@ -978,7 +1039,8 @@
 		"meanings": ["university"],
 		"example": {
 			"hanzi": "我哥哥今年上大学。",
-			"pinyin": "wǒ gē ge jīn nián shàng dà xué",
+			"pinyin": "wǒ gēge jīnnián shàng dàxué",
+			"spans": [1, 2, 2, 1, 2],
 			"english": "My older brother starts university this year."
 		},
 		"pos": ["N"],
@@ -997,7 +1059,8 @@
 		"meanings": ["university student"],
 		"example": {
 			"hanzi": "我姐姐是大学生。",
-			"pinyin": "wǒ jiě jie shì dà xué shēng",
+			"pinyin": "wǒ jiějie shì dàxuéshēng",
+			"spans": [1, 2, 1, 3],
 			"english": "My older sister is a university student."
 		},
 		"pos": ["N"],
@@ -1011,7 +1074,8 @@
 		"meanings": ["to reach", "to arrive"],
 		"example": {
 			"hanzi": "我八点到学校。",
-			"pinyin": "wǒ bā diǎn dào xué xiào",
+			"pinyin": "wǒ bā diǎn dào xuéxiào",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "I get to school at eight."
 		},
 		"pos": ["V"],
@@ -1020,7 +1084,7 @@
 	{
 		"id": "L1-0065",
 		"hanzi": "得到",
-		"pinyin": "dé dào",
+		"pinyin": "dédào",
 		"syllables": [
 			{ "py": "dé", "tone": 2 },
 			{ "py": "dào", "tone": 4 }
@@ -1028,7 +1092,8 @@
 		"meanings": ["to get", "to obtain"],
 		"example": {
 			"hanzi": "他得到了一个新手机。",
-			"pinyin": "tā dé dào le yí ge xīn shǒu jī",
+			"pinyin": "tā dédào le yí ge xīn shǒujī",
+			"spans": [1, 2, 1, 1, 1, 1, 2],
 			"english": "He got a new phone."
 		},
 		"pos": [],
@@ -1042,7 +1107,8 @@
 		"meanings": ["turns a word into an adverb"],
 		"example": {
 			"hanzi": "他慢慢地走进来。",
-			"pinyin": "tā màn màn de zǒu jìn lái",
+			"pinyin": "tā mànmàn de zǒu jìnlái",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "He walked in slowly."
 		},
 		"pos": ["Aux"],
@@ -1056,7 +1122,8 @@
 		"meanings": ["marks possession like 's", "of"],
 		"example": {
 			"hanzi": "这是我姐姐的书。",
-			"pinyin": "zhè shì wǒ jiě jie de shū",
+			"pinyin": "zhè shì wǒ jiějie de shū",
+			"spans": [1, 1, 1, 2, 1, 1],
 			"english": "This is my older sister's book."
 		},
 		"pos": ["Aux"],
@@ -1070,7 +1137,8 @@
 		"meanings": ["to wait"],
 		"example": {
 			"hanzi": "我在车站等你。",
-			"pinyin": "wǒ zài chē zhàn děng nǐ",
+			"pinyin": "wǒ zài chēzhàn děng nǐ",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "I'll wait for you at the station."
 		},
 		"pos": ["V"],
@@ -1085,6 +1153,7 @@
 		"example": {
 			"hanzi": "我的书在地上。",
 			"pinyin": "wǒ de shū zài dì shang",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "My book is on the ground."
 		},
 		"pos": ["N"],
@@ -1102,7 +1171,8 @@
 		"meanings": ["location", "site"],
 		"example": {
 			"hanzi": "考试的地点在三楼。",
-			"pinyin": "kǎo shì de dì diǎn zài sān lóu",
+			"pinyin": "kǎoshì de dìdiǎn zài sān lóu",
+			"spans": [2, 1, 2, 1, 1, 1],
 			"english": "The exam is held on the third floor."
 		},
 		"pos": ["N"],
@@ -1119,7 +1189,8 @@
 		"meanings": ["place", "area"],
 		"example": {
 			"hanzi": "这是一个好地方。",
-			"pinyin": "zhè shì yí gè hǎo dì fang",
+			"pinyin": "zhè shì yí gè hǎo dìfang",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "This is a good place."
 		},
 		"pos": ["N"],
@@ -1136,7 +1207,8 @@
 		"meanings": ["on the ground"],
 		"example": {
 			"hanzi": "别坐在地上。",
-			"pinyin": "bié zuò zài dì shang",
+			"pinyin": "bié zuò zài dìshang",
+			"spans": [1, 1, 1, 2],
 			"english": "Don't sit on the ground."
 		},
 		"pos": [],
@@ -1154,7 +1226,8 @@
 		"meanings": ["map"],
 		"example": {
 			"hanzi": "我们看地图吧。",
-			"pinyin": "wǒ men kàn dì tú ba",
+			"pinyin": "wǒmen kàn dìtú ba",
+			"spans": [2, 1, 2, 1],
 			"english": "Let's have a look at the map."
 		},
 		"pos": ["N"],
@@ -1171,7 +1244,8 @@
 		"meanings": ["younger brother"],
 		"example": {
 			"hanzi": "我弟弟今年八岁。",
-			"pinyin": "wǒ dì di jīn nián bā suì",
+			"pinyin": "wǒ dìdi jīnnián bā suì",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "My younger brother is eight this year."
 		},
 		"pos": ["N"],
@@ -1186,6 +1260,7 @@
 		"example": {
 			"hanzi": "他是第一个到的。",
 			"pinyin": "tā shì dì yī ge dào de",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "He was the first one to arrive."
 		},
 		"pos": ["Prefix"],
@@ -1200,7 +1275,8 @@
 		"meanings": ["o'clock", "a little", "to order food"],
 		"example": {
 			"hanzi": "我早上七点起床。",
-			"pinyin": "wǒ zǎo shang qī diǎn qǐ chuáng",
+			"pinyin": "wǒ zǎoshang qī diǎn qǐchuáng",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "I get up at seven in the morning."
 		},
 		"pos": ["M", "V", "N"],
@@ -1215,7 +1291,8 @@
 		"meanings": ["electricity"],
 		"example": {
 			"hanzi": "我们的房间没有电。",
-			"pinyin": "wǒ men de fáng jiān méi yǒu diàn",
+			"pinyin": "wǒmen de fángjiān méiyǒu diàn",
+			"spans": [2, 1, 2, 2, 1],
 			"english": "There's no electricity in our room."
 		},
 		"pos": ["N"],
@@ -1233,7 +1310,8 @@
 		"meanings": ["telephone", "phone call"],
 		"example": {
 			"hanzi": "我在等你的电话。",
-			"pinyin": "wǒ zài děng nǐ de diàn huà",
+			"pinyin": "wǒ zài děng nǐ de diànhuà",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I'm waiting for your call."
 		},
 		"pos": ["N"],
@@ -1251,7 +1329,8 @@
 		"meanings": ["computer"],
 		"example": {
 			"hanzi": "我的电脑很新。",
-			"pinyin": "wǒ de diàn nǎo hěn xīn",
+			"pinyin": "wǒ de diànnǎo hěn xīn",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "My computer is brand new."
 		},
 		"pos": ["N"],
@@ -1269,7 +1348,8 @@
 		"meanings": ["television"],
 		"example": {
 			"hanzi": "晚上我看电视。",
-			"pinyin": "wǎn shang wǒ kàn diàn shì",
+			"pinyin": "wǎnshang wǒ kàn diànshì",
+			"spans": [2, 1, 1, 2],
 			"english": "I watch television in the evening."
 		},
 		"pos": ["N"],
@@ -1288,7 +1368,8 @@
 		"meanings": ["television set"],
 		"example": {
 			"hanzi": "我家的电视机很大。",
-			"pinyin": "wǒ jiā de diàn shì jī hěn dà",
+			"pinyin": "wǒ jiā de diànshìjī hěn dà",
+			"spans": [1, 1, 1, 3, 1, 1],
 			"english": "The TV set at our house is very big."
 		},
 		"pos": ["N"],
@@ -1306,7 +1387,8 @@
 		"meanings": ["movie", "film"],
 		"example": {
 			"hanzi": "我们晚上去看电影吧。",
-			"pinyin": "wǒ men wǎn shang qù kàn diàn yǐng ba",
+			"pinyin": "wǒmen wǎnshang qù kàn diànyǐng ba",
+			"spans": [2, 2, 1, 1, 2, 1],
 			"english": "Let's go see a movie tonight."
 		},
 		"pos": ["N"],
@@ -1325,7 +1407,8 @@
 		"meanings": ["cinema"],
 		"example": {
 			"hanzi": "我们去电影院看电影。",
-			"pinyin": "wǒ men qù diàn yǐng yuàn kàn diàn yǐng",
+			"pinyin": "wǒmen qù diànyǐngyuàn kàn diànyǐng",
+			"spans": [2, 1, 3, 1, 2],
 			"english": "We're going to the cinema to see a film."
 		},
 		"pos": ["N"],
@@ -1340,7 +1423,8 @@
 		"meanings": ["east"],
 		"example": {
 			"hanzi": "我家在学校的东边。",
-			"pinyin": "wǒ jiā zài xué xiào de dōng bian",
+			"pinyin": "wǒ jiā zài xuéxiào de dōng bian",
+			"spans": [1, 1, 1, 2, 1, 1, 1],
 			"english": "My home is east of the school."
 		},
 		"pos": ["N"],
@@ -1358,7 +1442,8 @@
 		"meanings": ["the east side"],
 		"example": {
 			"hanzi": "医院在学校东边。",
-			"pinyin": "yī yuàn zài xué xiào dōng bian",
+			"pinyin": "yīyuàn zài xuéxiào dōngbian",
+			"spans": [2, 1, 2, 2],
 			"english": "The hospital is on the east side of the school."
 		},
 		"pos": ["N"],
@@ -1376,7 +1461,8 @@
 		"meanings": ["thing", "stuff"],
 		"example": {
 			"hanzi": "这些东西是我的。",
-			"pinyin": "zhè xiē dōng xi shì wǒ de",
+			"pinyin": "zhèxiē dōngxi shì wǒ de",
+			"spans": [2, 2, 1, 1, 1],
 			"english": "These things are mine."
 		},
 		"pos": ["N"],
@@ -1392,6 +1478,7 @@
 		"example": {
 			"hanzi": "别动我的书。",
 			"pinyin": "bié dòng wǒ de shū",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "Don't move my book."
 		},
 		"pos": ["V"],
@@ -1409,7 +1496,8 @@
 		"meanings": ["movement", "action"],
 		"example": {
 			"hanzi": "这个动作不太难。",
-			"pinyin": "zhè ge dòng zuò bú tài nán",
+			"pinyin": "zhè ge dòngzuò bú tài nán",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "This movement isn't too hard."
 		},
 		"pos": ["N"],
@@ -1423,7 +1511,8 @@
 		"meanings": ["all", "both"],
 		"example": {
 			"hanzi": "我们都是学生。",
-			"pinyin": "wǒ men dōu shì xué shēng",
+			"pinyin": "wǒmen dōu shì xuésheng",
+			"spans": [2, 1, 1, 2],
 			"english": "We are all students."
 		},
 		"pos": ["Adv"],
@@ -1438,7 +1527,8 @@
 		"meanings": ["to read", "to read aloud"],
 		"example": {
 			"hanzi": "我喜欢读中文书。",
-			"pinyin": "wǒ xǐ huan dú zhōng wén shū",
+			"pinyin": "wǒ xǐhuan dú Zhōngwén shū",
+			"spans": [1, 2, 1, 2, 1],
 			"english": "I like reading Chinese books."
 		},
 		"pos": ["V"],
@@ -1448,7 +1538,7 @@
 		"id": "L1-0091",
 		"hanzi": "读书",
 		"traditional": "讀書",
-		"pinyin": "dú shū",
+		"pinyin": "dúshū",
 		"syllables": [
 			{ "py": "dú", "tone": 2 },
 			{ "py": "shū", "tone": 1 }
@@ -1456,7 +1546,8 @@
 		"meanings": ["to read a book", "to attend school"],
 		"example": {
 			"hanzi": "他在房间里读书。",
-			"pinyin": "tā zài fáng jiān lǐ dú shū",
+			"pinyin": "tā zài fángjiān lǐ dúshū",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "He's reading in his room."
 		},
 		"pos": [],
@@ -1471,7 +1562,8 @@
 		"meanings": ["correct", "right"],
 		"example": {
 			"hanzi": "老师说我写得对。",
-			"pinyin": "lǎo shī shuō wǒ xiě de duì",
+			"pinyin": "lǎoshī shuō wǒ xiě de duì",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "The teacher said I wrote it correctly."
 		},
 		"pos": ["Adj"],
@@ -1490,7 +1582,8 @@
 		"meanings": ["I'm sorry", "excuse me"],
 		"example": {
 			"hanzi": "对不起，我来晚了。",
-			"pinyin": "duì bu qǐ wǒ lái wǎn le",
+			"pinyin": "duìbuqǐ wǒ lái wǎn le",
+			"spans": [3, 1, 1, 1, 1],
 			"english": "Sorry, I'm late."
 		},
 		"pos": ["V"],
@@ -1504,7 +1597,8 @@
 		"meanings": ["many", "a lot of"],
 		"example": {
 			"hanzi": "今天路上的人很多。",
-			"pinyin": "jīn tiān lù shang de rén hěn duō",
+			"pinyin": "jīntiān lùshang de rén hěn duō",
+			"spans": [2, 2, 1, 1, 1, 1],
 			"english": "There are a lot of people out today."
 		},
 		"pos": ["Adj", "Pron"],
@@ -1521,7 +1615,8 @@
 		"meanings": ["how much?", "how many?"],
 		"example": {
 			"hanzi": "这个多少钱？",
-			"pinyin": "zhè ge duō shao qián",
+			"pinyin": "zhè ge duōshao qián",
+			"spans": [1, 1, 2, 1],
 			"english": "How much is this?"
 		},
 		"pos": ["Pron"],
@@ -1536,7 +1631,8 @@
 		"meanings": ["hungry"],
 		"example": {
 			"hanzi": "我现在很饿。",
-			"pinyin": "wǒ xiàn zài hěn è",
+			"pinyin": "wǒ xiànzài hěn è",
+			"spans": [1, 2, 1, 1],
 			"english": "I'm really hungry right now."
 		},
 		"pos": ["Adj", "V"],
@@ -1554,7 +1650,8 @@
 		"meanings": ["son"],
 		"example": {
 			"hanzi": "我儿子今年八岁。",
-			"pinyin": "wǒ ér zi jīn nián bā suì",
+			"pinyin": "wǒ érzi jīnnián bā suì",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "My son is eight years old."
 		},
 		"pos": ["N"],
@@ -1569,6 +1666,7 @@
 		"example": {
 			"hanzi": "我住在二号楼。",
 			"pinyin": "wǒ zhù zài èr hào lóu",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I live in building number two."
 		},
 		"pos": ["Num"],
@@ -1583,7 +1681,8 @@
 		"meanings": ["cooked rice", "a meal"],
 		"example": {
 			"hanzi": "妈妈做的饭很好吃。",
-			"pinyin": "mā ma zuò de fàn hěn hǎo chī",
+			"pinyin": "māma zuò de fàn hěn hǎochī",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "The food my mum cooks is delicious."
 		},
 		"pos": ["N"],
@@ -1601,7 +1700,8 @@
 		"meanings": ["restaurant", "hotel"],
 		"example": {
 			"hanzi": "这家饭店有很多人。",
-			"pinyin": "zhè jiā fàn diàn yǒu hěn duō rén",
+			"pinyin": "zhè jiā fàndiàn yǒu hěn duō rén",
+			"spans": [1, 1, 2, 1, 1, 1, 1],
 			"english": "There are a lot of people in this restaurant."
 		},
 		"pos": ["N"],
@@ -1619,7 +1719,8 @@
 		"meanings": ["room"],
 		"example": {
 			"hanzi": "我的房间很干净。",
-			"pinyin": "wǒ de fáng jiān hěn gān jìng",
+			"pinyin": "wǒ de fángjiān hěn gānjìng",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "My room is very clean."
 		},
 		"pos": ["N"],
@@ -1636,7 +1737,8 @@
 		"meanings": ["house"],
 		"example": {
 			"hanzi": "他们的房子很大。",
-			"pinyin": "tā men de fáng zi hěn dà",
+			"pinyin": "tāmen de fángzi hěn dà",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "Their house is really big."
 		},
 		"pos": ["N"],
@@ -1650,7 +1752,8 @@
 		"meanings": ["to put", "to place"],
 		"example": {
 			"hanzi": "东西都放在桌子上。",
-			"pinyin": "dōng xi dōu fàng zài zhuō zi shàng",
+			"pinyin": "dōngxi dōu fàng zài zhuōzi shàng",
+			"spans": [2, 1, 1, 1, 2, 1],
 			"english": "Put everything on the desk."
 		},
 		"pos": ["V"],
@@ -1659,7 +1762,7 @@
 	{
 		"id": "L1-0104",
 		"hanzi": "放假",
-		"pinyin": "fàng jià",
+		"pinyin": "fàngjià",
 		"syllables": [
 			{ "py": "fàng", "tone": 4 },
 			{ "py": "jià", "tone": 4 }
@@ -1667,7 +1770,8 @@
 		"meanings": ["to have a holiday"],
 		"example": {
 			"hanzi": "我们下星期放假。",
-			"pinyin": "wǒ men xià xīng qī fàng jià",
+			"pinyin": "wǒmen xià xīngqī fàngjià",
+			"spans": [2, 1, 2, 2],
 			"english": "We're on holiday next week."
 		},
 		"pos": [],
@@ -1677,7 +1781,7 @@
 		"id": "L1-0105",
 		"hanzi": "放学",
 		"traditional": "放學",
-		"pinyin": "fàng xué",
+		"pinyin": "fàngxué",
 		"syllables": [
 			{ "py": "fàng", "tone": 4 },
 			{ "py": "xué", "tone": 2 }
@@ -1685,7 +1789,8 @@
 		"meanings": ["to finish school for the day"],
 		"example": {
 			"hanzi": "我们下午四点放学。",
-			"pinyin": "wǒ men xià wǔ sì diǎn fàng xué",
+			"pinyin": "wǒmen xiàwǔ sì diǎn fàngxué",
+			"spans": [2, 2, 1, 1, 2],
 			"english": "We finish school at four in the afternoon."
 		},
 		"pos": [],
@@ -1701,6 +1806,7 @@
 		"example": {
 			"hanzi": "飞机飞得很高。",
 			"pinyin": "fēi jī fēi de hěn gāo",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "The plane is flying very high."
 		},
 		"pos": ["V"],
@@ -1718,7 +1824,8 @@
 		"meanings": ["airplane"],
 		"example": {
 			"hanzi": "我们明天坐飞机回家。",
-			"pinyin": "wǒ men míng tiān zuò fēi jī huí jiā",
+			"pinyin": "wǒmen míngtiān zuò fēijī huí jiā",
+			"spans": [2, 2, 1, 2, 1, 1],
 			"english": "We're flying home tomorrow."
 		},
 		"pos": ["N"],
@@ -1735,7 +1842,8 @@
 		"meanings": ["extremely"],
 		"example": {
 			"hanzi": "今天非常热。",
-			"pinyin": "jīn tiān fēi cháng rè",
+			"pinyin": "jīntiān fēicháng rè",
+			"spans": [2, 2, 1],
 			"english": "It's extremely hot today."
 		},
 		"pos": ["Adv"],
@@ -1749,7 +1857,8 @@
 		"meanings": ["minute", "point in a score"],
 		"example": {
 			"hanzi": "现在是八点十分。",
-			"pinyin": "xiàn zài shì bā diǎn shí fēn",
+			"pinyin": "xiànzài shì bā diǎn shí fēn",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "It's ten past eight."
 		},
 		"pos": ["N", "M"],
@@ -1764,7 +1873,8 @@
 		"meanings": ["wind"],
 		"example": {
 			"hanzi": "今天风很大。",
-			"pinyin": "jīn tiān fēng hěn dà",
+			"pinyin": "jīntiān fēng hěn dà",
+			"spans": [2, 1, 1, 1],
 			"english": "It's very windy today."
 		},
 		"pos": ["N"],
@@ -1779,7 +1889,8 @@
 		"meanings": ["dry"],
 		"example": {
 			"hanzi": "衣服还没干。",
-			"pinyin": "yī fu hái méi gān",
+			"pinyin": "yīfu hái méi gān",
+			"spans": [2, 1, 1, 1],
 			"english": "The clothes aren't dry yet."
 		},
 		"pos": ["Adj"],
@@ -1797,7 +1908,8 @@
 		"meanings": ["clean", "neat"],
 		"example": {
 			"hanzi": "房间很干净。",
-			"pinyin": "fáng jiān hěn gān jìng",
+			"pinyin": "fángjiān hěn gānjìng",
+			"spans": [2, 1, 2],
 			"english": "The room is very clean."
 		},
 		"pos": ["Adj"],
@@ -1813,6 +1925,7 @@
 		"example": {
 			"hanzi": "我在这个店里干了三年。",
 			"pinyin": "wǒ zài zhè ge diàn lǐ gàn le sān nián",
+			"spans": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 			"english": "I've worked at this shop for three years."
 		},
 		"pos": ["V"],
@@ -1831,7 +1944,8 @@
 		"meanings": ["what are you doing?"],
 		"example": {
 			"hanzi": "你们在干什么呢？",
-			"pinyin": "nǐ men zài gàn shén me ne",
+			"pinyin": "nǐmen zài gàn shénme ne",
+			"spans": [2, 1, 1, 2, 1],
 			"english": "What are you all doing?"
 		},
 		"pos": [],
@@ -1845,7 +1959,8 @@
 		"meanings": ["tall", "high"],
 		"example": {
 			"hanzi": "我弟弟比我高。",
-			"pinyin": "wǒ dì di bǐ wǒ gāo",
+			"pinyin": "wǒ dìdi bǐ wǒ gāo",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "My little brother is taller than me."
 		},
 		"pos": ["Adj"],
@@ -1863,7 +1978,8 @@
 		"meanings": ["happy", "glad"],
 		"example": {
 			"hanzi": "今天见到你很高兴。",
-			"pinyin": "jīn tiān jiàn dào nǐ hěn gāo xìng",
+			"pinyin": "jīntiān jiàndào nǐ hěn gāoxìng",
+			"spans": [2, 2, 1, 1, 2],
 			"english": "I'm really glad to see you today."
 		},
 		"pos": ["Adj"],
@@ -1881,7 +1997,8 @@
 		"meanings": ["to tell"],
 		"example": {
 			"hanzi": "请告诉我你的名字。",
-			"pinyin": "qǐng gào su wǒ nǐ de míng zi",
+			"pinyin": "qǐng gàosu wǒ nǐ de míngzi",
+			"spans": [1, 2, 1, 1, 1, 2],
 			"english": "Please tell me your name."
 		},
 		"pos": ["V"],
@@ -1898,7 +2015,8 @@
 		"meanings": ["older brother"],
 		"example": {
 			"hanzi": "我哥哥今年二十岁。",
-			"pinyin": "wǒ gē ge jīn nián èr shí suì",
+			"pinyin": "wǒ gēge jīnnián èr shí suì",
+			"spans": [1, 2, 2, 1, 1, 1],
 			"english": "My older brother is twenty this year."
 		},
 		"pos": ["N"],
@@ -1912,7 +2030,8 @@
 		"meanings": ["song"],
 		"example": {
 			"hanzi": "老师教我们唱新歌。",
-			"pinyin": "lǎo shī jiāo wǒ men chàng xīn gē",
+			"pinyin": "lǎoshī jiāo wǒmen chàng xīn gē",
+			"spans": [2, 1, 2, 1, 1, 1],
 			"english": "The teacher is teaching us a new song."
 		},
 		"pos": ["N"],
@@ -1927,7 +2046,8 @@
 		"meanings": ["measure word: general purpose"],
 		"example": {
 			"hanzi": "我有两个哥哥。",
-			"pinyin": "wǒ yǒu liǎng ge gē ge",
+			"pinyin": "wǒ yǒu liǎng ge gēge",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "I have two older brothers."
 		},
 		"pos": ["M"],
@@ -1943,6 +2063,7 @@
 		"example": {
 			"hanzi": "请给我一杯茶。",
 			"pinyin": "qǐng gěi wǒ yì bēi chá",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "Please give me a cup of tea."
 		},
 		"pos": ["V", "Prep"],
@@ -1956,7 +2077,8 @@
 		"meanings": ["with", "to follow"],
 		"example": {
 			"hanzi": "我跟朋友一起去看电影。",
-			"pinyin": "wǒ gēn péng you yì qǐ qù kàn diàn yǐng",
+			"pinyin": "wǒ gēn péngyou yìqǐ qù kàn diànyǐng",
+			"spans": [1, 1, 2, 2, 1, 1, 2],
 			"english": "I'm going to a film with friends."
 		},
 		"pos": ["Prep", "Conj", "V"],
@@ -1973,7 +2095,8 @@
 		"meanings": ["worker"],
 		"example": {
 			"hanzi": "我爸爸是工人。",
-			"pinyin": "wǒ bà ba shì gōng rén",
+			"pinyin": "wǒ bàba shì gōngrén",
+			"spans": [1, 2, 1, 2],
 			"english": "My dad is a factory worker."
 		},
 		"pos": ["N"],
@@ -1990,7 +2113,8 @@
 		"meanings": ["to work", "a job"],
 		"example": {
 			"hanzi": "我爸爸在医院工作。",
-			"pinyin": "wǒ bà ba zài yī yuàn gōng zuò",
+			"pinyin": "wǒ bàba zài yīyuàn gōngzuò",
+			"spans": [1, 2, 1, 2, 2],
 			"english": "My dad works at a hospital."
 		},
 		"pos": ["V", "N"],
@@ -2005,7 +2129,8 @@
 		"meanings": ["to close", "to turn off"],
 		"example": {
 			"hanzi": "请关门，外面很冷。",
-			"pinyin": "qǐng guān mén wài miàn hěn lěng",
+			"pinyin": "qǐng guān mén wàimiàn hěn lěng",
+			"spans": [1, 1, 1, 2, 1, 1],
 			"english": "Please shut the door, it is cold outside."
 		},
 		"pos": ["V"],
@@ -2023,7 +2148,8 @@
 		"meanings": ["to close up"],
 		"example": {
 			"hanzi": "她关上门就走了。",
-			"pinyin": "tā guān shang mén jiù zǒu le",
+			"pinyin": "tā guānshang mén jiù zǒu le",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "She pulled the door shut and left."
 		},
 		"pos": [],
@@ -2038,7 +2164,8 @@
 		"meanings": ["expensive"],
 		"example": {
 			"hanzi": "这个手机很贵。",
-			"pinyin": "zhè ge shǒu jī hěn guì",
+			"pinyin": "zhè ge shǒujī hěn guì",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "This phone is expensive."
 		},
 		"pos": ["Adj"],
@@ -2054,6 +2181,7 @@
 		"example": {
 			"hanzi": "他是哪国人？",
 			"pinyin": "tā shì nǎ guó rén",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "What country is he from?"
 		},
 		"pos": ["N"],
@@ -2071,7 +2199,8 @@
 		"meanings": ["country"],
 		"example": {
 			"hanzi": "中国是一个大国家。",
-			"pinyin": "zhōng guó shì yí gè dà guó jiā",
+			"pinyin": "Zhōngguó shì yí gè dà guójiā",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "China is a big country."
 		},
 		"pos": ["N"],
@@ -2089,7 +2218,8 @@
 		"meanings": ["abroad", "overseas"],
 		"example": {
 			"hanzi": "我姐姐在国外学习。",
-			"pinyin": "wǒ jiě jie zài guó wài xué xí",
+			"pinyin": "wǒ jiějie zài guó wài xuéxí",
+			"spans": [1, 2, 1, 1, 1, 2],
 			"english": "My older sister is studying abroad."
 		},
 		"pos": [],
@@ -2104,7 +2234,8 @@
 		"meanings": ["to cross", "to go past"],
 		"example": {
 			"hanzi": "我们过马路吧。",
-			"pinyin": "wǒ men guò mǎ lù ba",
+			"pinyin": "wǒmen guò mǎlù ba",
+			"spans": [2, 1, 2, 1],
 			"english": "Let's cross the road."
 		},
 		"pos": ["V"],
@@ -2119,7 +2250,8 @@
 		"meanings": ["still", "in addition"],
 		"example": {
 			"hanzi": "他还没回来。",
-			"pinyin": "tā hái méi huí lái",
+			"pinyin": "tā hái méi huílai",
+			"spans": [1, 1, 1, 2],
 			"english": "He still isn't back."
 		},
 		"pos": ["Adv"],
@@ -2137,7 +2269,8 @@
 		"meanings": ["or in a question", "still"],
 		"example": {
 			"hanzi": "你喝茶还是喝水？",
-			"pinyin": "nǐ hē chá hái shi hē shuǐ",
+			"pinyin": "nǐ hē chá háishi hē shuǐ",
+			"spans": [1, 1, 1, 2, 1, 1],
 			"english": "Would you like tea or water?"
 		},
 		"pos": ["Adv", "Conj"],
@@ -2155,7 +2288,8 @@
 		"meanings": ["and also", "there is still more"],
 		"example": {
 			"hanzi": "我有哥哥还有姐姐。",
-			"pinyin": "wǒ yǒu gē ge hái yǒu jiě jie",
+			"pinyin": "wǒ yǒu gēge hái yǒu jiějie",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "I have an older brother and an older sister as well."
 		},
 		"pos": [],
@@ -2172,7 +2306,8 @@
 		"meanings": ["child (son or daughter)", "kid"],
 		"example": {
 			"hanzi": "他们有两个孩子。",
-			"pinyin": "tā men yǒu liǎng ge hái zi",
+			"pinyin": "tāmen yǒu liǎng ge háizi",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "They have two children."
 		},
 		"pos": ["N"],
@@ -2190,7 +2325,8 @@
 		"meanings": ["the Chinese language"],
 		"example": {
 			"hanzi": "我想学好汉语。",
-			"pinyin": "wǒ xiǎng xué hǎo Hàn yǔ",
+			"pinyin": "wǒ xiǎng xué hǎo Hànyǔ",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "I want to learn Chinese well."
 		},
 		"pos": ["N"],
@@ -2208,7 +2344,8 @@
 		"meanings": ["Chinese character"],
 		"example": {
 			"hanzi": "这个汉字我不认识。",
-			"pinyin": "zhè ge Hàn zì wǒ bú rèn shi",
+			"pinyin": "zhè ge Hànzì wǒ bú rènshi",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "I don't know this Chinese character."
 		},
 		"pos": ["N"],
@@ -2223,6 +2360,7 @@
 		"example": {
 			"hanzi": "他是一个很好的人。",
 			"pinyin": "tā shì yí ge hěn hǎo de rén",
+			"spans": [1, 1, 1, 1, 1, 1, 1, 1],
 			"english": "He is a very good person."
 		},
 		"pos": ["Adj"],
@@ -2239,7 +2377,8 @@
 		"meanings": ["tasty", "delicious"],
 		"example": {
 			"hanzi": "这个面包很好吃。",
-			"pinyin": "zhè ge miàn bāo hěn hǎo chī",
+			"pinyin": "zhè ge miànbāo hěn hǎochī",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "This bread is delicious."
 		},
 		"pos": ["Adj"],
@@ -2256,7 +2395,8 @@
 		"meanings": ["good-looking", "nice to look at"],
 		"example": {
 			"hanzi": "你的新衣服很好看。",
-			"pinyin": "nǐ de xīn yī fu hěn hǎo kàn",
+			"pinyin": "nǐ de xīn yīfu hěn hǎokàn",
+			"spans": [1, 1, 1, 2, 1, 2],
 			"english": "Your new clothes look great."
 		},
 		"pos": ["Adj"],
@@ -2274,7 +2414,8 @@
 		"meanings": ["pleasant to hear"],
 		"example": {
 			"hanzi": "她唱的歌很好听。",
-			"pinyin": "tā chàng de gē hěn hǎo tīng",
+			"pinyin": "tā chàng de gē hěn hǎotīng",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "The songs she sings are lovely."
 		},
 		"pos": ["Adj"],
@@ -2293,7 +2434,8 @@
 		"meanings": ["fun", "amusing"],
 		"example": {
 			"hanzi": "学汉语很好玩儿。",
-			"pinyin": "xué hàn yǔ hěn hǎo wán r",
+			"pinyin": "xué Hànyǔ hěn hǎowánr",
+			"spans": [1, 2, 1, 3],
 			"english": "Learning Chinese is a lot of fun."
 		},
 		"pos": ["Adj"],
@@ -2308,7 +2450,8 @@
 		"meanings": ["day of the month in speech", "number"],
 		"example": {
 			"hanzi": "今天是九月八号。",
-			"pinyin": "jīn tiān shì jiǔ yuè bā hào",
+			"pinyin": "jīntiān shì jiǔ yuè bā hào",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "Today is the eighth of September."
 		},
 		"pos": ["N", "M"],
@@ -2323,6 +2466,7 @@
 		"example": {
 			"hanzi": "我想喝一杯茶。",
 			"pinyin": "wǒ xiǎng hē yì bēi chá",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I'd like a cup of tea."
 		},
 		"pos": ["V"],
@@ -2336,7 +2480,8 @@
 		"meanings": ["and", "with"],
 		"example": {
 			"hanzi": "我和妹妹一起看电视。",
-			"pinyin": "wǒ hé mèi mei yì qǐ kàn diàn shì",
+			"pinyin": "wǒ hé mèimei yìqǐ kàn diànshì",
+			"spans": [1, 1, 2, 2, 1, 2],
 			"english": "My sister and I watch TV together."
 		},
 		"pos": ["Prep", "Conj"],
@@ -2350,7 +2495,8 @@
 		"meanings": ["very"],
 		"example": {
 			"hanzi": "她的中文很好。",
-			"pinyin": "tā de zhōng wén hěn hǎo",
+			"pinyin": "tā de Zhōngwén hěn hǎo",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "Her Chinese is very good."
 		},
 		"pos": ["Adv"],
@@ -2365,7 +2511,8 @@
 		"meanings": ["back or rear", "after"],
 		"example": {
 			"hanzi": "学校后面有一家店。",
-			"pinyin": "xué xiào hòu miàn yǒu yì jiā diàn",
+			"pinyin": "xuéxiào hòu miàn yǒu yì jiā diàn",
+			"spans": [2, 1, 1, 1, 1, 1, 1],
 			"english": "There's a shop behind the school."
 		},
 		"pos": ["N"],
@@ -2383,7 +2530,8 @@
 		"meanings": ["behind", "the back side"],
 		"example": {
 			"hanzi": "书店在学校后边。",
-			"pinyin": "shū diàn zài xué xiào hòu bian",
+			"pinyin": "shūdiàn zài xuéxiào hòubian",
+			"spans": [2, 1, 2, 2],
 			"english": "The bookshop is behind the school."
 		},
 		"pos": ["N"],
@@ -2401,7 +2549,8 @@
 		"meanings": ["the day after tomorrow"],
 		"example": {
 			"hanzi": "后天我去北京。",
-			"pinyin": "hòu tiān wǒ qù Běi jīng",
+			"pinyin": "hòutiān wǒ qù Běijīng",
+			"spans": [2, 1, 1, 2],
 			"english": "I'm going to Beijing the day after tomorrow."
 		},
 		"pos": ["N"],
@@ -2415,7 +2564,8 @@
 		"meanings": ["flower", "blossom"],
 		"example": {
 			"hanzi": "这些花很好看。",
-			"pinyin": "zhè xiē huā hěn hǎo kàn",
+			"pinyin": "zhèxiē huā hěn hǎokàn",
+			"spans": [2, 1, 1, 2],
 			"english": "These flowers are really pretty."
 		},
 		"pos": ["N"],
@@ -2430,7 +2580,8 @@
 		"meanings": ["words", "speech"],
 		"example": {
 			"hanzi": "他的话我没听见。",
-			"pinyin": "tā de huà wǒ méi tīng jiàn",
+			"pinyin": "tā de huà wǒ méi tīngjiàn",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I didn't catch what he said."
 		},
 		"pos": ["N"],
@@ -2446,6 +2597,7 @@
 		"example": {
 			"hanzi": "他不是坏人。",
 			"pinyin": "tā bú shì huài rén",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "He is not a bad person."
 		},
 		"pos": ["Adj"],
@@ -2460,7 +2612,8 @@
 		"meanings": ["to give back", "to return something"],
 		"example": {
 			"hanzi": "我明天还你钱。",
-			"pinyin": "wǒ míng tiān huán nǐ qián",
+			"pinyin": "wǒ míngtiān huán nǐ qián",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "I'll pay you back tomorrow."
 		},
 		"pos": ["V"],
@@ -2474,7 +2627,8 @@
 		"meanings": ["to return", "to go back"],
 		"example": {
 			"hanzi": "你什么时候回来？",
-			"pinyin": "nǐ shén me shí hou huí lái",
+			"pinyin": "nǐ shénme shíhou huí lái",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "When are you coming back?"
 		},
 		"pos": ["V"],
@@ -2491,7 +2645,8 @@
 		"meanings": ["to answer", "an answer"],
 		"example": {
 			"hanzi": "他没有回答我。",
-			"pinyin": "tā méi yǒu huí dá wǒ",
+			"pinyin": "tā méiyǒu huídá wǒ",
+			"spans": [1, 2, 2, 1],
 			"english": "He didn't answer me."
 		},
 		"pos": ["V", "N"],
@@ -2508,7 +2663,8 @@
 		"meanings": ["to return to"],
 		"example": {
 			"hanzi": "他昨天回到北京。",
-			"pinyin": "tā zuó tiān huí dào Běi jīng",
+			"pinyin": "tā zuótiān huídào Běijīng",
+			"spans": [1, 2, 2, 2],
 			"english": "He got back to Beijing yesterday."
 		},
 		"pos": ["V"],
@@ -2525,7 +2681,8 @@
 		"meanings": ["to go home"],
 		"example": {
 			"hanzi": "我晚上六点回家。",
-			"pinyin": "wǒ wǎn shang liù diǎn huí jiā",
+			"pinyin": "wǒ wǎnshang liù diǎn huí jiā",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I get home at six in the evening."
 		},
 		"pos": [],
@@ -2535,15 +2692,16 @@
 		"id": "L1-0158",
 		"hanzi": "回来",
 		"traditional": "回來",
-		"pinyin": "huí lái",
+		"pinyin": "huílai",
 		"syllables": [
 			{ "py": "huí", "tone": 2 },
-			{ "py": "lái", "tone": 2 }
+			{ "py": "lai", "tone": 0 }
 		],
 		"meanings": ["to come back"],
 		"example": {
 			"hanzi": "爸爸六点回来。",
-			"pinyin": "bà ba liù diǎn huí lái",
+			"pinyin": "bàba liù diǎn huílai",
+			"spans": [2, 1, 1, 2],
 			"english": "Dad comes back at six."
 		},
 		"pos": [],
@@ -2552,15 +2710,16 @@
 	{
 		"id": "L1-0159",
 		"hanzi": "回去",
-		"pinyin": "huí qù",
+		"pinyin": "huíqu",
 		"syllables": [
 			{ "py": "huí", "tone": 2 },
-			{ "py": "qù", "tone": 4 }
+			{ "py": "qu", "tone": 0 }
 		],
 		"meanings": ["to go back"],
 		"example": {
 			"hanzi": "他昨天就回去了。",
-			"pinyin": "tā zuó tiān jiù huí qù le",
+			"pinyin": "tā zuótiān jiù huíqu le",
+			"spans": [1, 2, 1, 2, 1],
 			"english": "He went back yesterday."
 		},
 		"pos": [],
@@ -2575,7 +2734,8 @@
 		"meanings": ["to know how to", "will or is likely to"],
 		"example": {
 			"hanzi": "我会说汉语。",
-			"pinyin": "wǒ huì shuō hàn yǔ",
+			"pinyin": "wǒ huì shuō Hànyǔ",
+			"spans": [1, 1, 1, 2],
 			"english": "I can speak Chinese."
 		},
 		"pos": ["V"],
@@ -2593,7 +2753,8 @@
 		"meanings": ["train"],
 		"example": {
 			"hanzi": "我坐火车回家。",
-			"pinyin": "wǒ zuò huǒ chē huí jiā",
+			"pinyin": "wǒ zuò huǒchē huí jiā",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "I'm taking the train home."
 		},
 		"pos": ["N"],
@@ -2611,7 +2772,8 @@
 		"meanings": ["airport"],
 		"example": {
 			"hanzi": "我们明天去机场。",
-			"pinyin": "wǒ men míng tiān qù jī chǎng",
+			"pinyin": "wǒmen míngtiān qù jīchǎng",
+			"spans": [2, 2, 1, 2],
 			"english": "We're going to the airport tomorrow."
 		},
 		"pos": ["N"],
@@ -2629,7 +2791,8 @@
 		"meanings": ["plane ticket"],
 		"example": {
 			"hanzi": "我要买机票。",
-			"pinyin": "wǒ yào mǎi jī piào",
+			"pinyin": "wǒ yào mǎi jīpiào",
+			"spans": [1, 1, 1, 2],
 			"english": "I want to buy a plane ticket."
 		},
 		"pos": ["N"],
@@ -2647,7 +2810,8 @@
 		"meanings": ["egg", "hen's egg"],
 		"example": {
 			"hanzi": "妈妈买了十个鸡蛋。",
-			"pinyin": "mā ma mǎi le shí ge jī dàn",
+			"pinyin": "māma mǎi le shí ge jīdàn",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "Mum bought ten eggs."
 		},
 		"pos": ["N"],
@@ -2663,6 +2827,7 @@
 		"example": {
 			"hanzi": "你家有几口人？",
 			"pinyin": "nǐ jiā yǒu jǐ kǒu rén",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "How many people are there in your family?"
 		},
 		"pos": ["Num", "Pron"],
@@ -2677,7 +2842,8 @@
 		"meanings": ["to write down", "to remember"],
 		"example": {
 			"hanzi": "请你记一下我的电话。",
-			"pinyin": "qǐng nǐ jì yí xià wǒ de diàn huà",
+			"pinyin": "qǐng nǐ jì yí xià wǒ de diànhuà",
+			"spans": [1, 1, 1, 1, 1, 1, 1, 2],
 			"english": "Please write down my phone number."
 		},
 		"pos": ["V"],
@@ -2695,7 +2861,8 @@
 		"meanings": ["to remember"],
 		"example": {
 			"hanzi": "我记得你的名字。",
-			"pinyin": "wǒ jì de nǐ de míng zi",
+			"pinyin": "wǒ jìde nǐ de míngzi",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "I remember your name."
 		},
 		"pos": ["V"],
@@ -2705,15 +2872,16 @@
 		"id": "L1-0168",
 		"hanzi": "记住",
 		"traditional": "記住",
-		"pinyin": "jìzhù",
+		"pinyin": "jìzhu",
 		"syllables": [
 			{ "py": "jì", "tone": 4 },
-			{ "py": "zhù", "tone": 4 }
+			{ "py": "zhu", "tone": 0 }
 		],
 		"meanings": ["to memorize", "to bear in mind"],
 		"example": {
 			"hanzi": "这个字我记住了。",
-			"pinyin": "zhè ge zì wǒ jì zhù le",
+			"pinyin": "zhè ge zì wǒ jìzhu le",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "I've got this character memorized."
 		},
 		"pos": [],
@@ -2727,7 +2895,8 @@
 		"meanings": ["home", "family"],
 		"example": {
 			"hanzi": "他的家在学校旁边。",
-			"pinyin": "tā de jiā zài xué xiào páng biān",
+			"pinyin": "tā de jiā zài xuéxiào pángbiān",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "His home is next to the school."
 		},
 		"pos": ["N", "M"],
@@ -2745,7 +2914,8 @@
 		"meanings": ["at home"],
 		"example": {
 			"hanzi": "家里没有人。",
-			"pinyin": "jiā li méi yǒu rén",
+			"pinyin": "jiā li méiyǒu rén",
+			"spans": [1, 1, 2, 1],
 			"english": "There's nobody home."
 		},
 		"pos": [],
@@ -2762,7 +2932,8 @@
 		"meanings": ["family member"],
 		"example": {
 			"hanzi": "我的家人都很好。",
-			"pinyin": "wǒ de jiā rén dōu hěn hǎo",
+			"pinyin": "wǒ de jiārén dōu hěn hǎo",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "My family are all doing well."
 		},
 		"pos": ["N"],
@@ -2778,6 +2949,7 @@
 		"example": {
 			"hanzi": "我家有三间房。",
 			"pinyin": "wǒ jiā yǒu sān jiān fáng",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "There are three rooms in my home."
 		},
 		"pos": ["M"],
@@ -2792,7 +2964,8 @@
 		"meanings": ["to meet with", "to see someone"],
 		"example": {
 			"hanzi": "明天在学校见！",
-			"pinyin": "míng tiān zài xué xiào jiàn",
+			"pinyin": "míngtiān zài xuéxiào jiàn",
+			"spans": [2, 1, 2, 1],
 			"english": "See you at school tomorrow!"
 		},
 		"pos": ["V"],
@@ -2802,7 +2975,7 @@
 		"id": "L1-0174",
 		"hanzi": "见面",
 		"traditional": "見面",
-		"pinyin": "jiàn miàn",
+		"pinyin": "jiànmiàn",
 		"syllables": [
 			{ "py": "jiàn", "tone": 4 },
 			{ "py": "miàn", "tone": 4 }
@@ -2810,7 +2983,8 @@
 		"meanings": ["to meet face to face"],
 		"example": {
 			"hanzi": "我们明天见面吧。",
-			"pinyin": "wǒ men míng tiān jiàn miàn ba",
+			"pinyin": "wǒmen míngtiān jiànmiàn ba",
+			"spans": [2, 2, 2, 1],
 			"english": "Let's meet up tomorrow."
 		},
 		"pos": [],
@@ -2824,7 +2998,8 @@
 		"meanings": ["to teach"],
 		"example": {
 			"hanzi": "老师教我们汉语。",
-			"pinyin": "lǎo shī jiāo wǒ men Hàn yǔ",
+			"pinyin": "lǎoshī jiāo wǒmen Hànyǔ",
+			"spans": [2, 1, 2, 2],
 			"english": "The teacher teaches us Chinese."
 		},
 		"pos": ["V"],
@@ -2838,7 +3013,8 @@
 		"meanings": ["to be called", "to shout"],
 		"example": {
 			"hanzi": "老师叫我们进来。",
-			"pinyin": "lǎo shī jiào wǒ men jìn lái",
+			"pinyin": "lǎoshī jiào wǒmen jìnlái",
+			"spans": [2, 1, 2, 2],
 			"english": "The teacher called us in."
 		},
 		"pos": ["V"],
@@ -2857,7 +3033,8 @@
 		"meanings": ["classroom building"],
 		"example": {
 			"hanzi": "教学楼在学校东边。",
-			"pinyin": "jiào xué lóu zài xué xiào dōng bian",
+			"pinyin": "jiàoxuélóu zài xuéxiào dōngbian",
+			"spans": [3, 1, 2, 2],
 			"english": "The classroom building is on the east side of the school."
 		},
 		"pos": ["N"],
@@ -2874,7 +3051,8 @@
 		"meanings": ["older sister"],
 		"example": {
 			"hanzi": "我姐姐是老师。",
-			"pinyin": "wǒ jiě jie shì lǎo shī",
+			"pinyin": "wǒ jiějie shì lǎoshī",
+			"spans": [1, 2, 1, 2],
 			"english": "My older sister is a teacher."
 		},
 		"pos": ["N"],
@@ -2892,7 +3070,8 @@
 		"meanings": ["to introduce"],
 		"example": {
 			"hanzi": "我来介绍一下我的朋友。",
-			"pinyin": "wǒ lái jiè shào yí xià wǒ de péng you",
+			"pinyin": "wǒ lái jièshào yí xià wǒ de péngyou",
+			"spans": [1, 1, 2, 1, 1, 1, 1, 2],
 			"english": "Let me introduce my friend."
 		},
 		"pos": ["V"],
@@ -2909,7 +3088,8 @@
 		"meanings": ["this year"],
 		"example": {
 			"hanzi": "我今年二十岁。",
-			"pinyin": "wǒ jīn nián èr shí suì",
+			"pinyin": "wǒ jīnnián èr shí suì",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "I'm twenty this year."
 		},
 		"pos": ["N"],
@@ -2926,7 +3106,8 @@
 		"meanings": ["today"],
 		"example": {
 			"hanzi": "今天我要去买东西。",
-			"pinyin": "jīn tiān wǒ yào qù mǎi dōng xi",
+			"pinyin": "jīntiān wǒ yào qù mǎi dōngxi",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "I'm going shopping today."
 		},
 		"pos": ["N"],
@@ -2941,7 +3122,8 @@
 		"meanings": ["to enter"],
 		"example": {
 			"hanzi": "他进了房间。",
-			"pinyin": "tā jìn le fáng jiān",
+			"pinyin": "tā jìn le fángjiān",
+			"spans": [1, 1, 1, 2],
 			"english": "He went into the room."
 		},
 		"pos": ["V"],
@@ -2951,7 +3133,7 @@
 		"id": "L1-0183",
 		"hanzi": "进来",
 		"traditional": "進來",
-		"pinyin": "jìn lái",
+		"pinyin": "jìnlái",
 		"syllables": [
 			{ "py": "jìn", "tone": 4 },
 			{ "py": "lái", "tone": 2 }
@@ -2959,7 +3141,8 @@
 		"meanings": ["to come in"],
 		"example": {
 			"hanzi": "请进来喝杯茶。",
-			"pinyin": "qǐng jìn lái hē bēi chá",
+			"pinyin": "qǐng jìnlái hē bēi chá",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "Come in and have a cup of tea."
 		},
 		"pos": [],
@@ -2969,13 +3152,18 @@
 		"id": "L1-0184",
 		"hanzi": "进去",
 		"traditional": "進去",
-		"pinyin": "jìn qù",
+		"pinyin": "jìnqù",
 		"syllables": [
 			{ "py": "jìn", "tone": 4 },
 			{ "py": "qù", "tone": 4 }
 		],
 		"meanings": ["to go in"],
-		"example": { "hanzi": "我们进去吧。", "pinyin": "wǒ men jìn qù ba", "english": "Let's go in." },
+		"example": {
+			"hanzi": "我们进去吧。",
+			"pinyin": "wǒmen jìnqù ba",
+			"spans": [2, 2, 1],
+			"english": "Let's go in."
+		},
 		"pos": [],
 		"level": 1
 	},
@@ -2987,7 +3175,8 @@
 		"meanings": ["nine"],
 		"example": {
 			"hanzi": "我弟弟今年九岁。",
-			"pinyin": "wǒ dì di jīn nián jiǔ suì",
+			"pinyin": "wǒ dìdi jīnnián jiǔ suì",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "My younger brother is nine this year."
 		},
 		"pos": ["Num"],
@@ -3002,6 +3191,7 @@
 		"example": {
 			"hanzi": "他吃了饭就走了。",
 			"pinyin": "tā chī le fàn jiù zǒu le",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "He ate and then left right away."
 		},
 		"pos": ["Adv"],
@@ -3019,7 +3209,8 @@
 		"meanings": ["to feel that", "to think"],
 		"example": {
 			"hanzi": "我觉得这个菜很好吃。",
-			"pinyin": "wǒ jué de zhè ge cài hěn hǎo chī",
+			"pinyin": "wǒ juéde zhè ge cài hěn hǎochī",
+			"spans": [1, 2, 1, 1, 1, 1, 2],
 			"english": "I think this dish is delicious."
 		},
 		"pos": ["V"],
@@ -3034,7 +3225,8 @@
 		"meanings": ["to open", "to turn on"],
 		"example": {
 			"hanzi": "请开一下电视。",
-			"pinyin": "qǐng kāi yí xià diàn shì",
+			"pinyin": "qǐng kāi yí xià diànshì",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "Please turn the TV on."
 		},
 		"pos": ["V"],
@@ -3044,7 +3236,7 @@
 		"id": "L1-0189",
 		"hanzi": "开车",
 		"traditional": "開車",
-		"pinyin": "kāi chē",
+		"pinyin": "kāichē",
 		"syllables": [
 			{ "py": "kāi", "tone": 1 },
 			{ "py": "chē", "tone": 1 }
@@ -3052,7 +3244,8 @@
 		"meanings": ["to drive a car"],
 		"example": {
 			"hanzi": "我哥哥会开车。",
-			"pinyin": "wǒ gē ge huì kāi chē",
+			"pinyin": "wǒ gēge huì kāichē",
+			"spans": [1, 2, 1, 2],
 			"english": "My older brother can drive."
 		},
 		"pos": [],
@@ -3062,7 +3255,7 @@
 		"id": "L1-0190",
 		"hanzi": "开会",
 		"traditional": "開會",
-		"pinyin": "kāi huì",
+		"pinyin": "kāihuì",
 		"syllables": [
 			{ "py": "kāi", "tone": 1 },
 			{ "py": "huì", "tone": 4 }
@@ -3070,7 +3263,8 @@
 		"meanings": ["to have a meeting", "to attend a meeting"],
 		"example": {
 			"hanzi": "我们下午三点开会。",
-			"pinyin": "wǒ men xià wǔ sān diǎn kāi huì",
+			"pinyin": "wǒmen xiàwǔ sān diǎn kāihuì",
+			"spans": [2, 2, 1, 1, 2],
 			"english": "We're having a meeting at three this afternoon."
 		},
 		"pos": [],
@@ -3089,7 +3283,8 @@
 		"meanings": ["to make a joke", "to joke around"],
 		"example": {
 			"hanzi": "他喜欢跟我开玩笑。",
-			"pinyin": "tā xǐ huan gēn wǒ kāi wán xiào",
+			"pinyin": "tā xǐhuan gēn wǒ kāi wánxiào",
+			"spans": [1, 2, 1, 1, 1, 2],
 			"english": "He likes joking around with me."
 		},
 		"pos": [],
@@ -3103,7 +3298,8 @@
 		"meanings": ["to look at", "to watch", "to read"],
 		"example": {
 			"hanzi": "我晚上喜欢看书。",
-			"pinyin": "wǒ wǎn shang xǐ huan kàn shū",
+			"pinyin": "wǒ wǎnshang xǐhuan kàn shū",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "I like to read in the evening."
 		},
 		"pos": ["V"],
@@ -3112,7 +3308,7 @@
 	{
 		"id": "L1-0193",
 		"hanzi": "看病",
-		"pinyin": "kàn bìng",
+		"pinyin": "kànbìng",
 		"syllables": [
 			{ "py": "kàn", "tone": 4 },
 			{ "py": "bìng", "tone": 4 }
@@ -3120,7 +3316,8 @@
 		"meanings": ["to see a doctor"],
 		"example": {
 			"hanzi": "我明天去医院看病。",
-			"pinyin": "wǒ míng tiān qù yī yuàn kàn bìng",
+			"pinyin": "wǒ míngtiān qù yīyuàn kànbìng",
+			"spans": [1, 2, 1, 2, 2],
 			"english": "I'm going to the hospital tomorrow to see a doctor."
 		},
 		"pos": [],
@@ -3137,7 +3334,8 @@
 		"meanings": ["to see (as a result)"],
 		"example": {
 			"hanzi": "我看到你的车了。",
-			"pinyin": "wǒ kàn dào nǐ de chē le",
+			"pinyin": "wǒ kàndào nǐ de chē le",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I spotted your car."
 		},
 		"pos": [],
@@ -3147,7 +3345,7 @@
 		"id": "L1-0195",
 		"hanzi": "看见",
 		"traditional": "看見",
-		"pinyin": "kàn jiàn",
+		"pinyin": "kànjiàn",
 		"syllables": [
 			{ "py": "kàn", "tone": 4 },
 			{ "py": "jiàn", "tone": 4 }
@@ -3155,7 +3353,8 @@
 		"meanings": ["to see (and catch sight of)", "to notice"],
 		"example": {
 			"hanzi": "我在路上看见了老师。",
-			"pinyin": "wǒ zài lù shang kàn jiàn le lǎo shī",
+			"pinyin": "wǒ zài lùshang kànjiàn le lǎoshī",
+			"spans": [1, 1, 2, 2, 1, 2],
 			"english": "I saw the teacher on the road."
 		},
 		"pos": [],
@@ -3169,7 +3368,8 @@
 		"meanings": ["to take a test", "to give a test"],
 		"example": {
 			"hanzi": "我明天考汉语。",
-			"pinyin": "wǒ míng tiān kǎo hàn yǔ",
+			"pinyin": "wǒ míngtiān kǎo Hànyǔ",
+			"spans": [1, 2, 1, 2],
 			"english": "I have my Chinese exam tomorrow."
 		},
 		"pos": ["V"],
@@ -3179,7 +3379,7 @@
 		"id": "L1-0197",
 		"hanzi": "考试",
 		"traditional": "考試",
-		"pinyin": "kǎo shì",
+		"pinyin": "kǎoshì",
 		"syllables": [
 			{ "py": "kǎo", "tone": 3 },
 			{ "py": "shì", "tone": 4 }
@@ -3187,7 +3387,8 @@
 		"meanings": ["exam", "to take an exam"],
 		"example": {
 			"hanzi": "明天我们有考试。",
-			"pinyin": "míng tiān wǒ men yǒu kǎo shì",
+			"pinyin": "míngtiān wǒmen yǒu kǎoshì",
+			"spans": [2, 2, 1, 2],
 			"english": "We have an exam tomorrow."
 		},
 		"pos": [],
@@ -3202,6 +3403,7 @@
 		"example": {
 			"hanzi": "我渴了，想喝水。",
 			"pinyin": "wǒ kě le xiǎng hē shuǐ",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I'm thirsty and want a drink of water."
 		},
 		"pos": ["Adj"],
@@ -3216,7 +3418,8 @@
 		"meanings": ["class", "lesson"],
 		"example": {
 			"hanzi": "我们上午有课。",
-			"pinyin": "wǒ men shàng wǔ yǒu kè",
+			"pinyin": "wǒmen shàngwǔ yǒu kè",
+			"spans": [2, 2, 1, 1],
 			"english": "We have class in the morning."
 		},
 		"pos": ["N"],
@@ -3234,7 +3437,8 @@
 		"meanings": ["textbook"],
 		"example": {
 			"hanzi": "我的课本在桌子上。",
-			"pinyin": "wǒ de kè běn zài zhuō zi shang",
+			"pinyin": "wǒ de kèběn zài zhuōzi shang",
+			"spans": [1, 1, 2, 1, 2, 1],
 			"english": "My textbook is on the desk."
 		},
 		"pos": ["N"],
@@ -3252,7 +3456,8 @@
 		"meanings": ["the text of a lesson"],
 		"example": {
 			"hanzi": "今天的课文很难。",
-			"pinyin": "jīn tiān de kè wén hěn nán",
+			"pinyin": "jīntiān de kèwén hěn nán",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "Today's lesson text is hard."
 		},
 		"pos": ["N"],
@@ -3267,6 +3472,7 @@
 		"example": {
 			"hanzi": "我喝了一口水。",
 			"pinyin": "wǒ hē le yì kǒu shuǐ",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I took a mouthful of water."
 		},
 		"pos": ["M", "N"],
@@ -3281,7 +3487,8 @@
 		"meanings": ["piece", "yuan in spoken Chinese"],
 		"example": {
 			"hanzi": "妈妈给我一块面包。",
-			"pinyin": "mā ma gěi wǒ yí kuài miàn bāo",
+			"pinyin": "māma gěi wǒ yí kuài miànbāo",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "Mum gave me a piece of bread."
 		},
 		"pos": ["N", "M"],
@@ -3296,6 +3503,7 @@
 		"example": {
 			"hanzi": "你走得太快了。",
 			"pinyin": "nǐ zǒu de tài kuài le",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "You walk too fast."
 		},
 		"pos": ["Adj", "Adv"],
@@ -3310,7 +3518,8 @@
 		"meanings": ["to come"],
 		"example": {
 			"hanzi": "你明天来我家吗？",
-			"pinyin": "nǐ míng tiān lái wǒ jiā ma",
+			"pinyin": "nǐ míngtiān lái wǒ jiā ma",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "Are you coming to my place tomorrow?"
 		},
 		"pos": ["V"],
@@ -3328,7 +3537,8 @@
 		"meanings": ["to come to", "to arrive at"],
 		"example": {
 			"hanzi": "我们来到了一个新学校。",
-			"pinyin": "wǒ men lái dào le yí ge xīn xué xiào",
+			"pinyin": "wǒmen láidào le yí ge xīn xuéxiào",
+			"spans": [2, 2, 1, 1, 1, 1, 2],
 			"english": "We arrived at a new school."
 		},
 		"pos": ["V"],
@@ -3342,7 +3552,8 @@
 		"meanings": ["old in years", "elderly"],
 		"example": {
 			"hanzi": "我爷爷老了。",
-			"pinyin": "wǒ yé ye lǎo le",
+			"pinyin": "wǒ yéye lǎo le",
+			"spans": [1, 2, 1, 1],
 			"english": "My grandfather has grown old."
 		},
 		"pos": ["Adj"],
@@ -3359,7 +3570,8 @@
 		"meanings": ["an old person", "the elderly"],
 		"example": {
 			"hanzi": "我常常帮老人拿东西。",
-			"pinyin": "wǒ cháng cháng bāng lǎo rén ná dōng xi",
+			"pinyin": "wǒ chángcháng bāng lǎorén ná dōngxi",
+			"spans": [1, 2, 1, 2, 1, 2],
 			"english": "I often help elderly people carry things."
 		},
 		"pos": ["N"],
@@ -3377,7 +3589,8 @@
 		"meanings": ["teacher"],
 		"example": {
 			"hanzi": "我们的老师很好。",
-			"pinyin": "wǒ men de lǎo shī hěn hǎo",
+			"pinyin": "wǒmen de lǎoshī hěn hǎo",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "Our teacher is really kind."
 		},
 		"pos": ["N"],
@@ -3392,6 +3605,7 @@
 		"example": {
 			"hanzi": "我买了一本书。",
 			"pinyin": "wǒ mǎi le yì běn shū",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I bought a book."
 		},
 		"pos": ["Aux"],
@@ -3406,6 +3620,7 @@
 		"example": {
 			"hanzi": "走了一天路我很累。",
 			"pinyin": "zǒu le yì tiān lù wǒ hěn lèi",
+			"spans": [1, 1, 1, 1, 1, 1, 1, 1],
 			"english": "I walked all day and I'm worn out."
 		},
 		"pos": ["Adj"],
@@ -3419,7 +3634,8 @@
 		"meanings": ["cold"],
 		"example": {
 			"hanzi": "今天天气很冷。",
-			"pinyin": "jīn tiān tiān qì hěn lěng",
+			"pinyin": "jīntiān tiānqì hěn lěng",
+			"spans": [2, 2, 1, 1],
 			"english": "The weather is cold today."
 		},
 		"pos": ["Adj"],
@@ -3434,7 +3650,8 @@
 		"meanings": ["inside", "in"],
 		"example": {
 			"hanzi": "我的书在房间里。",
-			"pinyin": "wǒ de shū zài fáng jiān lǐ",
+			"pinyin": "wǒ de shū zài fángjiān lǐ",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "My book is in the room."
 		},
 		"pos": ["N"],
@@ -3452,7 +3669,8 @@
 		"meanings": ["the inside part", "in there"],
 		"example": {
 			"hanzi": "书包里边有课本。",
-			"pinyin": "shū bāo lǐ bian yǒu kè běn",
+			"pinyin": "shūbāo lǐbian yǒu kèběn",
+			"spans": [2, 2, 1, 2],
 			"english": "There's a textbook inside the backpack."
 		},
 		"pos": ["N"],
@@ -3467,7 +3685,8 @@
 		"meanings": ["two of something"],
 		"example": {
 			"hanzi": "我有两个妹妹。",
-			"pinyin": "wǒ yǒu liǎng ge mèi mei",
+			"pinyin": "wǒ yǒu liǎng ge mèimei",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "I have two younger sisters."
 		},
 		"pos": ["Num"],
@@ -3481,7 +3700,8 @@
 		"meanings": ["zero"],
 		"example": {
 			"hanzi": "现在是十点零五分。",
-			"pinyin": "xiàn zài shì shí diǎn líng wǔ fēn",
+			"pinyin": "xiànzài shì shí diǎn líng wǔ fēn",
+			"spans": [2, 1, 1, 1, 1, 1, 1],
 			"english": "It's five past ten."
 		},
 		"pos": ["Num"],
@@ -3495,7 +3715,8 @@
 		"meanings": ["six"],
 		"example": {
 			"hanzi": "我们六点在学校见。",
-			"pinyin": "wǒ men liù diǎn zài xué xiào jiàn",
+			"pinyin": "wǒmen liù diǎn zài xuéxiào jiàn",
+			"spans": [2, 1, 1, 1, 2, 1],
 			"english": "We'll meet at the school at six."
 		},
 		"pos": ["Num"],
@@ -3511,6 +3732,7 @@
 		"example": {
 			"hanzi": "我家在三楼。",
 			"pinyin": "wǒ jiā zài sān lóu",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "My home is on the third floor."
 		},
 		"pos": ["N"],
@@ -3528,7 +3750,8 @@
 		"meanings": ["upstairs"],
 		"example": {
 			"hanzi": "我的房间在楼上。",
-			"pinyin": "wǒ de fáng jiān zài lóu shàng",
+			"pinyin": "wǒ de fángjiān zài lóu shàng",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "My room is upstairs."
 		},
 		"pos": [],
@@ -3546,7 +3769,8 @@
 		"meanings": ["downstairs"],
 		"example": {
 			"hanzi": "妈妈在楼下等我。",
-			"pinyin": "mā ma zài lóu xià děng wǒ",
+			"pinyin": "māma zài lóu xià děng wǒ",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "Mum is waiting for me downstairs."
 		},
 		"pos": [],
@@ -3560,7 +3784,8 @@
 		"meanings": ["road", "route"],
 		"example": {
 			"hanzi": "学校在这条路上。",
-			"pinyin": "xué xiào zài zhè tiáo lù shang",
+			"pinyin": "xuéxiào zài zhè tiáo lù shang",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "The school is on this road."
 		},
 		"pos": ["N", "M"],
@@ -3577,7 +3802,8 @@
 		"meanings": ["crossing", "intersection"],
 		"example": {
 			"hanzi": "我们在路口等你。",
-			"pinyin": "wǒ men zài lù kǒu děng nǐ",
+			"pinyin": "wǒmen zài lùkǒu děng nǐ",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "We'll wait for you at the intersection."
 		},
 		"pos": ["N"],
@@ -3594,7 +3820,8 @@
 		"meanings": ["on the way", "on the road"],
 		"example": {
 			"hanzi": "我在路上给他打电话。",
-			"pinyin": "wǒ zài lù shang gěi tā dǎ diàn huà",
+			"pinyin": "wǒ zài lùshang gěi tā dǎ diànhuà",
+			"spans": [1, 1, 2, 1, 1, 1, 2],
 			"english": "I rang him on the way."
 		},
 		"pos": ["N"],
@@ -3612,7 +3839,8 @@
 		"meanings": ["mother", "mom"],
 		"example": {
 			"hanzi": "我妈妈今年四十岁。",
-			"pinyin": "wǒ mā ma jīn nián sì shí suì",
+			"pinyin": "wǒ māma jīnnián sì shí suì",
+			"spans": [1, 2, 2, 1, 1, 1],
 			"english": "My mum is forty this year."
 		},
 		"pos": ["N"],
@@ -3630,7 +3858,8 @@
 		"meanings": ["street", "road"],
 		"example": {
 			"hanzi": "马路上有很多车。",
-			"pinyin": "mǎ lù shang yǒu hěn duō chē",
+			"pinyin": "mǎlù shang yǒu hěn duō chē",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "There are a lot of cars on the road."
 		},
 		"pos": ["N"],
@@ -3648,7 +3877,8 @@
 		"meanings": ["right away", "immediately"],
 		"example": {
 			"hanzi": "你等我，我马上回来。",
-			"pinyin": "nǐ děng wǒ wǒ mǎ shàng huí lái",
+			"pinyin": "nǐ děng wǒ wǒ mǎshàng huílai",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "Wait for me, I'll be right back."
 		},
 		"pos": ["Adv"],
@@ -3663,7 +3893,8 @@
 		"meanings": ["makes a sentence a yes-no question"],
 		"example": {
 			"hanzi": "你是中国人吗？",
-			"pinyin": "nǐ shì Zhōng guó rén ma",
+			"pinyin": "nǐ shì Zhōngguó rén ma",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "Are you Chinese?"
 		},
 		"pos": ["Aux"],
@@ -3678,7 +3909,8 @@
 		"meanings": ["to buy"],
 		"example": {
 			"hanzi": "我要去商店买东西。",
-			"pinyin": "wǒ yào qù shāng diàn mǎi dōng xi",
+			"pinyin": "wǒ yào qù shāngdiàn mǎi dōngxi",
+			"spans": [1, 1, 1, 2, 1, 2],
 			"english": "I'm going to the shop to buy a few things."
 		},
 		"pos": ["V"],
@@ -3693,6 +3925,7 @@
 		"example": {
 			"hanzi": "你走得太慢了。",
 			"pinyin": "nǐ zǒu de tài màn le",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "You're walking too slowly."
 		},
 		"pos": ["Adj"],
@@ -3706,7 +3939,8 @@
 		"meanings": ["busy"],
 		"example": {
 			"hanzi": "爸爸今天很忙。",
-			"pinyin": "bà ba jīn tiān hěn máng",
+			"pinyin": "bàba jīntiān hěn máng",
+			"spans": [2, 2, 1, 1],
 			"english": "Dad is very busy today."
 		},
 		"pos": ["Adj"],
@@ -3720,7 +3954,8 @@
 		"meanings": ["ten cents", "one tenth of a yuan"],
 		"example": {
 			"hanzi": "这个鸡蛋五毛钱。",
-			"pinyin": "zhè ge jī dàn wǔ máo qián",
+			"pinyin": "zhè ge jīdàn wǔ máo qián",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "This egg costs fifty cents."
 		},
 		"pos": ["M"],
@@ -3735,7 +3970,8 @@
 		"meanings": ["did not", "to not have"],
 		"example": {
 			"hanzi": "今天早上我没吃饭。",
-			"pinyin": "jīn tiān zǎo shang wǒ méi chī fàn",
+			"pinyin": "jīntiān zǎoshang wǒ méi chīfàn",
+			"spans": [2, 2, 1, 1, 2],
 			"english": "I did not have any breakfast this morning."
 		},
 		"pos": ["Adv", "V"],
@@ -3754,7 +3990,8 @@
 		"meanings": ["it doesn't matter"],
 		"example": {
 			"hanzi": "我来晚一点没关系吗？",
-			"pinyin": "wǒ lái wǎn yì diǎn méi guān xi ma",
+			"pinyin": "wǒ lái wǎn yì diǎn méi guānxi ma",
+			"spans": [1, 1, 1, 1, 1, 1, 2, 1],
 			"english": "Is it all right if I come a little late?"
 		},
 		"pos": [],
@@ -3773,7 +4010,8 @@
 		"meanings": ["it's nothing", "no big deal"],
 		"example": {
 			"hanzi": "没什么，我很好。",
-			"pinyin": "méi shén me wǒ hěn hǎo",
+			"pinyin": "méi shénme wǒ hěn hǎo",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "It's nothing, I'm fine."
 		},
 		"pos": [],
@@ -3783,7 +4021,7 @@
 		"id": "L1-0235",
 		"hanzi": "没事儿",
 		"traditional": "沒事兒",
-		"pinyin": "méi shìr",
+		"pinyin": "méishìr",
 		"syllables": [
 			{ "py": "méi", "tone": 2 },
 			{ "py": "shì", "tone": 4 },
@@ -3792,7 +4030,8 @@
 		"meanings": ["it's all right", "no problem"],
 		"example": {
 			"hanzi": "他说他没事儿。",
-			"pinyin": "tā shuō tā méi shì r",
+			"pinyin": "tā shuō tā méishìr",
+			"spans": [1, 1, 1, 3],
 			"english": "He says he's fine."
 		},
 		"pos": [],
@@ -3810,7 +4049,8 @@
 		"meanings": ["to not have", "there is not"],
 		"example": {
 			"hanzi": "我今天没有时间。",
-			"pinyin": "wǒ jīn tiān méi yǒu shí jiān",
+			"pinyin": "wǒ jīntiān méiyǒu shíjiān",
+			"spans": [1, 2, 2, 2],
 			"english": "I don't have time today."
 		},
 		"pos": ["V", "Adv"],
@@ -3827,7 +4067,8 @@
 		"meanings": ["younger sister", "young woman"],
 		"example": {
 			"hanzi": "我妹妹比我小两岁。",
-			"pinyin": "wǒ mèi mei bǐ wǒ xiǎo liǎng suì",
+			"pinyin": "wǒ mèimei bǐ wǒ xiǎo liǎng suì",
+			"spans": [1, 2, 1, 1, 1, 1, 1],
 			"english": "My younger sister is two years younger than me."
 		},
 		"pos": ["N"],
@@ -3842,7 +4083,8 @@
 		"meanings": ["door", "measure word for school courses"],
 		"example": {
 			"hanzi": "请你关上门。",
-			"pinyin": "qǐng nǐ guān shàng mén",
+			"pinyin": "qǐng nǐ guānshang mén",
+			"spans": [1, 1, 2, 1],
 			"english": "Please close the door."
 		},
 		"pos": ["N", "M"],
@@ -3860,7 +4102,8 @@
 		"meanings": ["doorway", "gate"],
 		"example": {
 			"hanzi": "他在学校门口等我。",
-			"pinyin": "tā zài xué xiào mén kǒu děng wǒ",
+			"pinyin": "tā zài xuéxiào ménkǒu děng wǒ",
+			"spans": [1, 1, 2, 2, 1, 1],
 			"english": "He's waiting for me at the school gate."
 		},
 		"pos": ["N"],
@@ -3878,7 +4121,8 @@
 		"meanings": ["entry ticket"],
 		"example": {
 			"hanzi": "电影院的门票不贵。",
-			"pinyin": "diàn yǐng yuàn de mén piào bú guì",
+			"pinyin": "diànyǐngyuàn de ménpiào bú guì",
+			"spans": [3, 1, 2, 1, 1],
 			"english": "Tickets at the cinema aren't expensive."
 		},
 		"pos": ["N"],
@@ -3893,7 +4137,8 @@
 		"meanings": ["plural ending for people"],
 		"example": {
 			"hanzi": "老师们都很忙。",
-			"pinyin": "lǎo shī men dōu hěn máng",
+			"pinyin": "lǎoshī men dōu hěn máng",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "The teachers are all very busy."
 		},
 		"pos": ["Suffix"],
@@ -3911,7 +4156,8 @@
 		"meanings": ["rice"],
 		"example": {
 			"hanzi": "我喜欢吃米饭。",
-			"pinyin": "wǒ xǐ huan chī mǐ fàn",
+			"pinyin": "wǒ xǐhuan chī mǐfàn",
+			"spans": [1, 2, 1, 2],
 			"english": "I like eating rice."
 		},
 		"pos": ["N"],
@@ -3929,7 +4175,8 @@
 		"meanings": ["bread"],
 		"example": {
 			"hanzi": "我早上吃面包喝牛奶。",
-			"pinyin": "wǒ zǎo shang chī miàn bāo hē niú nǎi",
+			"pinyin": "wǒ zǎoshang chī miànbāo hē niúnǎi",
+			"spans": [1, 2, 1, 2, 1, 2],
 			"english": "I have bread and milk in the morning."
 		},
 		"pos": ["N"],
@@ -3948,7 +4195,8 @@
 		"meanings": ["noodles"],
 		"example": {
 			"hanzi": "妈妈做的面条儿很好吃。",
-			"pinyin": "mā ma zuò de miàn tiáo r hěn hǎo chī",
+			"pinyin": "māma zuò de miàntiáor hěn hǎochī",
+			"spans": [2, 1, 1, 3, 1, 2],
 			"english": "The noodles my mum makes are delicious."
 		},
 		"pos": ["N"],
@@ -3965,7 +4213,8 @@
 		"meanings": ["name"],
 		"example": {
 			"hanzi": "你叫什么名字？",
-			"pinyin": "nǐ jiào shén me míng zi",
+			"pinyin": "nǐ jiào shénme míngzi",
+			"spans": [1, 1, 2, 2],
 			"english": "What's your name?"
 		},
 		"pos": ["N"],
@@ -3982,7 +4231,8 @@
 		"meanings": ["to understand clearly", "clear and obvious"],
 		"example": {
 			"hanzi": "老师说的我明白了。",
-			"pinyin": "lǎo shī shuō de wǒ míng bai le",
+			"pinyin": "lǎoshī shuō de wǒ míngbai le",
+			"spans": [2, 1, 1, 1, 2, 1],
 			"english": "I understand what the teacher said."
 		},
 		"pos": ["Adj", "V"],
@@ -3999,7 +4249,8 @@
 		"meanings": ["next year"],
 		"example": {
 			"hanzi": "明年我要去中国。",
-			"pinyin": "míng nián wǒ yào qù zhōng guó",
+			"pinyin": "míngnián wǒ yào qù Zhōngguó",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "Next year I'm going to China."
 		},
 		"pos": ["N"],
@@ -4016,7 +4267,8 @@
 		"meanings": ["tomorrow"],
 		"example": {
 			"hanzi": "明天是我的生日。",
-			"pinyin": "míng tiān shì wǒ de shēng rì",
+			"pinyin": "míngtiān shì wǒ de shēngrì",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "Tomorrow is my birthday."
 		},
 		"pos": ["N"],
@@ -4030,7 +4282,8 @@
 		"meanings": ["to take", "to hold"],
 		"example": {
 			"hanzi": "我去房间拿我的书。",
-			"pinyin": "wǒ qù fáng jiān ná wǒ de shū",
+			"pinyin": "wǒ qù fángjiān ná wǒ de shū",
+			"spans": [1, 1, 2, 1, 1, 1, 1],
 			"english": "I'm going to my room to get my book."
 		},
 		"pos": ["V"],
@@ -4045,6 +4298,7 @@
 		"example": {
 			"hanzi": "你是哪国人？",
 			"pinyin": "nǐ shì nǎ guó rén",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "Which country are you from?"
 		},
 		"pos": ["Pron"],
@@ -4062,7 +4316,8 @@
 		"meanings": ["where", "what place"],
 		"example": {
 			"hanzi": "你家在哪里？",
-			"pinyin": "nǐ jiā zài nǎ lǐ",
+			"pinyin": "nǐ jiā zài nǎlǐ",
+			"spans": [1, 1, 1, 2],
 			"english": "Where do you live?"
 		},
 		"pos": ["Pron"],
@@ -4080,7 +4335,8 @@
 		"meanings": ["the spoken word for where"],
 		"example": {
 			"hanzi": "你星期天要去哪儿？",
-			"pinyin": "nǐ xīng qī tiān yào qù nǎ r",
+			"pinyin": "nǐ xīngqītiān yào qù nǎr",
+			"spans": [1, 3, 1, 1, 2],
 			"english": "Where are you going on Sunday?"
 		},
 		"pos": ["Pron"],
@@ -4097,7 +4353,8 @@
 		"meanings": ["which ones"],
 		"example": {
 			"hanzi": "你想买哪些书？",
-			"pinyin": "nǐ xiǎng mǎi nǎ xiē shū",
+			"pinyin": "nǐ xiǎng mǎi nǎxiē shū",
+			"spans": [1, 1, 1, 2, 1],
 			"english": "Which books do you want to buy?"
 		},
 		"pos": ["Pron"],
@@ -4112,6 +4369,7 @@
 		"example": {
 			"hanzi": "那是我的书。",
 			"pinyin": "nà shì wǒ de shū",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "That is my book."
 		},
 		"pos": ["Pron"],
@@ -4121,15 +4379,16 @@
 		"id": "L1-0255",
 		"hanzi": "那边",
 		"traditional": "那邊",
-		"pinyin": "nàbiān",
+		"pinyin": "nàbian",
 		"syllables": [
 			{ "py": "nà", "tone": 4 },
-			{ "py": "biān", "tone": 1 }
+			{ "py": "bian", "tone": 0 }
 		],
 		"meanings": ["that side", "over there"],
 		"example": {
 			"hanzi": "书店在那边。",
-			"pinyin": "shū diàn zài nà biān",
+			"pinyin": "shūdiàn zài nàbian",
+			"spans": [2, 1, 2],
 			"english": "The bookshop is over there."
 		},
 		"pos": ["Pron"],
@@ -4139,15 +4398,16 @@
 		"id": "L1-0256",
 		"hanzi": "那里",
 		"traditional": "那裡",
-		"pinyin": "nàlǐ",
+		"pinyin": "nàli",
 		"syllables": [
 			{ "py": "nà", "tone": 4 },
-			{ "py": "lǐ", "tone": 3 }
+			{ "py": "li", "tone": 0 }
 		],
 		"meanings": ["there", "that place"],
 		"example": {
 			"hanzi": "我的书在那里。",
-			"pinyin": "wǒ de shū zài nà lǐ",
+			"pinyin": "wǒ de shū zài nàli",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "My book is over there."
 		},
 		"pos": ["Pron"],
@@ -4165,7 +4425,8 @@
 		"meanings": ["the spoken word for there"],
 		"example": {
 			"hanzi": "我们在那儿见面吧。",
-			"pinyin": "wǒ men zài nà r jiàn miàn ba",
+			"pinyin": "wǒmen zài nàr jiànmiàn ba",
+			"spans": [2, 1, 2, 2, 1],
 			"english": "Let's meet over there."
 		},
 		"pos": ["Pron"],
@@ -4182,7 +4443,8 @@
 		"meanings": ["those"],
 		"example": {
 			"hanzi": "那些书是我的。",
-			"pinyin": "nà xiē shū shì wǒ de",
+			"pinyin": "nàxiē shū shì wǒ de",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "Those books are mine."
 		},
 		"pos": ["Pron"],
@@ -4196,7 +4458,8 @@
 		"meanings": ["milk"],
 		"example": {
 			"hanzi": "妹妹喜欢喝奶茶。",
-			"pinyin": "mèi mei xǐ huan hē nǎi chá",
+			"pinyin": "mèimei xǐhuan hē nǎi chá",
+			"spans": [2, 2, 1, 1, 1],
 			"english": "My little sister loves milk tea."
 		},
 		"pos": ["N"],
@@ -4213,7 +4476,8 @@
 		"meanings": ["paternal grandmother", "grandma"],
 		"example": {
 			"hanzi": "我奶奶今年八十岁了。",
-			"pinyin": "wǒ nǎi nai jīn nián bā shí suì le",
+			"pinyin": "wǒ nǎinai jīnnián bā shí suì le",
+			"spans": [1, 2, 2, 1, 1, 1, 1],
 			"english": "My grandma turns eighty this year."
 		},
 		"pos": ["N"],
@@ -4227,7 +4491,8 @@
 		"meanings": ["male"],
 		"example": {
 			"hanzi": "我们班男生很多。",
-			"pinyin": "wǒ men bān nán shēng hěn duō",
+			"pinyin": "wǒmen bān nán shēng hěn duō",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "There are a lot of boys in our class."
 		},
 		"pos": ["Adj"],
@@ -4246,7 +4511,8 @@
 		"meanings": ["boy"],
 		"example": {
 			"hanzi": "那个男孩儿是我弟弟。",
-			"pinyin": "nà ge nán hái r shì wǒ dì di",
+			"pinyin": "nà ge nánháir shì wǒ dìdi",
+			"spans": [1, 1, 3, 1, 1, 2],
 			"english": "That boy is my younger brother."
 		},
 		"pos": ["N"],
@@ -4264,7 +4530,8 @@
 		"meanings": ["boyfriend"],
 		"example": {
 			"hanzi": "她的男朋友是老师。",
-			"pinyin": "tā de nán péng you shì lǎo shī",
+			"pinyin": "tā de nánpéngyou shì lǎoshī",
+			"spans": [1, 1, 3, 1, 2],
 			"english": "Her boyfriend is a teacher."
 		},
 		"pos": ["N"],
@@ -4281,7 +4548,8 @@
 		"meanings": ["man", "men"],
 		"example": {
 			"hanzi": "那个男人是我朋友。",
-			"pinyin": "nà ge nán rén shì wǒ péng you",
+			"pinyin": "nà ge nánrén shì wǒ péngyou",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "That man is my friend."
 		},
 		"pos": ["N"],
@@ -4298,7 +4566,8 @@
 		"meanings": ["male student", "schoolboy"],
 		"example": {
 			"hanzi": "那个男生是新来的学生。",
-			"pinyin": "nà ge nán shēng shì xīn lái de xué shēng",
+			"pinyin": "nà ge nánshēng shì xīn lái de xuésheng",
+			"spans": [1, 1, 2, 1, 1, 1, 1, 2],
 			"english": "That boy is a new student."
 		},
 		"pos": ["N"],
@@ -4312,7 +4581,8 @@
 		"meanings": ["south"],
 		"example": {
 			"hanzi": "商店在山的南边。",
-			"pinyin": "shāng diàn zài shān de nán bian",
+			"pinyin": "shāngdiàn zài shān de nán bian",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "The shop is south of the mountain."
 		},
 		"pos": ["N"],
@@ -4330,7 +4600,8 @@
 		"meanings": ["the south side"],
 		"example": {
 			"hanzi": "我家在学校南边。",
-			"pinyin": "wǒ jiā zài xué xiào nán bian",
+			"pinyin": "wǒ jiā zài xuéxiào nánbian",
+			"spans": [1, 1, 1, 2, 2],
 			"english": "My home is on the south side of the school."
 		},
 		"pos": ["N"],
@@ -4346,6 +4617,7 @@
 		"example": {
 			"hanzi": "这个字很难写。",
 			"pinyin": "zhè ge zì hěn nán xiě",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "This character is hard to write."
 		},
 		"pos": ["Adj"],
@@ -4360,6 +4632,7 @@
 		"example": {
 			"hanzi": "我很好，你呢？",
 			"pinyin": "wǒ hěn hǎo nǐ ne",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "I'm fine — and you?"
 		},
 		"pos": ["Aux"],
@@ -4373,7 +4646,8 @@
 		"meanings": ["to be able to", "to be allowed to"],
 		"example": {
 			"hanzi": "我今天不能去。",
-			"pinyin": "wǒ jīn tiān bù néng qù",
+			"pinyin": "wǒ jīntiān bù néng qù",
+			"spans": [1, 2, 1, 1, 1],
 			"english": "I can't go today."
 		},
 		"pos": ["V"],
@@ -4387,7 +4661,8 @@
 		"meanings": ["you"],
 		"example": {
 			"hanzi": "你是老师吗？",
-			"pinyin": "nǐ shì lǎo shī ma",
+			"pinyin": "nǐ shì lǎoshī ma",
+			"spans": [1, 1, 2, 1],
 			"english": "Are you a teacher?"
 		},
 		"pos": ["Pron"],
@@ -4405,7 +4680,8 @@
 		"meanings": ["you all"],
 		"example": {
 			"hanzi": "你们是学生吗？",
-			"pinyin": "nǐ men shì xué shēng ma",
+			"pinyin": "nǐmen shì xuésheng ma",
+			"spans": [2, 1, 2, 1],
 			"english": "Are you all students?"
 		},
 		"pos": ["Pron"],
@@ -4419,7 +4695,8 @@
 		"meanings": ["year"],
 		"example": {
 			"hanzi": "我学了三年汉语。",
-			"pinyin": "wǒ xué le sān nián hàn yǔ",
+			"pinyin": "wǒ xué le sān nián Hànyǔ",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I've studied Chinese for three years."
 		},
 		"pos": ["M"],
@@ -4434,6 +4711,7 @@
 		"example": {
 			"hanzi": "您好，请坐。",
 			"pinyin": "nín hǎo qǐng zuò",
+			"spans": [1, 1, 1, 1],
 			"english": "Hello, please have a seat."
 		},
 		"pos": ["Pron"],
@@ -4450,7 +4728,8 @@
 		"meanings": ["cow's milk"],
 		"example": {
 			"hanzi": "我早上喝一杯牛奶。",
-			"pinyin": "wǒ zǎo shang hē yì bēi niú nǎi",
+			"pinyin": "wǒ zǎoshang hē yì bēi niúnǎi",
+			"spans": [1, 2, 1, 1, 1, 2],
 			"english": "I have a glass of milk in the morning."
 		},
 		"pos": ["N"],
@@ -4464,7 +4743,8 @@
 		"meanings": ["female"],
 		"example": {
 			"hanzi": "她是我的女朋友。",
-			"pinyin": "tā shì wǒ de nǚ péng you",
+			"pinyin": "tā shì wǒ de nǚ péngyou",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "She's my girlfriend."
 		},
 		"pos": ["Adj"],
@@ -4482,7 +4762,8 @@
 		"meanings": ["daughter"],
 		"example": {
 			"hanzi": "我的女儿今年八岁。",
-			"pinyin": "wǒ de nǚ ér jīn nián bā suì",
+			"pinyin": "wǒ de nǚ'ér jīnnián bā suì",
+			"spans": [1, 1, 2, 2, 1, 1],
 			"english": "My daughter is eight this year."
 		},
 		"pos": ["N"],
@@ -4501,7 +4782,8 @@
 		"meanings": ["girl"],
 		"example": {
 			"hanzi": "那个女孩儿是我妹妹。",
-			"pinyin": "nà ge nǚ hái r shì wǒ mèi mei",
+			"pinyin": "nà ge nǚháir shì wǒ mèimei",
+			"spans": [1, 1, 3, 1, 1, 2],
 			"english": "That girl is my little sister."
 		},
 		"pos": ["N"],
@@ -4519,7 +4801,8 @@
 		"meanings": ["girlfriend"],
 		"example": {
 			"hanzi": "他的女朋友是老师。",
-			"pinyin": "tā de nǚ péng you shì lǎo shī",
+			"pinyin": "tā de nǚpéngyou shì lǎoshī",
+			"spans": [1, 1, 3, 1, 2],
 			"english": "His girlfriend is a teacher."
 		},
 		"pos": ["N"],
@@ -4536,7 +4819,8 @@
 		"meanings": ["woman"],
 		"example": {
 			"hanzi": "那个女人是我姐姐。",
-			"pinyin": "nà ge nǚ rén shì wǒ jiě jie",
+			"pinyin": "nà ge nǚrén shì wǒ jiějie",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "That woman is my older sister."
 		},
 		"pos": ["N"],
@@ -4553,7 +4837,8 @@
 		"meanings": ["female student", "schoolgirl"],
 		"example": {
 			"hanzi": "那个女生是我妹妹。",
-			"pinyin": "nà ge nǚ shēng shì wǒ mèi mei",
+			"pinyin": "nà ge nǚshēng shì wǒ mèimei",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "That girl is my younger sister."
 		},
 		"pos": ["N"],
@@ -4571,7 +4856,8 @@
 		"meanings": ["the side of something", "beside"],
 		"example": {
 			"hanzi": "我家旁边有一个商店。",
-			"pinyin": "wǒ jiā páng biān yǒu yí ge shāng diàn",
+			"pinyin": "wǒ jiā pángbiān yǒu yí ge shāngdiàn",
+			"spans": [1, 1, 2, 1, 1, 1, 2],
 			"english": "There is a shop next to my house."
 		},
 		"pos": ["N"],
@@ -4585,7 +4871,8 @@
 		"meanings": ["to run"],
 		"example": {
 			"hanzi": "孩子们在外面跑。",
-			"pinyin": "hái zi men zài wài miàn pǎo",
+			"pinyin": "háizi men zài wàimiàn pǎo",
+			"spans": [2, 1, 1, 2, 1],
 			"english": "The children are running around outside."
 		},
 		"pos": ["V"],
@@ -4602,7 +4889,8 @@
 		"meanings": ["friend"],
 		"example": {
 			"hanzi": "他是我最好的朋友。",
-			"pinyin": "tā shì wǒ zuì hǎo de péng you",
+			"pinyin": "tā shì wǒ zuìhǎo de péngyou",
+			"spans": [1, 1, 1, 2, 1, 2],
 			"english": "He's my best friend."
 		},
 		"pos": ["N"],
@@ -4616,7 +4904,8 @@
 		"meanings": ["ticket"],
 		"example": {
 			"hanzi": "我们的电影票买好了。",
-			"pinyin": "wǒ men de diàn yǐng piào mǎi hǎo le",
+			"pinyin": "wǒmen de diànyǐng piào mǎi hǎo le",
+			"spans": [2, 1, 2, 1, 1, 1, 1],
 			"english": "We've got our movie tickets."
 		},
 		"pos": ["N"],
@@ -4630,7 +4919,8 @@
 		"meanings": ["seven"],
 		"example": {
 			"hanzi": "我们七点去吃饭。",
-			"pinyin": "wǒ men qī diǎn qù chī fàn",
+			"pinyin": "wǒmen qī diǎn qù chīfàn",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "We're going out to eat at seven."
 		},
 		"pos": ["Num"],
@@ -4644,7 +4934,8 @@
 		"meanings": ["to rise", "to raise"],
 		"example": {
 			"hanzi": "我早上六点起床。",
-			"pinyin": "wǒ zǎo shang liù diǎn qǐ chuáng",
+			"pinyin": "wǒ zǎoshang liù diǎn qǐ chuáng",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I get up at six in the morning."
 		},
 		"pos": ["V"],
@@ -4653,7 +4944,7 @@
 	{
 		"id": "L1-0288",
 		"hanzi": "起床",
-		"pinyin": "qǐ chuáng",
+		"pinyin": "qǐchuáng",
 		"syllables": [
 			{ "py": "qǐ", "tone": 3 },
 			{ "py": "chuáng", "tone": 2 }
@@ -4661,7 +4952,8 @@
 		"meanings": ["to get out of bed"],
 		"example": {
 			"hanzi": "他早上七点起床。",
-			"pinyin": "tā zǎo shang qī diǎn qǐ chuáng",
+			"pinyin": "tā zǎoshang qī diǎn qǐchuáng",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "He gets up at seven in the morning."
 		},
 		"pos": [],
@@ -4671,15 +4963,16 @@
 		"id": "L1-0289",
 		"hanzi": "起来",
 		"traditional": "起來",
-		"pinyin": "qǐ lái",
+		"pinyin": "qǐlai",
 		"syllables": [
 			{ "py": "qǐ", "tone": 3 },
-			{ "py": "lái", "tone": 2 }
+			{ "py": "lai", "tone": 0 }
 		],
 		"meanings": ["to stand up", "to get up"],
 		"example": {
 			"hanzi": "我们都站起来了。",
-			"pinyin": "wǒ men dōu zhàn qǐ lái le",
+			"pinyin": "wǒmen dōu zhàn qǐlai le",
+			"spans": [2, 1, 1, 2, 1],
 			"english": "We all stood up."
 		},
 		"pos": [],
@@ -4697,7 +4990,8 @@
 		"meanings": ["car", "automobile"],
 		"example": {
 			"hanzi": "我坐汽车去学校。",
-			"pinyin": "wǒ zuò qì chē qù xué xiào",
+			"pinyin": "wǒ zuò qìchē qù xuéxiào",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "I go to school by car."
 		},
 		"pos": ["N"],
@@ -4711,7 +5005,8 @@
 		"meanings": ["in front", "before in time"],
 		"example": {
 			"hanzi": "学校前边有一家书店。",
-			"pinyin": "xué xiào qián bian yǒu yì jiā shū diàn",
+			"pinyin": "xuéxiào qián bian yǒu yì jiā shūdiàn",
+			"spans": [2, 1, 1, 1, 1, 1, 2],
 			"english": "There's a bookshop in front of the school."
 		},
 		"pos": ["N"],
@@ -4729,7 +5024,8 @@
 		"meanings": ["the front side", "ahead"],
 		"example": {
 			"hanzi": "学校前边有一家商店。",
-			"pinyin": "xué xiào qián bian yǒu yì jiā shāng diàn",
+			"pinyin": "xuéxiào qiánbian yǒu yì jiā shāngdiàn",
+			"spans": [2, 2, 1, 1, 1, 2],
 			"english": "There's a shop in front of the school."
 		},
 		"pos": ["N"],
@@ -4746,7 +5042,8 @@
 		"meanings": ["the day before yesterday"],
 		"example": {
 			"hanzi": "前天我去了医院。",
-			"pinyin": "qián tiān wǒ qù le yī yuàn",
+			"pinyin": "qiántiān wǒ qù le yīyuàn",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "I went to the hospital the day before yesterday."
 		},
 		"pos": ["N"],
@@ -4761,7 +5058,8 @@
 		"meanings": ["money"],
 		"example": {
 			"hanzi": "我没有钱买那本书。",
-			"pinyin": "wǒ méi yǒu qián mǎi nà běn shū",
+			"pinyin": "wǒ méiyǒu qián mǎi nà běn shū",
+			"spans": [1, 2, 1, 1, 1, 1, 1],
 			"english": "I don't have the money to buy that book."
 		},
 		"pos": ["N"],
@@ -4779,7 +5077,8 @@
 		"meanings": ["purse", "wallet"],
 		"example": {
 			"hanzi": "我的钱包里没有钱。",
-			"pinyin": "wǒ de qián bāo lǐ méi yǒu qián",
+			"pinyin": "wǒ de qiánbāo lǐ méiyǒu qián",
+			"spans": [1, 1, 2, 1, 2, 1],
 			"english": "There's no money in my wallet."
 		},
 		"pos": ["N"],
@@ -4794,7 +5093,8 @@
 		"meanings": ["to invite", "please"],
 		"example": {
 			"hanzi": "明天我请你吃饭。",
-			"pinyin": "míng tiān wǒ qǐng nǐ chī fàn",
+			"pinyin": "míngtiān wǒ qǐng nǐ chīfàn",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "I'll treat you to a meal tomorrow."
 		},
 		"pos": ["V"],
@@ -4804,7 +5104,7 @@
 		"id": "L1-0297",
 		"hanzi": "请假",
 		"traditional": "請假",
-		"pinyin": "qǐng jià",
+		"pinyin": "qǐngjià",
 		"syllables": [
 			{ "py": "qǐng", "tone": 3 },
 			{ "py": "jià", "tone": 4 }
@@ -4812,7 +5112,8 @@
 		"meanings": ["to ask for time off"],
 		"example": {
 			"hanzi": "我今天想请假。",
-			"pinyin": "wǒ jīn tiān xiǎng qǐng jià",
+			"pinyin": "wǒ jīntiān xiǎng qǐngjià",
+			"spans": [1, 2, 1, 2],
 			"english": "I'd like to take the day off today."
 		},
 		"pos": [],
@@ -4831,6 +5132,7 @@
 		"example": {
 			"hanzi": "你来了，请进！",
 			"pinyin": "nǐ lái le qǐng jìn",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "You're here — please come in!"
 		},
 		"pos": [],
@@ -4848,7 +5150,8 @@
 		"meanings": ["may I ask", "excuse me"],
 		"example": {
 			"hanzi": "请问，去医院怎么走？",
-			"pinyin": "qǐng wèn qù yī yuàn zěn me zǒu",
+			"pinyin": "qǐngwèn qù yīyuàn zěnme zǒu",
+			"spans": [2, 1, 2, 2, 1],
 			"english": "Excuse me, how do I get to the hospital?"
 		},
 		"pos": ["V"],
@@ -4866,7 +5169,8 @@
 		"meanings": ["please sit down"],
 		"example": {
 			"hanzi": "进来请坐吧。",
-			"pinyin": "jìn lái qǐng zuò ba",
+			"pinyin": "jìnlái qǐng zuò ba",
+			"spans": [2, 1, 1, 1],
 			"english": "Come in and have a seat."
 		},
 		"pos": [],
@@ -4880,7 +5184,8 @@
 		"meanings": ["ball"],
 		"example": {
 			"hanzi": "我下午和同学打球。",
-			"pinyin": "wǒ xià wǔ hé tóng xué dǎ qiú",
+			"pinyin": "wǒ xiàwǔ hé tóngxué dǎ qiú",
+			"spans": [1, 2, 1, 2, 1, 1],
 			"english": "I play ball with my classmates in the afternoon."
 		},
 		"pos": ["N"],
@@ -4894,7 +5199,8 @@
 		"meanings": ["to go"],
 		"example": {
 			"hanzi": "我明天去北京。",
-			"pinyin": "wǒ míng tiān qù Běi jīng",
+			"pinyin": "wǒ míngtiān qù Běijīng",
+			"spans": [1, 2, 1, 2],
 			"english": "I'm going to Beijing tomorrow."
 		},
 		"pos": ["V"],
@@ -4911,7 +5217,8 @@
 		"meanings": ["last year"],
 		"example": {
 			"hanzi": "去年我去了北京。",
-			"pinyin": "qù nián wǒ qù le Běi jīng",
+			"pinyin": "qùnián wǒ qù le Běijīng",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "Last year I went to Beijing."
 		},
 		"pos": ["N"],
@@ -4926,7 +5233,8 @@
 		"meanings": ["hot", "to heat up"],
 		"example": {
 			"hanzi": "今天天气很热。",
-			"pinyin": "jīn tiān tiān qì hěn rè",
+			"pinyin": "jīntiān tiānqì hěn rè",
+			"spans": [2, 2, 1, 1],
 			"english": "It's very hot today."
 		},
 		"pos": ["Adj", "V"],
@@ -4940,7 +5248,8 @@
 		"meanings": ["person", "people"],
 		"example": {
 			"hanzi": "这个商店人很多。",
-			"pinyin": "zhè ge shāng diàn rén hěn duō",
+			"pinyin": "zhè ge shāngdiàn rén hěn duō",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "There are a lot of people in this shop."
 		},
 		"pos": ["N"],
@@ -4958,7 +5267,8 @@
 		"meanings": ["to know someone", "to recognize"],
 		"example": {
 			"hanzi": "我认识她的哥哥。",
-			"pinyin": "wǒ rèn shi tā de gē ge",
+			"pinyin": "wǒ rènshi tā de gēge",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "I know her older brother."
 		},
 		"pos": ["V", "N"],
@@ -4976,7 +5286,8 @@
 		"meanings": ["serious and careful", "conscientious"],
 		"example": {
 			"hanzi": "他学习很认真。",
-			"pinyin": "tā xué xí hěn rèn zhēn",
+			"pinyin": "tā xuéxí hěn rènzhēn",
+			"spans": [1, 2, 1, 2],
 			"english": "He works hard at his studies."
 		},
 		"pos": ["Adj"],
@@ -4990,7 +5301,8 @@
 		"meanings": ["day of the month in writing", "sun"],
 		"example": {
 			"hanzi": "今天是五月八日。",
-			"pinyin": "jīn tiān shì wǔ yuè bā rì",
+			"pinyin": "jīntiān shì wǔ yuè bā rì",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "Today is the eighth of May."
 		},
 		"pos": ["N"],
@@ -5007,7 +5319,8 @@
 		"meanings": ["date"],
 		"example": {
 			"hanzi": "你知道考试的日期吗？",
-			"pinyin": "nǐ zhī dào kǎo shì de rì qī ma",
+			"pinyin": "nǐ zhīdào kǎoshì de rìqī ma",
+			"spans": [1, 2, 2, 1, 2, 1],
 			"english": "Do you know the date of the exam?"
 		},
 		"pos": ["N"],
@@ -5021,7 +5334,8 @@
 		"meanings": ["meat"],
 		"example": {
 			"hanzi": "这个菜里没有肉。",
-			"pinyin": "zhè ge cài lǐ méi yǒu ròu",
+			"pinyin": "zhè ge cài lǐ méiyǒu ròu",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "There's no meat in this dish."
 		},
 		"pos": ["N"],
@@ -5036,6 +5350,7 @@
 		"example": {
 			"hanzi": "我家有三口人。",
 			"pinyin": "wǒ jiā yǒu sān kǒu rén",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "There are three people in my family."
 		},
 		"pos": ["Num"],
@@ -5049,7 +5364,8 @@
 		"meanings": ["mountain", "hill"],
 		"example": {
 			"hanzi": "星期天我们去山上玩。",
-			"pinyin": "xīng qī tiān wǒ men qù shān shàng wán",
+			"pinyin": "xīngqītiān wǒmen qù shān shàng wán",
+			"spans": [3, 2, 1, 1, 1, 1],
 			"english": "On Sunday we're going up into the mountains."
 		},
 		"pos": ["N"],
@@ -5067,7 +5383,8 @@
 		"meanings": ["shopping mall", "department store"],
 		"example": {
 			"hanzi": "我们去商场买衣服。",
-			"pinyin": "wǒ men qù shāng chǎng mǎi yī fu",
+			"pinyin": "wǒmen qù shāngchǎng mǎi yīfu",
+			"spans": [2, 1, 2, 1, 2],
 			"english": "We're going to the mall to buy clothes."
 		},
 		"pos": ["N"],
@@ -5084,7 +5401,8 @@
 		"meanings": ["shop", "store"],
 		"example": {
 			"hanzi": "这家商店的东西很多。",
-			"pinyin": "zhè jiā shāng diàn de dōng xi hěn duō",
+			"pinyin": "zhè jiā shāngdiàn de dōngxi hěn duō",
+			"spans": [1, 1, 2, 1, 2, 1, 1],
 			"english": "This shop has a lot of things."
 		},
 		"pos": ["N"],
@@ -5098,7 +5416,8 @@
 		"meanings": ["above or on top", "to go up"],
 		"example": {
 			"hanzi": "书在桌子上。",
-			"pinyin": "shū zài zhuō zi shàng",
+			"pinyin": "shū zài zhuōzi shàng",
+			"spans": [1, 1, 2, 1],
 			"english": "The book is on the table."
 		},
 		"pos": ["N", "V"],
@@ -5107,7 +5426,7 @@
 	{
 		"id": "L1-0316",
 		"hanzi": "上班",
-		"pinyin": "shàng bān",
+		"pinyin": "shàngbān",
 		"syllables": [
 			{ "py": "shàng", "tone": 4 },
 			{ "py": "bān", "tone": 1 }
@@ -5115,7 +5434,8 @@
 		"meanings": ["to go to work"],
 		"example": {
 			"hanzi": "爸爸八点去上班。",
-			"pinyin": "bà ba bā diǎn qù shàng bān",
+			"pinyin": "bàba bā diǎn qù shàngbān",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "Dad goes to work at eight."
 		},
 		"pos": [],
@@ -5133,7 +5453,8 @@
 		"meanings": ["the top", "the upper side"],
 		"example": {
 			"hanzi": "桌子上边有一个杯子。",
-			"pinyin": "zhuō zi shàng bian yǒu yí ge bēi zi",
+			"pinyin": "zhuōzi shàngbian yǒu yí ge bēizi",
+			"spans": [2, 2, 1, 1, 1, 2],
 			"english": "There's a cup on top of the table."
 		},
 		"pos": ["N"],
@@ -5151,7 +5472,8 @@
 		"meanings": ["to get on a bus or train", "to get into a car"],
 		"example": {
 			"hanzi": "我们快上车吧。",
-			"pinyin": "wǒ men kuài shàng chē ba",
+			"pinyin": "wǒmen kuài shàng chē ba",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "Let's get on the bus, quick."
 		},
 		"pos": [],
@@ -5168,7 +5490,8 @@
 		"meanings": ["last time"],
 		"example": {
 			"hanzi": "上次我们去了那家店。",
-			"pinyin": "shàng cì wǒ men qù le nà jiā diàn",
+			"pinyin": "shàng cì wǒmen qù le nà jiā diàn",
+			"spans": [1, 1, 2, 1, 1, 1, 1, 1],
 			"english": "Last time we went to that shop."
 		},
 		"pos": [],
@@ -5178,7 +5501,7 @@
 		"id": "L1-0320",
 		"hanzi": "上课",
 		"traditional": "上課",
-		"pinyin": "shàng kè",
+		"pinyin": "shàngkè",
 		"syllables": [
 			{ "py": "shàng", "tone": 4 },
 			{ "py": "kè", "tone": 4 }
@@ -5186,7 +5509,8 @@
 		"meanings": ["to go to class", "to attend class"],
 		"example": {
 			"hanzi": "明天早上八点上课。",
-			"pinyin": "míng tiān zǎo shang bā diǎn shàng kè",
+			"pinyin": "míngtiān zǎoshang bā diǎn shàngkè",
+			"spans": [2, 2, 1, 1, 2],
 			"english": "Class starts at eight tomorrow morning."
 		},
 		"pos": [],
@@ -5196,7 +5520,7 @@
 		"id": "L1-0321",
 		"hanzi": "上网",
 		"traditional": "上網",
-		"pinyin": "shàng wǎng",
+		"pinyin": "shàngwǎng",
 		"syllables": [
 			{ "py": "shàng", "tone": 4 },
 			{ "py": "wǎng", "tone": 3 }
@@ -5204,7 +5528,8 @@
 		"meanings": ["to go online", "to use the Internet"],
 		"example": {
 			"hanzi": "我晚上喜欢上网。",
-			"pinyin": "wǒ wǎn shang xǐ huan shàng wǎng",
+			"pinyin": "wǒ wǎnshang xǐhuan shàngwǎng",
+			"spans": [1, 2, 2, 2],
 			"english": "I like going online in the evening."
 		},
 		"pos": [],
@@ -5221,7 +5546,8 @@
 		"meanings": ["morning"],
 		"example": {
 			"hanzi": "我上午有汉语课。",
-			"pinyin": "wǒ shàng wǔ yǒu hàn yǔ kè",
+			"pinyin": "wǒ shàngwǔ yǒu Hànyǔ kè",
+			"spans": [1, 2, 1, 2, 1],
 			"english": "I have a Chinese class in the morning."
 		},
 		"pos": ["N"],
@@ -5231,7 +5557,7 @@
 		"id": "L1-0323",
 		"hanzi": "上学",
 		"traditional": "上學",
-		"pinyin": "shàng xué",
+		"pinyin": "shàngxué",
 		"syllables": [
 			{ "py": "shàng", "tone": 4 },
 			{ "py": "xué", "tone": 2 }
@@ -5239,7 +5565,8 @@
 		"meanings": ["to go to school", "to attend school"],
 		"example": {
 			"hanzi": "我早上八点上学。",
-			"pinyin": "wǒ zǎo shang bā diǎn shàng xué",
+			"pinyin": "wǒ zǎoshang bā diǎn shàngxué",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "I go to school at eight in the morning."
 		},
 		"pos": [],
@@ -5253,7 +5580,8 @@
 		"meanings": ["few", "to lack"],
 		"example": {
 			"hanzi": "今天来的人很少。",
-			"pinyin": "jīn tiān lái de rén hěn shǎo",
+			"pinyin": "jīntiān lái de rén hěn shǎo",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "Very few people came today."
 		},
 		"pos": ["Adj", "V"],
@@ -5269,6 +5597,7 @@
 		"example": {
 			"hanzi": "这本书是谁的？",
 			"pinyin": "zhè běn shū shì shéi de",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "Whose book is this?"
 		},
 		"pos": ["Pron"],
@@ -5285,7 +5614,8 @@
 		"meanings": ["on one's body", "carried with you"],
 		"example": {
 			"hanzi": "我身上没有钱。",
-			"pinyin": "wǒ shēn shang méi yǒu qián",
+			"pinyin": "wǒ shēnshang méiyǒu qián",
+			"spans": [1, 2, 2, 1],
 			"english": "I don't have any money on me."
 		},
 		"pos": ["N"],
@@ -5303,7 +5633,8 @@
 		"meanings": ["the body", "one's health"],
 		"example": {
 			"hanzi": "多喝水对身体好。",
-			"pinyin": "duō hē shuǐ duì shēn tǐ hǎo",
+			"pinyin": "duō hē shuǐ duì shēntǐ hǎo",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "Drinking plenty of water is good for the body."
 		},
 		"pos": ["N"],
@@ -5321,7 +5652,8 @@
 		"meanings": ["what"],
 		"example": {
 			"hanzi": "你在做什么？",
-			"pinyin": "nǐ zài zuò shén me",
+			"pinyin": "nǐ zài zuò shénme",
+			"spans": [1, 1, 1, 2],
 			"english": "What are you doing?"
 		},
 		"pos": ["Pron"],
@@ -5330,7 +5662,7 @@
 	{
 		"id": "L1-0329",
 		"hanzi": "生病",
-		"pinyin": "shēng bìng",
+		"pinyin": "shēngbìng",
 		"syllables": [
 			{ "py": "shēng", "tone": 1 },
 			{ "py": "bìng", "tone": 4 }
@@ -5338,7 +5670,8 @@
 		"meanings": ["to get sick"],
 		"example": {
 			"hanzi": "我妹妹生病了。",
-			"pinyin": "wǒ mèi mei shēng bìng le",
+			"pinyin": "wǒ mèimei shēngbìng le",
+			"spans": [1, 2, 2, 1],
 			"english": "My little sister has fallen ill."
 		},
 		"pos": [],
@@ -5348,7 +5681,7 @@
 		"id": "L1-0330",
 		"hanzi": "生气",
 		"traditional": "生氣",
-		"pinyin": "shēng qì",
+		"pinyin": "shēngqì",
 		"syllables": [
 			{ "py": "shēng", "tone": 1 },
 			{ "py": "qì", "tone": 4 }
@@ -5356,7 +5689,8 @@
 		"meanings": ["to get angry"],
 		"example": {
 			"hanzi": "我回家太晚，妈妈生气了。",
-			"pinyin": "wǒ huí jiā tài wǎn mā ma shēng qì le",
+			"pinyin": "wǒ huí jiā tài wǎn māma shēngqì le",
+			"spans": [1, 1, 1, 1, 1, 2, 2, 1],
 			"english": "I got home too late and Mum got angry."
 		},
 		"pos": [],
@@ -5373,7 +5707,8 @@
 		"meanings": ["birthday"],
 		"example": {
 			"hanzi": "今天是我的生日。",
-			"pinyin": "jīn tiān shì wǒ de shēng rì",
+			"pinyin": "jīntiān shì wǒ de shēngrì",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "Today is my birthday."
 		},
 		"pos": ["N"],
@@ -5387,7 +5722,8 @@
 		"meanings": ["ten"],
 		"example": {
 			"hanzi": "我们十点上课。",
-			"pinyin": "wǒ men shí diǎn shàng kè",
+			"pinyin": "wǒmen shí diǎn shàngkè",
+			"spans": [2, 1, 1, 2],
 			"english": "Our class starts at ten."
 		},
 		"pos": ["Num"],
@@ -5405,7 +5741,8 @@
 		"meanings": ["the time when", "point in time"],
 		"example": {
 			"hanzi": "小的时候我很喜欢唱歌。",
-			"pinyin": "xiǎo de shí hou wǒ hěn xǐ huan chàng gē",
+			"pinyin": "xiǎo de shíhou wǒ hěn xǐhuan chànggē",
+			"spans": [1, 1, 2, 1, 1, 2, 2],
 			"english": "When I was little I loved to sing."
 		},
 		"pos": ["N"],
@@ -5423,7 +5760,8 @@
 		"meanings": ["time"],
 		"example": {
 			"hanzi": "我明天没有时间。",
-			"pinyin": "wǒ míng tiān méi yǒu shí jiān",
+			"pinyin": "wǒ míngtiān méiyǒu shíjiān",
+			"spans": [1, 2, 2, 2],
 			"english": "I don't have time tomorrow."
 		},
 		"pos": ["N"],
@@ -5437,7 +5775,8 @@
 		"meanings": ["matter", "affair"],
 		"example": {
 			"hanzi": "我今天有很多事。",
-			"pinyin": "wǒ jīn tiān yǒu hěn duō shì",
+			"pinyin": "wǒ jīntiān yǒu hěn duō shì",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I have a lot to do today."
 		},
 		"pos": ["N"],
@@ -5453,6 +5792,7 @@
 		"example": {
 			"hanzi": "你试试这个菜吧。",
 			"pinyin": "nǐ shì shi zhè ge cài ba",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "Give this dish a try."
 		},
 		"pos": ["V"],
@@ -5466,7 +5806,8 @@
 		"meanings": ["to be"],
 		"example": {
 			"hanzi": "他是我的汉语老师。",
-			"pinyin": "tā shì wǒ de hàn yǔ lǎo shī",
+			"pinyin": "tā shì wǒ de Hànyǔ lǎoshī",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "He is my Chinese teacher."
 		},
 		"pos": ["V"],
@@ -5485,6 +5826,7 @@
 		"example": {
 			"hanzi": "你是不是想回家？",
 			"pinyin": "nǐ shì bu shì xiǎng huí jiā",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "You want to go home, don't you?"
 		},
 		"pos": [],
@@ -5499,6 +5841,7 @@
 		"example": {
 			"hanzi": "我的手很冷。",
 			"pinyin": "wǒ de shǒu hěn lěng",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "My hands are cold."
 		},
 		"pos": ["N"],
@@ -5516,7 +5859,8 @@
 		"meanings": ["cell phone", "mobile phone"],
 		"example": {
 			"hanzi": "我的手机没电了。",
-			"pinyin": "wǒ de shǒu jī méi diàn le",
+			"pinyin": "wǒ de shǒujī méi diàn le",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "My cell phone is out of battery."
 		},
 		"pos": ["N"],
@@ -5532,6 +5876,7 @@
 		"example": {
 			"hanzi": "我在看一本新书。",
 			"pinyin": "wǒ zài kàn yì běn xīn shū",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "I'm reading a new book."
 		},
 		"pos": ["N"],
@@ -5549,7 +5894,8 @@
 		"meanings": ["schoolbag", "book bag"],
 		"example": {
 			"hanzi": "我的书包在桌子上。",
-			"pinyin": "wǒ de shū bāo zài zhuō zi shang",
+			"pinyin": "wǒ de shūbāo zài zhuōzi shang",
+			"spans": [1, 1, 2, 1, 2, 1],
 			"english": "My schoolbag is on the desk."
 		},
 		"pos": ["N"],
@@ -5567,7 +5913,8 @@
 		"meanings": ["bookstore"],
 		"example": {
 			"hanzi": "我在书店买了两本书。",
-			"pinyin": "wǒ zài shū diàn mǎi le liǎng běn shū",
+			"pinyin": "wǒ zài shūdiàn mǎi le liǎng běn shū",
+			"spans": [1, 1, 2, 1, 1, 1, 1, 1],
 			"english": "I bought two books at the bookshop."
 		},
 		"pos": ["N"],
@@ -5582,7 +5929,8 @@
 		"meanings": ["tree"],
 		"example": {
 			"hanzi": "学校里有很多树。",
-			"pinyin": "xué xiào lǐ yǒu hěn duō shù",
+			"pinyin": "xuéxiào lǐ yǒu hěn duō shù",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "There are a lot of trees at the school."
 		},
 		"pos": ["N"],
@@ -5597,6 +5945,7 @@
 		"example": {
 			"hanzi": "我想喝水。",
 			"pinyin": "wǒ xiǎng hē shuǐ",
+			"spans": [1, 1, 1, 1],
 			"english": "I want to drink some water."
 		},
 		"pos": ["N"],
@@ -5613,7 +5962,8 @@
 		"meanings": ["fruit"],
 		"example": {
 			"hanzi": "商店里有很多水果。",
-			"pinyin": "shāng diàn lǐ yǒu hěn duō shuǐ guǒ",
+			"pinyin": "shāngdiàn lǐ yǒu hěn duō shuǐguǒ",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "There's a lot of fruit in the shop."
 		},
 		"pos": ["N"],
@@ -5627,7 +5977,8 @@
 		"meanings": ["to sleep"],
 		"example": {
 			"hanzi": "我昨天睡得很晚。",
-			"pinyin": "wǒ zuó tiān shuì de hěn wǎn",
+			"pinyin": "wǒ zuótiān shuì de hěn wǎn",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I went to sleep very late last night."
 		},
 		"pos": ["V"],
@@ -5637,7 +5988,7 @@
 		"id": "L1-0348",
 		"hanzi": "睡觉",
 		"traditional": "睡覺",
-		"pinyin": "shuì jiào",
+		"pinyin": "shuìjiào",
 		"syllables": [
 			{ "py": "shuì", "tone": 4 },
 			{ "py": "jiào", "tone": 4 }
@@ -5645,7 +5996,8 @@
 		"meanings": ["to go to bed", "to sleep"],
 		"example": {
 			"hanzi": "弟弟九点就睡觉了。",
-			"pinyin": "dì di jiǔ diǎn jiù shuì jiào le",
+			"pinyin": "dìdi jiǔ diǎn jiù shuìjiào le",
+			"spans": [2, 1, 1, 1, 2, 1],
 			"english": "My little brother went to bed at nine."
 		},
 		"pos": [],
@@ -5660,7 +6012,8 @@
 		"meanings": ["to say", "to speak"],
 		"example": {
 			"hanzi": "老师说明天有课。",
-			"pinyin": "lǎo shī shuō míng tiān yǒu kè",
+			"pinyin": "lǎoshī shuō míngtiān yǒu kè",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "The teacher says there's class tomorrow."
 		},
 		"pos": ["V"],
@@ -5670,7 +6023,7 @@
 		"id": "L1-0350",
 		"hanzi": "说话",
 		"traditional": "說話",
-		"pinyin": "shuō huà",
+		"pinyin": "shuōhuà",
 		"syllables": [
 			{ "py": "shuō", "tone": 1 },
 			{ "py": "huà", "tone": 4 }
@@ -5678,7 +6031,8 @@
 		"meanings": ["to talk"],
 		"example": {
 			"hanzi": "老师说话很慢。",
-			"pinyin": "lǎo shī shuō huà hěn màn",
+			"pinyin": "lǎoshī shuōhuà hěn màn",
+			"spans": [2, 2, 1, 1],
 			"english": "The teacher talks slowly."
 		},
 		"pos": [],
@@ -5692,7 +6046,8 @@
 		"meanings": ["four"],
 		"example": {
 			"hanzi": "我们班有四个女生。",
-			"pinyin": "wǒ men bān yǒu sì ge nǚ shēng",
+			"pinyin": "wǒmen bān yǒu sì ge nǚshēng",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "There are four girls in our class."
 		},
 		"pos": ["Num"],
@@ -5707,6 +6062,7 @@
 		"example": {
 			"hanzi": "我送她一本书。",
 			"pinyin": "wǒ sòng tā yì běn shū",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I gave her a book as a present."
 		},
 		"pos": ["V"],
@@ -5721,7 +6077,8 @@
 		"meanings": ["years of age"],
 		"example": {
 			"hanzi": "我妹妹今年七岁。",
-			"pinyin": "wǒ mèi mei jīn nián qī suì",
+			"pinyin": "wǒ mèimei jīnnián qī suì",
+			"spans": [1, 2, 2, 1, 1],
 			"english": "My little sister is seven years old this year."
 		},
 		"pos": ["M"],
@@ -5735,7 +6092,8 @@
 		"meanings": ["he", "him"],
 		"example": {
 			"hanzi": "他今天没来上课。",
-			"pinyin": "tā jīn tiān méi lái shàng kè",
+			"pinyin": "tā jīntiān méi lái shàngkè",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "He didn't come to class today."
 		},
 		"pos": ["Pron"],
@@ -5753,7 +6111,8 @@
 		"meanings": ["they", "them"],
 		"example": {
 			"hanzi": "他们都是我的朋友。",
-			"pinyin": "tā men dōu shì wǒ de péng you",
+			"pinyin": "tāmen dōu shì wǒ de péngyou",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "They're all friends of mine."
 		},
 		"pos": ["Pron"],
@@ -5767,7 +6126,8 @@
 		"meanings": ["she", "her"],
 		"example": {
 			"hanzi": "她是我的汉语老师。",
-			"pinyin": "tā shì wǒ de Hàn yǔ lǎo shī",
+			"pinyin": "tā shì wǒ de Hànyǔ lǎoshī",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "She is my Chinese teacher."
 		},
 		"pos": ["Pron"],
@@ -5785,7 +6145,8 @@
 		"meanings": ["they for a group of women"],
 		"example": {
 			"hanzi": "她们都是老师。",
-			"pinyin": "tā men dōu shì lǎo shī",
+			"pinyin": "tāmen dōu shì lǎoshī",
+			"spans": [2, 1, 1, 2],
 			"english": "They are all teachers."
 		},
 		"pos": ["Pron"],
@@ -5800,6 +6161,7 @@
 		"example": {
 			"hanzi": "这本书太贵了。",
 			"pinyin": "zhè běn shū tài guì le",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "This book is too expensive."
 		},
 		"pos": ["Adv"],
@@ -5813,7 +6175,8 @@
 		"meanings": ["day", "sky"],
 		"example": {
 			"hanzi": "我们在这里住了三天。",
-			"pinyin": "wǒ men zài zhè lǐ zhù le sān tiān",
+			"pinyin": "wǒmen zài zhèlǐ zhù le sān tiān",
+			"spans": [2, 1, 2, 1, 1, 1, 1],
 			"english": "We stayed here for three days."
 		},
 		"pos": ["N", "M"],
@@ -5831,7 +6194,8 @@
 		"meanings": ["weather"],
 		"example": {
 			"hanzi": "今天天气很好。",
-			"pinyin": "jīn tiān tiān qì hěn hǎo",
+			"pinyin": "jīntiān tiānqì hěn hǎo",
+			"spans": [2, 2, 1, 1],
 			"english": "The weather is lovely today."
 		},
 		"pos": ["N"],
@@ -5846,7 +6210,8 @@
 		"meanings": ["to listen", "to hear"],
 		"example": {
 			"hanzi": "我喜欢听歌。",
-			"pinyin": "wǒ xǐ huan tīng gē",
+			"pinyin": "wǒ xǐhuan tīng gē",
+			"spans": [1, 2, 1, 1],
 			"english": "I like listening to songs."
 		},
 		"pos": ["V"],
@@ -5864,7 +6229,8 @@
 		"meanings": ["to hear (as a result)"],
 		"example": {
 			"hanzi": "我听到有人叫我。",
-			"pinyin": "wǒ tīng dào yǒu rén jiào wǒ",
+			"pinyin": "wǒ tīngdào yǒu rén jiào wǒ",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I heard someone calling me."
 		},
 		"pos": [],
@@ -5874,7 +6240,7 @@
 		"id": "L1-0363",
 		"hanzi": "听见",
 		"traditional": "聽見",
-		"pinyin": "tīng jiàn",
+		"pinyin": "tīngjiàn",
 		"syllables": [
 			{ "py": "tīng", "tone": 1 },
 			{ "py": "jiàn", "tone": 4 }
@@ -5882,7 +6248,8 @@
 		"meanings": ["to hear (and catch it)"],
 		"example": {
 			"hanzi": "你听见我说话了吗？",
-			"pinyin": "nǐ tīng jiàn wǒ shuō huà le ma",
+			"pinyin": "nǐ tīngjiàn wǒ shuōhuà le ma",
+			"spans": [1, 2, 1, 2, 1, 1],
 			"english": "Did you hear what I said?"
 		},
 		"pos": [],
@@ -5900,7 +6267,8 @@
 		"meanings": ["to take dictation", "to write down what you hear"],
 		"example": {
 			"hanzi": "明天我们要听写汉字。",
-			"pinyin": "míng tiān wǒ men yào tīng xiě hàn zì",
+			"pinyin": "míngtiān wǒmen yào tīngxiě Hànzì",
+			"spans": [2, 2, 1, 2, 2],
 			"english": "Tomorrow we have to write characters from dictation."
 		},
 		"pos": ["V"],
@@ -5918,7 +6286,8 @@
 		"meanings": ["classmate", "fellow student"],
 		"example": {
 			"hanzi": "他是我的同学。",
-			"pinyin": "tā shì wǒ de tóng xué",
+			"pinyin": "tā shì wǒ de tóngxué",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "He's my classmate."
 		},
 		"pos": ["N"],
@@ -5937,7 +6306,8 @@
 		"meanings": ["library"],
 		"example": {
 			"hanzi": "我们在图书馆看书。",
-			"pinyin": "wǒ men zài tú shū guǎn kàn shū",
+			"pinyin": "wǒmen zài túshūguǎn kàn shū",
+			"spans": [2, 1, 3, 1, 1],
 			"english": "We read in the library."
 		},
 		"pos": ["N"],
@@ -5952,6 +6322,7 @@
 		"example": {
 			"hanzi": "我在门外等你。",
 			"pinyin": "wǒ zài mén wài děng nǐ",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I will wait for you outside the door."
 		},
 		"pos": ["N"],
@@ -5969,7 +6340,8 @@
 		"meanings": ["out there", "outdoors"],
 		"example": {
 			"hanzi": "外边很冷，快进来吧。",
-			"pinyin": "wài bian hěn lěng kuài jìn lái ba",
+			"pinyin": "wàibian hěn lěng kuài jìnlái ba",
+			"spans": [2, 1, 1, 1, 2, 1],
 			"english": "It is cold out there, come inside."
 		},
 		"pos": ["N"],
@@ -5987,7 +6359,8 @@
 		"meanings": ["foreign country"],
 		"example": {
 			"hanzi": "他有很多外国朋友。",
-			"pinyin": "tā yǒu hěn duō wài guó péng you",
+			"pinyin": "tā yǒu hěn duō wàiguó péngyou",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "He has a lot of friends from other countries."
 		},
 		"pos": ["N"],
@@ -6005,7 +6378,8 @@
 		"meanings": ["foreign language"],
 		"example": {
 			"hanzi": "我很喜欢学外语。",
-			"pinyin": "wǒ hěn xǐ huan xué wài yǔ",
+			"pinyin": "wǒ hěn xǐhuan xué wàiyǔ",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "I really like studying foreign languages."
 		},
 		"pos": ["N"],
@@ -6023,7 +6397,8 @@
 		"meanings": ["to play", "to have fun"],
 		"example": {
 			"hanzi": "孩子们在外面玩儿。",
-			"pinyin": "hái zi men zài wài miàn wán r",
+			"pinyin": "háizi men zài wàimiàn wánr",
+			"spans": [2, 1, 1, 2, 2],
 			"english": "The kids are playing outside."
 		},
 		"pos": ["V"],
@@ -6037,7 +6412,8 @@
 		"meanings": ["late"],
 		"example": {
 			"hanzi": "你今天起得很晚。",
-			"pinyin": "nǐ jīn tiān qǐ de hěn wǎn",
+			"pinyin": "nǐ jīntiān qǐ de hěn wǎn",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "You got up very late today."
 		},
 		"pos": ["Adj"],
@@ -6055,7 +6431,8 @@
 		"meanings": ["dinner", "the evening meal"],
 		"example": {
 			"hanzi": "今天的晚饭是我做的。",
-			"pinyin": "jīn tiān de wǎn fàn shì wǒ zuò de",
+			"pinyin": "jīntiān de wǎnfàn shì wǒ zuò de",
+			"spans": [2, 1, 2, 1, 1, 1, 1],
 			"english": "I'm the one who made dinner tonight."
 		},
 		"pos": ["N"],
@@ -6072,7 +6449,8 @@
 		"meanings": ["evening", "at night"],
 		"example": {
 			"hanzi": "晚上我们一起看电影。",
-			"pinyin": "wǎn shang wǒ men yì qǐ kàn diàn yǐng",
+			"pinyin": "wǎnshang wǒmen yìqǐ kàn diànyǐng",
+			"spans": [2, 2, 2, 1, 2],
 			"english": "Tonight we're watching a film together."
 		},
 		"pos": ["N"],
@@ -6091,6 +6469,7 @@
 		"example": {
 			"hanzi": "我在网上买书。",
 			"pinyin": "wǒ zài wǎng shang mǎi shū",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I buy books online."
 		},
 		"pos": [],
@@ -6108,7 +6487,8 @@
 		"meanings": ["online friend", "internet user"],
 		"example": {
 			"hanzi": "他是我的网友。",
-			"pinyin": "tā shì wǒ de wǎng yǒu",
+			"pinyin": "tā shì wǒ de wǎngyǒu",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "He's a friend of mine from online."
 		},
 		"pos": ["N"],
@@ -6122,7 +6502,8 @@
 		"meanings": ["to forget"],
 		"example": {
 			"hanzi": "我忘了他的名字。",
-			"pinyin": "wǒ wàng le tā de míng zi",
+			"pinyin": "wǒ wàng le tā de míngzi",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I've forgotten his name."
 		},
 		"pos": ["V"],
@@ -6140,7 +6521,8 @@
 		"meanings": ["to forget about"],
 		"example": {
 			"hanzi": "我忘记问他的名字了。",
-			"pinyin": "wǒ wàng jì wèn tā de míng zi le",
+			"pinyin": "wǒ wàngjì wèn tā de míngzi le",
+			"spans": [1, 2, 1, 1, 1, 2, 1],
 			"english": "I forgot to ask his name."
 		},
 		"pos": ["V"],
@@ -6155,7 +6537,8 @@
 		"meanings": ["to ask"],
 		"example": {
 			"hanzi": "我问妈妈今天几点回家。",
-			"pinyin": "wǒ wèn mā ma jīn tiān jǐ diǎn huí jiā",
+			"pinyin": "wǒ wèn māma jīntiān jǐ diǎn huí jiā",
+			"spans": [1, 1, 2, 2, 1, 1, 1, 1],
 			"english": "I asked my mum what time she's coming home today."
 		},
 		"pos": ["V"],
@@ -6169,7 +6552,8 @@
 		"meanings": ["I", "me"],
 		"example": {
 			"hanzi": "我在学校学习汉语。",
-			"pinyin": "wǒ zài xué xiào xué xí hàn yǔ",
+			"pinyin": "wǒ zài xuéxiào xuéxí Hànyǔ",
+			"spans": [1, 1, 2, 2, 2],
 			"english": "I study Chinese at school."
 		},
 		"pos": ["Pron"],
@@ -6187,7 +6571,8 @@
 		"meanings": ["we", "us"],
 		"example": {
 			"hanzi": "我们是好朋友。",
-			"pinyin": "wǒ men shì hǎo péng you",
+			"pinyin": "wǒmen shì hǎo péngyou",
+			"spans": [2, 1, 1, 2],
 			"english": "We are good friends."
 		},
 		"pos": ["Pron"],
@@ -6201,7 +6586,8 @@
 		"meanings": ["five"],
 		"example": {
 			"hanzi": "我们班有五个学生。",
-			"pinyin": "wǒ men bān yǒu wǔ ge xué shēng",
+			"pinyin": "wǒmen bān yǒu wǔ ge xuésheng",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "There are five students in our class."
 		},
 		"pos": ["Num"],
@@ -6219,7 +6605,8 @@
 		"meanings": ["lunch"],
 		"example": {
 			"hanzi": "我们在家吃午饭。",
-			"pinyin": "wǒ men zài jiā chī wǔ fàn",
+			"pinyin": "wǒmen zàijiā chī wǔfàn",
+			"spans": [2, 2, 1, 2],
 			"english": "We eat lunch at home."
 		},
 		"pos": ["N"],
@@ -6233,7 +6620,8 @@
 		"meanings": ["west"],
 		"example": {
 			"hanzi": "我家在学校的西边。",
-			"pinyin": "wǒ jiā zài xué xiào de xī bian",
+			"pinyin": "wǒ jiā zài xuéxiào de xī bian",
+			"spans": [1, 1, 1, 2, 1, 1, 1],
 			"english": "My home is west of the school."
 		},
 		"pos": ["N"],
@@ -6251,7 +6639,8 @@
 		"meanings": ["the west side"],
 		"example": {
 			"hanzi": "我的房间在西边。",
-			"pinyin": "wǒ de fáng jiān zài xī bian",
+			"pinyin": "wǒ de fángjiān zài xībian",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "My room is on the west side."
 		},
 		"pos": ["N"],
@@ -6265,7 +6654,8 @@
 		"meanings": ["to wash"],
 		"example": {
 			"hanzi": "吃饭前要洗手。",
-			"pinyin": "chī fàn qián yào xǐ shǒu",
+			"pinyin": "chīfàn qián yào xǐ shǒu",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "Wash your hands before you eat."
 		},
 		"pos": ["V"],
@@ -6284,7 +6674,8 @@
 		"meanings": ["restroom", "washroom"],
 		"example": {
 			"hanzi": "洗手间在哪儿？",
-			"pinyin": "xǐ shǒu jiān zài nǎ r",
+			"pinyin": "xǐshǒujiān zài nǎr",
+			"spans": [3, 1, 2],
 			"english": "Where is the restroom?"
 		},
 		"pos": ["N"],
@@ -6302,7 +6693,8 @@
 		"meanings": ["to like"],
 		"example": {
 			"hanzi": "我很喜欢唱歌。",
-			"pinyin": "wǒ hěn xǐ huan chàng gē",
+			"pinyin": "wǒ hěn xǐhuan chànggē",
+			"spans": [1, 1, 2, 2],
 			"english": "I really like singing."
 		},
 		"pos": ["V"],
@@ -6316,7 +6708,8 @@
 		"meanings": ["below", "to go down"],
 		"example": {
 			"hanzi": "书在桌子下面。",
-			"pinyin": "shū zài zhuō zi xià miàn",
+			"pinyin": "shū zài zhuōzi xià miàn",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "The book is under the desk."
 		},
 		"pos": ["N", "V"],
@@ -6325,7 +6718,7 @@
 	{
 		"id": "L1-0390",
 		"hanzi": "下班",
-		"pinyin": "xià bān",
+		"pinyin": "xiàbān",
 		"syllables": [
 			{ "py": "xià", "tone": 4 },
 			{ "py": "bān", "tone": 1 }
@@ -6333,7 +6726,8 @@
 		"meanings": ["to finish work", "to get off work"],
 		"example": {
 			"hanzi": "我爸爸六点下班。",
-			"pinyin": "wǒ bà ba liù diǎn xià bān",
+			"pinyin": "wǒ bàba liù diǎn xiàbān",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "My dad finishes work at six."
 		},
 		"pos": [],
@@ -6351,7 +6745,8 @@
 		"meanings": ["the underside", "underneath"],
 		"example": {
 			"hanzi": "我的书在桌子下边。",
-			"pinyin": "wǒ de shū zài zhuō zi xià bian",
+			"pinyin": "wǒ de shū zài zhuōzi xiàbian",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "My book is under the table."
 		},
 		"pos": ["N"],
@@ -6369,7 +6764,8 @@
 		"meanings": ["to get off a vehicle"],
 		"example": {
 			"hanzi": "我在前面下车。",
-			"pinyin": "wǒ zài qián miàn xià chē",
+			"pinyin": "wǒ zài qiánmiàn xià chē",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "I'll get off up ahead."
 		},
 		"pos": [],
@@ -6386,7 +6782,8 @@
 		"meanings": ["next time"],
 		"example": {
 			"hanzi": "下次我请你吃饭。",
-			"pinyin": "xià cì wǒ qǐng nǐ chī fàn",
+			"pinyin": "xià cì wǒ qǐng nǐ chīfàn",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "Next time dinner is on me."
 		},
 		"pos": [],
@@ -6396,7 +6793,7 @@
 		"id": "L1-0394",
 		"hanzi": "下课",
 		"traditional": "下課",
-		"pinyin": "xià kè",
+		"pinyin": "xiàkè",
 		"syllables": [
 			{ "py": "xià", "tone": 4 },
 			{ "py": "kè", "tone": 4 }
@@ -6404,7 +6801,8 @@
 		"meanings": ["to finish class", "to get out of class"],
 		"example": {
 			"hanzi": "我们四点下课。",
-			"pinyin": "wǒ men sì diǎn xià kè",
+			"pinyin": "wǒmen sì diǎn xiàkè",
+			"spans": [2, 1, 1, 2],
 			"english": "We get out of class at four."
 		},
 		"pos": [],
@@ -6421,7 +6819,8 @@
 		"meanings": ["afternoon", "p.m"],
 		"example": {
 			"hanzi": "今天下午我们去打球。",
-			"pinyin": "jīn tiān xià wǔ wǒ men qù dǎ qiú",
+			"pinyin": "jīntiān xiàwǔ wǒmen qù dǎ qiú",
+			"spans": [2, 2, 2, 1, 1, 1],
 			"english": "This afternoon we're going to play ball."
 		},
 		"pos": ["N"],
@@ -6438,7 +6837,8 @@
 		"meanings": ["it is raining", "to rain"],
 		"example": {
 			"hanzi": "明天会下雨吗？",
-			"pinyin": "míng tiān huì xià yǔ ma",
+			"pinyin": "míngtiān huì xià yǔ ma",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "Will it rain tomorrow?"
 		},
 		"pos": [],
@@ -6452,7 +6852,8 @@
 		"meanings": ["first", "beforehand"],
 		"example": {
 			"hanzi": "你先吃饭吧。",
-			"pinyin": "nǐ xiān chī fàn ba",
+			"pinyin": "nǐ xiān chīfàn ba",
+			"spans": [1, 1, 2, 1],
 			"english": "You go ahead and eat first."
 		},
 		"pos": ["Adv"],
@@ -6469,7 +6870,8 @@
 		"meanings": ["Mr", "gentleman"],
 		"example": {
 			"hanzi": "先生，您要喝茶吗？",
-			"pinyin": "xiān sheng nín yào hē chá ma",
+			"pinyin": "xiānsheng nín yào hē chá ma",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "Would you like some tea, sir?"
 		},
 		"pos": ["N"],
@@ -6487,7 +6889,8 @@
 		"meanings": ["now", "at present"],
 		"example": {
 			"hanzi": "现在外面下雨了。",
-			"pinyin": "xiàn zài wài miàn xià yǔ le",
+			"pinyin": "xiànzài wàimiàn xià yǔ le",
+			"spans": [2, 2, 1, 1, 1],
 			"english": "It's raining outside now."
 		},
 		"pos": ["N"],
@@ -6501,7 +6904,8 @@
 		"meanings": ["to think about", "would like to", "to miss someone"],
 		"example": {
 			"hanzi": "你想什么呢？",
-			"pinyin": "nǐ xiǎng shén me ne",
+			"pinyin": "nǐ xiǎng shénme ne",
+			"spans": [1, 1, 2, 1],
 			"english": "What are you thinking about?"
 		},
 		"pos": ["V"],
@@ -6515,7 +6919,8 @@
 		"meanings": ["small", "little"],
 		"example": {
 			"hanzi": "这个房间很小。",
-			"pinyin": "zhè ge fáng jiān hěn xiǎo",
+			"pinyin": "zhè ge fángjiān hěn xiǎo",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "This room is very small."
 		},
 		"pos": ["Adj"],
@@ -6534,7 +6939,8 @@
 		"meanings": ["kid", "young child"],
 		"example": {
 			"hanzi": "那个小孩儿很爱笑。",
-			"pinyin": "nà ge xiǎo hái r hěn ài xiào",
+			"pinyin": "nà ge xiǎoháir hěn ài xiào",
+			"spans": [1, 1, 3, 1, 1, 1],
 			"english": "That little kid smiles a lot."
 		},
 		"pos": ["N"],
@@ -6543,15 +6949,16 @@
 	{
 		"id": "L1-0403",
 		"hanzi": "小姐",
-		"pinyin": "xiǎojiě",
+		"pinyin": "xiǎojie",
 		"syllables": [
 			{ "py": "xiǎo", "tone": 3 },
-			{ "py": "jiě", "tone": 3 }
+			{ "py": "jie", "tone": 0 }
 		],
 		"meanings": ["young lady", "Miss"],
 		"example": {
 			"hanzi": "小姐，这是你的书吗？",
-			"pinyin": "xiǎo jiě zhè shì nǐ de shū ma",
+			"pinyin": "xiǎojie zhè shì nǐ de shū ma",
+			"spans": [2, 1, 1, 1, 1, 1, 1],
 			"english": "Miss, is this your book?"
 		},
 		"pos": ["N"],
@@ -6569,7 +6976,8 @@
 		"meanings": ["child (as adults address one)"],
 		"example": {
 			"hanzi": "这个小朋友今年六岁。",
-			"pinyin": "zhè ge xiǎo péng yǒu jīn nián liù suì",
+			"pinyin": "zhè ge xiǎopéngyǒu jīnnián liù suì",
+			"spans": [1, 1, 3, 2, 1, 1],
 			"english": "This little one is six years old."
 		},
 		"pos": ["N"],
@@ -6587,7 +6995,8 @@
 		"meanings": ["hour"],
 		"example": {
 			"hanzi": "我看了两个小时的书。",
-			"pinyin": "wǒ kàn le liǎng gè xiǎo shí de shū",
+			"pinyin": "wǒ kàn le liǎng gè xiǎoshí de shū",
+			"spans": [1, 1, 1, 1, 1, 2, 1, 1],
 			"english": "I read for two hours."
 		},
 		"pos": ["N"],
@@ -6605,7 +7014,8 @@
 		"meanings": ["elementary school", "primary school"],
 		"example": {
 			"hanzi": "我弟弟在小学读书。",
-			"pinyin": "wǒ dì di zài xiǎo xué dú shū",
+			"pinyin": "wǒ dìdi zài xiǎoxué dúshū",
+			"spans": [1, 2, 1, 2, 2],
 			"english": "My younger brother is at primary school."
 		},
 		"pos": ["N"],
@@ -6624,7 +7034,8 @@
 		"meanings": ["primary school pupil", "schoolchild"],
 		"example": {
 			"hanzi": "我弟弟是小学生。",
-			"pinyin": "wǒ dì di shì xiǎo xué shēng",
+			"pinyin": "wǒ dìdi shì xiǎoxuéshēng",
+			"spans": [1, 2, 1, 3],
 			"english": "My younger brother is in primary school."
 		},
 		"pos": ["N"],
@@ -6638,7 +7049,8 @@
 		"meanings": ["to laugh", "to smile"],
 		"example": {
 			"hanzi": "孩子们都笑了。",
-			"pinyin": "hái zi men dōu xiào le",
+			"pinyin": "háizi men dōu xiào le",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "The children all laughed."
 		},
 		"pos": ["V"],
@@ -6653,7 +7065,8 @@
 		"meanings": ["to write"],
 		"example": {
 			"hanzi": "他在写汉字。",
-			"pinyin": "tā zài xiě Hàn zì",
+			"pinyin": "tā zài xiě Hànzì",
+			"spans": [1, 1, 1, 2],
 			"english": "He is writing Chinese characters."
 		},
 		"pos": ["V"],
@@ -6671,7 +7084,8 @@
 		"meanings": ["to thank", "thank you"],
 		"example": {
 			"hanzi": "谢谢你帮我。",
-			"pinyin": "xiè xie nǐ bāng wǒ",
+			"pinyin": "xièxie nǐ bāng wǒ",
+			"spans": [2, 1, 1, 1],
 			"english": "Thank you for helping me."
 		},
 		"pos": ["V"],
@@ -6685,7 +7099,8 @@
 		"meanings": ["new"],
 		"example": {
 			"hanzi": "这是我的新手机。",
-			"pinyin": "zhè shì wǒ de xīn shǒu jī",
+			"pinyin": "zhè shì wǒ de xīn shǒujī",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "This is my new phone."
 		},
 		"pos": ["Adj"],
@@ -6702,7 +7117,8 @@
 		"meanings": ["New Year"],
 		"example": {
 			"hanzi": "我在家过新年。",
-			"pinyin": "wǒ zài jiā guò xīn nián",
+			"pinyin": "wǒ zàijiā guò xīnnián",
+			"spans": [1, 2, 1, 2],
 			"english": "I spend New Year at home."
 		},
 		"pos": ["N"],
@@ -6719,7 +7135,8 @@
 		"meanings": ["week"],
 		"example": {
 			"hanzi": "这个星期我很忙。",
-			"pinyin": "zhè ge xīng qī wǒ hěn máng",
+			"pinyin": "zhè ge xīngqī wǒ hěn máng",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "I'm very busy this week."
 		},
 		"pos": ["N"],
@@ -6737,7 +7154,8 @@
 		"meanings": ["Sunday"],
 		"example": {
 			"hanzi": "星期日我在家休息。",
-			"pinyin": "xīng qī rì wǒ zài jiā xiū xi",
+			"pinyin": "xīngqīrì wǒ zàijiā xiūxi",
+			"spans": [3, 1, 2, 2],
 			"english": "On Sunday I rest at home."
 		},
 		"pos": ["N"],
@@ -6755,7 +7173,8 @@
 		"meanings": ["Sunday in everyday speech"],
 		"example": {
 			"hanzi": "星期天我们去看电影。",
-			"pinyin": "xīng qī tiān wǒ men qù kàn diàn yǐng",
+			"pinyin": "xīngqītiān wǒmen qù kàn diànyǐng",
+			"spans": [3, 2, 1, 1, 2],
 			"english": "On Sunday we're going to see a film."
 		},
 		"pos": ["N"],
@@ -6769,7 +7188,8 @@
 		"meanings": ["all right", "capable"],
 		"example": {
 			"hanzi": "我们明天去，行吗？",
-			"pinyin": "wǒ men míng tiān qù xíng ma",
+			"pinyin": "wǒmen míngtiān qù xíng ma",
+			"spans": [2, 2, 1, 1, 1],
 			"english": "Let's go tomorrow — is that all right?"
 		},
 		"pos": ["V", "Adj"],
@@ -6786,7 +7206,8 @@
 		"meanings": ["to rest", "to take a break"],
 		"example": {
 			"hanzi": "你累了就休息一下。",
-			"pinyin": "nǐ lèi le jiù xiū xi yí xià",
+			"pinyin": "nǐ lèi le jiù xiūxi yí xià",
+			"spans": [1, 1, 1, 1, 2, 1, 1],
 			"english": "If you're tired, take a break."
 		},
 		"pos": ["V"],
@@ -6801,7 +7222,8 @@
 		"meanings": ["to learn"],
 		"example": {
 			"hanzi": "我在学中文。",
-			"pinyin": "wǒ zài xué zhōng wén",
+			"pinyin": "wǒ zài xué Zhōngwén",
+			"spans": [1, 1, 1, 2],
 			"english": "I'm learning Chinese."
 		},
 		"pos": ["V"],
@@ -6811,15 +7233,16 @@
 		"id": "L1-0419",
 		"hanzi": "学生",
 		"traditional": "學生",
-		"pinyin": "xuéshēng",
+		"pinyin": "xuésheng",
 		"syllables": [
 			{ "py": "xué", "tone": 2 },
-			{ "py": "shēng", "tone": 1 }
+			{ "py": "sheng", "tone": 0 }
 		],
 		"meanings": ["student", "schoolchild"],
 		"example": {
 			"hanzi": "我们班有三十个学生。",
-			"pinyin": "wǒ men bān yǒu sān shí ge xué shēng",
+			"pinyin": "wǒmen bān yǒu sān shí ge xuésheng",
+			"spans": [2, 1, 1, 1, 1, 1, 2],
 			"english": "There are thirty students in our class."
 		},
 		"pos": ["N"],
@@ -6837,7 +7260,8 @@
 		"meanings": ["to study"],
 		"example": {
 			"hanzi": "他在家学习汉语。",
-			"pinyin": "tā zài jiā xué xí hàn yǔ",
+			"pinyin": "tā zàijiā xuéxí Hànyǔ",
+			"spans": [1, 2, 2, 2],
 			"english": "He studies Chinese at home."
 		},
 		"pos": ["V"],
@@ -6855,7 +7279,8 @@
 		"meanings": ["school"],
 		"example": {
 			"hanzi": "我们的学校很大。",
-			"pinyin": "wǒ men de xué xiào hěn dà",
+			"pinyin": "wǒmen de xuéxiào hěn dà",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "Our school is very big."
 		},
 		"pos": ["N"],
@@ -6873,7 +7298,8 @@
 		"meanings": ["college", "academy"],
 		"example": {
 			"hanzi": "她在这个学院学习。",
-			"pinyin": "tā zài zhè ge xué yuàn xué xí",
+			"pinyin": "tā zài zhè ge xuéyuàn xuéxí",
+			"spans": [1, 1, 1, 1, 2, 2],
 			"english": "She studies at this college."
 		},
 		"pos": ["N"],
@@ -6887,7 +7313,8 @@
 		"meanings": ["to want", "to need", "will"],
 		"example": {
 			"hanzi": "明天我要去看医生。",
-			"pinyin": "míng tiān wǒ yào qù kàn yī shēng",
+			"pinyin": "míngtiān wǒ yào qù kàn yīshēng",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "I have to go to the doctor tomorrow."
 		},
 		"pos": ["V"],
@@ -6905,7 +7332,8 @@
 		"meanings": ["paternal grandfather", "grandpa"],
 		"example": {
 			"hanzi": "我爷爷今年八十岁了。",
-			"pinyin": "wǒ yé ye jīn nián bā shí suì le",
+			"pinyin": "wǒ yéye jīnnián bā shí suì le",
+			"spans": [1, 2, 2, 1, 1, 1, 1],
 			"english": "My grandpa turns eighty this year."
 		},
 		"pos": ["N"],
@@ -6919,7 +7347,8 @@
 		"meanings": ["also", "too"],
 		"example": {
 			"hanzi": "我也想去看电影。",
-			"pinyin": "wǒ yě xiǎng qù kàn diàn yǐng",
+			"pinyin": "wǒ yě xiǎng qù kàn diànyǐng",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I want to go and see the film too."
 		},
 		"pos": ["Adv"],
@@ -6935,6 +7364,7 @@
 		"example": {
 			"hanzi": "这本书有两百页。",
 			"pinyin": "zhè běn shū yǒu liǎng bǎi yè",
+			"spans": [1, 1, 1, 1, 1, 1, 1],
 			"english": "This book is two hundred pages long."
 		},
 		"pos": ["M"],
@@ -6948,7 +7378,8 @@
 		"meanings": ["one"],
 		"example": {
 			"hanzi": "我有一个哥哥。",
-			"pinyin": "wǒ yǒu yí gè gē ge",
+			"pinyin": "wǒ yǒu yí gè gēge",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "I have one older brother."
 		},
 		"pos": ["Num"],
@@ -6965,7 +7396,8 @@
 		"meanings": ["clothes"],
 		"example": {
 			"hanzi": "妈妈买了新衣服。",
-			"pinyin": "mā ma mǎi le xīn yī fu",
+			"pinyin": "māma mǎi le xīn yīfu",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "Mum bought some new clothes."
 		},
 		"pos": ["N"],
@@ -6983,7 +7415,8 @@
 		"meanings": ["doctor", "physician"],
 		"example": {
 			"hanzi": "我姐姐是医生。",
-			"pinyin": "wǒ jiě jie shì yī shēng",
+			"pinyin": "wǒ jiějie shì yīshēng",
+			"spans": [1, 2, 1, 2],
 			"english": "My older sister is a doctor."
 		},
 		"pos": ["N"],
@@ -7001,7 +7434,8 @@
 		"meanings": ["hospital"],
 		"example": {
 			"hanzi": "妈妈在医院工作。",
-			"pinyin": "mā ma zài yī yuàn gōng zuò",
+			"pinyin": "māma zài yīyuàn gōngzuò",
+			"spans": [2, 1, 2, 2],
 			"english": "My mum works at a hospital."
 		},
 		"pos": ["N"],
@@ -7018,7 +7452,8 @@
 		"meanings": ["one half"],
 		"example": {
 			"hanzi": "这些菜我吃了一半。",
-			"pinyin": "zhè xiē cài wǒ chī le yí bàn",
+			"pinyin": "zhèxiē cài wǒ chī le yíbàn",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "I ate half of this food."
 		},
 		"pos": ["Num"],
@@ -7037,7 +7472,8 @@
 		"meanings": ["a short while", "a moment"],
 		"example": {
 			"hanzi": "请等我一会儿。",
-			"pinyin": "qǐng děng wǒ yí huì r",
+			"pinyin": "qǐng děng wǒ yíhuìr",
+			"spans": [1, 1, 1, 3],
 			"english": "Please wait for me a moment."
 		},
 		"pos": [],
@@ -7056,7 +7492,8 @@
 		"meanings": ["together with someone", "as a group"],
 		"example": {
 			"hanzi": "我们一块儿吃饭吧。",
-			"pinyin": "wǒ men yí kuài r chī fàn ba",
+			"pinyin": "wǒmen yíkuàir chīfàn ba",
+			"spans": [2, 3, 2, 1],
 			"english": "Let's eat together."
 		},
 		"pos": ["N", "Adv"],
@@ -7075,7 +7512,8 @@
 		"meanings": ["briefly", "just once"],
 		"example": {
 			"hanzi": "请等一下儿，我马上来。",
-			"pinyin": "qǐng děng yí xià r wǒ mǎ shàng lái",
+			"pinyin": "qǐng děng yíxiàr wǒ mǎshàng lái",
+			"spans": [1, 1, 3, 1, 2, 1],
 			"english": "Hang on a second, I'm coming."
 		},
 		"pos": [],
@@ -7093,7 +7531,8 @@
 		"meanings": ["the same", "alike"],
 		"example": {
 			"hanzi": "这两个杯子一样。",
-			"pinyin": "zhè liǎng gè bēi zi yí yàng",
+			"pinyin": "zhè liǎng gè bēizi yíyàng",
+			"spans": [1, 1, 1, 2, 2],
 			"english": "These two cups are the same."
 		},
 		"pos": ["Adj"],
@@ -7111,7 +7550,8 @@
 		"meanings": ["one side", "while doing something else"],
 		"example": {
 			"hanzi": "我们坐在桌子的一边。",
-			"pinyin": "wǒ men zuò zài zhuō zi de yì biān",
+			"pinyin": "wǒmen zuò zài zhuōzi de yìbiān",
+			"spans": [2, 1, 1, 2, 1, 2],
 			"english": "We sat on one side of the table."
 		},
 		"pos": ["N", "Adv"],
@@ -7130,7 +7570,8 @@
 		"meanings": ["a little", "a bit"],
 		"example": {
 			"hanzi": "我会说一点儿汉语。",
-			"pinyin": "wǒ huì shuō yì diǎn r hàn yǔ",
+			"pinyin": "wǒ huì shuō yìdiǎnr Hànyǔ",
+			"spans": [1, 1, 1, 3, 2],
 			"english": "I can speak a little Chinese."
 		},
 		"pos": [],
@@ -7147,7 +7588,8 @@
 		"meanings": ["together", "in the same place"],
 		"example": {
 			"hanzi": "我们一起去看电影吧。",
-			"pinyin": "wǒ men yì qǐ qù kàn diàn yǐng ba",
+			"pinyin": "wǒmen yìqǐ qù kàn diànyǐng ba",
+			"spans": [2, 2, 1, 1, 2, 1],
 			"english": "Let's go and see a film together."
 		},
 		"pos": ["Adv", "N"],
@@ -7164,7 +7606,8 @@
 		"meanings": ["some"],
 		"example": {
 			"hanzi": "我买了一些水果。",
-			"pinyin": "wǒ mǎi le yì xiē shuǐ guǒ",
+			"pinyin": "wǒ mǎi le yìxiē shuǐguǒ",
+			"spans": [1, 1, 1, 2, 2],
 			"english": "I bought some fruit."
 		},
 		"pos": [],
@@ -7178,7 +7621,8 @@
 		"meanings": ["to use"],
 		"example": {
 			"hanzi": "我用手机看书。",
-			"pinyin": "wǒ yòng shǒu jī kàn shū",
+			"pinyin": "wǒ yòng shǒujī kàn shū",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "I read books on my phone."
 		},
 		"pos": ["V"],
@@ -7192,7 +7636,8 @@
 		"meanings": ["to have", "there is"],
 		"example": {
 			"hanzi": "学校里有很多学生。",
-			"pinyin": "xué xiào lǐ yǒu hěn duō xué shēng",
+			"pinyin": "xuéxiào lǐ yǒu hěn duō xuésheng",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "There are a lot of students at the school."
 		},
 		"pos": ["V"],
@@ -7209,7 +7654,8 @@
 		"meanings": ["some of them"],
 		"example": {
 			"hanzi": "有的同学喜欢唱歌。",
-			"pinyin": "yǒu de tóng xué xǐ huan chàng gē",
+			"pinyin": "yǒude tóngxué xǐhuan chànggē",
+			"spans": [2, 2, 2, 2],
 			"english": "Some of the students like to sing."
 		},
 		"pos": ["Pron"],
@@ -7218,7 +7664,7 @@
 	{
 		"id": "L1-0443",
 		"hanzi": "有名",
-		"pinyin": "yǒu míng",
+		"pinyin": "yǒumíng",
 		"syllables": [
 			{ "py": "yǒu", "tone": 3 },
 			{ "py": "míng", "tone": 2 }
@@ -7226,7 +7672,8 @@
 		"meanings": ["famous", "well-known"],
 		"example": {
 			"hanzi": "这个饭馆很有名。",
-			"pinyin": "zhè ge fàn guǎn hěn yǒu míng",
+			"pinyin": "zhè ge fànguǎn hěn yǒumíng",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "This restaurant is very famous."
 		},
 		"pos": [],
@@ -7245,7 +7692,8 @@
 		"meanings": ["sometimes"],
 		"example": {
 			"hanzi": "我有时候去朋友家玩儿。",
-			"pinyin": "wǒ yǒu shí hou qù péng you jiā wán r",
+			"pinyin": "wǒ yǒushíhou qù péngyou jiā wánr",
+			"spans": [1, 3, 1, 2, 1, 2],
 			"english": "Sometimes I go over to a friend's place."
 		},
 		"pos": ["Adv"],
@@ -7254,7 +7702,7 @@
 	{
 		"id": "L1-0445",
 		"hanzi": "有些",
-		"pinyin": "yǒu xiē",
+		"pinyin": "yǒuxiē",
 		"syllables": [
 			{ "py": "yǒu", "tone": 3 },
 			{ "py": "xiē", "tone": 1 }
@@ -7262,7 +7710,8 @@
 		"meanings": ["certain ones", "somewhat"],
 		"example": {
 			"hanzi": "有些学生今天没来。",
-			"pinyin": "yǒu xiē xué shēng jīn tiān méi lái",
+			"pinyin": "yǒuxiē xuésheng jīntiān méi lái",
+			"spans": [2, 2, 2, 1, 1],
 			"english": "Some of the students didn't come today."
 		},
 		"pos": ["Pron"],
@@ -7279,7 +7728,8 @@
 		"meanings": ["to be useful"],
 		"example": {
 			"hanzi": "这本书很有用。",
-			"pinyin": "zhè běn shū hěn yǒu yòng",
+			"pinyin": "zhè běn shū hěn yǒuyòng",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "This book is very useful."
 		},
 		"pos": ["V"],
@@ -7293,7 +7743,8 @@
 		"meanings": ["the right-hand side"],
 		"example": {
 			"hanzi": "书店在医院的右边。",
-			"pinyin": "shū diàn zài yī yuàn de yòu bian",
+			"pinyin": "shūdiàn zài yīyuàn de yòu bian",
+			"spans": [2, 1, 2, 1, 1, 1],
 			"english": "The bookshop is to the right of the hospital."
 		},
 		"pos": ["N"],
@@ -7311,7 +7762,8 @@
 		"meanings": ["right side", "on the right"],
 		"example": {
 			"hanzi": "医院在马路右边。",
-			"pinyin": "yī yuàn zài mǎ lù yòu bian",
+			"pinyin": "yīyuàn zài mǎlù yòubian",
+			"spans": [2, 1, 2, 2],
 			"english": "The hospital is on the right side of the road."
 		},
 		"pos": ["N"],
@@ -7325,7 +7777,8 @@
 		"meanings": ["rain"],
 		"example": {
 			"hanzi": "今天的雨很大。",
-			"pinyin": "jīn tiān de yǔ hěn dà",
+			"pinyin": "jīntiān de yǔ hěn dà",
+			"spans": [2, 1, 1, 1, 1],
 			"english": "The rain is heavy today."
 		},
 		"pos": ["N"],
@@ -7340,6 +7793,7 @@
 		"example": {
 			"hanzi": "这本书三十元。",
 			"pinyin": "zhè běn shū sān shí yuán",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "This book costs thirty yuan."
 		},
 		"pos": ["M"],
@@ -7354,7 +7808,8 @@
 		"meanings": ["far", "distant"],
 		"example": {
 			"hanzi": "那个地方很远。",
-			"pinyin": "nà ge dì fang hěn yuǎn",
+			"pinyin": "nà ge dìfang hěn yuǎn",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "That place is a long way away."
 		},
 		"pos": ["Adj"],
@@ -7369,6 +7824,7 @@
 		"example": {
 			"hanzi": "这个月我很忙。",
 			"pinyin": "zhè ge yuè wǒ hěn máng",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "I'm very busy this month."
 		},
 		"pos": ["N"],
@@ -7383,6 +7839,7 @@
 		"example": {
 			"hanzi": "请你再说一次。",
 			"pinyin": "qǐng nǐ zài shuō yí cì",
+			"spans": [1, 1, 1, 1, 1, 1],
 			"english": "Please say that once more."
 		},
 		"pos": ["Adv"],
@@ -7400,7 +7857,8 @@
 		"meanings": ["goodbye", "see you again"],
 		"example": {
 			"hanzi": "她跟我说再见。",
-			"pinyin": "tā gēn wǒ shuō zài jiàn",
+			"pinyin": "tā gēn wǒ shuō zàijiàn",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "She said goodbye to me."
 		},
 		"pos": ["V"],
@@ -7414,7 +7872,8 @@
 		"meanings": ["to be at", "at or in"],
 		"example": {
 			"hanzi": "我的书在桌子上。",
-			"pinyin": "wǒ de shū zài zhuō zi shang",
+			"pinyin": "wǒ de shū zài zhuōzi shang",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "My book is on the table."
 		},
 		"pos": ["V", "Prep", "Adv"],
@@ -7431,7 +7890,8 @@
 		"meanings": ["to be at home"],
 		"example": {
 			"hanzi": "星期天我在家看书。",
-			"pinyin": "xīng qī tiān wǒ zài jiā kàn shū",
+			"pinyin": "xīngqītiān wǒ zàijiā kàn shū",
+			"spans": [3, 1, 2, 1, 1],
 			"english": "On Sunday I stay home and read."
 		},
 		"pos": ["V"],
@@ -7445,7 +7905,8 @@
 		"meanings": ["early"],
 		"example": {
 			"hanzi": "今天你来得很早。",
-			"pinyin": "jīn tiān nǐ lái de hěn zǎo",
+			"pinyin": "jīntiān nǐ lái de hěn zǎo",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "You came very early today."
 		},
 		"pos": ["Adj"],
@@ -7463,7 +7924,8 @@
 		"meanings": ["breakfast"],
 		"example": {
 			"hanzi": "我今天没吃早饭。",
-			"pinyin": "wǒ jīn tiān méi chī zǎo fàn",
+			"pinyin": "wǒ jīntiān méi chī zǎofàn",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "I didn't have breakfast today."
 		},
 		"pos": ["N"],
@@ -7480,7 +7942,8 @@
 		"meanings": ["early morning"],
 		"example": {
 			"hanzi": "早上我喝一杯牛奶。",
-			"pinyin": "zǎo shang wǒ hē yì bēi niú nǎi",
+			"pinyin": "zǎoshang wǒ hē yì bēi niúnǎi",
+			"spans": [2, 1, 1, 1, 1, 2],
 			"english": "In the morning I drink a glass of milk."
 		},
 		"pos": ["N"],
@@ -7498,7 +7961,8 @@
 		"meanings": ["how?", "in what way?"],
 		"example": {
 			"hanzi": "这个字怎么读？",
-			"pinyin": "zhè ge zì zěn me dú",
+			"pinyin": "zhè ge zì zěnme dú",
+			"spans": [1, 1, 1, 2, 1],
 			"english": "How do you read this character?"
 		},
 		"pos": ["Pron"],
@@ -7512,7 +7976,8 @@
 		"meanings": ["station", "a stop on a route"],
 		"example": {
 			"hanzi": "下一站是学校。",
-			"pinyin": "xià yí zhàn shì xué xiào",
+			"pinyin": "xià yí zhàn shì xuéxiào",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "The next stop is the school."
 		},
 		"pos": ["N"],
@@ -7526,7 +7991,8 @@
 		"meanings": ["to look for", "to try to find"],
 		"example": {
 			"hanzi": "我在找我的手机。",
-			"pinyin": "wǒ zài zhǎo wǒ de shǒu jī",
+			"pinyin": "wǒ zài zhǎo wǒ de shǒujī",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I'm looking for my phone."
 		},
 		"pos": ["V"],
@@ -7543,7 +8009,8 @@
 		"meanings": ["to find"],
 		"example": {
 			"hanzi": "我找到我的书了。",
-			"pinyin": "wǒ zhǎo dào wǒ de shū le",
+			"pinyin": "wǒ zhǎodào wǒ de shū le",
+			"spans": [1, 2, 1, 1, 1, 1],
 			"english": "I found my book."
 		},
 		"pos": [],
@@ -7559,6 +8026,7 @@
 		"example": {
 			"hanzi": "这是我的书。",
 			"pinyin": "zhè shì wǒ de shū",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "This is my book."
 		},
 		"pos": ["Pron"],
@@ -7576,7 +8044,8 @@
 		"meanings": ["this side", "over here"],
 		"example": {
 			"hanzi": "请到这边来坐。",
-			"pinyin": "qǐng dào zhè biān lái zuò",
+			"pinyin": "qǐng dào zhèbiān lái zuò",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "Please come and sit over here."
 		},
 		"pos": ["Pron"],
@@ -7594,7 +8063,8 @@
 		"meanings": ["here"],
 		"example": {
 			"hanzi": "我们在这里等你。",
-			"pinyin": "wǒ men zài zhè lǐ děng nǐ",
+			"pinyin": "wǒmen zài zhèlǐ děng nǐ",
+			"spans": [2, 1, 2, 1, 1],
 			"english": "We'll wait for you here."
 		},
 		"pos": ["Pron"],
@@ -7612,7 +8082,8 @@
 		"meanings": ["the spoken word for here"],
 		"example": {
 			"hanzi": "你的书在这儿。",
-			"pinyin": "nǐ de shū zài zhè r",
+			"pinyin": "nǐ de shū zài zhèr",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "Your book is here."
 		},
 		"pos": ["Pron"],
@@ -7630,7 +8101,8 @@
 		"meanings": ["these"],
 		"example": {
 			"hanzi": "这些菜都很好吃。",
-			"pinyin": "zhè xiē cài dōu hěn hǎo chī",
+			"pinyin": "zhèxiē cài dōu hěn hǎochī",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "These dishes are all delicious."
 		},
 		"pos": ["Pron"],
@@ -7645,7 +8117,8 @@
 		"meanings": ["shows a continuing state", "marks an ongoing action"],
 		"example": {
 			"hanzi": "他在门口站着。",
-			"pinyin": "tā zài mén kǒu zhàn zhe",
+			"pinyin": "tā zài ménkǒu zhàn zhe",
+			"spans": [1, 1, 2, 1, 1],
 			"english": "He is standing in the doorway."
 		},
 		"pos": ["Aux"],
@@ -7659,7 +8132,8 @@
 		"meanings": ["truly", "real"],
 		"example": {
 			"hanzi": "今天真冷！",
-			"pinyin": "jīn tiān zhēn lěng",
+			"pinyin": "jīntiān zhēn lěng",
+			"spans": [2, 1, 1],
 			"english": "It's really cold today!"
 		},
 		"pos": ["Adv", "Adj"],
@@ -7676,7 +8150,8 @@
 		"meanings": ["really", "truly"],
 		"example": {
 			"hanzi": "我真的很喜欢你。",
-			"pinyin": "wǒ zhēn de hěn xǐ huan nǐ",
+			"pinyin": "wǒ zhēn de hěn xǐhuan nǐ",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "I really do like you."
 		},
 		"pos": [],
@@ -7690,7 +8165,8 @@
 		"meanings": ["just at that moment", "right in the middle of"],
 		"example": {
 			"hanzi": "我正在吃饭。",
-			"pinyin": "wǒ zhèng zài chī fàn",
+			"pinyin": "wǒ zhèng zài chīfàn",
+			"spans": [1, 1, 1, 2],
 			"english": "I'm right in the middle of eating."
 		},
 		"pos": ["Adv"],
@@ -7707,7 +8183,8 @@
 		"meanings": ["in the process of doing", "currently"],
 		"example": {
 			"hanzi": "妈妈正在做饭。",
-			"pinyin": "mā ma zhèng zài zuò fàn",
+			"pinyin": "māma zhèngzài zuòfàn",
+			"spans": [2, 2, 2],
 			"english": "Mum is cooking right now."
 		},
 		"pos": ["Adv"],
@@ -7724,7 +8201,8 @@
 		"meanings": ["to know a fact"],
 		"example": {
 			"hanzi": "我不知道他的名字。",
-			"pinyin": "wǒ bù zhī dào tā de míng zi",
+			"pinyin": "wǒ bù zhīdào tā de míngzi",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "I don't know his name."
 		},
 		"pos": ["V"],
@@ -7742,7 +8220,8 @@
 		"meanings": ["knowledge", "intellectual"],
 		"example": {
 			"hanzi": "书里有很多知识。",
-			"pinyin": "shū lǐ yǒu hěn duō zhī shi",
+			"pinyin": "shū lǐ yǒu hěn duō zhīshi",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "There is a lot of knowledge in books."
 		},
 		"pos": ["N"],
@@ -7756,7 +8235,8 @@
 		"meanings": ["the middle part", "within"],
 		"example": {
 			"hanzi": "这些书中我最喜欢这本。",
-			"pinyin": "zhè xiē shū zhōng wǒ zuì xǐ huan zhè běn",
+			"pinyin": "zhèxiē shū zhōng wǒ zuì xǐhuan zhè běn",
+			"spans": [2, 1, 1, 1, 1, 2, 1, 1],
 			"english": "Of all these books, this is the one I like best."
 		},
 		"pos": ["N"],
@@ -7774,7 +8254,8 @@
 		"meanings": ["China"],
 		"example": {
 			"hanzi": "我在中国学汉语。",
-			"pinyin": "wǒ zài Zhōng guó xué hàn yǔ",
+			"pinyin": "wǒ zài Zhōngguó xué Hànyǔ",
+			"spans": [1, 1, 2, 1, 2],
 			"english": "I study Chinese in China."
 		},
 		"pos": ["N"],
@@ -7792,7 +8273,8 @@
 		"meanings": ["the middle", "in between"],
 		"example": {
 			"hanzi": "我坐在他们中间。",
-			"pinyin": "wǒ zuò zài tā men zhōng jiān",
+			"pinyin": "wǒ zuò zài tāmen zhōngjiān",
+			"spans": [1, 1, 1, 2, 2],
 			"english": "I'm sitting between the two of them."
 		},
 		"pos": ["N"],
@@ -7809,7 +8291,8 @@
 		"meanings": ["Chinese especially in writing"],
 		"example": {
 			"hanzi": "这本书是中文的。",
-			"pinyin": "zhè běn shū shì zhōng wén de",
+			"pinyin": "zhè běn shū shì Zhōngwén de",
+			"spans": [1, 1, 1, 1, 2, 1],
 			"english": "This book is in Chinese."
 		},
 		"pos": ["N"],
@@ -7826,7 +8309,8 @@
 		"meanings": ["noon", "midday"],
 		"example": {
 			"hanzi": "我们中午在学校吃饭。",
-			"pinyin": "wǒ men zhōng wǔ zài xué xiào chī fàn",
+			"pinyin": "wǒmen zhōngwǔ zài xuéxiào chīfàn",
+			"spans": [2, 2, 1, 2, 2],
 			"english": "We eat at school at midday."
 		},
 		"pos": ["N"],
@@ -7844,7 +8328,8 @@
 		"meanings": ["middle school"],
 		"example": {
 			"hanzi": "我哥哥在中学学习。",
-			"pinyin": "wǒ gē ge zài zhōng xué xué xí",
+			"pinyin": "wǒ gēge zài zhōngxué xuéxí",
+			"spans": [1, 2, 1, 2, 2],
 			"english": "My older brother studies at a middle school."
 		},
 		"pos": ["N"],
@@ -7863,7 +8348,8 @@
 		"meanings": ["middle-school student", "high school student"],
 		"example": {
 			"hanzi": "我姐姐是中学生。",
-			"pinyin": "wǒ jiě jie shì zhōng xué shēng",
+			"pinyin": "wǒ jiějie shì zhōngxuéshēng",
+			"spans": [1, 2, 1, 3],
 			"english": "My older sister is a middle-school student."
 		},
 		"pos": ["N"],
@@ -7877,7 +8363,8 @@
 		"meanings": ["heavy", "serious"],
 		"example": {
 			"hanzi": "这个东西太重了。",
-			"pinyin": "zhè ge dōng xi tài zhòng le",
+			"pinyin": "zhè ge dōngxi tài zhòng le",
+			"spans": [1, 1, 2, 1, 1, 1],
 			"english": "This thing is far too heavy."
 		},
 		"pos": ["Adj"],
@@ -7894,7 +8381,8 @@
 		"meanings": ["important"],
 		"example": {
 			"hanzi": "这本书对我很重要。",
-			"pinyin": "zhè běn shū duì wǒ hěn zhòng yào",
+			"pinyin": "zhè běn shū duì wǒ hěn zhòngyào",
+			"spans": [1, 1, 1, 1, 1, 1, 2],
 			"english": "This book matters a lot to me."
 		},
 		"pos": ["Adj"],
@@ -7908,7 +8396,8 @@
 		"meanings": ["to live somewhere", "to stay"],
 		"example": {
 			"hanzi": "我住在学校旁边。",
-			"pinyin": "wǒ zhù zài xué xiào páng biān",
+			"pinyin": "wǒ zhù zài xuéxiào pángbiān",
+			"spans": [1, 1, 1, 2, 2],
 			"english": "I live right next to the school."
 		},
 		"pos": ["V"],
@@ -7926,7 +8415,8 @@
 		"meanings": ["to prepare", "to plan to"],
 		"example": {
 			"hanzi": "我在准备明天的考试。",
-			"pinyin": "wǒ zài zhǔn bèi míng tiān de kǎo shì",
+			"pinyin": "wǒ zài zhǔnbèi míngtiān de kǎoshì",
+			"spans": [1, 1, 2, 2, 1, 2],
 			"english": "I'm getting ready for tomorrow's exam."
 		},
 		"pos": ["V"],
@@ -7943,7 +8433,8 @@
 		"meanings": ["table", "desk"],
 		"example": {
 			"hanzi": "我的桌子上有电脑。",
-			"pinyin": "wǒ de zhuō zi shàng yǒu diàn nǎo",
+			"pinyin": "wǒ de zhuōzi shàng yǒu diànnǎo",
+			"spans": [1, 1, 2, 1, 1, 2],
 			"english": "There is a computer on my desk."
 		},
 		"pos": ["N"],
@@ -7957,7 +8448,8 @@
 		"meanings": ["written character", "letter"],
 		"example": {
 			"hanzi": "这个字我不认识。",
-			"pinyin": "zhè ge zì wǒ bú rèn shi",
+			"pinyin": "zhè ge zì wǒ bú rènshi",
+			"spans": [1, 1, 1, 1, 1, 2],
 			"english": "I don't know this character."
 		},
 		"pos": ["N"],
@@ -7971,7 +8463,8 @@
 		"meanings": ["noun suffix on objects and people"],
 		"example": {
 			"hanzi": "桌子和杯子都在房间里。",
-			"pinyin": "zhuō zi hé bēi zi dōu zài fáng jiān lǐ",
+			"pinyin": "zhuō zi hé bēi zi dōu zài fángjiān lǐ",
+			"spans": [1, 1, 1, 1, 1, 1, 1, 2, 1],
 			"english": "The table and the cup are both in the room."
 		},
 		"pos": ["Suffix"],
@@ -7985,7 +8478,8 @@
 		"meanings": ["to walk", "to leave"],
 		"example": {
 			"hanzi": "我们走路去学校。",
-			"pinyin": "wǒ men zǒu lù qù xué xiào",
+			"pinyin": "wǒmen zǒu lù qù xuéxiào",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "We walk to school."
 		},
 		"pos": ["V"],
@@ -7994,7 +8488,7 @@
 	{
 		"id": "L1-0491",
 		"hanzi": "走路",
-		"pinyin": "zǒu lù",
+		"pinyin": "zǒulù",
 		"syllables": [
 			{ "py": "zǒu", "tone": 3 },
 			{ "py": "lù", "tone": 4 }
@@ -8002,7 +8496,8 @@
 		"meanings": ["to go on foot"],
 		"example": {
 			"hanzi": "我走路去学校。",
-			"pinyin": "wǒ zǒu lù qù xué xiào",
+			"pinyin": "wǒ zǒulù qù xuéxiào",
+			"spans": [1, 2, 1, 2],
 			"english": "I walk to school."
 		},
 		"pos": [],
@@ -8016,7 +8511,8 @@
 		"meanings": ["the most", "to the highest degree"],
 		"example": {
 			"hanzi": "今天是最冷的一天。",
-			"pinyin": "jīn tiān shì zuì lěng de yì tiān",
+			"pinyin": "jīntiān shì zuì lěng de yì tiān",
+			"spans": [2, 1, 1, 1, 1, 1, 1],
 			"english": "Today is the coldest day."
 		},
 		"pos": ["Adv"],
@@ -8033,7 +8529,8 @@
 		"meanings": ["had better", "it would be best to"],
 		"example": {
 			"hanzi": "你最好早点睡觉。",
-			"pinyin": "nǐ zuì hǎo zǎo diǎn shuì jiào",
+			"pinyin": "nǐ zuìhǎo zǎo diǎn shuìjiào",
+			"spans": [1, 2, 1, 1, 2],
 			"english": "You'd better go to bed early."
 		},
 		"pos": ["Adv"],
@@ -8051,7 +8548,8 @@
 		"meanings": ["the last one", "in the end"],
 		"example": {
 			"hanzi": "他是最后一个走的。",
-			"pinyin": "tā shì zuì hòu yí ge zǒu de",
+			"pinyin": "tā shì zuìhòu yí ge zǒu de",
+			"spans": [1, 1, 2, 1, 1, 1, 1],
 			"english": "He was the last one to leave."
 		},
 		"pos": ["N"],
@@ -8068,7 +8566,8 @@
 		"meanings": ["yesterday"],
 		"example": {
 			"hanzi": "昨天我没去学校。",
-			"pinyin": "zuó tiān wǒ méi qù xué xiào",
+			"pinyin": "zuótiān wǒ méi qù xuéxiào",
+			"spans": [2, 1, 1, 1, 2],
 			"english": "I didn't go to school yesterday."
 		},
 		"pos": ["N"],
@@ -8082,7 +8581,8 @@
 		"meanings": ["the left-hand side"],
 		"example": {
 			"hanzi": "商店在路的左边。",
-			"pinyin": "shāng diàn zài lù de zuǒ bian",
+			"pinyin": "shāngdiàn zài lù de zuǒ bian",
+			"spans": [2, 1, 1, 1, 1, 1],
 			"english": "The shop is on the left side of the road."
 		},
 		"pos": ["N"],
@@ -8100,7 +8600,8 @@
 		"meanings": ["the left side"],
 		"example": {
 			"hanzi": "医院在学校的左边。",
-			"pinyin": "yī yuàn zài xué xiào de zuǒ bian",
+			"pinyin": "yīyuàn zài xuéxiào de zuǒbian",
+			"spans": [2, 1, 2, 1, 2],
 			"english": "The hospital is on the left side of the school."
 		},
 		"pos": ["N"],
@@ -8114,7 +8615,8 @@
 		"meanings": ["to sit", "to travel by vehicle"],
 		"example": {
 			"hanzi": "请你坐在这里。",
-			"pinyin": "qǐng nǐ zuò zài zhè lǐ",
+			"pinyin": "qǐng nǐ zuò zài zhèlǐ",
+			"spans": [1, 1, 1, 1, 2],
 			"english": "Please sit here."
 		},
 		"pos": ["V"],
@@ -8132,6 +8634,7 @@
 		"example": {
 			"hanzi": "请你坐下吧。",
 			"pinyin": "qǐng nǐ zuò xia ba",
+			"spans": [1, 1, 1, 1, 1],
 			"english": "Please have a seat."
 		},
 		"pos": [],
@@ -8145,7 +8648,8 @@
 		"meanings": ["to do", "to make"],
 		"example": {
 			"hanzi": "妈妈在家做饭。",
-			"pinyin": "mā ma zài jiā zuò fàn",
+			"pinyin": "māma zàijiā zuò fàn",
+			"spans": [2, 2, 1, 1],
 			"english": "Mom is cooking at home."
 		},
 		"pos": ["V"],
