@@ -7,56 +7,56 @@
     {
      "piece": "vocab-data",
      "kind": "data",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Bind each part of speech to the sense it labels: stop shipping `pos` as a card-level array with no link to `meanings`, and re-emit every card's senses as an ordered list of {pos, gloss} groups (震惊 → Adj \"shocked, astonished\" / V \"to shock, to astonish\"; 记录 →…"
     },
     {
      "piece": "progress-store",
      "kind": "logic",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Make every copy prove THESE bytes, not that some copy exists."
     },
     {
      "piece": "session-engine",
      "kind": "logic",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Make the session budget read the learner's backlog instead of returning the constant 3, so review comes back before new words do."
     },
     {
      "piece": "design-system",
      "kind": "visual",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Make every control edge that sits directly on the page --color-line-strong, starting with the .say pill, and add the assertion that keeps it there."
     },
     {
      "piece": "app-shell",
      "kind": "visual",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Build the error frame in one pass, as a real screen rather than a framework fallback."
     },
     {
      "piece": "level-select",
      "kind": "visual",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Take the tone hues off the pinyin in the level-select preview and put tone on the character instead."
     },
     {
      "piece": "quiz-card",
      "kind": "visual",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Keep the sentence on the reveal, and finish it."
     },
     {
      "piece": "session-summary",
      "kind": "visual",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Promote `YOU PICKED` from a grey footnote into the card's second act: a two-column contrast between the word missed and the word chosen, set directly under the headword."
     },
     {
      "piece": "vocab-browse",
      "kind": "visual",
-     "pass": null,
-     "biggestGap": ""
+     "pass": false,
+     "biggestGap": "Make the word sheet's primary action act on the word it is showing."
     }
    ]
   },
