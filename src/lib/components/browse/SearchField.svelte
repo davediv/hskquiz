@@ -36,6 +36,7 @@
 	$effect(() => {
 		function onDocumentKeydown(event: KeyboardEvent) {
 			if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
+			if (document.querySelector('[role="dialog"][aria-modal="true"]')) return;
 			const target = event.target;
 			if (target instanceof HTMLElement && target.closest('input, textarea, [contenteditable]')) {
 				return;

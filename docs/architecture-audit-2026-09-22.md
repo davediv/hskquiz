@@ -61,7 +61,7 @@ The route tree is defined by `src/routes/+page.svelte`, `src/routes/browse/[leve
   - **Files:** `src/routes/quiz/[level]/+page.svelte`, `src/lib/session/index.ts`, `src/lib/components/summary/SessionSummary.svelte`, `src/lib/session/session.spec.ts`
   - **Depends on:** —
 
-- [ ] **AR-02 — Keep the search shortcut inside the active modal** · Priority: **Medium** · Effort: S
+- [x] **AR-02 — Keep the search shortcut inside the active modal** · done 2026-09-22 · Priority: **Medium** · Effort: S
   - **Issue:** Browse's document-wide `/` shortcut focuses the search field behind an open `aria-modal` word sheet; the sheet's keyboard handler only contains Tab and Escape within its panel (`src/lib/components/browse/SearchField.svelte:34-49`; `src/lib/components/browse/WordSheet.svelte:335-394`).
   - **Why it matters:** Keyboard focus can leave the visible dialog, contradicting its modal state and disorienting keyboard and screen-reader users.
   - **Recommendation:** Disable the search shortcut while the word sheet is open, or scope it to events outside any active modal; verify focus remains in the sheet after `/` and returns to the opener on close.
