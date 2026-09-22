@@ -11,13 +11,14 @@ import {
 	isIntroduction,
 	isScored,
 	mulberry32,
+	pinFirst,
 	readRecord,
 	recordOutcome,
 	type CardKind,
 	type ProgressWriter
 } from './index';
 import { sharesSense } from './distractors';
-import { HOUR, makeLevel, mastered, progressState, record, shaky } from './test-fixtures';
+import { DAY, HOUR, makeLevel, mastered, progressState, record, shaky } from './test-fixtures';
 
 const NOW = 1_700_000_000_000;
 const LEVEL_1 = makeLevel(1, 220);
@@ -94,12 +95,42 @@ describe('buildSession — shape', () => {
 		}
 	});
 
-	it("never reuses a session answer as another question's wrong answer", () => {
-		const answers = new Set(ids(session));
-		for (const question of session.questions) {
-			for (const choice of question.choices) {
-				if (choice.id === question.word.id) continue;
-				expect(answers.has(choice.id)).toBe(false);
+	it('lets just-taught words appear as distractors on each other', () => {
+		// The old `answerIds` set was every word in the run, so a first question's three wrong
+		// answers were never the glosses the learner had just read and the right button was the
+		// only familiar one. Just-taught words now compete as distractors; review answers still
+		// do not, so a coming review question cannot hint and a just-answered one cannot
+		// contradict.
+		let taughtAsDistractor = 0;
+		for (let seed = 0; seed < 80; seed++) {
+			const questions = build(LEVEL_1, null, seed).questions;
+			const taught = new Set(
+				questions.filter((question) => isIntroduction(question)).map((q) => q.word.id)
+			);
+			for (const question of questions) {
+				if (!isScored(question) || !taught.has(question.word.id)) continue;
+				for (const choice of question.choices) {
+					if (choice.id === question.word.id) continue;
+					if (taught.has(choice.id)) taughtAsDistractor++;
+				}
+			}
+		}
+		expect(taughtAsDistractor).toBeGreaterThan(0);
+	});
+
+	it('still keeps a review answer off another card as a wrong choice', () => {
+		const seen = LEVEL_1.slice(0, 120);
+		const history = progressState(seen.map((w) => mastered(w.id, NOW, 5 * HOUR)));
+		for (let seed = 0; seed < 40; seed++) {
+			const questions = build(LEVEL_1, history, seed).questions;
+			const reviewIds = new Set(
+				questions.filter((q) => q.word.id in history.byWord).map((q) => q.word.id)
+			);
+			for (const question of questions) {
+				for (const choice of question.choices) {
+					if (choice.id === question.word.id) continue;
+					expect(reviewIds.has(choice.id)).toBe(false);
+				}
 			}
 		}
 	});
@@ -193,12 +224,51 @@ describe('buildSession — explore / exploit', () => {
 		expect(new Set(fresh).size).toBe(3);
 	});
 
-	it('holds that split across many seeds', () => {
+	it('holds that split across many seeds when nothing is outstanding', () => {
 		for (let seed = 0; seed < 40; seed++) {
 			const session = build(LEVEL_1, history, seed);
 			const fresh = ids(session).filter((id) => !(id in history.byWord));
 			expect(fresh).toHaveLength(6);
 			expect(new Set(fresh).size).toBe(3);
+		}
+	});
+
+	it('drops new words to the floor of one when the backlog is due', () => {
+		// Twenty once-answered words a day old sit at weight ≈ 1.14, above the unseen
+		// reference of 1.0. The pair budget goes to 0 and the floor of 1 puts two cards on a
+		// new word, leaving eight for review.
+		const dueWords = LEVEL_1.filter((w) => w.meanings.length > 0).slice(0, 20);
+		const backlog = progressState(
+			dueWords.map((w) => record(w.id, { seen: 1, correct: 1, streak: 1, lastSeen: NOW - DAY }))
+		);
+		for (let seed = 0; seed < 40; seed++) {
+			const session = build(LEVEL_1, backlog, seed);
+			const fresh = ids(session).filter((id) => !(id in backlog.byWord));
+			expect(new Set(fresh).size).toBe(1);
+			expect(fresh).toHaveLength(2);
+			expect(session.questions.filter((question) => isScored(question))).toHaveLength(9);
+		}
+	});
+
+	it('asks every owed word before it spends review cards on the rest', () => {
+		// Finding 7: taught-only at weight 1.0 × stale used to compete with a miss at ~12 for
+		// four review slots. They now take the review quota first, so an abandoned run cannot
+		// starve behind the misses.
+		const usable = LEVEL_1.filter((w) => w.meanings.length > 0);
+		const abandoned = usable.slice(0, 8);
+		const missed = usable.slice(8, 80);
+		const saved = progressState([
+			...abandoned.map((w) =>
+				record(w.id, { seen: 0, correct: 0, streak: 0, lastSeen: NOW - DAY })
+			),
+			...missed.map((w) => shaky(w.id, NOW, DAY))
+		]);
+		const owedIds = new Set(abandoned.map((w) => w.id));
+		for (let seed = 0; seed < 30; seed++) {
+			const asked = build(LEVEL_1, saved, seed)
+				.questions.filter((question) => isScored(question) && owedIds.has(question.word.id))
+				.map((question) => question.word.id);
+			expect(new Set(asked).size).toBe(abandoned.length);
 		}
 	});
 
@@ -701,11 +771,16 @@ describe('a learner, over sessions', () => {
 		}
 	});
 
-	it('keeps meeting new words at a steady rate', () => {
-		// Five in the first session, three in each of the nine after it. The old model settled
-		// on a fixed point of 3.08 a session *and* left three of them never asked.
+	it('keeps meeting new words, slower once a backlog is due', () => {
+		// First session still teaches five. After that the pair budget falls as once-answered
+		// words sit at weight ≥ 1, down to the floor of one new word rather than three forever.
 		const run = play(10, 41);
-		expect(new Set(Object.keys(run.byWord)).size).toBe(32);
+		const met = new Set(Object.keys(run.byWord)).size;
+		expect(met).toBeGreaterThanOrEqual(14);
+		expect(met).toBeLessThan(32);
+		expect(run.kinds[0].introduce).toBe(5);
+		expect(run.kinds.slice(1).every((here) => here.introduce <= 3)).toBe(true);
+		expect(run.kinds.slice(1).some((here) => here.introduce <= 2)).toBe(true);
 	});
 
 	it('records nothing at all rather than a lie, when the store cannot note an exposure', () => {
@@ -720,6 +795,29 @@ describe('a learner, over sessions', () => {
 		const results = taught.map((question) => recordOutcome(legacy, question, null));
 		expect(new Set(results)).toEqual(new Set(['dropped']));
 		expect(seen).toEqual([]);
+	});
+
+	it('pins a requested word as card 1 without changing the rest of the draw', () => {
+		const word = LEVEL_1.find((entry) => entry.meanings.length > 0);
+		expect(word).toBeTruthy();
+		const id = word!.id;
+		for (let seed = 0; seed < 20; seed++) {
+			const built = buildSession(LEVEL_1, 1, null, SESSION_SIZE, {
+				rng: mulberry32(seed),
+				now: NOW,
+				pin: id
+			});
+			expect(built.questions[0].word.id).toBe(id);
+			expect(isIntroduction(built.questions[0])).toBe(true);
+			const asked = built.questions.filter((q) => q.word.id === id && isScored(q));
+			expect(asked).toHaveLength(1);
+		}
+		// `pinFirst` is the post-hoc helper a `?word=` route can call when the word is already
+		// in the run. Unknown ids are ignored.
+		const plain = build(LEVEL_1, null, 3);
+		expect(pinFirst(plain, 'no-such-word').questions.map((q) => q.word.id)).toEqual(
+			plain.questions.map((q) => q.word.id)
+		);
 	});
 
 	it('scores a real question exactly once, right or wrong', () => {

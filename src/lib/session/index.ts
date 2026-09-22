@@ -10,7 +10,7 @@
  */
 
 import type { Level, ProgressState, Question, Session, Word, WordProgress } from '../types';
-import { EXPLORE_SHARE, wordWeight } from './weighting';
+import { wordWeight } from './weighting';
 import { readRecord } from './record';
 import {
 	cardKindFor,
@@ -63,6 +63,12 @@ export interface SessionOptions {
 	rng?: Rng;
 	/** Epoch ms used for every recency calculation. Defaults to `Date.now()`. */
 	now?: number;
+	/**
+	 * Show this word as card 1. The rest of the run is the ordinary weighted draw — this does
+	 * not change anyone's score, and an unknown id is ignored. For a `?word=` deep link that
+	 * has not been wired yet; the route does not pass it.
+	 */
+	pin?: string;
 }
 
 /*
@@ -136,23 +142,32 @@ function requestedSize(size: number): number {
  */
 export const INTRO_GAP = 3;
 
+function clamp(value: number, min: number, max: number): number {
+	return value < min ? min : value > max ? max : value;
+}
+
 /**
- * New words a session introduces when both pools are deep.
+ * New-word pairs a session may spend, given how far behind the learner is.
  *
- * A new word costs two cards — one to teach it, one to ask it — so `EXPLORE_SHARE` is taken out
- * of the session's *questions*, and every first question drags its own teach card in with it.
- * `fresh = round((size - fresh) × EXPLORE_SHARE)` has exactly one fixed point at ten cards:
- * **three** new words, six cards, four left for review.
+ * `due` is met words whose weight is at or above the unseen reference of 1.0 — the ones that
+ * should come back before anything new does. The old `freshTarget` ignored that count and
+ * returned 3 forever, so every session was 3 new + 4 review no matter the backlog.
  *
- * That is card-for-card what the two-session model settled at — three introductions, three
- * first questions paid out of a debt quota, four weighted reviews — so review depth does not
- * move. What moves is *when* the first question is asked: in the session that taught the word,
- * rather than in the next one, and only if the scheduler happens to owe it. The old model
- * manufactured that debt every session and then throttled discovery with it; measured over 60
- * sessions it sat on a fixed point of 3.08 new words and left 3 words taught and never asked.
+ *   pairs = clamp(round((size / 2) × (1 − due / size)), 0, 3)
+ *
+ * At `due = 0` this is 3, today's 3+4 run. At `due ≥ size` it is 0. Discovery still never
+ * stops dead: while the level has unseen words the floor is 1, so a heavy backlog is one
+ * pair (2 cards) + 8 review, and an exhausted level is 10 review.
+ *
+ * The floor steps up to 2 while the level has a deep unseen pool and fewer than a full
+ * session of due reviews. Once the backlog reaches ten, one pair leaves eight review cards
+ * so words already introduced can be asked again.
  */
-function freshTarget(size: number): number {
-	return Math.round((size * EXPLORE_SHARE) / (1 + EXPLORE_SHARE));
+function pairBudget(size: number, due: number, freshAvailable: number): number {
+	if (size <= 0 || freshAvailable <= 0) return 0;
+	const raw = Math.round((size / 2) * (1 - due / size));
+	const floor = freshAvailable > size * 2 && due < size ? 2 : 1;
+	return Math.min(freshAvailable, Math.max(clamp(raw, 0, 3), floor));
 }
 
 /** How a session's cards are divided. Counted in cards, not in words. */
@@ -168,16 +183,20 @@ interface Quota {
 /**
  * Split the session between words never shown and words already met.
  *
- * There is no backlog brake here any more and no debt quota, because there is no manufactured
- * debt to service: a word is asked in the session that taught it, so `taughtOnly` is now only
- * what a *learner* leaves behind by walking out mid-run, and those words simply rejoin the
- * review pool on their own weight.
+ * The new-word side is a function of `due`, not a constant: review takes every card the pairs
+ * do not claim. Either side still backfills the other, so a first session is all-new (five
+ * taught, five asked) and an exhausted level is all-review.
  *
- * New words take `freshTarget` of the cards, review takes the rest, and either side backfills
- * the other: a first session is all-new (five taught, five asked), an exhausted level is
- * all-review, and everything in between holds the line above.
+ * Words left taught-only by an abandoned run are *not* left to compete on a weight of 1.0
+ * against a miss at 12. They are picked first out of the review quota in `buildSession`; the
+ * quota itself is what this function sizes.
  */
-function splitQuota(size: number, reviewAvailable: number, freshAvailable: number): Quota {
+function splitQuota(
+	size: number,
+	reviewAvailable: number,
+	freshAvailable: number,
+	due: number
+): Quota {
 	// A level with no usable words leaves nothing to split. Falling through would compute a
 	// negative review quota and then *backfill* it, handing back a card from a pool the caller
 	// was told was empty.
@@ -185,7 +204,7 @@ function splitQuota(size: number, reviewAvailable: number, freshAvailable: numbe
 
 	const maxPairs = Math.min(freshAvailable, Math.floor(size / 2));
 	const filled = (pairs: number) => 2 * pairs + Math.min(reviewAvailable, size - 2 * pairs);
-	let pairs = Math.min(maxPairs, freshTarget(size));
+	let pairs = Math.min(maxPairs, pairBudget(size, due, freshAvailable));
 	// The review side ran dry — a first session is the extreme case, where it is empty. Spend
 	// the cards it cannot fill on more new words rather than handing back a short run. Each one
 	// costs two cards, so this grows in pairs and can leave a single card over; the loop stops
@@ -196,8 +215,8 @@ function splitQuota(size: number, reviewAvailable: number, freshAvailable: numbe
 	// A pair needs two cards and review has none left to give, so an odd `size` can leave one
 	// card over — `size: 7` on a first run is 3 pairs and a spare, and `size: 1` is nothing but
 	// a spare. A card is a card: teach a word with it. That word is `taughtOnly` until the next
-	// run, which is the one state this rewrite does not manufacture and does still handle — it
-	// rejoins the review pool and is asked on its own weight. Zero at the default size of ten.
+	// run, where it is picked first out of the review quota rather than waiting on a weight of
+	// 1.0. Zero at the default size of ten.
 	const teach = Math.max(0, Math.min(freshAvailable - pairs, size - 2 * pairs - review));
 	return { review, pairs, teach };
 }
@@ -280,6 +299,21 @@ function weave<T>(a: readonly T[], b: readonly T[], rng: Rng): T[] {
 }
 
 /**
+ * Pull `id` to the front of `items` without otherwise changing the order. No-op when it is
+ * already first or not present — so a caller can pass this over a shuffled list and only
+ * the pinned word moves.
+ */
+function preferId<T>(items: readonly T[], id: string, of: (item: T) => string): T[] {
+	const list = items.slice();
+	if (!id) return list;
+	const at = list.findIndex((item) => of(item) === id);
+	if (at <= 0) return list;
+	const [hit] = list.splice(at, 1);
+	list.unshift(hit);
+	return list;
+}
+
+/**
  * Order the run so every introduction sits at least `INTRO_GAP` cards ahead of its question.
  *
  * Two halves. The first holds every introduction, the second holds every first question in the
@@ -295,17 +329,24 @@ function weave<T>(a: readonly T[], b: readonly T[], rng: Rng): T[] {
  *
  * A run too short to hold the gap — two cards, on a level with one word left in it — takes the
  * widest gap that fits rather than refusing to build.
+ *
+ * `pinId` puts that word on card 1 without touching the gap: a pinned pair is drawn first
+ * and the head is intros-only, so its teach card is index 0 and every ask still sits `p + t`
+ * behind its intro; a pinned single is parked in the tail and then moved to index 0, which
+ * shifts every remaining card by one and leaves every gap as it was.
  */
-function layout(pairs: readonly Pair[], singles: readonly Draft[], rng: Rng): Draft[] {
-	const drawn = shuffle(pairs, rng);
+function layout(pairs: readonly Pair[], singles: readonly Draft[], rng: Rng, pinId = ''): Draft[] {
+	const drawn = preferId(shuffle(pairs, rng), pinId, (pair) => pair.intro.word.id);
 	const rest = shuffle(singles, rng);
 	const seam = Math.min(rest.length, Math.max(0, INTRO_GAP - drawn.length));
 	const spare = rest.length - seam;
 	// `rng()` is `[0, 1)`, so this cannot reach `spare + 1` — clamped anyway, because an
 	// injected rng is somebody else's function and a single off-by-one here silently drops a
 	// card out of the run.
-	const early = Math.min(spare, Math.floor(rng() * (spare + 1)));
-	return [
+	const pinnedPair = pinId !== '' && drawn.some((pair) => pair.intro.word.id === pinId);
+	// Intros-only head so a pinned teach card is card 1; the seam still holds the gap.
+	const early = pinnedPair ? 0 : Math.min(spare, Math.floor(rng() * (spare + 1)));
+	const order = [
 		...weave(
 			drawn.map((pair) => pair.intro),
 			rest.slice(0, early),
@@ -318,6 +359,28 @@ function layout(pairs: readonly Pair[], singles: readonly Draft[], rng: Rng): Dr
 			rng
 		)
 	];
+	return pinLeading(order, pinId);
+}
+
+/**
+ * Put `pinId`'s first card at index 0.
+ *
+ * A pinned pair is already at the front after `layout` draws it first with an intros-only
+ * head. A pinned single is moved here: splicing it out of the tail (after every intro) and
+ * unshifting it shifts intros and asks by the same +1, so every intro→ask gap is unchanged.
+ * Pulling a card from *between* intros is the one move that would shrink a neighbour's gap,
+ * and it does not happen — a pinned pair is handled above, and a pinned single is a review
+ * card, never an intro.
+ */
+function pinLeading(order: Draft[], pinId: string): Draft[] {
+	if (!pinId) return order;
+	const introAt = order.findIndex((draft) => draft.word.id === pinId && draft.kind === 'introduce');
+	const at = introAt >= 0 ? introAt : order.findIndex((draft) => draft.word.id === pinId);
+	if (at <= 0) return order;
+	const next = order.slice();
+	const [hit] = next.splice(at, 1);
+	next.unshift(hit);
+	return next;
 }
 
 /**
@@ -339,36 +402,67 @@ export function buildSession(
 	const rng = options.rng ?? Math.random;
 	const now = options.now ?? Date.now();
 	const byWord = resolveProgress(progress);
+	const pinId = typeof options.pin === 'string' ? options.pin : '';
 
 	const pool = makePool(words.filter((word) => word.level === level));
 
 	const fresh: Word[] = [];
 	/** Met at least once — answered, or taught and then walked out on. */
 	const review: Word[] = [];
+	/** Taught and walked out on: the review draw takes these first, so they cannot starve. */
+	const owed: Word[] = [];
+	/** Met and already answered at least once. */
+	const answeredReview: Word[] = [];
+	/** Met words sitting at or above the unseen reference weight of 1.0. */
+	let due = 0;
 	for (const word of pool.words) {
 		// `met`, not `seen > 0`: an introduction is a real meeting with a word even though it
 		// is not an answer, and this is the same reading `cardKindFor` and `wordWeight` use, so
 		// the three can never disagree about whether the learner has met a word.
-		if (readRecord(byWord[word.id]).met) review.push(word);
-		else fresh.push(word);
+		const facts = readRecord(byWord[word.id]);
+		if (!facts.met) {
+			fresh.push(word);
+			continue;
+		}
+		review.push(word);
+		if (facts.taughtOnly) owed.push(word);
+		else answeredReview.push(word);
+		if (wordWeight(byWord[word.id], now) >= 1) due++;
 	}
 
 	// Capacity is counted in cards, not words, because a new word now brings two of them: a
 	// six-word level can still fill a ten-card run.
 	const target = Math.min(requestedSize(size), review.length + 2 * fresh.length);
-	const quota = splitQuota(target, review.length, fresh.length);
+	const quota = splitQuota(target, review.length, fresh.length, due);
 	const weightOf = (word: Word) => wordWeight(byWord[word.id], now);
 
 	// Every word in a session goes through `takeDistinct`, with no side door: the one thing that
 	// used to bypass it (`options.require`) put two 地 cards in one run. See the note above.
+	// A pinned id is walked first so it is in the run; it still has to pass `takeDistinct`.
 	const picked: Word[] = [];
-	takeDistinct(pool, picked, orderWeighted(review, weightOf, rng), quota.review);
-	const reviewWords = picked.slice();
-	// Nothing distinguishes one unseen word from another, so this is a plain shuffle.
 	takeDistinct(
 		pool,
 		picked,
-		orderWeighted(fresh, () => 1, rng),
+		preferId(orderWeighted(owed, weightOf, rng), pinId, (w) => w.id),
+		quota.review
+	);
+	takeDistinct(
+		pool,
+		picked,
+		preferId(orderWeighted(answeredReview, weightOf, rng), pinId, (w) => w.id),
+		quota.review - picked.length
+	);
+	const reviewWords = picked.slice();
+	// Nothing distinguishes one unseen word from another, so this is a plain shuffle — except
+	// a pinned unseen word, which is walked first so the pair lands in this run.
+	takeDistinct(
+		pool,
+		picked,
+		preferId(
+			orderWeighted(fresh, () => 1, rng),
+			pinId,
+			(w) => w.id
+		),
 		quota.pairs + quota.teach
 	);
 	const freshWords = picked.slice(reviewWords.length);
@@ -388,10 +482,12 @@ export function buildSession(
 			.map((word) => ({ word, kind: cardKindFor(byWord[word.id], word.id) }))
 	];
 
-	const order = layout(pairs, singles, rng);
-	// A word that is the answer to one question must not turn up as a wrong answer in
-	// another: it would either hint at the coming question or contradict the last one.
-	const answerIds = new Set(order.map((draft) => draft.word.id));
+	const order = layout(pairs, singles, rng, pinId);
+	// Review answers stay off each other's buttons — a coming question must not hint, and a
+	// just-answered one must not contradict. Just-taught words used to be in this set too, so
+	// a first question's three wrong answers were never the glosses the learner had just read
+	// and the right button was the only familiar one. They compete as distractors now.
+	const answerIds = new Set(reviewWords.map((word) => word.id));
 
 	const wantedDistractors = CHOICE_COUNT - 1;
 	const questions: SessionQuestion[] = order.map(({ word, kind }) => {
@@ -410,6 +506,30 @@ export function buildSession(
 		index: 0,
 		answers: questions.map(() => null)
 	};
+}
+
+/**
+ * Put `wordId` on card 1 of an already-built run.
+ *
+ * Introductions stay ahead of their own question. A word that is not in the run is ignored —
+ * this does not change the draw or anyone's weight, so a `?word=` route that needs the word
+ * *in* the session should pass `options.pin` to `buildSession` instead.
+ */
+export function pinFirst(session: BuiltSession, wordId: string): BuiltSession {
+	if (!wordId) return session;
+	const introAt = session.questions.findIndex(
+		(question) => question.word.id === wordId && question.kind === 'introduce'
+	);
+	const at =
+		introAt >= 0 ? introAt : session.questions.findIndex((question) => question.word.id === wordId);
+	if (at <= 0) return session;
+	const questions = session.questions.slice();
+	const [hit] = questions.splice(at, 1);
+	questions.unshift(hit);
+	const answers = session.answers.slice();
+	const [picked] = answers.splice(at, 1);
+	answers.unshift(picked);
+	return { ...session, questions, answers };
 }
 
 /**

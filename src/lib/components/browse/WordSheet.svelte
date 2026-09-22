@@ -31,10 +31,10 @@
 	import { untrack } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { Hanzi, Pinyin } from '$lib/design';
-	import type { Level, Word, WordProgress } from '$lib/types';
+	import type { Word, WordProgress } from '$lib/types';
 	import CharacterCard from './CharacterCard.svelte';
 	import ExampleSentence from './ExampleSentence.svelte';
-	import { posLong } from './pos';
+	import { groupSenses, posWord, sensesOf } from './pos';
 	import { charCard, charIndexNow, ensureCharIndex, rowBudget, type CharIndex } from './related';
 	import StatusPip from './StatusPip.svelte';
 	import { STATUS_META, progressLine, type WordStatus } from './status';
@@ -47,13 +47,6 @@
 		/** 1-based position in the filtered list, and its length — "412 of 1,070". */
 		position: number;
 		total: number;
-		/**
-		 * The level the screen behind this sheet is browsing. NOT the open word's own level:
-		 * following a character out of HSK 5 can land on an HSK 2 word, and until loop 4 that
-		 * silently re-pointed the footer button at HSK 2 while the page behind it still read
-		 * "HSK 5 vocabulary". The button belongs to the session, the badge belongs to the word.
-		 */
-		browseLevel: Level;
 		/**
 		 * The word this one was reached from by tapping a character card, if any. Its presence
 		 * is what turns the sheet from a page of the list into a drill-down: the counter and the
@@ -73,7 +66,6 @@
 		record,
 		position,
 		total,
-		browseLevel,
 		from,
 		onclose,
 		onback,
@@ -204,7 +196,8 @@
 		if (canSpeak) window.speechSynthesis.cancel();
 	});
 
-	const pos = $derived(posLong(word.pos));
+	const senses = $derived(sensesOf(word));
+	const senseGroups = $derived(groupSenses(senses));
 	const meta = $derived(STATUS_META[status]);
 	const line = $derived(progressLine(record));
 	// Prev/next walk the list, and a followed word is not in it — 慰问 is HSK 5 whatever level
@@ -213,7 +206,6 @@
 	const hasNext = $derived(from === null && position < total);
 	/** Follows the word on screen, not the level being browsed: 安 opens as HSK 4 from 安慰. */
 	const level = $derived(word.level);
-	const practiseHref = $derived(resolve('/quiz/[level]', { level: String(browseLevel) }));
 
 	// ------------------------------------------------------------------ the scroller ------
 
@@ -536,18 +528,29 @@
 						{/if}
 
 						<!-- One block, so the gap above the meanings is the same whether or not the
-						     word carries a part-of-speech annotation — plenty of them do not. -->
+						     word carries a part-of-speech annotation — plenty of them do not.
+						     Each sense is headed by its own POS, the way Pleco prints ADVERB
+						     directly above "almost; nearly; practically", not one joined banner. -->
 						<div class="gloss">
-							{#if pos}<p class="pos eyebrow">{pos}</p>{/if}
-
-							{#if word.meanings.length > 1}
-								<ol class="senses">
-									{#each word.meanings as meaning, i (i)}
-										<li><span class="num tabular">{i + 1}</span>{meaning}</li>
-									{/each}
-								</ol>
+							{#if senseGroups.length === 0}
+								<p class="sense">—</p>
 							{:else}
-								<p class="sense">{word.meanings[0] ?? '—'}</p>
+								{#each senseGroups as group, gi (gi)}
+									<div class="sense-group">
+										{#if group.pos}<p class="pos eyebrow">{posWord(group.pos)}</p>{/if}
+										{#if senses.length === 1}
+											<p class="sense">{group.items[0]?.gloss ?? '—'}</p>
+										{:else}
+											<ol class="senses">
+												{#each group.items as item (item.n)}
+													<li>
+														<span class="num tabular">{item.n}</span>{item.gloss}
+													</li>
+												{/each}
+											</ol>
+										{/if}
+									</div>
+								{/each}
 							{/if}
 						</div>
 
@@ -578,6 +581,13 @@
 								<span class="label">{meta.label}</span>
 								<span class="detail">{hasMet(record) ? line : meta.description}</span>
 							</p>
+						</div>
+
+						<!-- Desktop only: sits in the left column's leftover cream so the pinned
+						     bar cannot slice the character graph. Hidden below 64rem; the pin
+						     under the scroller is the phone control. -->
+						<div class="cta">
+							{@render practiseCta()}
 						</div>
 					</div>
 
@@ -628,10 +638,20 @@
 		</div>
 
 		<div class="foot">
-			<a class="btn btn-primary btn-block" href={practiseHref}>Practise HSK {browseLevel}</a>
+			{@render practiseCta()}
 		</div>
 	</div>
 </div>
+
+{#snippet practiseCta()}
+	<!-- eslint-disable svelte/no-navigation-without-resolve -- The path below calls resolve() before adding the word query. -->
+	<a
+		class="btn btn-primary btn-block"
+		href={`${resolve('/quiz/[level]', { level: String(level) })}?word=${encodeURIComponent(word.id)}`}
+		>Practise HSK {level}</a
+	>
+	<!-- eslint-enable svelte/no-navigation-without-resolve -->
+{/snippet}
 
 <style>
 	.root {
@@ -995,6 +1015,10 @@
 		margin-block-start: 0.75rem;
 	}
 
+	.sense-group + .sense-group {
+		margin-block-start: 0.75rem;
+	}
+
 	.pos {
 		margin: 0;
 	}
@@ -1081,6 +1105,12 @@
 		padding-inline: max(1.25rem, var(--app-safe-left)) max(1.25rem, var(--app-safe-right));
 	}
 
+	/* In-column CTA is a desktop layout; on a phone `.col` is `display: contents` so this
+	   would otherwise land in the scroller as a second copy of the pinned bar. */
+	.cta {
+		display: none;
+	}
+
 	/* From tablet up the sheet stops being a sheet: a centred card reads as an entry rather
 	   than a drawer, and there is no thumb at the bottom of a laptop screen. It is also wider
 	   and taller than it was — a 480px box floating in 960px of scrim showed four of twelve
@@ -1127,12 +1157,30 @@
 			   so it gets the extra width rather than splitting it evenly and truncating. */
 			grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
 			column-gap: 2rem;
-			align-items: start;
+			align-items: stretch;
 		}
 
 		.col {
 			display: block;
 			min-inline-size: 0;
+		}
+
+		/* Stretch the meaning column to the graph's height so the CTA can sit in the cream
+		   that used to sit empty under the record, instead of as a full-width bar that
+		   sliced the last related-word row. */
+		.col.meaning {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.cta {
+			display: block;
+			margin-block-start: auto;
+			padding-block-start: 1.5rem;
+		}
+
+		.foot {
+			display: none;
 		}
 
 		/* The rule that separated the strip from the meanings above it now has nothing above
@@ -1141,13 +1189,6 @@
 			margin-block-start: 0;
 			padding-block-start: 0;
 			border-block-start: 0;
-		}
-
-		/* `btn-block` means "as wide as the thumb reaching for it"; at 800px it means "a black
-		   bar". The button keeps a phone's proportions and centres in the width it has. */
-		.foot :global(.btn) {
-			max-inline-size: 22rem;
-			margin-inline: auto;
 		}
 	}
 

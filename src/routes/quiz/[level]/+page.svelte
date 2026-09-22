@@ -45,10 +45,11 @@
 -->
 <script lang="ts">
 	import { untrack } from 'svelte';
+	import { error } from '@sveltejs/kit';
 	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { LEVELS, type Level, type Word } from '$lib/types';
+	import type { Level, Session, Word } from '$lib/types';
 	import { loadLevel } from '$lib/data';
 	import { progress } from '$lib/progress';
 	import StorageNotice from '$lib/progress/StorageNotice.svelte';
@@ -69,6 +70,7 @@
 		introductionAnnouncement,
 		marks,
 		parseLevel,
+		pinFirstQuestion,
 		tally,
 		verdictAnnouncement
 	} from '$lib/components/quiz/quiz';
@@ -80,13 +82,18 @@
 		seedDemoAnswers,
 		type SummaryComponent
 	} from '$lib/components/quiz/summary';
-	import type { Session } from '$lib/types';
 
-	type Status = 'loading' | 'ready' | 'empty' | 'failed' | 'no-level';
+	type Status = 'loading' | 'ready' | 'empty' | 'failed';
+
+	if (parseLevel(page.params.level) === null) {
+		error(404, 'Not a level');
+	}
 
 	const level = $derived(parseLevel(page.params.level));
 	/** `?state=summary` — a finished run, seeded, so the summary can be opened directly. */
 	const preview = $derived(isSummaryPreview(page.url));
+	/** `?word=<id>` — pin that word as question 1. Junk or cross-level ids are ignored. */
+	const seedId = $derived(page.url.searchParams.get('word'));
 
 	let session = $state<Session | null>(null);
 	let status = $state<Status>('loading');
@@ -131,7 +138,7 @@
 		return picked ? verdictAnnouncement(question, picked) : '';
 	});
 
-	async function startSession(target: Level, demo: boolean, fresh = false) {
+	async function startSession(target: Level, demo: boolean, pin: string | null, fresh = false) {
 		const id = ++runId;
 		status = 'loading';
 		session = null;
@@ -157,21 +164,28 @@
 
 		// `buildSession` reads the whole progress map. Untracked: this runs from an effect, and
 		// a tracked read would rebuild the session on every answer it records.
-		const restored = demo || fresh ? null : restoreSession(storage, target, words, null);
+		const restored = demo || fresh ? null : restoreSession(storage, target, words, pin);
 		const built =
 			restored ??
-			untrack(() =>
-				demo
-					? // The demo answers its own questions, so it is built against a synthetic record
-						// rather than the learner's: the preview is then the same ten words on every
-						// device and in every screenshot. `demoProgress`, not `null` — a learner with no
-						// record is owed an introduction for every word, and this URL exists to show the
-						// scored summary.
-						seedDemoAnswers(
-							buildSession(words, target, demoProgress(words), 10, { rng: seededRng(DEMO_SEED) })
-						)
-					: buildSession(words, target, progress)
-			);
+			untrack(() => {
+				if (demo) {
+					// The demo answers its own questions, so it is built against a synthetic record
+					// rather than the learner's: the preview is then the same ten words on every
+					// device and in every screenshot. `demoProgress`, not `null` — a learner with no
+					// record is owed an introduction for every word, and this URL exists to show the
+					// scored summary.
+					return seedDemoAnswers(
+						buildSession(words, target, demoProgress(words), 10, { rng: seededRng(DEMO_SEED) })
+					);
+				}
+				return pinFirstQuestion(
+					buildSession(words, target, progress),
+					words,
+					target,
+					pin,
+					progress
+				);
+			});
 
 		if (built.questions.length === 0) {
 			status = 'empty';
@@ -179,19 +193,17 @@
 		}
 		session = built;
 		status = 'ready';
-		if (!demo) saveSession(storage, built, null);
+		if (!demo) saveSession(storage, built, pin);
 	}
 
 	$effect(() => {
 		const target = level;
 		const demo = preview;
+		const pin = seedId;
 		if (target === null) {
-			runId++;
-			session = null;
-			status = 'no-level';
-			return;
+			error(404, 'Not a level');
 		}
-		void startSession(target, demo);
+		void startSession(target, demo, pin);
 	});
 
 	/* Re-arms from scratch on every card, and disarms the moment one is answered. */
@@ -217,7 +229,7 @@
 		// Not `recordAnswer` directly: `recordOutcome` is the one place a card becomes a change
 		// to the record, and it honours `isScored` so this screen cannot get it half right.
 		recordOutcome(progress, question, choice);
-		if (!preview) saveSession(availableSessionStorage(), session, null);
+		if (!preview) saveSession(availableSessionStorage(), session, seedId);
 	}
 
 	/** "Got it" on a teach card: note the exposure — never an answer — and move on. */
@@ -235,7 +247,7 @@
 		hinted = false;
 		// Once per finished run.
 		if (next >= session.questions.length) progress.noteSession(session.level);
-		if (!preview) saveSession(availableSessionStorage(), session, null);
+		if (!preview) saveSession(availableSessionStorage(), session, seedId);
 	}
 
 	function advance() {
@@ -252,7 +264,7 @@
 			await goto(resolve('/quiz/[level]', { level: String(level) }), { replaceState: true });
 			return;
 		}
-		await startSession(level, false, true);
+		await startSession(level, false, seedId, true);
 	}
 
 	function goHome() {
@@ -306,26 +318,7 @@
 	     to say so: it is where the answers are being given. -->
 	<StorageNotice />
 
-	{#if status === 'no-level'}
-		<section class="panel">
-			<p class="eyebrow">Not a level</p>
-			<h1 class="panel-title">hskquiz covers HSK 1 to 5</h1>
-			<p class="panel-body">
-				There is no level “{page.params.level}”. Pick one of the five below, or go back to the level
-				list to see where you left off.
-			</p>
-			<ul class="levels">
-				{#each LEVELS as choice (choice)}
-					<li>
-						<a class="level-link" href={resolve('/quiz/[level]', { level: String(choice) })}>
-							HSK {choice}
-						</a>
-					</li>
-				{/each}
-			</ul>
-			<a class="btn btn-quiet btn-block" href={resolve('/')}>Back to levels</a>
-		</section>
-	{:else if status === 'failed'}
+	{#if status === 'failed'}
 		<section class="panel">
 			<p class="eyebrow">Could not load</p>
 			<h2 class="panel-title">The HSK {level} word list did not arrive</h2>
@@ -634,34 +627,6 @@
 	.panel-body {
 		margin: 0.625rem 0 1.5rem;
 		color: var(--color-ink-muted);
-	}
-
-	.levels {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin: 0 0 1.5rem;
-		padding: 0;
-		list-style: none;
-	}
-
-	.level-link {
-		display: inline-flex;
-		align-items: center;
-		min-block-size: var(--spacing-tap);
-		padding-inline: 1rem;
-		border: 1px solid var(--color-line-strong);
-		border-radius: var(--radius-pill);
-		color: var(--color-ink);
-		font-size: var(--text-sm);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	@media (hover: hover) {
-		.level-link:hover {
-			background-color: var(--color-surface-sunken);
-		}
 	}
 
 	/* ------------------------------------------------------------------- skeleton ----- */

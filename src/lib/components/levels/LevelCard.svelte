@@ -34,13 +34,16 @@
 
 	So the columns are gone. The preview is a LIST, in the shape Pleco's result rows use
 	(`reference/screenshots/pleco/pleco-iphone-01.png`): one entry per word, full card width,
-	hanzi and its own tone-coloured pinyin on the first line and that word's own gloss directly
-	beneath it. A gloss now has the whole card to set in — the longest of the 4,308 shipped is 34
-	characters, ~210px, against 246px on the narrowest card this layout builds — so every gloss
-	in the list is one line at every width, nothing is cut, no gloss can land under a character
-	that is not its own, and the five cards hold one height. It also ends the width problem the
-	old row had: 大学生 / 教学楼 / 图书馆 needed 346px side by side and got dropped to two
-	columns, where stacked they are 130px each and all three fit at 320.
+	hanzi and its own pinyin on the first line and that word's own gloss directly beneath it.
+	Tone lives on the character — a ~2px rule under each glyph, the way Du Chinese's reader
+	marks it (`reference/screenshots/duchinese/ui/duchinese-iphone-04-ui.png`) — and the
+	romanisation is one muted ink, never five hues on 14px type. A gloss now has the whole card
+	to set in — the longest of the 4,308 shipped is 34 characters, ~210px, against 246px on the
+	narrowest card this layout builds — so every gloss in the list is one line at every width,
+	nothing is cut, no gloss can land under a character that is not its own, and the five cards
+	hold one height. It also ends the width problem the old row had: 大学生 / 教学楼 / 图书馆
+	needed 346px side by side and got dropped to two columns, where stacked they are 130px each
+	and all three fit at 320.
 
 	THE WHOLE CARD IS A TARGET. `Practise` stretches an overlay across the card, so anywhere that
 	is not the preview starts a session; the preview itself is a link into that level's word
@@ -49,11 +52,28 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { loadLevel } from '$lib/data';
-	import { Hanzi, Pinyin } from '$lib/design';
-	import type { Level, Word } from '$lib/types';
+	import { Hanzi, Pinyin, resolveSyllables, toneColor } from '$lib/design';
+	import type { Level, Syllable, Word } from '$lib/types';
 	import { LEVEL_META } from './levelMeta';
 	import { fitPreview, LEVEL_PREVIEW, PREVIEW_COUNT, toPreview, type PreviewWord } from './preview';
 	import { formatAccuracy, formatWhen, type LevelStats } from './stats';
+
+	/**
+	 * One tone token per character, for the Du Chinese rule under the preview hanzi.
+	 *
+	 * Null when the syllable count does not match — same gate `<Hanzi tones>` uses — so a
+	 * contrived row still prints rather than drawing a rule under the wrong glyph.
+	 */
+	function previewTones(
+		hanzi: string,
+		pinyin: string,
+		syllables?: readonly Syllable[]
+	): string[] | null {
+		const glyphs = [...hanzi];
+		const known = resolveSyllables(syllables, pinyin);
+		if (known.length === 0 || known.length !== glyphs.length) return null;
+		return known.map((syllable) => toneColor(syllable.tone));
+	}
 
 	interface Props {
 		level: Level;
@@ -182,11 +202,7 @@
 	);
 </script>
 
-<article
-	class="card hskq-card p-4"
-	class:hskq-featured={featured}
-	aria-labelledby="level-{level}-title"
->
+<article class="card hskq-card p-4" aria-labelledby="level-{level}-title">
 	<!-- Identity on the left, the way out of the card on the right. `Browse →` spent two loops
 	     inside the preview block, where at 247/192/234 (375/320/1440) it landed inside the third
 	     word's column and read as that word's caption. Up here it captions nothing, it is the
@@ -219,19 +235,35 @@
 		     card's Chinese, so they get the hanzi scale, not the UI one. -->
 		<ul class="hskq-preview" bind:clientWidth={rowWidth}>
 			{#each preview as word (word.id)}
+				{@const marks = previewTones(word.hanzi, word.pinyin, word.syllables)}
 				<li class="hskq-entry">
-					<Hanzi text={word.hanzi} size="md" class="hskq-hz text-ink" />
-					<!-- Tone-coloured, per the design system: pinyin is the one place in the app a
-					     learner reads tone off a colour, and flat accent pinyin here read as
-					     fifteen error states. `spaced={false}` keeps the list's own orthography —
-					     `xièxie`, not `xiè xie`, the same rule the hero's `cíhuì liànxí` follows.
-					     Never truncated: half a syllable is a wrong reading. On the rare word
-					     whose pinyin will not sit beside its hanzi at this width it wraps to its
-					     own line, under its own characters, whole. -->
+					<!-- Tone on the character, as a ~2px rule under each glyph — Du Chinese's
+					     reader, not Pleco's painted strokes. The glyph stays ink so the shape
+					     being learned is not fighting a hue; the diacritic on the pinyin beside
+					     it is the other channel, so colour is never the only copy of the tone. -->
+					<span class="hskq-face">
+						<Hanzi text={word.hanzi} size="md" class="hskq-hz text-ink" />
+						{#if marks}
+							<span class="hskq-tones" aria-hidden="true">
+								{#each marks as color, i (`${word.id}-${i}`)}
+									<span class="hskq-tone" style:background-color={color}></span>
+								{/each}
+							</span>
+						{/if}
+					</span>
+					<!-- One muted ink, via `tones={false}` — not a colour painted over five
+					     tone spans. `xièxie` used to read as purple-then-teal at 14px, the
+					     second-smallest type on the card, with no key on the screen. The quiz
+					     card keeps the rainbow; this list is not drilling tone. `spaced={false}`
+					     keeps the list's own orthography — `xièxie`, not `xiè xie`. Never
+					     truncated: half a syllable is a wrong reading. On the rare word whose
+					     pinyin will not sit beside its hanzi at this width it wraps to its own
+					     line, under its own characters, whole. -->
 					<Pinyin
 						pinyin={word.pinyin}
 						syllables={word.syllables}
 						size="sm"
+						tones={false}
 						spaced={false}
 						class="hskq-py"
 					/>
@@ -289,19 +321,18 @@
 <style>
 	.hskq-card {
 		/* Column + full height so two cards sharing a desktop row line their buttons up, and
-		   `relative` so the Practise overlay below has this card as its containing block. */
+		   `relative` so the Practise overlay below has this card as its containing block.
+		   Same strong line as the other page-sitting controls (quiet Practise, search field):
+		   rank comes from the filled button and the Start here chip, not from being the only
+		   card with a visible outline. */
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		block-size: 100%;
+		border-color: var(--color-line-strong);
 		transition:
 			box-shadow 180ms var(--ease-out-soft),
 			border-color 180ms var(--ease-out-soft);
-	}
-
-	/* The recommended level is the only one that draws a line around itself. */
-	.hskq-featured {
-		border-color: var(--color-line-strong);
 	}
 
 	.hskq-head {
@@ -425,7 +456,34 @@
 		white-space: nowrap;
 	}
 
+	/* Inline-flex column so the entry's baseline is still the hanzi's, not the rule under it. */
+	.hskq-face {
+		position: relative;
+		display: inline-flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	/* Overlay, not a second row: a 2px rule must not buy 15px of card height. Inset and gapped
+	   so two characters do not join into one bar — Du Chinese's ticks, not an underline. */
+	.hskq-tones {
+		position: absolute;
+		inset-inline: 0.18em;
+		bottom: 0.08em;
+		display: flex;
+		gap: 0.28em;
+		pointer-events: none;
+	}
+
+	.hskq-tone {
+		flex: 1 1 0;
+		block-size: 2px;
+		border-radius: 1px;
+	}
+
+	/* One muted ink, inherited by the uncoloured spans `tones={false}` left behind. */
 	.hskq-preview :global(.hskq-py) {
+		color: var(--color-ink-muted);
 		white-space: nowrap;
 	}
 

@@ -15,7 +15,7 @@
 <script lang="ts">
 	import { Hanzi, Pinyin } from '$lib/design';
 	import type { Word } from '$lib/types';
-	import { posPrimary } from './pos';
+	import { posAbbrev, sensesOf } from './pos';
 	import StatusPip from './StatusPip.svelte';
 	import { STATUS_META, type WordStatus } from './status';
 
@@ -31,8 +31,14 @@
 
 	let { word, status, index, total, onopen }: Props = $props();
 
-	const pos = $derived(posPrimary(word.pos));
-	const gloss = $derived(word.meanings.join(', '));
+	/**
+	 * The chip belongs to the gloss beside it, not to `pos[0]`. 记录 is officially N then V
+	 * over "to write down" then "a written record" — printing `n.` next to the verb is the
+	 * lie this pairing exists to stop.
+	 */
+	const senses = $derived(sensesOf(word));
+	const pos = $derived(senses[0]?.pos ? posAbbrev(senses[0].pos) : '');
+	const gloss = $derived(senses.map((sense) => sense.gloss).join(', '));
 </script>
 
 <!--
@@ -132,7 +138,7 @@
 	}
 
 	/* Fixed first column, wide enough for the longest single code (`pron.`, `prep.`, `intj.`)
-	   and no wider — that is what `posPrimary` guarantees. */
+	   and no wider — that is what a single `posAbbrev` guarantees. */
 	.gloss {
 		display: grid;
 		grid-template-columns: 2.625rem minmax(0, 1fr);

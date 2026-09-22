@@ -32,6 +32,8 @@
  *      to a learner. The gates fail the build; scripts/vocab-audit.json is the work list that
  *      clears them. What counts as "the same English" is src/lib/data/senses.ts, which the
  *      quiz's own distractor guard imports too — one implementation, not two copies.
+ *      Each meaning is also bound to the POS that labels it as `senses: {pos?, gloss}[]`,
+ *      so a sheet can head a sense with its own chip instead of one banner over a mixed list.
  *
  * Authored glosses live in scripts/overrides/*.json, not in this file — see readOverrides().
  *
@@ -669,6 +671,183 @@ function overlaps(a, b) {
 	return x === y || x.startsWith(y + ' ') || y.startsWith(x + ' ');
 }
 
+/* ---------------------------------------------------------- sense binding */
+
+/**
+ * Bind each gloss to the part of speech that labels it.
+ *
+ * Official POS is a card-level list and `meanings` is the quiz-facing list; neither says
+ * which label belongs to which gloss, which is how a row printed "ADJ. to shock". `senses`
+ * is that pairing, in display order. `pos` contains only codes that label a shipped gloss
+ * (for distractors), ordered so `pos[0]` belongs to `meanings[0]`.
+ * Cards the official list gives no POS for stay chip-less: each sense is `{gloss}` only.
+ *
+ * An official code with no gloss under it is filled from CC-CEDICT when a short, strong
+ * match exists. Otherwise it stays in the reference row until an authored `senses`
+ * override supplies a gloss; shipping the unsupported code would mislabel the card.
+ * The 386 untagged cards are not invented a chip.
+ */
+const MEASURE_GLOSS = /\bmeasure word\b|\bclassifier\b/i;
+const UNIT_MEASURE = /\b(o['']clock|yuan|cents?|pages?)\b/i;
+const PREFIX_GLOSS = /\bprefix\b|lunar month date|before a surname/i;
+const SUFFIX_GLOSS = /\bsuffix\b/i;
+const PARTICLE_GLOSS = /\b(particle|marker)\b/i;
+const MODAL_GLOSS = /^(?:should|ought|must|may|might|can|will|shall|would|could|need)\b/i;
+const ADJ_TAIL = /\b(?:ed|ous|ful|less|able|ible|al|ic|ive|ant|ent|ary|ing|y|like)$/i;
+
+function glossFitsPos(text, code) {
+	const t = unqualified(text);
+	const isTo = /^to\b/i.test(t);
+	const isMW = MEASURE_GLOSS.test(text);
+	const isUnit = UNIT_MEASURE.test(t);
+	const head =
+		t
+			.toLowerCase()
+			.split(/[\s-]+/)
+			.filter(Boolean)
+			.pop() || '';
+	switch (code) {
+		case 'M':
+			return isMW ? 10 : isUnit ? 8 : -6;
+		case 'V':
+			if (isTo) return 8;
+			if (MODAL_GLOSS.test(t)) return 6;
+			if (isMW) return -8;
+			return -1;
+		case 'N':
+			if (isTo || isMW) return -5;
+			if (/^(a|an|the)\s/i.test(t)) return 6;
+			if (isBareNounGloss(t) || isNounWordGloss(t)) return 5;
+			return 1;
+		case 'Adj':
+			if (isTo || isMW || isUnit) return -5;
+			if (isAdverbGloss(t)) return -2;
+			if (ADJ_TAIL.test(head)) return 4;
+			return 2;
+		case 'Adv':
+			if (isTo || isMW) return -5;
+			if (isAdverbGloss(t)) return 8;
+			if (/^(as if|maybe|still|together|almost|entirely)\b/i.test(t)) return 5;
+			return 1;
+		case 'Prep':
+			if (isTo) return -2;
+			if (/^(than|from|with|to|at|in|for|by|as|on behalf of|according to|away from)\b/i.test(t))
+				return 6;
+			return 1;
+		case 'Conj':
+			if (isTo) return -2;
+			if (/^(and|or|but|because|if|so that|even though)\b/i.test(t)) return 6;
+			return 1;
+		case 'Pron':
+			if (isTo || isMW) return -4;
+			return 2;
+		case 'Num':
+			if (isTo || isMW) return -4;
+			return 2;
+		case 'Aux':
+			if (PARTICLE_GLOSS.test(t)) return 8;
+			if (isTo) return -3;
+			return 1;
+		case 'Prefix':
+			if (PREFIX_GLOSS.test(t)) return 10;
+			return isTo ? -3 : 1;
+		case 'Suffix':
+			if (SUFFIX_GLOSS.test(t)) return 10;
+			return isTo ? -3 : 1;
+		case 'Intj':
+		case 'Phonetic':
+			return isTo || isMW ? -3 : 2;
+		default:
+			return 0;
+	}
+}
+
+/** The POS a critic-style detector would read off a gloss, or null when it is ambiguous. */
+function clearGlossKind(text) {
+	if (MEASURE_GLOSS.test(text)) return 'M';
+	if (/^to\b/i.test(unqualified(text))) return 'V';
+	return null;
+}
+
+function uniquePos(senses) {
+	const out = [];
+	for (const sense of senses) {
+		if (sense.pos && !out.includes(sense.pos)) out.push(sense.pos);
+	}
+	return out;
+}
+
+function assignSensePos(meanings, advertised) {
+	if (!advertised.length) return meanings.map((gloss) => ({ gloss }));
+	if (advertised.length === 1) {
+		return meanings.map((gloss) => ({ pos: advertised[0], gloss }));
+	}
+	const used = new Set();
+	return meanings.map((gloss) => {
+		const ranked = advertised
+			.map((code) => ({
+				code,
+				score:
+					glossFitsPos(gloss, code) + (!used.has(code) && glossFitsPos(gloss, code) >= 0 ? 0.4 : 0)
+			}))
+			.sort((a, b) => b.score - a.score || advertised.indexOf(a.code) - advertised.indexOf(b.code));
+		const pick = ranked[0].code;
+		used.add(pick);
+		return { pos: pick, gloss };
+	});
+}
+
+/** A short CC-CEDICT sense that clearly wears `code` and is not already on the card. */
+function cedictGlossForPos(defs, code, existing) {
+	const notes = new Set();
+	const candidates = [];
+	for (const raw of defs || []) {
+		for (const alt of senseAlternatives(raw, notes)) {
+			if (!alt.text || alt.text.length > MAX_LEN) continue;
+			if (
+				existing.some((g) => overlaps(g, alt.text) || g.toLowerCase() === alt.text.toLowerCase())
+			) {
+				continue;
+			}
+			const score = glossFitsPos(alt.text, code);
+			if (score >= 6) candidates.push({ text: alt.text, score });
+		}
+	}
+	candidates.sort((a, b) => b.score - a.score || a.text.length - b.text.length);
+	return candidates[0]?.text;
+}
+
+function bindCardSenses(entry) {
+	const advertised = [...entry.pos];
+	if (entry.authoredSenses?.length) {
+		entry.senses = entry.authoredSenses.map((s) =>
+			s.pos ? { pos: s.pos, gloss: s.gloss } : { gloss: s.gloss }
+		);
+		entry.meanings = entry.senses.map((s) => s.gloss);
+		entry.pos = advertised.length ? uniquePos(entry.senses) : [];
+		return;
+	}
+
+	let senses = assignSensePos(entry.meanings, advertised);
+	if (advertised.length) {
+		const have = new Set(senses.map((s) => s.pos).filter(Boolean));
+		for (const code of advertised) {
+			if (have.has(code) || senses.length >= 3) continue;
+			const extra = cedictGlossForPos(
+				entry.defs,
+				code,
+				senses.map((s) => s.gloss)
+			);
+			if (!extra) continue;
+			senses.push({ pos: code, gloss: extra });
+			have.add(code);
+		}
+	}
+	entry.senses = senses;
+	entry.meanings = senses.map((s) => s.gloss);
+	entry.pos = advertised.length ? uniquePos(senses) : [];
+}
+
 /* -------------------------------------------------------------- overrides */
 
 /**
@@ -713,7 +892,44 @@ function readOverrides() {
 					`${id} is overridden twice: ${owner.get(id)} and ${name} — one id, one owner`
 				);
 			}
+			const rawSenses = value && value.senses;
 			const meanings = value && value.meanings;
+			if (rawSenses !== undefined) {
+				if (!Array.isArray(rawSenses) || !rawSenses.length) {
+					throw new Error(`${path}: ${id} "senses" must be a non-empty array of {pos, gloss}`);
+				}
+				const senses = [];
+				for (const sense of rawSenses) {
+					const gloss = sense && typeof sense.gloss === 'string' ? sense.gloss.trim() : '';
+					if (!gloss) {
+						throw new Error(`${path}: ${id} each sense needs a non-empty "gloss"`);
+					}
+					if (sense.pos !== undefined && (typeof sense.pos !== 'string' || !sense.pos.trim())) {
+						throw new Error(`${path}: ${id} sense pos must be a non-empty string when present`);
+					}
+					senses.push(sense.pos ? { pos: sense.pos.trim(), gloss } : { gloss });
+				}
+				const fromSenses = senses.map((s) => s.gloss);
+				if (
+					meanings !== undefined &&
+					(!Array.isArray(meanings) ||
+						meanings.map((m) => String(m).trim()).join('\0') !== fromSenses.join('\0'))
+				) {
+					throw new Error(`${path}: ${id} "meanings" must list the same glosses as "senses"`);
+				}
+				if (!value.note || !String(value.note).trim()) {
+					throw new Error(
+						`${path}: ${id} needs a "note" saying why this gloss and not CC-CEDICT's`
+					);
+				}
+				owner.set(id, name);
+				byId.set(id, {
+					meanings: fromSenses,
+					senses,
+					note: String(value.note).trim()
+				});
+				continue;
+			}
 			if (!Array.isArray(meanings) || !meanings.length || meanings.some((m) => !m || !m.trim())) {
 				throw new Error(`${path}: ${id} needs a non-empty "meanings" array of strings`);
 			}
@@ -1123,6 +1339,7 @@ function build(official, overrides, sentences) {
 			level: r.level,
 			// Diagnostics. Never shipped — toShipped() drops them.
 			authored: Boolean(override),
+			authoredSenses: override?.senses,
 			notes: picked.notes,
 			suggested: picked.meanings,
 			defs: [...(r.cedictDefs || [])],
@@ -1149,6 +1366,7 @@ function build(official, overrides, sentences) {
 		if (!prev.authored && e.authored) {
 			prev.meanings = [...e.meanings];
 			prev.authored = true;
+			prev.authoredSenses = e.authoredSenses;
 		}
 
 		// The second row is a second *official* row: it is there because the standard gives
@@ -1168,6 +1386,13 @@ function build(official, overrides, sentences) {
 			prev.notes = [...new Set([...prev.notes, 'merged-row-sense-not-authored'])];
 		}
 		for (const p of e.pos) if (!prev.pos.includes(p)) prev.pos.push(p);
+		// Unioned meanings no longer match a single row's authored pairing.
+		if (
+			prev.authoredSenses &&
+			prev.authoredSenses.map((s) => s.gloss).join('\0') !== prev.meanings.join('\0')
+		) {
+			prev.authoredSenses = undefined;
+		}
 	}
 
 	const entriesOut = [...byKey.values()];
@@ -1191,6 +1416,8 @@ function build(official, overrides, sentences) {
 			english: example.english
 		};
 	}
+
+	for (const e of entriesOut) bindCardSenses(e);
 
 	return entriesOut;
 }
@@ -2016,6 +2243,44 @@ function verify(official, shipped, refs) {
 			if (m.length > MAX_LEN) problems.push(`${w.id} ${w.hanzi}: meaning too long "${m}"`);
 		}
 		if (w.meanings.length > 3) problems.push(`${w.id} ${w.hanzi}: ${w.meanings.length} meanings`);
+		if (!Array.isArray(w.senses) || w.senses.length !== w.meanings.length) {
+			problems.push(
+				`${w.id} ${w.hanzi}: senses (${w.senses?.length ?? 0}) not aligned with meanings (${w.meanings.length})`
+			);
+		} else {
+			for (let i = 0; i < w.meanings.length; i++) {
+				if (w.senses[i]?.gloss !== w.meanings[i]) {
+					problems.push(
+						`${w.id} ${w.hanzi}: sense ${i + 1} "${w.senses[i]?.gloss}" != meaning "${w.meanings[i]}"`
+					);
+				}
+			}
+		}
+		if (!w.pos.length) {
+			if ((w.senses || []).some((s) => s.pos)) {
+				problems.push(`${w.id} ${w.hanzi}: untagged card shipped a POS on a sense`);
+			}
+		} else {
+			for (const code of w.pos) {
+				if (!(w.senses || []).some((s) => s.pos === code)) {
+					problems.push(
+						`gate:pos ${w.id} ${w.hanzi} [${w.pos.join('/')}]: advertises ${code} with no gloss under it`
+					);
+				}
+			}
+			const firstPos = w.senses?.[0]?.pos;
+			if (firstPos && w.pos[0] !== firstPos) {
+				problems.push(
+					`${w.id} ${w.hanzi}: pos[0] ${w.pos[0]} is not the first sense's ${firstPos}`
+				);
+			}
+			const kind = clearGlossKind(w.meanings[0] || '');
+			if (kind && firstPos && kind !== firstPos) {
+				problems.push(
+					`gate:pos ${w.id} ${w.hanzi}: chip ${firstPos} disagrees with "${w.meanings[0]}" (${kind})`
+				);
+			}
+		}
 
 		// Syllables: one per character, a real tone, and joining back to the printed pinyin.
 		const characters = [...w.hanzi];
@@ -2106,6 +2371,13 @@ function auditEntries(shipped, refs) {
 	const out = [];
 	for (const w of shipped) {
 		const reasons = new Set(gateHits.get(w.id) ?? []);
+		// The official list may name a second part of speech that the card cannot yet explain.
+		// Keep that editorial work visible without printing an unsupported label to learners.
+		if (
+			w.ids.some((id) => (refs.officialPos.get(id) ?? []).some((code) => !w.pos.includes(code)))
+		) {
+			reasons.add('official-pos-awaits-gloss');
+		}
 		const lead = w.meanings[0] || '';
 		const verbal = /^to\b/i.test(lead);
 		const only = (...codes) => w.pos.length > 0 && w.pos.every((p) => codes.includes(p));
@@ -2179,6 +2451,9 @@ function toShipped(entries, level) {
 			pinyin: w.pinyin,
 			syllables: w.syllables,
 			meanings: w.meanings,
+			senses: (w.senses || []).map((s) =>
+				s.pos ? { pos: s.pos, gloss: s.gloss } : { gloss: s.gloss }
+			),
 			// Optional, and absent rather than empty where no sentence has been authored.
 			// All 4,308 cards carry one today; nothing in the app may assume the field is there.
 			...(w.example ? { example: w.example } : {}),
@@ -2232,6 +2507,7 @@ try {
 	// reads the first two, gate (g) the third.
 	refs = {
 		defs: new Map(official.map((r) => [r.id, r.cedictDefs || []])),
+		officialPos: new Map(official.map((r) => [r.id, (r.pos || '').split('/').filter(Boolean)])),
 		allow: readSurvivalAllow(),
 		sentences
 	};

@@ -7,7 +7,8 @@ import {
 	type StoredProgress,
 	emptyStored,
 	encode,
-	mergeProgress
+	mergeProgress,
+	readRestorable
 } from './progress-core.ts';
 import { SHIPPED_SIZES } from '$lib/data/sizes';
 
@@ -91,6 +92,24 @@ function payloadOf(build: (store: ProgressStore) => void): string {
 	build(scratch);
 	const stored: StoredProgress = { state: scratch.state, gens: {} };
 	return encode(stored);
+}
+
+/** Word ids a rescue copy would actually put back. */
+function wordIdsIn(text: string | null | undefined): string[] {
+	if (!text) return [];
+	const rescued = readRestorable(text, T0);
+	return rescued ? Object.keys(rescued.stored.state.byWord).sort() : [];
+}
+
+/** N word records at `seen: 3`, optionally under a reset generation that outranks them. */
+function payloadOfSize(n: number, level = 1, generation?: number): string {
+	const w: Record<string, number[]> = {};
+	for (let i = 1; i <= n; i += 1) {
+		w[`L${level}-${String(i).padStart(4, '0')}`] = [3, 2, 1, T0, 0];
+	}
+	const body: Record<string, unknown> = { v: 1, w, l: {} };
+	if (generation !== undefined) body.g = { [level]: generation };
+	return JSON.stringify(body);
 }
 
 afterEach(() => {
@@ -364,6 +383,24 @@ describe('hostile storage', () => {
 		expect(store.state.levels[1]?.sessions).toBe(1);
 	});
 
+	it('resets in-memory progress when there is no storage to write', () => {
+		// `flush()` returns false whenever storage is null, so Reset used to roll itself back
+		// and latch "try again in a moment" on a path that can never succeed. There is nothing
+		// on disk to keep or to erase; the in-memory wipe is the whole story.
+		const store = new ProgressStore({ storage: null, now: () => T0 });
+		store.recordAnswer('L1-0001', true);
+		store.recordAnswer('L1-0002', true);
+		store.noteSession(1);
+
+		expect(store.resetAll()).toBe(true);
+
+		expect(store.forWord('L1-0001').seen).toBe(0);
+		expect(store.forWord('L1-0002').seen).toBe(0);
+		expect(store.state.levels[1]).toBeUndefined();
+		expect(store.eraseFailed).toBe(false);
+		expect(store.status).toBe('unavailable');
+	});
+
 	it('degrades when reading throws, the way Safari private mode does', () => {
 		const storage = new MemoryStorage();
 		storage.failReads = true;
@@ -508,7 +545,9 @@ describe('hostile storage', () => {
 		const store = new ProgressStore({ storage, now: () => T0 });
 
 		expect(store.salvaged).toBe(true);
-		expect(storage.items.get(BACKUP_KEY)).toBe(bigText.slice(0, -30));
+		// Folded into the leftover rather than replacing it, so the copy is the union — 39
+		// salvageable records — not the truncated bytes as-is.
+		expect(wordIdsIn(storage.items.get(BACKUP_KEY))).toHaveLength(39);
 		expect(store.rescue).toEqual({
 			words: 39,
 			answers: 117,
@@ -1348,6 +1387,78 @@ describe('no write may shrink the key without a copy kept aside', () => {
 		expect(store.flush()).toBe(true);
 		expect(store.eraseFailed).toBe(false);
 		expect(store.levelSummary(1).seen).toBe(3);
+	});
+});
+
+describe('a copy has to contain THIS history, not merely be larger', () => {
+	it('folds 40 HSK-1 records into a richer HSK-2 backup instead of destroying them (a)', () => {
+		// Loop 6's gap: BACKUP_KEY = 300 HSK-2, STORAGE_KEY = 40 HSK-1 under g:{"1":3}.
+		// Three answers used to shrink the main key 1,413 → 140 b while the backup stayed
+		// byte-identical HSK-2 — richer() compared counts, never identity, so the 300
+		// authorised the destruction. The copy has to contain these 40, or the write must
+		// not happen.
+		const storage = new MemoryStorage();
+		const forty = payloadOfSize(40, 1, 3);
+		storage.items.set(BACKUP_KEY, payloadOfSize(300, 2));
+		storage.items.set(STORAGE_KEY, forty);
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		store.recordAnswer('L1-0001', true);
+		store.recordAnswer('L1-0002', true);
+		store.recordAnswer('L1-0003', true);
+		expect(store.flush()).toBe(true);
+
+		const mainIds = Object.keys(storage.words());
+		const backupIds = wordIdsIn(storage.items.get(BACKUP_KEY));
+		const fortyIds = wordIdsIn(forty);
+		const fortyKeptInMain = fortyIds.every((id) => mainIds.includes(id));
+		const fortyKeptInBackup = fortyIds.every((id) => backupIds.includes(id));
+		expect(fortyKeptInMain || fortyKeptInBackup).toBe(true);
+		expect(backupIds.filter((id) => id.startsWith('L2-'))).toHaveLength(300);
+		// The notice may still say a copy is sitting here — but not over a hole.
+		if (store.rescue?.reason === 'found') {
+			expect(fortyKeptInBackup).toBe(true);
+		}
+	});
+
+	it('keeps the five HSK-2 answers a second reset would otherwise throw away (b)', () => {
+		const storage = new MemoryStorage();
+		storage.items.set(STORAGE_KEY, payloadOfSize(300, 1));
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		expect(store.resetAll()).toBe(true);
+		expect(wordIdsIn(storage.items.get(BACKUP_KEY))).toHaveLength(300);
+
+		const five = ['L2-0001', 'L2-0002', 'L2-0003', 'L2-0004', 'L2-0005'];
+		for (const id of five) store.recordAnswer(id, true);
+		expect(store.flush()).toBe(true);
+
+		expect(store.resetAll()).toBe(true);
+
+		const backupIds = wordIdsIn(storage.items.get(BACKUP_KEY));
+		for (const id of five) expect(backupIds, id).toContain(id);
+		expect(backupIds.filter((id) => id.startsWith('L1-'))).toHaveLength(300);
+		expect(store.rescue?.words).toBeGreaterThanOrEqual(305);
+	});
+
+	it('keeps two live L2 answers when reset erases an unreadable key of 50 L1 records (c)', () => {
+		// richer() used to pick the junk (49 salvageable records) over the live payload (2),
+		// so resetAll copied the 49 and threw the two away. The erase destroys both sides;
+		// the copy has to be the union.
+		const storage = new MemoryStorage();
+		const full = payloadOfSize(50, 1);
+		storage.items.set(STORAGE_KEY, full.slice(0, -30));
+		const store = new ProgressStore({ storage, now: () => T0 });
+
+		store.recordAnswer('L2-0001', true);
+		store.recordAnswer('L2-0002', false);
+
+		expect(store.resetAll()).toBe(true);
+
+		const backupIds = wordIdsIn(storage.items.get(BACKUP_KEY));
+		expect(backupIds).toContain('L2-0001');
+		expect(backupIds).toContain('L2-0002');
+		expect(backupIds.filter((id) => id.startsWith('L1-')).length).toBeGreaterThan(40);
 	});
 });
 

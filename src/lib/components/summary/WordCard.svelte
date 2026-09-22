@@ -12,14 +12,22 @@
 	The divisor is 1.1 rather than the question card's 1.28 for the reason the *teach* card uses
 	1.1 — a card in a scrolling list is not competing with four answer buttons for the column.
 
-	THE SENTENCE IS THE PART THE REVEAL DID NOT ALREADY SHOW
+	THE CONTRAST IS THE CARD'S SECOND ACT
 	Hanzi, pinyin, gloss and part of speech are exactly what the quiz put on screen ninety
-	seconds ago, so a card carrying only those is a dictionary line set large. 1,270 words now
-	ship an authored `example` (every HSK 1 and 2 word; none above yet), and where there is one
-	it goes on the card, with the word itself picked out of its own sentence the way Pleco bolds
-	它 in an example and Du Chinese bolds it in a review card. Where there is none — 70.5% of the
-	corpus — there is no block, no label and no reserved gap: the card simply ends at the part of
-	speech. Nothing on this card is laid out around a slot that may be empty.
+	seconds ago, so a card carrying only those is a dictionary line set large. The one fact the
+	reveal did not already spend is which wrong word was chosen, and that used to sit as a 12px
+	grey footnote under a hairline — half-erased by the sticky bar's fade on the first card of a
+	0/10. It is now a two-column contrast directly under the headword: the missed word and the
+	word chosen, each set the way this app sets a word — hanzi in ink, tone-coloured pinyin,
+	primary gloss — marked Answer and You picked. The example sentence follows it.
+	`picked === null` prints No answer on the empty side; a word the drill has healed (`fixed`)
+	keeps the original miss under First time, because the answer that fixed it is the headword.
+
+	THE SENTENCE FOLLOWS THE CONTRAST
+	Where there is an authored example it goes on the card after the contrast, with the word
+	itself picked out of its own sentence the way Pleco bolds 它 in an example and Du Chinese
+	bolds it in a review card. Where there is none the block is absent: no label, no reserved
+	gap. Nothing on this card is laid out around a slot that may be empty.
 
 	TONE COLOUR IS ON THE PINYIN, NOT THE CHARACTER
 	`<Hanzi>` sets characters in ink and `<Pinyin>` paints one colour per syllable off
@@ -30,9 +38,9 @@
 	is the same exception `QuestionPrompt` makes, for the same reason.
 
 	SAME CARD FOR A MISS AND A HIT
-	`outcome` changes the label at the top and whether the "you picked" footer exists. Nothing
-	else. A word answered correctly is still worth reading once more, and giving it a quieter
-	typographic treatment would be the app deciding which of your words deserve to be legible.
+	`outcome` changes the label at the top and whether the contrast exists. Nothing else. A word
+	answered correctly is still worth reading once more, and giving it a quieter typographic
+	treatment would be the app deciding which of your words deserve to be legible.
 
 	TRADITIONAL IN BRACKETS
 	`Word.traditional` is in the data for roughly a third of the list and Pleco prints it beside
@@ -55,7 +63,7 @@
 	the screen heals instead of rearranging itself under a thumb. `picked` is likewise the most
 	recent *wrong* answer, not the oldest: a word missed a second time with a different
 	distractor prints that distractor. A word that was fixed keeps the original miss under
-	`First time`, because the answer that fixed it is the headword and "FIRST TIME 地方" on a
+	First time, because the answer that fixed it is the headword and "FIRST TIME 地方" on a
 	card about 地方 says nothing at all.
 
 	A CORRECT ANSWER INSIDE THE "10 ANSWERED CORRECTLY" DISCLOSURE SAYS SO ONCE. The green
@@ -71,11 +79,11 @@
 
 	interface Props {
 		word: Word;
-		/** How the run went on this word. Decides the label and the footer, not the size. */
+		/** How the run went on this word. Decides the label and the contrast, not the size. */
 		outcome: 'right' | 'wrong';
 		/** What was chosen instead, on a miss. `null` is a question that ran out of run. */
 		picked?: Word | null;
-		/** Which way the question ran, so the footer reads in the order it was asked. */
+		/** Which way the question ran, so the contrast can name the task. */
 		direction?: Direction;
 		/** Position in its list, for the staggered entrance. */
 		index?: number;
@@ -150,6 +158,20 @@
 	 */
 	const tradSize: 'sm' | 'md' = $derived([...word.hanzi].length <= 2 ? 'md' : 'sm');
 	const pos = $derived(posLabel(word));
+	/**
+	 * Hanzi step for the contrast. Three- and four-character words at `sm` (26px) overrun a
+	 * ~120px pole on a 375px phone; `xs` (20px) keeps 公共汽车 on one line. One- and two-
+	 * character words take the larger step so 要 / 吃 still read as words, not labels.
+	 */
+	const poleSize: 'xs' | 'sm' = $derived(
+		Math.max([...word.hanzi].length, picked ? [...picked.hanzi].length : 0) >= 3 ? 'xs' : 'sm'
+	);
+	const pickTag = $derived(picked === null ? 'No answer' : fixed ? 'First time' : 'You picked');
+	const contrastLabel = $derived(
+		picked === null
+			? `No answer. The ${direction === 'meaning-to-hanzi' ? 'character' : 'meaning'} was ${word.hanzi}.`
+			: `${pickTag}: ${picked.hanzi}, ${picked.pinyin}, ${primaryGloss(picked)}. Answer: ${word.hanzi}.`
+	);
 	/** 1,270 of 4,308 words carry one. The block does not exist for the other 3,038. */
 	const example = $derived(word.example ?? null);
 	/**
@@ -246,9 +268,36 @@
 	<p class="gloss">{fullGloss(word)}</p>
 	{#if pos}<p class="pos">{pos}</p>{/if}
 
+	{#if !right}
+		<section class="contrast" aria-label={contrastLabel}>
+			<div class="pole">
+				<span class="tag">Answer</span>
+				<p class="pole-face"><Hanzi {word} size={poleSize} display /></p>
+				<p class="pole-sound"><Pinyin {word} size="sm" /></p>
+				<p class="pole-gloss">{primaryGloss(word)}</p>
+			</div>
+			{#if picked !== null}
+				<div class="pole pole-pick" class:pole-live={!fixed}>
+					<!-- Once the drill has fixed the word, the wrong answer is history rather than
+					     news, and a bare "YOU PICKED" under a green ✓ FIXED reads as if it had just
+					     happened. -->
+					<span class="tag">{pickTag}</span>
+					<p class="pole-face"><Hanzi word={picked} size={poleSize} display /></p>
+					<p class="pole-sound"><Pinyin word={picked} size="sm" /></p>
+					<p class="pole-gloss">{primaryGloss(picked)}</p>
+				</div>
+			{:else}
+				<div class="pole pole-pick pole-empty">
+					<span class="tag">{pickTag}</span>
+				</div>
+			{/if}
+		</section>
+	{/if}
+
 	{#if sentence && example}
 		<!-- No wrapper, no panel and no reserved height: on a word with no authored sentence
-		     this whole block is absent and the card ends at the part of speech above. -->
+		     this whole block is absent and the card ends at the contrast, or at the part of
+		     speech on a hit. -->
 		<section class="sen" style:--sen-chars={sentence.chars} aria-label="Example sentence">
 			<p class="sen-face">
 				{#each sentence.parts as part, i (i)}<Hanzi
@@ -263,27 +312,6 @@
 			</p>
 			<p class="sen-english">{example.english}</p>
 		</section>
-	{/if}
-
-	{#if !right}
-		<p class="picked">
-			<!-- Once the drill has fixed the word, the wrong answer is history rather than news, and
-			     a bare "YOU PICKED" under a green ✓ FIXED reads as if it had just happened. -->
-			<span class="tag">{picked === null ? 'No answer' : fixed ? 'First time' : 'You picked'}</span>
-			{#if picked !== null}
-				<span class="pick">
-					{#if direction === 'meaning-to-hanzi'}
-						<Hanzi word={picked} size="xs" />
-						<Pinyin word={picked} size="sm" />
-						<span class="pick-gloss">&ldquo;{primaryGloss(picked)}&rdquo;</span>
-					{:else}
-						<span class="pick-gloss">&ldquo;{primaryGloss(picked)}&rdquo;</span>
-						<Hanzi word={picked} size="xs" />
-						<Pinyin word={picked} size="sm" />
-					{/if}
-				</span>
-			{/if}
-		</p>
 	{/if}
 </li>
 
@@ -347,7 +375,7 @@
 		gap: 0.3125rem;
 		min-block-size: var(--spacing-tap);
 		padding-inline: 0.5rem;
-		border: 1px solid var(--color-line);
+		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-pill);
 		background-color: var(--color-surface);
 		/*
@@ -543,23 +571,42 @@
 	}
 
 	/*
-	 * What they chose instead — context, not the record, so it sits below a hairline and stays
-	 * quiet. The whole pick is one inline run inside a single flex item: as a row of separate
-	 * flex items the gloss separator wrapped onto its own line and read as a stray bullet.
+	 * THE CONTRAST. Two words, set the same way, so the card answers *why did I pick that one*.
+	 *
+	 * Equal columns, a hairline above and a rule between: the missed word on the left as the
+	 * answer, the chosen word on the right as the pick. Each pole is a word — hanzi in ink,
+	 * tone-coloured pinyin, primary gloss — not a grey footnote. `minmax(0, 1fr)` is load-
+	 * bearing: without it a four-character pick (公共汽车) sizes the column to the glyphs and
+	 * shoves the row past the card.
 	 */
-	.picked {
-		display: flex;
-		align-items: baseline;
-		flex-wrap: wrap;
-		gap: 0.25rem 0.4375rem;
-		margin: 0.875rem 0 0;
-		padding-block-start: 0.6875rem;
+	.contrast {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		column-gap: 0;
+		margin: 0.75rem 0 0;
+		padding-block-start: 0.75rem;
 		border-block-start: 1px solid var(--color-line);
-		font-size: var(--text-xs);
-		color: var(--color-ink-muted);
+	}
+
+	.pole {
+		min-inline-size: 0;
+		padding-inline-end: 0.75rem;
+	}
+
+	.pole-pick {
+		padding-inline-start: 0.75rem;
+		padding-inline-end: 0;
+		border-inline-start: 1px solid var(--color-line);
+	}
+
+	.pole-empty {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	.tag {
+		display: block;
 		font-weight: 700;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
@@ -567,12 +614,26 @@
 		color: var(--color-ink-subtle);
 	}
 
-	.pick {
-		display: inline;
+	.pole-live .tag {
+		color: var(--color-wrong);
 	}
 
-	.pick-gloss {
+	.pole-face {
+		margin: 0.25rem 0 0;
+		line-height: 1.15;
+	}
+
+	.pole-sound {
+		margin: 0.125rem 0 0;
+	}
+
+	.pole-gloss {
+		margin: 0.1875rem 0 0;
 		font-size: var(--text-sm);
+		font-weight: 550;
+		line-height: 1.35;
+		color: var(--color-ink);
+		text-wrap: pretty;
 	}
 
 	/*
@@ -647,8 +708,8 @@
 	.side .sound,
 	.side .gloss,
 	.side .pos,
-	.side .sen,
-	.side .picked {
+	.side .contrast,
+	.side .sen {
 		grid-column: 2;
 	}
 

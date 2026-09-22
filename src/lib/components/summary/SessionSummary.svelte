@@ -1007,7 +1007,6 @@
 			record={progress.forWord(sheetWord.id)}
 			position={(sheetAt ?? 0) + 1}
 			total={sheetWords.length}
-			browseLevel={session.level}
 			from={sheetFrom}
 			onclose={() => closeSheet()}
 			onback={backSheet}
@@ -1383,7 +1382,9 @@
 		inset-block-end: 0;
 		z-index: 10;
 		display: flex;
-		gap: 0.625rem;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: var(--spacing-xs);
 		/* Deep enough that the fade above it lands entirely in this gap once the page is scrolled
 		   to the end — the last block on the page is never the one left dimmed. */
 		margin-block-start: 3.5rem;
@@ -1393,29 +1394,38 @@
 	}
 
 	/*
-	 * The quiet half is narrowed so the primary's own label fits on one line: at 375px the row
-	 * is 335px, and `Practise these 3 again` needs 178 of the 195 this leaves it.
+	 * The column is 295px at 375px, not 335. `.app-shell` and `.summary` each add
+	 * `--spacing-gutter` (20px), so the inset is 40px a side: 375 − 80 = 295. Same double
+	 * gutter at 361 (281px) through 398. `Practise these 10 again` nowrap plus `10 more`
+	 * shrink-0 measured 319, which overran every one of those widths and put the quiet pill
+	 * past the card's right edge — 37.6px over at 361, 23.6 at 375.
+	 *
+	 * So the primary may wrap, and both pills sit in the column. The quiet half stays
+	 * shrink-0 so `10 more` keeps a 44px target and its right edge is the card's; the
+	 * primary takes the rest with `min-inline-size: 0` so its label wraps *inside* the pill
+	 * instead of growing the row. From 25rem there is room for one line and nowrap returns.
 	 */
-	.actions .btn-quiet {
-		padding-inline: 0.875rem;
-	}
-
 	.actions .btn-primary {
-		white-space: nowrap;
+		min-inline-size: 0;
+		padding-inline: var(--spacing-sm);
+		white-space: normal;
+		text-wrap: balance;
 	}
 
-	/*
-	 * 320px: `Practise these 3 again` beside `10 more` wants 273px of a 240px row, and the row
-	 * was running off the screen. The label wraps to two lines inside its own pill instead —
-	 * still one row, still one decision, and the quiet half keeps its full tap target.
-	 */
-	@media (max-width: 22.5rem) {
+	.actions .btn-quiet {
+		flex: none;
+		align-self: center;
+		padding-inline: var(--spacing-xs);
+	}
+
+	@media (min-width: 25rem) {
 		.actions .btn-primary {
-			white-space: normal;
+			padding-inline: var(--spacing-gutter);
+			white-space: nowrap;
 		}
 
 		.actions .btn-quiet {
-			padding-inline: 0.625rem;
+			padding-inline: 0.875rem;
 		}
 	}
 

@@ -91,7 +91,7 @@
 	import { base } from '$app/paths';
 	import AppBar from '$lib/components/shell/AppBar.svelte';
 	import SiteFooter from '$lib/components/shell/SiteFooter.svelte';
-	import { readRoute } from '$lib/components/shell/route';
+	import { ERROR_TITLE, NOT_FOUND_TITLE, readRoute } from '$lib/components/shell/route';
 	import { createChrome } from '$lib/components/shell/chrome.svelte';
 	import { createBackTarget } from '$lib/components/shell/back.svelte';
 	import { createScrollMemory } from '$lib/components/shell/scroll';
@@ -170,6 +170,9 @@
 	/**
 	 * Canonical without the query string: `?state=summary` is a view of `/quiz/1`, not a
 	 * separate document, and a shared link should resolve to one address either way.
+	 *
+	 * Emitted only for a real page. A 404 that names itself canonical tells crawlers the
+	 * bogus URL is the document — `/browse/9`, `/quiz/9` and `/nope` all did that.
 	 */
 	const canonical = $derived(`${page.url.origin}${page.url.pathname}`);
 
@@ -186,7 +189,15 @@
 	const finished = $derived(
 		page.url.searchParams.get('state') === 'summary' || (route.focus && pageOwnsHeading)
 	);
-	const title = $derived(finished && route.resultsTitle ? route.resultsTitle : route.title);
+	const title = $derived(
+		page.status === 404
+			? NOT_FOUND_TITLE
+			: page.status >= 400
+				? ERROR_TITLE
+				: finished && route.resultsTitle
+					? route.resultsTitle
+					: route.title
+	);
 
 	/**
 	 * And the same for the BAR, which is the only chrome a finished run still has. The title
@@ -211,8 +222,10 @@
 
 <svelte:head>
 	<title>{title}</title>
-	<link rel="canonical" href={canonical} />
-	<meta property="og:url" content={canonical} />
+	{#if page.status === 200}
+		<link rel="canonical" href={canonical} />
+		<meta property="og:url" content={canonical} />
+	{/if}
 	<meta property="og:image" content={shareImage} />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />

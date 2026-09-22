@@ -184,7 +184,15 @@
 	import type { Question, Syllable, Word } from '$lib/types';
 	import { Hanzi, Pinyin } from '$lib/design';
 	import SpeakButton from '$lib/components/summary/SpeakButton.svelte';
-	import { fullGloss, glossEm, posLabel, primaryGloss, promptLabel, splitExample } from './quiz';
+	import {
+		fullGloss,
+		glossEm,
+		posLabel,
+		primaryGloss,
+		promptLabel,
+		splitExample,
+		splitExampleSound
+	} from './quiz';
 	import { isCorrect, isIntroduction } from '$lib/session';
 
 	interface Props {
@@ -339,9 +347,13 @@
 	 * hint answered and eight syllables more. It is laid over the reserved box, not placed in
 	 * it, so the swap costs the character nothing and moves nothing below it.
 	 *
-	 * A tap turns the card over: clue out, word in. Nothing moves, and on a production card the
-	 * blank is never filled in front of the learner — the answer replaces the question rather
-	 * than annotating it.
+	 * THE SENTENCE STAYS ON THE REVEAL, AND THE BLANK IS FILLED. A tap used to null the clue
+	 * and print the word's own pinyin in its place, so 我们坐在桌子的____。 vanished the moment
+	 * the learner had earned 我们坐在桌子的一边。 The sound slot now holds the sentence in both
+	 * states: before the tap as today, and after it with the target in ink and the blank put
+	 * back. The word's own pinyin pays for that by moving down onto the gloss row, beside the
+	 * meaning (`chēzhàn · rail station · bus stop`), speaker trailing — same three rows, same
+	 * heights, nothing below the stage moves.
 	 */
 
 	/** The word's sentence. Every shipped word carries one; the type keeps it optional. */
@@ -351,16 +363,31 @@
 	 * same split is what lets a question blank it instead. See `splitExample`.
 	 */
 	const sentence = $derived(example ? splitExample(example.hanzi, word.hanzi) : null);
-	/** The sentence as a clue: on either question card, while the question is still open. */
-	const clue = $derived(!teaching && !answered ? sentence : null);
 	/**
-	 * The sound is on screen because the whole word is, or because it was asked for.
-	 *
-	 * `!clue` on the second term: where a clue is in the sound slot the hint is one row down
-	 * and reveals the sentence's pinyin instead, so the word's own sound stays behind the
-	 * answer. (`hinted` can only ever be true in the recognition direction — see `canHint`.)
+	 * The sentence in the sound slot: on either question card, before the tap *and* after it.
+	 * Teaching keeps its sentence in `.aside`; a word with none falls through to the pinyin.
 	 */
-	const showSound = $derived(shown || (hinted && !clue));
+	const clue = $derived(!teaching && sentence ? sentence : null);
+	/** The same cut, on the pinyin line, so the target syllables can be set in ink. */
+	const soundParts = $derived(
+		example ? splitExampleSound(example.pinyin, word.pinyin, example.hanzi) : []
+	);
+	/**
+	 * The sound is on screen because the whole word is, or because it was asked for — and
+	 * because the sound slot is not already holding the sentence. (`hinted` can only ever be
+	 * true in the recognition direction — see `canHint`.)
+	 */
+	const showSound = $derived(!clue && (shown || hinted));
+	/**
+	 * The gloss line the slot is measured by. On a question card this is the word's pinyin
+	 * beside the meaning, reserved in both states so adding it on the tap cannot wrap the
+	 * line and steal a row from the character.
+	 */
+	const glossLine = $derived(clue ? `${word.pinyin} · ${meaning}` : meaning);
+	/** Speaker trails the gloss row on a question reveal; the teach card keeps it on the sound. */
+	const sayInGloss = $derived(Boolean(clue) && shown);
+	/** Named so the compiler cannot turn ` · ` into a newline of template whitespace. */
+	const DOT = ' · ';
 	/**
 	 * The word taken apart, one character to one syllable — the second block for a word with no
 	 * sentence. All 4,308 shipped words carry one (500/770/969/999/1070, build-gated), so this
@@ -386,7 +413,7 @@
 	class:teach={teaching}
 	class:bare
 	style:--cols={cols}
-	style:--gloss-em={glossEm(meaning)}
+	style:--gloss-em={glossEm(glossLine)}
 	style:--ask-rows={senses.length}
 	style:--ask-em={senseEm}
 	style:--ask-em2={senseEm2}
@@ -440,18 +467,13 @@
 	-->
 	<div class="under">
 		<div class="sound-slot">
-			{#if showSound}
-				<p class="sound" class:arrive={answered && !hinted}><Pinyin {word} size="xl" /></p>
-				<span class="say-slot" class:icon={!teaching}
-					><SpeakButton text={word.hanzi} pinyin={word.pinyin} /></span
-				>
-			{:else if clue}
-				<!-- The question's own context, in the slot the answer's sound will land in. The
-				     word is cut out of it where the character is the answer and bolded in it
-				     where the character is the question. -->
+			{#if clue}
+				<!-- The question's own sentence, before the tap and after it. The word is cut
+				     out of it while the character is still the answer, then put back in ink
+				     once the tap lands — 我们坐在桌子的____。 becomes 我们坐在桌子的一边。 -->
 				<p class="clue-face" style:--sen-chars={clue.chars}>
-					{#each clue.parts as part, i (i)}{#if part.hit && production}<span class="sr-only"
-								>(blank)</span
+					{#each clue.parts as part, i (i)}{#if part.hit && production && !answered}<span
+								class="sr-only">(blank)</span
 							><span class="blank" aria-hidden="true"
 								><Hanzi text={part.text} size="sm" display class="clue-hanzi" /></span
 							>{:else}<Hanzi
@@ -461,6 +483,11 @@
 								class={part.hit ? 'clue-hanzi hit' : 'clue-hanzi'}
 							/>{/if}{/each}
 				</p>
+			{:else if showSound}
+				<p class="sound" class:arrive={answered && !hinted}><Pinyin {word} size="xl" /></p>
+				<span class="say-slot" class:icon={!teaching}
+					><SpeakButton text={word.hanzi} pinyin={word.pinyin} /></span
+				>
 			{:else if canHint}
 				{@render pinyinHint(false)}
 			{/if}
@@ -470,9 +497,14 @@
 			The gloss slot is measured by the revealed meaning in both states, so a question
 			cannot be a different height from its own answer.
 		-->
-		<div class="gloss-slot">
-			<p class="meaning" class:veiled={!shown}>{meaning}</p>
-			{#if clue && example}
+		<div class="gloss-slot" class:with-say={Boolean(clue)}>
+			<p class="meaning" class:veiled={!shown}>
+				{#if clue}<Pinyin {word} size="sm" class="word-py" />{DOT}{/if}{meaning}
+			</p>
+			{#if sayInGloss}
+				<span class="say-slot icon"><SpeakButton text={word.hanzi} pinyin={word.pinyin} /></span>
+			{/if}
+			{#if clue && example && !answered}
 				<!-- Laid over the reserved box rather than placed in it, so what this row says
 				     costs the character nothing — the same trick the extra glosses used, spent
 				     on something that is not half of a phrase printed elsewhere. -->
@@ -480,7 +512,11 @@
 					<p class="clue-en" style:--clue-em={glossEm(example.english)}>{example.english}</p>
 				{:else if hinted}
 					<p class="clue-py" style:--clue-em={glossEm(example.pinyin)}>
-						<Pinyin pinyin={example.pinyin} size="sm" tones={false} sentence={example.hanzi} />
+						{#each soundParts as part, i (i)}<Pinyin
+								pinyin={part.text}
+								size="sm"
+								class={part.hit ? 'hit' : ''}
+							/>{/each}
 					</p>
 				{:else if canHint}
 					{@render pinyinHint(true)}
@@ -537,7 +573,11 @@
 					/>{/each}
 			</p>
 			<p class="sen-sound">
-				<Pinyin pinyin={example.pinyin} size="sm" tones={false} sentence={example.hanzi} />
+				{#each soundParts as part, i (i)}<Pinyin
+						pinyin={part.text}
+						size="sm"
+						class={part.hit ? 'hit' : ''}
+					/>{/each}
 			</p>
 			<p class="sen-english">{example.english}</p>
 		</section>
@@ -1013,6 +1053,7 @@
 	.gloss-slot {
 		/* An inline-size container, so the meaning can be divided into it. It has a definite
 		   inline size already, so this contains nothing that was load-bearing. */
+		--gloss-ends: 0px;
 		container-type: inline-size;
 		position: relative;
 		display: grid;
@@ -1028,6 +1069,12 @@
 		 */
 		min-block-size: calc(var(--gloss-max) * 1.35);
 		margin-block-start: 0.25rem;
+	}
+
+	/* Speaker trails the pinyin · meaning line; pad both ends so the line stays centred
+	   under the character and never runs under the button. Reserved in both states. */
+	.gloss-slot.with-say {
+		--gloss-ends: 2.75rem;
 	}
 
 	/* The reveal's rows are laid out in both states; only the ink is withheld. */
@@ -1140,6 +1187,15 @@
 	.clue-py :global(.pinyin) {
 		font-size: min(var(--text-pinyin-sm), calc(96cqw / var(--clue-em)));
 		line-height: 1.2;
+	}
+
+	/* The target word's own syllables, in ink-weight on the page ground — matching `.clue-face
+	   .hit` on the hanzi line, so the two can be read against each other. Tone colour stays:
+	   this line is not a coloured surface. */
+	.clue-py :global(.hit),
+	.sen-sound :global(.hit) {
+		font-weight: 700;
+		color: var(--color-ink);
 	}
 
 	/*
@@ -1278,6 +1334,7 @@
 	.meaning {
 		max-inline-size: 100%;
 		margin: 0;
+		padding-inline: var(--gloss-ends, 0px);
 		/*
 		 * 92, not 100. Two margins are being bought here. `glossEm` is an estimate, and a text
 		 * run laid out at 12–14px is up to 5% wider than the same run measured at 100px and
@@ -1285,12 +1342,26 @@
 		 * full column lands a hair over it and wraps, which is the one outcome this whole
 		 * mechanism exists to avoid. Eight per cent covers both, measured: at 92 the only
 		 * glosses that still take two lines are the ones that cannot fit at the floor.
+		 *
+		 * `--gloss-ends` is the speaker's reserve on a question card; subtracted here so the
+		 * pinyin · meaning line is sized into the column it actually has.
 		 */
-		font-size: clamp(var(--gloss-min), calc(92cqw / var(--gloss-em)), var(--gloss-max));
+		font-size: clamp(
+			var(--gloss-min),
+			calc((100cqw - 2 * var(--gloss-ends, 0px)) * 0.92 / var(--gloss-em)),
+			var(--gloss-max)
+		);
 		font-weight: 550;
 		line-height: 1.35;
 		color: var(--color-ink);
 		text-wrap: pretty;
+	}
+
+	/* Inherit the gloss size so `chēzhàn · rail station · bus stop` is one line, not a 14px
+	   pinyin stuck to an independently-sized meaning. */
+	.meaning :global(.word-py) {
+		font-size: 1em;
+		font-weight: 650;
 	}
 
 	.pos {

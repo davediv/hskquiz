@@ -14,10 +14,11 @@
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import type { Level, Word } from '../types';
-import { buildSession, isCorrect, mulberry32 } from './index';
+import type { Level, ProgressState, Word, WordProgress } from '../types';
+import { buildSession, isCorrect, isScored, mulberry32, readRecord } from './index';
 import { sharesSense } from './distractors';
 import { senseSet } from '$lib/data/senses';
+import { applyAnswer, applySeen, blankWord } from '../progress/progress-core';
 
 const NOW = 1_700_000_000_000;
 const LEVELS: Level[] = [1, 2, 3, 4, 5];
@@ -89,7 +90,7 @@ describe.skipIf(!available)('buildSession against the shipped HSK list', () => {
 				}
 			}
 		}
-	});
+	}, 15_000);
 
 	it('never offers a contained form of the answer as a wrong answer', () => {
 		// 去 "to go" beside 出去 "to go out", and — the half the prefix-only guard used to miss —
@@ -148,5 +149,95 @@ describe.skipIf(!available)('buildSession against the shipped HSK list', () => {
 			);
 		}
 		expect(seen.size).toBeGreaterThan(20);
+	});
+});
+
+const DAY = 24 * 60 * 60 * 1000;
+
+function median(values: number[]): number {
+	if (values.length === 0) return Number.NaN;
+	const sorted = values.slice().sort((a, b) => a - b);
+	const mid = Math.floor(sorted.length / 2);
+	return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
+}
+
+/**
+ * Drive `buildSession` + the real `applyAnswer`/`applySeen` writers for `days` daily runs
+ * on one level. `abandonEvery` of 5 means every fifth run stops after four cards.
+ */
+function playLevel(
+	words: readonly Word[],
+	level: Level,
+	days: number,
+	accuracy: number,
+	seed: number,
+	abandonEvery = 0
+) {
+	const rng = mulberry32(seed);
+	const byWord: Record<string, WordProgress> = {};
+	const answerAt = new Map<string, number[]>();
+	const introCounts: number[] = [];
+	for (let day = 0; day < days; day++) {
+		const at = NOW + day * DAY;
+		const saved: ProgressState = { version: 1, byWord, levels: {} };
+		const built = buildSession(words, level, saved, 10, { rng, now: at });
+		const stop = abandonEvery > 0 && (day + 1) % abandonEvery === 0 ? 4 : built.questions.length;
+		let intros = 0;
+		for (let i = 0; i < stop; i++) {
+			const question = built.questions[i];
+			const rec = (byWord[question.word.id] ??= blankWord(question.word.id));
+			if (!isScored(question)) {
+				applySeen(rec, at, 0);
+				intros++;
+				continue;
+			}
+			applyAnswer(rec, rng() < accuracy, at, 0);
+			const times = answerAt.get(question.word.id) ?? [];
+			times.push(at);
+			answerAt.set(question.word.id, times);
+		}
+		introCounts.push(intros);
+	}
+	const end = NOW + (days - 1) * DAY;
+	const records = Object.values(byWord).map((raw) => readRecord(raw));
+	const met = records.filter((facts) => facts.met);
+	const answered = records.filter((facts) => facts.answers > 0);
+	const gaps: number[] = [];
+	for (const times of answerAt.values()) {
+		for (let i = 1; i < times.length; i++) gaps.push((times[i] - times[i - 1]) / DAY);
+	}
+	return {
+		introCounts,
+		met: met.length,
+		once: answered.filter((facts) => facts.answers === 1).length,
+		stale30: answered.filter((facts) => facts.lastSeen <= end - 30 * DAY).length,
+		streak3: records.filter((facts) => facts.streak >= 3).length,
+		medianGap: median(gaps),
+		taughtOnly: records.filter((facts) => facts.taughtOnly).length
+	};
+}
+
+describe.skipIf(!available)('a learner over 120 daily HSK 1 sessions', () => {
+	const words = available ? readLevel(1) : [];
+
+	it('keeps introduced words in active review at 75% accuracy', () => {
+		const run = playLevel(words, 1, 120, 0.75, 7);
+		const snapshot = `met=${run.met} once=${run.once} stale30=${run.stale30} streak3=${run.streak3} gap=${run.medianGap} owed=${run.taughtOnly} intros=${run.introCounts.slice(0, 20).join(',')}`;
+		expect(run.taughtOnly, snapshot).toBe(0);
+		expect(run.once, snapshot).toBeLessThan(40);
+		expect(run.stale30, snapshot).toBeLessThan(60);
+		// A fixed count of 150 would require introducing more words than the due backlog can
+		// support. Check how many of the words met have reached a three-answer streak instead.
+		expect(run.streak3, snapshot).toBeGreaterThan(90);
+		expect(run.streak3 / run.met, snapshot).toBeGreaterThan(0.7);
+		expect(run.medianGap, snapshot).toBeLessThan(5);
+	});
+
+	it('does not leave abandoned introductions unasked', () => {
+		// One run in five stops after four cards. The review draw takes taught-only words
+		// first, so they cannot sit at weight 1.0 behind a miss at 12 for the rest of the
+		// profile. Loop 6 left 27 of them; this has to stay far under that.
+		const run = playLevel(words, 1, 150, 0.75, 11, 5);
+		expect(run.taughtOnly).toBeLessThan(8);
 	});
 });

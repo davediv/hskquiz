@@ -14,12 +14,24 @@
 	own syllabification on 4,306 of the 4,308 shipped words (see `tone.spec.ts`) — but the data
 	is exact by construction, so prefer it.
 
-	PINYIN IS WHERE TONE COLOUR LIVES — all of it. `<Hanzi>` sets characters in ink, so this
-	component is the only place in the app a learner reads tone off a colour. `tones` therefore
-	defaults on, and `tones={false}` is for exactly one situation: pinyin on a surface that
-	already owns its colour, such as an ink-filled button, where the tone hues would fail
-	contrast. It is NOT a way to set pinyin in a brand colour instead — flat accent pinyin was
-	loop 2's landing-page bug, and it reads as "these words are an error".
+	PINYIN IS WHERE TONE COLOUR LIVES — all of it, on screens that are drilling tone. `<Hanzi>`
+	sets characters in ink, so this component is the only place in the app a learner reads tone
+	off a colour by default. `tones` therefore defaults on.
+
+	`tones={false}` is the one-ink reading. Two legitimate uses, and they share a mechanism —
+	no per-syllable `color`, so the ink comes from this element (or a wrapper) rather than from
+	five tone tokens:
+
+	  · a surface that already owns its colour, such as an ink-filled button, where the tone
+	    hues would fail contrast — the reading inherits;
+	  · a quiet line that is not drilling tone, such as the level-select preview, which wants
+	    a single muted ink (`--color-ink-muted`) rather than five hues on 14px type. The
+	    component marks that reading with `.pinyin-flat`; the caller sets the muted ink on it.
+	    Do not paint a colour over a tone-coloured span — that fights `style:color` and is how
+	    loop 2's landing page printed every preview word in ✕-NOT-QUITE red.
+
+	It is NOT a way to set pinyin in a brand colour instead — flat accent pinyin was loop 2's
+	landing-page bug, and it reads as "these words are an error".
 
 	IT PRINTS THE SOURCE STRING, EXACTLY. Colouring per syllable means slicing `Word.pinyin`
 	apart, and how it is put back together is spelling, not styling. 汉语拼音正词法 sets pinyin
@@ -75,7 +87,8 @@
 		size?: Size;
 		/**
 		 * Colour each syllable by its tone: 1 vermilion, 2 leaf, 3 blue, 4 violet, 0 petrol.
-		 * On by default — turn it off only where the surface owns its colour.
+		 * On by default. Off is the one-ink reading: a surface that owns its colour, or a quiet
+		 * line (level-select preview) that wants muted rather than five hues. Adds `.pinyin-flat`.
 		 */
 		tones?: boolean;
 		/**
@@ -149,6 +162,6 @@
 	});
 </script>
 
-<span lang="zh-Latn-pinyin" class="pinyin {SIZE_CLASS[size]} {extra}"
+<span lang="zh-Latn-pinyin" class="pinyin {SIZE_CLASS[size]} {tones ? '' : 'pinyin-flat'} {extra}"
 	>{#each parts as part, i (i)}<span style:color={part.color}>{part.text}</span>{/each}</span
 >
