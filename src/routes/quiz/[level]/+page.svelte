@@ -346,6 +346,7 @@
 			<a class="btn btn-quiet btn-block" href={resolve('/')}>Back to levels</a>
 		</section>
 	{:else if status === 'loading' || !session}
+		<p class="sr-only" role="status">Loading HSK {level} practice.</p>
 		<!-- Shaped like the run it becomes, so the first frame does not jump into the second. -->
 		<div class="run" aria-hidden="true">
 			<div class="skeleton-rail"></div>

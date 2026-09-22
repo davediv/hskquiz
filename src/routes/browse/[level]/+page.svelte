@@ -732,6 +732,7 @@
 		</div>
 
 		{#if phase === 'loading'}
+			<p class="sr-only" role="status">Loading HSK {level} vocabulary.</p>
 			<div class="list" aria-hidden="true">
 				{#each SKELETON as slot (slot)}
 					<div class="skeleton">
