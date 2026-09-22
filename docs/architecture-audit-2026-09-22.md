@@ -69,7 +69,7 @@ The route tree is defined by `src/routes/+page.svelte`, `src/routes/browse/[leve
   - **Files:** `src/lib/components/browse/SearchField.svelte`, `src/routes/browse/[level]/+page.svelte`
   - **Depends on:** —
 
-- [ ] **AR-03 — Announce vocabulary loading** · Priority: **Medium** · Effort: S
+- [x] **AR-03 — Announce vocabulary loading** · done 2026-09-22 · Priority: **Medium** · Effort: S
   - **Issue:** Browse and quiz render only `aria-hidden` skeletons while a level chunk loads (`src/routes/browse/[level]/+page.svelte:718-726`; `src/routes/quiz/[level]/+page.svelte:320-331`).
   - **Why it matters:** Assistive technology reaches an apparently empty main region during a core transition, with no indication that content is coming.
   - **Recommendation:** Add a concise loading message with status semantics on both routes while retaining the visual skeletons, then let the loaded content or existing error state replace it.
