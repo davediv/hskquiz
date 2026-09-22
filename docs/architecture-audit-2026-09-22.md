@@ -77,7 +77,7 @@ The route tree is defined by `src/routes/+page.svelte`, `src/routes/browse/[leve
   - **Files:** `src/routes/browse/[level]/+page.svelte`, `src/routes/quiz/[level]/+page.svelte`
   - **Depends on:** —
 
-- [ ] **AR-04 — Make browse failure copy reflect storage state** · Priority: **Medium** · Effort: S
+- [x] **AR-04 — Make browse failure copy reflect storage state** · done 2026-09-22 · Priority: **Medium** · Effort: S
   - **Issue:** Browse always claims practised progress is kept on this device when the vocabulary chunk fails, even if local storage is unavailable or writes have failed (`src/routes/browse/[level]/+page.svelte:657-675`). The quiz's matching failure state already conditions this reassurance on `progress.status` (`src/routes/quiz/[level]/+page.svelte:300-310`).
   - **Why it matters:** A recovery screen can give a false promise about learner data at the moment reliability matters most.
   - **Recommendation:** Use the same conditional storage copy as quiz, with a neutral network-retry message in other storage states.

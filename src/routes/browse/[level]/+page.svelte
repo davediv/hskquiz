@@ -675,8 +675,8 @@
 			<p class="eyebrow">Could not load</p>
 			<h2 class="panel-title">The HSK {level} word list did not arrive</h2>
 			<p class="panel-body">
-				That is usually the network. Nothing you have practised is lost — progress is kept on this
-				device.
+				That is usually the network. {#if progress.status === 'saving'}Nothing you have practised is
+					lost — progress is kept on this device.{/if}
 			</p>
 			<button
 				type="button"
