@@ -5,14 +5,8 @@
  * so the screen itself stays a thin layer of markup over the session engine.
  */
 
-import {
-	LEVELS,
-	type Direction,
-	type Level,
-	type Question,
-	type Session,
-	type Word
-} from '$lib/types';
+import { type Direction, type Level, type Question, type Session, type Word } from '$lib/types';
+import { parseLevelSegment } from '$lib/levels/route';
 import { isCorrect, isScored } from '$lib/session';
 
 /**
@@ -254,9 +248,7 @@ export function promptLabel(kind: Direction | 'introduce'): string {
  * the route can render a way out instead of an error.
  */
 export function parseLevel(segment: string | null | undefined): Level | null {
-	if (typeof segment !== 'string' || segment.trim() === '') return null;
-	const n = Number(segment);
-	return LEVELS.find((level) => level === n) ?? null;
+	return parseLevelSegment(segment);
 }
 
 /**

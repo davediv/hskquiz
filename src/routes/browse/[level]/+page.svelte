@@ -32,6 +32,7 @@
 	import { loadLevel } from '$lib/data';
 	import { SHIPPED_SIZES } from '$lib/data/sizes';
 	import { progress } from '$lib/progress';
+	import { parseLevelSegment as toLevel } from '$lib/levels/route';
 	import { LEVELS, LEVEL_SIZES, type Level, type Word } from '$lib/types';
 	import LevelSwitch from '$lib/components/browse/LevelSwitch.svelte';
 	import SearchField from '$lib/components/browse/SearchField.svelte';
@@ -63,12 +64,6 @@
 	const FOCUS_GAP = 8;
 	/** Placeholder rows while the level's chunk is in flight. */
 	const SKELETON = Array.from({ length: 10 }, (_, i) => i);
-
-	function toLevel(segment: string | undefined): Level | null {
-		if (typeof segment !== 'string' || segment.trim() === '') return null;
-		const n = Number(segment);
-		return LEVELS.find((level) => level === n) ?? null;
-	}
 
 	const level = $derived(toLevel(page.params.level));
 
