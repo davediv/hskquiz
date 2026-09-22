@@ -15,6 +15,7 @@
 	import { LEVELS, LEVEL_SIZES, type Level } from '$lib/types';
 	import { SHIPPED_SIZES, SHIPPED_TOTAL } from '$lib/data/sizes';
 	import { progress } from '$lib/progress';
+	import { availableSessionStorage, clearAllSessions } from '$lib/session/persistence';
 	import { Pinyin } from '$lib/design';
 	import StorageNotice from '$lib/progress/StorageNotice.svelte';
 	import LevelCard from '$lib/components/levels/LevelCard.svelte';
@@ -119,7 +120,7 @@
 			return;
 		}
 		confirmingReset = false;
-		progress.resetAll();
+		if (progress.resetAll()) clearAllSessions(availableSessionStorage());
 	}
 </script>
 

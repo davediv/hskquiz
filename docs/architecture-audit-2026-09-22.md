@@ -1,19 +1,19 @@
 # Architecture & UX Audit — 2026-09-22
 
-*Audited on 2026-09-22 at commit `5b84ad9` with pre-existing working-tree changes · Scope: entire app · Live walkthrough: unavailable (the existing `127.0.0.1:5177` dev server returned HTTP 500, `EPERM` scanning `src`; no connected browser surface)*
+_Audited on 2026-09-22 at commit `5b84ad9` with pre-existing working-tree changes · Scope: entire app · Live walkthrough: unavailable (the existing `127.0.0.1:5177` dev server returned HTTP 500, `EPERM` scanning `src`; no connected browser surface)_
 
-*Previous audit: none*
+_Previous audit: none_
 
 Tick a box when its recommendation is implemented. The checkbox is the single source of truth for that item; the sections after the list only reference IDs.
 
 ## Summary
 
 | Priority | Count |
-|----------|-------|
-| Critical | 0 |
-| High | 1 |
-| Medium | 4 |
-| Low | 0 |
+| -------- | ----- |
+| Critical | 0     |
+| High     | 1     |
+| Medium   | 4     |
+| Low      | 0     |
 
 The five HSK levels and two core activities are reachable without authentication. The compact, contextual navigation fits this small route tree. The main structural weakness is that a learner's quiz position and results exist only in a mounted component, while individual answers already persist.
 
@@ -53,7 +53,7 @@ The route tree is defined by `src/routes/+page.svelte`, `src/routes/browse/[leve
 
 ## Recommendations
 
-- [ ] **AR-01 — Restore an interrupted quiz and its result** · Priority: **High** · Effort: L
+- [x] **AR-01 — Restore an interrupted quiz and its result** · done 2026-09-22 · Priority: **High** · Effort: L
   - **Issue:** `/quiz/[level]` creates a random session in a component effect, while each answer is recorded immediately. Refresh, history re-entry, or leaving results for Browse and returning creates a different run, losing the learner's position or result (`src/routes/quiz/[level]/+page.svelte:135-189,206-246,332-337`; `src/lib/components/summary/SessionSummary.svelte:937-947`).
   - **Why it matters:** A common interruption can replace the task in progress, and already-recorded answers cannot reconstruct the same question sequence or summary.
   - **Recommendation:** Save a versioned active-session snapshot for the current level (question and choice IDs, answers, index, and finished state) in browser session storage; restore it on re-entry after validating it against the loaded vocabulary. Distinguish explicit “another run” from resume, and clear or replace the snapshot only when the learner starts a new run. Keep the existing per-word progress writes and demo-preview behavior.
