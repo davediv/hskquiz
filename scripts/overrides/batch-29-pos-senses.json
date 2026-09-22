@@ -1,0 +1,44 @@
+{
+	"L2-0422": {
+		"meanings": ["measure word: bottles", "a bottle"],
+		"senses": [
+			{ "pos": "M", "gloss": "measure word: bottles" },
+			{ "pos": "N", "gloss": "a bottle" }
+		],
+		"note": "Official N/M. 瓶子 owns the primary 'bottle'; 瓶 still advertises N, so the noun sits second and the classifier (一瓶水) leads."
+	},
+	"L2-0580": {
+		"meanings": ["to take a nap in the afternoon", "an afternoon nap"],
+		"senses": [
+			{ "pos": "V", "gloss": "to take a nap in the afternoon" },
+			{ "pos": "N", "gloss": "an afternoon nap" }
+		],
+		"note": "Official N/V. CEDICT only lists the verb; the noun reading (睡个午睡) was missing under an N chip."
+	},
+	"L2-0606": {
+		"meanings": ["to be careful", "to take care", "careful"],
+		"senses": [
+			{ "pos": "V", "gloss": "to be careful" },
+			{ "pos": "V", "gloss": "to take care" },
+			{ "pos": "Adj", "gloss": "careful" }
+		],
+		"note": "Official Adj/V. Both shipped glosses were verbs, so the Adj chip sat on 'to be careful'."
+	},
+	"L5-0781": {
+		"meanings": ["to feel awkward", "to make things hard for someone", "awkward"],
+		"senses": [
+			{ "pos": "V", "gloss": "to feel awkward" },
+			{ "pos": "V", "gloss": "to make things hard for someone" },
+			{ "pos": "Adj", "gloss": "awkward" }
+		],
+		"note": "Official Adj/V. Both shipped glosses were verbs; the adjective reading (很为难) was missing."
+	},
+	"L5-0989": {
+		"meanings": ["shocked, astonished", "to shock, to astonish"],
+		"senses": [
+			{ "pos": "Adj", "gloss": "shocked, astonished" },
+			{ "pos": "V", "gloss": "to shock, to astonish" }
+		],
+		"note": "Official Adj/V. CEDICT only lists the verb; the adjective reading (我很震惊) was missing, so the row printed ADJ over two verb glosses."
+	}
+}

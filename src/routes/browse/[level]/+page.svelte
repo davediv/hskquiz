@@ -26,6 +26,7 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';
+	import { error } from '@sveltejs/kit';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { Hanzi, Pinyin } from '$lib/design';
@@ -54,7 +55,7 @@
 		type WordStatus
 	} from '$lib/components/browse/status';
 
-	type Phase = 'loading' | 'ready' | 'failed' | 'no-level';
+	type Phase = 'loading' | 'ready' | 'failed';
 
 	/** Rows rendered before the first measurement, and the whole list without JavaScript. */
 	const PROBE_ROWS = 24;
@@ -64,6 +65,10 @@
 	const FOCUS_GAP = 8;
 	/** Placeholder rows while the level's chunk is in flight. */
 	const SKELETON = Array.from({ length: 10 }, (_, i) => i);
+
+	if (toLevel(page.params.level) === null) {
+		error(404, 'Not a level');
+	}
 
 	const level = $derived(toLevel(page.params.level));
 
@@ -121,10 +126,7 @@
 		// empty-progress markup has been matched and the real store is safe to read.
 		hydrated = true;
 		if (target === null) {
-			loadId++;
-			words = [];
-			phase = 'no-level';
-			return;
+			error(404, 'Not a level');
 		}
 		openIndex = null;
 		trail = [];
@@ -647,25 +649,7 @@
 	data-rows={showChips ? 'two' : 'one'}
 	style:--browse-sticky-h={stickyH > 0 ? `${stickyH}px` : null}
 >
-	{#if phase === 'no-level'}
-		<section class="panel">
-			<p class="eyebrow">Not a level</p>
-			<h1 class="panel-title">hskquiz covers HSK 1 to 5</h1>
-			<p class="panel-body">
-				There is no level “{page.params.level}”. The five official HSK 3.0 word lists are below.
-			</p>
-			<ul class="jump">
-				{#each LEVELS as choice (choice)}
-					<li>
-						<a class="jump-link" href={resolve('/browse/[level]', { level: String(choice) })}>
-							HSK {choice}
-						</a>
-					</li>
-				{/each}
-			</ul>
-			<a class="btn btn-quiet btn-block" href={resolve('/')}>Back to levels</a>
-		</section>
-	{:else if phase === 'failed'}
+	{#if phase === 'failed'}
 		<section class="panel">
 			<p class="eyebrow">Could not load</p>
 			<h2 class="panel-title">The HSK {level} word list did not arrive</h2>
@@ -850,7 +834,6 @@
 			record={progress.forWord(sheetWord.id)}
 			position={openIndex + 1}
 			total={filtered.length}
-			browseLevel={level}
 			from={sheetFrom}
 			onclose={closeSheet}
 			onback={backSheet}
@@ -1252,34 +1235,5 @@
 	.panel-body {
 		margin: 0.625rem 0 1.5rem;
 		color: var(--color-ink-muted);
-	}
-
-	.jump {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin: 0 0 1.5rem;
-		padding: 0;
-		list-style: none;
-	}
-
-	.jump-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		min-block-size: var(--spacing-tap);
-		padding-inline: 1rem;
-		border: 1px solid var(--color-line-strong);
-		border-radius: var(--radius-pill);
-		color: var(--color-ink);
-		font-size: var(--text-sm);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	@media (hover: hover) {
-		.jump-link:hover {
-			background-color: var(--color-surface-sunken);
-		}
 	}
 </style>

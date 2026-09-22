@@ -74,7 +74,7 @@
 		"hanzi": "班",
 		"pinyin": "bān",
 		"level": 1,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["class of students", "work shift"],
 		"cedictDefs": [
 			"team; class; grade",
@@ -82,7 +82,7 @@
 			"work shift",
 			"classifier for groups of people and scheduled transport vehicles"
 		],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L1-0010",
@@ -123,7 +123,7 @@
 		"hanzi": "包",
 		"pinyin": "bāo",
 		"level": 1,
-		"pos": ["N", "M", "V"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["bag", "to wrap"],
 		"cedictDefs": [
 			"to cover",
@@ -141,7 +141,7 @@
 			"packet",
 			"CL:個|个[ge4],隻|只[zhi1]"
 		],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L1-0017",
@@ -615,7 +615,7 @@
 		"hanzi": "点",
 		"pinyin": "diǎn",
 		"level": 1,
-		"pos": ["M", "V", "N"],
+		"pos": ["M", "N", "V"],
 		"currentMeanings": ["o'clock", "a little", "to order food"],
 		"cedictDefs": [
 			"to touch briefly; to tap",
@@ -787,7 +787,7 @@
 		"pinyin": "è",
 		"level": 1,
 		"pos": ["Adj", "V"],
-		"currentMeanings": ["hungry"],
+		"currentMeanings": ["hungry", "to starve"],
 		"cedictDefs": ["hungry", "to starve (sb)"],
 		"reasons": ["has-authored-override", "single-character"]
 	},
@@ -862,7 +862,7 @@
 		"pinyin": "fēn",
 		"level": 1,
 		"pos": ["N", "M"],
-		"currentMeanings": ["minute", "point in a score"],
+		"currentMeanings": ["minute", "point in a score", "0.01 yuan"],
 		"cedictDefs": [
 			"to divide; to separate",
 			"to distribute; to allocate",
@@ -986,8 +986,8 @@
 		"hanzi": "跟",
 		"pinyin": "gēn",
 		"level": 1,
-		"pos": ["Prep", "Conj", "V"],
-		"currentMeanings": ["with", "to follow"],
+		"pos": ["Prep", "V", "Conj"],
+		"currentMeanings": ["with", "to follow", "and"],
 		"cedictDefs": [
 			"heel",
 			"to follow closely",
@@ -1088,7 +1088,7 @@
 		"hanzi": "还是",
 		"pinyin": "háishi",
 		"level": 1,
-		"pos": ["Adv", "Conj"],
+		"pos": ["Conj", "Adv"],
 		"currentMeanings": ["or in a question", "still"],
 		"cedictDefs": ["still (as before)", "had better", "unexpectedly", "or"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
@@ -1138,7 +1138,7 @@
 		"hanzi": "号",
 		"pinyin": "hào",
 		"level": 1,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["day of the month in speech", "number"],
 		"cedictDefs": [
 			"(literary) to call out; to command",
@@ -1153,7 +1153,7 @@
 			"(TCM) to feel (the pulse) (used in 號脈|号脉[hao4 mai4])",
 			"classifier for numbered people or items"
 		],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L1-0144",
@@ -1170,7 +1170,7 @@
 		"hanzi": "和",
 		"pinyin": "hé",
 		"level": 1,
-		"pos": ["Prep", "Conj"],
+		"pos": ["Conj", "Prep"],
 		"currentMeanings": ["and", "with"],
 		"cedictDefs": [
 			"(joining two nouns) and; together with; with (Taiwan pr. [han4])",
@@ -1349,7 +1349,7 @@
 		"hanzi": "家",
 		"pinyin": "jiā",
 		"level": 1,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["home", "family"],
 		"cedictDefs": [
 			"home",
@@ -1360,7 +1360,7 @@
 			"noun suffix for a specialist in some activity, such as a musician or revolutionary, corresponding to English -ist, -er, -ary or -ian",
 			"CL:個|个[ge4]"
 		],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L1-0171",
@@ -1596,7 +1596,7 @@
 		"hanzi": "口",
 		"pinyin": "kǒu",
 		"level": 1,
-		"pos": ["M", "N"],
+		"pos": ["N", "M"],
 		"currentMeanings": ["mouth", "measure word for family members"],
 		"cedictDefs": [
 			"mouth",
@@ -1624,7 +1624,7 @@
 		"hanzi": "快",
 		"pinyin": "kuài",
 		"level": 1,
-		"pos": ["Adj", "Adv"],
+		"pos": ["Adj"],
 		"currentMeanings": ["fast", "soon"],
 		"cedictDefs": [
 			"rapid",
@@ -1642,7 +1642,7 @@
 			"pleased",
 			"pleasant"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L1-0205",
@@ -1814,12 +1814,12 @@
 		"hanzi": "路",
 		"pinyin": "lù",
 		"level": 1,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["road", "route"],
 		"cedictDefs": ["road (CL:條|条[tiao2])", "journey", "route", "line (bus etc)", "sort; kind"],
 		"reasons": [
 			"has-authored-override",
-			"pos-and-gloss-disagree",
+			"official-pos-awaits-gloss",
 			"shares-sense-with-level-mate",
 			"single-character"
 		]
@@ -2343,7 +2343,7 @@
 			"(after a verb of motion indicates movement away from the speaker)",
 			"(used after certain verbs to indicate detachment or separation)"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
 		"id": "L1-0304",
@@ -2364,6 +2364,25 @@
 		"currentMeanings": ["person", "people"],
 		"cedictDefs": ["person; people", "CL:個|个[ge4],位[wei4],名[ming2]"],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L1-0306",
+		"hanzi": "认识",
+		"pinyin": "rènshi",
+		"level": 1,
+		"pos": ["V"],
+		"currentMeanings": ["to know someone", "to recognize"],
+		"cedictDefs": [
+			"to know",
+			"to recognize",
+			"to be familiar with",
+			"to get acquainted with sb",
+			"knowledge",
+			"understanding",
+			"awareness",
+			"cognition"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L1-0308",
@@ -2695,10 +2714,10 @@
 		"hanzi": "天",
 		"pinyin": "tiān",
 		"level": 1,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["day", "sky"],
 		"cedictDefs": ["day", "sky", "heaven"],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L1-0361",
@@ -2967,8 +2986,8 @@
 		"hanzi": "行",
 		"pinyin": "xíng",
 		"level": 1,
-		"pos": ["V", "Adj"],
-		"currentMeanings": ["all right", "capable"],
+		"pos": ["Adj", "V"],
+		"currentMeanings": ["all right", "capable", "to go"],
 		"cedictDefs": [
 			"(bound form) to walk; to go; to travel",
 			"(literary) trip; journey; visit",
@@ -2980,7 +2999,7 @@
 			"behavior; conduct (Taiwan pr. [xing4])",
 			"(literary) about to; soon"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
 		"id": "L1-0418",
@@ -3065,7 +3084,7 @@
 		"hanzi": "一块儿",
 		"pinyin": "yíkuàir",
 		"level": 1,
-		"pos": ["N", "Adv"],
+		"pos": ["Adv", "N"],
 		"currentMeanings": ["together with someone", "as a group"],
 		"cedictDefs": ["erhua variant of 一塊|一块[yi1 kuai4]"],
 		"reasons": ["has-authored-override", "no-usable-cedict-sense"]
@@ -3234,14 +3253,19 @@
 		"hanzi": "在",
 		"pinyin": "zài",
 		"level": 1,
-		"pos": ["V", "Prep", "Adv"],
+		"pos": ["V", "Prep"],
 		"currentMeanings": ["to be at", "at or in"],
 		"cedictDefs": [
 			"to exist; to be alive",
 			"(of sb or sth) to be (located) at",
 			"(used before a verb to indicate an action in progress)"
 		],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate",
+			"single-character"
+		]
 	},
 	{
 		"id": "L1-0457",
@@ -3520,6 +3544,26 @@
 		"reasons": ["has-authored-override", "no-usable-cedict-sense", "single-character"]
 	},
 	{
+		"id": "L2-0004",
+		"hanzi": "安静",
+		"pinyin": "ānjìng",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["quiet", "peaceful"],
+		"cedictDefs": ["quiet", "peaceful", "calm"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
+		"id": "L2-0005",
+		"hanzi": "安全",
+		"pinyin": "ānquán",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["safe", "safety"],
+		"cedictDefs": ["safe; secure", "safety; security"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L2-0007",
 		"hanzi": "班长",
 		"pinyin": "bānzhǎng",
@@ -3658,6 +3702,20 @@
 		"reasons": ["has-authored-override", "no-usable-cedict-sense", "single-character"]
 	},
 	{
+		"id": "L2-0029",
+		"hanzi": "表示",
+		"pinyin": "biǎoshì",
+		"level": 2,
+		"pos": ["V"],
+		"currentMeanings": ["to indicate", "to express"],
+		"cedictDefs": [
+			"(of sb) to express; to state; to show",
+			"(of sth) to indicate; to signify; to show",
+			"expression; manifestation"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L2-0030",
 		"hanzi": "不错",
 		"pinyin": "búcuò",
@@ -3666,6 +3724,16 @@
 		"currentMeanings": ["not bad", "pretty good"],
 		"cedictDefs": ["correct", "right", "not bad", "pretty good"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L2-0032",
+		"hanzi": "不够",
+		"pinyin": "búgòu",
+		"level": 2,
+		"pos": ["Adv"],
+		"currentMeanings": ["not enough", "insufficient"],
+		"cedictDefs": ["not enough", "insufficient", "inadequate"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0033",
@@ -3704,6 +3772,22 @@
 		"currentMeanings": ["not as good as", "worse than"],
 		"cedictDefs": ["not equal to; not as good as; inferior to", "it would be better to"],
 		"reasons": ["has-authored-override", "pos-and-gloss-disagree"]
+	},
+	{
+		"id": "L2-0042",
+		"hanzi": "不行",
+		"pinyin": "bùxíng",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["won't do", "not allowed"],
+		"cedictDefs": [
+			"won't do",
+			"be out of the question",
+			"be no good",
+			"not work",
+			"not be capable"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0044",
@@ -3938,6 +4022,24 @@
 		"currentMeanings": ["dictionary"],
 		"cedictDefs": ["dictionary", "CL:本[ben3],部[bu4]"],
 		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L2-0087",
+		"hanzi": "打算",
+		"pinyin": "dǎsuàn",
+		"level": 2,
+		"pos": ["V"],
+		"currentMeanings": ["to plan to"],
+		"cedictDefs": [
+			"to plan",
+			"to intend",
+			"to calculate",
+			"plan",
+			"intention",
+			"calculation",
+			"CL:個|个[ge4]"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0094",
@@ -4248,7 +4350,7 @@
 		"hanzi": "度",
 		"pinyin": "dù",
 		"level": 2,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["degree of temperature or angle", "extent"],
 		"cedictDefs": [
 			"to pass",
@@ -4261,7 +4363,7 @@
 			"kilowatt-hour",
 			"classifier for events and occurrences"
 		],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L2-0140",
@@ -4381,7 +4483,7 @@
 		"pinyin": "fāxiàn",
 		"level": 2,
 		"pos": ["V", "N"],
-		"currentMeanings": ["to discover", "to notice"],
+		"currentMeanings": ["to discover", "to notice", "a discovery"],
 		"cedictDefs": [
 			"to notice; to become aware of",
 			"to discover; to find; to detect",
@@ -4496,11 +4598,21 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
+		"id": "L2-0174",
+		"hanzi": "改变",
+		"pinyin": "gǎibiàn",
+		"level": 2,
+		"pos": ["V"],
+		"currentMeanings": ["to transform"],
+		"cedictDefs": ["to change", "to alter", "to transform"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L2-0178",
 		"hanzi": "感觉",
 		"pinyin": "gǎnjué",
 		"level": 2,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["a feeling", "to sense"],
 		"cedictDefs": ["feeling; impression; sensation", "to feel; to perceive"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
@@ -4930,6 +5042,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L2-0262",
+		"hanzi": "检查",
+		"pinyin": "jiǎnchá",
+		"level": 2,
+		"pos": ["V"],
+		"currentMeanings": ["to examine", "to inspect"],
+		"cedictDefs": ["inspection", "to examine", "to inspect", "CL:次[ci4]"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L2-0264",
 		"hanzi": "见过",
 		"pinyin": "jiànguo",
@@ -4948,6 +5070,16 @@
 		"currentMeanings": ["measure word: clothes and matters"],
 		"cedictDefs": ["item", "component", "classifier for events, things, clothes etc"],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L2-0266",
+		"hanzi": "健康",
+		"pinyin": "jiànkāng",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["health", "healthy"],
+		"cedictDefs": ["health", "healthy"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0267",
@@ -5051,7 +5183,7 @@
 		"hanzi": "节",
 		"pinyin": "jié",
 		"level": 2,
-		"pos": ["N", "M"],
+		"pos": ["M", "N"],
 		"currentMeanings": ["measure word: class periods", "a section or joint"],
 		"cedictDefs": [
 			"joint; node",
@@ -5110,10 +5242,14 @@
 		"hanzi": "经过",
 		"pinyin": "jīngguò",
 		"level": 2,
-		"pos": ["V", "N"],
+		"pos": ["V"],
 		"currentMeanings": ["to pass by", "to go through"],
 		"cedictDefs": ["to pass", "to go through", "process", "course", "CL:個|个[ge4]"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L2-0300",
@@ -5233,6 +5369,25 @@
 			"CL:個|个[ge4]"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L2-0319",
+		"hanzi": "可能",
+		"pinyin": "kěnéng",
+		"level": 2,
+		"pos": ["Adj", "V"],
+		"currentMeanings": ["possible", "maybe", "might"],
+		"cedictDefs": [
+			"might (happen)",
+			"possible",
+			"probable",
+			"possibility",
+			"probability",
+			"maybe",
+			"perhaps",
+			"CL:個|个[ge4]"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0321",
@@ -5368,8 +5523,8 @@
 		"hanzi": "离",
 		"pinyin": "lí",
 		"level": 2,
-		"pos": ["V", "Prep"],
-		"currentMeanings": ["away from", "at a distance from"],
+		"pos": ["Prep", "V"],
+		"currentMeanings": ["away from", "at a distance from", "to leave"],
 		"cedictDefs": [
 			"to leave",
 			"to part from",
@@ -5380,7 +5535,17 @@
 			"one of the Eight Trigrams 八卦[ba1 gua4], symbolizing fire",
 			"☲"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L2-0345",
+		"hanzi": "离开",
+		"pinyin": "líkāi",
+		"level": 2,
+		"pos": [],
+		"currentMeanings": ["to leave", "to depart from"],
+		"cedictDefs": ["to depart; to leave"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L2-0349",
@@ -5823,14 +5988,34 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
+		"id": "L2-0419",
+		"hanzi": "平常",
+		"pinyin": "píngcháng",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["usual", "most of the time"],
+		"cedictDefs": ["ordinary", "common", "usually", "ordinarily"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L2-0422",
 		"hanzi": "瓶",
 		"pinyin": "píng",
 		"level": 2,
-		"pos": ["N", "M"],
-		"currentMeanings": ["measure word: bottles"],
+		"pos": ["M", "N"],
+		"currentMeanings": ["measure word: bottles", "a bottle"],
 		"cedictDefs": ["bottle", "vase", "pitcher", "CL:個|个[ge4]", "classifier for wine and liquids"],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L2-0423",
+		"hanzi": "瓶子",
+		"pinyin": "píngzi",
+		"level": 2,
+		"pos": ["N"],
+		"currentMeanings": ["bottle"],
+		"cedictDefs": ["bottle", "CL:個|个[ge4]"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L2-0428",
@@ -5847,7 +6032,7 @@
 		"hanzi": "气",
 		"pinyin": "qì",
 		"level": 2,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["gas", "breath", "to make someone angry"],
 		"cedictDefs": [
 			"gas; air",
@@ -5924,6 +6109,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L2-0444",
+		"hanzi": "请求",
+		"pinyin": "qǐngqiú",
+		"level": 2,
+		"pos": ["V"],
+		"currentMeanings": ["to request"],
+		"cedictDefs": ["to request; to ask", "request (CL:個|个[ge4])"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L2-0446",
 		"hanzi": "求",
 		"pinyin": "qiú",
@@ -5958,10 +6153,10 @@
 		"hanzi": "全",
 		"pinyin": "quán",
 		"level": 2,
-		"pos": ["Adv", "Adj"],
+		"pos": ["Adv"],
 		"currentMeanings": ["entirely"],
 		"cedictDefs": ["all", "whole", "entire", "every", "complete"],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L2-0459",
@@ -5978,7 +6173,7 @@
 		"hanzi": "让",
 		"pinyin": "ràng",
 		"level": 2,
-		"pos": ["V", "Prep"],
+		"pos": ["V"],
 		"currentMeanings": ["to let someone do something", "to allow", "to give way"],
 		"cedictDefs": [
 			"to yield",
@@ -5988,7 +6183,17 @@
 			"to make sb (feel sad etc)",
 			"by (indicates the agent in a passive clause, like 被[bei4])"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
+	},
+	{
+		"id": "L2-0461",
+		"hanzi": "热情",
+		"pinyin": "rèqíng",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["warm and friendly", "enthusiasm"],
+		"cedictDefs": ["cordial", "enthusiastic", "passion", "passionate", "passionately"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0462",
@@ -6064,6 +6269,16 @@
 			"merged-rows",
 			"single-character"
 		]
+	},
+	{
+		"id": "L2-0484",
+		"hanzi": "实际",
+		"pinyin": "shíjì",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["actual", "in practice"],
+		"cedictDefs": ["reality", "practice", "practical", "realistic", "real", "actual"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0491",
@@ -6396,6 +6611,16 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L2-0548",
+		"hanzi": "同样",
+		"pinyin": "tóngyàng",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["the same"],
+		"cedictDefs": ["same; equal; similar", "similarly; also; too"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "pos-and-gloss-disagree"]
+	},
+	{
 		"id": "L2-0549",
 		"hanzi": "头",
 		"pinyin": "tóu",
@@ -6539,7 +6764,7 @@
 		"hanzi": "往",
 		"pinyin": "wǎng",
 		"level": 2,
-		"pos": ["V", "Prep"],
+		"pos": ["Prep", "V"],
 		"currentMeanings": ["toward", "to head for"],
 		"cedictDefs": [
 			"to go (in a direction)",
@@ -6833,7 +7058,7 @@
 		"hanzi": "眼",
 		"pinyin": "yǎn",
 		"level": 2,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["a glance", "eye"],
 		"cedictDefs": [
 			"eye (CL:隻|只[zhi1],雙|双[shuang1])",
@@ -6844,7 +7069,7 @@
 		],
 		"reasons": [
 			"has-authored-override",
-			"pos-and-gloss-disagree",
+			"official-pos-awaits-gloss",
 			"shares-sense-with-level-mate",
 			"single-character"
 		]
@@ -6970,6 +7195,16 @@
 			"to do sth as a gesture of goodwill etc"
 		],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L2-0667",
+		"hanzi": "因为",
+		"pinyin": "yīnwèi",
+		"level": 2,
+		"pos": ["Conj"],
+		"currentMeanings": ["because", "because of"],
+		"cedictDefs": ["because; owing to; on account of"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0668",
@@ -7204,7 +7439,7 @@
 		"hanzi": "正好",
 		"pinyin": "zhènghǎo",
 		"level": 2,
-		"pos": ["Adj", "Adv"],
+		"pos": ["Adj"],
 		"currentMeanings": ["just right", "as it happens"],
 		"cedictDefs": [
 			"just (in time)",
@@ -7215,7 +7450,11 @@
 			"by chance",
 			"it just so happens that"
 		],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L2-0727",
@@ -7289,6 +7528,16 @@
 			"to pack"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L2-0753",
+		"hanzi": "自由",
+		"pinyin": "zìyóu",
+		"level": 2,
+		"pos": ["Adj"],
+		"currentMeanings": ["freedom", "free and unrestricted"],
+		"cedictDefs": ["freedom; liberty", "free; unrestricted"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L2-0754",
@@ -7379,6 +7628,16 @@
 		"currentMeanings": ["to accomplish", "to manage to do"],
 		"cedictDefs": ["to accomplish", "to achieve"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L3-0002",
+		"hanzi": "安排",
+		"pinyin": "ānpái",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to arrange"],
+		"cedictDefs": ["to arrange", "to plan", "to set up", "arrangements", "plans"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0003",
@@ -7552,6 +7811,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L3-0026",
+		"hanzi": "报道",
+		"pinyin": "bàodào",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to report"],
+		"cedictDefs": ["to report (news)", "report", "CL:篇[pian1],份[fen4]"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0028",
 		"hanzi": "背",
 		"pinyin": "bēi",
@@ -7681,11 +7950,30 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0051",
+		"hanzi": "表演",
+		"pinyin": "biǎoyǎn",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to perform"],
+		"cedictDefs": [
+			"play",
+			"show",
+			"performance",
+			"exhibition",
+			"to perform",
+			"to act",
+			"to demonstrate",
+			"CL:場|场[chang3]"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0052",
 		"hanzi": "并",
 		"pinyin": "bìng",
 		"level": 3,
-		"pos": ["Adv", "Conj"],
+		"pos": ["Conj", "Adv"],
 		"currentMeanings": ["and also", "emphasizes a following negative"],
 		"cedictDefs": [
 			"and",
@@ -7711,6 +7999,16 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0057",
+		"hanzi": "不断",
+		"pinyin": "búduàn",
+		"level": 3,
+		"pos": ["Adv"],
+		"currentMeanings": ["without stopping", "unceasing"],
+		"cedictDefs": ["unceasing", "uninterrupted", "continuous", "constant"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0059",
 		"hanzi": "补",
 		"pinyin": "bǔ",
@@ -7725,7 +8023,24 @@
 			"to fill (a vacancy)",
 			"to supplement"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L3-0060",
+		"hanzi": "补充",
+		"pinyin": "bǔchōng",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to supplement", "to add what is missing"],
+		"cedictDefs": [
+			"to replenish",
+			"to supplement",
+			"to complement",
+			"additional",
+			"supplementary",
+			"CL:個|个[ge4]"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0065",
@@ -7742,10 +8057,10 @@
 		"hanzi": "步",
 		"pinyin": "bù",
 		"level": 3,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["a step", "a stage in a process"],
 		"cedictDefs": ["a step", "a pace", "walk", "march", "stages in a process", "situation"],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L3-0067",
@@ -7782,7 +8097,7 @@
 		"pinyin": "cháo",
 		"level": 3,
 		"pos": ["Prep", "V"],
-		"currentMeanings": ["facing towards", "towards"],
+		"currentMeanings": ["facing towards", "towards", "to make a pilgrimage to"],
 		"cedictDefs": [
 			"imperial or royal court",
 			"government",
@@ -7931,6 +8246,21 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0108",
+		"hanzi": "处理",
+		"pinyin": "chǔlǐ",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to deal with"],
+		"cedictDefs": [
+			"to handle; to deal with",
+			"to punish",
+			"to treat sth by a special process; to process",
+			"to sell at reduced prices"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0109",
 		"hanzi": "传",
 		"pinyin": "chuán",
@@ -7947,6 +8277,16 @@
 			"to conduct (electricity)"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L3-0115",
+		"hanzi": "创造",
+		"pinyin": "chuàngzào",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to create"],
+		"cedictDefs": ["to create", "to bring about", "to produce", "to set (a record)"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0120",
@@ -7977,6 +8317,16 @@
 		"currentMeanings": ["to break", "to smash"],
 		"cedictDefs": ["to break; to smash"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L3-0127",
+		"hanzi": "大概",
+		"pinyin": "dàgài",
+		"level": 3,
+		"pos": ["Adv"],
+		"currentMeanings": ["probably", "roughly"],
+		"cedictDefs": ["roughly", "probably", "rough", "approximate", "about", "general idea"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0131",
@@ -8010,6 +8360,16 @@
 		"currentMeanings": ["at that time", "originally"],
 		"cedictDefs": ["at that time", "originally"],
 		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L3-0139",
+		"hanzi": "当然",
+		"pinyin": "dāngrán",
+		"level": 3,
+		"pos": ["Adj", "Adv"],
+		"currentMeanings": ["of course", "naturally"],
+		"cedictDefs": ["only natural", "as it should be", "certainly", "of course", "without doubt"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L3-0141",
@@ -8134,6 +8494,23 @@
 			"classifier for meals, beatings, scoldings etc: time, bout, spell, meal"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L3-0181",
+		"hanzi": "反复",
+		"pinyin": "fǎnfù",
+		"level": 3,
+		"pos": ["Adv"],
+		"currentMeanings": ["over and over", "repeatedly"],
+		"cedictDefs": [
+			"repeatedly",
+			"over and over",
+			"to upend",
+			"unstable",
+			"to come and go",
+			"(of an illness) to return"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0183",
@@ -8365,10 +8742,33 @@
 		"hanzi": "各",
 		"pinyin": "gè",
 		"level": 3,
-		"pos": ["Pron", "Adv"],
+		"pos": ["Pron"],
 		"currentMeanings": ["each"],
 		"cedictDefs": ["each", "every"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate",
+			"single-character"
+		]
+	},
+	{
+		"id": "L3-0237",
+		"hanzi": "根本",
+		"pinyin": "gēnběn",
+		"level": 3,
+		"pos": ["N", "Adj", "Adv"],
+		"currentMeanings": ["at all in a negative sentence", "fundamental", "simply"],
+		"cedictDefs": [
+			"fundamental",
+			"basic",
+			"root",
+			"simply",
+			"absolutely (not)",
+			"(not) at all",
+			"CL:個|个[ge4]"
+		],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L3-0244",
@@ -8470,8 +8870,8 @@
 		"hanzi": "光",
 		"pinyin": "guāng",
 		"level": 3,
-		"pos": ["Adv", "N", "Adj"],
-		"currentMeanings": ["light or brightness", "only or merely"],
+		"pos": ["N", "Adj", "Adv"],
+		"currentMeanings": ["light or brightness", "only or merely", "merely"],
 		"cedictDefs": [
 			"light; ray (CL:道[dao4])",
 			"bright; shiny",
@@ -8490,6 +8890,23 @@
 		"currentMeanings": ["bright", "brightness"],
 		"cedictDefs": ["light", "radiance", "(fig.) bright (prospects etc)", "openhearted"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L3-0270",
+		"hanzi": "广播",
+		"pinyin": "guǎngbō",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to broadcast"],
+		"cedictDefs": [
+			"broadcast",
+			"CL:個|个[ge4]",
+			"broadcasting",
+			"to broadcast",
+			"(formal) to propagate",
+			"to publicize"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0283",
@@ -8632,6 +9049,23 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0320",
+		"hanzi": "集中",
+		"pinyin": "jízhōng",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to concentrate", "to centralize"],
+		"cedictDefs": [
+			"to concentrate",
+			"to centralize",
+			"to focus",
+			"centralized",
+			"concentrated",
+			"to put together"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0324",
 		"hanzi": "纪录",
 		"pinyin": "jìlù",
@@ -8680,6 +9114,16 @@
 		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0342",
+		"hanzi": "简直",
+		"pinyin": "jiǎnzhí",
+		"level": 3,
+		"pos": ["Adv"],
+		"currentMeanings": ["simply or downright"],
+		"cedictDefs": ["simply; really"],
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
 		"id": "L3-0343",
 		"hanzi": "建",
 		"pinyin": "jiàn",
@@ -8698,6 +9142,22 @@
 		"currentMeanings": ["to establish"],
 		"cedictDefs": ["to establish", "to set up", "to found"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L3-0352",
+		"hanzi": "交流",
+		"pinyin": "jiāoliú",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to exchange ideas", "to communicate"],
+		"cedictDefs": [
+			"to exchange",
+			"exchange",
+			"communication",
+			"interaction",
+			"to have social contact (with sb)"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0355",
@@ -8834,6 +9294,16 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0381",
+		"hanzi": "经济",
+		"pinyin": "jīngjì",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["economy", "economic"],
+		"cedictDefs": ["economy", "economic"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0386",
 		"hanzi": "精神",
 		"pinyin": "jīngshén",
@@ -8858,20 +9328,24 @@
 		"hanzi": "精神",
 		"pinyin": "jīngshen",
 		"level": 3,
-		"pos": ["Adj", "N"],
+		"pos": ["Adj"],
 		"currentMeanings": ["full of energy", "lively"],
 		"cedictDefs": ["vigor; vitality", "spirited", "good-looking"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L3-0390",
 		"hanzi": "静",
 		"pinyin": "jìng",
 		"level": 3,
-		"pos": ["Adj", "V"],
+		"pos": ["Adj"],
 		"currentMeanings": ["still and silent", "calm"],
 		"cedictDefs": ["still", "calm", "quiet", "not moving"],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L3-0391",
@@ -8962,10 +9436,10 @@
 		"hanzi": "空",
 		"pinyin": "kōng",
 		"level": 3,
-		"pos": ["Adj", "Adv"],
+		"pos": ["Adj"],
 		"currentMeanings": ["empty", "hollow"],
 		"cedictDefs": ["empty", "air", "sky", "in vain"],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L3-0422",
@@ -9020,6 +9494,16 @@
 			"(bound form) to resemble; to be similar to"
 		],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L3-0436",
+		"hanzi": "类似",
+		"pinyin": "lèisì",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["similar"],
+		"cedictDefs": ["similar; analogous"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0443",
@@ -9096,7 +9580,7 @@
 		"hanzi": "另外",
 		"pinyin": "lìngwài",
 		"level": 3,
-		"pos": ["Pron", "Adv", "Conj"],
+		"pos": ["Pron"],
 		"currentMeanings": ["another one", "besides"],
 		"cedictDefs": [
 			"additional",
@@ -9107,7 +9591,11 @@
 			"moreover",
 			"furthermore"
 		],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L3-0462",
@@ -9207,10 +9695,15 @@
 		"hanzi": "每",
 		"pinyin": "měi",
 		"level": 3,
-		"pos": ["Pron", "Adv"],
+		"pos": ["Pron"],
 		"currentMeanings": ["every", "each"],
 		"cedictDefs": ["each", "every"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate",
+			"single-character"
+		]
 	},
 	{
 		"id": "L3-0480",
@@ -9505,6 +9998,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L3-0538",
+		"hanzi": "评价",
+		"pinyin": "píngjià",
+		"level": 3,
+		"pos": ["V"],
+		"currentMeanings": ["to evaluate", "to assess"],
+		"cedictDefs": ["to evaluate", "to assess"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0540",
 		"hanzi": "破",
 		"pinyin": "pò",
@@ -9581,7 +10084,7 @@
 		"pinyin": "qí",
 		"level": 3,
 		"pos": ["Adj", "V"],
-		"currentMeanings": ["even and neat", "all present"],
+		"currentMeanings": ["even and neat", "all present", "to even something out"],
 		"cedictDefs": [
 			"neat",
 			"even",
@@ -9757,6 +10260,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L3-0588",
+		"hanzi": "人工",
+		"pinyin": "réngōng",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["human labor", "artificial or man-made"],
+		"cedictDefs": ["artificial", "manpower", "manual work"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0591",
 		"hanzi": "人民币",
 		"pinyin": "rénmínbì",
@@ -9922,7 +10435,7 @@
 		"hanzi": "胜利",
 		"pinyin": "shènglì",
 		"level": 3,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["victory", "to win"],
 		"cedictDefs": ["victory", "CL:個|个[ge4]"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
@@ -9962,7 +10475,7 @@
 		"hanzi": "实验",
 		"pinyin": "shíyàn",
 		"level": 3,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["an experiment", "to experiment"],
 		"cedictDefs": ["experiment", "test", "CL:個|个[ge4],次[ci4]", "experimental", "to experiment"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
@@ -10146,7 +10659,7 @@
 		"hanzi": "所",
 		"pinyin": "suǒ",
 		"level": 3,
-		"pos": ["N", "M"],
+		"pos": ["M", "N"],
 		"currentMeanings": ["measure word: schools or houses", "an institute or office"],
 		"cedictDefs": [
 			"actually",
@@ -10438,6 +10951,16 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L3-0750",
+		"hanzi": "危险",
+		"pinyin": "wēixiǎn",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["danger", "dangerous"],
+		"cedictDefs": ["danger", "dangerous"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0751",
 		"hanzi": "为",
 		"pinyin": "wéi",
@@ -10478,6 +11001,26 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L3-0755",
+		"hanzi": "卫生",
+		"pinyin": "wèishēng",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["hygienic", "hygiene"],
+		"cedictDefs": ["hygienic; sanitary", "hygiene; sanitation"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
+		"id": "L3-0758",
+		"hanzi": "温暖",
+		"pinyin": "wēnnuǎn",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["warm"],
+		"cedictDefs": ["warm"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L3-0769",
 		"hanzi": "舞台",
 		"pinyin": "wǔtái",
@@ -10496,6 +11039,19 @@
 		"currentMeanings": ["university department", "faculty"],
 		"cedictDefs": ["system", "department", "faculty"],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L3-0776",
+		"hanzi": "先进",
+		"pinyin": "xiānjìn",
+		"level": 3,
+		"pos": ["Adj"],
+		"currentMeanings": ["advanced", "exemplary"],
+		"cedictDefs": [
+			"sophisticated; advanced (technology etc)",
+			"meritorious; exemplary (deeds etc)"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L3-0778",
@@ -10601,10 +11157,14 @@
 		"hanzi": "形象",
 		"pinyin": "xíngxiàng",
 		"level": 3,
-		"pos": ["N", "Adj"],
+		"pos": ["Adj"],
 		"currentMeanings": ["image", "vivid"],
 		"cedictDefs": ["image", "form", "figure", "CL:個|个[ge4]", "visualization", "vivid"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L3-0810",
@@ -10976,7 +11536,7 @@
 		"pinyin": "zhěng",
 		"level": 3,
 		"pos": ["Adj", "V"],
-		"currentMeanings": ["whole", "neat and in order"],
+		"currentMeanings": ["whole", "neat and in order", "to mend"],
 		"cedictDefs": [
 			"(bound form) whole; complete; entire; (before a measure word) whole; (before or after number + measure word) exactly",
 			"(bound form) in good order; tidy; neat",
@@ -10985,7 +11545,7 @@
 			"(coll.) to fix sb; to give sb a hard time; to mess with sb",
 			"(dialect) to tinker with; to do sth to"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
 		"id": "L3-0896",
@@ -11072,8 +11632,8 @@
 		"hanzi": "直",
 		"pinyin": "zhí",
 		"level": 3,
-		"pos": ["Adj", "V", "Adv"],
-		"currentMeanings": ["straight", "frank and direct"],
+		"pos": ["Adj", "V"],
+		"currentMeanings": ["straight", "frank and direct", "to straighten"],
 		"cedictDefs": [
 			"straight",
 			"to straighten",
@@ -11084,7 +11644,7 @@
 			"vertical",
 			"vertical downward stroke in Chinese characters"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L3-0908",
@@ -11318,6 +11878,20 @@
 			"responsible; predisposed to do the right thing; considerate of others"
 		],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L3-0961",
+		"hanzi": "自然",
+		"pinyin": "zìrán",
+		"level": 3,
+		"pos": ["Adj", "Adv"],
+		"currentMeanings": ["nature", "natural", "naturally"],
+		"cedictDefs": ["nature", "natural", "naturally"],
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L3-0964",
@@ -11581,6 +12155,16 @@
 		"reasons": ["machine-picked", "register-sense-excluded"]
 	},
 	{
+		"id": "L4-0049",
+		"hanzi": "冰雪",
+		"pinyin": "bīngxuě",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["ice and snow"],
+		"cedictDefs": ["ice and snow"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0050",
 		"hanzi": "兵",
 		"pinyin": "bīng",
@@ -11664,6 +12248,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0063",
+		"hanzi": "采访",
+		"pinyin": "cǎifǎng",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to interview for the news", "to cover a story"],
+		"cedictDefs": ["to interview", "to gather news", "to hunt for and collect", "to cover"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0068",
 		"hanzi": "测",
 		"pinyin": "cè",
@@ -11701,6 +12295,20 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0074",
+		"hanzi": "长途",
+		"pinyin": "chángtú",
+		"level": 4,
+		"pos": ["N"],
+		"currentMeanings": ["long-distance", "a long-distance bus or call"],
+		"cedictDefs": [
+			"long distance",
+			"long-distance phone call (abbr. for 長途電話|长途电话[chang2 tu2 dian4 hua4])",
+			"long-distance coach (abbr. for 長途汽車|长途汽车[chang2 tu2 qi4 che1])"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0076",
 		"hanzi": "唱片",
 		"pinyin": "chàngpiàn",
@@ -11735,7 +12343,7 @@
 		"hanzi": "潮",
 		"pinyin": "cháo",
 		"level": 4,
-		"pos": ["N", "Adj"],
+		"pos": ["Adj"],
 		"currentMeanings": ["tide", "damp"],
 		"cedictDefs": [
 			"tide",
@@ -11743,7 +12351,12 @@
 			"fashionable; trendy",
 			"(coll.) inferior; substandard"
 		],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate",
+			"single-character"
+		]
 	},
 	{
 		"id": "L4-0081",
@@ -11780,7 +12393,7 @@
 		"hanzi": "尺",
 		"pinyin": "chǐ",
 		"level": 4,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["a Chinese foot of length", "a ruler"],
 		"cedictDefs": [
 			"a Chinese foot",
@@ -11792,7 +12405,7 @@
 		],
 		"reasons": [
 			"has-authored-override",
-			"pos-and-gloss-disagree",
+			"official-pos-awaits-gloss",
 			"shares-sense-with-level-mate",
 			"single-character"
 		]
@@ -11934,6 +12547,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0126",
+		"hanzi": "刺激",
+		"pinyin": "cìjī",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to stimulate", "to irritate or upset"],
+		"cedictDefs": ["to provoke; to irritate; to upset; to stimulate; to excite", "irritant"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0128",
 		"hanzi": "粗",
 		"pinyin": "cū",
@@ -12002,6 +12625,16 @@
 			"to support"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L4-0158",
+		"hanzi": "担保",
+		"pinyin": "dānbǎo",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to guarantee", "to vouch for"],
+		"cedictDefs": ["to guarantee", "to vouch for"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0161",
@@ -12093,7 +12726,7 @@
 		"hanzi": "顶",
 		"pinyin": "dǐng",
 		"level": 4,
-		"pos": ["N", "V", "M"],
+		"pos": ["N", "M", "V"],
 		"currentMeanings": ["the top of something", "measure word for hats", "to carry on the head"],
 		"cedictDefs": [
 			"apex",
@@ -12272,7 +12905,7 @@
 		"hanzi": "反",
 		"pinyin": "fǎn",
 		"level": 4,
-		"pos": ["Adj", "V", "Adv"],
+		"pos": ["Adj", "V"],
 		"currentMeanings": ["reverse or inside out", "to oppose"],
 		"cedictDefs": [
 			"contrary",
@@ -12289,7 +12922,7 @@
 			"instead",
 			"abbr. for 反切[fan3 qie4] phonetic system"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L4-0230",
@@ -12300,6 +12933,24 @@
 		"currentMeanings": ["on the contrary", "instead of what you expect"],
 		"cedictDefs": ["on the contrary; instead"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L4-0231",
+		"hanzi": "反映",
+		"pinyin": "fǎnyìng",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to reflect a situation", "to report a problem"],
+		"cedictDefs": [
+			"to mirror",
+			"to reflect",
+			"mirror image",
+			"reflection",
+			"(fig.) to report",
+			"to make known",
+			"to render"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0232",
@@ -12362,6 +13013,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0239",
+		"hanzi": "分散",
+		"pinyin": "fēnsàn",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to disperse"],
+		"cedictDefs": ["to scatter", "to disperse", "to distribute"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0242",
 		"hanzi": "分之",
 		"pinyin": "fēn zhī",
@@ -12370,6 +13031,20 @@
 		"currentMeanings": ["used to say fractions: two thirds"],
 		"cedictDefs": ["(indicating a fraction)"],
 		"reasons": ["has-authored-override", "no-usable-cedict-sense"]
+	},
+	{
+		"id": "L4-0248",
+		"hanzi": "封闭",
+		"pinyin": "fēngbì",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to seal off"],
+		"cedictDefs": [
+			"to close; to seal off",
+			"to close down (an illegal venue)",
+			"closed (i.e. isolated from outside input)"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0249",
@@ -12428,11 +13103,21 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0273",
+		"hanzi": "各个",
+		"pinyin": "gègè",
+		"level": 4,
+		"pos": ["Pron"],
+		"currentMeanings": ["each one", "one by one"],
+		"cedictDefs": ["every", "various", "separately, one by one"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0274",
 		"hanzi": "根",
 		"pinyin": "gēn",
 		"level": 4,
-		"pos": ["M", "N"],
+		"pos": ["N", "M"],
 		"currentMeanings": ["root", "measure word for sticks or hairs"],
 		"cedictDefs": [
 			"root",
@@ -12442,6 +13127,16 @@
 			"radical (chemistry)"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L4-0275",
+		"hanzi": "根据",
+		"pinyin": "gēnjù",
+		"level": 4,
+		"pos": ["Prep", "N"],
+		"currentMeanings": ["based on", "grounds or basis"],
+		"cedictDefs": ["according to", "based on", "basis", "foundation", "CL:個|个[ge4]"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0279",
@@ -12486,7 +13181,7 @@
 		"hanzi": "怪",
 		"pinyin": "guài",
 		"level": 4,
-		"pos": ["Adj", "Adv"],
+		"pos": ["Adj"],
 		"currentMeanings": ["odd or weird", "rather or quite"],
 		"cedictDefs": [
 			"odd; strange; uncanny",
@@ -12495,7 +13190,7 @@
 			"to blame",
 			"(coll.) somewhat; rather"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L4-0288",
@@ -13013,6 +13708,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0436",
+		"hanzi": "考察",
+		"pinyin": "kǎochá",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to investigate on the spot", "to inspect"],
+		"cedictDefs": ["to inspect", "to observe and study", "on-the-spot investigation"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0438",
 		"hanzi": "棵",
 		"pinyin": "kē",
@@ -13027,7 +13732,7 @@
 		"hanzi": "空",
 		"pinyin": "kòng",
 		"level": 4,
-		"pos": ["V", "Adj"],
+		"pos": ["Adj", "V"],
 		"currentMeanings": ["vacant", "to leave blank"],
 		"cedictDefs": ["to empty", "vacant", "unoccupied", "space", "leisure", "free time"],
 		"reasons": ["has-authored-override", "single-character"]
@@ -13170,6 +13875,22 @@
 			"(Tw) row"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L4-0487",
+		"hanzi": "临时",
+		"pinyin": "línshí",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["temporary", "at the last moment"],
+		"cedictDefs": [
+			"as the time draws near",
+			"at the last moment",
+			"temporary",
+			"interim",
+			"ad hoc"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0495",
@@ -13407,7 +14128,7 @@
 		"hanzi": "批",
 		"pinyin": "pī",
 		"level": 4,
-		"pos": ["V", "M"],
+		"pos": ["M", "V"],
 		"currentMeanings": ["measure word: batches", "to approve in writing"],
 		"cedictDefs": [
 			"to ascertain",
@@ -13429,10 +14150,20 @@
 		"hanzi": "平方",
 		"pinyin": "píngfāng",
 		"level": 4,
-		"pos": ["N", "M"],
+		"pos": ["N"],
 		"currentMeanings": ["square meter", "the square of a number"],
 		"cedictDefs": ["square (as in square foot, square mile, square root)"],
-		"reasons": ["has-authored-override", "pos-and-gloss-disagree"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
+		"id": "L4-0561",
+		"hanzi": "平均",
+		"pinyin": "píngjūn",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["average", "shared out evenly"],
+		"cedictDefs": ["average; on average", "evenly; in equal proportions"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0579",
@@ -13453,6 +14184,26 @@
 		"currentMeanings": ["to cut", "to slice"],
 		"cedictDefs": ["to cut; to slice; to carve", "(math.) tangential"],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L4-0586",
+		"hanzi": "轻易",
+		"pinyin": "qīngyì",
+		"level": 4,
+		"pos": ["Adv"],
+		"currentMeanings": ["easily", "rashly"],
+		"cedictDefs": ["easy; simple", "rashly; offhandedly"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
+		"id": "L4-0587",
+		"hanzi": "清醒",
+		"pinyin": "qīngxǐng",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["clear-headed", "wide awake"],
+		"cedictDefs": ["clear-headed", "sober", "awake"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0588",
@@ -13537,6 +14288,16 @@
 			"even though"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L4-0600",
+		"hanzi": "热闹",
+		"pinyin": "rènao",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["lively", "bustling"],
+		"cedictDefs": ["bustling with noise and excitement", "lively"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0606",
@@ -13676,6 +14437,23 @@
 			"(coll.) to become full of oneself; to get carried away"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L4-0635",
+		"hanzi": "失败",
+		"pinyin": "shībài",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to fail", "to be defeated"],
+		"cedictDefs": [
+			"to be defeated",
+			"to lose",
+			"to fail (e.g. experiments)",
+			"failure",
+			"defeat",
+			"CL:次[ci4]"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0638",
@@ -13862,8 +14640,8 @@
 		"hanzi": "替",
 		"pinyin": "tì",
 		"level": 4,
-		"pos": ["V", "Prep"],
-		"currentMeanings": ["on behalf of", "in place of"],
+		"pos": ["Prep", "V"],
+		"currentMeanings": ["on behalf of", "in place of", "to replace"],
 		"cedictDefs": [
 			"to substitute for",
 			"to take the place of",
@@ -13975,11 +14753,29 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0727",
+		"hanzi": "投入",
+		"pinyin": "tóurù",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to invest time or money", "to throw oneself into"],
+		"cedictDefs": [
+			"to throw into",
+			"to put into",
+			"to throw oneself into",
+			"to participate in",
+			"to invest in",
+			"absorbed",
+			"engrossed"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0730",
 		"hanzi": "透",
 		"pinyin": "tòu",
 		"level": 4,
-		"pos": ["V", "Adj"],
+		"pos": ["V"],
 		"currentMeanings": ["to soak through", "thoroughly"],
 		"cedictDefs": [
 			"(bound form) to penetrate; to seep through",
@@ -13987,7 +14783,7 @@
 			"thoroughly; through and through",
 			"to appear; to show"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L4-0734",
@@ -14110,6 +14906,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L4-0781",
+		"hanzi": "系统",
+		"pinyin": "xìtǒng",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["system"],
+		"cedictDefs": ["system", "CL:個|个[ge4]"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0782",
 		"hanzi": "细",
 		"pinyin": "xì",
@@ -14163,10 +14969,14 @@
 		"hanzi": "相反",
 		"pinyin": "xiāngfǎn",
 		"level": 4,
-		"pos": ["Adj", "Conj"],
+		"pos": ["Adj"],
 		"currentMeanings": ["exactly opposite", "on the contrary"],
 		"cedictDefs": ["opposite", "contrary"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L4-0799",
@@ -14310,10 +15120,14 @@
 		"hanzi": "严格",
 		"pinyin": "yángé",
 		"level": 4,
-		"pos": ["Adj", "V"],
+		"pos": ["Adj"],
 		"currentMeanings": ["strict", "rigorous"],
 		"cedictDefs": ["strict; stringent; tight; rigorous"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L4-0850",
@@ -14382,10 +15196,14 @@
 		"hanzi": "依靠",
 		"pinyin": "yīkào",
 		"level": 4,
-		"pos": ["V", "N"],
+		"pos": ["V"],
 		"currentMeanings": ["to rely on", "to depend on"],
 		"cedictDefs": ["to rely on; to depend on"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate"
+		]
 	},
 	{
 		"id": "L4-0868",
@@ -14398,6 +15216,16 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L4-0869",
+		"hanzi": "一致",
+		"pinyin": "yízhì",
+		"level": 4,
+		"pos": ["Adj"],
+		"currentMeanings": ["in agreement", "consistent"],
+		"cedictDefs": ["consistent; unanimous; in agreement", "together; in unison"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L4-0870",
 		"hanzi": "移",
 		"pinyin": "yí",
@@ -14406,6 +15234,16 @@
 		"currentMeanings": ["to move something over", "to shift"],
 		"cedictDefs": ["to move", "to shift", "to change", "to alter", "to remove"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L4-0880",
+		"hanzi": "议论",
+		"pinyin": "yìlùn",
+		"level": 4,
+		"pos": ["V"],
+		"currentMeanings": ["to discuss openly", "to air opinions"],
+		"cedictDefs": ["to comment", "to talk about", "to discuss", "discussion", "CL:個|个[ge4]"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L4-0881",
@@ -14782,6 +15620,16 @@
 		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
 	},
 	{
+		"id": "L5-0001",
+		"hanzi": "安慰",
+		"pinyin": "ānwèi",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to comfort", "to console"],
+		"cedictDefs": ["to comfort; to console"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0002",
 		"hanzi": "岸",
 		"pinyin": "àn",
@@ -14990,6 +15838,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0073",
+		"hanzi": "采购",
+		"pinyin": "cǎigòu",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to procure", "to purchase"],
+		"cedictDefs": ["to procure (for an enterprise etc)", "to purchase"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0079",
 		"hanzi": "册",
 		"pinyin": "cè",
@@ -15081,10 +15939,10 @@
 		"hanzi": "尝试",
 		"pinyin": "chángshì",
 		"level": 5,
-		"pos": ["V", "N"],
+		"pos": ["V"],
 		"currentMeanings": ["to try"],
 		"cedictDefs": ["to try (to see what it's like or whether one can do it)"],
-		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
+		"reasons": ["machine-picked", "official-pos-awaits-gloss", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L5-0101",
@@ -15190,10 +16048,10 @@
 		"hanzi": "处罚",
 		"pinyin": "chǔfá",
 		"level": 5,
-		"pos": ["V", "N"],
+		"pos": ["V"],
 		"currentMeanings": ["to penalize", "to punish"],
 		"cedictDefs": ["to penalize", "to punish"],
-		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
+		"reasons": ["machine-picked", "official-pos-awaits-gloss", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L5-0137",
@@ -15404,10 +16262,15 @@
 		"hanzi": "毒",
 		"pinyin": "dú",
 		"level": 5,
-		"pos": ["N", "V", "Adj"],
+		"pos": ["Adj"],
 		"currentMeanings": ["poison", "poisonous"],
 		"cedictDefs": ["poison", "to poison", "poisonous", "malicious", "cruel", "fierce", "narcotics"],
-		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+		"reasons": [
+			"has-authored-override",
+			"official-pos-awaits-gloss",
+			"shares-sense-with-level-mate",
+			"single-character"
+		]
 	},
 	{
 		"id": "L5-0215",
@@ -15501,6 +16364,16 @@
 		"currentMeanings": ["to punish", "to fine"],
 		"cedictDefs": ["to punish; to penalize; to fine"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
+	},
+	{
+		"id": "L5-0232",
+		"hanzi": "繁荣",
+		"pinyin": "fánróng",
+		"level": 5,
+		"pos": ["Adj"],
+		"currentMeanings": ["prosperous", "flourishing"],
+		"cedictDefs": ["prosperous; booming"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-0246",
@@ -15649,6 +16522,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0292",
+		"hanzi": "鼓励",
+		"pinyin": "gǔlì",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to encourage"],
+		"cedictDefs": ["to encourage"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0295",
 		"hanzi": "怪",
 		"pinyin": "guài",
@@ -15663,6 +16546,16 @@
 			"(coll.) somewhat; rather"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L5-0299",
+		"hanzi": "光荣",
+		"pinyin": "guāngróng",
+		"level": 5,
+		"pos": ["Adj"],
+		"currentMeanings": ["honor and glory", "glorious"],
+		"cedictDefs": ["honor and glory", "glorious"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-0301",
@@ -15710,11 +16603,24 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0311",
+		"hanzi": "过敏",
+		"pinyin": "guòmǐn",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to be allergic to something"],
+		"cedictDefs": [
+			"(medicine) allergic; hypersensitive",
+			"(fig.) oversensitive; prone to overreact"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0313",
 		"hanzi": "害",
 		"pinyin": "hài",
 		"level": 5,
-		"pos": ["N", "V"],
+		"pos": ["V", "N"],
 		"currentMeanings": ["to do harm to", "harm or damage"],
 		"cedictDefs": ["to do harm to", "to cause trouble to", "harm", "evil", "calamity"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
@@ -15735,11 +16641,21 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0316",
+		"hanzi": "号召",
+		"pinyin": "hàozhào",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to call", "to appeal"],
+		"cedictDefs": ["to call", "to appeal"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0319",
 		"hanzi": "盒",
 		"pinyin": "hé",
 		"level": 5,
-		"pos": ["N", "M"],
+		"pos": ["M", "N"],
 		"currentMeanings": ["measure word: boxes of something", "a box"],
 		"cedictDefs": ["small box", "case"],
 		"reasons": ["has-authored-override", "single-character"]
@@ -15808,6 +16724,24 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0337",
+		"hanzi": "灰色",
+		"pinyin": "huīsè",
+		"level": 5,
+		"pos": ["Adj"],
+		"currentMeanings": ["gray"],
+		"cedictDefs": [
+			"gray",
+			"ash gray",
+			"grizzly",
+			"pessimistic",
+			"gloomy",
+			"dispirited",
+			"ambiguous"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0345",
 		"hanzi": "回忆",
 		"pinyin": "huíyì",
@@ -15839,7 +16773,7 @@
 		"hanzi": "记忆",
 		"pinyin": "jìyì",
 		"level": 5,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["memory", "to commit to memory"],
 		"cedictDefs": ["to remember; to recall", "memory"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
@@ -15900,6 +16834,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0374",
+		"hanzi": "坚定",
+		"pinyin": "jiāndìng",
+		"level": 5,
+		"pos": ["Adj"],
+		"currentMeanings": ["firm and unwavering", "resolute"],
+		"cedictDefs": ["firm", "steady", "staunch", "resolute"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0375",
 		"hanzi": "肩",
 		"pinyin": "jiān",
@@ -15939,7 +16883,7 @@
 		"hanzi": "建筑",
 		"pinyin": "jiànzhù",
 		"level": 5,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["architecture", "a building", "to build"],
 		"cedictDefs": ["to construct", "building", "CL:個|个[ge4]"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
@@ -15949,10 +16893,10 @@
 		"hanzi": "健全",
 		"pinyin": "jiànquán",
 		"level": 5,
-		"pos": ["Adj", "V"],
+		"pos": ["Adj"],
 		"currentMeanings": ["robust", "sound"],
 		"cedictDefs": ["robust", "sound"],
-		"reasons": ["machine-picked", "shares-sense-with-level-mate"]
+		"reasons": ["machine-picked", "official-pos-awaits-gloss", "shares-sense-with-level-mate"]
 	},
 	{
 		"id": "L5-0387",
@@ -15986,6 +16930,16 @@
 			"(introduces object of main verb, used in the same way as 把[ba3])"
 		],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L5-0391",
+		"hanzi": "奖励",
+		"pinyin": "jiǎnglì",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to reward"],
+		"cedictDefs": ["to reward", "reward (as encouragement)"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-0397",
@@ -16058,6 +17012,16 @@
 		"currentMeanings": ["a sight"],
 		"cedictDefs": ["scene", "sight (to behold)"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L5-0411",
+		"hanzi": "警告",
+		"pinyin": "jǐnggào",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to warn", "to admonish"],
+		"cedictDefs": ["to warn", "to admonish"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-0419",
@@ -16154,6 +17118,21 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0446",
+		"hanzi": "肯定",
+		"pinyin": "kěndìng",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to be sure of something", "definitely", "to affirm"],
+		"cedictDefs": [
+			"to be certain; to be positive",
+			"assuredly; definitely",
+			"to give recognition; to affirm",
+			"affirmative (answer)"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0450",
 		"hanzi": "库",
 		"pinyin": "kù",
@@ -16242,6 +17221,16 @@
 		"currentMeanings": ["courtesy", "a rite"],
 		"cedictDefs": ["gift", "rite", "ceremony", "CL:份[fen4]", "propriety", "etiquette", "courtesy"],
 		"reasons": ["has-authored-override", "single-character"]
+	},
+	{
+		"id": "L5-0465",
+		"hanzi": "礼貌",
+		"pinyin": "lǐmào",
+		"level": 5,
+		"pos": ["Adj"],
+		"currentMeanings": ["good manners", "courteous"],
+		"cedictDefs": ["courtesy; politeness; manners", "courteous; polite"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-0466",
@@ -16508,7 +17497,7 @@
 		"hanzi": "旁",
 		"pinyin": "páng",
 		"level": 5,
-		"pos": ["N", "Pron"],
+		"pos": ["Pron"],
 		"currentMeanings": ["one side", "other"],
 		"cedictDefs": [
 			"one side",
@@ -16516,7 +17505,7 @@
 			"different",
 			"lateral component of a Chinese character (such as 刂[dao1], 亻[ren2] etc)"
 		],
-		"reasons": ["has-authored-override", "single-character"]
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss", "single-character"]
 	},
 	{
 		"id": "L5-0541",
@@ -17097,6 +18086,16 @@
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate", "single-character"]
 	},
 	{
+		"id": "L5-0660",
+		"hanzi": "射击",
+		"pinyin": "shèjī",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to fire a gun"],
+		"cedictDefs": ["to shoot; to fire (a gun)"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0665",
 		"hanzi": "伸",
 		"pinyin": "shēn",
@@ -17510,6 +18509,16 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0814",
+		"hanzi": "先后",
+		"pinyin": "xiānhòu",
+		"level": 5,
+		"pos": ["N"],
+		"currentMeanings": ["one after another", "order of priority"],
+		"cedictDefs": ["early or late; first and last; priority", "in succession; one after another"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0816",
 		"hanzi": "鲜艳",
 		"pinyin": "xiānyàn",
@@ -17651,14 +18660,50 @@
 		"reasons": ["has-authored-override", "single-character"]
 	},
 	{
+		"id": "L5-0883",
+		"hanzi": "一流",
+		"pinyin": "yīliú",
+		"level": 5,
+		"pos": ["N"],
+		"currentMeanings": ["top quality", "front ranking"],
+		"cedictDefs": ["top quality", "front ranking"],
+		"reasons": ["machine-picked", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0886",
 		"hanzi": "依据",
 		"pinyin": "yījù",
 		"level": 5,
-		"pos": ["V", "N"],
+		"pos": ["N", "V"],
 		"currentMeanings": ["on the basis of", "grounds", "to go by"],
 		"cedictDefs": ["according to", "basis", "foundation"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L5-0887",
+		"hanzi": "依照",
+		"pinyin": "yīzhào",
+		"level": 5,
+		"pos": ["Prep"],
+		"currentMeanings": ["in accordance with", "going by"],
+		"cedictDefs": ["according to; in light of"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
+		"id": "L5-0892",
+		"hanzi": "一路",
+		"pinyin": "yílù",
+		"level": 5,
+		"pos": ["N"],
+		"currentMeanings": ["all the way", "the whole journey"],
+		"cedictDefs": [
+			"the whole journey",
+			"all the way",
+			"going the same way",
+			"going in the same direction",
+			"of the same kind"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-0893",
@@ -17871,6 +18916,20 @@
 		"reasons": ["has-authored-override", "pos-and-gloss-disagree"]
 	},
 	{
+		"id": "L5-0994",
+		"hanzi": "正义",
+		"pinyin": "zhèngyì",
+		"level": 5,
+		"pos": ["Adj"],
+		"currentMeanings": ["justice", "righteous"],
+		"cedictDefs": [
+			"justice; righteousness",
+			"just; righteous",
+			"(in the titles of traditional commentaries) correct interpretation"
+		],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
+	},
+	{
 		"id": "L5-0997",
 		"hanzi": "挣",
 		"pinyin": "zhèng",
@@ -17919,6 +18978,16 @@
 		"currentMeanings": ["to be in charge of", "the person in charge"],
 		"cedictDefs": ["in charge", "responsible for", "person in charge", "manager"],
 		"reasons": ["has-authored-override", "shares-sense-with-level-mate"]
+	},
+	{
+		"id": "L5-1051",
+		"hanzi": "装饰",
+		"pinyin": "zhuāngshì",
+		"level": 5,
+		"pos": ["V"],
+		"currentMeanings": ["to decorate"],
+		"cedictDefs": ["to decorate", "decoration", "decorative", "ornamental"],
+		"reasons": ["has-authored-override", "official-pos-awaits-gloss"]
 	},
 	{
 		"id": "L5-1052",

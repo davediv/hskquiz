@@ -222,6 +222,17 @@ describe('shipped vocabulary vs. reference/hsk', () => {
 		expect(() =>
 			execFileSync('node', ['scripts/build-vocab.mjs', '--verify'], { stdio: 'pipe' })
 		).not.toThrow();
+	}, 15_000);
+
+	it('keeps unsupported official POS out of cards and on the editorial work list', () => {
+		const audit = JSON.parse(readFileSync('scripts/vocab-audit.json', 'utf8')) as {
+			id: string;
+			reasons: string[];
+		}[];
+		expect(byOfficialId.get('L1-0009')?.pos).not.toContain('M');
+		expect(audit.find((entry) => entry.id === 'L1-0009')?.reasons).toContain(
+			'official-pos-awaits-gloss'
+		);
 	});
 });
 

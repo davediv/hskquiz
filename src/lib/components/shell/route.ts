@@ -45,6 +45,8 @@ export interface ShellRoute {
 
 export const APP_NAME = 'hskquiz';
 export const APP_TAGLINE = 'HSK 1–5 vocabulary practice';
+export const NOT_FOUND_TITLE = `Page not found · ${APP_NAME}`;
+export const ERROR_TITLE = `Something went wrong · ${APP_NAME}`;
 
 /**
  * Derive the shell's chrome from a pathname. Pure, so the header, the title and the

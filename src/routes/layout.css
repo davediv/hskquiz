@@ -156,16 +156,19 @@
    to exactly that measurement, with no slack above it, so the next one anyone writes goes red.
    It is 0 for this file and for `src/lib/design/**`, and that half is a hard assertion.
 
-   ACCESSIBILITY CONTRACT — do not regress these. The first four are executable: they are
-   computed off this stylesheet by `src/lib/design/palette.spec.ts` and `scale.spec.ts`, so
-   they fail loudly rather than drifting back.
+   ACCESSIBILITY CONTRACT — do not regress these. The contrast and token-use rules are
+   executable: `palette.spec.ts`, `scale.spec.ts` and `borders.spec.ts` compute them off this
+   stylesheet and off every `border*` in `src/`, so they fail loudly rather than drifting back.
        · every text token is >= 4.5:1 on every surface it is allowed on (worst: 4.58 light,
          correct on sunken; 5.03 dark, tone 1 on sunken)
        · every tone hue is >= 12 ΔE00 from every non-tone colour token in its own theme, and
          >= 10 from every other tone — see THE FOURTH FAMILY above
-       · `--color-line-strong` is the >= 3:1 border for interactive components, on all three
+       · `--color-line-strong` is the >= 3:1 border for interactive components and for any
+         edge that sits on the page (`.card`, `.btn-quiet`, the Listen pill), on all three
          surfaces in BOTH themes (worst: 3.06 light, 3.35 dark); `--color-line` is a
-         decorative hairline and must not be the only thing defining a control
+         decorative hairline for rules inside a surface — WordRow, YOU PICKED, sheet sections
+         — and must not be the only thing defining a control. `borders.spec.ts` reads every
+         `border*: var(--color-line…)` in `src/` and fails any selector not on that allow-list
        · a `color-mix` dilution of `--color-line-strong` is still a control edge only while it
          measures >= 3:1 on the surface under it, and there is very little room: the token
          sits ON the 3:1 floor, so the mix crosses it at 93% (light) and 83% (dark) against
@@ -787,7 +790,9 @@
 
 	.card {
 		background-color: var(--color-surface);
-		border: 1px solid var(--color-line);
+		/* On-page edge: same token as `.btn-quiet`, so a card is not quieter than the button
+		   inside it. `--color-line` is the hairline for rules *inside* a surface. */
+		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-card);
 		box-shadow: var(--shadow-card);
 	}

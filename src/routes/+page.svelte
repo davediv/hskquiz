@@ -129,9 +129,11 @@
 		<!--
 			Title, reading and scope on one baseline, and only two lines when they have to be.
 
-			The pinyin is the app's most prominent — it teaches on sight, so it is painted by the
-			same component and the same tone tokens as every other syllable in the app. It used
-			to be a flat `text-accent`, which is the exact red of ✕ NOT QUITE.
+			The pinyin is one muted ink, same contract as the preview list: this screen is not
+			drilling tone, and a rainbow `cíhuì liànxí` next to five more rainbows on the cards
+			was six competing hues before the first Practise tap. It used to be a flat
+			`text-accent`, which is the exact red of ✕ NOT QUITE — `tones={false}` is the one-ink
+			reading, not a colour painted over the spans.
 
 			Two components, one per word, and not one with `spaced={false}`: 汉语拼音正词法基本规则
 			joins the syllables *inside* a word and separates the words, so cíhuì liànxí is right,
@@ -160,8 +162,8 @@
 		<div class="hskq-title">
 			<h1 class="hanzi-display text-hanzi-md text-ink" lang="zh-Hans">词汇练习</h1>
 			<p class="hskq-reading">
-				<Pinyin pinyin="cíhuì" size="md" spaced={false} />
-				<Pinyin pinyin="liànxí" size="md" spaced={false} />
+				<Pinyin pinyin="cíhuì" size="md" tones={false} spaced={false} />
+				<Pinyin pinyin="liànxí" size="md" tones={false} spaced={false} />
 			</p>
 			<p class="eyebrow">HSK 3.0</p>
 		</div>
@@ -278,7 +280,9 @@
 	}
 
 	.hskq-reading {
-		/* Never the only thing on its line while the title is still on the one above. */
+		/* Never the only thing on its line while the title is still on the one above.
+		   One muted ink: `tones={false}` left the spans inheriting, and this is the ink. */
+		color: var(--color-ink-muted);
 		white-space: nowrap;
 	}
 

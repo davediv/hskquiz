@@ -55,9 +55,11 @@
 		gap: 0.3125rem;
 		min-block-size: var(--spacing-tap);
 		padding-inline: 0.5rem;
-		border: 1px solid var(--color-line);
+		border: 1px solid var(--color-line-strong);
 		border-radius: var(--radius-pill);
-		background-color: var(--color-surface);
+		/* No fill: `--color-surface` was the only pure white on the quiz page. The strong
+		   line is the edge, on the page and on a card. */
+		background-color: transparent;
 		color: var(--color-ink-muted);
 		font-size: var(--text-xs);
 		font-weight: 650;

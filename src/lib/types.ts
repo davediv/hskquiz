@@ -48,11 +48,28 @@ export interface Word {
 	syllables: Syllable[];
 	/** Short learner-facing English meanings, best first. 1–3 entries, each a few words. */
 	meanings: string[];
+	/**
+	 * Meanings grouped with the part of speech that labels each one.
+	 *
+	 * `pos` is a card-level list of advertised codes and `meanings` is the quiz-facing
+	 * gloss list; neither says which label belongs to which gloss. `senses` is that
+	 * pairing, in display order. Cards with no supported POS omit `pos` on each sense
+	 * and stay chip-less. Quiz code keeps reading `meanings`.
+	 */
+	senses?: Sense[];
 	/** One sentence showing the word in use. Absent where none has been authored yet. */
 	example?: Example;
-	/** Part-of-speech codes: N V Adj Adv Pron Num M Prep Conj Aux Int Prefix Suffix Phonetic. */
+	/** Supported part-of-speech codes: N V Adj Adv Pron Num M Prep Conj Aux Int Prefix Suffix Phonetic. */
 	pos: string[];
 	level: Level;
+}
+
+/** One gloss bound to the part of speech that labels it. */
+export interface Sense {
+	/** Official POS code when the list gives one; omitted on untagged cards. */
+	pos?: string;
+	/** Learner-facing English for this sense alone. */
+	gloss: string;
 }
 
 /**

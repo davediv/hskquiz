@@ -7,7 +7,17 @@
 
 import { type Direction, type Level, type Question, type Session, type Word } from '$lib/types';
 import { parseLevelSegment } from '$lib/levels/route';
-import { isCorrect, isScored } from '$lib/session';
+import {
+	cardKindFor,
+	CHOICE_COUNT,
+	directionOf,
+	isCorrect,
+	isScored,
+	shuffle,
+	type BuiltSession,
+	type ProgressSource
+} from '$lib/session';
+import { makePool, pickDistractors } from '$lib/session/distractors';
 
 /**
  * How one answer button is drawn once the question is closed. `answer` is the right choice
@@ -134,6 +144,61 @@ export function splitExample(sentence: string, hanzi: string): SplitSentence {
 		{ text: chars.slice(at + target.length).join(''), hit: false }
 	].filter((part) => part.text !== '');
 	return { parts, chars: chars.length };
+}
+
+/**
+ * The sentence's pinyin, cut around the headword the way `splitExample` cuts the characters.
+ *
+ * `.clue-face` already sets the target hanzi in ink; this is the matching cut on the sound
+ * line, so `yìbiān` can be read against 一边 the way Pleco bolds `jīhū` inside its pinyin.
+ * `Example.pinyin` now ships spelled by word, so the cut is a substring of that spelling
+ * (`chēzhàn` inside `chēzhàn zài xuéxiào pángbiān`) rather than a zip against characters.
+ *
+ * The leading capital and the stop the hanzi writes are applied here because the caller
+ * renders each run through its own `<Pinyin>` and can no longer hand the whole line to
+ * `sentence={hanzi}`. A sentence whose reading does not contain the word comes back as one
+ * un-hit run, same fallback as `splitExample`.
+ */
+export function splitExampleSound(
+	pinyin: string,
+	wordPy: string,
+	hanzi: string = ''
+): SentencePart[] {
+	const source = pinyin.trim();
+	if (source === '') return [];
+	const target = wordPy.trim();
+	const at = target === '' ? -1 : source.toLowerCase().indexOf(target.toLowerCase());
+	const parts =
+		at < 0
+			? [{ text: source, hit: false }]
+			: [
+					{ text: source.slice(0, at), hit: false },
+					{ text: source.slice(at, at + target.length), hit: true },
+					{ text: source.slice(at + target.length), hit: false }
+				].filter((part) => part.text !== '');
+	if (parts[0]) parts[0] = { ...parts[0], text: capitalisePy(parts[0].text) };
+	const stop = sentenceStop(hanzi);
+	if (stop !== '' && parts.length > 0) {
+		const last = parts[parts.length - 1];
+		if (!/[.?!…]$/u.test(last.text)) parts.push({ text: stop, hit: false });
+	}
+	return parts;
+}
+
+/** Leading capital on a pinyin run — the first letter, whatever spaces precede it. */
+function capitalisePy(text: string): string {
+	return text.replace(
+		/^(\s*)(\p{L})/u,
+		(_, pad: string, letter: string) => pad + letter.toUpperCase()
+	);
+}
+
+/** The Latin stop the hanzi's own punctuation asks for, or '' when the line has none. */
+function sentenceStop(hanzi: string): string {
+	if (hanzi.endsWith('。') || hanzi.endsWith('.')) return '.';
+	if (hanzi.endsWith('？') || hanzi.endsWith('?')) return '?';
+	if (hanzi.endsWith('！') || hanzi.endsWith('!')) return '!';
+	return '';
 }
 
 /**
@@ -271,4 +336,72 @@ export function verdictAnnouncement(question: Question, picked: Word | null): st
 	const word = question.word;
 	const record = `${word.hanzi}, ${word.pinyin}, ${fullGloss(word)}`;
 	return isCorrect(question, picked) ? `Correct. ${record}` : `Not quite. The answer is ${record}`;
+}
+
+/**
+ * Put `wordId` at question 1 of an already-built session, if that id is a word of this level.
+ *
+ * Unknown, empty, or cross-level ids (`L5-0400` on HSK 1, `nonsense`) return the session
+ * unchanged, so `/quiz/1?word=banana` is a normal run rather than an empty card. A word the
+ * draw already held is rotated to the front; a word it did not is built with the same ladder
+ * and distractor picker `buildSession` uses and spliced in, dropping the last card to keep
+ * the length. `weighting.ts` is not consulted — the rest of the run is the weighted draw.
+ */
+export function pinFirstQuestion(
+	session: BuiltSession,
+	words: readonly Word[],
+	level: Level,
+	wordId: string | null | undefined,
+	progress: ProgressSource | null | undefined,
+	rng: () => number = Math.random
+): BuiltSession {
+	if (typeof wordId !== 'string') return session;
+	const id = wordId.trim();
+	if (id === '') return session;
+	const word = words.find((entry) => entry.id === id && entry.level === level);
+	if (!word) return session;
+
+	const at = session.questions.findIndex((question) => question.word.id === id);
+	if (at === 0) return session;
+	if (at > 0) {
+		const questions = session.questions.slice();
+		const [pinned] = questions.splice(at, 1);
+		questions.unshift(pinned);
+		return { ...session, questions, answers: questions.map(() => null) };
+	}
+
+	const kind = cardKindFor(recordOf(progress, id), id);
+	const direction = directionOf(kind);
+	let choices: Word[] = [];
+	if (kind !== 'introduce') {
+		const pool = makePool(words.filter((entry) => entry.level === level));
+		const exclude = new Set(session.questions.map((question) => question.word.id));
+		exclude.add(id);
+		let distractors = pickDistractors(pool, word, direction, CHOICE_COUNT - 1, rng, exclude);
+		if (distractors.length < CHOICE_COUNT - 1) {
+			distractors = pickDistractors(pool, word, direction, CHOICE_COUNT - 1, rng);
+		}
+		choices = shuffle([word, ...distractors], rng);
+	}
+
+	const rest = session.questions
+		.slice(0, Math.max(0, session.questions.length - 1))
+		.map((question) => dropChoice(question, id));
+	const questions = [{ word, kind, direction, choices }, ...rest];
+	return { ...session, questions, answers: questions.map(() => null) };
+}
+
+function recordOf(progress: ProgressSource | null | undefined, wordId: string) {
+	if (!progress) return undefined;
+	const byWord = 'byWord' in progress ? progress.byWord : progress.state.byWord;
+	return byWord?.[wordId];
+}
+
+/** A pinned word must not also sit on a later card as a wrong answer. */
+function dropChoice(question: BuiltSession['questions'][number], wordId: string) {
+	if (!question.choices.some((choice) => choice.id === wordId)) return question;
+	return {
+		...question,
+		choices: question.choices.filter((choice) => choice.id !== wordId)
+	};
 }
