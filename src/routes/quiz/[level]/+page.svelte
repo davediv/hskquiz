@@ -53,6 +53,12 @@
 	import { progress } from '$lib/progress';
 	import StorageNotice from '$lib/progress/StorageNotice.svelte';
 	import { buildSession, isIntroduction, recordOutcome, seededRng } from '$lib/session';
+	import {
+		availableSessionStorage,
+		clearSession,
+		restoreSession,
+		saveSession
+	} from '$lib/session/persistence';
 	import ChoiceButton from '$lib/components/quiz/ChoiceButton.svelte';
 	import QuestionPrompt from '$lib/components/quiz/QuestionPrompt.svelte';
 	import QuizProgress from '$lib/components/quiz/QuizProgress.svelte';
@@ -125,11 +131,13 @@
 		return picked ? verdictAnnouncement(question, picked) : '';
 	});
 
-	async function startSession(target: Level, demo: boolean) {
+	async function startSession(target: Level, demo: boolean, fresh = false) {
 		const id = ++runId;
 		status = 'loading';
 		session = null;
 		hinted = false;
+		const storage = availableSessionStorage();
+		if (fresh && !demo) clearSession(storage, target);
 
 		// Warmed now, needed ten answers from now. The run never blocks on it.
 		void loadSummary().then((component) => {
@@ -149,18 +157,21 @@
 
 		// `buildSession` reads the whole progress map. Untracked: this runs from an effect, and
 		// a tracked read would rebuild the session on every answer it records.
-		const built = untrack(() =>
-			demo
-				? // The demo answers its own questions, so it is built against a synthetic record
-					// rather than the learner's: the preview is then the same ten words on every
-					// device and in every screenshot. `demoProgress`, not `null` — a learner with no
-					// record is owed an introduction for every word, and this URL exists to show the
-					// scored summary.
-					seedDemoAnswers(
-						buildSession(words, target, demoProgress(words), 10, { rng: seededRng(DEMO_SEED) })
-					)
-				: buildSession(words, target, progress)
-		);
+		const restored = demo || fresh ? null : restoreSession(storage, target, words, null);
+		const built =
+			restored ??
+			untrack(() =>
+				demo
+					? // The demo answers its own questions, so it is built against a synthetic record
+						// rather than the learner's: the preview is then the same ten words on every
+						// device and in every screenshot. `demoProgress`, not `null` — a learner with no
+						// record is owed an introduction for every word, and this URL exists to show the
+						// scored summary.
+						seedDemoAnswers(
+							buildSession(words, target, demoProgress(words), 10, { rng: seededRng(DEMO_SEED) })
+						)
+					: buildSession(words, target, progress)
+			);
 
 		if (built.questions.length === 0) {
 			status = 'empty';
@@ -168,6 +179,7 @@
 		}
 		session = built;
 		status = 'ready';
+		if (!demo) saveSession(storage, built, null);
 	}
 
 	$effect(() => {
@@ -205,6 +217,7 @@
 		// Not `recordAnswer` directly: `recordOutcome` is the one place a card becomes a change
 		// to the record, and it honours `isScored` so this screen cannot get it half right.
 		recordOutcome(progress, question, choice);
+		if (!preview) saveSession(availableSessionStorage(), session, null);
 	}
 
 	/** "Got it" on a teach card: note the exposure — never an answer — and move on. */
@@ -222,6 +235,7 @@
 		hinted = false;
 		// Once per finished run.
 		if (next >= session.questions.length) progress.noteSession(session.level);
+		if (!preview) saveSession(availableSessionStorage(), session, null);
 	}
 
 	function advance() {
@@ -234,10 +248,11 @@
 		// Leaving the preview flag behind is the whole job here: the effect sees the URL change
 		// and builds a real session instead of re-seeding the demo.
 		if (preview) {
+			clearSession(availableSessionStorage(), level);
 			await goto(resolve('/quiz/[level]', { level: String(level) }), { replaceState: true });
 			return;
 		}
-		await startSession(level, false);
+		await startSession(level, false, true);
 	}
 
 	function goHome() {
