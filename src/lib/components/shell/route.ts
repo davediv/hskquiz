@@ -1,4 +1,5 @@
-import { LEVELS, type Level } from '$lib/types';
+import type { Level } from '$lib/types';
+import { parseLevelSegment } from '$lib/levels/route';
 
 /** Which shape of chrome a route gets. */
 export type ShellMode = 'home' | 'quiz' | 'browse' | 'other';
@@ -45,12 +46,6 @@ export interface ShellRoute {
 export const APP_NAME = 'hskquiz';
 export const APP_TAGLINE = 'HSK 1–5 vocabulary practice';
 
-function toLevel(segment: string | undefined): Level | null {
-	if (segment === undefined) return null;
-	const n = Number(segment);
-	return LEVELS.find((level) => level === n) ?? null;
-}
-
 /**
  * Derive the shell's chrome from a pathname. Pure, so the header, the title and the
  * footer can never disagree about what screen the user is on.
@@ -72,7 +67,7 @@ export function readRoute(pathname: string, base = ''): ShellRoute {
 		};
 	}
 
-	const level = toLevel(segments[1]);
+	const level = segments.length === 2 ? parseLevelSegment(segments[1]) : null;
 
 	if (segments[0] === 'quiz' && level !== null) {
 		return {

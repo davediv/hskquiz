@@ -85,7 +85,7 @@ The route tree is defined by `src/routes/+page.svelte`, `src/routes/browse/[leve
   - **Files:** `src/routes/browse/[level]/+page.svelte`
   - **Depends on:** —
 
-- [ ] **AR-05 — Give each level one route identity** · Priority: **Medium** · Effort: M
+- [x] **AR-05 — Give each level one route identity** · done 2026-09-22 · Priority: **Medium** · Effort: M
   - **Issue:** The browse, quiz, and shell parsers coerce level segments with `Number()`, so aliases such as `/quiz/01` and `/browse/1.0` can display level 1 under duplicate URLs. The shell also ignores extra path segments when assigning mode, so a 404 such as `/quiz/1/extra` gets quiz chrome and hides the footer (`src/lib/components/quiz/quiz.ts:321-324`; `src/routes/browse/[level]/+page.svelte:68-76`; `src/lib/components/shell/route.ts:60-103`; `src/routes/+layout.svelte:177,239-263`).
   - **Why it matters:** Bookmarks and canonical tags can name the same content differently, and an unknown path can look like a valid quiz page around its error content.
   - **Recommendation:** Parse only exact `1`–`5` segments through one shared helper, use it for both route validation and shell mode selection, and require the expected segment count. Let malformed paths show the existing recovery page with neutral error chrome.
